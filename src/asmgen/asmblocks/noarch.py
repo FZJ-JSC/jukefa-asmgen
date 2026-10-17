@@ -631,6 +631,12 @@ class asmgen(ABC):
         """
         raise NotImplementedError(NIE_MESSAGE)
 
+    def mov_greg_to_freg(self, *, src : greg_type, dst : freg_type, dt : asm_data_type) -> str:
+        """
+        Move a general register's low bits into an FP register of data type dt
+        """
+        raise NotImplementedError(NIE_MESSAGE)
+
     def ret(self) -> str:
         """
         Return from a function: after the boilerplate's restoring block
@@ -763,7 +769,8 @@ class asmgen(ABC):
         raise NotImplementedError(NIE_MESSAGE)
 
     @abstractmethod
-    def cb(self, *, reg1 : greg_type, reg2 : greg_type, cmp : comparison, label : str) -> str:
+    def cb(self, *, reg1, reg2, cmp : comparison, label : str,
+           dt : asm_data_type | None = None, greg : greg_type | None = None) -> str:
         """
         Returns the string containing instructions to branch conditionally
 
@@ -777,6 +784,9 @@ class asmgen(ABC):
         :type label: str
         :return: String containing the required ASM instructions
         :rtype: str
+                reg1 and reg2 may be FP registers of data type dt: compared as floating
+        point (EQ/EZ, NE/NZ), into greg where the ISA needs a general register
+        (RISC-V); reg2 None compares with 0.0 where the ISA can (AArch64)
         """
         raise NotImplementedError(NIE_MESSAGE)
 

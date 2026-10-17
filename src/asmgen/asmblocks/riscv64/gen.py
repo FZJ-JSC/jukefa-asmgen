@@ -10,6 +10,8 @@ RISC-V 64bit asm generator and related types
 from copy import deepcopy
 
 from ...registers import (
+    adt_size,
+
     asm_data_type as adt,
     greg_base, freg_base
 )
@@ -109,7 +111,33 @@ class riscv64(asmgen):
     def jump(self, *, label : str) -> str:
         return self.asmwrap(f"j {self.labelstr(label)}")
 
-    def cb(self, *, reg1: greg_base, reg2: greg_base, cmp: comparison, label: str) -> str:
+    def fcb(self, *, reg1, reg2, cmp: comparison, label: str, dt: adt, greg=None) -> str:
+        """
+        cb on FP registers: equality as floating point, so -0.0 equals 0.0
+        and NaN equals nothing
+        """
+        if reg2 is None or greg is None:
+            raise ValueError("RISC-V compares FP registers into a general register: "
+                             "pass reg2 and greg")
+        lab = self.labelstr(label)
+        out = self.asmwrap(f"feq.{self.fcdt_suffixes[dt]} {greg},{reg1},{reg2}")
+        if cmp.name in ('EQ', 'EZ'):
+            return out + self.asmwrap(f"bnez {greg},{lab}")
+        if cmp.name in ('NE', 'NZ'):
+            return out + self.asmwrap(f"beqz {greg},{lab}")
+        raise NotImplementedError(f"RISC-V FP comparison {cmp.name}")
+
+    def mov_greg_to_freg(self, *, src: greg_base, dst, dt: adt) -> str:
+        """
+        Move a general register's low bits into an FP register: an FP
+        constant from its bit pattern
+        """
+        return self.asmwrap(f"fmv.{self.fdt_suffixes[dt]}.x {dst},{src}")
+
+    def cb(self, *, reg1, reg2, cmp: comparison, label: str,
+           dt: adt | None = None, greg: greg_base | None = None) -> str:
+        if isinstance(reg1, freg_base):
+            return self.fcb(reg1=reg1, reg2=reg2, cmp=cmp, label=label, dt=dt, greg=greg)
         inst = self.cb_insts[cmp.name]
         if reg2 is None:
             return self.asmwrap(f"{inst} {reg1},zero,{self.labelstr(label)}")

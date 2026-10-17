@@ -12,6 +12,8 @@ from typing import Union
 
 from ..noarch import asmgen,comparison
 from ...registers import (
+    adt_size,
+
     asm_data_type as adt,
     greg_base, freg_base
 )
@@ -116,8 +118,30 @@ class aarch64(asmgen):
         asmblock += self.asmwrap(f"b.ne {self.labelstr(label)}")
         return asmblock
 
-    def cb(self, *, reg1: greg_base, reg2: greg_base,
-           cmp: comparison, label: str) -> str:
+    def fcb(self, *, reg1, reg2, cmp: comparison, label: str, dt: adt, greg=None) -> str:
+        """
+        cb on FP registers: equality as floating point, so -0.0 equals 0.0
+        and NaN equals nothing
+        """
+        insts = {'EQ': 'b.eq', 'EZ': 'b.eq', 'NE': 'b.ne', 'NZ': 'b.ne',
+                 'LT': 'b.mi', 'LE': 'b.ls', 'GT': 'b.gt', 'GE': 'b.ge'}
+        other = reg2 if reg2 is not None else "#0.0"
+        return self.asmwrap(f"fcmp {reg1},{other}") + \
+            self.asmwrap(f"{insts[cmp.name]} {self.labelstr(label)}")
+
+    def mov_greg_to_freg(self, *, src: greg_base, dst, dt: adt) -> str:
+        """
+        Move a general register's low bits into an FP register: an FP
+        constant from its bit pattern
+        """
+        if 8 == adt_size(dt):
+            return self.asmwrap(f"fmov {dst},{src}")
+        return self.asmwrap(f"fmov {dst},w{str(src)[1:]}")
+
+    def cb(self, *, reg1, reg2, cmp: comparison, label: str,
+           dt: adt | None = None, greg: greg_base | None = None) -> str:
+        if isinstance(reg1, freg_base):
+            return self.fcb(reg1=reg1, reg2=reg2, cmp=cmp, label=label, dt=dt, greg=greg)
         inst = self.cb_insts[cmp.name]
         if reg2 is None:
             return self.asmwrap(f"{inst} {reg1},{self.labelstr(label)}")
@@ -233,8 +257,9 @@ class aarch64(asmgen):
         return self.asmwrap(f"fmov {dst},{src}")
 
     def zero_freg(self, *, freg : freg_base, dt : adt) -> str:
-        _ = dt # explicitly unused
-        return self.asmwrap(f"fmov {freg},#0")
+        # fmov's immediate can't encode 0.0: the zero register can
+        zero = "xzr" if 8 == adt_size(dt) else "wzr"
+        return self.asmwrap(f"fmov {freg},{zero}")
 
     def load_greg(self, *, areg : greg_base, offset : int, dst : greg_base) -> str:
         return self.asmwrap(f"ldr {dst},[{areg},#{offset}]")

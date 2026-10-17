@@ -13,6 +13,9 @@ from abc import abstractmethod
 
 from ...asmdata import asm_data
 from ...registers import (
+    adt_size,
+    freg_base,
+
     reg_tracker,
     asm_data_type as adt,
     adt_size,
@@ -70,7 +73,8 @@ class avxbase(asmgen):
                                         [9,   # BX
                                          14,  # Frame Pointer
                                          15], # SP
-                                    'freg' : list(range(8,16))},
+                                    # SysV: every xmm register is caller-saved
+                                    'freg' : []},
                 spreg=15,
                 spstart=8)
             }
@@ -228,8 +232,36 @@ class avxbase(asmgen):
         asmblock += self.asmwrap(f"jne {self.labelstr(label)}")
         return asmblock
 
-    def cb(self, *, reg1: greg_base, reg2: greg_base,
-           cmp: comparison, label: str) -> str:
+    def fcb(self, *, reg1, reg2, cmp: comparison, label: str, dt: adt, greg=None) -> str:
+        """
+        cb on FP registers: equality as floating point, so -0.0 equals 0.0
+        and NaN equals nothing
+        """
+        if reg2 is None:
+            raise ValueError("x86 compares FP registers with another: pass reg2")
+        suf = 'd' if 8 == adt_size(dt) else 's'
+        lab = self.labelstr(label)
+        out = self.asmwrap(f"vucomis{suf} {self.rpref(reg2)},{self.rpref(reg1)}")
+        # unordered (NaN) sets the parity flag: not equal
+        if cmp.name in ('NE', 'NZ'):
+            return out + self.asmwrap(f"jne {lab}") + self.asmwrap(f"jp {lab}")
+        if cmp.name in ('EQ', 'EZ'):
+            return out + self.asmwrap("jp 1f") + self.asmwrap(f"je {lab}") + self.asmwrap("1:")
+        raise NotImplementedError(f"x86 FP comparison {cmp.name}")
+
+    def mov_greg_to_freg(self, *, src: greg_base, dst, dt: adt) -> str:
+        """
+        Move a general register's low bits into an FP register: an FP
+        constant from its bit pattern
+        """
+        if 8 == adt_size(dt):
+            return self.asmwrap(f"vmovq {self.rpref(src)},{self.rpref(dst)}")
+        return self.asmwrap(f"vmovd {self.rpref(src, size=4)},{self.rpref(dst)}")
+
+    def cb(self, *, reg1, reg2, cmp: comparison, label: str,
+           dt: adt | None = None, greg: greg_base | None = None) -> str:
+        if isinstance(reg1, freg_base):
+            return self.fcb(reg1=reg1, reg2=reg2, cmp=cmp, label=label, dt=dt, greg=greg)
         inst = self.cb_insts[cmp.name]
         if reg2 is None:
             pr1 = self.rpref(reg1)
