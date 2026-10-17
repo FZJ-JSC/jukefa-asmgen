@@ -59,7 +59,8 @@ def make_sve_opd3_signatures(supports_np: bool, destructive: bool = False,
 
 
     def add_sig(a_dt, b_dt, c_dt, *, mods, opd_mods, is_widening=False):
-        struct_params = {'widening_method': wm.SPLIT_INSTRUCTIONS} if is_widening else {}
+        # bottom and top: even and odd elements
+        struct_params = {'widening_method': wm.SPLIT_INTERLEAVED} if is_widening else {}
 
         ops = {
             'adreg': osh(ot.REGISTER, orl.DATA, rt.VEC, a_dt),

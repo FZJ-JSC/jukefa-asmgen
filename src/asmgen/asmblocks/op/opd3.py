@@ -24,7 +24,11 @@ class widening_method(Enum):
     VEC_GROUP = auto()
     VEC_MULTI = auto()
     DOT_NEIGHBOURS = auto()
-    SPLIT_INSTRUCTIONS = auto()
+    # one instruction per part of the wide result, each part a register:
+    SPLIT_CONTIGUOUS = auto()   # part p holds a contiguous run of the elements
+                                # (NEON fmlal/fmlal2: the lower and upper half)
+    SPLIT_INTERLEAVED = auto()  # part p holds every ways-th element from p
+                                # (bottom/top: fmlalb even, fmlalt odd elements)
 
 class opd3_modifier(operation_modifier):
     """

@@ -49,4 +49,4 @@ class test_sve_fmul(test_sve_opd3_base):
             with self.assertRaisesRegex(ValueError, "Invalid configuration for sve_fmul"):
                 self.gen.fmul(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
                               a_dt=adt.SINT16, b_dt=adt.SINT16, c_dt=adt.SINT32,
-                              widening_method=wm.SPLIT_INSTRUCTIONS) # modifiers={mod.PART} missing
+                              widening_method=wm.SPLIT_INTERLEAVED) # modifiers={mod.PART} missing

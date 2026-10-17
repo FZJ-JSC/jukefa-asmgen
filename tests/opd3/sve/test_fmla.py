@@ -53,7 +53,7 @@ class test_sve_fmla(test_sve_opd3_base):
                 res = self.gen.fma(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
                                    a_dt=narrow_dt, b_dt=narrow_dt, c_dt=wide_dt,
                                    modifiers=modifiers, part=part,
-                                   widening_method=wm.SPLIT_INSTRUCTIONS)
+                                   widening_method=wm.SPLIT_INTERLEAVED)
                 self.assertEqual(res, expected)
 
     def test_indexed_fma(self):
@@ -109,7 +109,7 @@ class test_sve_fmla(test_sve_opd3_base):
             with self.assertRaisesRegex(ValueError, "value of part must be <= 1"):
                 self.gen.fma(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
                              a_dt=adt.FP16, b_dt=adt.FP16, c_dt=adt.FP32,
-                             modifiers={mod.PART}, part=2, widening_method=wm.SPLIT_INSTRUCTIONS)
+                             modifiers={mod.PART}, part=2, widening_method=wm.SPLIT_INTERLEAVED)
 
     def test_invalid_configurations(self):
         """

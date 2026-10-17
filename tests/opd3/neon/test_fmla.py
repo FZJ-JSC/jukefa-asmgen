@@ -53,7 +53,9 @@ class test_neon_fmla(test_neon_opd3_base):
                 res = self.gen.fma(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
                                    a_dt=narrow_dt, b_dt=narrow_dt, c_dt=wide_dt,
                                    modifiers=modifiers,
-                                   widening_method=wm.SPLIT_INSTRUCTIONS,
+                                   widening_method=wm.SPLIT_CONTIGUOUS
+                                   if (adt.FP16, adt.FP32) == (narrow_dt, wide_dt)
+                                   else wm.SPLIT_INTERLEAVED,
                                    part=part)
                 self.assertEqual(res, expected)
 
@@ -83,7 +85,7 @@ class test_neon_fmla(test_neon_opd3_base):
                 self.gen.fma(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
                              a_dt=adt.FP16, b_dt=adt.FP16, c_dt=adt.FP32,
                              modifiers={mod.PART},
-                             widening_method=wm.SPLIT_INSTRUCTIONS,
+                             widening_method=wm.SPLIT_CONTIGUOUS,
                              part=2)
 
         # 3. BDREG too high for 16-bit indexing (max v15)
@@ -107,7 +109,7 @@ class test_neon_fmla(test_neon_opd3_base):
             with self.assertRaisesRegex(ValueError, "Operand missing: part"):
                 self.gen.fma(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
                              a_dt=adt.FP16, b_dt=adt.FP16, c_dt=adt.FP32,
-                             widening_method=wm.SPLIT_INSTRUCTIONS,
+                             widening_method=wm.SPLIT_CONTIGUOUS,
                              modifiers={mod.PART}) # part=... is missing
 
         # 3. MASK is unsupported in NEON

@@ -57,7 +57,10 @@ def make_neon_opd3_signatures(supports_np: bool) -> list[sig]:
     opd_mods_list = [{}, {'bdreg':{opd_mod.ILANE}}]
 
     def add_sig (*, dts, mods, opd_mods, is_widening=False):
-        struct_params = {'widening_method': wm.SPLIT_INSTRUCTIONS} if is_widening else {}
+        # FP16 to FP32 by halves (fmlal/fmlal2); BF16 and FP8 by bottom and top
+        method = wm.SPLIT_CONTIGUOUS if (adt.FP16, adt.FP32) == (dts['adreg'], dts['cdreg']) \
+            else wm.SPLIT_INTERLEAVED
+        struct_params = {'widening_method': method} if is_widening else {}
 
         ops = {
             'adreg': osh(ot.REGISTER, orl.DATA, rt.VEC, dts['adreg']),
