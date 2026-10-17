@@ -23,6 +23,9 @@ from ...op import (
 from ...op.constraint import (
     otherplusnmod_constraint,
     minmax_constraint,
+    multiple_constraint,
+    oneof_constraint,
+    either_constraint,
     regidx_constraint
 )
 from ...op.misc import make_ord_prefix as mop
@@ -73,10 +76,17 @@ def make_neon_opmem_signatures(bcast_supported=False):
                         neon_struct_constraint(other=f"{mop(i-1)}dreg")
                     ])
 
+        # ldr/str q: an unscaled offset within -256..255 (the assembler encodes
+        # ldur/stur) or a multiple of 16 up to 65520; voffset counts vectors
         if mod.IOFFSET in mods:
-            ops['ioffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None)
+            ops['ioffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None,
+                                 value_constraints=[either_constraint(options=[
+                                     [minmax_constraint(minval=-256, maxval=255)],
+                                     [minmax_constraint(minval=0, maxval=65520),
+                                      multiple_constraint(multiple=16)]])])
         if mod.VOFFSET in mods:
-            ops['voffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None)
+            ops['voffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None,
+                                 value_constraints=[minmax_constraint(minval=-16, maxval=4095)])
 
         for opd, omods in opd_mods.items():
             ops[opd].modifiers = omods
@@ -92,7 +102,14 @@ def make_neon_opmem_signatures(bcast_supported=False):
             if postinc_reg:
                 ops['increg'] = osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64)
             else:
-                ops['iinc'] = osh(ot.IMMEDIATE, orl.PARAM, None, None)
+                # ld1, ld1r, ld2...: the immediate post-increment is exactly the
+                # bytes transferred - an element per structure for broadcasts and
+                # lanes, a 16-byte register per structure otherwise
+                adreg_mods = opd_mods.get('adreg', set())
+                per_struct = adt_size(dt) if {opd_mod.BCAST, opd_mod.ILANE} & adreg_mods else 16
+                ops['iinc'] = osh(ot.IMMEDIATE, orl.PARAM, None, None,
+                                  value_constraints=[oneof_constraint(
+                                      valset=[per_struct * nstructs])])
 
         sigs.append(sig(
             modifiers=mods,

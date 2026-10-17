@@ -75,7 +75,7 @@ def make_sve_move_signatures() -> list[opsig]:
                                     rtype=rgt.VEC, dt=dt)
 
             # 512 bits are directly addressable
-            max_lane = 512/8 /adt_size(dt)
+            max_lane = 512 // 8 // adt_size(dt) - 1
             operands['adreg_lane'] = osh(otype=ot.IMMEDIATE,
                                          orole=orl.PARAM,
                                          value_constraints=[

@@ -21,6 +21,8 @@ from ...op import (
 )
 
 from ...op.constraint import (
+    minmax_constraint,
+    multiple_constraint,
     otherplusnmod_constraint,
     regidx_constraint
 )
@@ -103,13 +105,19 @@ def make_sve_opmem_signatures(bcast_supported=False):
                                  modifiers=opd_mods.get('vidxreg', set()))
             struct_params['it'] = idx_it
 
+        # gathers and scatters [z.d, #imm]: 0..31 elements
         if mod.IOFFSET in mods:
-            ops['ioffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None)
+            ops['ioffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None,
+                                 value_constraints=[
+                                     minmax_constraint(minval=0, maxval=31 * adt_size(dt)),
+                                     multiple_constraint(multiple=adt_size(dt))])
         if mod.GOFFSET in mods:
             ops['offreg'] = osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.SINT64,
                                 modifiers=opd_mods.get('offreg', set()))
+        # [x, #imm, MUL VL]
         if mod.VOFFSET in mods:
-            ops['voffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None)
+            ops['voffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None,
+                                 value_constraints=[minmax_constraint(minval=-8, maxval=7)])
 
         sigs.append(sig(
             modifiers=mods,

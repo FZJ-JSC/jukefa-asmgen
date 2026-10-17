@@ -369,3 +369,35 @@ class differentval_constraint(intval_constraint):
         if self.getint(val) == self.getint(context[other]):
             raise ValueError((f"{self.what} of {name} must be different from "
                               f"{self.what} of {other}"))
+
+
+@dataclass(kw_only=True)
+class either_constraint(operand_constraint):
+    """
+    Constraint satisfied when all constraints of at least one option hold: a
+    union of ranges, like AArch64's ldr q immediate - unscaled within
+    -256..255 (encoded as ldur) or a multiple of 16 up to 65520
+    """
+    options : list[list[operand_constraint]]
+    what : str = "value"
+
+    def __call__(self, name : str,
+                 modifiers : set[mod],
+                 val : ValueType,
+                 context: dict[str,ValueType]):
+        failures = []
+        for option in self.options:
+            try:
+                for constraint in option:
+                    try:
+                        constraint(name, modifiers, val, context)
+                    except ConstraintDoesNotApplyError:
+                        pass
+                return
+            except ValueError as err:
+                failures.append(str(err))
+        raise ValueError(f"{self.what} of {name} must satisfy one of: " + "; or ".join(failures))
+
+    def validate(self, name : str, val : ValueType,
+                 context : dict[str,ValueType], params : dict[str,ValueType]):
+        pass
