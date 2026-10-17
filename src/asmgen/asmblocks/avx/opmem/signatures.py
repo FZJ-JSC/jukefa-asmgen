@@ -113,8 +113,11 @@ def make_avx_opmem_signatures(action: opmem_action,
     # calculable for any size (throws NotImplementedError in implementation if missing).
     for dt in _ALL_DTS:
         for addr_mod in base_addr_mods:
-            # lane loads don't preserve the lanes above the loaded one
-            add_sig(dt, mods=addr_mod, opd_mods={'adreg':{opd_mod.ILANE, opd_mod.ZEROOTHERS}})
+            # lane loads don't preserve the lanes above the loaded one; a lane
+            # store leaves the register as it is
+            lane_mods = {opd_mod.ILANE, opd_mod.ZEROOTHERS} if action == opmem_action.LOAD \
+                else {opd_mod.ILANE}
+            add_sig(dt, mods=addr_mod, opd_mods={'adreg': lane_mods})
 
 
     # 4. Gather / Scatter (VINDEX)

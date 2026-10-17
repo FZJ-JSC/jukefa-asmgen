@@ -151,13 +151,13 @@ class test_avx_opmem(unittest.TestCase):
         # FP64 lane 1
         self.assertEqual(
             self.store_128(dregs=[self.xmm0], areg=self.r8, dt=adt.FP64,
-                           operand_modifiers={'adreg':{opd_mod.ILANE, opd_mod.ZEROOTHERS}}, adreg_lane=1),
+                           operand_modifiers={'adreg':{opd_mod.ILANE}}, adreg_lane=1),
             "vmovhpd %xmm0,(%r8)\n"
         )
         # FP32 lane 2 (2 << 4 = 32)
         self.assertEqual(
             self.store_128(dregs=[self.xmm1], areg=self.r8, dt=adt.FP32,
-                           operand_modifiers={'adreg':{opd_mod.ILANE, opd_mod.ZEROOTHERS}}, adreg_lane=2),
+                           operand_modifiers={'adreg':{opd_mod.ILANE}}, adreg_lane=2),
             "vextractps $32, %xmm1, (%r8)\n"
         )
     def test_lane_ldst_integer(self):
@@ -173,7 +173,7 @@ class test_avx_opmem(unittest.TestCase):
         # 8-bit INT store (vpextrb)
         self.assertEqual(
             self.store_128(dregs=[self.xmm2], areg=self.r8, dt=adt.UINT8,
-                           operand_modifiers={'adreg':{opd_mod.ILANE, opd_mod.ZEROOTHERS}}, adreg_lane=15),
+                           operand_modifiers={'adreg':{opd_mod.ILANE}}, adreg_lane=15),
             "vpextrb $15, %xmm2, (%r8)\n"
         )
 
