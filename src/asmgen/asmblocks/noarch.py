@@ -170,58 +170,33 @@ class asmgen(ABC):
         opblock += ",".join([f"\"{reg}\"" for reg in clobber])
         return opblock
 
-    @abstractmethod
+    def isa_setup(self):
+        """
+        What this ISA needs set up before a kernel and torn down after: see
+        :class:`asmgen.asmblocks.setup.isa_setup`. Nothing, by default.
+        """
+        from .setup import isa_setup
+        return isa_setup(self)
+
     def isaquirks(self, *, rt : reg_tracker, dt : asm_data_type) -> str:
         """
-        Returns a string containing instructions for ISA-specific setup, 
-        like the smstart instruction for SME
-
-        :param rt: register tracker for allowing to reserve and write specific registers
-        :type rt: class:`asmgen.registers.reg_tracker`
-        :param dt: Data type the kernel will be working with
-        :type dt: class:`asmgen.registers.asm_data_type`
-        :return: string containing ISA-specific setup instructions
-        :rtype: str
+        Instructions setting up what every kernel needs - the predicate of
+        SVE, SME's smstart, RVV's vsetvli. Wraps isa_setup().setup().
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self.isa_setup().setup(rt=rt, dt=dt)
 
-    @abstractmethod
     def isaendquirks(self, *, rt : reg_tracker, dt : asm_data_type) -> str:
         """
-        Returns a string containing instructions for ISA-specific tear-down, 
-        like the smstop instruction for SME
-
-        :param rt: register tracker for allowing to reserve and write specific registers
-        :type rt: class:`asmgen.registers.reg_tracker`
-        :param dt: Data type the kernel will be working with
-        :type dt: class:`asmgen.registers.asm_data_type`
-        :return: string containing ISA-specific tear-down instructions
-        :rtype: str
+        Instructions tearing it down - SME's smstop. Wraps isa_setup().teardown().
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self.isa_setup().teardown(rt=rt, dt=dt)
 
     def isadata(self) -> str:
         """
-        Returns a string containing ISA-specific ISA data, like indices for a 
-        strided gather/scatter in AVX512. The generator is stateful wrt/ this data, i.e.
-        the internal storage containing the data will be populated if an instruction that
-        needs data is used. the internal data storaged can be cleared with the isaclear()
-        method.
-
-        :return: string with the ASM labels and definitions for the data
-        :rtype: str
+        Constants instructions have registered, like AVX-512's gather indices,
+        in a read-only section of their own. Wraps isa_setup().data().
         """
-
-        result = ""
-
-        for name,datalist in self.asmdata.items():
-            label = self.labelstr(name)
-            result += self.asmwrap(f"{label}:")
-
-            for d in datalist:
-                result += self.asmwrap(f"  {str(d)}")
-
-        return result
+        return self.isa_setup().data()
 
     def isaclear(self):
         """

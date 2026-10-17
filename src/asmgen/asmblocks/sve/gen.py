@@ -51,6 +51,13 @@ class sve(aarch64):
             adt.SINT8  : "b",
             }
 
+    def isa_setup(self):
+        """
+        What this ISA needs set up before a kernel and torn down after
+        """
+        from ..setup import sve_setup
+        return sve_setup(self)
+
     def __init__(self):
         super().__init__()
         self.fma = sve_fma(asmwrap=self.asmwrap,
@@ -82,13 +89,6 @@ class sve(aarch64):
                 supported = False
                 break
         return supported
-
-    def isaquirks(self, *, rt : reg_tracker, dt : adt) -> str:
-        asmblock = self.ptrue(self.mreg(0), dt)
-        return asmblock
-
-    def isaendquirks(self, *, rt : reg_tracker, dt : adt) -> str:
-        return ""
 
     def jvzero(self, *, vreg1 : vreg_base, freg : freg_base,
                vreg2 : vreg_base,

@@ -94,11 +94,6 @@ class neon(aarch64):
                 break
         return supported
 
-    def isaquirks(self, *, rt : reg_tracker, dt : adt):
-        return ""
-    def isaendquirks(self, *, rt : reg_tracker, dt : adt):
-        return ""
-
     def jvzero(self, *, vreg1 : vreg_base, freg : freg_base,
                vreg2 : vreg_base,
                greg : greg_base, label : str,

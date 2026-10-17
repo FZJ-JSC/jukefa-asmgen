@@ -43,6 +43,13 @@ class rvv(riscv64):
             ait.INT8  : "ei8",
             }
 
+    def isa_setup(self):
+        """
+        What this ISA needs set up before a kernel and torn down after
+        """
+        from ..setup import rvv_setup
+        return rvv_setup(self)
+
     def __init__(self):
         super().__init__()
         self.fma = rvv_fma(asmwrap=self.asmwrap)
@@ -87,27 +94,6 @@ class rvv(riscv64):
         extensions = cpuinfo[isa_idx:].split()[0]
         print(f"Extensions: {extensions}")
         return "v" in extensions
-
-    def isaquirks(self, *, rt : reg_tracker, dt : adt) -> str:
-
-        vlreg_idx = 0
-        if 'vlen' in rt.aliased_regs['greg'].keys():
-            vlreg_idx = rt.aliased_regs['greg']['vlen']
-        else:
-            vlreg_idx = rt.reserve_any_reg('greg')
-            rt.alias_reg('greg', 'vlen', vlreg_idx)
-        vlreg = self.greg(vlreg_idx)
-
-        if 'avl' in rt.aliased_regs['greg'].keys():
-            avlreg_idx = rt.aliased_regs['greg']['avl']
-            avlreg = self.greg(avlreg_idx)
-            asmblock = self.vsetvli(vlreg=vlreg, avlreg=avlreg, dt=dt)
-        else:
-            asmblock = self.vsetvlmax(reg=vlreg, dt=dt)
-        return asmblock
-
-    def isaendquirks(self, *, rt : reg_tracker, dt : adt) -> str:
-        return ""
 
     def vreg(self, reg_idx : int) -> vreg_base:
         return rvv_vreg(reg_idx * self.lmul)

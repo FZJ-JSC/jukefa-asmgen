@@ -28,6 +28,13 @@ class sme(sve):
     SME asmgen implementation
     """
 
+    def isa_setup(self):
+        """
+        What this ISA needs set up before a kernel and torn down after
+        """
+        from ..setup import sme_setup
+        return sme_setup(self)
+
     def __init__(self):
         super().__init__()
         self.valid_rcregs = [str(self.greg(i)) for i in range(12,16)]
@@ -59,19 +66,6 @@ class sme(sve):
         result += "}"
         self.set_output_inline(yesno=pre_oi)
         return result
-
-    def isaquirks(self, *, rt : reg_tracker, dt : adt) -> str:
-        asmblock = self.asmwrap("smstart")
-        # set p0 to true (default sve preg)
-        asmblock += super().isaquirks(rt=rt,dt=dt)
-        # set pn8 to true (default sme preg)
-        asmblock += self.ptrue(self.mreg(8,True), dt)
-        return asmblock
-
-    def isaendquirks(self, *, rt : reg_tracker, dt : adt) -> str:
-        asmblock = super().isaendquirks(rt=rt,dt=dt)
-        asmblock += self.asmwrap("smstop")
-        return asmblock
 
     def max_tregs(self, dt : adt) -> int:
         return adt_size(dt)

@@ -50,6 +50,13 @@ class avxbase(asmgen):
             'GT' : 'jg',
             }
 
+    def isa_setup(self):
+        """
+        What this ISA needs set up before a kernel and torn down after
+        """
+        from ..setup import constants_setup
+        return constants_setup(self)
+
     def __init__(self):
         super().__init__()
         self.callconvs = {
@@ -179,11 +186,6 @@ class avxbase(asmgen):
 
         self.asmdata[key] = [asm_data(index_dt, i) for i in range(count)]
 
-
-    def isaquirks(self, *, rt : reg_tracker, dt : adt):
-        return ""
-    def isaendquirks(self, *, rt : reg_tracker, dt : adt):
-        return ""
 
     def jzero(self, *, reg : greg_base, label : str) -> str:
         preg = self.rpref(reg)
