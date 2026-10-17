@@ -184,6 +184,14 @@ class rvv(riscv64):
     def max_add_voff(self) -> int:
         return 0
 
+    def vsetvli_keep_vl(self, *, dt : adt, lmul : int) -> str:
+        """
+        Change the element width and register grouping, keeping the vector
+        length (vsetvli zero, zero): valid where SEW/LMUL stays the same, as
+        from e32,m1 to e64,m2 for a widened register group
+        """
+        return self.asmwrap(f"vsetvli zero,zero,e{adt_size(dt) * 8},m{lmul},ta,ma")
+
     def greg_to_voffs(self, *, streg : greg_base, vreg : vreg_base, dt : adt) -> str:
         """
         An index vector of byte offsets 0, s, 2s... for indexed loads and
