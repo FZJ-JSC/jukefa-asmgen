@@ -61,6 +61,10 @@ class operand_modifier(Enum):
     BLOCK      = auto() # Operates on blocks of `blocksize` elements; with BCAST one
                         # block is replicated into every block (SVE ld1rq)
     IBLOCK     = auto() # Selects a block of `blocksize` elements with an immediate
+    ZEROOTHERS = auto() # A lane load that doesn't preserve the lanes above the one it
+                        # loads (AVX's vmovsd clears them; VEX vmovhpd and vinsertps
+                        # clear all above the low 128 bits): load lanes in increasing
+                        # order, and fill the upper blocks otherwise
     ROW        = auto() # Selects a row within a tile register
     COL        = auto() # Selects a column within a tile register
     BCAST      = auto() # Broadcasts a scalar across a vector/tile register

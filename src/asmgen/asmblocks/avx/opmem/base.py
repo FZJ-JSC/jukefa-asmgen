@@ -393,6 +393,11 @@ class avx512_opmem(avx_opmem):
     """
     AVX512 opmem implementation
     """
+    # lane loads and stores work on the xmm view, as on AVX2: vmovsd, vmovhpd,
+    # vinsertps and their stores are encodable on all 32 registers
+    build_lane_load = avx128_opmem.build_lane_load
+    build_lane_store = avx128_opmem.build_lane_store
+
     def __init__(self, action: opmem_action,
                  asmwrap: Callable[[str],str],
                  rpref : Callable[[str],str]):
