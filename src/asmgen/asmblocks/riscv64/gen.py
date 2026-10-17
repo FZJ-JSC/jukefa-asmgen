@@ -143,9 +143,7 @@ class riscv64(asmgen):
         return asmblock
 
     def loopend(self, *, reg : greg_base, label : str) -> str:
-        asmblock = f"\"bnez {reg}, {self.labelstr(label)}\\n\\t\"\n"
-
-        return asmblock
+        return self.asmwrap(f"bnez {reg},{self.labelstr(label)}")
     def max_gregs(self) -> int:
         return len(riscv64_greg.names)
     def max_mregs(self):

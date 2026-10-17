@@ -205,6 +205,9 @@ class asmgen(ABC):
             for name, idx in regs.items():
                 rt.reserve_specific_reg(tag, idx)
                 rt.alias_reg(tag, name, idx)
+                # reserved means never handed out, not overwritten: a
+                # function's boilerplate saves only what the code clobbers
+                rt.clobbered_regs[tag].discard(idx)
         return rt
 
     def vlen_to_greg(self, *, reg, dt : asm_data_type) -> str:
@@ -627,6 +630,12 @@ class asmgen(ABC):
         :rtype: str
         """
         raise NotImplementedError(NIE_MESSAGE)
+
+    def ret(self) -> str:
+        """
+        Return from a function: after the boilerplate's restoring block
+        """
+        return self.asmwrap("ret")
 
     @abstractmethod
     def jump(self, *, label : str) -> str:
