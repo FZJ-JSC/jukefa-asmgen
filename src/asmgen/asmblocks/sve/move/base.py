@@ -73,6 +73,8 @@ class sve_move(move):
         # not used for making decision rn
         #output_mods = operand_modifiers.get('bdreg',set())
 
+        if omod.IBLOCK in input_mods:
+            return self.asmwrap(f"dup {output_reg}.q,{input_reg}.q[{kwargs['adreg_block']}]")
         inst = "mov"
         in_str = ""
         out_str = f"{output_reg}.{self.dt_suffixes[output_dt]}"

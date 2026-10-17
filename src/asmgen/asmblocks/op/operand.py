@@ -58,6 +58,9 @@ class operand_modifier(Enum):
     ILANE      = auto() # Selects a lane within a vector register with an immediate
     GLANE      = auto() # Selects a lane within a vector register with a gp reg
     BLOCKLANE  = auto() # Selects a lane within each block with `blocksize` elements
+    BLOCK      = auto() # Operates on blocks of `blocksize` elements; with BCAST one
+                        # block is replicated into every block (SVE ld1rq)
+    IBLOCK     = auto() # Selects a block of `blocksize` elements with an immediate
     ROW        = auto() # Selects a row within a tile register
     COL        = auto() # Selects a column within a tile register
     BCAST      = auto() # Broadcasts a scalar across a vector/tile register

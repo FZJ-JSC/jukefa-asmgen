@@ -80,6 +80,9 @@ def make_sve_opmem_signatures(bcast_supported=False):
         }
 
         struct_params={}
+        if opd_mod.BLOCK in opd_mods.get('adreg', set()):
+            # 128-bit blocks (ld1rq)
+            struct_params['adreg_blocksize'] = 16 // adt_size(dt)
 
         # structured ld/st logic
         if mod.STRUCT in mods:
@@ -105,8 +108,21 @@ def make_sve_opmem_signatures(bcast_supported=False):
                                  modifiers=opd_mods.get('vidxreg', set()))
             struct_params['it'] = idx_it
 
-        # gathers and scatters [z.d, #imm]: 0..31 elements
-        if mod.IOFFSET in mods:
+        # gathers and scatters [z.d, #imm]: 0..31 elements; ld1rq [x, #imm]:
+        # -128..112 bytes in multiples of 16
+        if mod.IOFFSET in mods and opd_mod.BLOCK not in opd_mods.get('adreg', set()) \
+                and opd_mod.BCAST in opd_mods.get('adreg', set()):
+            # ld1r{b,h,w,d} [x, #imm]: 0..63 elements
+            ops['ioffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None,
+                                 value_constraints=[
+                                     minmax_constraint(minval=0, maxval=63 * adt_size(dt)),
+                                     multiple_constraint(multiple=adt_size(dt))])
+        elif mod.IOFFSET in mods and opd_mod.BLOCK in opd_mods.get('adreg', set()):
+            ops['ioffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None,
+                                 value_constraints=[
+                                     minmax_constraint(minval=-128, maxval=112),
+                                     multiple_constraint(multiple=16)])
+        elif mod.IOFFSET in mods:
             ops['ioffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None,
                                  value_constraints=[
                                      minmax_constraint(minval=0, maxval=31 * adt_size(dt)),
@@ -144,6 +160,11 @@ def make_sve_opmem_signatures(bcast_supported=False):
         if bcast_supported:
             # ld1r (load scalar and broadcast to all lanes)
             add_sig(dt, mods={mod.MASK}, opd_mods={'adreg': {opd_mod.BCAST}})
+            add_sig(dt, mods={mod.MASK, mod.IOFFSET}, opd_mods={'adreg': {opd_mod.BCAST}})
+            # a 128-bit block replicated into every block: ld1rq
+            add_sig(dt, mods={mod.MASK}, opd_mods={'adreg': {opd_mod.BLOCK, opd_mod.BCAST}})
+            add_sig(dt, mods={mod.MASK, mod.IOFFSET},
+                    opd_mods={'adreg': {opd_mod.BLOCK, opd_mod.BCAST}})
 
         for nstructs in range(2,5):
             # ld2/ld3/ld4

@@ -26,6 +26,7 @@ from ...callconv.callconv import callconv
 from .base import avxbase
 from .types import x86_greg,avx_freg,xmm_vreg,ymm_vreg,zmm_vreg,reg_prefixer
 
+from .move import avx_move
 from .opd3 import avx_fma,avx_fmul,avx_fadd
 
 from .opmem.load import avx128_load,avx256_load,avx512_load
@@ -62,6 +63,7 @@ class avx512(avxbase):
 
         self.load = avx512_load(asmwrap=self.asmwrap, rpref=self.rpref)
         self.store = avx512_store(asmwrap=self.asmwrap, rpref=self.rpref)
+        self.move = avx_move(asmwrap=self.asmwrap, rpref=self.rpref, simd_bytes=64)
 
     def get_req_flags(self) -> list[str]:
         return ['avx512f']

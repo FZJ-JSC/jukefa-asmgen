@@ -69,6 +69,13 @@ def make_sve_move_signatures() -> list[opsig]:
                 operands['adreg'] = osh(otype=ot.REGISTER,
                                         orole=orl.DATA,
                                         rtype=rgt.GP, dt=dt)
+        if omod.IBLOCK in amods:
+            # dup z.q, z.q[i]: 128-bit blocks, at most four in 512 bits
+            operands['adreg'] = osh(otype=ot.REGISTER, orole=orl.DATA, rtype=rgt.VEC, dt=dt)
+            operands['adreg_block'] = osh(otype=ot.IMMEDIATE, orole=orl.PARAM,
+                                          value_constraints=[minmax_constraint(minval=0, maxval=3)])
+            structural_params['adreg_blocksize'] = 16 // adt_size(dt)
+            structural_params['bdreg_blocksize'] = 16 // adt_size(dt)
         if omod.ILANE in amods:
             operands['adreg'] = osh(otype=ot.REGISTER,
                                     orole=orl.DATA,
@@ -95,6 +102,7 @@ def make_sve_move_signatures() -> list[opsig]:
         add_sig(dt=dt, mods=set(), amods=set(), bmods=set())
         add_sig(dt=dt, mods=set(), amods=set(), bmods={omod.BCAST})
         add_sig(dt=dt, mods=set(), amods={omod.ILANE}, bmods={omod.BCAST})
+        add_sig(dt=dt, mods=set(), amods={omod.IBLOCK}, bmods={omod.BLOCK, omod.BCAST})
         add_sig(dt=dt, mods={mod.MASK}, amods=set(), bmods=set())
         add_sig(dt=dt, mods={mod.MASK}, amods=set(), bmods={omod.BCAST})
         add_sig(dt=dt, mods={mod.MASK}, amods={omod.ILANE}, bmods={omod.BCAST})

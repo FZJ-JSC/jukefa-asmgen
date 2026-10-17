@@ -226,7 +226,10 @@ class sve_opmem(opmem):
         nstructs = kwargs.get("nstructs", 1)
         has_bcast = any(opd_mod.BCAST in mods
                         for _,mods in operand_modifiers.items())
-        if has_bcast:
+        has_block = any(opd_mod.BLOCK in mods for _,mods in operand_modifiers.items())
+        if has_bcast and has_block:
+            inst = f"{self.inst_base}1rq{msuf}"
+        elif has_bcast:
             inst = f"{self.inst_base}{nstructs}r{msuf}"
         else:
             inst = f"{self.inst_base}{nstructs}{msuf}"
