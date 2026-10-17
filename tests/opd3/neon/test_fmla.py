@@ -40,8 +40,9 @@ class test_neon_fmla(test_neon_opd3_base):
         """Test widening (PART) and negate-product (NP) combinations"""
         cases = [
             # 2x Widening
-            (adt.FP16, adt.FP32, 0, set(), "fmlalb v0.4s,v1.8h,v2.8h\n"),
-            (adt.FP16, adt.FP32, 1, set(), "fmlalt v0.4s,v1.8h,v2.8h\n"),
+            # FP16 to FP32: the lower half (fmlal), the upper half (fmlal2)
+            (adt.FP16, adt.FP32, 0, set(), "fmlal v0.4s,v1.4h,v2.4h\n"),
+            (adt.FP16, adt.FP32, 1, set(), "fmlal2 v0.4s,v1.4h,v2.4h\n"),
             # 4x Widening + Negate Product
             (adt.FP8E5M2, adt.FP32, 0, {mod.NP}, "fmlsllbb v0.4s,v1.16b,v2.16b\n"),
             (adt.FP8E5M2, adt.FP32, 3, {mod.NP}, "fmlslltt v0.4s,v1.16b,v2.16b\n"),

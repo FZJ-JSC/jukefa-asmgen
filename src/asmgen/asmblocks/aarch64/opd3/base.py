@@ -102,7 +102,7 @@ class aarch64_simd_opd3_base(opd3):
 
         raise RuntimeError("Unsupported datatype")
 
-    def partial_inst_suffix(self, ways : int, part : int):
+    def partial_inst_suffix(self, ways : int, part : int, **_):
         """
         Get the instruction suffix for a n-ways widening instruction computing
         the specified part
@@ -189,7 +189,7 @@ class aarch64_simd_opd3_base(opd3):
         if mod.PART in modifiers:
             inst += self.partial_inst_suffix(
                     ways=adt_size(c_dt)//adt_size(a_dt),
-                    part=kwargs['part'])
+                    part=kwargs['part'], a_dt=a_dt, c_dt=c_dt)
 
         a,b,c = self.build_operands(adreg=adreg, bdreg=bdreg, cdreg=cdreg,
                                     a_dt=a_dt, b_dt=b_dt, c_dt=c_dt,
