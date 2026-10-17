@@ -138,6 +138,10 @@ class aarch64(asmgen):
         asmblock += self.asmwrap(f"b.eq {self.labelstr(label)}")
         return asmblock
 
+    def shared_registers(self) -> list[tuple[str, str, dict[int, int] | None]]:
+        # a scalar FP register is the low part of the vector register
+        return [("freg", "vreg", None)]
+
     def reserved_registers(self) -> dict[str, dict[str, int]]:
         # x18 is the platform register on Apple and Windows
         return {"greg": {"sp": 31, "lr": 30, "fp": 29, "platform": 18}}

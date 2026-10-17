@@ -129,3 +129,34 @@ class test_predication(unittest.TestCase):
         self.assertIn(3, rt.get_used_regs("mreg"))
         # later calls find it through the tracker
         self.assertEqual("p3", str(g.isa_setup().all_true_predicate(rt=rt, dt=adt.FP64)))
+
+
+class test_shared_registers(unittest.TestCase):
+
+    def test_fp_and_vector_are_one_file(self):
+        g = neon()
+        rt = g.get_reg_tracker()
+        v = rt.reserve_any_reg("vreg")
+        f = rt.reserve_any_reg("freg")
+        self.assertNotEqual(v, f)
+        self.assertEqual({v, f}, rt.get_used_regs("vreg"))
+        rt.unuse_reg("freg", f)
+        self.assertEqual({v}, rt.get_used_regs("vreg"))
+
+    def test_rvv_mask_is_v0(self):
+        g = rvv()
+        rt = g.get_reg_tracker()
+        order = [rt.reserve_any_reg("vreg") for _ in range(g.max_vregs())]
+        self.assertEqual(0, order[-1])          # v0 comes last
+        rt = g.get_reg_tracker()
+        self.assertEqual(0, rt.reserve_any_reg("mreg"))
+        self.assertIn(0, rt.get_used_regs("vreg"))
+
+
+class test_rvv_index_vector(unittest.TestCase):
+
+    def test_bytes(self):
+        g = rvv()
+        text = g.greg_to_voffs(streg=g.greg(5), vreg=g.vreg(3), dt=adt.FP64)
+        self.assertIn("vid.v v3", text)
+        self.assertIn("vmul.vx v3,v3,", text)

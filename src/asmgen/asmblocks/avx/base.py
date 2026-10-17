@@ -141,6 +141,10 @@ class avxbase(asmgen):
             ait.INT32 : "d",
             }
 
+    def shared_registers(self) -> list[tuple[str, str, dict[int, int] | None]]:
+        # a scalar FP register is the low part of the vector register
+        return [("freg", "vreg", None)]
+
     def reserved_registers(self) -> dict[str, dict[str, int]]:
         # indices as x86_greg names them: rbp, rsp; k0 can't be a write mask
         regs = {"greg": {"rbp": 14, "rsp": 15}}

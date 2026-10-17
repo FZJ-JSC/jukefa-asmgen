@@ -48,6 +48,8 @@ class reg_tracker:
         self.used_regs      : dict[str,set[int]] = {}
         self.clobbered_regs : dict[str,set[int]] = {}
         self.aliased_regs   : dict[str,dict[str,int]] = {}
+        # type -> [(other type, index in this type -> index in the other)]
+        self.shared         : dict[str,list[tuple[str,dict[int,int]]]] = {}
 
         for tag,max_regs in reg_type_init_list:
             self.add_type(type_tag=tag, max_regs=max_regs)
@@ -78,6 +80,35 @@ class reg_tracker:
             self.clobbered_regs[tag] = set()
             self.used_regs[tag] = set()
 
+    def share(self, type_a : str, type_b : str, mapping : dict[int,int] | None = None):
+        """
+        Declare registers of two types to be the same registers: AArch64's d0
+        is the low part of v0, RVV's mask register is vector register 0.
+        Reserving or releasing one then reserves or releases the other.
+
+        :param mapping: index in type_a -> index in type_b; None for the same
+                        index, for every register both types have
+        """
+        for tag in (type_a, type_b):
+            if tag not in self.registered_types:
+                raise ValueError(f"Type not tracked: {tag}")
+        if mapping is None:
+            mapping = {i: i for i in range(min(self.max_regs[type_a], self.max_regs[type_b]))}
+        self.shared.setdefault(type_a, []).append((type_b, dict(mapping)))
+        self.shared.setdefault(type_b, []).append((type_a, {v: k for k, v in mapping.items()}))
+
+    def _counterparts(self, type_tag : str, idx : int) -> list[tuple[str,int]]:
+        return [(other, m[idx]) for other, m in self.shared.get(type_tag, []) if idx in m]
+
+    def _free(self, type_tag : str, idx : int) -> bool:
+        return idx not in self.used_regs[type_tag] and \
+            all(i not in self.used_regs[t] for t, i in self._counterparts(type_tag, idx))
+
+    def _mark(self, type_tag : str, idx : int):
+        for tag, i in [(type_tag, idx)] + self._counterparts(type_tag, idx):
+            self.used_regs[tag].add(i)
+            self.clobbered_regs[tag].add(i)
+
     def reserve_any_reg(self, type_tag : str) -> int:
         """
         Reserves a single register of the specified type and marks it as used and clobbered
@@ -89,10 +120,13 @@ class reg_tracker:
         """
         if type_tag not in self.registered_types:
             raise ValueError(f"Type not tracked: {type_tag}")
-        for idx in self.available_regs[type_tag]:
-            if not idx in self.used_regs[type_tag]:
-                self.used_regs[type_tag].add(idx)
-                self.clobbered_regs[type_tag].add(idx)
+        # registers no other type shares first: RVV's v0, also the mask
+        # register, comes last; with every register shared the order stays
+        ordered = sorted(self.available_regs[type_tag],
+                         key=lambda i: bool(self._counterparts(type_tag, i)))
+        for idx in ordered:
+            if self._free(type_tag, idx):
+                self._mark(type_tag, idx)
                 return idx
         raise IndexError(f"All {type_tag} registers in use!")
 
@@ -134,14 +168,13 @@ class reg_tracker:
         """
         if type_tag not in self.registered_types:
             raise ValueError(f"Type not tracked: {type_tag}")
-        if idx in self.used_regs[type_tag]:
+        if not self._free(type_tag, idx):
             raise IndexError(f"{type_tag} register nr. {idx} already in use")
         if idx >= self.max_regs[type_tag]:
             raise IndexError((f"{type_tag} register nr. {idx} not accessible"
                               f"(max_regs = {self.max_regs[type_tag]})"))
 
-        self.used_regs[type_tag].add(idx)
-        self.clobbered_regs[type_tag].add(idx)
+        self._mark(type_tag, idx)
 
     def unuse_reg(self, type_tag : str, idx : int):
         """
@@ -162,6 +195,9 @@ class reg_tracker:
             alias = list(self.aliased_regs[type_tag].keys())[alias_index]
             del self.aliased_regs[type_tag][alias]
         self.used_regs[type_tag].remove(idx)
+        # the same register under its other types is free again too
+        for tag, i in self._counterparts(type_tag, idx):
+            self.used_regs[tag].discard(i)
 
     def available_reg_count(self, type_tag : str) -> int:
         """

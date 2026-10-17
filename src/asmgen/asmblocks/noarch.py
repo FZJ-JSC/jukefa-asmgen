@@ -177,6 +177,13 @@ class asmgen(ABC):
         """
         return {}
 
+    def shared_registers(self) -> list[tuple[str, str, dict[int, int] | None]]:
+        """
+        Register types that are the same registers: (type, other type, index
+        mapping or None for the same indices)
+        """
+        return []
+
     def get_reg_tracker(self) -> reg_tracker:
         """
         A register tracker for this ISA: every register file with its size,
@@ -190,6 +197,10 @@ class asmgen(ABC):
         if count("max_mregs"):
             types.append(("mreg", count("max_mregs")))
         rt = reg_tracker(types)
+        tracked = {t for t, _ in types}
+        for type_a, type_b, mapping in self.shared_registers():
+            if type_a in tracked and type_b in tracked:
+                rt.share(type_a, type_b, mapping)
         for tag, regs in self.reserved_registers().items():
             for name, idx in regs.items():
                 rt.reserve_specific_reg(tag, idx)

@@ -185,8 +185,21 @@ class rvv(riscv64):
         return 0
 
     def greg_to_voffs(self, *, streg : greg_base, vreg : vreg_base, dt : adt) -> str:
-        raise NotImplementedError(
-            "Index not required in RVV for constant strides, use {load,store}_vector_gregstride")
+        """
+        An index vector of byte offsets 0, s, 2s... for indexed loads and
+        stores (vluxei, vsuxei), the stride s in bytes in streg. For a
+        constant stride vlse/vsse do the same without an index vector, but a
+        gather is a choice of its own
+        """
+        return self.asmwrap(f"vid.v {vreg}") + self.asmwrap(f"vmul.vx {vreg},{vreg},{streg}")
+
+    def max_mregs(self) -> int:
+        # masked instructions take their mask in v0
+        return 1
+
+    def shared_registers(self) -> list[tuple[str, str, dict[int, int] | None]]:
+        # the mask register is vector register 0
+        return [("mreg", "vreg", {0: 0})]
 
     def fill_vector(self, *, sreg : freg_base,
                     vreg : vreg_base, dt : adt) -> str:
