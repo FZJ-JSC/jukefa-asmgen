@@ -185,3 +185,27 @@ class test_sve_broadcast_offset(unittest.TestCase):
         for bad in (512, 4):
             with self.assertRaises(Exception):
                 load(bad)
+
+
+class test_avx512_256bit_blocks(unittest.TestCase):
+
+    def test_forms(self):
+        a = avx512()
+        v = a.vreg
+        call = lambda **kw: plain(a.move(dregs=[v(1), v(2)], dts=[adt.FP64] * 2, **kw))
+        lines = [
+            call(operand_modifiers={"adreg": {omod.IBLOCK}, "bdreg": BLK}, adreg_block=1,
+                 adreg_blocksize=4, bdreg_blocksize=4),
+            call(operand_modifiers={"adreg": {omod.IBLOCK}}, adreg_block=1, adreg_blocksize=4),
+            call(operand_modifiers={"bdreg": {omod.IBLOCK}}, bdreg_block=1, bdreg_blocksize=4)]
+        self.assertEqual(["vshuff64x2 $0xee,%%zmm1,%%zmm1,%%zmm2",
+                          "vextractf64x4 $1,%%zmm1,%%ymm2",
+                          "vinsertf64x4 $1,%%ymm1,%%zmm2,%%zmm2"], lines)
+        if shutil.which("as"):
+            with tempfile.TemporaryDirectory() as d:
+                src = os.path.join(d, "x.s")
+                with open(src, "w") as f:
+                    f.write("\n".join(l.replace("%%", "%") for l in lines) + "\n")
+                r = subprocess.run(["as", src, "-o", os.path.join(d, "x.o")],
+                                   capture_output=True, text=True)
+                self.assertEqual(0, r.returncode, r.stderr)

@@ -262,6 +262,10 @@ class riscv64(asmgen):
         dt_suf = self.fdt_suffixes[dt]
         return self.asmwrap(f"fcvt.{dt_suf}.w {freg}, zero")
 
+    def reserved_registers(self) -> dict[str, dict[str, int]]:
+        # indices as riscv64_greg names them: ra, sp, gp, tp, s0 (fp), zero
+        return {"greg": {"ra": 26, "sp": 27, "gp": 28, "tp": 29, "fp": 30, "zero": 31}}
+
     @property
     def min_prefetch_offset(self):
         return 0

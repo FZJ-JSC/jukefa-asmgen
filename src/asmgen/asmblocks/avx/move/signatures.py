@@ -21,7 +21,8 @@ from ....registers import asm_data_type as adt, adt_size
 
 def make_avx_move_signatures(simd_bytes : int) -> list[opsig]:
     """
-    adreg is the source, bdreg the destination; blocks are 128 bits:
+    adreg is the source, bdreg the destination; blocks are 128 bits, or on zmm
+    also 256 bits (vshuff64x2, vextractf64x4, vinsertf64x4):
 
         copy             vmovaps
         scalar to all    vbroadcastsd/ss (vmovddup for doubles in xmm)
@@ -30,9 +31,9 @@ def make_avx_move_signatures(simd_bytes : int) -> list[opsig]:
         block in         vinsertf32x4, vinsertf128             bdreg IBLOCK
     """
     sigs = []
-    blocks = simd_bytes // 16
 
-    def add_sig(dt, amods, bmods):
+    def add_sig(dt, amods, bmods, block_bytes=16):
+        blocks = simd_bytes // block_bytes
         ops = {
             'adreg': osh(otype=ot.REGISTER, orole=orl.DATA,
                          rtype=rgt.FP if (omod.BCAST in bmods and not amods) else rgt.VEC, dt=dt),
@@ -44,7 +45,7 @@ def make_avx_move_signatures(simd_bytes : int) -> list[opsig]:
                 ops[f'{name}_block'] = osh(otype=ot.IMMEDIATE, orole=orl.PARAM, value_constraints=[
                     minmax_constraint(minval=0, maxval=blocks - 1)])
             if {omod.IBLOCK, omod.BLOCK} & mods:
-                params[f'{name}_blocksize'] = 16 // adt_size(dt)
+                params[f'{name}_blocksize'] = block_bytes // adt_size(dt)
         ops['adreg'].modifiers = amods
         ops['bdreg'].modifiers = bmods
         sigs.append(opsig(modifiers=set(), structural_params=params, operands=ops))
@@ -52,8 +53,11 @@ def make_avx_move_signatures(simd_bytes : int) -> list[opsig]:
     for dt in (adt.FP64, adt.FP32):
         add_sig(dt, set(), set())
         add_sig(dt, set(), {omod.BCAST})
-        if blocks > 1:
-            add_sig(dt, {omod.IBLOCK}, {omod.BLOCK, omod.BCAST})
-            add_sig(dt, {omod.IBLOCK}, set())
-            add_sig(dt, set(), {omod.IBLOCK})
+        # 128-bit blocks, and on zmm 256-bit ones
+        for block_bytes in (16, 32):
+            if simd_bytes // block_bytes < 2:
+                continue
+            add_sig(dt, {omod.IBLOCK}, {omod.BLOCK, omod.BCAST}, block_bytes)
+            add_sig(dt, {omod.IBLOCK}, set(), block_bytes)
+            add_sig(dt, set(), {omod.IBLOCK}, block_bytes)
     return sigs

@@ -138,6 +138,10 @@ class aarch64(asmgen):
         asmblock += self.asmwrap(f"b.eq {self.labelstr(label)}")
         return asmblock
 
+    def reserved_registers(self) -> dict[str, dict[str, int]]:
+        # x18 is the platform register on Apple and Windows
+        return {"greg": {"sp": 31, "lr": 30, "fp": 29, "platform": 18}}
+
     @property
     def max_gregs(self):
         return 32

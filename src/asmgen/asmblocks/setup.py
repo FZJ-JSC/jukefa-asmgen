@@ -26,6 +26,19 @@ class setup_kind(Enum):
     CONSTANTS = auto()
 
 
+class predication(Enum):
+    """
+    How vector instructions limit the elements they work on
+    """
+    #: they don't: fixed-width vectors (NEON, AVX2)
+    NONE = auto()
+    #: instructions name a predicate register (SVE, SME): an all-true one for
+    #: full vectors, others for partial ones - the last vector of an edge
+    EXPLICIT = auto()
+    #: the vector length is state every instruction obeys (RVV's vl)
+    IMPLICIT = auto()
+
+
 @dataclass(frozen=True)
 class setup_step:
     """
@@ -47,6 +60,9 @@ class isa_setup:
 
     def steps(self) -> list[setup_step]:
         return []
+
+    def predication(self) -> predication:
+        return predication.NONE
 
     def supports_vl_override(self) -> bool:
         """
@@ -106,22 +122,39 @@ class isa_setup:
 
 class sve_setup(isa_setup):
     """
-    SVE: a governing predicate with every lane active
+    SVE: a governing predicate with every lane active, in the predicate
+    register chosen (p0 by default), reserved and aliased as 'all_true' in the
+    register tracker
     """
 
-    PREDICATE = 0
+    ALIAS = "all_true"
+
+    def __init__(self, gen, predicate : int = 0):
+        super().__init__(gen)
+        self.predicate = predicate
 
     def steps(self) -> list[setup_step]:
         return [setup_step(setup_kind.PREDICATE,
-                           f"all-true governing predicate in p{self.PREDICATE} for "
+                           f"all-true governing predicate in p{self.predicate} for "
                            f"full-vector instructions")]
+
+    def predication(self) -> predication:
+        return predication.EXPLICIT
+
+    def _index(self, rt) -> int:
+        aliased = getattr(rt, "aliased_regs", {}).get("mreg", {}) if rt else {}
+        return aliased.get(self.ALIAS, self.predicate)
 
     def setup(self, *, rt, dt, vl : int | None = None) -> str:
         super().setup(rt=rt, dt=dt, vl=vl)
-        return self.gen.ptrue(self.gen.mreg(self.PREDICATE), dt)
+        aliased = getattr(rt, "aliased_regs", {}).get("mreg") if rt else None
+        if aliased is not None and self.ALIAS not in aliased:
+            rt.reserve_specific_reg("mreg", self.predicate)
+            rt.alias_reg("mreg", self.ALIAS, self.predicate)
+        return self.gen.ptrue(self.gen.mreg(self._index(rt)), dt)
 
     def all_true_predicate(self, *, rt, dt):
-        return self.gen.mreg(self.PREDICATE)
+        return self.gen.mreg(self._index(rt))
 
 
 class sme_setup(sve_setup):
@@ -162,6 +195,9 @@ class rvv_setup(isa_setup):
 
     def supports_vl_override(self) -> bool:
         return True
+
+    def predication(self) -> predication:
+        return predication.IMPLICIT
 
     @staticmethod
     def _aliased(rt, name: str) -> int:

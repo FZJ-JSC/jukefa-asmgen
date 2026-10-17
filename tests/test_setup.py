@@ -90,3 +90,42 @@ class test_setup(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+from asmgen.asmblocks.setup import predication
+
+
+class test_reg_trackers(unittest.TestCase):
+
+    def test_reserved_never_allocated(self):
+        cases = ((neon, {"sp", "x30", "x29", "x18"}),
+                 (rvv, {"ra", "sp", "gp", "tp", "s0", "zero"}),
+                 (avx512, {"rsp", "rbp"}))
+        for G, reserved in cases:
+            with self.subTest(isa=G.__name__):
+                g = G()
+                rt = g.get_reg_tracker()
+                free = g.max_gregs - len(rt.get_used_regs("greg"))
+                handed = {str(g.greg(rt.reserve_any_reg("greg"))) for _ in range(free)}
+                self.assertFalse(handed & reserved)
+
+    def test_avx512_k0(self):
+        self.assertEqual({"k0": 0}, avx512().get_reg_tracker().aliased_regs["mreg"])
+
+
+class test_predication(unittest.TestCase):
+
+    def test_kinds(self):
+        self.assertEqual(predication.NONE, neon().isa_setup().predication())
+        self.assertEqual(predication.EXPLICIT, sve().isa_setup().predication())
+        self.assertEqual(predication.IMPLICIT, rvv().isa_setup().predication())
+
+    def test_chosen_predicate_aliased(self):
+        g = sve()
+        rt = g.get_reg_tracker()
+        setup = g.isa_setup(predicate=3)
+        self.assertIn("ptrue p3.d", setup.setup(rt=rt, dt=adt.FP64))
+        self.assertEqual({"all_true": 3}, rt.aliased_regs["mreg"])
+        self.assertIn(3, rt.get_used_regs("mreg"))
+        # later calls find it through the tracker
+        self.assertEqual("p3", str(g.isa_setup().all_true_predicate(rt=rt, dt=adt.FP64)))

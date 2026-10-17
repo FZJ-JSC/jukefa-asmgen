@@ -14,6 +14,7 @@ from ...op.signature import operation_signature
 from ...op.operand import operand_modifier as omod
 from ...op.move import move, move_modifier as mod
 from ..types import xmm_vreg, ymm_vreg
+from ....registers import adt_size
 from .signatures import make_avx_move_signatures
 
 
@@ -42,20 +43,29 @@ class avx_move(move):
         amods = operand_modifiers.get('adreg', set())
         bmods = operand_modifiers.get('bdreg', set())
         p, wide = self.rpref, self.simd_bytes == 64
+        block = lambda name: kwargs.get(f"{name}_blocksize", 0) * adt_size(dt)
+        # the register holding one block: xmm for 128 bits, ymm for 256
+        part = lambda r, size: p(ymm_vreg(r.idx) if 32 == size else xmm_vreg(r.idx))
         x = lambda r: p(xmm_vreg(r.idx))
 
         if omod.IBLOCK in amods and omod.BCAST in bmods:
             i = kwargs['adreg_block']
+            if wide and 32 == block('adreg'):
+                # both 128-bit halves of 256-bit block i, twice
+                imm = (2 * i) | (2 * i + 1) << 2 | (2 * i) << 4 | (2 * i + 1) << 6
+                return self.asmwrap(f"vshuff64x2 ${imm:#x},{p(src)},{p(src)},{p(dst)}")
             if wide:
                 imm = i * 0b01010101
                 return self.asmwrap(f"vshuff32x4 ${imm:#x},{p(src)},{p(src)},{p(dst)}")
             return self.asmwrap(f"vperm2f128 ${i | (i << 4):#x},{p(src)},{p(src)},{p(dst)}")
         if omod.IBLOCK in amods:
-            inst = "vextractf32x4" if wide else "vextractf128"
-            return self.asmwrap(f"{inst} ${kwargs['adreg_block']},{p(src)},{x(dst)}")
+            size = block('adreg')
+            inst = "vextractf64x4" if 32 == size else ("vextractf32x4" if wide else "vextractf128")
+            return self.asmwrap(f"{inst} ${kwargs['adreg_block']},{p(src)},{part(dst, size)}")
         if omod.IBLOCK in bmods:
-            inst = "vinsertf32x4" if wide else "vinsertf128"
-            return self.asmwrap(f"{inst} ${kwargs['bdreg_block']},{x(src)},{p(dst)},{p(dst)}")
+            size = block('bdreg')
+            inst = "vinsertf64x4" if 32 == size else ("vinsertf32x4" if wide else "vinsertf128")
+            return self.asmwrap(f"{inst} ${kwargs['bdreg_block']},{part(src, size)},{p(dst)},{p(dst)}")
         if omod.BCAST in bmods:
             if adt.FP64 == dt and 16 == self.simd_bytes:
                 return self.asmwrap(f"vmovddup {x(src)},{p(dst)}")

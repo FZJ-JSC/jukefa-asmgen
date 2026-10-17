@@ -141,6 +141,14 @@ class avxbase(asmgen):
             ait.INT32 : "d",
             }
 
+    def reserved_registers(self) -> dict[str, dict[str, int]]:
+        # indices as x86_greg names them: rbp, rsp; k0 can't be a write mask
+        regs = {"greg": {"rbp": 14, "rsp": 15}}
+        mregs = self.max_mregs() if callable(self.max_mregs) else self.max_mregs
+        if mregs:
+            regs["mreg"] = {"k0": 0}
+        return regs
+
     def iota_label(self, size : int, count : int) -> str:
         """
         Returns the label string for iota data (used for emulating strided ld/st

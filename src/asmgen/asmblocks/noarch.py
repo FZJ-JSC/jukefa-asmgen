@@ -170,6 +170,34 @@ class asmgen(ABC):
         opblock += ",".join([f"\"{reg}\"" for reg in clobber])
         return opblock
 
+    def reserved_registers(self) -> dict[str, dict[str, int]]:
+        """
+        Registers no kernel may allocate - stack pointer, link register and the
+        like: register type -> name -> index
+        """
+        return {}
+
+    def get_reg_tracker(self) -> reg_tracker:
+        """
+        A register tracker for this ISA: every register file with its size,
+        the reserved registers reserved and aliased by their names
+        """
+        def count(name):
+            # a property on most generators, a method on some
+            value = getattr(self, name)
+            return value() if callable(value) else value
+        types = [("greg", count("max_gregs")), ("vreg", count("max_vregs"))]
+        if count("max_fregs"):
+            types.append(("freg", count("max_fregs")))
+        if count("max_mregs"):
+            types.append(("mreg", count("max_mregs")))
+        rt = reg_tracker(types)
+        for tag, regs in self.reserved_registers().items():
+            for name, idx in regs.items():
+                rt.reserve_specific_reg(tag, idx)
+                rt.alias_reg(tag, name, idx)
+        return rt
+
     def isa_setup(self):
         """
         What this ISA needs set up before a kernel and torn down after: see

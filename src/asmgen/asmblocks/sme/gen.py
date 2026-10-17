@@ -28,12 +28,14 @@ class sme(sve):
     SME asmgen implementation
     """
 
-    def isa_setup(self):
+    def isa_setup(self, predicate : int = 0):
         """
         What this ISA needs set up before a kernel and torn down after
+
+        :param predicate: predicate register for the all-true predicate
         """
         from ..setup import sme_setup
-        return sme_setup(self)
+        return sme_setup(self, predicate=predicate)
 
     def __init__(self):
         super().__init__()

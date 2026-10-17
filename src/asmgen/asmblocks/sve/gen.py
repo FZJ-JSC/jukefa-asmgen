@@ -51,12 +51,14 @@ class sve(aarch64):
             adt.SINT8  : "b",
             }
 
-    def isa_setup(self):
+    def isa_setup(self, predicate : int = 0):
         """
         What this ISA needs set up before a kernel and torn down after
+
+        :param predicate: predicate register for the all-true predicate
         """
         from ..setup import sve_setup
-        return sve_setup(self)
+        return sve_setup(self, predicate=predicate)
 
     def __init__(self):
         super().__init__()
