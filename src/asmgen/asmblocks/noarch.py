@@ -196,6 +196,21 @@ class asmgen(ABC):
                 rt.alias_reg(tag, name, idx)
         return rt
 
+    def vlen_to_greg(self, *, reg, dt : asm_data_type) -> str:
+        """
+        The vector length in elements of dt into a general register, for
+        vector-length agnostic ISAs that don't keep it in one
+        """
+        raise NotImplementedError(f"{type(self).__name__} has no vector length to read")
+
+    def mask_all_true(self, *, reg, dt : asm_data_type) -> str:
+        """
+        Set a mask register to every lane active: before instructions that
+        clear their mask (AVX gathers and scatters list it in their
+        signatures' clobber_list)
+        """
+        raise NotImplementedError(f"{type(self).__name__} has no mask to set")
+
     def isa_setup(self):
         """
         What this ISA needs set up before a kernel and torn down after: see

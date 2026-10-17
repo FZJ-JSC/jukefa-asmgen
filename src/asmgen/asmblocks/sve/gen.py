@@ -148,6 +148,16 @@ class sve(aarch64):
     def add_greg_voff(self, *, reg : greg_base, offset : int, dt : adt) -> str:
         return self.asmwrap(f"incb {reg}, ALL, MUL #{offset}")
 
+    def vlen_to_greg(self, *, reg, dt : adt) -> str:
+        """
+        The vector length in elements of dt into a general register: cnt{b,h,w,d}
+        """
+        suf = {1: 'b', 2: 'h', 4: 'w', 8: 'd'}[adt_size(dt)]
+        return self.asmwrap(f"cnt{suf} {reg}")
+
+    def mask_all_true(self, *, reg, dt : adt) -> str:
+        return self.ptrue(reg, dt)
+
     def greg_to_voffs(self, *, streg : greg_base, vreg : vreg_base, dt : adt) -> str:
         suf = self.dt_suffixes[dt]
         cstreg = str(streg)

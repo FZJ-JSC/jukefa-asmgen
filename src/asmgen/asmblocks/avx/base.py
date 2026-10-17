@@ -23,7 +23,7 @@ from ...registers import (
 from ..noarch import asmgen,comparison
 from ...callconv.callconv import callconv
 
-from .types import x86_greg,avx_freg,xmm_vreg,ymm_vreg,zmm_vreg,reg_prefixer
+from .types import x86_greg,avx_freg,xmm_vreg,ymm_vreg,zmm_vreg,reg_prefixer,avx512_mreg
 
 from .opd3 import avx_fma,avx_fmul,avx_fadd
 
@@ -560,6 +560,23 @@ class avxbase(asmgen):
     def max_add_voff(self) -> int:
         return 2**31//self.simd_size//8
 
+    def mreg(self, reg_idx : int):
+        """
+        An AVX-512 mask register, k0..k7
+        """
+        return avx512_mreg(reg_idx)
+
+    def mask_all_true(self, *, reg, dt : adt) -> str:
+        """
+        Set a gather or scatter mask to every lane active - before each, as
+        those instructions clear their mask: kxnorw on an AVX-512 mask
+        register, vpcmpeqd on an AVX2 vector mask
+        """
+        if isinstance(reg, avx512_mreg):
+            return self.asmwrap(f"kxnorw {self.rpref(reg)},{self.rpref(reg)},{self.rpref(reg)}")
+        r = self.rpref(reg)
+        return self.asmwrap(f"vpcmpeqd {r},{r},{r}")
+
     def greg_to_voffs(self, *, streg : greg_base, vreg : vreg_base, dt : adt) -> str:
 
         dt_size = adt_size(dt)
@@ -577,7 +594,11 @@ class avxbase(asmgen):
         rip = '%rip'
         if self.output_inline:
             rip = '%%rip'
-        result += self.asmwrap(f"vpmull{suf} {label}({rip}),{pv},{pv}")
+        if 8 == dt_size and self.simd_size < 64:
+            # vpmullq is AVX-512; for strides below 4 GB the low dwords suffice
+            result += self.asmwrap(f"vpmuludq {label}({rip}),{pv},{pv}")
+        else:
+            result += self.asmwrap(f"vpmull{suf} {label}({rip}),{pv},{pv}")
 
         return result
 

@@ -369,7 +369,7 @@ class avx128_opmem(avx_opmem):
         pdreg = self.rpref(dreg)
         pmreg = self.rpref(mreg)
 
-        return f"vgather{isuf}{suf} {pmreg}, ({pareg},{pvidxreg},{adt_size(dt)}), {pdreg}"
+        return f"vgather{isuf}{suf} {pmreg}, ({pareg},{pvidxreg},1), {pdreg}"
 
     def build_scatter(self, dreg: xmm_vreg, mreg : xmm_vreg,
                       areg: x86_greg, dt: adt, **kwargs) -> str:
@@ -416,7 +416,7 @@ class avx512_opmem(avx_opmem):
         pareg = self.rpref(areg)
         pvidxreg = self.rpref(vidxreg)
 
-        addressing = f"({pareg},{pvidxreg},{adt_size(dt)})"
+        addressing = f"({pareg},{pvidxreg},1)"
         maskreg = self.rpref(mreg)
         #masksuf = "w" if adt_size(dt) == 4 else "q"
 
@@ -435,7 +435,7 @@ class avx512_opmem(avx_opmem):
         pareg = self.rpref(areg)
         pvidxreg = self.rpref(vidxreg)
 
-        addressing = f"({pareg},{pvidxreg},{adt_size(dt)})"
+        addressing = f"({pareg},{pvidxreg},1)"
         maskreg = self.rpref(mreg)
         #masksuf = "w" if adt_size(dt) == 4 else "q"
 

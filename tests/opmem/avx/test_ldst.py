@@ -186,14 +186,14 @@ class test_avx_opmem(unittest.TestCase):
             self.load_256(dregs=[self.ymm0], amreg=self.ymm2, areg=self.r8,
                           dt=adt.FP64,
                           modifiers={mod.VINDEX, mod.MASK}, vidxreg=self.ymm1, it=ait.INT64),
-            "vgatherqpd %ymm2, (%r8,%ymm1,8), %ymm0\n"
+            "vgatherqpd %ymm2, (%r8,%ymm1,1), %ymm0\n"
         )
 
     def test_gather_avx512(self):
         """
         AVX512 Gather with K-mask
         """
-        expected = "vgatherdps (%r8,%zmm1,4), %zmm0{%k2}\n"
+        expected = "vgatherdps (%r8,%zmm1,1), %zmm0{%k2}\n"
         self.assertEqual(
             self.load_512(dregs=[self.zmm0], amreg=self.k2, areg=self.r8,
                           dt=adt.FP32, modifiers={mod.VINDEX, mod.MASK},
@@ -204,7 +204,7 @@ class test_avx_opmem(unittest.TestCase):
         """
         AVX512 Scatter with K-mask
         """
-        expected = "vscatterdps %zmm0, (%r8,%zmm1,4){%k2}\n"
+        expected = "vscatterdps %zmm0, (%r8,%zmm1,1){%k2}\n"
         self.assertEqual(
             self.store_512(dregs=[self.zmm0], amreg=self.k2, areg=self.r8,
                            dt=adt.FP32, modifiers={mod.VINDEX, mod.MASK},
