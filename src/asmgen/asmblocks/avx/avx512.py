@@ -67,16 +67,10 @@ class avx512(avxbase):
 
     def get_req_flags(self) -> list[str]:
         return ['avx512f']
-
-    @property
     def max_fregs(self):
         return 32
-
-    @property
     def max_vregs(self):
         return 32
-
-    @property
     def max_mregs(self):
         return 8
 

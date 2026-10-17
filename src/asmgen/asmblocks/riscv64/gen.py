@@ -146,16 +146,10 @@ class riscv64(asmgen):
         asmblock = f"\"bnez {reg}, {self.labelstr(label)}\\n\\t\"\n"
 
         return asmblock
-
-    @property
     def max_gregs(self) -> int:
         return len(riscv64_greg.names)
-
-    @property
     def max_mregs(self):
         return 0
-
-    @property
     def max_fregs(self) -> int:
         return len(riscv64_freg.names)
 

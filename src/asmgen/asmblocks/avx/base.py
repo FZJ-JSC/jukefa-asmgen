@@ -144,7 +144,7 @@ class avxbase(asmgen):
     def reserved_registers(self) -> dict[str, dict[str, int]]:
         # indices as x86_greg names them: rbp, rsp; k0 can't be a write mask
         regs = {"greg": {"rbp": 14, "rsp": 15}}
-        mregs = self.max_mregs() if callable(self.max_mregs) else self.max_mregs
+        mregs = self.max_mregs()
         if mregs:
             regs["mreg"] = {"k0": 0}
         return regs
@@ -300,12 +300,8 @@ class avxbase(asmgen):
 
     def indexable_elements(self, dt : adt):
         return self.simd_size//adt_size(dt)
-
-    @property
     def max_gregs(self):
         return 16
-
-    @property
     def max_mregs(self):
         return 0
 

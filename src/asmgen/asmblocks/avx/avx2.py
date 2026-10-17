@@ -67,12 +67,8 @@ class fma128(avxbase):
 
     def get_req_flags(self):
         return ['fma', 'avx']
-
-    @property
     def max_fregs(self):
         return 16
-
-    @property
     def max_vregs(self):
         return 16
 
@@ -146,12 +142,8 @@ class fma256(avxbase):
 
     def get_req_flags(self):
         return ['fma', 'avx']
-
-    @property
     def max_fregs(self):
         return 16
-
-    @property
     def max_vregs(self):
         return 16
 

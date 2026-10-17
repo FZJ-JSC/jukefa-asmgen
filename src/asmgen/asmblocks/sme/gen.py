@@ -71,8 +71,6 @@ class sme(sve):
 
     def max_tregs(self, dt : adt) -> int:
         return adt_size(dt)
-
-    @property
     def max_mregs(self):
         return 16
 

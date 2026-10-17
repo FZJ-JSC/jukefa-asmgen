@@ -99,9 +99,9 @@ class asm_correctness_test(unittest.TestCase,testcase):
         # Generating test sources
         vg = vargen()
         reg_init_list = [
-                ("greg", cls.gen.max_gregs),
-                ("vreg", cls.gen.max_vregs),
-                ("freg", cls.gen.max_fregs)
+                ("greg", cls.gen.max_gregs()),
+                ("vreg", cls.gen.max_vregs()),
+                ("freg", cls.gen.max_fregs())
                 ]
         rt = reg_tracker(reg_type_init_list=reg_init_list)
 

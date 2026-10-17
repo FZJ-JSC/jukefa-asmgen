@@ -21,6 +21,10 @@ class sve_fmul(sve_opd3_base):
     """
     SVE implementation of fmul
     """
+    # unpredicated fadd/fmul (vectors) exist; the predicated forms are
+    # destructive: Zdn is both the destination and the first source
+    unpredicated = True
+    destructive = True
 
     inst_base = "mul"
 

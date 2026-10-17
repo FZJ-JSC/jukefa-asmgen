@@ -72,3 +72,29 @@ class test_sve(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class test_sve_destructive(unittest.TestCase):
+
+    def test_fmul_fadd(self):
+        from asmgen.asmblocks.op import opd3_modifier as m3
+        g = sve()
+        z = g.vreg
+        dts = dict(a_dt=adt.FP64, b_dt=adt.FP64, c_dt=adt.FP64)
+        plain = lambda t: t.strip().strip('"').replace("\\n", "").replace("\\t", "")
+        # unpredicated forms take any registers
+        self.assertEqual("fmul z8.d,z1.d,z2.d", plain(g.fmul(adreg=z(1), bdreg=z(2), cdreg=z(8), **dts)))
+        self.assertEqual("fadd z8.d,z1.d,z2.d", plain(g.fadd(adreg=z(1), bdreg=z(2), cdreg=z(8), **dts)))
+        # predicated forms write Zdn, their first source
+        g.fmul(adreg=z(8), bdreg=z(2), cdreg=z(8), modifiers={m3.MASK}, amreg=g.mreg(0), **dts)
+        with self.assertRaises(Exception):
+            g.fmul(adreg=z(4), bdreg=z(5), cdreg=z(8), modifiers={m3.MASK}, amreg=g.mreg(0), **dts)
+
+
+class test_counts_are_methods(unittest.TestCase):
+
+    def test_methods(self):
+        g = sve()
+        for name in ("max_gregs", "max_vregs", "max_fregs", "max_mregs"):
+            self.assertTrue(callable(getattr(g, name)), name)
+            self.assertIsInstance(getattr(g, name)(), int)

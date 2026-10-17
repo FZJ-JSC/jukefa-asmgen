@@ -23,13 +23,13 @@ class test_sve_fmul(test_sve_opd3_base):
         Test some known instructions for correctness
         """
         cases = [
-            (adt.FP64, "fmul z0.d,p0/m,z1.d,z2.d\n"),
-            (adt.FP32, "fmul z0.s,p0/m,z1.s,z2.s\n"),
-            (adt.SINT16, "mul z0.h,p0/m,z1.h,z2.h\n")
+            (adt.FP64, "fmul z0.d,p0/m,z0.d,z2.d\n"),
+            (adt.FP32, "fmul z0.s,p0/m,z0.s,z2.s\n"),
+            (adt.SINT16, "mul z0.h,p0/m,z0.h,z2.h\n")
         ]
         for dt, expected in cases:
             with self.subTest(dt=dt.name):
-                res = self.gen.fmul(adreg=self.v1, bdreg=self.v2, cdreg=self.v0, amreg=self.p0,
+                res = self.gen.fmul(adreg=self.v0, bdreg=self.v2, cdreg=self.v0, amreg=self.p0,
                                     a_dt=dt, b_dt=dt, c_dt=dt, modifiers={mod.MASK})
                 self.assertEqual(res, expected)
 
@@ -40,7 +40,7 @@ class test_sve_fmul(test_sve_opd3_base):
         # 1. NP is unsupported in FMUL
         with self.subTest(error="unsupported NP"):
             with self.assertRaisesRegex(ValueError, "SVE mul has no NP-form"):
-                self.gen.fmul(adreg=self.v1, bdreg=self.v2, cdreg=self.v0, amreg=self.p0,
+                self.gen.fmul(adreg=self.v0, bdreg=self.v2, cdreg=self.v0, amreg=self.p0,
                               a_dt=adt.FP32, b_dt=adt.FP32, c_dt=adt.FP32,
                               modifiers={mod.MASK, mod.NP})
 

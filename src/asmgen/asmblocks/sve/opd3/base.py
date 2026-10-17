@@ -26,6 +26,10 @@ class sve_opd3_base(aarch64_simd_opd3_base):
     inst_base = "invalid"
 
     supports_np = False
+    # predicated forms overwrite their first source: Zdn
+    destructive = False
+    # unpredicated forms (vectors) exist besides the predicated ones
+    unpredicated = False
 
     def __init__(self,
                  asmwrap : Callable[[str],str],
@@ -34,4 +38,5 @@ class sve_opd3_base(aarch64_simd_opd3_base):
                  ):
         super().__init__(asmwrap,dt_suffixes,dt_idxsuffixes)
 
-        self.signatures = make_sve_opd3_signatures(self.supports_np)
+        self.signatures = make_sve_opd3_signatures(self.supports_np, self.destructive,
+                                                   self.unpredicated)

@@ -16,7 +16,7 @@ from ...op import (
     operand_modifier as opd_mod
 )
 
-from ...op.constraint import minmax_constraint
+from ...op.constraint import otherplusn_constraint, minmax_constraint
 from ...op.opd3 import widening_method as wm
 from ....registers import asm_data_type as adt, adt_size
 from ..types import sve_vreg
@@ -44,7 +44,8 @@ _MIXED_INTS = [
 
 # Readable enough, no need for subfunctions
 # pylint: disable-next=too-many-branches
-def make_sve_opd3_signatures(supports_np: bool) -> list[sig]:
+def make_sve_opd3_signatures(supports_np: bool, destructive: bool = False,
+                              unpredicated: bool = False) -> list[sig]:
     """
     Generate signatures for NEON opd3 operations
     """
@@ -63,7 +64,10 @@ def make_sve_opd3_signatures(supports_np: bool) -> list[sig]:
         ops = {
             'adreg': osh(ot.REGISTER, orl.DATA, rt.VEC, a_dt),
             'bdreg': osh(ot.REGISTER, orl.DATA, rt.VEC, b_dt),
-            'cdreg': osh(ot.REGISTER, orl.DATA, rt.VEC, c_dt)
+            'cdreg': osh(ot.REGISTER, orl.DATA, rt.VEC, c_dt,
+                         value_constraints=[otherplusn_constraint(
+                             other='adreg', offset=0, getint=lambda r: r.idx,
+                             what="register")] if destructive and mod.MASK in mods else [])
         }
 
         if mod.MASK in mods:
@@ -119,6 +123,9 @@ def make_sve_opd3_signatures(supports_np: bool) -> list[sig]:
                     add_sig(dt, dt, dt, mods=m, opd_mods=om)
                 else:
                     add_sig(dt, dt, dt, mods=m | {mod.MASK}, opd_mods=om)
+                    # unpredicated (vectors): floating-point fadd and fmul
+                    if unpredicated and not m:
+                        add_sig(dt, dt, dt, mods=m, opd_mods=om)
                 if dt in _WIDENING_2X_MAP:
                     add_sig(dt, dt, _WIDENING_2X_MAP[dt],
                             mods=m | {mod.PART},

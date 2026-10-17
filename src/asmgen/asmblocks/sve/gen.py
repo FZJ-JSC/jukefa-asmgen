@@ -106,12 +106,8 @@ class sve(aarch64):
     @property
     def is_vla(self) -> bool:
         return True
-
-    @property
     def max_vregs(self) -> int:
         return 32
-
-    @property
     def max_mregs(self):
         return 8
 

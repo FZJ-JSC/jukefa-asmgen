@@ -141,16 +141,10 @@ class aarch64(asmgen):
     def reserved_registers(self) -> dict[str, dict[str, int]]:
         # x18 is the platform register on Apple and Windows
         return {"greg": {"sp": 31, "lr": 30, "fp": 29, "platform": 18}}
-
-    @property
     def max_gregs(self):
         return 32
-
-    @property
     def max_mregs(self):
         return 0
-
-    @property
     def max_fregs(self):
         return 32
 

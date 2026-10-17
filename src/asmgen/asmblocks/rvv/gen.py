@@ -121,8 +121,6 @@ class rvv(riscv64):
 
     def indexable_elements(self, dt : adt):
         return self.simd_size//adt_size(dt)
-
-    @property
     def max_vregs(self):
         return 32//self.lmul
 

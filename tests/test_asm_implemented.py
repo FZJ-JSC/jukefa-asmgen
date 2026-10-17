@@ -171,9 +171,9 @@ def get_rt(gen : asmgen, name: str) -> reg_tracker:
     if name not in rts:
         rts[name] = reg_tracker(
                 reg_type_init_list=[
-                    ('greg', gen.max_gregs),
-                    ('freg', gen.max_fregs),
-                    ('vreg', gen.max_vregs),
+                    ('greg', gen.max_gregs()),
+                    ('freg', gen.max_fregs()),
+                    ('vreg', gen.max_vregs()),
                     ('treg', gen.max_tregs(adt.FP64)),
                     ]
                 )

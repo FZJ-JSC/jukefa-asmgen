@@ -105,7 +105,7 @@ class test_reg_trackers(unittest.TestCase):
             with self.subTest(isa=G.__name__):
                 g = G()
                 rt = g.get_reg_tracker()
-                free = g.max_gregs - len(rt.get_used_regs("greg"))
+                free = g.max_gregs() - len(rt.get_used_regs("greg"))
                 handed = {str(g.greg(rt.reserve_any_reg("greg"))) for _ in range(free)}
                 self.assertFalse(handed & reserved)
 

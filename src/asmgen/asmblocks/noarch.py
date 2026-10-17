@@ -183,9 +183,7 @@ class asmgen(ABC):
         the reserved registers reserved and aliased by their names
         """
         def count(name):
-            # a property on most generators, a method on some
-            value = getattr(self, name)
-            return value() if callable(value) else value
+            return getattr(self, name)()
         types = [("greg", count("max_gregs")), ("vreg", count("max_vregs"))]
         if count("max_fregs"):
             types.append(("freg", count("max_fregs")))
