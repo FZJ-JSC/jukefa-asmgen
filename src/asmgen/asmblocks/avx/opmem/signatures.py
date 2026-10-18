@@ -68,10 +68,15 @@ def make_avx_opmem_signatures(action: opmem_action,
         if mod.MASK in mods:
             ops['amreg'] = osh(ot.REGISTER, orl.MASK, maskrt, dt)
 
+        # a 32-bit signed displacement: in bytes, or in vectors of the
+        # register's size
         if mod.IOFFSET in mods:
-            ops['ioffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None)
+            ops['ioffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None, value_constraints=[
+                minmax_constraint(minval=-2**31, maxval=2**31 - 1)])
         if mod.VOFFSET in mods:
-            ops['voffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None)
+            vbytes = 64 if is_avx512 else 32
+            ops['voffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None, value_constraints=[
+                minmax_constraint(minval=-2**31 // vbytes, maxval=(2**31 - 1) // vbytes)])
 
         has_ilane = any(opd_mod.ILANE in mods for _,mods in opd_mods.items())
 

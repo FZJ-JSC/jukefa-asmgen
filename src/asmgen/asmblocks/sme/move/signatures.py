@@ -7,6 +7,7 @@
 Signatures for SME move instructions
 """
 
+from ...op.constraint import minmax_constraint
 from typing import Type
 
 from dataclasses import dataclass
@@ -182,9 +183,13 @@ def make_sme_move_signatures() -> list[opsig]:
                         )
 
                 if i == 0:
+                    # the first slice: the tile has 16 bytes' worth of slices
+                    # per element size, the following ones after it
                     operands[f'{treg}_imm{rcstr}'] = osh(
                             otype=ot.IMMEDIATE,
-                            orole=orl.PARAM)
+                            orole=orl.PARAM,
+                            value_constraints=[minmax_constraint(
+                                minval=0, maxval=max(0, 16 // adt_size(dt) - outputs))])
                     operands[f'{treg}_{rcstr}reg'] = osh(
                             otype=ot.REGISTER,
                             orole=orl.PARAM,

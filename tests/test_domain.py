@@ -66,3 +66,57 @@ class test_priorities(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class test_ranges(unittest.TestCase):
+    """
+    Large domains stay ranges: a 32-bit displacement is never listed
+    """
+
+    def test_large_symbolic(self):
+        d = constraint_domain([minmax_constraint(minval=-2**31, maxval=2**31 - 1)])
+        self.assertEqual(2**32, d.size)
+        self.assertIn(-5, d)
+        self.assertNotIn(2**31, d)
+        with self.assertRaises(unbounded_domain_error):
+            d.values
+
+    def test_scaled_offsets(self):
+        # AArch64's ldr d: scaled unsigned, or ldur's unscaled signed
+        d = constraint_domain([either_constraint(options=[
+            [minmax_constraint(minval=0, maxval=4095 * 8), multiple_constraint(multiple=8)],
+            [minmax_constraint(minval=-256, maxval=255)]])])
+        for ok in (-256, -1, 0, 7, 255, 256, 32760):
+            self.assertIn(ok, d)
+        for bad in (-257, 257, 32761, 32768):
+            self.assertNotIn(bad, d)
+
+
+class test_every_immediate_constrained(unittest.TestCase):
+    """
+    Every immediate operand of every signature has constraints, and none
+    leaves its operand without a value
+    """
+
+    def test_all(self):
+        from asmgen.asmblocks.op.operand import operand_type as ot
+        from asmgen.asmblocks.neon import neon
+        from asmgen.asmblocks.sve import sve
+        from asmgen.asmblocks.rvv import rvv
+        from asmgen.asmblocks.sme import sme
+        from asmgen.asmblocks.avx.avx2 import fma256
+        from asmgen.asmblocks.avx.avx512 import avx512
+        for G in (neon, sve, sme, rvv, fma256, avx512):
+            g = G()
+            for opn in ("load", "store", "move"):
+                for s in getattr(g, opn).get_signatures():
+                    for name, o in s.operands.items():
+                        if ot.IMMEDIATE != o.otype:
+                            continue
+                        self.assertTrue(o.value_constraints, f"{G.__name__}.{opn}.{name}")
+                        try:
+                            d = constraint_domain(o.value_constraints, name=name,
+                                                  modifiers=set(s.modifiers))
+                        except ArgumentDependencyError:
+                            continue
+                        self.assertNotEqual(0, d.size, f"{G.__name__}.{opn}.{name}")

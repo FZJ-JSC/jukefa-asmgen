@@ -7,6 +7,7 @@
 Valid signatures for RISCV64 +D/F opmem operations
 """
 
+from ...op.constraint import minmax_constraint
 from ...op import (
     operation_signature as sig,
     operand_shape as osh,
@@ -46,7 +47,7 @@ def make_riscv64_opmem_signatures():
         operands={
             'adreg': osh(ot.REGISTER, orl.DATA, rt.FP, dt),
             'agreg': osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
-            'ioffset': osh(ot.IMMEDIATE, orl.PARAM, None, adt.UINT64)
+            'ioffset': osh(ot.IMMEDIATE, orl.PARAM, None, adt.SINT64, value_constraints=[minmax_constraint(minval=-2048, maxval=2047)])
             }
         ))
 
@@ -66,7 +67,7 @@ def make_riscv64_opmem_signatures():
         operands={
             'adreg': osh(ot.REGISTER, orl.DATA, rt.GP, dt),
             'agreg': osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
-            'ioffset': osh(ot.IMMEDIATE, orl.PARAM, None, adt.UINT64)
+            'ioffset': osh(ot.IMMEDIATE, orl.PARAM, None, adt.SINT64, value_constraints=[minmax_constraint(minval=-2048, maxval=2047)])
             }
         ))
 
@@ -92,7 +93,7 @@ def make_riscv64_prefetch_signatures():
         structural_params={},
         operands={
             'agreg': osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
-            'ioffset': osh(ot.IMMEDIATE, orl.PARAM, None, adt.UINT64)
+            'ioffset': osh(ot.IMMEDIATE, orl.PARAM, None, adt.SINT64, value_constraints=[minmax_constraint(minval=-2048, maxval=2047)])
             }
         ),
     ]

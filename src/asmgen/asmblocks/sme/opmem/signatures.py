@@ -174,7 +174,9 @@ def make_sme_opmem_signatures():
         if mod.GOFFSET in mods:
             ops['offreg'] = osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.SINT64)
         if mod.VOFFSET in mods:
-            ops['voffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None)
+            # [x, #imm, MUL VL]: as SVE's contiguous forms, -8..7 vectors
+            ops['voffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None,
+                                 value_constraints=[minmax_constraint(minval=-8, maxval=7)])
 
         sigs.append(sig(
             modifiers=mods,

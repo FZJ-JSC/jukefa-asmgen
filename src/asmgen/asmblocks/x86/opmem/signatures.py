@@ -7,6 +7,7 @@
 Valid signatures for Base X86_64 opmem operations
 """
 
+from ...op.constraint import minmax_constraint
 from ...op import (
     operation_signature as sig,
     operand_shape as osh,
@@ -49,7 +50,7 @@ def make_x86_64_opmem_signatures():
         operands={
             'adreg': osh(ot.REGISTER, orl.DATA, a_rt, dt),
             'agreg': osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
-            'ioffset': osh(ot.IMMEDIATE, orl.PARAM, None, adt.UINT64)
+            'ioffset': osh(ot.IMMEDIATE, orl.PARAM, None, adt.SINT64, value_constraints=[minmax_constraint(minval=-2**31, maxval=2**31-1)])
             }
         ))
         # (f)ld with gp-reg offset
@@ -71,7 +72,7 @@ def make_x86_64_opmem_signatures():
             'adreg': osh(ot.REGISTER, orl.DATA, a_rt, dt),
             'agreg': osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
             'offreg': osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
-            'ioffset': osh(ot.IMMEDIATE, orl.PARAM, None, adt.UINT64)
+            'ioffset': osh(ot.IMMEDIATE, orl.PARAM, None, adt.SINT64, value_constraints=[minmax_constraint(minval=-2**31, maxval=2**31-1)])
             }
         ))
 
@@ -97,7 +98,7 @@ def make_x86_prefetch_signatures():
         structural_params={},
         operands={
             'agreg': osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
-            'ioffset': osh(ot.IMMEDIATE, orl.PARAM, None, adt.UINT64)
+            'ioffset': osh(ot.IMMEDIATE, orl.PARAM, None, adt.SINT64, value_constraints=[minmax_constraint(minval=-2**31, maxval=2**31-1)])
             }
         ),
         # prefetch with gp-reg offset
