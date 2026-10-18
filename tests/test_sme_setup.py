@@ -69,3 +69,28 @@ class test_callee_saved_last(unittest.TestCase):
         free = [i for i in range(g.max_vregs()) if i not in rt.get_used_regs("vreg")]
         order = [rt.reserve_any_reg("vreg") for _ in range(len(free) - 8)]
         self.assertFalse(set(order) & set(range(8, 16)))
+
+
+class test_stack_parameters(unittest.TestCase):
+    """
+    Parameters passed on the stack are read past the save area the
+    convention lays out - its clobbers included
+    """
+
+    def test_offset_past_saves(self):
+        from asmgen.callconv.fngen import fngen
+        from asmgen.registers import asm_data_type as adt
+        g = sme()
+        g.output_inline = False
+        rt = g.get_reg_tracker()
+        cc = g.create_callconv()
+        fn = fngen(gen=g, rt=rt)
+        # nine parameters: the ninth on the stack
+        for i in range(9):
+            cc.add_param("greg", f"p{i}")
+        fn.init_cc(cc=cc)
+        cc.add_clobber("freg", range(32))
+        save, load, restore = fn.get_boilerplate(cc=cc)
+        if "ldr" not in load:
+            self.skipTest("no parameter on the stack in this setup")
+        self.assertIn("[sp,#64]", load.replace(" ", ""))

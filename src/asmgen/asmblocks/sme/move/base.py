@@ -78,7 +78,8 @@ class sme_move(move):
         :param nvregs: how many rows/columns to access
         :return: string to be used for tile access in a mova instruction
         """
-        rc_char = "V" if operand_modifier.COL == row_or_col else "H"
+        # GNU as takes the slice direction in lower case: za0v.d[w12, 0]
+        rc_char = "v" if operand_modifier.COL == row_or_col else "h"
 
         multi_spec = ""
         if nvregs > 1:

@@ -101,7 +101,9 @@ class fngen:
 
         loadblock = ''
 
-        raw_sp_shift = sr_count*8
+        # the save area as the convention laid it out - with the registers
+        # added as clobbers (add_clobber), not only those allocated
+        raw_sp_shift = getattr(cc, "spadd", sr_count*8)
         aligned_sp_shift = ((raw_sp_shift + cc.spalign - 1) // cc.spalign) * cc.spalign
 
         for name,(tag,off) in self.required_loads.items():

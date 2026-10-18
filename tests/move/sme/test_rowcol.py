@@ -64,7 +64,7 @@ class test_sme_opmem(unittest.TestCase):
         """
 
         self.assertEqual(
-                "mova za0V.d[w12,0],p0/m,z0.d\n",
+                "mova za0v.d[w12,0],p0/m,z0.d\n",
                 self.gen.move(
             dregs=[self.z0,self.za0],
             dts=[adt.FP64 for _ in range(2)],
@@ -80,7 +80,7 @@ class test_sme_opmem(unittest.TestCase):
         """
 
         self.assertEqual(
-                "mova z0.d,p0/m,za0V.d[w12,0]\n",
+                "mova z0.d,p0/m,za0v.d[w12,0]\n",
                 self.gen.move(
             dregs=[self.za0,self.z0],
             dts=[adt.FP64 for _ in range(2)],
@@ -96,7 +96,7 @@ class test_sme_opmem(unittest.TestCase):
         """
 
         self.assertEqual(
-                "mova za0H.d[w12,0:3],p0/m,{z0.d-z3.d}\n",
+                "mova za0h.d[w12,0:3],p0/m,{z0.d-z3.d}\n",
                 self.gen.move(
             dregs=[self.z0,self.z1,self.z2,self.z3,
                    self.za0,self.za0,self.za0,self.za0],
