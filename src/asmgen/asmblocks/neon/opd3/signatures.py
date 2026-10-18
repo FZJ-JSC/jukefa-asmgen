@@ -43,7 +43,7 @@ _MIXED_INTS = [
 
 # Readable enough, no need for subfunctions
 # pylint: disable-next=too-many-branches
-def make_neon_opd3_signatures(supports_np: bool) -> list[sig]:
+def make_neon_opd3_signatures(supports_np: bool, widens: bool = True) -> list[sig]:
     """
     Generate signatures for NEON opd3 operations
     """
@@ -57,6 +57,13 @@ def make_neon_opd3_signatures(supports_np: bool) -> list[sig]:
     opd_mods_list = [{}, {'bdreg':{opd_mod.ILANE}}]
 
     def add_sig (*, dts, mods, opd_mods, is_widening=False):
+        types = set(dts.values())
+        # FP8 arithmetic is widening FMAs only; floating-point widening is FMAs
+        # only (fmlal...): there is no faddl or fmull for floats
+        if types & {adt.FP8E4M3, adt.FP8E5M2} and not is_widening:
+            return
+        if is_widening and not widens and types & {adt.FP16, adt.BF16} | {adt.FP8E4M3, adt.FP8E5M2}:
+            return
         # FP16 to FP32 by halves (fmlal/fmlal2); BF16 and FP8 by bottom and top
         method = wm.SPLIT_CONTIGUOUS if (adt.FP16, adt.FP32) == (dts['adreg'], dts['cdreg']) \
             else wm.SPLIT_INTERLEAVED
@@ -98,10 +105,11 @@ def make_neon_opd3_signatures(supports_np: bool) -> list[sig]:
                 value_constraints=[minmax_constraint(minval=0, maxval=max_part)]
             )
 
-        types = set(dts.values())
         requires = set()
-        if adt.FP16 in types:
-            requires.add("FHM" if is_widening else "FP16")
+        if (adt.FP16, adt.FP32) == (dts['adreg'], dts['cdreg']):
+            requires.add("FHM")
+        elif adt.FP16 in types and not is_widening:
+            requires.add("FP16")
         if adt.BF16 in types:
             requires.add("BF16")
         if types & {adt.FP8E4M3, adt.FP8E5M2}:

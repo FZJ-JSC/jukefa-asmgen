@@ -347,8 +347,8 @@ class avx128_opmem(avx_opmem):
 
         # Float 32 uses extractps
         if dt == adt.FP32:
-            imm8 = lane << 4
-            return f"vextractps ${imm8}, {pdreg}, {addressing}"
+            # the immediate is the lane (vinsertps encodes it shifted)
+            return f"vextractps ${lane}, {pdreg}, {addressing}"
 
         # Integer domain extracts (vpextrb/w/d/q)
         return f"vpextr{self.ie_suffixes[size]} ${lane}, {pdreg}, {addressing}"
@@ -395,6 +395,14 @@ class avx512_opmem(avx_opmem):
     """
     # lane loads and stores work on the xmm view, as on AVX2: vmovsd, vmovhpd,
     # vinsertps and their stores are encodable on all 32 registers
+    ie_suffixes = {1:'b',2:'w',4:'d',8:'q'}
+
+    def get_vector_mnemonic(self, dt):
+        # zmm has no VEX vmovdqu: vmovdqu64 moves any type (AVX512F)
+        if dt in (adt.FP32, adt.FP64):
+            return super().get_vector_mnemonic(dt)
+        return "vmovdqu64"
+
     build_lane_load = avx128_opmem.build_lane_load
     build_lane_store = avx128_opmem.build_lane_store
 

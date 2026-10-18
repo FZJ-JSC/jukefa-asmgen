@@ -59,6 +59,9 @@ def make_rvv_opd3_signatures(supports_np: bool) -> list[sig]:
     np_options = [set(), {mod.NP}] if supports_np else [set()]
 
     def add_sig(a_dt, b_dt, c_dt, *, b_rt, mods, opd_mods=None, is_widening=False):
+        # no ratified extension computes on FP8
+        if {a_dt, b_dt, c_dt} & {adt.FP8E4M3, adt.FP8E5M2}:
+            return
         if opd_mods is None:
             opd_mods = dict()
         struct_params = {'widening_method': wm.VEC_GROUP} if is_widening else {}

@@ -45,7 +45,7 @@ _MIXED_INTS = [
 # Readable enough, no need for subfunctions
 # pylint: disable-next=too-many-branches
 def make_sve_opd3_signatures(supports_np: bool, destructive: bool = False,
-                              unpredicated: bool = False) -> list[sig]:
+                              unpredicated: bool = False, widens: bool = True) -> list[sig]:
     """
     Generate signatures for NEON opd3 operations
     """
@@ -59,6 +59,13 @@ def make_sve_opd3_signatures(supports_np: bool, destructive: bool = False,
 
 
     def add_sig(a_dt, b_dt, c_dt, *, mods, opd_mods, is_widening=False):
+        types = {a_dt, b_dt, c_dt}
+        # FP8 arithmetic is widening FMAs only; floating-point widening is FMAs
+        # only (fmlalb...): integers widen in adds and multiplies too (SVE2)
+        if types & {adt.FP8E4M3, adt.FP8E5M2} and not is_widening:
+            return
+        if is_widening and not widens and types & {adt.FP16, adt.BF16} | {adt.FP8E4M3, adt.FP8E5M2}:
+            return
         # bottom and top: even and odd elements
         struct_params = {'widening_method': wm.SPLIT_INTERLEAVED} if is_widening else {}
 
@@ -111,10 +118,11 @@ def make_sve_opd3_signatures(supports_np: bool, destructive: bool = False,
                 value_constraints=[minmax_constraint(minval=0, maxval=max_part)]
             )
 
-        types = {a_dt, b_dt, c_dt}
+        # widening needs SVE2, but BF16 into FP32 (bfmlalb) only BF16;
+        # BF16 arithmetic (bfmla, bfadd) needs SVE_B16B16
         requires = {"SVE2"} if is_widening else set()
         if adt.BF16 in types:
-            requires.add("BF16")
+            requires = {"BF16"} if is_widening else {"B16B16"}
         if types & {adt.FP8E4M3, adt.FP8E5M2}:
             requires.add("FP8FMA")
         sigs.append(sig(

@@ -24,6 +24,8 @@ class neon_opd3_base(aarch64_simd_opd3_base):
     NEON/ASIMD base opd3 implementation with methods shared by all
     opd3 operations
     """
+    # floating-point widening exists as FMA only
+    widens = True
 
     inst_base = "invalid"
 
@@ -36,7 +38,7 @@ class neon_opd3_base(aarch64_simd_opd3_base):
                  ):
         super().__init__(asmwrap,dt_suffixes,dt_idxsuffixes)
 
-        self.signatures = make_neon_opd3_signatures(self.supports_np)
+        self.signatures = make_neon_opd3_signatures(self.supports_np, self.widens)
 
     def partial_inst_suffix(self, ways : int, part : int, a_dt=None, c_dt=None, **_):
         """

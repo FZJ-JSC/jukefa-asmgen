@@ -630,8 +630,9 @@ class avxbase(asmgen):
         rip = '%rip'
         if self.output_inline:
             rip = '%%rip'
-        if 8 == dt_size and self.simd_size < 64:
-            # vpmullq is AVX-512; for strides below 4 GB the low dwords suffice
+        if 8 == dt_size:
+            # vpmullq is AVX512DQ; for strides below 4 GB the low dwords
+            # suffice (vpmuludq, AVX512F on zmm)
             result += self.asmwrap(f"vpmuludq {label}({rip}),{pv},{pv}")
         else:
             result += self.asmwrap(f"vpmull{suf} {label}({rip}),{pv},{pv}")

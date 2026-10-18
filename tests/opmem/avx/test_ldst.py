@@ -158,7 +158,7 @@ class test_avx_opmem(unittest.TestCase):
         self.assertEqual(
             self.store_128(dregs=[self.xmm1], areg=self.r8, dt=adt.FP32,
                            operand_modifiers={'adreg':{opd_mod.ILANE}}, adreg_lane=2),
-            "vextractps $32, %xmm1, (%r8)\n"
+            "vextractps $2, %xmm1, (%r8)\n"
         )
     def test_lane_ldst_integer(self):
         """

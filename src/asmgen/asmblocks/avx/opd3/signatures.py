@@ -38,7 +38,9 @@ def make_avx_opd3_signatures(supports_np : bool, has_fp16 : bool) -> list[sig]:
         sigs.append(sig(
             modifiers=mods,
             structural_params={},
-            operands=ops
+            operands=ops,
+            # the ph instructions: AVX512-FP16
+            requires=frozenset({"FP16"}) if adt.FP16 in (a_dt, b_dt, c_dt) else frozenset()
         ))
 
     dts = [adt.FP64, adt.FP32]

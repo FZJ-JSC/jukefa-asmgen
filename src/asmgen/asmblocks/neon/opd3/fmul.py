@@ -19,6 +19,7 @@ class neon_fmul(neon_opd3_base):
     """
     NEON/ASIMD implementation of fmul
     """
+    widens = False
 
     inst_base = "mul"
 

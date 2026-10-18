@@ -32,7 +32,7 @@ class sve(aarch64):
     SVE asmgen implementation
     """
     # FEAT_SVE2 (fmlalb/fmlalt), FEAT_BF16, FEAT_FP8FMA, FEAT_I8MM
-    FEATURES = ('SVE2', 'BF16', 'FP8FMA', 'I8MM')
+    FEATURES = ('SVE2', 'BF16', 'B16B16', 'FP8FMA', 'I8MM')
 
 
     dt_suffixes = neon.dt_idxsuffixes

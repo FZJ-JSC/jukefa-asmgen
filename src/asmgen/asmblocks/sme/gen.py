@@ -27,6 +27,11 @@ class sme(sve):
     """
     SME asmgen implementation
     """
+    # SVE's, and SME's own: FEAT_SME2, FEAT_SME_F64F64, _I16I64, _F16F16,
+    # _B16B16, _F8F16, _F8F32
+    FEATURES = sve.FEATURES + ("SME2", "F64F64", "I16I64", "F16F16", "SME_B16B16",
+                               "F8F16", "F8F32")
+
 
     def isa_setup(self, predicate : int = 0):
         """

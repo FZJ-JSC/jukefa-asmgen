@@ -24,6 +24,7 @@ class sve_fadd(sve_opd3_base):
     # destructive: Zdn is both the destination and the first source
     unpredicated = True
     destructive = True
+    widens = False
 
     inst_base = "add"
 

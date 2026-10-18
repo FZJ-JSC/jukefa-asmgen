@@ -88,9 +88,18 @@ def make_avx_opmem_signatures(action: opmem_action,
             structural_params['it'] = _SIZE_AIT_MAP[adt_size(dt)]
             clobber_list.append('amreg')
 
+        requires = set()
+        if is_avx512 and any(opd_mod.ILANE in m for m in (opd_mods or {}).values()):
+            # EVEX vpinsr/vpextr: bytes and words AVX512BW, dwords and
+            # qwords AVX512DQ; the FP lanes (vmovsd, vmovhpd, vinsertps,
+            # vextractps) AVX512F
+            if adt_size(dt) <= 2:
+                requires.add("BW")
+            elif dt not in (adt.FP32, adt.FP64):
+                requires.add("DQ")
         sigs.append(sig(modifiers=mods, operands=ops,
                         structural_params=structural_params,
-                        clobber_list=clobber_list))
+                        clobber_list=clobber_list, requires=frozenset(requires)))
 
 
     # 1. Standard Load / Store

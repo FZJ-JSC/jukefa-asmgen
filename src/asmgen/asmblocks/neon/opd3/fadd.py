@@ -22,6 +22,7 @@ class neon_fadd(neon_opd3_base):
     """
     NEON/ASIMD implementation of fadd
     """
+    widens = False
 
     inst_base = "add"
 
