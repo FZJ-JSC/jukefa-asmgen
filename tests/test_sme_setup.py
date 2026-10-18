@@ -50,3 +50,22 @@ class test_clobbers(unittest.TestCase):
         self.assertEqual(sorted(f"d{n}" for n in range(8, 16)),
                          sorted(l.split()[1].split(",")[0] for l in save.splitlines()
                                 if l.strip().startswith("str")))
+
+
+class test_callee_saved_last(unittest.TestCase):
+    """
+    The calling convention's callee-saved registers allocated last - through
+    the tracker's shared pools for vector registers whose low parts they are
+    """
+
+    def test_deprioritized(self):
+        g = sme()
+        cc = g.create_callconv()
+        rt = g.get_reg_tracker()
+        cc.deprioritize_callee_saved(rt)
+        # AAPCS64: x19-x28 and d8-d15 - so v8-v15, their registers - last
+        self.assertEqual(-1, rt.priority("greg", 19))
+        self.assertEqual(-1, rt.priority("vreg", 8))
+        free = [i for i in range(g.max_vregs()) if i not in rt.get_used_regs("vreg")]
+        order = [rt.reserve_any_reg("vreg") for _ in range(len(free) - 8)]
+        self.assertFalse(set(order) & set(range(8, 16)))

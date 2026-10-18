@@ -274,6 +274,23 @@ class callconv:
         """
         self.clobbers.setdefault(type_tag, set()).update(indices)
 
+    def deprioritize_callee_saved(self, rt, priority : int = -1):
+        """
+        Lowers the allocation priority of the registers the convention makes
+        the callee's: general allocation takes the caller's first, sparing a
+        save and restore. The tracker gives a register's priority to its
+        counterparts in a shared pool - AArch64's v8-v15 where d8-d15 are
+        the callee's
+        :param rt: the register tracker
+        :param priority: the priority given, where not already lower
+        """
+        for tag, regs in self.callee_save_lists.items():
+            if tag not in getattr(rt, "registered_types", ()):
+                continue
+            for idx in regs:
+                if idx < rt.max_regs[tag]:
+                    rt.set_priority(tag, idx, min(priority, rt.priority(tag, idx)))
+
     def _with_clobbers(self, regs : dict[str,list[int]]) -> dict[str,list[int]]:
         tags = set(regs) | set(self.clobbers)
         return {t: sorted(set(regs.get(t, [])) | self.clobbers.get(t, set())) for t in tags}

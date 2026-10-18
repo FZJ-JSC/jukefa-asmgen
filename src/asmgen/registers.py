@@ -116,11 +116,15 @@ class reg_tracker:
         """
         A register's priority: reserve_any_reg takes the free register of the
         highest first. Lower a register some instruction requires (SME's slice
-        index registers) to keep it free for that instruction
+        index registers) to keep it free for that instruction. A priority is
+        the register's: the same register under its other types (share) has
+        it too - AArch64's v8 where d8 is lowered
         """
         if type_tag not in self.registered_types:
             raise ValueError(f"Type not tracked: {type_tag}")
         self.priorities.setdefault(type_tag, {})[idx] = priority
+        for tag, i in self._counterparts(type_tag, idx):
+            self.priorities.setdefault(tag, {})[i] = priority
 
     def priority(self, type_tag : str, idx : int) -> int:
         return self.priorities.get(type_tag, {}).get(idx, 0)
