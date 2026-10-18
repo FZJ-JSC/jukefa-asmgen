@@ -28,6 +28,24 @@ class operation(ABC):
 
     NIE_MESSAGE="Inheriting class must implement this method"
 
+    #: optional ISA extensions enabled - signatures requiring others are
+    #: hidden; None: no gating, every signature
+    enabled_features : frozenset | None = None
+
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+        raw = cls.__dict__.get("get_signatures")
+        if raw is not None and not getattr(raw, "feature_gated", False):
+            def get_signatures(self, *args, _raw=raw, **kw):
+                sigs = _raw(self, *args, **kw)
+                enabled = self.enabled_features
+                if enabled is None:
+                    return sigs
+                return [s for s in sigs if getattr(s, "requires", frozenset()) <= enabled]
+            get_signatures.feature_gated = True
+            get_signatures.__doc__ = raw.__doc__
+            cls.get_signatures = get_signatures
+
     @abstractmethod
     def get_signatures(self) -> list[operation_signature]:
         """

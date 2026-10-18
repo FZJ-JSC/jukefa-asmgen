@@ -25,6 +25,9 @@ class neon(aarch64):
     """
     NEON/ASIMD implementation of asmgen
     """
+    # FEAT_FP16, FEAT_FHM (fmlal), FEAT_BF16, FEAT_FP8FMA, FEAT_DotProd, FEAT_I8MM
+    FEATURES = ('FP16', 'FHM', 'BF16', 'FP8FMA', 'DOTPROD', 'I8MM')
+
 
     dt_suffixes = {
             adt.DOUBLE  : "2d",

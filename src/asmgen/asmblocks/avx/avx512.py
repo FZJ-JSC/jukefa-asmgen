@@ -36,6 +36,9 @@ class avx512(avxbase):
     """
     X86_64/AVX512 asmgem implementation
     """
+    # AVX512VL, AVX512DQ, AVX512BW, AVX512-FP16, AVX512-BF16
+    FEATURES = ('VL', 'DQ', 'BW', 'FP16', 'BF16')
+
 
     def __init__(self):
         super().__init__()

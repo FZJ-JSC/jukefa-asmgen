@@ -111,9 +111,16 @@ def make_sve_opd3_signatures(supports_np: bool, destructive: bool = False,
                 value_constraints=[minmax_constraint(minval=0, maxval=max_part)]
             )
 
+        types = {a_dt, b_dt, c_dt}
+        requires = {"SVE2"} if is_widening else set()
+        if adt.BF16 in types:
+            requires.add("BF16")
+        if types & {adt.FP8E4M3, adt.FP8E5M2}:
+            requires.add("FP8FMA")
         sigs.append(sig(
             modifiers=mods,
             structural_params=struct_params,
+            requires=frozenset(requires),
             operands=ops
         ))
 

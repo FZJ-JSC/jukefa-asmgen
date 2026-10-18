@@ -65,9 +65,11 @@ def make_rvv_opd3_signatures(supports_np: bool) -> list[sig]:
         constraints = [_RVV_IDX_2X] if is_widening else []
 
         b_mods = opd_mods.get('bdreg',set())
+        requires = {"ZVFH"} if adt.FP16 in (a_dt, b_dt, c_dt) else set()
         sigs.append(sig(
             modifiers=mods,
             structural_params=struct_params,
+            requires=frozenset(requires),
             operands={
                 'adreg': osh(ot.REGISTER, orl.DATA, rt.VEC, a_dt),
                 'bdreg': osh(ot.REGISTER, orl.DATA, b_rt, b_dt, modifiers=b_mods),

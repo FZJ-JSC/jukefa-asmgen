@@ -27,6 +27,9 @@ class operation_signature:
 
     modifiers : set[operation_modifier]
     structural_params : dict[str, Any]
+    #: optional ISA extensions the instruction needs (FHM, SVE2, ZVFH...): the
+    #: signature is available only where the generator enables them all
+    requires : frozenset = field(default_factory=frozenset)
     operands: dict[str, operand_shape]
     clobber_list: list[str] = field(default_factory=list)
 

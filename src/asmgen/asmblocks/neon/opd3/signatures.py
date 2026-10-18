@@ -98,9 +98,18 @@ def make_neon_opd3_signatures(supports_np: bool) -> list[sig]:
                 value_constraints=[minmax_constraint(minval=0, maxval=max_part)]
             )
 
+        types = set(dts.values())
+        requires = set()
+        if adt.FP16 in types:
+            requires.add("FHM" if is_widening else "FP16")
+        if adt.BF16 in types:
+            requires.add("BF16")
+        if types & {adt.FP8E4M3, adt.FP8E5M2}:
+            requires.add("FP8FMA")
         sigs.append(sig(
             modifiers=mods,
             structural_params=struct_params,
+            requires=frozenset(requires),
             operands=ops
         ))
 

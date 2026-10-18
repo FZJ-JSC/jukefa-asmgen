@@ -12,6 +12,7 @@ Base ASM generator class and ISA-independent utilities
 # pylint: disable=too-many-lines
 
 
+from .op.operation import operation
 from enum import Enum,auto
 from abc import ABC, abstractmethod
 from typing import TypeAlias,Union,TYPE_CHECKING
@@ -70,6 +71,39 @@ class asmgen(ABC):
         :return: Calling convention object
         :rtype: class:`asmgen.callconv.callconv.callconv`
         """
+
+    #: optional extensions this ISA's signatures may require: ISA parameters,
+    #: "on" or "off"
+    FEATURES : tuple[str, ...] = ()
+
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+        for name, wrap in (("get_parameters", _features_in_parameters),
+                           ("get_param_value", _features_in_values),
+                           ("set_parameter", _features_set)):
+            raw = cls.__dict__.get(name)
+            if raw is not None and not getattr(raw, "feature_aware", False):
+                setattr(cls, name, wrap(raw))
+
+    def available_features(self) -> list[str]:
+        """
+        The optional extensions signatures of this ISA may require
+        """
+        return list(self.FEATURES)
+
+    def set_features(self, names):
+        """
+        Enable exactly these optional extensions: signatures requiring others
+        are hidden from then on (without a call, nothing is hidden)
+        """
+        unknown = set(names) - set(self.FEATURES)
+        if unknown:
+            raise ValueError(f"{type(self).__name__} has no features {sorted(unknown)}: "
+                             f"{list(self.FEATURES)}")
+        self.features = set(names)
+        for value in vars(self).values():
+            if isinstance(value, operation):
+                value.enabled_features = frozenset(self.features)
 
     @abstractmethod
     def get_parameters(self) -> list[str]:
@@ -1642,3 +1676,36 @@ class asmgen(ABC):
         :rtype: str
         """
         raise NotImplementedError(NIE_MESSAGE)
+
+
+def _features_in_parameters(raw):
+    def get_parameters(self):
+        return list(raw(self)) + [f for f in self.FEATURES]
+    get_parameters.feature_aware = True
+    get_parameters.__doc__ = raw.__doc__
+    return get_parameters
+
+
+def _features_in_values(raw):
+    def get_param_value(self, name):
+        if name in self.FEATURES:
+            return "on" if name in getattr(self, "features", set()) else "off"
+        return raw(self, name)
+    get_param_value.feature_aware = True
+    get_param_value.__doc__ = raw.__doc__
+    return get_param_value
+
+
+def _features_set(raw):
+    def set_parameter(self, name, value):
+        if name in self.FEATURES:
+            on = str(value).lower() in ("on", "1", "yes", "true")
+            features = set(getattr(self, "features", set()))
+            (features.add if on else features.discard)(name)
+            self.set_features(features)
+            return None
+        return raw(self, name, value)
+    set_parameter.feature_aware = True
+    set_parameter.__doc__ = raw.__doc__
+    return set_parameter
+

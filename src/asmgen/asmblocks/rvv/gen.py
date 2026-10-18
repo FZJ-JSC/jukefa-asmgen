@@ -29,6 +29,9 @@ class rvv(riscv64):
     """
     RISC-V RVV 1.0 asmgen implementation
     """
+    # Zvfh: half-precision vector arithmetic
+    FEATURES = ('ZVFH',)
+
 
     dt_suffixes = {
             adt.DOUBLE  : "e64",
