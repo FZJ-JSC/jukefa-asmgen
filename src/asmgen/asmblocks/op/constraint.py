@@ -267,6 +267,8 @@ class otherplusn_constraint(intval_constraint):
                  params : dict[str,ValueType]):
 
         other = params['other']
+        if other not in context:
+            raise ArgumentDependencyError(name=name, deps=[other])
         otherint = self.getint(context[other])
         offset = params['offset']
 

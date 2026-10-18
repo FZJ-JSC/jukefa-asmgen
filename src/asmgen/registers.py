@@ -50,6 +50,9 @@ class reg_tracker:
         self.aliased_regs   : dict[str,dict[str,int]] = {}
         # type -> [(other type, index in this type -> index in the other)]
         self.shared         : dict[str,list[tuple[str,dict[int,int]]]] = {}
+        # type -> index -> priority: reserve_any_reg takes the free register
+        # of the highest first (default 0)
+        self.priorities     : dict[str,dict[int,int]] = {}
 
         for tag,max_regs in reg_type_init_list:
             self.add_type(type_tag=tag, max_regs=max_regs)
@@ -109,6 +112,19 @@ class reg_tracker:
             self.used_regs[tag].add(i)
             self.clobbered_regs[tag].add(i)
 
+    def set_priority(self, type_tag : str, idx : int, priority : int):
+        """
+        A register's priority: reserve_any_reg takes the free register of the
+        highest first. Lower a register some instruction requires (SME's slice
+        index registers) to keep it free for that instruction
+        """
+        if type_tag not in self.registered_types:
+            raise ValueError(f"Type not tracked: {type_tag}")
+        self.priorities.setdefault(type_tag, {})[idx] = priority
+
+    def priority(self, type_tag : str, idx : int) -> int:
+        return self.priorities.get(type_tag, {}).get(idx, 0)
+
     def reserve_any_reg(self, type_tag : str) -> int:
         """
         Reserves a single register of the specified type and marks it as used and clobbered
@@ -120,10 +136,11 @@ class reg_tracker:
         """
         if type_tag not in self.registered_types:
             raise ValueError(f"Type not tracked: {type_tag}")
-        # registers no other type shares first: RVV's v0, also the mask
-        # register, comes last; with every register shared the order stays
+        # the highest priority first; then registers no other type shares:
+        # RVV's v0, also the mask register, comes last; then by number
+        prio = self.priorities.get(type_tag, {})
         ordered = sorted(self.available_regs[type_tag],
-                         key=lambda i: bool(self._counterparts(type_tag, i)))
+                         key=lambda i: (-prio.get(i, 0), bool(self._counterparts(type_tag, i))))
         for idx in ordered:
             if self._free(type_tag, idx):
                 self._mark(type_tag, idx)
