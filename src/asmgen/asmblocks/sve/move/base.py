@@ -9,7 +9,7 @@ data move operation base class for SVE
 
 from typing import Callable
 
-from ....registers import asm_data_type as adt, data_reg
+from ....registers import adt_size, asm_data_type as adt, data_reg
 
 from ...op.signature import operation_signature
 from ...op.operand import operand_modifier as omod
@@ -70,6 +70,14 @@ class sve_move(move):
         output_dt = dts['bdreg']
 
         input_mods = operand_modifiers.get('adreg',set())
+        if {omod.ILANEROT, omod.ILANESHIFT, omod.IBLOCKROT} & input_mods:
+            size = adt_size(output_dt)
+            if omod.FILLOTHERS in input_mods:
+                suffix = {8: "d", 4: "s", 2: "h", 1: "b"}[size]
+                return self.asmwrap(f"insr {output_reg}.{suffix},{kwargs['fillreg']}")
+            unit = 16 if omod.IBLOCKROT in input_mods else size
+            return self.asmwrap(f"ext {output_reg}.b,{output_reg}.b,{input_reg}.b,"
+                                f"#{-kwargs['adreg_irot'] * unit}")
         # not used for making decision rn
         #output_mods = operand_modifiers.get('bdreg',set())
 

@@ -9,7 +9,7 @@ data move operation for NEON
 
 from typing import Callable
 
-from ....registers import asm_data_type as adt, data_reg
+from ....registers import asm_data_type as adt, data_reg, adt_size
 from ...op.signature import operation_signature
 from ...op.operand import operand_modifier as omod
 from ...op.move import move, move_modifier as mod
@@ -41,6 +41,10 @@ class neon_move(move):
         dt = dts['bdreg']
         el = self.dt_idxsuffixes[dt]
         amods = operand_modifiers.get('adreg', set())
+        if {omod.ILANEROT, omod.ILANESHIFT} & amods:
+            size = adt_size(dts['bdreg'])
+            nbytes = ((-kwargs['adreg_irot']) % (16 // size)) * size
+            return self.asmwrap(f"ext v{dst.idx}.16b,v{src.idx}.16b,v{src.idx}.16b,#{nbytes}")
         bmods = operand_modifiers.get('bdreg', set())
 
         if omod.ILANE in amods:

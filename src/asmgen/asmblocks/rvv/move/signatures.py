@@ -17,6 +17,7 @@ from ...op import (
     register_type as rgt,
 )
 from ...op.constraint import minmax_constraint
+from ...op.shift import shift_signatures
 from ....registers import asm_data_type as adt
 
 _FLOATS = [adt.FP64, adt.FP32, adt.FP16]
@@ -60,4 +61,11 @@ def make_rvv_move_signatures() -> list[opsig]:
         add_sig(dt, set(), {omod.BCAST})
         add_sig(dt, {omod.ILANE}, {omod.BCAST})
         add_sig(dt, set(), {omod.ILANE})
+    # vslidedown.vi: down, the lanes vacated tail-agnostic; vslide1down
+    # (vfslide1down): down by one, a scalar into the top lane
+    sigs += shift_signatures(
+        _FLOATS + _INTS,
+        [{omod.ILANESHIFT, omod.INVALIDOTHERS}, {omod.ILANESHIFT, omod.FILLOTHERS}],
+        irot=lambda dt, m: (-1, -1) if omod.FILLOTHERS in m else (-31, -1),
+        fill=lambda dt: rgt.FP if dt in _FLOATS else rgt.GP)
     return sigs

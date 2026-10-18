@@ -23,6 +23,7 @@ from ...op.constraint import (
 )
 
 from ....registers import asm_data_type as adt,adt_size
+from ...op.shift import shift_signatures
 
 _FLOATS = [adt.FP64, adt.FP32, adt.FP16, adt.BF16, adt.FP8E4M3, adt.FP8E5M2]
 _INTS = [adt.SINT64, adt.SINT32, adt.SINT16, adt.SINT8,
@@ -107,4 +108,17 @@ def make_sve_move_signatures() -> list[opsig]:
         add_sig(dt=dt, mods={mod.MASK}, amods=set(), bmods={omod.BCAST})
         add_sig(dt=dt, mods={mod.MASK}, amods={omod.ILANE}, bmods={omod.BCAST})
 
+    # destructive ext with the register twice: a rotation towards lane 0 by a
+    # number of bytes known now - lanes or 16-byte blocks; insr shifts away
+    # from lane 0 by one, a scalar into lane 0
+    sigs += shift_signatures(
+        _FLOATS + _INTS, [{omod.ILANEROT}, {omod.ILANESHIFT, omod.INVALIDOTHERS}],
+        irot=lambda dt, m: (-(255 // adt_size(dt)), -1), destructive=True)
+    sigs += shift_signatures(
+        _FLOATS + _INTS, [{omod.IBLOCKROT}], irot=lambda dt, m: (-15, -1),
+        destructive=True, blocksize=lambda dt: 16 // adt_size(dt))
+    sigs += shift_signatures(
+        [dt for dt in _FLOATS + _INTS if dt not in (adt.BF16, adt.FP8E4M3, adt.FP8E5M2)],
+        [{omod.ILANESHIFT, omod.FILLOTHERS}], irot=lambda dt, m: (1, 1), destructive=True,
+        fill=lambda dt: rgt.FP if dt in _FLOATS else rgt.GP)
     return sigs

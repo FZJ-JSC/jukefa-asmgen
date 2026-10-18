@@ -48,6 +48,16 @@ class avx_move(move):
         part = lambda r, size: p(ymm_vreg(r.idx) if 32 == size else xmm_vreg(r.idx))
         x = lambda r: p(xmm_vreg(r.idx))
 
+        if {omod.ILANEROT, omod.ILANESHIFT} & amods:
+            size = adt_size(dt)
+            imm = (-kwargs['adreg_irot']) % (self.simd_bytes // size)
+            inst = "valignq" if 8 == size else "valignd"
+            return self.asmwrap(f"{inst} ${imm},{p(src)},{p(src)},{p(dst)}")
+        if omod.IBLOCKROT in amods:
+            r = (-kwargs['adreg_irot']) % 4
+            imm = sum(((j + r) % 4) << (2 * j) for j in range(4))
+            return self.asmwrap(f"vshuff64x2 ${imm},{p(src)},{p(src)},{p(dst)}")
+
         if omod.IBLOCK in amods and omod.BCAST in bmods:
             i = kwargs['adreg_block']
             if wide and 32 == block('adreg'):

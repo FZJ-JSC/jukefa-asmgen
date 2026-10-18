@@ -17,6 +17,7 @@ from ...op import (
     register_type as rgt,
 )
 from ...op.constraint import minmax_constraint
+from ...op.shift import shift_signatures
 from ....registers import asm_data_type as adt, adt_size
 
 _FLOATS = [adt.FP64, adt.FP32, adt.FP16]
@@ -64,4 +65,9 @@ def make_neon_move_signatures() -> list[opsig]:
         add_sig(dt, {omod.ILANE}, {omod.BCAST})
         add_sig(dt, set(), {omod.ILANE})
         add_sig(dt, {omod.ILANE}, {omod.ILANE})
+    # ext with the register twice: a rotation, also a shift whose others
+    # hold anything
+    sigs += shift_signatures(
+        _FLOATS + _INTS, [{omod.ILANEROT}, {omod.ILANESHIFT, omod.INVALIDOTHERS}],
+        irot=lambda dt, m: (1 - 16 // adt_size(dt), 16 // adt_size(dt) - 1))
     return sigs

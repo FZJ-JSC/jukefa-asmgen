@@ -38,6 +38,12 @@ class rvv_move(move):
         amods = operand_modifiers.get('adreg', set())
         bmods = operand_modifiers.get('bdreg', set())
         integer = isinstance(src, riscv64_greg)
+        if omod.ILANESHIFT in amods:
+            if omod.FILLOTHERS in amods:
+                floating = dts['bdreg'].name in ("DOUBLE", "SINGLE", "HALF")
+                inst = "vfslide1down.vf" if floating else "vslide1down.vx"
+                return self.asmwrap(f"{inst} {dst},{src},{kwargs['fillreg']}")
+            return self.asmwrap(f"vslidedown.vi {dst},{src},{-kwargs['adreg_irot']}")
         if omod.ILANE in amods:
             if str(src) == str(dst):
                 raise ValueError("vrgather.vi: the destination must not be the source")

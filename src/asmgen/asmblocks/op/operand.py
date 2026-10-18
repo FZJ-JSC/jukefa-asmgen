@@ -61,6 +61,15 @@ class operand_modifier(Enum):
     BLOCK      = auto() # Operates on blocks of `blocksize` elements; with BCAST one
                         # block is replicated into every block (SVE ld1rq)
     IBLOCK     = auto() # Selects a block of `blocksize` elements with an immediate
+    ILANESHIFT = auto()    # the source's lanes moved by irot lanes - negative towards
+                           # lane 0, positive away; the lanes vacated hold what an
+                           # *OTHERS modifier says
+    ILANEROT   = auto()    # the source's lanes rotated by irot lanes
+    IBLOCKSHIFT = auto()   # blocks of blocksize elements moved by irot blocks
+    IBLOCKROT  = auto()    # blocks of blocksize elements rotated by irot blocks
+    FILLOTHERS = auto()    # the lanes a shift vacates take the value in fillreg
+    INVALIDOTHERS = auto() # the lanes a shift vacates hold anything (RVV's tail-
+                           # agnostic slides)
     ZEROOTHERS = auto() # A lane load that doesn't preserve the lanes above the one it
                         # loads (AVX's vmovsd clears them; VEX vmovhpd and vinsertps
                         # clear all above the low 128 bits): load lanes in increasing

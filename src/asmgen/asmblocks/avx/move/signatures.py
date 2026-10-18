@@ -16,6 +16,7 @@ from ...op import (
     register_type as rgt,
 )
 from ...op.constraint import minmax_constraint
+from ...op.shift import shift_signatures
 from ....registers import asm_data_type as adt, adt_size
 
 
@@ -60,4 +61,14 @@ def make_avx_move_signatures(simd_bytes : int) -> list[opsig]:
             add_sig(dt, {omod.IBLOCK}, {omod.BLOCK, omod.BCAST}, block_bytes)
             add_sig(dt, {omod.IBLOCK}, set(), block_bytes)
             add_sig(dt, set(), {omod.IBLOCK}, block_bytes)
+    if 64 == simd_bytes:
+        # valignq/valignd with the register twice: a rotation by lanes;
+        # vshuff64x2 likewise by 128-bit blocks
+        sigs += shift_signatures(
+            [dt for dt in (adt.FP64, adt.FP32, adt.SINT64, adt.UINT64, adt.SINT32, adt.UINT32)],
+            [{omod.ILANEROT}, {omod.ILANESHIFT, omod.INVALIDOTHERS}],
+            irot=lambda dt, m: (1 - 64 // adt_size(dt), 64 // adt_size(dt) - 1))
+        sigs += shift_signatures(
+            [adt.FP64, adt.FP32], [{omod.IBLOCKROT}], irot=lambda dt, m: (-3, 3),
+            blocksize=lambda dt: 16 // adt_size(dt))
     return sigs
