@@ -45,6 +45,8 @@ class callconv:
         self.sp_rtype_offsets : dict[str,int] = {}
 
         self.spalign = spalign
+        # registers clobbered beyond those the function allocates
+        self.clobbers : dict[str,set[int]] = {}
 
     def add_param(self, type_tag : str, name : str, dt : adt|None = None):
         """
@@ -261,6 +263,21 @@ class callconv:
                 save_lists=self.caller_save_lists,
                 action=self.restore_regs)
 
+    def add_clobber(self, type_tag : str, indices) -> None:
+        """
+        Registers the function clobbers beyond those it allocates - an
+        instruction's side effect (SME's smstart and smstop zero the vector
+        registers). Saved and restored in the call where the convention makes
+        them the callee's: checked against its callee-saved lists here
+        :param type_tag: register type, as in the save lists ('greg', 'freg')
+        :param indices: the registers' numbers
+        """
+        self.clobbers.setdefault(type_tag, set()).update(indices)
+
+    def _with_clobbers(self, regs : dict[str,list[int]]) -> dict[str,list[int]]:
+        tags = set(regs) | set(self.clobbers)
+        return {t: sorted(set(regs.get(t, [])) | self.clobbers.get(t, set())) for t in tags}
+
     def save_in_call(self,
                      gen : asmgen,
                      regs : dict[str,list[int]]) -> str:
@@ -278,7 +295,7 @@ class callconv:
         """
         return self.save_or_restore(
                 gen=gen,
-                regs=regs,
+                regs=self._with_clobbers(regs),
                 save_lists=self.callee_save_lists,
                 action=self.save_regs)
 
@@ -299,7 +316,7 @@ class callconv:
         """
         return self.save_or_restore(
                 gen=gen,
-                regs=regs,
+                regs=self._with_clobbers(regs),
                 save_lists=self.callee_save_lists,
                 action=self.restore_regs)
 

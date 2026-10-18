@@ -72,6 +72,13 @@ class isa_setup:
         """
         return False
 
+    def clobbers(self) -> dict[str, list[int]]:
+        """
+        Registers the setup and teardown clobber beyond those they allocate,
+        for the calling convention to keep where they are the callee's
+        """
+        return {}
+
     def setup(self, *, rt, dt, vl : int | None = None) -> str:
         """
         Instructions setting up everything every kernel needs, in order
@@ -164,6 +171,13 @@ class sme_setup(sve_setup):
     """
 
     COUNTER = 8
+
+    def clobbers(self) -> dict[str, list[int]]:
+        """
+        smstart and smstop zero the vector registers: every FP register the
+        function's caller may expect kept
+        """
+        return {"freg": list(range(self.gen.max_fregs()))}
 
     def counter(self) -> bool:
         """
