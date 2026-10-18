@@ -70,6 +70,14 @@ class sve_move(move):
         output_dt = dts['bdreg']
 
         input_mods = operand_modifiers.get('adreg',set())
+        output_mods = operand_modifiers.get('bdreg', set())
+        suffixes = {8: "d", 4: "s", 2: "h", 1: "b"}
+        if omod.FILLOTHERS in output_mods:
+            return self.asmwrap(f"insr {output_reg}.{suffixes[adt_size(output_dt)]},{input_reg}")
+        if omod.ILANE in input_mods and not hasattr(output_reg, "lanes") and \
+                type(output_reg).__name__.endswith("freg"):
+            # lane 0 is the register's low part
+            return self.asmwrap(f"fmov {output_reg},{suffixes[adt_size(input_dt)]}{input_reg.idx}")
         if {omod.ILANEROT, omod.ILANESHIFT, omod.IBLOCKROT} & input_mods:
             size = adt_size(output_dt)
             if omod.FILLOTHERS in input_mods:

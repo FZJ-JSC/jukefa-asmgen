@@ -23,7 +23,7 @@ from ...op.constraint import (
 )
 
 from ....registers import asm_data_type as adt,adt_size
-from ...op.shift import shift_signatures
+from ...op.shift import shift_signatures, fill_signatures, extract_signatures
 
 _FLOATS = [adt.FP64, adt.FP32, adt.FP16, adt.BF16, adt.FP8E4M3, adt.FP8E5M2]
 _INTS = [adt.SINT64, adt.SINT32, adt.SINT16, adt.SINT8,
@@ -121,4 +121,10 @@ def make_sve_move_signatures() -> list[opsig]:
         [dt for dt in _FLOATS + _INTS if dt not in (adt.BF16, adt.FP8E4M3, adt.FP8E5M2)],
         [{omod.ILANESHIFT, omod.FILLOTHERS}], irot=lambda dt, m: (1, 1), destructive=True,
         fill=lambda dt: rgt.FP if dt in _FLOATS else rgt.GP)
+    # a fill loop's step: the scalar into lane 0, the vector shifted up in
+    # place (insr); a drain loop's: lane 0, the register's low part, out
+    scalar = lambda dt: rgt.FP if dt in _FLOATS else rgt.GP
+    plain = [dt for dt in _FLOATS + _INTS if dt not in (adt.BF16, adt.FP8E4M3, adt.FP8E5M2)]
+    sigs += fill_signatures(plain, irot=lambda dt: 1, scalar=scalar)
+    sigs += extract_signatures([dt for dt in plain if dt in _FLOATS], scalar=scalar)
     return sigs

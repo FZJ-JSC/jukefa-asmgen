@@ -38,6 +38,13 @@ class rvv_move(move):
         amods = operand_modifiers.get('adreg', set())
         bmods = operand_modifiers.get('bdreg', set())
         integer = isinstance(src, riscv64_greg)
+        floating = dts['bdreg'].name in ("DOUBLE", "SINGLE", "HALF")
+        if omod.FILLOTHERS in bmods:
+            inst = "vfslide1down.vf" if floating else "vslide1down.vx"
+            return self.asmwrap(f"{inst} {dst},{dst},{src}")
+        if omod.ILANE in amods and not isinstance(dst, type(src)):
+            inst = "vfmv.f.s" if floating else "vmv.x.s"
+            return self.asmwrap(f"{inst} {dst},{src}")
         if omod.ILANESHIFT in amods:
             if omod.FILLOTHERS in amods:
                 floating = dts['bdreg'].name in ("DOUBLE", "SINGLE", "HALF")

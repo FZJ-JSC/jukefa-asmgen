@@ -47,3 +47,44 @@ def shift_signatures(dts, forms, irot, fill=None, destructive=False, blocksize=N
                 params["adreg_blocksize"] = blocksize(dt)
             sigs.append(opsig(modifiers=set(), structural_params=params, operands=operands))
     return sigs
+
+
+def fill_signatures(dts, irot, scalar) -> list:
+    """
+    A scalar into a vector shifted in place: adreg the scalar, bdreg the
+    vector - read and written - shifted by bdreg_irot, the scalar filling the
+    lane vacated (ILANESHIFT + FILLOTHERS on bdreg). A fill loop's step.
+
+    :param irot: dt -> irot, +1 or -1
+    :param scalar: dt -> register type of the scalar
+    """
+    sigs = []
+    for dt in dts:
+        r = irot(dt)
+        operands = {
+            "adreg": osh(otype=ot.REGISTER, orole=orl.DATA, rtype=scalar(dt), dt=dt),
+            "bdreg": osh(otype=ot.REGISTER, orole=orl.DATA, rtype=rgt.VEC, dt=dt),
+            "bdreg_irot": osh(otype=ot.IMMEDIATE, orole=orl.PARAM, value_constraints=[
+                minmax_constraint(minval=r, maxval=r)]),
+        }
+        operands["bdreg"].modifiers = {omod.ILANESHIFT, omod.FILLOTHERS}
+        sigs.append(opsig(modifiers=set(), structural_params={}, operands=operands))
+    return sigs
+
+
+def extract_signatures(dts, scalar) -> list:
+    """
+    Lane 0 of a vector into a scalar register: adreg the vector (ILANE, lane
+    0), bdreg the scalar. A drain loop's step
+    """
+    sigs = []
+    for dt in dts:
+        operands = {
+            "adreg": osh(otype=ot.REGISTER, orole=orl.DATA, rtype=rgt.VEC, dt=dt),
+            "bdreg": osh(otype=ot.REGISTER, orole=orl.DATA, rtype=scalar(dt), dt=dt),
+            "adreg_lane": osh(otype=ot.IMMEDIATE, orole=orl.PARAM, value_constraints=[
+                minmax_constraint(minval=0, maxval=0)]),
+        }
+        operands["adreg"].modifiers = {omod.ILANE}
+        sigs.append(opsig(modifiers=set(), structural_params={}, operands=operands))
+    return sigs

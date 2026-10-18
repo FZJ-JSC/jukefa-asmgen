@@ -81,3 +81,31 @@ class test_shifts(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class test_fill_drain(unittest.TestCase):
+    """
+    A fill loop's step - a scalar into a vector shifted in place - and a drain
+    loop's - lane 0 into a scalar
+    """
+
+    def test_rvv(self):
+        from asmgen.asmblocks.op import operand_modifier as om
+        g = rvv()
+        g.output_inline = False
+        dt = adt.FP64
+        fill = g.move(dregs=[g.freg(1, dt), g.vreg(4)], dts=[dt, dt], modifiers=set(),
+                      operand_modifiers={"bdreg": {om.ILANESHIFT, om.FILLOTHERS}}, bdreg_irot=-1)
+        drain = g.move(dregs=[g.vreg(4), g.freg(2, dt)], dts=[dt, dt], modifiers=set(),
+                       operand_modifiers={"adreg": {om.ILANE}}, adreg_lane=0)
+        self.assertEqual("vfslide1down.vf v4,v4,f1", fill.strip())
+        self.assertEqual("vfmv.f.s f2,v4", drain.strip())
+
+    def test_sve(self):
+        from asmgen.asmblocks.op import operand_modifier as om
+        g = sve()
+        g.output_inline = False
+        dt = adt.FP64
+        fill = g.move(dregs=[g.freg(1, dt), g.vreg(4)], dts=[dt, dt], modifiers=set(),
+                      operand_modifiers={"bdreg": {om.ILANESHIFT, om.FILLOTHERS}}, bdreg_irot=1)
+        self.assertEqual("insr z4.d,d1", fill.strip())
