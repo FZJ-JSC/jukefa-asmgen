@@ -84,7 +84,8 @@ class sme(sve):
 
     def zero_treg(self, *, treg : treg_base, dt : adt) -> str:
         suf = self.dt_suffixes[dt]
-        return self.asmwrap(f"zero {treg}.{suf}")
+        # the tiles to zero are a list: zero {za0.d}
+        return self.asmwrap(f"zero {{{treg}.{suf}}}")
 
 
     def insert_tile_rows(self, *,

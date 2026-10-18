@@ -165,16 +165,28 @@ class sme_setup(sve_setup):
 
     COUNTER = 8
 
+    def counter(self) -> bool:
+        """
+        Whether the predicate-as-counter is set: an SME2 register - with SME2
+        enabled, or no features chosen (every one available)
+        """
+        features = getattr(self.gen, "features", None)
+        return features is None or "SME2" in features
+
     def steps(self) -> list[setup_step]:
-        return [setup_step(setup_kind.ENGINE, "streaming SVE mode and ZA: smstart, smstop"),
-                *super().steps(),
-                setup_step(setup_kind.PREDICATE,
-                           f"all-true predicate-as-counter in pn{self.COUNTER} for "
-                           f"multi-vector instructions")]
+        steps = [setup_step(setup_kind.ENGINE, "streaming SVE mode and ZA: smstart, smstop"),
+                 *super().steps()]
+        if self.counter():
+            steps.append(setup_step(setup_kind.PREDICATE,
+                                    f"all-true predicate-as-counter in pn{self.COUNTER} for "
+                                    f"multi-vector instructions"))
+        return steps
 
     def setup(self, *, rt, dt, vl : int | None = None) -> str:
-        return (self.gen.asmwrap("smstart") + super().setup(rt=rt, dt=dt, vl=vl)
-                + self.gen.ptrue(self.gen.mreg(self.COUNTER, True), dt))
+        out = self.gen.asmwrap("smstart") + super().setup(rt=rt, dt=dt, vl=vl)
+        if self.counter():
+            out += self.gen.ptrue(self.gen.mreg(self.COUNTER, True), dt)
+        return out
 
     def teardown(self, *, rt, dt) -> str:
         return super().teardown(rt=rt, dt=dt) + self.gen.asmwrap("smstop")
