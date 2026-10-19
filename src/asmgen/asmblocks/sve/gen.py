@@ -149,7 +149,16 @@ class sve(aarch64):
         return result
 
     def add_greg_voff(self, *, reg : greg_base, offset : int, dt : adt) -> str:
-        return self.asmwrap(f"incb {reg}, ALL, MUL #{offset}")
+        """
+        A register moved by offset vector lengths in bytes: incb forward, decb
+        back, at most 16 a time
+        """
+        out, left = "", offset
+        while left:
+            n = max(-16, min(16, left))
+            out += self.asmwrap(f"{'incb' if n > 0 else 'decb'} {reg}, ALL, MUL #{abs(n)}")
+            left -= n
+        return out
 
     def vlen_to_greg(self, *, reg, dt : adt) -> str:
         """
