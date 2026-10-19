@@ -144,3 +144,22 @@ class test_shifted_adds(unittest.TestCase):
         r = rvv()
         with self.assertRaises(NotImplementedError):
             r.add_greg_greg_shifted(dst=r.greg(0), reg1=r.greg(0), reg2=r.greg(9), shift=1)
+
+
+class test_riscv_fp_suffixes(unittest.TestCase):
+    """
+    RISC-V spells single precision w in loads, stores and moves to and from
+    integer registers (flw, fmv.w.x), s in arithmetic and conversions
+    (fcvt.s.w, fmv.s): zeroing and copying FP registers take the latter
+    """
+
+    def test_single_and_double(self):
+        from asmgen.asmblocks.rvv import rvv
+        g = rvv()
+        g.output_inline = False
+        for dt, suf in ((adt.FP32, "s"), (adt.FP64, "d")):
+            self.assertEqual(f"fcvt.{suf}.w f29, zero", g.zero_freg(freg=g.freg(29, dt), dt=dt).strip())
+            self.assertEqual(f"fmv.{suf} f2,f1", g.mov_freg(src=g.freg(1, dt), dst=g.freg(2, dt), dt=dt).strip())
+        # loads keep w
+        self.assertEqual(f"flw f3, 8({g.greg(10)})",
+                         g.load_scalar_immoff(areg=g.greg(10), offset=8, freg=g.freg(3, adt.FP32), dt=adt.FP32).strip())

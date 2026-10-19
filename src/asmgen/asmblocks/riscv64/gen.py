@@ -225,7 +225,9 @@ class riscv64(asmgen):
         return asmblock
 
     def mov_freg(self, *, src : freg_base, dst : freg_base, dt : adt) ->  str:
-        dt_suf = self.fdt_suffixes[dt]
+        # fmv.s / fmv.d (fsgnj): fmv.w is no instruction - fmv.w.x moves an
+        # integer register
+        dt_suf = self.fcdt_suffixes[dt]
         return self.asmwrap(f"fmv.{dt_suf} {dst},{src}")
 
     def mov_greg(self, *, src : greg_base, dst : greg_base) -> str:
@@ -290,7 +292,8 @@ class riscv64(asmgen):
         return self.asmwrap(f"add {greg}, zero, 0")
 
     def zero_freg(self, *, freg : freg_base, dt : adt) -> str:
-        dt_suf = self.fdt_suffixes[dt]
+        # a conversion's format is the arithmetic one: fcvt.s.w, not fcvt.w.w
+        dt_suf = self.fcdt_suffixes[dt]
         return self.asmwrap(f"fcvt.{dt_suf}.w {freg}, zero")
 
     def reserved_registers(self) -> dict[str, dict[str, int]]:
