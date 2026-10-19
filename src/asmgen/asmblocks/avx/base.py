@@ -534,6 +534,19 @@ class avxbase(asmgen):
         asmblock += self.asmwrap(f"subq {preg2},{pdst}")
         return asmblock
 
+    def add_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
+                              reg2 : greg_base, shift : int) -> str:
+        if not 0 <= shift <= 3:
+            raise NotImplementedError(
+                    f"x86's lea scales a register by 1, 2, 4 or 8, not by 2^{shift}")
+        return self.asmwrap(f"leaq ({self.rpref(reg1)},{self.rpref(reg2)},{1 << shift}),"
+                            f"{self.rpref(dst)}")
+
+    def sub_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
+                              reg2 : greg_base, shift : int) -> str:
+        raise NotImplementedError(
+                "x86 has no subtraction of a scaled register in one instruction")
+
     def add_greg_voff(self, *, reg : greg_base, offset : int, dt : adt) -> str:
         offset = offset*self.simd_size
         return self.add_greg_imm(reg=reg, imm=offset)

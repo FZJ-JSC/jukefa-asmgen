@@ -303,6 +303,16 @@ class aarch64(asmgen):
                       reg1 : greg_base, reg2 : greg_base) -> str:
         return self.asmwrap(f"sub {dst},{reg1},{reg2}")
 
+    def add_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
+                              reg2 : greg_base, shift : int) -> str:
+        return self.asmwrap(f"add {dst},{reg1},{reg2}, LSL #{shift}" if shift
+                            else f"add {dst},{reg1},{reg2}")
+
+    def sub_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
+                              reg2 : greg_base, shift : int) -> str:
+        return self.asmwrap(f"sub {dst},{reg1},{reg2}, LSL #{shift}" if shift
+                            else f"sub {dst},{reg1},{reg2}")
+
     def shift_greg_left(self, *, reg : greg_base, bit_count : int) -> str:
         return self.asmwrap(f"lsl {reg},{reg},#{bit_count}")
 

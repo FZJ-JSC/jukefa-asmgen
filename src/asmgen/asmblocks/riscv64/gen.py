@@ -269,6 +269,17 @@ class riscv64(asmgen):
     def sub_greg_greg(self, *, dst : greg_base, reg1 : greg_base, reg2 : greg_base) -> str:
         return self.asmwrap(f"sub {dst},{reg1},{reg2}")
 
+    def add_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
+                              reg2 : greg_base, shift : int) -> str:
+        raise NotImplementedError(
+                "RISC-V adds a shifted register in one instruction only with Zba "
+                "(sh1add, sh2add, sh3add), which isn't supported")
+
+    def sub_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
+                              reg2 : greg_base, shift : int) -> str:
+        raise NotImplementedError(
+                "RISC-V has no subtraction of a shifted register in one instruction")
+
     def shift_greg_left(self, *, reg : greg_base, bit_count : int) -> str:
         return self.asmwrap(f"slli {reg},{reg},{bit_count}")
 

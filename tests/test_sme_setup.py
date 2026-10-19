@@ -115,3 +115,32 @@ class test_element_state(unittest.TestCase):
         from asmgen.asmblocks.setup import sme_setup
         self.assertFalse(sme_setup(sme()).element_type_is_state())
         self.assertEqual("", sme_setup(sme()).setup_dt(dt=adt.FP32, group=2))
+
+
+class test_shifted_adds(unittest.TestCase):
+    """
+    dst = reg1 +/- (reg2 << shift) in one instruction where the ISA has one;
+    NotImplementedError where it hasn't
+    """
+
+    def test_aarch64(self):
+        g = sme()
+        g.output_inline = False
+        self.assertEqual("add x0,x0,x9, LSL #1",
+                         g.add_greg_greg_shifted(dst=g.greg(0), reg1=g.greg(0), reg2=g.greg(9), shift=1).strip())
+        self.assertEqual("sub x0,x0,x9, LSL #2",
+                         g.sub_greg_greg_shifted(dst=g.greg(0), reg1=g.greg(0), reg2=g.greg(9), shift=2).strip())
+
+    def test_x86_and_riscv(self):
+        from asmgen.asmblocks.avx.avx2 import fma256
+        from asmgen.asmblocks.rvv import rvv
+        g = fma256()
+        g.output_inline = False
+        self.assertIn(",4)", g.add_greg_greg_shifted(dst=g.greg(0), reg1=g.greg(0), reg2=g.greg(9), shift=2))
+        with self.assertRaises(NotImplementedError):
+            g.add_greg_greg_shifted(dst=g.greg(0), reg1=g.greg(0), reg2=g.greg(9), shift=4)
+        with self.assertRaises(NotImplementedError):
+            g.sub_greg_greg_shifted(dst=g.greg(0), reg1=g.greg(0), reg2=g.greg(9), shift=1)
+        r = rvv()
+        with self.assertRaises(NotImplementedError):
+            r.add_greg_greg_shifted(dst=r.greg(0), reg1=r.greg(0), reg2=r.greg(9), shift=1)

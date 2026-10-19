@@ -1113,6 +1113,38 @@ class asmgen(ABC):
         """
         raise NotImplementedError(NIE_MESSAGE)
 
+
+    @abstractmethod
+    def add_greg_greg_shifted(self, *, dst : greg_type, reg1 : greg_type, reg2 : greg_type,
+                              shift : int) -> str:
+        """
+        Returns the string containing the instruction to write reg1 plus reg2
+        shifted left by shift into a GP register: one instruction - an
+        address moved by a power-of-two multiple of an amount in a register
+
+        :param dst: destination GP register
+        :param reg1: first summand
+        :param reg2: second summand, shifted
+        :param shift: bits reg2 is shifted left by
+        :return: ASM/IR of the operation
+        """
+        raise NotImplementedError("Method not implemented")
+
+    @abstractmethod
+    def sub_greg_greg_shifted(self, *, dst : greg_type, reg1 : greg_type, reg2 : greg_type,
+                              shift : int) -> str:
+        """
+        Returns the string containing the instruction to write reg1 minus reg2
+        shifted left by shift into a GP register: one instruction
+
+        :param dst: destination GP register
+        :param reg1: minuend
+        :param reg2: subtrahend, shifted
+        :param shift: bits reg2 is shifted left by
+        :return: ASM/IR of the operation
+        """
+        raise NotImplementedError("Method not implemented")
+
     @abstractmethod
     def shift_greg_left(self, *, reg : greg_type, bit_count : int) -> str:
         """
