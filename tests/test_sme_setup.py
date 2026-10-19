@@ -94,3 +94,24 @@ class test_stack_parameters(unittest.TestCase):
         if "ldr" not in load:
             self.skipTest("no parameter on the stack in this setup")
         self.assertIn("[sp,#64]", load.replace(" ", ""))
+
+
+class test_element_state(unittest.TestCase):
+    """
+    Whether the element type is state, and switching it over register
+    groups the caller counts - the ISA's own grouping kept
+    """
+
+    def test_rvv(self):
+        from asmgen.asmblocks.rvv import rvv
+        from asmgen.asmblocks.setup import rvv_setup
+        g = rvv()
+        g.output_inline = False
+        self.assertTrue(rvv_setup(g).element_type_is_state())
+        self.assertEqual("vsetvli zero,zero,e32,m2,ta,ma",
+                         rvv_setup(g).setup_dt(dt=adt.FP32, group=2).strip())
+
+    def test_per_instruction(self):
+        from asmgen.asmblocks.setup import sme_setup
+        self.assertFalse(sme_setup(sme()).element_type_is_state())
+        self.assertEqual("", sme_setup(sme()).setup_dt(dt=adt.FP32, group=2))

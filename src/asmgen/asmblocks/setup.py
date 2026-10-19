@@ -72,6 +72,26 @@ class isa_setup:
         """
         return False
 
+    def element_type_is_state(self) -> bool:
+        """
+        Whether the element type is state the instructions run under (RVV's
+        vtype, set by vsetvli) rather than part of each instruction (SVE,
+        NEON, AVX): where it is, an instruction on another element type - or
+        on registers grouped otherwise - needs setup_dt first
+        """
+        return False
+
+    def setup_dt(self, *, dt, group : int = 1) -> str:
+        """
+        The element type state switched to dt over registers grouped by
+        group - a wide accumulator of a widening instruction spans group
+        registers - keeping the vector length. Nothing where the element type
+        is part of each instruction. Whatever the ISA groups registers by
+        otherwise (RVV's LMUL) is its own: group counts the registers the
+        caller sees
+        """
+        return ""
+
     def clobbers(self) -> dict[str, list[int]]:
         """
         Registers the setup and teardown clobber beyond those they allocate,
@@ -224,6 +244,14 @@ class rvv_setup(isa_setup):
 
     def predication(self) -> predication:
         return predication.IMPLICIT
+
+    def element_type_is_state(self) -> bool:
+        return True
+
+    def setup_dt(self, *, dt, group : int = 1) -> str:
+        # LMUL stays the generator's: a register the caller sees is a group
+        # of LMUL already, a wide one a group of those
+        return self.gen.vsetvli_keep_vl(dt=dt, lmul=getattr(self.gen, "lmul", 1) * group)
 
     @staticmethod
     def _aliased(rt, name: str) -> int:
