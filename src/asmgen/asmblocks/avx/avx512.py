@@ -87,6 +87,12 @@ class avx512(avxbase):
         preg = self.rpref(vreg)
         return self.asmwrap(f"vpxorq {preg},{preg},{preg}")
 
+    def zero_freg(self, *, freg : freg_base, dt : adt) -> str:
+        # EVEX: FP scalars live in the vector file, allocated from the top -
+        # xmm16-31 VEX's vpxor can't reach (AVX512VL)
+        preg = self.rpref(freg)
+        return self.asmwrap(f"vpxord {preg},{preg},{preg}")
+
     def vreg(self, reg_idx : int):
         return zmm_vreg(reg_idx)
 

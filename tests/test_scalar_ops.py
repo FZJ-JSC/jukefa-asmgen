@@ -60,3 +60,26 @@ class test_riscv_fp_suffixes(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class test_avx512_fp_zero(unittest.TestCase):
+    """
+    AVX-512 keeps FP scalars in the vector file, allocated from the top:
+    zeroing one in xmm16-31 needs EVEX - vpxord, not VEX's vpxor
+    """
+
+    def test_evex(self):
+        import shutil
+        import subprocess
+        import tempfile
+        from asmgen.asmblocks.avx.avx512 import avx512
+        g = avx512()
+        g.output_inline = False
+        line = g.zero_freg(freg=g.freg(20, adt.FP64), dt=adt.FP64).strip()
+        self.assertEqual("vpxord %xmm20,%xmm20,%xmm20", line)
+        if shutil.which("as"):
+            with tempfile.TemporaryDirectory() as d:
+                with open(f"{d}/z.s", "w") as f:
+                    f.write(line + "\n")
+                r = subprocess.run(["as", f"{d}/z.s", "-o", f"{d}/z.o"], capture_output=True, text=True)
+                self.assertEqual(0, r.returncode, r.stderr)
