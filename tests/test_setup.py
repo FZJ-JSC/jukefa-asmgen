@@ -88,10 +88,6 @@ class test_setup(unittest.TestCase):
                                  gen.isaendquirks(rt=tracker(), dt=adt.FP32))
 
 
-if __name__ == "__main__":
-    unittest.main()
-
-
 from asmgen.asmblocks.setup import predication
 
 
@@ -160,3 +156,28 @@ class test_rvv_index_vector(unittest.TestCase):
         text = g.greg_to_voffs(streg=g.greg(5), vreg=g.vreg(3), dt=adt.FP64)
         self.assertIn("vid.v v3", text)
         self.assertIn("vmul.vx v3,v3,", text)
+
+
+class test_element_state(unittest.TestCase):
+    """
+    Whether the element type is state, and switching it over register
+    groups the caller counts - the ISA's own grouping kept
+    """
+
+    def test_rvv(self):
+        from asmgen.asmblocks.rvv import rvv
+        from asmgen.asmblocks.setup import rvv_setup
+        g = rvv()
+        g.output_inline = False
+        self.assertTrue(rvv_setup(g).element_type_is_state())
+        self.assertEqual("vsetvli zero,zero,e32,m2,ta,ma",
+                         rvv_setup(g).setup_dt(dt=adt.FP32, group=2).strip())
+
+    def test_per_instruction(self):
+        from asmgen.asmblocks.setup import sme_setup
+        self.assertFalse(sme_setup(sme()).element_type_is_state())
+        self.assertEqual("", sme_setup(sme()).setup_dt(dt=adt.FP32, group=2))
+
+
+if __name__ == "__main__":
+    unittest.main()
