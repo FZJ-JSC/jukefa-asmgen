@@ -114,6 +114,12 @@ class test_scaled_offset(unittest.TestCase):
                             modifiers={mod.GOFFSET, mod.SCALEOFFSET, mod.IOFFSET}, offreg=g.greg(5),
                             scale_factor=4, ioffset=64).strip())
         self.assertTrue(lines[-1].startswith("vmovupd 64("), lines[-1])
+        # a broadcast through a scaled index
+        from asmgen.asmblocks.op.operand import operand_modifier as om
+        lines.append(g.load(dregs=[g.vreg(3)], areg=g.greg(4), dt=adt.FP64,
+                            modifiers={mod.GOFFSET, mod.SCALEOFFSET}, offreg=g.greg(5), scale_factor=2,
+                            operand_modifiers={"adreg": {om.BCAST}}).strip())
+        self.assertIn(",2)", lines[-1])
         if shutil.which("as"):
             with tempfile.TemporaryDirectory() as d:
                 with open(f"{d}/s.s", "w") as f:
