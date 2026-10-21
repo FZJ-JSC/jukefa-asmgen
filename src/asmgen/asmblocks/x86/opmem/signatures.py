@@ -76,6 +76,13 @@ def make_x86_64_opmem_signatures():
             }
         ))
 
+    # the gp-reg offset scaled (x86's index register): base + offreg x 1, 2,
+    # 4 or 8 - beside every gp-reg offset signature
+    for s0 in [s for s in sigs if mod.GOFFSET in s.modifiers]:
+        for scale in (1, 2, 4, 8):
+            sigs.append(sig(modifiers=set(s0.modifiers) | {mod.SCALEOFFSET},
+                            structural_params=dict(s0.structural_params, scale_factor=scale),
+                            operands=dict(s0.operands)))
     return sigs
 
 

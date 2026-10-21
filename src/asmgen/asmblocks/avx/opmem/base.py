@@ -99,6 +99,7 @@ class avx_opmem(opmem):
             mod.VOFFSET : ['voffset'],
             mod.VINDEX  : ['vidxreg','it'],
             mod.GOFFSET : ['offreg'],
+            mod.SCALEOFFSET : ['offreg', 'scale_factor'],
         }
         for m, plist in required_params.items():
             for p in plist:
@@ -144,6 +145,11 @@ class avx_opmem(opmem):
 
         pareg = self.rpref(areg)
 
+        if mod.GOFFSET in modifiers:
+            # an index register, scaled by 1, 2, 4 or 8
+            pareg += f",{self.rpref(kwargs['offreg'])}"
+            if mod.SCALEOFFSET in modifiers:
+                pareg += f",{int(kwargs['scale_factor'])}"
         return f"{offset}({pareg})" if offset != 0 else f"({pareg})"
 
     def get_vector_mnemonic(self, dt: adt) -> str:

@@ -83,3 +83,40 @@ class test_avx512_fp_zero(unittest.TestCase):
                     f.write(line + "\n")
                 r = subprocess.run(["as", f"{d}/z.s", "-o", f"{d}/z.o"], capture_output=True, text=True)
                 self.assertEqual(0, r.returncode, r.stderr)
+
+
+class test_scaled_offset(unittest.TestCase):
+    """
+    SCALEOFFSET: an address as base + index register x scale_factor (1, 2,
+    4, 8) - signatures carrying the scale as a structural parameter, the
+    forms assembling
+    """
+
+    def test_x86(self):
+        import shutil
+        import subprocess
+        import tempfile
+        from asmgen.asmblocks.avx.avx512 import avx512
+        from asmgen.asmblocks.op import opmem_modifier as mod
+        g = avx512()
+        g.output_inline = False
+        scales = sorted({s.structural_params.get("scale_factor") for s in g.load.get_signatures()
+                         if mod.SCALEOFFSET in s.modifiers})
+        self.assertEqual([1, 2, 4, 8], scales)
+        lines = []
+        for scale in scales:
+            line = g.load(dregs=[g.vreg(3)], areg=g.greg(4), dt=adt.FP64,
+                          modifiers={mod.GOFFSET, mod.SCALEOFFSET}, offreg=g.greg(5),
+                          scale_factor=scale).strip()
+            self.assertIn(f",{scale})", line)
+            lines.append(line)
+        lines.append(g.load(dregs=[g.vreg(3)], areg=g.greg(4), dt=adt.FP64,
+                            modifiers={mod.GOFFSET, mod.SCALEOFFSET, mod.IOFFSET}, offreg=g.greg(5),
+                            scale_factor=4, ioffset=64).strip())
+        self.assertTrue(lines[-1].startswith("vmovupd 64("), lines[-1])
+        if shutil.which("as"):
+            with tempfile.TemporaryDirectory() as d:
+                with open(f"{d}/s.s", "w") as f:
+                    f.write("\n".join(lines) + "\n")
+                r = subprocess.run(["as", f"{d}/s.s", "-o", f"{d}/s.o"], capture_output=True, text=True)
+                self.assertEqual(0, r.returncode, r.stderr)

@@ -92,6 +92,7 @@ class x86_opmem(opmem):
         required_params = {
             mod.IOFFSET : ['ioffset'],
             mod.GOFFSET : ['offreg'],
+            mod.SCALEOFFSET : ['offreg', 'scale_factor'],
         }
         for m, plist in required_params.items():
             for p in plist:
@@ -127,6 +128,9 @@ class x86_opmem(opmem):
         if mod.GOFFSET in modifiers:
             poffreg = self.rpref(kwargs['offreg'])
             register_part += f",{poffreg}"
+            if mod.SCALEOFFSET in modifiers:
+                # the index register scaled: base + offreg x scale_factor
+                register_part += f",{int(kwargs['scale_factor'])}"
 
         return f"{offset}({register_part})" if offset != 0 else f"({register_part})"
 

@@ -33,6 +33,7 @@ class opmem_modifier(operation_modifier):
     VOFFSET = auto() # 1D offset in number of vectors
     IOFFSET = auto() # 1D offset in number of elements
     GOFFSET = auto() # 1D offset given by greg
+    SCALEOFFSET = auto() # the greg offset scaled: scale_factor (x86: 1, 2, 4, 8)
     TINDEX = auto()  # 2D tile contains per-element indices/offsets
     VINDEX = auto()  # 1D vector contains per-element indices/offsets
     GSTRIDE = auto() # stride between elements given by greg
