@@ -105,6 +105,9 @@ class fngen:
         # added as clobbers (add_clobber), not only those allocated
         raw_sp_shift = getattr(cc, "spadd", sr_count*8)
         aligned_sp_shift = ((raw_sp_shift + cc.spalign - 1) // cc.spalign) * cc.spalign
+        # where stack parameters are, from the stack pointer after the save:
+        # for loads of them emitted elsewhere than at entry
+        self.sp_shift = aligned_sp_shift
 
         for name,(tag,off) in self.required_loads.items():
             loadblock += self.gen.asmwrap(f"# loading {name}")
