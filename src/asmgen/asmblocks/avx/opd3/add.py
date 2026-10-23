@@ -16,11 +16,13 @@ from ...op import (
 from ....registers import asm_data_type as adt
 
 from .base import avx_opd3_base
+from ...x86.opd3 import x86_add
 
 class avx_add(avx_opd3_base):
     """
     AVX implementation of add (vadd)
     """
+    scalar_class = x86_add
 
     def get_base_inst(self, modifiers : set[mod]):
         return "vadd"

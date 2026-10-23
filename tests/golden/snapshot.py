@@ -24,7 +24,7 @@ from asmgen.registers import asm_data_type as adt
 
 HERE = os.path.dirname(__file__)
 DATA = os.path.join(HERE, "data")
-OPERATIONS = ("load", "store", "move", "fma", "add", "mul", "fopa")
+OPERATIONS = ("load", "store", "move", "fma", "add", "sub", "mul", "fopa")
 DTS = (adt.FP64, adt.FP32, adt.FP16)
 IMMEDIATES = (0, 1, 8, 255, 256, 2047, 2048, 4096, -8, -2048, -2049)
 IMM_PARAMS = ("imm", "offset", "ioffset", "shift")
@@ -165,6 +165,11 @@ def _minmax(shape):
     for p in _params(shape):
         if "minval" in p and "maxval" in p:
             return p["minval"], p["maxval"]
+        for alternative in p.get("alternatives", ()):
+            for c in alternative:
+                q = getattr(c, "params", {}) or {}
+                if "minval" in q and "maxval" in q:
+                    return q["minval"], q["maxval"]
     return None
 
 

@@ -1,6 +1,3 @@
-method add_greg_imm(imm=-2049, reg=t0)
-method add_greg_imm(imm=2048, reg=t0)
-method add_greg_imm(imm=4096, reg=t0)
 method c_simd_size_function()
 method create_callconv(name=default)
 method freg(dt=DOUBLE, reg_idx=0)

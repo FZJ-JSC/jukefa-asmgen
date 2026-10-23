@@ -16,11 +16,13 @@ from ...op import (
 )
 
 from .base import sve_opd3_base
+from ...aarch64.opd3 import aarch64_mul
 
 class sve_mul(sve_opd3_base):
     """
     SVE implementation of mul (fmul)
     """
+    scalar_class = aarch64_mul
     # unpredicated fadd/fmul (vectors) exist; the predicated forms are
     # destructive: Zdn is both the destination and the first source
     unpredicated = True

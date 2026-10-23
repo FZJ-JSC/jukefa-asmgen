@@ -2439,6 +2439,18 @@ add z1.s,p1/m,z1.s,z2.s
 add z1.d,p1/m,z1.d,z2.d
 ### op add [MASK] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 amreg:REGISTER:MASK:SINT8
 add z1.b,p1/m,z1.b,z2.b
+### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+add x12,x10,x11
+### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+add x11,x10,#-4095
+### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+add x11,x10,#4095
+### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+add x12,x10,x11
+### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+add x11,x10,#-4095
+### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+add x11,x10,#4095
 ### op add [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16
 !KeyError: <asm_data_type.BF16: 5>
 ### op add [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16{BLOCKLANE} cdreg:REGISTER:VEC:BF16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
@@ -4909,6 +4921,10 @@ mul z1.s,p1/m,z1.s,z2.s
 mul z1.d,p1/m,z1.d,z2.d
 ### op mul [MASK] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 amreg:REGISTER:MASK:SINT8
 mul z1.b,p1/m,z1.b,z2.b
+### op mul [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+mul x12,x10,x11
+### op mul [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+mul x12,x10,x11
 ### op mul [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16
 !KeyError: <asm_data_type.BF16: 5>
 ### op mul [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16{BLOCKLANE} cdreg:REGISTER:VEC:BF16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
@@ -5785,3 +5801,15 @@ str w10, [x11]
 str x10, [x11]
 ### op store [] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64
 strb w10, [x11]
+### op sub [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+sub x12,x10,x11
+### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+sub x11,x10,#-4095
+### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+sub x11,x10,#4095
+### op sub [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+sub x12,x10,x11
+### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+sub x11,x10,#-4095
+### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+sub x11,x10,#4095

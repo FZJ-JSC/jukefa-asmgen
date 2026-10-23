@@ -21,12 +21,17 @@ from ...op import (
     operand_modifier as opd_mod,
     operation_signature
 )
+from ....registers import greg_base as _greg_base
+from ...op.scalar import scalar_operands
 
 class aarch64_simd_opd3_base(opd3):
     """
     NEON+SVE base opd3 implementation with methods shared by all
     opd3 operations
     """
+    # the base ISA's operation for general registers (add, mul): a member
+    # whose signatures are offered too and to which calls with them go
+    scalar_class = None
     inst_base = "invalid"
     has_acc_suffix = False
 
@@ -40,10 +45,11 @@ class aarch64_simd_opd3_base(opd3):
         self.dt_idxsuffixes = dt_idxsuffixes
 
         self.signatures = []
+        self.scalar_op = self.scalar_class(asmwrap=asmwrap) if self.scalar_class else None
 
 
     def get_signatures(self) -> list[operation_signature]:
-        return self.signatures
+        return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
 
     def diagnose_failure(self,
                          modifiers : set[mod],
@@ -164,11 +170,18 @@ class aarch64_simd_opd3_base(opd3):
     # ??? It's just 6?
     # pylint: disable-next=too-many-locals
     def implementation(self, *,
-                       adreg : data_reg, bdreg : data_reg, cdreg : data_reg,
-                       a_dt : adt, b_dt : adt, c_dt : adt,
+                       adreg : data_reg, bdreg : data_reg = None, cdreg : data_reg,
+                       a_dt : adt, b_dt : adt = None, c_dt : adt,
                        modifiers : set[mod] = None,
                        operand_modifiers : dict[str,set[opd_mod]] = None,
                        **kwargs) -> str:
+
+        # If scalar registers are passed, forward to the base ISA's operation
+        if self.scalar_op is not None and isinstance(cdreg, _greg_base):
+            return self.scalar_op(adreg=adreg, bdreg=bdreg, cdreg=cdreg,
+                                  a_dt=a_dt, b_dt=b_dt, c_dt=c_dt,
+                                  modifiers=modifiers, operand_modifiers=operand_modifiers,
+                                  **scalar_operands(kwargs))
 
         if modifiers is None:
             modifiers = set()

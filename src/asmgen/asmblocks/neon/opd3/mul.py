@@ -14,11 +14,13 @@ from ....registers import (
 )
 from ...op import opd3_modifier as mod,operand_modifier as opd_mod
 from .base import neon_opd3_base
+from ...aarch64.opd3 import aarch64_mul
 
 class neon_mul(neon_opd3_base):
     """
     NEON/ASIMD implementation of mul (fmul)
     """
+    scalar_class = aarch64_mul
     widens = False
 
     inst_base = "mul"

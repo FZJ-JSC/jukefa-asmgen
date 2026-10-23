@@ -124,8 +124,12 @@ def main():
     parser.add_argument("--isa", type=str, default="rvv", choices=ISA_MODULES.keys())
     parser.add_argument("--unroll", type=int, default=1,
                         help="Number of vectors to unroll")
-    parser.add_argument("--arith", type=str, choices=['fma', 'fmul_fadd'], default='fma')
+    parser.add_argument("--arith", type=str, choices=['fma', 'mul_add', 'fmul_fadd'], default='fma')
     args = parser.parse_args()
+    if args.arith == 'fmul_fadd':
+        import sys
+        print("axpy: --arith fmul_fadd is deprecated, use mul_add", file=sys.stderr)
+        args.arith = 'mul_add'
 
     dt = adt.FP64
     module_name = ISA_MODULES[args.isa]
@@ -176,8 +180,8 @@ def main():
         arith_sig, can_vf = resolve_arith_sig(gen.fma.get_signatures(), dt, op_rt.VEC)
         arith_sig2 = None
     else:
-        arith_sig, can_vf = resolve_arith_sig(gen.fmul.get_signatures(), dt, op_rt.VEC)
-        arith_sig2, _ = resolve_arith_sig(gen.fadd.get_signatures(), dt, op_rt.VEC)
+        arith_sig, can_vf = resolve_arith_sig(gen.mul.get_signatures(), dt, op_rt.VEC)
+        arith_sig2, _ = resolve_arith_sig(gen.add.get_signatures(), dt, op_rt.VEC)
 
     # 2. Setup Masking
     needs_mask = any(
@@ -227,12 +231,12 @@ def main():
                                       operand_modifiers=opd_modifiers,
                                       **build_kwargs(arith_sig, mreg))
             else:
-                innerblock += gen.fmul(adreg=x_regs[i], bdreg=breg, cdreg=x_regs[i],
+                innerblock += gen.mul(adreg=x_regs[i], bdreg=breg, cdreg=x_regs[i],
                                        a_dt=dt, b_dt=dt, c_dt=dt,
                                        modifiers=arith_sig.modifiers,
                                        operand_modifiers=opd_modifiers,
                                        **build_kwargs(arith_sig, mreg))
-                innerblock += gen.fadd(adreg=x_regs[i], bdreg=y_regs[i], cdreg=y_regs[i],
+                innerblock += gen.add(adreg=x_regs[i], bdreg=y_regs[i], cdreg=y_regs[i],
                                        a_dt=dt, b_dt=dt, c_dt=dt,
                                        modifiers=arith_sig2.modifiers,
                                        operand_modifiers={},
@@ -262,12 +266,12 @@ def main():
                                       operand_modifiers=opd_modifiers,
                                       **build_kwargs(arith_sig, mreg))
             else:
-                innerblock += gen.fmul(adreg=x_regs[i], bdreg=breg, cdreg=x_regs[i],
+                innerblock += gen.mul(adreg=x_regs[i], bdreg=breg, cdreg=x_regs[i],
                                        a_dt=dt, b_dt=dt, c_dt=dt,
                                        modifiers=arith_sig.modifiers,
                                        operand_modifiers=opd_modifiers,
                                        **build_kwargs(arith_sig, mreg))
-                innerblock += gen.fadd(adreg=x_regs[i], bdreg=y_regs[i], cdreg=y_regs[i],
+                innerblock += gen.add(adreg=x_regs[i], bdreg=y_regs[i], cdreg=y_regs[i],
                                        a_dt=dt, b_dt=dt, c_dt=dt,
                                        modifiers=arith_sig2.modifiers,
                                        operand_modifiers={},

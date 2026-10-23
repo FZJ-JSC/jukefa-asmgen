@@ -31,6 +31,7 @@ from .opd3 import avx_fma,avx_mul,avx_add
 
 from .opmem.load import avx128_load,avx256_load,avx512_load
 from .opmem.store import avx128_store,avx256_store,avx512_store
+from ..x86.opd3 import x86_sub
 
 class fma128(avxbase):
     """
@@ -64,6 +65,7 @@ class fma128(avxbase):
         self.load = avx128_load(asmwrap=self.asmwrap, rpref=self.rpref)
         self.store = avx128_store(asmwrap=self.asmwrap, rpref=self.rpref)
         self.move = avx_move(asmwrap=self.asmwrap, rpref=self.rpref, simd_bytes=16)
+        self.sub = x86_sub(asmwrap=self.asmwrap, rpref=self.rpref)
 
     def get_req_flags(self):
         return ['fma', 'avx']
@@ -139,6 +141,7 @@ class fma256(avxbase):
         self.load = avx256_load(asmwrap=self.asmwrap, rpref=self.rpref)
         self.store = avx256_store(asmwrap=self.asmwrap, rpref=self.rpref)
         self.move = avx_move(asmwrap=self.asmwrap, rpref=self.rpref, simd_bytes=32)
+        self.sub = x86_sub(asmwrap=self.asmwrap, rpref=self.rpref)
 
     def get_req_flags(self):
         return ['fma', 'avx']

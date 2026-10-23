@@ -70,8 +70,9 @@ class opd3(operation):
     NIE_MESSAGE="Method not implemented"
 
     def __call__(self, *,
-                 adreg : data_reg, bdreg : data_reg, cdreg : data_reg,
-                 a_dt : adt, b_dt : adt, c_dt : adt,
+                 adreg : data_reg, cdreg : data_reg,
+                 a_dt : adt, c_dt : adt,
+                 bdreg : data_reg | None = None, b_dt : adt | None = None,
                  modifiers : set[opd3_modifier] = None,
                  operand_modifiers : dict[str,set[operand_modifier]] = None,
                  **kwargs) -> str:
@@ -99,6 +100,17 @@ class opd3(operation):
         if operand_modifiers is None:
             operand_modifiers = dict()
 
+        if bdreg is None:
+            # an immediate in B's place (add, sub, mul of a general register):
+            # the operands by name, not position
+            return self.execute(
+                dregs=[],
+                dts={'adreg':a_dt,'cdreg':c_dt},
+                modifiers=modifiers,
+                operand_modifiers=operand_modifiers,
+                adreg=adreg, cdreg=cdreg, a_dt=a_dt, c_dt=c_dt,
+                **kwargs
+            )
         return self.execute(
             dregs=[adreg,bdreg,cdreg],
             gregs=[],

@@ -21,6 +21,7 @@ from .types import rvv_vreg
 from .opd3 import rvv_fma,rvv_mul,rvv_add
 from .opmem import rvv_load,rvv_store
 from .move import rvv_move
+from ..riscv64.opd3 import riscv64_sub
 
 
 # pylint: disable=too-many-public-methods
@@ -67,6 +68,7 @@ class rvv(riscv64):
         self.store = rvv_store(asmwrap=self.asmwrap,
                                lmul_getter=lambda : self.lmul)
         self.move = rvv_move(asmwrap=self.asmwrap)
+        self.sub = riscv64_sub(asmwrap=self.asmwrap)
 
     def get_parameters(self) -> list[str]:
         return ["LMUL"]

@@ -403,3 +403,32 @@ class either_constraint(operand_constraint):
     def validate(self, name : str, val : ValueType,
                  context : dict[str,ValueType], params : dict[str,ValueType]):
         pass
+
+
+@dataclass(kw_only=True)
+class anyof_constraint(intval_constraint):
+    """
+    Valid where any one of several sets of constraints is - every constraint
+    of one set holds. AArch64's add and sub immediates, say: up to 4095, or a
+    multiple of 4096 up to 4095 * 4096. Its params name the alternatives, not
+    an overall range: the values between them aren't valid.
+    """
+    alternatives : list = field(default_factory=list)
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.params['alternatives'] = self.alternatives
+
+    def validate(self, name : str, val : ValueType,
+                 context : dict[str,ValueType],
+                 params : dict[str,ValueType]):
+        problems = []
+        for alternative in params['alternatives']:
+            try:
+                for c in alternative:
+                    c.validate(name=name, val=val, context=context, params=c.params)
+            except ValueError as err:
+                problems.append(str(err))
+                continue
+            return
+        raise ValueError(f"{self.what} of {name} fits none of the forms: " + "; or ".join(problems))

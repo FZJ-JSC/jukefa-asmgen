@@ -816,6 +816,24 @@ vpxor %ymm0,%ymm0,%ymm0
 vpxor %ymm0,%ymm0,%ymm0
 ### method zero_vreg(dt=SINGLE, vreg=ymm0)
 vpxor %ymm0,%ymm0,%ymm0
+### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+movq %rcx,%rsi
+addq %rdx,%rsi
+### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+movq %rcx,%rdx
+addq $-2147483648,%rdx
+### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+movq %rcx,%rdx
+addq $2147483647,%rdx
+### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+movq %rcx,%rsi
+addq %rdx,%rsi
+### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+movq %rcx,%rdx
+addq $-2147483648,%rdx
+### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+movq %rcx,%rdx
+addq $2147483647,%rdx
 ### op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
 vaddpd %ymm1,%ymm2,%ymm3
 ### op add [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
@@ -2164,6 +2182,20 @@ vextractf128 $1,%ymm1,%xmm2
 vperm2f128 $0x0,%ymm1,%ymm1,%ymm2
 ### op move [] adreg:REGISTER:VEC:SINGLE{IBLOCK} bdreg:REGISTER:VEC:SINGLE{BCAST,BLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:4,bdreg_blocksize:4} @far
 vperm2f128 $0x11,%ymm1,%ymm1,%ymm2
+### op mul [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+movq %rcx,%rsi
+imulq %rdx,%rsi
+### op mul [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+imulq $-2147483648,%rcx,%rdx
+### op mul [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+imulq $2147483647,%rcx,%rdx
+### op mul [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+movq %rcx,%rsi
+imulq %rdx,%rsi
+### op mul [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+imulq $-2147483648,%rcx,%rdx
+### op mul [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+imulq $2147483647,%rcx,%rdx
 ### op mul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
 vmulpd %ymm1,%ymm2,%ymm3
 ### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
@@ -3224,3 +3256,21 @@ vmovdqu %ymm1, (%rcx)
 vpextrb $0, %xmm1, (%rcx)
 ### op store [] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- @far
 vpextrb $15, %xmm1, (%rcx)
+### op sub [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+movq %rcx,%rsi
+subq %rdx,%rsi
+### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+movq %rcx,%rdx
+subq $-2147483648,%rdx
+### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+movq %rcx,%rdx
+subq $2147483647,%rdx
+### op sub [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+movq %rcx,%rsi
+subq %rdx,%rsi
+### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+movq %rcx,%rdx
+subq $-2147483648,%rdx
+### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+movq %rcx,%rdx
+subq $2147483647,%rdx

@@ -22,6 +22,9 @@ from .types import aarch64_greg,aarch64_freg
 from ...callconv.callconv import callconv
 
 from .opmem import aarch64_load, aarch64_store
+from ...registers import asm_data_type as _ADT
+
+_GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
 class aarch64(asmgen):
     """
@@ -282,26 +285,25 @@ class aarch64(asmgen):
 
     def mul_greg_imm(self, *, src : greg_base, dst : greg_base, factor):
         assert src != dst
-        #Gotta do 2 instructions for this
-        asmblock  = self.mov_greg_imm(reg=dst, imm=factor)
-        #asmblock += self.asmwrap(f"mul {dst},{src},{dst}")
-        asmblock += self.asmwrap(f"mul {dst},{src},{dst}")
+        # no immediate form: the factor into dst first
+        asmblock = self.mov_greg_imm(reg=dst, imm=factor)
+        asmblock += self.mul(adreg=src, bdreg=dst, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
         return asmblock
 
     def mul_greg_greg(self, *, dst : greg_base,
                       reg1 : greg_base, reg2 : greg_base) -> str:
-        return self.asmwrap(f"mul {dst},{reg1},{reg2}")
+        return self.mul(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
 
     def add_greg_imm(self, *, reg : greg_base, imm : int) -> str:
-        return self.asmwrap(f"add {reg},{reg},#{imm}")
+        return self.add(adreg=reg, imm=imm, cdreg=reg, a_dt=_GP, c_dt=_GP)
 
     def add_greg_greg(self, *, dst : greg_base,
                       reg1 : greg_base, reg2 : greg_base) -> str:
-        return self.asmwrap(f"add {dst},{reg1},{reg2}")
+        return self.add(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
 
     def sub_greg_greg(self, *, dst : greg_base,
                       reg1 : greg_base, reg2 : greg_base) -> str:
-        return self.asmwrap(f"sub {dst},{reg1},{reg2}")
+        return self.sub(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
 
     def add_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
                               reg2 : greg_base, shift : int) -> str:

@@ -26,6 +26,7 @@ from .opmem.store import sve_store
 from .move import sve_move
 
 from ..neon import neon
+from ..aarch64.opd3 import aarch64_sub
 
 class sve(aarch64):
     """
@@ -79,6 +80,7 @@ class sve(aarch64):
         self.store = sve_store(asmwrap = self.asmwrap)
         self.move = sve_move(asmwrap=self.asmwrap,
                              dt_suffixes=self.dt_suffixes)
+        self.sub = aarch64_sub(asmwrap=self.asmwrap)
 
     def get_req_flags(self) -> list[str]:
         """

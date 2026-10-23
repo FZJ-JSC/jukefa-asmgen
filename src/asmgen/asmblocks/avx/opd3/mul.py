@@ -16,11 +16,13 @@ from ...op import (
 from ....registers import asm_data_type as adt
 
 from .base import avx_opd3_base
+from ...x86.opd3 import x86_mul
 
 class avx_mul(avx_opd3_base):
     """
     AVX implementation of mul (vmul)
     """
+    scalar_class = x86_mul
 
     def get_base_inst(self, modifiers : set[mod]):
         return "vmul"

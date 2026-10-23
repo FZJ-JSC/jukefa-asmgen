@@ -32,6 +32,9 @@ from .opd3 import avx_fma,avx_mul,avx_add
 
 from .opmem.load import avx128_load,avx256_load,avx512_load
 from .opmem.store import avx128_store,avx256_store,avx512_store
+from ...registers import asm_data_type as _ADT
+
+_GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
 class avxbase(asmgen):
     """
@@ -494,45 +497,19 @@ class avxbase(asmgen):
         return self.mov_greg_imm(reg=greg, imm=0)
 
     def add_greg_imm(self, *, reg : greg_base, imm : int):
-        preg = self.rpref(reg)
-        return self.asmwrap(f"addq ${imm},{preg}")
+        return self.add(adreg=reg, imm=imm, cdreg=reg, a_dt=_GP, c_dt=_GP)
 
     def mul_greg_imm(self, *, src : greg_base, dst : greg_base, factor : int) -> str:
-        pdst = self.rpref(dst)
-        psrc = self.rpref(src)
-        return self.asmwrap(f"imulq ${factor},{psrc},{pdst}")
+        return self.mul(adreg=src, imm=factor, cdreg=dst, a_dt=_GP, c_dt=_GP)
 
     def mul_greg_greg(self, *, dst : greg_base, reg1 : greg_base, reg2 : greg_base) -> str:
-        pdst = self.rpref(dst)
-        preg1 = self.rpref(reg1)
-        preg2 = self.rpref(reg2)
-        asmblock = ''
-        if preg1 != pdst:
-            asmblock += self.asmwrap(f"movq {preg1},{pdst}")
-        asmblock += self.asmwrap(f"imulq {preg2},{pdst}")
-        return asmblock
+        return self.mul(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
 
     def add_greg_greg(self, *, dst : greg_base, reg1 : greg_base, reg2 : greg_base) -> str:
-        pdst = self.rpref(dst)
-        preg1 = self.rpref(reg1)
-        preg2 = self.rpref(reg2)
-        asmblock = ''
-        if preg1 != pdst:
-            asmblock += self.asmwrap(f"movq {preg1},{pdst}")
-        # Eh... might be inefficient in some weird
-        # cases but I can't be bothered to handle x86 differently
-        asmblock += self.asmwrap(f"addq {preg2},{pdst}")
-        return asmblock
+        return self.add(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
 
     def sub_greg_greg(self, *, dst : greg_base, reg1 : greg_base, reg2 : greg_base) -> str:
-        pdst = self.rpref(dst)
-        preg1 = self.rpref(reg1)
-        preg2 = self.rpref(reg2)
-        asmblock = ''
-        if preg1 != pdst:
-            asmblock += self.asmwrap(f"movq {preg1},{pdst}")
-        asmblock += self.asmwrap(f"subq {preg2},{pdst}")
-        return asmblock
+        return self.sub(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
 
     def add_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
                               reg2 : greg_base, shift : int) -> str:

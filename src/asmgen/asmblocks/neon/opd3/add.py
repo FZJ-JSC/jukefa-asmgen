@@ -17,11 +17,13 @@ from ...op import (
     operand_modifier as opd_mod
 )
 from .base import neon_opd3_base
+from ...aarch64.opd3 import aarch64_add
 
 class neon_add(neon_opd3_base):
     """
     NEON/ASIMD implementation of add (fadd)
     """
+    scalar_class = aarch64_add
     widens = False
 
     inst_base = "add"

@@ -20,6 +20,7 @@ from .types import neon_vreg
 from .opd3 import neon_fma,neon_mul,neon_add
 from .opmem import neon_load, neon_store
 from .move import neon_move
+from ..aarch64.opd3 import aarch64_sub
 
 class neon(aarch64):
     """
@@ -84,6 +85,7 @@ class neon(aarch64):
         self.store = neon_store(asmwrap=self.asmwrap)
         self.move = neon_move(asmwrap=self.asmwrap, dt_suffixes=self.dt_suffixes,
                               dt_idxsuffixes=self.dt_idxsuffixes)
+        self.sub = aarch64_sub(asmwrap=self.asmwrap)
 
     def get_req_flags(self) -> list[str]:
         """

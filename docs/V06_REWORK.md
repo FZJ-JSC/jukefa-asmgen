@@ -210,13 +210,22 @@ and after alike.
 
 `fma` stays: fused multiply-accumulate.
 
-### Phase 2: scalar arithmetic as operations [ ]
+### Phase 2: scalar arithmetic as operations [~]
 
-- [ ] `add`, `sub`, `mul` on general registers: register and register,
-      register and immediate. Immediate ranges as constraints: RISC-V
-      -2048..2047; AArch64 0..4095, optionally shifted by 12; x86 the
-      255-byte default, 32-bit with `allow-32bit-offsets`. Where an ISA has
-      no immediate form (RISC-V `mul`) the signature doesn't offer one.
+- [x] `add`, `sub`, `mul` on general registers (`op/scalar.py`): register
+      and register, register and immediate (`imm`, by name - no `bdreg`), in
+      `UINT64` and `SINT64`. Immediate ranges as constraints: RISC-V
+      -2048..2047 (`sub`: -2047..2048, an `addi` negated); AArch64 up to
+      4095, or a multiple of 4096 up to 4095 * 4096, either sign
+      (`anyof_constraint`, new: one constraint of alternatives - execute
+      takes the first signature matching by name, so alternatives can't be
+      signatures); x86 signed 32 bits. `mul` has an immediate form on x86
+      only.
+      x86 (agreed): the 255-byte default with `allow-32bit-offsets` is for
+      load and store offsets (phase 5) - arithmetic immediates take 32
+      bits, as `add_greg_imm` always did. x86's two-operand forms now keep a
+      destination that is the second source (`addq a,c`; `negq c` then
+      `addq a,c` for `sub`), which the old methods overwrote.
 - [ ] Shifted operands with an operation modifier `ISHIFT` and the shift as
       a constrained immediate (AArch64 `lsl #0..63`, x86 `lea` scales 1, 2,
       4, 8, RISC-V's `shNadd` with Zba): replaces
@@ -225,12 +234,24 @@ and after alike.
       settle here: `op/shift.py` is about lane and block moves).
 - [ ] VL-scaled immediates for SVE's `addvl` (-32..31): replaces
       `add_greg_voff` and `max_add_voff`.
-- [ ] Vector generators delegate scalar registers to their base ISA's
-      operations, as `rvv_opmem` does.
-- [ ] Wrappers: `add_greg_greg`, `add_greg_imm`, `sub_greg_greg`,
-      `mul_greg_greg`, `mul_greg_imm`, `shift_greg_left/right`,
-      `{add,sub}_greg_greg_shifted`, `add_greg_voff`.
-- [ ] asmgen's own `callconv` (stack pointer) on the operations.
+- [x] Vector generators delegate scalar registers to their base ISA's
+      operations, as `rvv_opmem` does: the vector `opd3` bases (RVV,
+      AArch64 SIMD, AVX) carry the scalar operation their class names
+      (`scalar_class`, set by `add` and `mul`) as `scalar_op`, offer its
+      signatures among their own, and hand calls with general registers
+      to it first thing in `implementation`. `sub` is the scalar operation
+      alone. `opd3.__call__` takes `bdreg` optional: with an immediate in
+      its place the operands go by name.
+- [~] Wrappers: `add_greg_greg`, `add_greg_imm`, `sub_greg_greg`,
+      `mul_greg_greg`, `mul_greg_imm` done (RISC-V's and AArch64's
+      `mul_greg_imm` keep their two instructions); `shift_greg_left/right`,
+      `{add,sub}_greg_greg_shifted`, `add_greg_voff` with their steps.
+- [x] asmgen's own `callconv` (stack pointer) on the operations.
+
+Checked (step 2a): the snapshots changed in three entries only, RISC-V's
+`add_greg_imm` with -2049, 2048 and 4096 - now an error, before text that
+didn't assemble - besides the scalar signatures' new entries; ukrgen's
+golden kernels and ukropt's builds unchanged.
 
 ### Phase 3: moves [ ]
 
@@ -336,3 +357,7 @@ ukropt:
   kernels (its 0156), ukropt's build checks (its 0010).
 - 2026-10-23: phase 1 done - fadd/fmul renamed add/mul, the old names
   deprecated (asmgen 0037, ukrgen 0157).
+- 2026-10-23: phase 2, step 2a - add, sub, mul on general registers as
+  operations, the old methods and callconv on them (asmgen 0038; revised:
+  the scalar operation a member of the vector one, as in rvv_opmem). 0037's
+  change to examples/axpy.py hadn't arrived upstream: 0038 has it again.
