@@ -7,6 +7,7 @@
 RISC-V 64-bit register types
 """
 from ...registers import greg_base, freg_base
+from ...registers import asm_data_type
 
 #pylint: disable=too-few-public-methods
 
@@ -50,3 +51,18 @@ class riscv64_freg(freg_base):
 
     def __str__(self) -> str:
         return riscv64_freg.names[self.idx]
+
+
+# floating-point instructions' type suffixes: fcdt (fmv.d, fcvt.d.w, fadd.s)
+# and fdt (the integer side of a move of bits: fmv.d.x, fmv.w.x)
+FCDT_SUFFIXES = {
+        asm_data_type.DOUBLE : "d",
+        asm_data_type.SINGLE : "s",
+        asm_data_type.HALF   : "h",
+        }
+FDT_SUFFIXES = {
+        asm_data_type.DOUBLE : "d",
+        asm_data_type.SINGLE : "w",
+        asm_data_type.HALF   : "h",
+        }
+

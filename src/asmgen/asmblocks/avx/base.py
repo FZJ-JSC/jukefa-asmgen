@@ -36,6 +36,7 @@ from ...registers import asm_data_type as _ADT
 from ..op.operand import operand_modifier as _opd_mod
 from ..op.move import move_modifier as _move_mod
 from ..op.scalar import BITS_GP as _BITS_GP
+from ..op.opset import opset_modifier as _opset_mod
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
@@ -492,7 +493,7 @@ class avxbase(asmgen):
         return self.asmwrap(f"movq ${imm},{preg}")
 
     def zero_greg(self, *, greg : greg_base):
-        return self.mov_greg_imm(reg=greg, imm=0)
+        return self.set(dreg=greg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, constant="zero")
 
     def add_greg_imm(self, *, reg : greg_base, imm : int):
         return self.add(adreg=reg, imm=imm, cdreg=reg, a_dt=_GP, c_dt=_GP)
@@ -547,8 +548,7 @@ class avxbase(asmgen):
         return avx_freg(reg_idx=reg_idx)
 
     def zero_freg(self, *, freg : freg_base, dt : adt) -> str:
-        preg = self.rpref(freg)
-        return self.asmwrap(f"vpxor {preg},{preg},{preg}")
+        return self.set(dreg=freg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
     @property
     def min_prefetch_offset(self):

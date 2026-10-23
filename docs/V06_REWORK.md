@@ -305,14 +305,27 @@ The parameter moves left for phase 5, phase 3 is done. Checked (step 3b):
 the snapshots changed in `fill_vector`'s entries only, every one
 assembling; ukrgen's golden kernels and ukropt's builds unchanged.
 
-### Phase 4: the `set` operation [ ]
+### Phase 4: the `set` operation [~]
 
 A new operation class for values that come from nowhere but the
 instruction stream:
 
-- [ ] `CONST`: `constant="zero"`, `"ones"`, or a value (general registers:
+- [~] `CONST`: `constant="zero"`, `"ones"`, or a value (general registers:
       the materializing sequence). Replaces `zero_greg`, `zero_freg`,
       `zero_vreg`, `zero_treg`, `mov_greg_imm`.
+      Step 4a: the operation class `opset` (`op/opset.py`, as `opmem`
+      and `opd3`; `gen.set(dreg=r, dt=dt,
+      modifiers={opset_modifier.CONST}, constant="zero")` - the register
+      set is `dreg`, its one output; the constant a structural parameter,
+      so a signature names the constants it makes). `scalar_opset` and the
+      ISAs' (`riscv64_opset`, `aarch64_opset`, `x86_opset`) for general
+      and floating-point registers, carried by the vector ISAs'
+      (`rvv_opset`, `neon_opset`, `sve_opset`, `avx_opset`; `sme_opset`
+      adds tiles) as their `scalar_op` - each in `<isa>/opset/{__init__,
+      base,signatures}.py`, as the other operations. RISC-V's FP suffix
+      tables are `riscv64/types.py`'s now, the generator's and the
+      operations' alike. Zero done, `zero_greg`, `zero_freg`, `zero_vreg`,
+      `zero_treg` on it, their texts kept; `"ones"` and values to come.
 - [ ] `CONSTMASK`: `mask="alltrue"` and `"allfalse"`. Replaces
       `mask_all_true`.
 - [ ] `VLEN`: bytes, or elements of `dt` where given - on every backend
@@ -322,7 +335,11 @@ instruction stream:
 - [ ] `INDEX`: a vector of element index times a stride register. Replaces
       `greg_to_voffs`.
 - [ ] `c_simd_size_function` on `set(VLEN)`, `static inline`.
-- [ ] Wrappers for the above.
+- [~] Wrappers for the above: the `zero_*` methods done.
+
+Checked (step 4a): no snapshot entry changed, `set`'s new; ukrgen's golden
+kernels - zeroing their accumulators through `zero_vreg` - and ukropt's
+builds unchanged.
 
 ### Phase 5: memory [ ]
 
@@ -389,15 +406,17 @@ ukropt:
       mode, `asmwrap`); host checks; `c_simd_size_function`; `nop()`.
 - [ ] `examples/axpy.py` and `examples/rvv_lmul.py` work.
 
-### Phase 10: `opd3` renamed [ ]
+### Phase 10: `opd3` and `move` renamed [ ]
 
 With `bdreg` optional - an immediate in its place - and shifts among its
 operations, `opd3` is the transforming operation: what changes elements,
 where `move` only moves them. A name to say so, as ukrgen's
-`lsc_transformation`: `optransform`, say. After the other phases.
+`lsc_transformation`: `optransform`, say. And `move`'s base class named as
+the others (`opmem`, `opset`): `opmove`. After the other phases.
 
-- [ ] `opd3` (class, module, modifier enum) renamed, the old names
-      deprecated for a release.
+- [ ] `opd3` (class, module, modifier enum) renamed `optransform`, the old
+      names deprecated for a release.
+- [ ] `move` (class, module, modifier enum) renamed `opmove`, likewise.
 
 ## Log
 
@@ -421,3 +440,5 @@ where `move` only moves them. A name to say so, as ukrgen's
   operations, move_modifier.BITS (asmgen 0041).
 - 2026-10-23: phase 3 done, step 3b - fill_vector a move with BCAST; x86's
   FP16 broadcast vpbroadcastw (asmgen 0042).
+- 2026-10-23: phase 4, step 4a - the set operation (opset), CONST zero,
+  the zero_* methods on it (asmgen 0043).

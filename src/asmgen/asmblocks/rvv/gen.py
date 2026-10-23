@@ -23,6 +23,8 @@ from .opmem import rvv_load,rvv_store
 from .move import rvv_move
 from ..riscv64.opd3 import riscv64_sub
 from ..riscv64.opd3 import riscv64_shl, riscv64_shr
+from .opset import rvv_opset
+from ..op.opset import opset_modifier as _opset_mod
 
 
 # pylint: disable=too-many-public-methods
@@ -72,6 +74,7 @@ class rvv(riscv64):
         self.sub = riscv64_sub(asmwrap=self.asmwrap)
         self.shl = riscv64_shl(asmwrap=self.asmwrap)
         self.shr = riscv64_shr(asmwrap=self.asmwrap)
+        self.set = rvv_opset(asmwrap=self.asmwrap)
 
     def get_parameters(self) -> list[str]:
         return ["LMUL"]
@@ -164,7 +167,7 @@ class rvv(riscv64):
                 "RVV doesn't have an instruction to add a vector offset to a gp register")
 
     def zero_vreg(self, *, vreg : vreg_base, dt : adt) -> str:
-        return self.asmwrap(f"vmv.v.i {vreg},0")
+        return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
 
     @property

@@ -23,6 +23,8 @@ from .move import neon_move
 from ..aarch64.opd3 import aarch64_sub
 from ..aarch64.opd3 import aarch64_shl, aarch64_shr
 from ...registers import asm_data_type as _ADT
+from .opset import neon_opset
+from ..op.opset import opset_modifier as _opset_mod
 
 class neon(aarch64):
     """
@@ -90,6 +92,7 @@ class neon(aarch64):
         self.sub = aarch64_sub(asmwrap=self.asmwrap)
         self.shl = aarch64_shl(asmwrap=self.asmwrap)
         self.shr = aarch64_shr(asmwrap=self.asmwrap)
+        self.set = neon_opset(asmwrap=self.asmwrap, dt_suffixes=self.dt_suffixes, dt_greg_pfx=self.dt_greg_pfx)
 
     def get_req_flags(self) -> list[str]:
         """
@@ -153,9 +156,7 @@ class neon(aarch64):
         return self.add(adreg=reg, imm=self.simd_size*offset, cdreg=reg, a_dt=_ADT.UINT64, c_dt=_ADT.UINT64)
 
     def zero_vreg(self, *, vreg : vreg_base, dt : adt):
-        suf = self.dt_suffixes[dt]
-        zeroreg = f"{self.dt_greg_pfx[dt]}zr"
-        return self.asmwrap(f"dup {vreg}.{suf},{zeroreg}")
+        return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
     def vreg(self, reg_idx : int) -> neon_vreg:
         return neon_vreg(reg_idx)

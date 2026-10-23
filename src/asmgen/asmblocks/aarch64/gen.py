@@ -26,6 +26,7 @@ from ...registers import asm_data_type as _ADT
 from ..op.operand import operand_modifier as _opd_mod
 from ..op.move import move_modifier as _move_mod
 from ..op.scalar import BITS_GP as _BITS_GP
+from ..op.opset import opset_modifier as _opset_mod
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
@@ -262,8 +263,7 @@ class aarch64(asmgen):
 
     def zero_freg(self, *, freg : freg_base, dt : adt) -> str:
         # fmov's immediate can't encode 0.0: the zero register can
-        zero = "xzr" if 8 == adt_size(dt) else "wzr"
-        return self.asmwrap(f"fmov {freg},{zero}")
+        return self.set(dreg=freg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
     def load_greg(self, *, areg : greg_base, offset : int, dst : greg_base) -> str:
         return self.asmwrap(f"ldr {dst},[{areg},#{offset}]")
@@ -333,7 +333,7 @@ class aarch64(asmgen):
         return self.shr(adreg=reg, imm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP)
 
     def zero_greg(self, *, greg : greg_base) -> str:
-        return self.mov_greg_imm(reg=greg, imm=0)
+        return self.set(dreg=greg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, constant="zero")
 
     def greg(self, reg_idx : int) -> greg_base:
         return aarch64_greg(reg_idx)

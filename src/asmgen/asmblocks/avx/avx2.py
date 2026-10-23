@@ -33,6 +33,8 @@ from .opmem.load import avx128_load,avx256_load,avx512_load
 from .opmem.store import avx128_store,avx256_store,avx512_store
 from ..x86.opd3 import x86_sub
 from ..x86.opd3 import x86_shl, x86_shr
+from .opset import avx_opset
+from ..op.opset import opset_modifier as _opset_mod
 
 class fma128(avxbase):
     """
@@ -69,6 +71,7 @@ class fma128(avxbase):
         self.sub = x86_sub(asmwrap=self.asmwrap, rpref=self.rpref)
         self.shl = x86_shl(asmwrap=self.asmwrap, rpref=self.rpref)
         self.shr = x86_shr(asmwrap=self.asmwrap, rpref=self.rpref)
+        self.set = avx_opset(asmwrap=self.asmwrap, rpref=self.rpref, evex=False)
 
     def get_req_flags(self):
         return ['fma', 'avx']
@@ -82,8 +85,7 @@ class fma128(avxbase):
         return 16
 
     def zero_vreg(self, *, vreg : vreg_base, dt : adt):
-        preg = self.rpref(vreg)
-        return self.asmwrap(f"vpxor {preg},{preg},{preg}")
+        return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
     def vreg(self, reg_idx):
         return xmm_vreg(reg_idx)
@@ -137,6 +139,7 @@ class fma256(avxbase):
         self.sub = x86_sub(asmwrap=self.asmwrap, rpref=self.rpref)
         self.shl = x86_shl(asmwrap=self.asmwrap, rpref=self.rpref)
         self.shr = x86_shr(asmwrap=self.asmwrap, rpref=self.rpref)
+        self.set = avx_opset(asmwrap=self.asmwrap, rpref=self.rpref, evex=False)
 
     def get_req_flags(self):
         return ['fma', 'avx']
@@ -150,8 +153,7 @@ class fma256(avxbase):
         return 32
 
     def zero_vreg(self, *, vreg : vreg_base, dt : adt):
-        preg = self.rpref(vreg)
-        return self.asmwrap(f"vpxor {preg},{preg},{preg}")
+        return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
     def vreg(self, reg_idx : int):
         return ymm_vreg(reg_idx)

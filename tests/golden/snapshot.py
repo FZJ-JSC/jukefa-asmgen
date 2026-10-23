@@ -24,7 +24,7 @@ from asmgen.registers import asm_data_type as adt
 
 HERE = os.path.dirname(__file__)
 DATA = os.path.join(HERE, "data")
-OPERATIONS = ("load", "store", "move", "fma", "add", "sub", "mul", "shl", "shr", "fopa")
+OPERATIONS = ("load", "store", "move", "fma", "add", "sub", "mul", "shl", "shr", "set", "fopa")
 DTS = (adt.FP64, adt.FP32, adt.FP16)
 IMMEDIATES = (0, 1, 8, 255, 256, 2047, 2048, 4096, -8, -2048, -2049)
 IMM_PARAMS = ("imm", "offset", "ioffset", "shift")
@@ -253,6 +253,10 @@ def instantiate(gen, opname: str, sig, far: bool = False) -> dict | None:
         addr = [n for n, (_, _, s) in regs.items() if "ADDRESS" == s.orole.name]
         if addr:
             kwargs["areg"] = rest.pop(addr[0])
+    elif "set" == opname:
+        for n, r, sh in data:
+            kwargs[n] = r
+            kwargs["dt"] = sh.dt
     elif "move" == opname:
         kwargs["dregs"] = [r for _, r, _ in data]
         kwargs["dts"] = [s.dt for _, _, s in data]

@@ -21,6 +21,8 @@ from .move import sme_move
 
 from .opmem.load import sme_load
 from .opmem.store import sme_store
+from .opset import sme_opset
+from ..op.opset import opset_modifier as _opset_mod
 
 
 class sme(sve):
@@ -53,6 +55,7 @@ class sme(sve):
 
         self.move = sme_move(asmwrap=self.asmwrap,
                                   dt_suffixes=self.dt_suffixes)
+        self.set = sme_opset(asmwrap=self.asmwrap, dt_suffixes=self.dt_suffixes)
 
     @property
     def c_simd_size_function(self):
@@ -83,9 +86,7 @@ class sme(sve):
         return sme_treg(reg_idx, dt)
 
     def zero_treg(self, *, treg : treg_base, dt : adt) -> str:
-        suf = self.dt_suffixes[dt]
-        # the tiles to zero are a list: zero {za0.d}
-        return self.asmwrap(f"zero {{{treg}.{suf}}}")
+        return self.set(dreg=treg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
 
     def insert_tile_rows(self, *,

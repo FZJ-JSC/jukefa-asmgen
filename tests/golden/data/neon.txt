@@ -2758,6 +2758,26 @@ mul v3.16b,v1.16b,v2.16b
 mul v3.16b,v1.16b,v2.b[0]
 ### op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{ILANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- @far
 mul v3.16b,v1.16b,v2.b[15]
+### op set [CONST] dreg:REGISTER:FP:DOUBLE {constant:zero}
+fmov d1,xzr
+### op set [CONST] dreg:REGISTER:FP:HALF {constant:zero}
+fmov h1,wzr
+### op set [CONST] dreg:REGISTER:FP:SINGLE {constant:zero}
+fmov s1,wzr
+### op set [CONST] dreg:REGISTER:GP:SINT64 {constant:zero}
+mov x10,#0
+### op set [CONST] dreg:REGISTER:GP:UINT64 {constant:zero}
+mov x10,#0
+### op set [CONST] dreg:REGISTER:VEC:DOUBLE {constant:zero}
+dup v1.2d,xzr
+### op set [CONST] dreg:REGISTER:VEC:FP8E4M3 {constant:zero}
+dup v1.16b,wzr
+### op set [CONST] dreg:REGISTER:VEC:FP8E5M2 {constant:zero}
+dup v1.16b,wzr
+### op set [CONST] dreg:REGISTER:VEC:HALF {constant:zero}
+dup v1.8h,wzr
+### op set [CONST] dreg:REGISTER:VEC:SINGLE {constant:zero}
+dup v1.4s,wzr
 ### op shl [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 lsl x12,x10,x11
 ### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-

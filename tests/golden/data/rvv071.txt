@@ -2028,6 +2028,38 @@ vmulu.vx v2,v1,s4
 vwmulu.vv v4,v1,v2
 ### op mul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
 vmulu.vv v3,v1,v2
+### op set [CONST] dreg:REGISTER:FP:DOUBLE {constant:zero}
+fcvt.d.w f1, zero
+### op set [CONST] dreg:REGISTER:FP:HALF {constant:zero}
+fcvt.h.w f1, zero
+### op set [CONST] dreg:REGISTER:FP:SINGLE {constant:zero}
+fcvt.s.w f1, zero
+### op set [CONST] dreg:REGISTER:GP:SINT64 {constant:zero}
+add s4, zero, 0
+### op set [CONST] dreg:REGISTER:GP:UINT64 {constant:zero}
+add s4, zero, 0
+### op set [CONST] dreg:REGISTER:VEC:DOUBLE {constant:zero}
+vmv.v.i v1,0
+### op set [CONST] dreg:REGISTER:VEC:HALF {constant:zero}
+vmv.v.i v1,0
+### op set [CONST] dreg:REGISTER:VEC:SINGLE {constant:zero}
+vmv.v.i v1,0
+### op set [CONST] dreg:REGISTER:VEC:SINT16 {constant:zero}
+vmv.v.i v1,0
+### op set [CONST] dreg:REGISTER:VEC:SINT32 {constant:zero}
+vmv.v.i v1,0
+### op set [CONST] dreg:REGISTER:VEC:SINT64 {constant:zero}
+vmv.v.i v1,0
+### op set [CONST] dreg:REGISTER:VEC:SINT8 {constant:zero}
+vmv.v.i v1,0
+### op set [CONST] dreg:REGISTER:VEC:UINT16 {constant:zero}
+vmv.v.i v1,0
+### op set [CONST] dreg:REGISTER:VEC:UINT32 {constant:zero}
+vmv.v.i v1,0
+### op set [CONST] dreg:REGISTER:VEC:UINT64 {constant:zero}
+vmv.v.i v1,0
+### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
+vmv.v.i v1,0
 ### op shl [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 sll s6,s4,s5
 ### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-

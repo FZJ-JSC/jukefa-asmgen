@@ -33,6 +33,8 @@ from .opmem.load import avx128_load,avx256_load,avx512_load
 from .opmem.store import avx128_store,avx256_store,avx512_store
 from ..x86.opd3 import x86_sub
 from ..x86.opd3 import x86_shl, x86_shr
+from .opset import avx_opset
+from ..op.opset import opset_modifier as _opset_mod
 
 class avx512(avxbase):
     """
@@ -72,6 +74,7 @@ class avx512(avxbase):
         self.sub = x86_sub(asmwrap=self.asmwrap, rpref=self.rpref)
         self.shl = x86_shl(asmwrap=self.asmwrap, rpref=self.rpref)
         self.shr = x86_shr(asmwrap=self.asmwrap, rpref=self.rpref)
+        self.set = avx_opset(asmwrap=self.asmwrap, rpref=self.rpref, evex=True)
 
     def get_req_flags(self) -> list[str]:
         return ['avx512f']
@@ -89,14 +92,12 @@ class avx512(avxbase):
 
 
     def zero_vreg(self, *, vreg : vreg_base, dt : adt):
-        preg = self.rpref(vreg)
-        return self.asmwrap(f"vpxorq {preg},{preg},{preg}")
+        return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
     def zero_freg(self, *, freg : freg_base, dt : adt) -> str:
         # EVEX: FP scalars live in the vector file, allocated from the top -
         # xmm16-31 VEX's vpxor can't reach (AVX512VL)
-        preg = self.rpref(freg)
-        return self.asmwrap(f"vpxord {preg},{preg},{preg}")
+        return self.set(dreg=freg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
     def vreg(self, reg_idx : int):
         return zmm_vreg(reg_idx)

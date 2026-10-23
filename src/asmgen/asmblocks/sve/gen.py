@@ -30,6 +30,8 @@ from ..aarch64.opd3 import aarch64_sub
 from ..aarch64.opd3 import aarch64_shl, aarch64_shr
 from ..op.operand import operand_modifier as _opd_mod
 from ...registers import asm_data_type as _ADT
+from .opset import sve_opset
+from ..op.opset import opset_modifier as _opset_mod
 
 class sve(aarch64):
     """
@@ -86,6 +88,7 @@ class sve(aarch64):
         self.sub = aarch64_sub(asmwrap=self.asmwrap)
         self.shl = aarch64_shl(asmwrap=self.asmwrap)
         self.shr = aarch64_shr(asmwrap=self.asmwrap)
+        self.set = sve_opset(asmwrap=self.asmwrap, dt_suffixes=self.dt_suffixes)
 
     def get_req_flags(self) -> list[str]:
         """
@@ -188,8 +191,7 @@ class sve(aarch64):
 
 
     def zero_vreg(self, *, vreg : vreg_base, dt : adt) -> str:
-        suf = self.dt_suffixes[dt]
-        return self.asmwrap(f"dup {vreg}.{suf},#0")
+        return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
     def vreg(self, reg_idx : int) -> sve_vreg:
         return sve_vreg(reg_idx)
