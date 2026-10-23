@@ -33,7 +33,7 @@ def make_avx_move_signatures(simd_bytes : int) -> list[opsig]:
     """
     sigs = []
 
-    def add_sig(dt, amods, bmods, block_bytes=16):
+    def add_sig(dt, amods, bmods, block_bytes=16, requires=frozenset()):
         blocks = simd_bytes // block_bytes
         ops = {
             'adreg': osh(otype=ot.REGISTER, orole=orl.DATA,
@@ -49,7 +49,7 @@ def make_avx_move_signatures(simd_bytes : int) -> list[opsig]:
                 params[f'{name}_blocksize'] = block_bytes // adt_size(dt)
         ops['adreg'].modifiers = amods
         ops['bdreg'].modifiers = bmods
-        sigs.append(opsig(modifiers=set(), structural_params=params, operands=ops))
+        sigs.append(opsig(modifiers=set(), structural_params=params, operands=ops, requires=requires))
 
     for dt in (adt.FP64, adt.FP32):
         add_sig(dt, set(), set())
@@ -61,6 +61,9 @@ def make_avx_move_signatures(simd_bytes : int) -> list[opsig]:
             add_sig(dt, {omod.IBLOCK}, {omod.BLOCK, omod.BCAST}, block_bytes)
             add_sig(dt, {omod.IBLOCK}, set(), block_bytes)
             add_sig(dt, set(), {omod.IBLOCK}, block_bytes)
+    # FP16 from a register into every element: a 16-bit broadcast,
+    # vpbroadcastw - AVX2's on xmm and ymm, AVX512BW's on zmm
+    add_sig(adt.FP16, set(), {omod.BCAST}, requires=frozenset({'BW'}) if 64 == simd_bytes else frozenset())
     if 64 == simd_bytes:
         # valignq/valignd with the register twice: a rotation by lanes;
         # vshuff64x2 likewise by 128-bit blocks

@@ -202,14 +202,6 @@ class neon(aarch64):
         raise NotImplementedError(
                 "NEON has no instruction for creating vector indices")
 
-    def fill_vector(self, *, sreg : freg_base,
-                    vreg : vreg_base, dt : adt) -> str:
-        if not isinstance(vreg, neon_vreg):
-            raise ValueError(f"{vreg} is not a NEON vreg")
-        suf = self.dt_suffixes[dt]
-        isuf = self.dt_idxsuffixes[dt]
-        return self.asmwrap(f"dup {vreg}.{suf}, v{sreg.idx}.{isuf}[0]")
-
     def load_vector(self, *, areg : greg_base,
                     vreg : vreg_base, dt : adt) -> str:
         if not isinstance(vreg, neon_vreg):

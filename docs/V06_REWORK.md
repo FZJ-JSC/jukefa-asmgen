@@ -278,7 +278,7 @@ Checked (step 2c): the snapshots changed in NEON's `add_greg_voff` with
 SVE's and SME's new signatures; SVE's `incb` sequences unchanged; ukrgen's
 golden kernels and ukropt's builds unchanged.
 
-### Phase 3: moves [~]
+### Phase 3: moves [x]
 
 - [x] `move([greg, greg])` (`mov_greg`), `move([freg, freg])` (`mov_freg`),
       `move([greg, freg], mods={BITS})` (`mov_greg_to_freg`): `scalar_move`
@@ -293,9 +293,17 @@ golden kernels and ukropt's builds unchanged.
       `load`/`store` with a `PARAM` modifier, inline output only - with
       phase 5: they read and write memory (`ld`/`sd`, `ldr`/`str`, `movq`
       with `%[param]`), and no caller uses them.
-- [ ] A broadcast from a register is a `move` with `BCAST`: replaces
-      `fill_vector`.
-- [ ] Wrappers for the above.
+- [x] A broadcast from a register is a `move` with `BCAST`: `fill_vector`
+      is one method in the base class now, the backends' five gone. Its
+      texts changed in their spacing, and SVE writes `mov z.d,d` (the
+      alias of `dup z.d,z.d[0]`). x86's FP16 broadcast was `vbroadcastsh`,
+      which isn't an instruction: it is `vpbroadcastw` now (AVX2 on xmm and
+      ymm, AVX512BW on zmm), a new signature of the AVX move.
+- [x] Wrappers for the above.
+
+The parameter moves left for phase 5, phase 3 is done. Checked (step 3b):
+the snapshots changed in `fill_vector`'s entries only, every one
+assembling; ukrgen's golden kernels and ukropt's builds unchanged.
 
 ### Phase 4: the `set` operation [ ]
 
@@ -411,3 +419,5 @@ where `move` only moves them. A name to say so, as ukrgen's
   add_greg_voff on the operations (asmgen 0040).
 - 2026-10-23: phase 3, step 3a - moves between scalar registers as
   operations, move_modifier.BITS (asmgen 0041).
+- 2026-10-23: phase 3 done, step 3b - fill_vector a move with BCAST; x86's
+  FP16 broadcast vpbroadcastw (asmgen 0042).

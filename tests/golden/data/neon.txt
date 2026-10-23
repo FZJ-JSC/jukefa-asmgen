@@ -104,11 +104,11 @@ b.ne .notequal
 ### method create_callconv(name=default)
 <asmgen.callconv.callconv.callconv object>
 ### method fill_vector(dt=DOUBLE, sreg=d0, vreg=v1)
-dup v1.2d, v0.d[0]
+dup v1.2d,v0.d[0]
 ### method fill_vector(dt=HALF, sreg=d0, vreg=v1)
-dup v1.8h, v0.h[0]
+dup v1.8h,v0.h[0]
 ### method fill_vector(dt=SINGLE, sreg=d0, vreg=v1)
-dup v1.4s, v0.s[0]
+dup v1.4s,v0.s[0]
 ### method freg(dt=DOUBLE, reg_idx=0)
 d0
 ### method freg(dt=HALF, reg_idx=0)

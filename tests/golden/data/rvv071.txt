@@ -112,11 +112,11 @@ bne t0,t1,.notequal
 ### method create_callconv(name=default)
 <asmgen.callconv.callconv.callconv object>
 ### method fill_vector(dt=DOUBLE, sreg=f0, vreg=v1)
-vfmv.v.f v1, f0
+vfmv.v.f v1,f0
 ### method fill_vector(dt=HALF, sreg=f0, vreg=v1)
-vfmv.v.f v1, f0
+vfmv.v.f v1,f0
 ### method fill_vector(dt=SINGLE, sreg=f0, vreg=v1)
-vfmv.v.f v1, f0
+vfmv.v.f v1,f0
 ### method freg(dt=DOUBLE, reg_idx=0)
 f0
 ### method freg(dt=HALF, reg_idx=0)

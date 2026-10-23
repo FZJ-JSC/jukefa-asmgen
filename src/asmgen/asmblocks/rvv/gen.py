@@ -217,10 +217,6 @@ class rvv(riscv64):
         # the mask register is vector register 0
         return [("mreg", "vreg", {0: 0})]
 
-    def fill_vector(self, *, sreg : freg_base,
-                    vreg : vreg_base, dt : adt) -> str:
-        return self.asmwrap(f"vfmv.v.f {vreg}, {sreg}")
-
     def load_vector(self, *, areg : greg_base,
                     vreg : vreg_base, dt : adt) -> str:
         dt_suf = self.dt_suffixes[dt]

@@ -105,11 +105,11 @@ jne .notequal
 ### method create_callconv(name=default)
 <asmgen.callconv.callconv.callconv object>
 ### method fill_vector(dt=DOUBLE, sreg=xmm0, vreg=xmm1)
-vmovddup %xmm0, %xmm1
+vmovddup %xmm0,%xmm1
 ### method fill_vector(dt=HALF, sreg=xmm0, vreg=xmm1)
-vbroadcastsh %xmm0, %xmm1
+vpbroadcastw %xmm0,%xmm1
 ### method fill_vector(dt=SINGLE, sreg=xmm0, vreg=xmm1)
-vbroadcastss %xmm0, %xmm1
+vbroadcastss %xmm0,%xmm1
 ### method freg(dt=DOUBLE, reg_idx=0)
 xmm0
 ### method freg(dt=HALF, reg_idx=0)
@@ -2170,6 +2170,8 @@ vmovsd xmm1, xmm2
 vmovddup %xmm1,%xmm1
 ### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:FP:HALF
 vmovsh xmm1, xmm2
+### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:VEC:HALF{BCAST}
+vpbroadcastw %xmm1,%xmm1
 ### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:FP:SINGLE
 vmovss xmm1, xmm2
 ### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:VEC:SINGLE{BCAST}

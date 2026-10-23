@@ -1379,22 +1379,14 @@ class asmgen(ABC):
         """
         raise NotImplementedError(NIE_MESSAGE)
 
-    @abstractmethod
-    def fill_vector(self, *, sreg : freg_type, vreg : vreg_type, dt : asm_data_type):
+    def fill_vector(self, *, sreg : freg_base, vreg : vreg_base, dt : asm_data_type) -> str:
         """
-        Returns the string containing the instruction(s) to fill every element of a
-        vector register with the data from the FP register
-
-        :param sreg: FP register containing the data to use
-        :type sreg: class:`asmgen.registers.freg_base`
-        :param vreg: vector register to fill
-        :type vreg: class:`asmgen.registers.vreg_base`
-        :param dt: Data type of the values
-        :type dt: class:`asmgen.registers.asm_data_type`
-        :return: String containing the required ASM instructions
-        :rtype: str
+        Every element of vreg the value in sreg: a move broadcasting (0.6,
+        phase 3) - move(dregs=[sreg, vreg], operand_modifiers={'bdreg': {BCAST}})
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        from .op.operand import operand_modifier   # pylint: disable=import-outside-toplevel
+        return self.move(dregs=[sreg, vreg], dts=[dt, dt],
+                         operand_modifiers={'bdreg': {operand_modifier.BCAST}})
 
     @abstractmethod
     def load_vector_lane(self, *, areg : greg_base,

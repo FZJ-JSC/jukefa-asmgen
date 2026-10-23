@@ -91,6 +91,8 @@ class avx_move(move):
         if omod.BCAST in bmods:
             if adt.FP64 == dt and 16 == self.simd_bytes:
                 return self.asmwrap(f"vmovddup {x(src)},{p(dst)}")
+            if adt.FP16 == dt:
+                return self.asmwrap(f"vpbroadcastw {x(src)},{p(dst)}")
             suf = "sd" if adt.FP64 == dt else "ss"
             return self.asmwrap(f"vbroadcast{suf} {x(src)},{p(dst)}")
         return self.asmwrap(f"vmovaps {p(src)},{p(dst)}")

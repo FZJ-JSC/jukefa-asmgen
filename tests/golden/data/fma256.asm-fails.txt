@@ -1,6 +1,5 @@
 method c_simd_size_function()
 method create_callconv(name=default)
-method fill_vector(dt=HALF, sreg=xmm0, vreg=ymm1)
 method freg(dt=DOUBLE, reg_idx=0)
 method freg(dt=HALF, reg_idx=0)
 method freg(dt=SINGLE, reg_idx=0)

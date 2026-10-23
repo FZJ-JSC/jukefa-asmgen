@@ -218,11 +218,6 @@ class sve(aarch64):
     def max_add_voff(self) -> int:
         return 16
 
-    def fill_vector(self, *, sreg : freg_base,
-                    vreg : vreg_base, dt : adt) -> str:
-        suf = self.dt_suffixes[dt]
-        return self.asmwrap(f"dup {vreg}.{suf}, z{sreg.idx}.{suf}[0]")
-
     def load_vector(self, *, areg : greg_base,
                     vreg : vreg_base, dt : adt) -> str:
         suf = self.dt_suffixes[dt]

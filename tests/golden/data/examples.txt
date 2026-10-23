@@ -6,7 +6,7 @@ myfunction:
 # rsi = y
 # xmm0 = alpha
 # rdx = n
-vbroadcastsd %xmm0, %zmm3
+vbroadcastsd %xmm0,%zmm3
 .loop:
 vmovupd (%rdi), %zmm1
 vmovupd (%rsi), %zmm2
@@ -25,7 +25,7 @@ myfunction:
 # rsi = y
 # xmm0 = alpha
 # rdx = n
-vbroadcastsd %xmm0, %zmm7
+vbroadcastsd %xmm0,%zmm7
 .loop:
 vmovupd (%rdi), %zmm1
 vmovupd (%rsi), %zmm4
@@ -52,7 +52,7 @@ myfunction:
 # rsi = y
 # xmm0 = alpha
 # rdx = n
-vbroadcastsd %xmm0, %zmm3
+vbroadcastsd %xmm0,%zmm3
 .loop:
 vmovupd (%rdi), %zmm1
 vmovupd (%rsi), %zmm2
@@ -72,7 +72,7 @@ myfunction:
 # rsi = y
 # xmm0 = alpha
 # rdx = n
-vbroadcastsd %xmm0, %zmm7
+vbroadcastsd %xmm0,%zmm7
 .loop:
 vmovupd (%rdi), %zmm1
 vmovupd (%rsi), %zmm4
@@ -102,7 +102,7 @@ myfunction:
 # rsi = y
 # xmm0 = alpha
 # rdx = n
-vmovddup %xmm0, %xmm3
+vmovddup %xmm0,%xmm3
 .loop:
 vmovupd (%rdi), %xmm1
 vmovupd (%rsi), %xmm2
@@ -121,7 +121,7 @@ myfunction:
 # rsi = y
 # xmm0 = alpha
 # rdx = n
-vmovddup %xmm0, %xmm7
+vmovddup %xmm0,%xmm7
 .loop:
 vmovupd (%rdi), %xmm1
 vmovupd (%rsi), %xmm4
@@ -148,7 +148,7 @@ myfunction:
 # rsi = y
 # xmm0 = alpha
 # rdx = n
-vmovddup %xmm0, %xmm3
+vmovddup %xmm0,%xmm3
 .loop:
 vmovupd (%rdi), %xmm1
 vmovupd (%rsi), %xmm2
@@ -168,7 +168,7 @@ myfunction:
 # rsi = y
 # xmm0 = alpha
 # rdx = n
-vmovddup %xmm0, %xmm7
+vmovddup %xmm0,%xmm7
 .loop:
 vmovupd (%rdi), %xmm1
 vmovupd (%rsi), %xmm4
@@ -198,7 +198,7 @@ myfunction:
 # rsi = y
 # xmm0 = alpha
 # rdx = n
-vbroadcastsd %xmm0, %ymm3
+vbroadcastsd %xmm0,%ymm3
 .loop:
 vmovupd (%rdi), %ymm1
 vmovupd (%rsi), %ymm2
@@ -217,7 +217,7 @@ myfunction:
 # rsi = y
 # xmm0 = alpha
 # rdx = n
-vbroadcastsd %xmm0, %ymm7
+vbroadcastsd %xmm0,%ymm7
 .loop:
 vmovupd (%rdi), %ymm1
 vmovupd (%rsi), %ymm4
@@ -244,7 +244,7 @@ myfunction:
 # rsi = y
 # xmm0 = alpha
 # rdx = n
-vbroadcastsd %xmm0, %ymm3
+vbroadcastsd %xmm0,%ymm3
 .loop:
 vmovupd (%rdi), %ymm1
 vmovupd (%rsi), %ymm2
@@ -264,7 +264,7 @@ myfunction:
 # rsi = y
 # xmm0 = alpha
 # rdx = n
-vbroadcastsd %xmm0, %ymm7
+vbroadcastsd %xmm0,%ymm7
 .loop:
 vmovupd (%rdi), %ymm1
 vmovupd (%rsi), %ymm4
@@ -294,7 +294,7 @@ myfunction:
 # x1 = y
 # d0 = alpha
 # x2 = n
-dup v3.2d, v0.d[0]
+dup v3.2d,v0.d[0]
 .loop:
 ldr q1, [x0]
 ldr q2, [x1]
@@ -312,7 +312,7 @@ myfunction:
 # x1 = y
 # d0 = alpha
 # x2 = n
-dup v7.2d, v0.d[0]
+dup v7.2d,v0.d[0]
 .loop:
 ldr q1, [x0]
 ldr q4, [x1]
@@ -338,7 +338,7 @@ myfunction:
 # x1 = y
 # d0 = alpha
 # x2 = n
-dup v3.2d, v0.d[0]
+dup v3.2d,v0.d[0]
 .loop:
 ldr q1, [x0]
 ldr q2, [x1]
@@ -357,7 +357,7 @@ myfunction:
 # x1 = y
 # d0 = alpha
 # x2 = n
-dup v7.2d, v0.d[0]
+dup v7.2d,v0.d[0]
 .loop:
 ldr q1, [x0]
 ldr q4, [x1]
@@ -494,7 +494,7 @@ smstart
 ptrue p0.d
 ptrue pn8.d
 ptrue p1.d
-dup z3.d, z0.d[0]
+mov z3.d,d0
 .loop:
 ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
 ld1d {z2.d}, p1/z, [x1, #0, MUL VL]
@@ -517,7 +517,7 @@ smstart
 ptrue p0.d
 ptrue pn8.d
 ptrue p1.d
-dup z7.d, z0.d[0]
+mov z7.d,d0
 .loop:
 ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
 ld1d {z4.d}, p1/z, [x1, #0, MUL VL]
@@ -548,7 +548,7 @@ smstart
 ptrue p0.d
 ptrue pn8.d
 ptrue p1.d
-dup z3.d, z0.d[0]
+mov z3.d,d0
 .loop:
 ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
 ld1d {z2.d}, p1/z, [x1, #0, MUL VL]
@@ -572,7 +572,7 @@ smstart
 ptrue p0.d
 ptrue pn8.d
 ptrue p1.d
-dup z7.d, z0.d[0]
+mov z7.d,d0
 .loop:
 ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
 ld1d {z4.d}, p1/z, [x1, #0, MUL VL]
@@ -604,7 +604,7 @@ myfunction:
 # x2 = n
 ptrue p0.d
 ptrue p1.d
-dup z3.d, z0.d[0]
+mov z3.d,d0
 .loop:
 ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
 ld1d {z2.d}, p1/z, [x1, #0, MUL VL]
@@ -624,7 +624,7 @@ myfunction:
 # x2 = n
 ptrue p0.d
 ptrue p1.d
-dup z7.d, z0.d[0]
+mov z7.d,d0
 .loop:
 ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
 ld1d {z4.d}, p1/z, [x1, #0, MUL VL]
@@ -652,7 +652,7 @@ myfunction:
 # x2 = n
 ptrue p0.d
 ptrue p1.d
-dup z3.d, z0.d[0]
+mov z3.d,d0
 .loop:
 ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
 ld1d {z2.d}, p1/z, [x1, #0, MUL VL]
@@ -673,7 +673,7 @@ myfunction:
 # x2 = n
 ptrue p0.d
 ptrue p1.d
-dup z7.d, z0.d[0]
+mov z7.d,d0
 .loop:
 ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
 ld1d {z4.d}, p1/z, [x1, #0, MUL VL]

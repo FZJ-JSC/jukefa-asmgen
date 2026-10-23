@@ -76,3 +76,23 @@ class test_scalar_moves(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class test_broadcast(unittest.TestCase):
+    """
+    fill_vector is a move broadcasting a floating-point register (BCAST)
+    """
+    def test_fill_vector_is_a_move(self):
+        from asmgen.asmblocks.avx import fma128, fma256
+        from asmgen.asmblocks.op.operand import operand_modifier
+        for ctor in (rvv, neon, sve, sme, fma128, fma256, avx512):
+            g = make(ctor)
+            for dt in (adt.DOUBLE, adt.SINGLE, adt.HALF):
+                with self.subTest(isa=ctor.__name__, dt=dt.name):
+                    f, v = g.freg(1, dt), g.vreg(2)
+                    self.assertEqual(g.move(dregs=[f, v], dts=[dt, dt], operand_modifiers={"bdreg": {operand_modifier.BCAST}}),
+                                     g.fill_vector(sreg=f, vreg=v, dt=dt))
+
+    def test_x86_half_is_a_word_broadcast(self):
+        g = make(avx512)
+        self.assertIn("vpbroadcastw", g.fill_vector(sreg=g.freg(1, adt.HALF), vreg=g.vreg(2), dt=adt.HALF))
