@@ -15,12 +15,17 @@ from ...op.operand import operand_modifier as omod
 from ...op.move import move, move_modifier as mod
 from ...aarch64.types import aarch64_greg
 from .signatures import make_neon_move_signatures
+from ...aarch64.move import aarch64_move
+from ...op.scalar import scalar_dregs_only, scalar_operands
 
 
 class neon_move(move):
     """
     NEON data move instructions: mov, dup, ins
     """
+    # the base ISA's moves between scalar registers: a member whose
+    # signatures are offered too and to which calls with them go
+    scalar_class = aarch64_move
 
     def __init__(self, asmwrap : Callable[[str], str],
                  dt_suffixes : dict[adt, str], dt_idxsuffixes : dict[adt, str]):
@@ -28,15 +33,22 @@ class neon_move(move):
         self.dt_suffixes = dt_suffixes
         self.dt_idxsuffixes = dt_idxsuffixes
         self.signatures = make_neon_move_signatures()
+        self.scalar_op = self.scalar_class(asmwrap=asmwrap) if self.scalar_class else None
 
     def get_signatures(self) -> list[operation_signature]:
-        return self.signatures
+        return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
 
     def implementation(self, *, dregs : list[data_reg],
                        dts : dict[str, adt],
                        modifiers : set[mod],
                        operand_modifiers : dict[str, set[omod]],
                        **kwargs) -> str:
+        # If scalar registers only are passed, forward to the base ISA's move
+        if self.scalar_op is not None and scalar_dregs_only(dregs):
+            return self.scalar_op(dregs=dregs, dts=[dts[k] for k in sorted(dts)],
+                                  modifiers=modifiers, operand_modifiers=operand_modifiers,
+                                  **scalar_operands(kwargs))
+
         src, dst = dregs[0], dregs[1]
         dt = dts['bdreg']
         el = self.dt_idxsuffixes[dt]

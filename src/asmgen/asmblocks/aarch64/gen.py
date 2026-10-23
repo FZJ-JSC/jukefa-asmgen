@@ -24,6 +24,8 @@ from ...callconv.callconv import callconv
 from .opmem import aarch64_load, aarch64_store
 from ...registers import asm_data_type as _ADT
 from ..op.operand import operand_modifier as _opd_mod
+from ..op.move import move_modifier as _move_mod
+from ..op.scalar import BITS_GP as _BITS_GP
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
@@ -138,9 +140,7 @@ class aarch64(asmgen):
         Move a general register's low bits into an FP register: an FP
         constant from its bit pattern
         """
-        if 8 == adt_size(dt):
-            return self.asmwrap(f"fmov {dst},{src}")
-        return self.asmwrap(f"fmov {dst},w{str(src)[1:]}")
+        return self.move(dregs=[src, dst], dts=[_BITS_GP[dt], dt], modifiers={_move_mod.BITS})
 
     def cb(self, *, reg1, reg2, cmp: comparison, label: str,
            dt: adt | None = None, greg: greg_base | None = None) -> str:
@@ -254,11 +254,11 @@ class aarch64(asmgen):
 
 
     def mov_greg(self, *, src : greg_base, dst : greg_base) -> str:
-        return self.asmwrap(f"mov {dst},{src}")
+        return self.move(dregs=[src, dst], dts=[_GP, _GP])
 
     def mov_freg(self, *, src : freg_base, dst : freg_base,
                  dt : adt) -> str:
-        return self.asmwrap(f"fmov {dst},{src}")
+        return self.move(dregs=[src, dst], dts=[dt, dt])
 
     def zero_freg(self, *, freg : freg_base, dt : adt) -> str:
         # fmov's immediate can't encode 0.0: the zero register can

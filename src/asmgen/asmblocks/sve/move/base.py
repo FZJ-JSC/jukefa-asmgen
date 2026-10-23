@@ -20,11 +20,16 @@ from ...aarch64.types import aarch64_greg,aarch64_freg
 
 
 from .signatures import make_sve_move_signatures
+from ...aarch64.move import aarch64_move
+from ...op.scalar import scalar_dregs_only, scalar_operands
 
 class sve_move(move):
     """
     SVE data move instructions
     """
+    # the base ISA's moves between scalar registers: a member whose
+    # signatures are offered too and to which calls with them go
+    scalar_class = aarch64_move
 
     def __init__(self, asmwrap : Callable[[str],str],
                  dt_suffixes = dict[adt,str]):
@@ -32,9 +37,10 @@ class sve_move(move):
         self.dt_suffixes = dt_suffixes
 
         self.signatures = make_sve_move_signatures()
+        self.scalar_op = self.scalar_class(asmwrap=asmwrap) if self.scalar_class else None
 
     def get_signatures(self) -> list[operation_signature]:
-        return self.signatures
+        return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
 
     def build_vec_lane_spec(self,
                             vreg : sve_vreg,
@@ -58,6 +64,12 @@ class sve_move(move):
                        modifiers : set[mod],
                        operand_modifiers : dict[str,set[omod]],
                        **kwargs) -> str:
+
+        # If scalar registers only are passed, forward to the base ISA's move
+        if self.scalar_op is not None and scalar_dregs_only(dregs):
+            return self.scalar_op(dregs=dregs, dts=[dts[k] for k in sorted(dts)],
+                                  modifiers=modifiers, operand_modifiers=operand_modifiers,
+                                  **scalar_operands(kwargs))
 
         predicate = ""
         if mod.MASK in modifiers:

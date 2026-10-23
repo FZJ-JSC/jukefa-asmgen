@@ -34,6 +34,8 @@ from .opmem.load import avx128_load,avx256_load,avx512_load
 from .opmem.store import avx128_store,avx256_store,avx512_store
 from ...registers import asm_data_type as _ADT
 from ..op.operand import operand_modifier as _opd_mod
+from ..op.move import move_modifier as _move_mod
+from ..op.scalar import BITS_GP as _BITS_GP
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
@@ -258,9 +260,7 @@ class avxbase(asmgen):
         Move a general register's low bits into an FP register: an FP
         constant from its bit pattern
         """
-        if 8 == adt_size(dt):
-            return self.asmwrap(f"vmovq {self.rpref(src)},{self.rpref(dst)}")
-        return self.asmwrap(f"vmovd {self.rpref(src, size=4)},{self.rpref(dst)}")
+        return self.move(dregs=[src, dst], dts=[_BITS_GP[dt], dt], modifiers={_move_mod.BITS})
 
     def cb(self, *, reg1, reg2, cmp: comparison, label: str,
            dt: adt | None = None, greg: greg_base | None = None) -> str:
@@ -453,13 +453,10 @@ class avxbase(asmgen):
         return asmblock
 
     def mov_greg(self, *, src : greg_base, dst : greg_base):
-        psrc = self.rpref(src)
-        pdst = self.rpref(dst)
-        return self.asmwrap(f"movq {psrc}, {pdst}")
+        return self.move(dregs=[src, dst], dts=[_GP, _GP])
 
     def mov_freg(self, *, src : freg_base, dst : freg_base, dt : adt):
-        suf = 's'+self.dt_suffixes[dt]
-        return self.asmwrap(f"vmov{suf} {src}, {dst}")
+        return self.move(dregs=[src, dst], dts=[dt, dt])
 
 
     def load_greg(self, *, areg : greg_base, offset : int, dst : greg_base) -> str:

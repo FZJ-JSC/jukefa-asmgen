@@ -15,6 +15,7 @@ from typing import Callable
 
 from ...registers import asm_data_type as adt
 from .opd3 import opd3
+from .move import move, move_modifier
 from .operand import operand_shape as osh, operand_type as ot, operand_role as orl, register_type as rt
 from .operand import operand_modifier as opd_mod
 from .signature import operation_signature
@@ -123,4 +124,72 @@ def scalar_operands(kwargs : dict) -> dict:
     besides the named operands: anything but execute's bookkeeping
     """
     return {k: v for k, v in kwargs.items() if k not in ("dts", "dregs", "gregs")}
+
+
+BITS_GP = {adt.DOUBLE: adt.UINT64, adt.SINGLE: adt.UINT32, adt.HALF: adt.UINT16}
+
+
+class scalar_move(move):
+    """
+    Moves between scalar registers, as operations (0.6, phase 3): general
+    to general (dregs [src, dst], UINT64 or SINT64), floating-point to
+    floating-point, and a general register's bits into a floating-point
+    register (move_modifier.BITS; UINT64 to DOUBLE, UINT32 to SINGLE,
+    UINT16 to HALF). A vector move carries its base ISA's as a member, as
+    rvv_opmem does with riscv64_opmem. Each ISA writes the instructions.
+    """
+    FP_DTS = (adt.DOUBLE, adt.SINGLE, adt.HALF)
+
+    def __init__(self, *, asmwrap : Callable[[str], str]):
+        self.asmwrap = asmwrap
+        self._signatures = self.make_signatures()
+
+    def make_signatures(self) -> list[operation_signature]:
+        sigs = []
+        def reg(rtype, dt):
+            return osh(ot.REGISTER, orl.DATA, rtype, dt)
+        for dt in GREG_DTS:
+            sigs.append(operation_signature(modifiers=set(), structural_params={},
+                                            operands={"adreg": reg(rt.GP, dt), "bdreg": reg(rt.GP, dt)}))
+        for dt in self.FP_DTS:
+            sigs.append(operation_signature(modifiers=set(), structural_params={},
+                                            operands={"adreg": reg(rt.FP, dt), "bdreg": reg(rt.FP, dt)}))
+        for dt in self.FP_DTS:
+            sigs.append(operation_signature(modifiers={move_modifier.BITS}, structural_params={},
+                                            operands={"adreg": reg(rt.GP, BITS_GP[dt]), "bdreg": reg(rt.FP, dt)}))
+        return sigs
+
+    def get_signatures(self) -> list[operation_signature]:
+        return self._signatures
+
+    # pylint: disable-next=arguments-differ
+    def implementation(self, *, dregs, dts, modifiers=None, **_) -> str:
+        src, dst = dregs[0], dregs[1]
+        if move_modifier.BITS in (modifiers or set()):
+            return self.bits_to_freg(src, dst, dts["bdreg"])
+        if "GP" == self.rtype_of(dts["adreg"]):
+            return self.greg_to_greg(src, dst)
+        return self.freg_to_freg(src, dst, dts["bdreg"])
+
+    @staticmethod
+    def rtype_of(dt) -> str:
+        return "FP" if dt in scalar_move.FP_DTS else "GP"
+
+    def greg_to_greg(self, src, dst) -> str:
+        raise NotImplementedError(self.NIE_MESSAGE)
+
+    def freg_to_freg(self, src, dst, dt) -> str:
+        raise NotImplementedError(self.NIE_MESSAGE)
+
+    def bits_to_freg(self, src, dst, dt) -> str:
+        raise NotImplementedError(self.NIE_MESSAGE)
+
+
+def scalar_dregs_only(dregs) -> bool:
+    """
+    Whether a move's registers are all scalar (general or floating-point):
+    its vector operation hands it to the scalar member
+    """
+    from ...registers import greg_base, freg_base   # pylint: disable=import-outside-toplevel
+    return all(isinstance(r, (greg_base, freg_base)) for r in dregs)
 

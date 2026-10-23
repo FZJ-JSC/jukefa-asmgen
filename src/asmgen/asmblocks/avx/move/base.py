@@ -16,6 +16,8 @@ from ...op.move import move, move_modifier as mod
 from ..types import xmm_vreg, ymm_vreg
 from ....registers import adt_size
 from .signatures import make_avx_move_signatures
+from ...x86.move import x86_move
+from ...op.scalar import scalar_dregs_only, scalar_operands
 
 
 class avx_move(move):
@@ -23,21 +25,31 @@ class avx_move(move):
     AVX data move instructions on 128-bit blocks, in AT&T operand order. The
     block forms move bits, so their 32x4 variants serve every element type.
     """
+    # the base ISA's moves between scalar registers: a member whose
+    # signatures are offered too and to which calls with them go
+    scalar_class = x86_move
 
     def __init__(self, asmwrap : Callable[[str], str], rpref, simd_bytes : int):
         self.asmwrap = asmwrap
         self.rpref = rpref
         self.simd_bytes = simd_bytes
         self.signatures = make_avx_move_signatures(simd_bytes)
+        self.scalar_op = self.scalar_class(asmwrap=asmwrap, rpref=rpref) if self.scalar_class else None
 
     def get_signatures(self) -> list[operation_signature]:
-        return self.signatures
+        return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
 
     def implementation(self, *, dregs : list[data_reg],
                        dts : dict[str, adt],
                        modifiers : set[mod],
                        operand_modifiers : dict[str, set[omod]],
                        **kwargs) -> str:
+        # If scalar registers only are passed, forward to the base ISA's move
+        if self.scalar_op is not None and scalar_dregs_only(dregs):
+            return self.scalar_op(dregs=dregs, dts=[dts[k] for k in sorted(dts)],
+                                  modifiers=modifiers, operand_modifiers=operand_modifiers,
+                                  **scalar_operands(kwargs))
+
         src, dst = dregs[0], dregs[1]
         dt = dts['bdreg']
         amods = operand_modifiers.get('adreg', set())

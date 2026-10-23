@@ -23,11 +23,15 @@ from ..types import sme_treg
 from ...aarch64.types import aarch64_greg,aarch64_freg
 
 from .signatures import make_sme_move_signatures
+from ...op.scalar import scalar_dregs_only, scalar_operands
 
 class sme_move(move):
     """
     SME data move instructions
     """
+    # moves between scalar registers: the SVE move's member - its
+    # signatures among this one's, calls with them handed on to it
+    scalar_class = None
 
     def __init__(self, asmwrap : Callable[[str],str],
                  dt_suffixes = dict[adt,str]):
@@ -37,9 +41,10 @@ class sme_move(move):
         self.sve_move = sve_move(asmwrap=asmwrap, dt_suffixes=dt_suffixes)
         self.signatures = make_sme_move_signatures()
         self.signatures.extend(self.sve_move.get_signatures())
+        self.scalar_op = self.scalar_class(asmwrap=asmwrap) if self.scalar_class else None
 
     def get_signatures(self) -> list[operation_signature]:
-        return self.signatures
+        return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
 
 
     def get_v_specs(self,
@@ -97,6 +102,12 @@ class sme_move(move):
                        modifiers : set[move_modifier],
                        operand_modifiers : dict[str,set[operand_modifier]],
                        **kwargs) -> str:
+
+        # If scalar registers only are passed, forward to the base ISA's move
+        if self.scalar_op is not None and scalar_dregs_only(dregs):
+            return self.scalar_op(dregs=dregs, dts=[dts[k] for k in sorted(dts)],
+                                  modifiers=modifiers, operand_modifiers=operand_modifiers,
+                                  **scalar_operands(kwargs))
 
         input_count = 1
         output_count = 1

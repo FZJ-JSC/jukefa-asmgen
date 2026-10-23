@@ -2168,10 +2168,26 @@ vmovdqu64 (%rcx), %zmm1
 vpinsrb $0, (%rcx), %xmm1, %xmm1
 ### op load [] adreg:REGISTER:VEC:UINT8{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- @far
 vpinsrb $15, (%rcx), %xmm1, %xmm1
+### op move [BITS] adreg:REGISTER:GP:UINT16 bdreg:REGISTER:FP:HALF
+vmovd %ecx,%xmm1
+### op move [BITS] adreg:REGISTER:GP:UINT32 bdreg:REGISTER:FP:SINGLE
+vmovd %ecx,%xmm1
+### op move [BITS] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:FP:DOUBLE
+vmovq %rcx,%xmm1
+### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:FP:DOUBLE
+vmovsd xmm1, xmm2
 ### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BCAST}
 vbroadcastsd %xmm1,%zmm1
+### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:FP:HALF
+vmovsh xmm1, xmm2
+### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:FP:SINGLE
+vmovss xmm1, xmm2
 ### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:VEC:SINGLE{BCAST}
 vbroadcastss %xmm1,%zmm1
+### op move [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64
+movq %rcx, %rdx
+### op move [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64
+movq %rcx, %rdx
 ### op move [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE
 vmovaps %zmm1,%zmm2
 ### op move [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{IBLOCK} bdreg_block:IMMEDIATE:-:- {bdreg_blocksize:2}

@@ -1688,18 +1688,30 @@ vlse64.v v1, (s4), zero
 vle8.v v1, (s4)
 ### op load [] adreg:REGISTER:VEC:UINT8{BCAST} agreg:REGISTER:GP:UINT64
 vlse8.v v1, (s4), zero
+### op move [BITS] adreg:REGISTER:GP:UINT16 bdreg:REGISTER:FP:HALF
+fmv.h.x f1,s4
+### op move [BITS] adreg:REGISTER:GP:UINT32 bdreg:REGISTER:FP:SINGLE
+fmv.w.x f1,s4
+### op move [BITS] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:FP:DOUBLE
+fmv.d.x f1,s4
+### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:FP:DOUBLE
+fmv.d f2,f1
 ### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BCAST}
 vfmv.v.f v1,f1
 ### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:VEC:DOUBLE{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
 vfslide1down.vf v1,v1,f1
 ### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:VEC:DOUBLE{ILANE} bdreg_lane:IMMEDIATE:-:-
 vfmv.s.f v1,f1
+### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:FP:HALF
+fmv.h f2,f1
 ### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:VEC:HALF{BCAST}
 vfmv.v.f v1,f1
 ### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:VEC:HALF{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
 vfslide1down.vf v1,v1,f1
 ### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:VEC:HALF{ILANE} bdreg_lane:IMMEDIATE:-:-
 vfmv.s.f v1,f1
+### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:FP:SINGLE
+fmv.s f2,f1
 ### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:VEC:SINGLE{BCAST}
 vfmv.v.f v1,f1
 ### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:VEC:SINGLE{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
@@ -1718,6 +1730,8 @@ vmv.v.x v1,s4
 vslide1down.vx v1,v1,s4
 ### op move [] adreg:REGISTER:GP:SINT32 bdreg:REGISTER:VEC:SINT32{ILANE} bdreg_lane:IMMEDIATE:-:-
 vmv.s.x v1,s4
+### op move [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64
+add s5,s4,0
 ### op move [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:VEC:SINT64{BCAST}
 vmv.v.x v1,s4
 ### op move [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:VEC:SINT64{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
@@ -1742,6 +1756,8 @@ vmv.v.x v1,s4
 vslide1down.vx v1,v1,s4
 ### op move [] adreg:REGISTER:GP:UINT32 bdreg:REGISTER:VEC:UINT32{ILANE} bdreg_lane:IMMEDIATE:-:-
 vmv.s.x v1,s4
+### op move [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64
+add s5,s4,0
 ### op move [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:VEC:UINT64{BCAST}
 vmv.v.x v1,s4
 ### op move [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:VEC:UINT64{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-

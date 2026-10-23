@@ -30,6 +30,7 @@ class move_modifier(operation_modifier):
     MASK = auto()
     MULTIPLE_IN = auto()
     MULTIPLE_OUT = auto()
+    BITS = auto()      # the bits as they are, between register files (greg to freg): no conversion
 
 
 class move(operation):

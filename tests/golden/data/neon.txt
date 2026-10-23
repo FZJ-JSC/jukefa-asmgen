@@ -2432,18 +2432,30 @@ ld1r {v1.16b}, [x10]
 ld1 {v1.b}[0], [x10]
 ### op load [] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- @far
 ld1 {v1.b}[15], [x10]
+### op move [BITS] adreg:REGISTER:GP:UINT16 bdreg:REGISTER:FP:HALF
+fmov h1,w10
+### op move [BITS] adreg:REGISTER:GP:UINT32 bdreg:REGISTER:FP:SINGLE
+fmov s1,w10
+### op move [BITS] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:FP:DOUBLE
+fmov d1,x10
+### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:FP:DOUBLE
+fmov d2,d1
 ### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BCAST}
 dup v1.2d,v1.d[0]
 ### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:VEC:DOUBLE{ILANE} bdreg_lane:IMMEDIATE:-:-
 ins v1.d[0],v1.d[0]
 ### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:VEC:DOUBLE{ILANE} bdreg_lane:IMMEDIATE:-:- @far
 ins v1.d[1],v1.d[0]
+### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:FP:HALF
+fmov h2,h1
 ### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:VEC:HALF{BCAST}
 dup v1.8h,v1.h[0]
 ### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:VEC:HALF{ILANE} bdreg_lane:IMMEDIATE:-:-
 ins v1.h[0],v1.h[0]
 ### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:VEC:HALF{ILANE} bdreg_lane:IMMEDIATE:-:- @far
 ins v1.h[7],v1.h[0]
+### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:FP:SINGLE
+fmov s2,s1
 ### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:VEC:SINGLE{BCAST}
 dup v1.4s,v1.s[0]
 ### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:VEC:SINGLE{ILANE} bdreg_lane:IMMEDIATE:-:-
@@ -2462,6 +2474,8 @@ dup v1.4s,w10
 ins v1.s[0],w10
 ### op move [] adreg:REGISTER:GP:SINT32 bdreg:REGISTER:VEC:SINT32{ILANE} bdreg_lane:IMMEDIATE:-:- @far
 ins v1.s[3],w10
+### op move [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64
+mov x11,x10
 ### op move [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:VEC:SINT64{BCAST}
 dup v1.2d,x10
 ### op move [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:VEC:SINT64{ILANE} bdreg_lane:IMMEDIATE:-:-
@@ -2486,6 +2500,8 @@ dup v1.4s,w10
 ins v1.s[0],w10
 ### op move [] adreg:REGISTER:GP:UINT32 bdreg:REGISTER:VEC:UINT32{ILANE} bdreg_lane:IMMEDIATE:-:- @far
 ins v1.s[3],w10
+### op move [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64
+mov x11,x10
 ### op move [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:VEC:UINT64{BCAST}
 dup v1.2d,x10
 ### op move [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:VEC:UINT64{ILANE} bdreg_lane:IMMEDIATE:-:-

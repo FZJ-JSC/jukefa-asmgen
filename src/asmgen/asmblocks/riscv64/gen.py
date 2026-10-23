@@ -25,6 +25,8 @@ from ...callconv.callconv import callconv
 from .opmem import riscv64_load,riscv64_store
 from ...registers import asm_data_type as _ADT
 from ..op.operand import operand_modifier as _opd_mod
+from ..op.move import move_modifier as _move_mod
+from ..op.scalar import BITS_GP as _BITS_GP
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
@@ -136,7 +138,7 @@ class riscv64(asmgen):
         Move a general register's low bits into an FP register: an FP
         constant from its bit pattern
         """
-        return self.asmwrap(f"fmv.{self.fdt_suffixes[dt]}.x {dst},{src}")
+        return self.move(dregs=[src, dst], dts=[_BITS_GP[dt], dt], modifiers={_move_mod.BITS})
 
     def cb(self, *, reg1, reg2, cmp: comparison, label: str,
            dt: adt | None = None, greg: greg_base | None = None) -> str:
@@ -231,12 +233,11 @@ class riscv64(asmgen):
     def mov_freg(self, *, src : freg_base, dst : freg_base, dt : adt) ->  str:
         # fmv.s / fmv.d (fsgnj): fmv.w is no instruction - fmv.w.x moves an
         # integer register
-        dt_suf = self.fcdt_suffixes[dt]
-        return self.asmwrap(f"fmv.{dt_suf} {dst},{src}")
+        return self.move(dregs=[src, dst], dts=[dt, dt])
 
     def mov_greg(self, *, src : greg_base, dst : greg_base) -> str:
         # There is no mov instruction?
-        return self.asmwrap(f"add {dst},{src},0")
+        return self.move(dregs=[src, dst], dts=[_GP, _GP])
 
     def mov_param_to_greg(self, *, param : str, dst : greg_base) -> str:
         return self.asmwrap(f"ld {dst},%[{param}]")

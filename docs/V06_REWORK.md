@@ -278,12 +278,21 @@ Checked (step 2c): the snapshots changed in NEON's `add_greg_voff` with
 SVE's and SME's new signatures; SVE's `incb` sequences unchanged; ukrgen's
 golden kernels and ukropt's builds unchanged.
 
-### Phase 3: moves [ ]
+### Phase 3: moves [~]
 
-- [ ] `move([greg, greg])` (`mov_greg`), `move([freg, freg])` (`mov_freg`),
-      `move([greg, freg], mods={BITS})` (`mov_greg_to_freg`).
+- [x] `move([greg, greg])` (`mov_greg`), `move([freg, freg])` (`mov_freg`),
+      `move([greg, freg], mods={BITS})` (`mov_greg_to_freg`): `scalar_move`
+      (`op/scalar.py`) and the ISAs' (`riscv64_move`, `aarch64_move`,
+      `x86_move`), carried by the vector moves as their `scalar_op` (SME's
+      through SVE's move), calls whose registers are all scalar handed to
+      it. `move_modifier.BITS` (new): UINT64 into DOUBLE, UINT32 into
+      SINGLE, UINT16 into HALF. The old methods' texts kept - x86's
+      `vmovs{d,s,h}` with two unprefixed registers too, which doesn't
+      assemble (a fix for later).
 - [ ] Parameters: `mov_greg_to_param`, `mov_param_to_greg[_shift]` as
-      `load`/`store` with a `PARAM` modifier, inline output only.
+      `load`/`store` with a `PARAM` modifier, inline output only - with
+      phase 5: they read and write memory (`ld`/`sd`, `ldr`/`str`, `movq`
+      with `%[param]`), and no caller uses them.
 - [ ] A broadcast from a register is a `move` with `BCAST`: replaces
       `fill_vector`.
 - [ ] Wrappers for the above.
@@ -400,3 +409,5 @@ where `move` only moves them. A name to say so, as ukrgen's
   (asmgen 0039); phase 10 added: opd3's rename.
 - 2026-10-23: phase 2 done, step 2c - VLSCALE, SVE's VL-scaled add,
   add_greg_voff on the operations (asmgen 0040).
+- 2026-10-23: phase 3, step 3a - moves between scalar registers as
+  operations, move_modifier.BITS (asmgen 0041).

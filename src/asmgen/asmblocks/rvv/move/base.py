@@ -15,25 +15,37 @@ from ...op.operand import operand_modifier as omod
 from ...op.move import move, move_modifier as mod
 from ...riscv64.types import riscv64_greg
 from .signatures import make_rvv_move_signatures
+from ...riscv64.move import riscv64_move
+from ...op.scalar import scalar_dregs_only, scalar_operands
 
 
 class rvv_move(move):
     """
     RVV data move instructions: vmv, vfmv, vrgather
     """
+    # the base ISA's moves between scalar registers: a member whose
+    # signatures are offered too and to which calls with them go
+    scalar_class = riscv64_move
 
     def __init__(self, asmwrap : Callable[[str], str]):
         self.asmwrap = asmwrap
         self.signatures = make_rvv_move_signatures()
+        self.scalar_op = self.scalar_class(asmwrap=asmwrap) if self.scalar_class else None
 
     def get_signatures(self) -> list[operation_signature]:
-        return self.signatures
+        return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
 
     def implementation(self, *, dregs : list[data_reg],
                        dts : dict[str, adt],
                        modifiers : set[mod],
                        operand_modifiers : dict[str, set[omod]],
                        **kwargs) -> str:
+        # If scalar registers only are passed, forward to the base ISA's move
+        if self.scalar_op is not None and scalar_dregs_only(dregs):
+            return self.scalar_op(dregs=dregs, dts=[dts[k] for k in sorted(dts)],
+                                  modifiers=modifiers, operand_modifiers=operand_modifiers,
+                                  **scalar_operands(kwargs))
+
         src, dst = dregs[0], dregs[1]
         amods = operand_modifiers.get('adreg', set())
         bmods = operand_modifiers.get('bdreg', set())

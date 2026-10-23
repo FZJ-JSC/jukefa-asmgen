@@ -3423,6 +3423,12 @@ ldr w10, [x11]
 ldr x10, [x11]
 ### op load [] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64
 ldrb w10, [x11]
+### op move [BITS] adreg:REGISTER:GP:UINT16 bdreg:REGISTER:FP:HALF
+fmov h1,w10
+### op move [BITS] adreg:REGISTER:GP:UINT32 bdreg:REGISTER:FP:SINGLE
+fmov s1,w10
+### op move [BITS] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:FP:DOUBLE
+fmov d1,x10
 ### op move [MASK] amreg:REGISTER:MASK:BF16 bdreg:REGISTER:VEC:BF16 adreg:REGISTER:VEC:BF16
 !KeyError: <asm_data_type.BF16: 5>
 ### op move [MASK] amreg:REGISTER:MASK:BF16 bdreg:REGISTER:VEC:BF16{BCAST} adreg:REGISTER:FP:BF16
@@ -3535,16 +3541,24 @@ mov z1.b,p1/m,w10
 dup z1.b,p1/m,z2.b[0]
 ### op move [MASK] amreg:REGISTER:MASK:UINT8 bdreg:REGISTER:VEC:UINT8{BCAST} adreg:REGISTER:VEC:UINT8{ILANE} adreg_lane:IMMEDIATE:-:- @far
 dup z1.b,p1/m,z2.b[63]
+### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:FP:DOUBLE
+fmov d2,d1
 ### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:VEC:DOUBLE{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
 insr z1.d,d1
+### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:FP:HALF
+fmov h2,h1
 ### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:VEC:HALF{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
 insr z1.h,h1
+### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:FP:SINGLE
+fmov s2,s1
 ### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:VEC:SINGLE{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
 insr z1.s,s1
 ### op move [] adreg:REGISTER:GP:SINT16 bdreg:REGISTER:VEC:SINT16{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
 insr z1.h,x10
 ### op move [] adreg:REGISTER:GP:SINT32 bdreg:REGISTER:VEC:SINT32{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
 insr z1.s,x10
+### op move [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64
+mov x11,x10
 ### op move [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:VEC:SINT64{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
 insr z1.d,x10
 ### op move [] adreg:REGISTER:GP:SINT8 bdreg:REGISTER:VEC:SINT8{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
@@ -3553,6 +3567,8 @@ insr z1.b,x10
 insr z1.h,x10
 ### op move [] adreg:REGISTER:GP:UINT32 bdreg:REGISTER:VEC:UINT32{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
 insr z1.s,x10
+### op move [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64
+mov x11,x10
 ### op move [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:VEC:UINT64{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
 insr z1.d,x10
 ### op move [] adreg:REGISTER:GP:UINT8 bdreg:REGISTER:VEC:UINT8{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
