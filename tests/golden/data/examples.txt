@@ -1,0 +1,696 @@
+### axpy --isa avx512 --arith fma --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# rdi = x
+# rsi = y
+# xmm0 = alpha
+# rdx = n
+vbroadcastsd %xmm0, %zmm3
+.loop:
+vmovupd (%rdi), %zmm1
+vmovupd (%rsi), %zmm2
+vfmadd231pd %zmm1,%zmm3,%zmm2
+vmovupd %zmm2, (%rsi)
+addq $64,%rdi
+addq $64,%rsi
+addq $-1,%rdx
+test %rdx,%rdx
+jnz .loop
+### axpy --isa avx512 --arith fma --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# rdi = x
+# rsi = y
+# xmm0 = alpha
+# rdx = n
+vbroadcastsd %xmm0, %zmm7
+.loop:
+vmovupd (%rdi), %zmm1
+vmovupd (%rsi), %zmm4
+vmovupd 64(%rdi), %zmm2
+vmovupd 64(%rsi), %zmm5
+vmovupd 128(%rdi), %zmm3
+vmovupd 128(%rsi), %zmm6
+vfmadd231pd %zmm1,%zmm7,%zmm4
+vfmadd231pd %zmm2,%zmm7,%zmm5
+vfmadd231pd %zmm3,%zmm7,%zmm6
+vmovupd %zmm4, (%rsi)
+vmovupd %zmm5, 64(%rsi)
+vmovupd %zmm6, 128(%rsi)
+addq $192,%rdi
+addq $192,%rsi
+addq $-1,%rdx
+test %rdx,%rdx
+jnz .loop
+### axpy --isa avx512 --arith fmul_fadd --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# rdi = x
+# rsi = y
+# xmm0 = alpha
+# rdx = n
+vbroadcastsd %xmm0, %zmm3
+.loop:
+vmovupd (%rdi), %zmm1
+vmovupd (%rsi), %zmm2
+vmulpd %zmm1,%zmm3,%zmm1
+vaddpd %zmm1,%zmm2,%zmm2
+vmovupd %zmm2, (%rsi)
+addq $64,%rdi
+addq $64,%rsi
+addq $-1,%rdx
+test %rdx,%rdx
+jnz .loop
+### axpy --isa avx512 --arith fmul_fadd --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# rdi = x
+# rsi = y
+# xmm0 = alpha
+# rdx = n
+vbroadcastsd %xmm0, %zmm7
+.loop:
+vmovupd (%rdi), %zmm1
+vmovupd (%rsi), %zmm4
+vmovupd 64(%rdi), %zmm2
+vmovupd 64(%rsi), %zmm5
+vmovupd 128(%rdi), %zmm3
+vmovupd 128(%rsi), %zmm6
+vmulpd %zmm1,%zmm7,%zmm1
+vaddpd %zmm1,%zmm4,%zmm4
+vmulpd %zmm2,%zmm7,%zmm2
+vaddpd %zmm2,%zmm5,%zmm5
+vmulpd %zmm3,%zmm7,%zmm3
+vaddpd %zmm3,%zmm6,%zmm6
+vmovupd %zmm4, (%rsi)
+vmovupd %zmm5, 64(%rsi)
+vmovupd %zmm6, 128(%rsi)
+addq $192,%rdi
+addq $192,%rsi
+addq $-1,%rdx
+test %rdx,%rdx
+jnz .loop
+### axpy --isa fma128 --arith fma --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# rdi = x
+# rsi = y
+# xmm0 = alpha
+# rdx = n
+vmovddup %xmm0, %xmm3
+.loop:
+vmovupd (%rdi), %xmm1
+vmovupd (%rsi), %xmm2
+vfmadd231pd %xmm1,%xmm3,%xmm2
+vmovupd %xmm2, (%rsi)
+addq $16,%rdi
+addq $16,%rsi
+addq $-1,%rdx
+test %rdx,%rdx
+jnz .loop
+### axpy --isa fma128 --arith fma --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# rdi = x
+# rsi = y
+# xmm0 = alpha
+# rdx = n
+vmovddup %xmm0, %xmm7
+.loop:
+vmovupd (%rdi), %xmm1
+vmovupd (%rsi), %xmm4
+vmovupd 16(%rdi), %xmm2
+vmovupd 16(%rsi), %xmm5
+vmovupd 32(%rdi), %xmm3
+vmovupd 32(%rsi), %xmm6
+vfmadd231pd %xmm1,%xmm7,%xmm4
+vfmadd231pd %xmm2,%xmm7,%xmm5
+vfmadd231pd %xmm3,%xmm7,%xmm6
+vmovupd %xmm4, (%rsi)
+vmovupd %xmm5, 16(%rsi)
+vmovupd %xmm6, 32(%rsi)
+addq $48,%rdi
+addq $48,%rsi
+addq $-1,%rdx
+test %rdx,%rdx
+jnz .loop
+### axpy --isa fma128 --arith fmul_fadd --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# rdi = x
+# rsi = y
+# xmm0 = alpha
+# rdx = n
+vmovddup %xmm0, %xmm3
+.loop:
+vmovupd (%rdi), %xmm1
+vmovupd (%rsi), %xmm2
+vmulpd %xmm1,%xmm3,%xmm1
+vaddpd %xmm1,%xmm2,%xmm2
+vmovupd %xmm2, (%rsi)
+addq $16,%rdi
+addq $16,%rsi
+addq $-1,%rdx
+test %rdx,%rdx
+jnz .loop
+### axpy --isa fma128 --arith fmul_fadd --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# rdi = x
+# rsi = y
+# xmm0 = alpha
+# rdx = n
+vmovddup %xmm0, %xmm7
+.loop:
+vmovupd (%rdi), %xmm1
+vmovupd (%rsi), %xmm4
+vmovupd 16(%rdi), %xmm2
+vmovupd 16(%rsi), %xmm5
+vmovupd 32(%rdi), %xmm3
+vmovupd 32(%rsi), %xmm6
+vmulpd %xmm1,%xmm7,%xmm1
+vaddpd %xmm1,%xmm4,%xmm4
+vmulpd %xmm2,%xmm7,%xmm2
+vaddpd %xmm2,%xmm5,%xmm5
+vmulpd %xmm3,%xmm7,%xmm3
+vaddpd %xmm3,%xmm6,%xmm6
+vmovupd %xmm4, (%rsi)
+vmovupd %xmm5, 16(%rsi)
+vmovupd %xmm6, 32(%rsi)
+addq $48,%rdi
+addq $48,%rsi
+addq $-1,%rdx
+test %rdx,%rdx
+jnz .loop
+### axpy --isa fma256 --arith fma --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# rdi = x
+# rsi = y
+# xmm0 = alpha
+# rdx = n
+vbroadcastsd %xmm0, %ymm3
+.loop:
+vmovupd (%rdi), %ymm1
+vmovupd (%rsi), %ymm2
+vfmadd231pd %ymm1,%ymm3,%ymm2
+vmovupd %ymm2, (%rsi)
+addq $32,%rdi
+addq $32,%rsi
+addq $-1,%rdx
+test %rdx,%rdx
+jnz .loop
+### axpy --isa fma256 --arith fma --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# rdi = x
+# rsi = y
+# xmm0 = alpha
+# rdx = n
+vbroadcastsd %xmm0, %ymm7
+.loop:
+vmovupd (%rdi), %ymm1
+vmovupd (%rsi), %ymm4
+vmovupd 32(%rdi), %ymm2
+vmovupd 32(%rsi), %ymm5
+vmovupd 64(%rdi), %ymm3
+vmovupd 64(%rsi), %ymm6
+vfmadd231pd %ymm1,%ymm7,%ymm4
+vfmadd231pd %ymm2,%ymm7,%ymm5
+vfmadd231pd %ymm3,%ymm7,%ymm6
+vmovupd %ymm4, (%rsi)
+vmovupd %ymm5, 32(%rsi)
+vmovupd %ymm6, 64(%rsi)
+addq $96,%rdi
+addq $96,%rsi
+addq $-1,%rdx
+test %rdx,%rdx
+jnz .loop
+### axpy --isa fma256 --arith fmul_fadd --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# rdi = x
+# rsi = y
+# xmm0 = alpha
+# rdx = n
+vbroadcastsd %xmm0, %ymm3
+.loop:
+vmovupd (%rdi), %ymm1
+vmovupd (%rsi), %ymm2
+vmulpd %ymm1,%ymm3,%ymm1
+vaddpd %ymm1,%ymm2,%ymm2
+vmovupd %ymm2, (%rsi)
+addq $32,%rdi
+addq $32,%rsi
+addq $-1,%rdx
+test %rdx,%rdx
+jnz .loop
+### axpy --isa fma256 --arith fmul_fadd --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# rdi = x
+# rsi = y
+# xmm0 = alpha
+# rdx = n
+vbroadcastsd %xmm0, %ymm7
+.loop:
+vmovupd (%rdi), %ymm1
+vmovupd (%rsi), %ymm4
+vmovupd 32(%rdi), %ymm2
+vmovupd 32(%rsi), %ymm5
+vmovupd 64(%rdi), %ymm3
+vmovupd 64(%rsi), %ymm6
+vmulpd %ymm1,%ymm7,%ymm1
+vaddpd %ymm1,%ymm4,%ymm4
+vmulpd %ymm2,%ymm7,%ymm2
+vaddpd %ymm2,%ymm5,%ymm5
+vmulpd %ymm3,%ymm7,%ymm3
+vaddpd %ymm3,%ymm6,%ymm6
+vmovupd %ymm4, (%rsi)
+vmovupd %ymm5, 32(%rsi)
+vmovupd %ymm6, 64(%rsi)
+addq $96,%rdi
+addq $96,%rsi
+addq $-1,%rdx
+test %rdx,%rdx
+jnz .loop
+### axpy --isa neon --arith fma --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# x0 = x
+# x1 = y
+# d0 = alpha
+# x2 = n
+dup v3.2d, v0.d[0]
+.loop:
+ldr q1, [x0]
+ldr q2, [x1]
+fmla v2.2d,v1.2d,v3.2d
+str q2, [x1]
+add x0,x0,#16
+add x1,x1,#16
+add x2,x2,#-1
+cbnz x2,.loop
+### axpy --isa neon --arith fma --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# x0 = x
+# x1 = y
+# d0 = alpha
+# x2 = n
+dup v7.2d, v0.d[0]
+.loop:
+ldr q1, [x0]
+ldr q4, [x1]
+ldr q2, [x0, #16]
+ldr q5, [x1, #16]
+ldr q3, [x0, #32]
+ldr q6, [x1, #32]
+fmla v4.2d,v1.2d,v7.2d
+fmla v5.2d,v2.2d,v7.2d
+fmla v6.2d,v3.2d,v7.2d
+str q4, [x1]
+str q5, [x1, #16]
+str q6, [x1, #32]
+add x0,x0,#48
+add x1,x1,#48
+add x2,x2,#-1
+cbnz x2,.loop
+### axpy --isa neon --arith fmul_fadd --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# x0 = x
+# x1 = y
+# d0 = alpha
+# x2 = n
+dup v3.2d, v0.d[0]
+.loop:
+ldr q1, [x0]
+ldr q2, [x1]
+fmul v1.2d,v1.2d,v3.2d
+fadd v2.2d,v1.2d,v2.2d
+str q2, [x1]
+add x0,x0,#16
+add x1,x1,#16
+add x2,x2,#-1
+cbnz x2,.loop
+### axpy --isa neon --arith fmul_fadd --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# x0 = x
+# x1 = y
+# d0 = alpha
+# x2 = n
+dup v7.2d, v0.d[0]
+.loop:
+ldr q1, [x0]
+ldr q4, [x1]
+ldr q2, [x0, #16]
+ldr q5, [x1, #16]
+ldr q3, [x0, #32]
+ldr q6, [x1, #32]
+fmul v1.2d,v1.2d,v7.2d
+fadd v4.2d,v1.2d,v4.2d
+fmul v2.2d,v2.2d,v7.2d
+fadd v5.2d,v2.2d,v5.2d
+fmul v3.2d,v3.2d,v7.2d
+fadd v6.2d,v3.2d,v6.2d
+str q4, [x1]
+str q5, [x1, #16]
+str q6, [x1, #32]
+add x0,x0,#48
+add x1,x1,#48
+add x2,x2,#-1
+cbnz x2,.loop
+### axpy --isa rvv --arith fma --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# a0 = x
+# a1 = y
+# f10 = alpha
+# a2 = n
+vsetvli t0, zero, e64, m1, ta, ma
+slli t0,t0,3
+.loop:
+vle64.v v1, (a0)
+vle64.v v2, (a1)
+vfmacc.vf v2,f10,v1
+vse64.v v2, (a1)
+add a0,a0,t0
+add a1,a1,t0
+add a2,a2,-1
+bne a2,zero,.loop
+### axpy --isa rvv --arith fma --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# a0 = x
+# a1 = y
+# f10 = alpha
+# a2 = n
+vsetvli t0, zero, e64, m1, ta, ma
+slli t0,t0,3
+.loop:
+vle64.v v1, (a0)
+vle64.v v4, (a1)
+vfmacc.vf v4,f10,v1
+vse64.v v4, (a1)
+add a0,a0,t0
+add a1,a1,t0
+vle64.v v2, (a0)
+vle64.v v5, (a1)
+vfmacc.vf v5,f10,v2
+vse64.v v5, (a1)
+add a0,a0,t0
+add a1,a1,t0
+vle64.v v3, (a0)
+vle64.v v6, (a1)
+vfmacc.vf v6,f10,v3
+vse64.v v6, (a1)
+add a0,a0,t0
+add a1,a1,t0
+add a2,a2,-1
+bne a2,zero,.loop
+### axpy --isa rvv --arith fmul_fadd --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# a0 = x
+# a1 = y
+# f10 = alpha
+# a2 = n
+vsetvli t0, zero, e64, m1, ta, ma
+slli t0,t0,3
+.loop:
+vle64.v v1, (a0)
+vle64.v v2, (a1)
+vfmul.vf v1,v1,f10
+vfadd.vv v2,v1,v2
+vse64.v v2, (a1)
+add a0,a0,t0
+add a1,a1,t0
+add a2,a2,-1
+bne a2,zero,.loop
+### axpy --isa rvv --arith fmul_fadd --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# a0 = x
+# a1 = y
+# f10 = alpha
+# a2 = n
+vsetvli t0, zero, e64, m1, ta, ma
+slli t0,t0,3
+.loop:
+vle64.v v1, (a0)
+vle64.v v4, (a1)
+vfmul.vf v1,v1,f10
+vfadd.vv v4,v1,v4
+vse64.v v4, (a1)
+add a0,a0,t0
+add a1,a1,t0
+vle64.v v2, (a0)
+vle64.v v5, (a1)
+vfmul.vf v2,v2,f10
+vfadd.vv v5,v2,v5
+vse64.v v5, (a1)
+add a0,a0,t0
+add a1,a1,t0
+vle64.v v3, (a0)
+vle64.v v6, (a1)
+vfmul.vf v3,v3,f10
+vfadd.vv v6,v3,v6
+vse64.v v6, (a1)
+add a0,a0,t0
+add a1,a1,t0
+add a2,a2,-1
+bne a2,zero,.loop
+### axpy --isa sme --arith fma --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# x0 = x
+# x1 = y
+# d0 = alpha
+# x2 = n
+smstart
+ptrue p0.d
+ptrue pn8.d
+ptrue p1.d
+dup z3.d, z0.d[0]
+.loop:
+ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
+ld1d {z2.d}, p1/z, [x1, #0, MUL VL]
+fmla z2.d,p1/m,z1.d,z3.d
+st1d {z2.d}, p1, [x1, #0, MUL VL]
+incb x0, ALL, MUL #1
+incb x1, ALL, MUL #1
+add x2,x2,#-1
+cbnz x2,.loop
+smstop
+### axpy --isa sme --arith fma --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# x0 = x
+# x1 = y
+# d0 = alpha
+# x2 = n
+smstart
+ptrue p0.d
+ptrue pn8.d
+ptrue p1.d
+dup z7.d, z0.d[0]
+.loop:
+ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
+ld1d {z4.d}, p1/z, [x1, #0, MUL VL]
+ld1d {z2.d}, p1/z, [x0, #1, MUL VL]
+ld1d {z5.d}, p1/z, [x1, #1, MUL VL]
+ld1d {z3.d}, p1/z, [x0, #2, MUL VL]
+ld1d {z6.d}, p1/z, [x1, #2, MUL VL]
+fmla z4.d,p1/m,z1.d,z7.d
+fmla z5.d,p1/m,z2.d,z7.d
+fmla z6.d,p1/m,z3.d,z7.d
+st1d {z4.d}, p1, [x1, #0, MUL VL]
+st1d {z5.d}, p1, [x1, #1, MUL VL]
+st1d {z6.d}, p1, [x1, #2, MUL VL]
+incb x0, ALL, MUL #3
+incb x1, ALL, MUL #3
+add x2,x2,#-1
+cbnz x2,.loop
+smstop
+### axpy --isa sme --arith fmul_fadd --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# x0 = x
+# x1 = y
+# d0 = alpha
+# x2 = n
+smstart
+ptrue p0.d
+ptrue pn8.d
+ptrue p1.d
+dup z3.d, z0.d[0]
+.loop:
+ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
+ld1d {z2.d}, p1/z, [x1, #0, MUL VL]
+fmul z1.d,z1.d,z3.d
+fadd z2.d,z1.d,z2.d
+st1d {z2.d}, p1, [x1, #0, MUL VL]
+incb x0, ALL, MUL #1
+incb x1, ALL, MUL #1
+add x2,x2,#-1
+cbnz x2,.loop
+smstop
+### axpy --isa sme --arith fmul_fadd --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# x0 = x
+# x1 = y
+# d0 = alpha
+# x2 = n
+smstart
+ptrue p0.d
+ptrue pn8.d
+ptrue p1.d
+dup z7.d, z0.d[0]
+.loop:
+ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
+ld1d {z4.d}, p1/z, [x1, #0, MUL VL]
+ld1d {z2.d}, p1/z, [x0, #1, MUL VL]
+ld1d {z5.d}, p1/z, [x1, #1, MUL VL]
+ld1d {z3.d}, p1/z, [x0, #2, MUL VL]
+ld1d {z6.d}, p1/z, [x1, #2, MUL VL]
+fmul z1.d,z1.d,z7.d
+fadd z4.d,z1.d,z4.d
+fmul z2.d,z2.d,z7.d
+fadd z5.d,z2.d,z5.d
+fmul z3.d,z3.d,z7.d
+fadd z6.d,z3.d,z6.d
+st1d {z4.d}, p1, [x1, #0, MUL VL]
+st1d {z5.d}, p1, [x1, #1, MUL VL]
+st1d {z6.d}, p1, [x1, #2, MUL VL]
+incb x0, ALL, MUL #3
+incb x1, ALL, MUL #3
+add x2,x2,#-1
+cbnz x2,.loop
+smstop
+### axpy --isa sve --arith fma --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# x0 = x
+# x1 = y
+# d0 = alpha
+# x2 = n
+ptrue p0.d
+ptrue p1.d
+dup z3.d, z0.d[0]
+.loop:
+ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
+ld1d {z2.d}, p1/z, [x1, #0, MUL VL]
+fmla z2.d,p1/m,z1.d,z3.d
+st1d {z2.d}, p1, [x1, #0, MUL VL]
+incb x0, ALL, MUL #1
+incb x1, ALL, MUL #1
+add x2,x2,#-1
+cbnz x2,.loop
+### axpy --isa sve --arith fma --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# x0 = x
+# x1 = y
+# d0 = alpha
+# x2 = n
+ptrue p0.d
+ptrue p1.d
+dup z7.d, z0.d[0]
+.loop:
+ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
+ld1d {z4.d}, p1/z, [x1, #0, MUL VL]
+ld1d {z2.d}, p1/z, [x0, #1, MUL VL]
+ld1d {z5.d}, p1/z, [x1, #1, MUL VL]
+ld1d {z3.d}, p1/z, [x0, #2, MUL VL]
+ld1d {z6.d}, p1/z, [x1, #2, MUL VL]
+fmla z4.d,p1/m,z1.d,z7.d
+fmla z5.d,p1/m,z2.d,z7.d
+fmla z6.d,p1/m,z3.d,z7.d
+st1d {z4.d}, p1, [x1, #0, MUL VL]
+st1d {z5.d}, p1, [x1, #1, MUL VL]
+st1d {z6.d}, p1, [x1, #2, MUL VL]
+incb x0, ALL, MUL #3
+incb x1, ALL, MUL #3
+add x2,x2,#-1
+cbnz x2,.loop
+### axpy --isa sve --arith fmul_fadd --unroll 1
+.section .text
+.global myfunction
+myfunction:
+# x0 = x
+# x1 = y
+# d0 = alpha
+# x2 = n
+ptrue p0.d
+ptrue p1.d
+dup z3.d, z0.d[0]
+.loop:
+ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
+ld1d {z2.d}, p1/z, [x1, #0, MUL VL]
+fmul z1.d,z1.d,z3.d
+fadd z2.d,z1.d,z2.d
+st1d {z2.d}, p1, [x1, #0, MUL VL]
+incb x0, ALL, MUL #1
+incb x1, ALL, MUL #1
+add x2,x2,#-1
+cbnz x2,.loop
+### axpy --isa sve --arith fmul_fadd --unroll 3
+.section .text
+.global myfunction
+myfunction:
+# x0 = x
+# x1 = y
+# d0 = alpha
+# x2 = n
+ptrue p0.d
+ptrue p1.d
+dup z7.d, z0.d[0]
+.loop:
+ld1d {z1.d}, p1/z, [x0, #0, MUL VL]
+ld1d {z4.d}, p1/z, [x1, #0, MUL VL]
+ld1d {z2.d}, p1/z, [x0, #1, MUL VL]
+ld1d {z5.d}, p1/z, [x1, #1, MUL VL]
+ld1d {z3.d}, p1/z, [x0, #2, MUL VL]
+ld1d {z6.d}, p1/z, [x1, #2, MUL VL]
+fmul z1.d,z1.d,z7.d
+fadd z4.d,z1.d,z4.d
+fmul z2.d,z2.d,z7.d
+fadd z5.d,z2.d,z5.d
+fmul z3.d,z3.d,z7.d
+fadd z6.d,z3.d,z6.d
+st1d {z4.d}, p1, [x1, #0, MUL VL]
+st1d {z5.d}, p1, [x1, #1, MUL VL]
+st1d {z6.d}, p1, [x1, #2, MUL VL]
+incb x0, ALL, MUL #3
+incb x1, ALL, MUL #3
+add x2,x2,#-1
+cbnz x2,.loop

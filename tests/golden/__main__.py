@@ -10,13 +10,13 @@ from .snapshot import assemble, backends, compare, fails_path, read, snapshot, w
 def main(argv):
     if not argv or argv[0] not in ("record", "diff"):
         sys.exit(__doc__)
-    names = argv[1:] or list(backends())
+    names = argv[1:] or [*backends(), "examples"]
     for name in names:
         if "record" == argv[0]:
             entries = snapshot(name)
             write(name, entries)
             errors = sum(v.startswith("!") for v in entries.values())
-            failing = assemble(name, entries)
+            failing = assemble(name, entries) if "examples" != name else None
             if failing is not None:
                 with open(fails_path(name), "w") as f:
                     f.write("".join(k + "\n" for k in failing))

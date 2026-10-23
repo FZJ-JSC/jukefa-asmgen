@@ -137,7 +137,7 @@ Also agreed:
 Each phase lists its steps and when it is done. Status: [ ] open, [~] in
 progress, [x] done.
 
-### Phase 0: a safety net [~]
+### Phase 0: a safety net [x]
 
 - [x] Golden snapshots (`tests/golden`, `tests/test_golden.py`): every
       base method as `test_asm_implemented` calls it, those with a data type
@@ -152,9 +152,16 @@ progress, [x] done.
 - [x] The snapshots assembled by each backend's assembler (rvv071: text
       only): the entries that don't assemble today are the baseline, an
       entry that stops assembling fails.
-- [ ] `examples/axpy.py` run as a test.
-- [ ] ukrgen: snapshots of a few family-pipeline kernels per ISA.
-- [ ] ukropt: `pairs` and `fmaload` built for RVV, NEON, SVE, x86.
+- [x] `examples/axpy.py` run as a test (`tests/test_examples.py`): every
+      ISA it offers, both arithmetic forms, unrolled once and three times,
+      against a recording, its output assembled. It was broken - it built
+      its register tracker from `gen.max_*regs`, which the backends
+      implement as methods - and now takes `gen.get_reg_tracker()`.
+- [x] ukrgen: snapshots of the family pipeline's kernels
+      (`tests/flow/golden_kernels`): five configurations' families at their
+      first sizes (RVV, NEON, SVE, AVX2, AVX-512) and the K1's 2v x 14.
+- [x] ukropt: `pairs` and `fmaload` built for RVV, NEON, SVE, x86
+      (`tests/test_builds.py`), where the compilers are there.
 
 Done when: the snapshots pass on the unchanged code, and a deliberate
 change to one method's output fails them. (Checked: RVV's `zero_vreg`
@@ -169,10 +176,15 @@ Found by the snapshots, for the phases to come:
   only be instantiated by guessing.
 - 11 RVV and 11 SVE `move` forms are rejected by their own signatures
   ("Invalid configuration").
+- `max_gregs`, `max_vregs`, `max_fregs`, `max_mregs`, `max_tregs` are
+  properties in the base class and methods in the backends (and
+  `get_reg_tracker` calls them): one of the two, phase 7.
 - Entries that don't assemble (fma128 346, fma256 286, avx512 289, neon
-  262, sve 312, sme 556, rvv 357): partly immediates swept past what
+  262, sve 312, sme 549, rvv 193): partly immediates swept past what
   encodes, inline-only methods and label references - by design - partly
-  to triage.
+  to triage. The assemblers take the extensions this binutils knows (RVV
+  without the BF16 vector extensions, SME with SME2: axpy's SME code uses
+  predicate-as-counter registers).
 
 ### Phase 1: `fadd` → `add`, `fmul` → `mul` [ ]
 
@@ -269,6 +281,8 @@ instruction stream:
 - [ ] `available(tag)` on the register tracker.
 - [ ] Lane ranges as operand constraints: replaces `indexable_elements`.
 - [ ] `simd_size` raises on VLA.
+- [ ] `max_*regs`: properties or methods, the same in the base class and the
+      backends.
 - [ ] Compiler flags from the generator and its enabled features (or an
       improved `compiler_presets`), its users moved.
 
@@ -303,3 +317,5 @@ ukropt:
   fee96f1).
 - 2026-10-23: phase 0 - golden snapshots of methods and operations on all
   eight backends, with an assembly baseline.
+- 2026-10-23: phase 0 done - axpy as a test (fixed), ukrgen's golden
+  kernels (its 0156), ukropt's build checks (its 0010).

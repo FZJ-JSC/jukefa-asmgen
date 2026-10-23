@@ -297,6 +297,8 @@ def operation_entries(name: str) -> dict:
 
 
 def snapshot(name: str) -> dict:
+    if "examples" == name:
+        return examples_snapshot()
     out = method_entries(name)
     out.update(operation_entries(name))
     return out
@@ -342,10 +344,10 @@ def compare(name: str) -> tuple[list, list, list]:
 ASSEMBLERS = {
     # the assemblers themselves: compiler drivers check -march against their
     # own (older) lists - GCC 13's has no +sme
-    "rvv": ["riscv64-linux-gnu-as", "-march=rv64gcv_zfh_zvfh_zvfbfmin_zvfbfwma"],
+    "rvv": ["riscv64-linux-gnu-as", "-march=rv64gcv_zfh_zvfh"],
     "neon": ["aarch64-linux-gnu-as", "-march=armv8.6-a+fp16+fp16fml+bf16+i8mm+dotprod"],
     "sve": ["aarch64-linux-gnu-as", "-march=armv9-a+sve2+bf16+i8mm+f64mm"],
-    "sme": ["aarch64-linux-gnu-as", "-march=armv9-a+sme+sme-f64f64+sme-i16i64+bf16"],
+    "sme": ["aarch64-linux-gnu-as", "-march=armv9-a+sme2+sme-f64f64+sme-i16i64+bf16"],
     "fma128": ["as"], "fma256": ["as"], "avx512": ["as"],
 }
 
@@ -390,3 +392,36 @@ def assemble(name: str, entries: dict) -> list | None:
 
 def fails_path(name: str) -> str:
     return os.path.join(DATA, f"{name}.asm-fails.txt")
+
+
+EXAMPLES = os.path.join(os.path.dirname(os.path.dirname(HERE)), "examples")
+
+
+def examples_snapshot() -> dict:
+    """
+    examples/axpy.py's output for every ISA it offers, both arithmetic
+    forms, unrolled once and three times: the text, or how it failed
+    """
+    import importlib.util
+    import subprocess
+    import sys
+    script = os.path.join(EXAMPLES, "axpy.py")
+    spec = importlib.util.spec_from_file_location("axpy_example", script)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    env = dict(os.environ, PYTHONPATH=os.pathsep.join(
+        [os.path.join(os.path.dirname(EXAMPLES), "src"), os.environ.get("PYTHONPATH", "")]))
+    out = {}
+    for isa in module.ISA_MODULES:
+        for arith in ("fma", "fmul_fadd"):
+            for unroll in (1, 3):
+                r = subprocess.run([sys.executable, script, "--isa", isa, "--arith", arith,
+                                    "--unroll", str(unroll)], capture_output=True, text=True, env=env)
+                key = f"axpy --isa {isa} --arith {arith} --unroll {unroll}"
+                out[key] = (_text(r.stdout) if 0 == r.returncode else
+                            f"!exit {r.returncode}: " + (r.stderr.strip().splitlines() or [""])[-1][:160])
+    return out
+
+
+def example_isa(key: str) -> str:
+    return key.split("--isa ")[1].split()[0]

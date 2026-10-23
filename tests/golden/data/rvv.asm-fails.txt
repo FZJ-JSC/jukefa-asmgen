@@ -1,14 +1,7 @@
-method add_greg_greg(dst=t0, reg1=t1, reg2=t2)
-method add_greg_imm(imm=-2048, reg=t0)
 method add_greg_imm(imm=-2049, reg=t0)
-method add_greg_imm(imm=2047, reg=t0)
 method add_greg_imm(imm=2048, reg=t0)
-method add_greg_imm(imm=255, reg=t0)
-method add_greg_imm(imm=256, reg=t0)
-method add_greg_imm(imm=40, reg=t0)
 method add_greg_imm(imm=4096, reg=t0)
 method c_simd_size_function()
-method cb(cmp=NE, label=notequal, reg1=t0, reg2=t1)
 method create_callconv(name=default)
 method freg(dt=DOUBLE, reg_idx=0)
 method freg(dt=HALF, reg_idx=0)
@@ -21,58 +14,18 @@ method indexable_elements(dt=HALF)
 method indexable_elements(dt=SINGLE)
 method is_vla()
 method isaclear()
-method jfzero(dt=DOUBLE, freg1=f0, freg2=f1, greg=t0, label=someloop)
-method jfzero(dt=HALF, freg1=f0, freg2=f1, greg=t0, label=someloop)
-method jfzero(dt=SINGLE, freg1=f0, freg2=f1, greg=t0, label=someloop)
-method jvzero(dt=DOUBLE, freg=f2, greg=t0, label=someloop, vreg1=v0, vreg2=v1)
-method jvzero(dt=HALF, freg=f2, greg=t0, label=someloop, vreg1=v0, vreg2=v1)
-method jvzero(dt=SINGLE, freg=f2, greg=t0, label=someloop, vreg1=v0, vreg2=v1)
-method jzero(label=someloop, reg=t0)
-method kiterkleft(kleftreg=t1, kreg=t0, tmpreg=t2, unroll=4)
 method labelstr(label=label)
-method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=-2048)
 method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=-2049)
-method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=-8)
-method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=0)
-method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=1)
-method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=2047)
 method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=2048)
-method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=255)
-method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=256)
-method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=4)
 method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=4096)
-method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=8)
-method load_freg(areg=t0, dst=f0, dt=HALF, offset=4)
-method load_freg(areg=t0, dst=f0, dt=SINGLE, offset=4)
-method load_greg(areg=t0, dst=t1, offset=-2048)
 method load_greg(areg=t0, dst=t1, offset=-2049)
-method load_greg(areg=t0, dst=t1, offset=-8)
-method load_greg(areg=t0, dst=t1, offset=0)
-method load_greg(areg=t0, dst=t1, offset=1)
-method load_greg(areg=t0, dst=t1, offset=2047)
 method load_greg(areg=t0, dst=t1, offset=2048)
-method load_greg(areg=t0, dst=t1, offset=255)
-method load_greg(areg=t0, dst=t1, offset=256)
-method load_greg(areg=t0, dst=t1, offset=4)
 method load_greg(areg=t0, dst=t1, offset=4096)
-method load_greg(areg=t0, dst=t1, offset=8)
 method load_pointer(areg=t0, name=someparam)
-method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-2048)
 method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-2049)
-method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-8)
-method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=0)
-method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=1)
-method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=2047)
 method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=2048)
-method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=255)
-method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=256)
-method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=4)
 method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=4096)
-method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=8)
-method load_scalar_immoff(areg=t0, dt=HALF, freg=f0, offset=4)
-method load_scalar_immoff(areg=t0, dt=SINGLE, freg=f0, offset=4)
 method loopbegin_nz(label=someloop, labelskip=someloop_nz, reg=t0)
-method loopend(label=someloop, reg=t0)
 method max_bcast_immoff(dt=DOUBLE)
 method max_bcast_immoff(dt=HALF)
 method max_bcast_immoff(dt=SINGLE)
@@ -101,24 +54,9 @@ method min_load_immoff(dt=HALF)
 method min_load_immoff(dt=SINGLE)
 method min_load_voff()
 method min_prefetch_offset()
-method mov_freg(dst=f1, dt=DOUBLE, src=f0)
-method mov_freg(dst=f1, dt=SINGLE, src=f0)
-method mov_greg(dst=t1, src=t0)
-method mov_greg_imm(imm=-2048, reg=t0)
-method mov_greg_imm(imm=-2049, reg=t0)
-method mov_greg_imm(imm=2047, reg=t0)
-method mov_greg_imm(imm=2048, reg=t0)
-method mov_greg_imm(imm=255, reg=t0)
-method mov_greg_imm(imm=256, reg=t0)
-method mov_greg_imm(imm=40, reg=t0)
-method mov_greg_to_freg(dst=f1, dt=DOUBLE, src=t0)
-method mov_greg_to_freg(dst=f1, dt=HALF, src=t0)
-method mov_greg_to_freg(dst=f1, dt=SINGLE, src=t0)
 method mov_greg_to_param(param=someparam, src=t0)
 method mov_param_to_greg(dst=t0, param=someparam)
 method mov_param_to_greg_shift(bit_count=2, dst=t0, param=someparam)
-method mul_greg_greg(dst=t0, reg1=t1, reg2=t2)
-method mul_greg_imm(dst=t0, factor=40, src=t1)
 method prefetch_l1_immoff(areg=t0, offset=-2048)
 method prefetch_l1_immoff(areg=t0, offset=-2049)
 method prefetch_l1_immoff(areg=t0, offset=-8)
@@ -130,55 +68,19 @@ method prefetch_l1_immoff(areg=t0, offset=255)
 method prefetch_l1_immoff(areg=t0, offset=256)
 method prefetch_l1_immoff(areg=t0, offset=4096)
 method prefetch_l1_immoff(areg=t0, offset=8)
-method shift_greg_right(bit_count=4, reg=t0)
 method simd_size()
-method store_freg(areg=t0, dt=DOUBLE, offset=-2048, src=f0)
 method store_freg(areg=t0, dt=DOUBLE, offset=-2049, src=f0)
-method store_freg(areg=t0, dt=DOUBLE, offset=-8, src=f0)
-method store_freg(areg=t0, dt=DOUBLE, offset=0, src=f0)
-method store_freg(areg=t0, dt=DOUBLE, offset=1, src=f0)
-method store_freg(areg=t0, dt=DOUBLE, offset=2047, src=f0)
 method store_freg(areg=t0, dt=DOUBLE, offset=2048, src=f0)
-method store_freg(areg=t0, dt=DOUBLE, offset=255, src=f0)
-method store_freg(areg=t0, dt=DOUBLE, offset=256, src=f0)
-method store_freg(areg=t0, dt=DOUBLE, offset=4, src=f0)
 method store_freg(areg=t0, dt=DOUBLE, offset=4096, src=f0)
-method store_freg(areg=t0, dt=DOUBLE, offset=8, src=f0)
-method store_freg(areg=t0, dt=HALF, offset=4, src=f0)
-method store_freg(areg=t0, dt=SINGLE, offset=4, src=f0)
-method store_greg(areg=t0, offset=-2048, src=t1)
 method store_greg(areg=t0, offset=-2049, src=t1)
-method store_greg(areg=t0, offset=-8, src=t1)
-method store_greg(areg=t0, offset=0, src=t1)
-method store_greg(areg=t0, offset=1, src=t1)
-method store_greg(areg=t0, offset=2047, src=t1)
 method store_greg(areg=t0, offset=2048, src=t1)
-method store_greg(areg=t0, offset=255, src=t1)
-method store_greg(areg=t0, offset=256, src=t1)
-method store_greg(areg=t0, offset=4, src=t1)
 method store_greg(areg=t0, offset=4096, src=t1)
-method store_greg(areg=t0, offset=8, src=t1)
-method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-2048)
 method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-2049)
-method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-8)
-method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=0)
-method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=1)
-method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=2047)
 method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=2048)
-method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=255)
-method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=256)
-method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=4)
 method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=4096)
-method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=8)
-method store_scalar_immoff(areg=t0, dt=HALF, freg=f0, offset=4)
-method store_scalar_immoff(areg=t0, dt=SINGLE, freg=f0, offset=4)
-method sub_greg_greg(dst=t0, reg1=t1, reg2=t2)
 method supported_on_host()
 method supportedby_cpuinfo(cpuinfo=invalid_isa)
 method vreg(reg_idx=0)
-method zero_freg(dt=DOUBLE, freg=f0)
-method zero_freg(dt=SINGLE, freg=f0)
-method zero_greg(greg=t0)
 op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
 op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
 op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
@@ -238,32 +140,10 @@ op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8 cdreg:REGISTER:VEC:S
 op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
 op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT8
 op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
-op load [IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op load [IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
 op load [IOFFSET] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
 op load [IOFFSET] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
 op load [IOFFSET] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
 op load [IOFFSET] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op load [IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op load [IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op load [IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op load [IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op load [IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op load [IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op load [IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op load [IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op load [IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op load [IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op load [IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op load [IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op load [IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op load [IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op load [IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op load [IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op load [IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op load [IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op load [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op load [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
 op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE {nstructs:1}
 op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE{BCAST} {nstructs:1}
 op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 {nstructs:1}
@@ -290,45 +170,12 @@ op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 {nstructs:1}
 op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64{BCAST} {nstructs:1}
 op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 {nstructs:1}
 op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8{BCAST} {nstructs:1}
-op load [] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64
 op load [] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64
 op load [] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64
-op load [] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64
-op load [] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64
-op load [] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64
-op load [] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64
-op load [] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64
-op load [] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64
-op load [] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64
-op load [] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64
-op load [] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64
-op load [] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64
-op store [IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op store [IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
 op store [IOFFSET] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
 op store [IOFFSET] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
 op store [IOFFSET] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
 op store [IOFFSET] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op store [IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op store [IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op store [IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op store [IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op store [IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op store [IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op store [IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op store [IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op store [IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op store [IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op store [IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op store [IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op store [IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op store [IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op store [IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op store [IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op store [IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op store [IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-op store [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-op store [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
 op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE {nstructs:1}
 op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 {nstructs:1}
 op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 {nstructs:1}
@@ -342,16 +189,5 @@ op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 {nstructs:1
 op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 {nstructs:1}
 op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 {nstructs:1}
 op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 {nstructs:1}
-op store [] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64
 op store [] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64
 op store [] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64
-op store [] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64
-op store [] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64
-op store [] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64
-op store [] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64
-op store [] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64
-op store [] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64
-op store [] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64
-op store [] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64
-op store [] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64
-op store [] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64

@@ -140,10 +140,7 @@ def main():
     gen: asmgen = generator_class()
     gen.set_output_inline(False)
 
-    rt = reg_tracker(reg_type_init_list=[
-        ("greg", gen.max_gregs), ("freg", gen.max_fregs),
-        ("vreg", gen.max_vregs), ("mreg", gen.max_mregs)
-    ])
+    rt = gen.get_reg_tracker()
 
     cc = gen.create_callconv()
     cc.add_param("greg", "x")
