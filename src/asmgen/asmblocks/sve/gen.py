@@ -28,6 +28,8 @@ from .move import sve_move
 from ..neon import neon
 from ..aarch64.opd3 import aarch64_sub
 from ..aarch64.opd3 import aarch64_shl, aarch64_shr
+from ..op.operand import operand_modifier as _opd_mod
+from ...registers import asm_data_type as _ADT
 
 class sve(aarch64):
     """
@@ -158,10 +160,12 @@ class sve(aarch64):
         A register moved by offset vector lengths in bytes: incb forward, decb
         back, at most 16 a time
         """
+        # whole vector lengths: incb or decb, 16 at a time
         out, left = "", offset
         while left:
             n = max(-16, min(16, left))
-            out += self.asmwrap(f"{'incb' if n > 0 else 'decb'} {reg}, ALL, MUL #{abs(n)}")
+            out += self.add(adreg=reg, imm=n, cdreg=reg, a_dt=_ADT.UINT64, c_dt=_ADT.UINT64,
+                            operand_modifiers={'imm': {_opd_mod.VLSCALE}})
             left -= n
         return out
 

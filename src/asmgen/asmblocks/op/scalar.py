@@ -52,6 +52,14 @@ class scalar_arith(opd3):
         """
         return []
 
+    def vl_forms(self) -> list[list]:
+        """
+        Forms adding an immediate count of vector lengths (operand modifier
+        VLSCALE on imm), one list of constraints per form; none: no such
+        form (a fixed vector length is a byte count for imm)
+        """
+        return []
+
     def make_signatures(self) -> list[operation_signature]:
         sigs = []
         for dt in GREG_DTS:
@@ -60,6 +68,11 @@ class scalar_arith(opd3):
             if self.has_register_form():
                 sigs.append(operation_signature(modifiers=set(), structural_params={},
                                                 operands={"adreg": reg(), "bdreg": reg(), "cdreg": reg()}))
+            for constraints in self.vl_forms():
+                count = osh(ot.IMMEDIATE, orl.PARAM, None, None, modifiers={opd_mod.VLSCALE},
+                            value_constraints=list(constraints))
+                sigs.append(operation_signature(modifiers=set(), structural_params={},
+                                                operands={"adreg": reg(), "cdreg": reg(), "imm": count}))
             for constraints, requires in self.shift_forms():
                 amount = osh(ot.IMMEDIATE, orl.PARAM, None, None, value_constraints=list(constraints))
                 sigs.append(operation_signature(modifiers=set(), structural_params={}, requires=frozenset(requires),
@@ -75,7 +88,10 @@ class scalar_arith(opd3):
         return self._signatures
 
     # pylint: disable-next=arguments-differ
-    def implementation(self, *, adreg, cdreg, bdreg=None, imm=None, bdreg_shift=None, **_) -> str:
+    def implementation(self, *, adreg, cdreg, bdreg=None, imm=None, bdreg_shift=None,
+                       operand_modifiers=None, **_) -> str:
+        if imm is not None and opd_mod.VLSCALE in (operand_modifiers or {}).get("imm", set()):
+            return self.with_vl(cdreg, adreg, imm)
         if bdreg_shift is not None:
             return self.with_shifted(cdreg, adreg, bdreg, bdreg_shift)
         if imm is not None:
@@ -86,6 +102,12 @@ class scalar_arith(opd3):
         raise NotImplementedError(self.NIE_MESSAGE)
 
     def with_immediate(self, c, a, imm : int) -> str:
+        raise NotImplementedError(self.NIE_MESSAGE)
+
+    def with_vl(self, c, a, count : int) -> str:
+        """
+        c = a + count vector lengths (in bytes)
+        """
         raise NotImplementedError(self.NIE_MESSAGE)
 
     def with_shifted(self, c, a, b, shift : int) -> str:

@@ -210,7 +210,7 @@ and after alike.
 
 `fma` stays: fused multiply-accumulate.
 
-### Phase 2: scalar arithmetic as operations [~]
+### Phase 2: scalar arithmetic as operations [x]
 
 - [x] `add`, `sub`, `mul` on general registers (`op/scalar.py`): register
       and register, register and immediate (`imm`, by name - no `bdreg`), in
@@ -239,8 +239,14 @@ and after alike.
       change elements - lane shifts only move them, so they are `move`'s
       (`op/shift.py`). Immediate amounts 0..63; register amounts on RISC-V
       and AArch64 (x86 takes them only in `%cl`: not offered).
-- [ ] VL-scaled immediates for SVE's `addvl` (-32..31): replaces
-      `add_greg_voff` and `max_add_voff`.
+- [x] VL-scaled immediates: the operand modifier `VLSCALE` on `imm`, a
+      count of vector lengths - on SVE (and SME): -32..31, `incb`/`decb`
+      where the destination is the source and the count within 16 (as
+      `add_greg_voff` wrote), `addvl` otherwise. A fixed vector length is
+      a byte count: NEON's `add_greg_voff` adds `simd_size * offset`
+      through `add`, its immediates checked; x86's through `add_greg_imm`.
+      RVV has none (raises, as before; `set(VLEN)`, phase 4).
+      `max_add_voff` stays until the old emitter leaves (phases 8, 9).
 - [x] Vector generators delegate scalar registers to their base ISA's
       operations, as `rvv_opmem` does: the vector `opd3` bases (RVV,
       AArch64 SIMD, AVX) carry the scalar operation their class names
@@ -249,10 +255,10 @@ and after alike.
       to it first thing in `implementation`. `sub` is the scalar operation
       alone. `opd3.__call__` takes `bdreg` optional: with an immediate in
       its place the operands go by name.
-- [~] Wrappers: `add_greg_greg`, `add_greg_imm`, `sub_greg_greg`,
+- [x] Wrappers: `add_greg_greg`, `add_greg_imm`, `sub_greg_greg`,
       `mul_greg_greg`, `mul_greg_imm` (RISC-V's and AArch64's
       `mul_greg_imm` keep their two instructions), `shift_greg_left/right`,
-      `{add,sub}_greg_greg_shifted` done; `add_greg_voff` with step 2c.
+      `{add,sub}_greg_greg_shifted`, `add_greg_voff` (SVE's 16 at a time).
 - [x] asmgen's own `callconv` (stack pointer) on the operations.
 
 Checked (step 2a): the snapshots changed in three entries only, RISC-V's
@@ -266,6 +272,11 @@ outside 0..63, 48 entries over NEON, SVE and SME, raise now - besides RISC-V's
 shifted add with `ZBA` (the snapshots enable every feature) and the new
 signatures' entries; ukrgen's golden kernels and ukropt's builds unchanged.
 A debug print in `operation.execute`'s unsupported-modifier error is gone.
+
+Checked (step 2c): the snapshots changed in NEON's `add_greg_voff` with
+2047 and -2049 vector lengths only - text that didn't assemble - besides
+SVE's and SME's new signatures; SVE's `incb` sequences unchanged; ukrgen's
+golden kernels and ukropt's builds unchanged.
 
 ### Phase 3: moves [ ]
 
@@ -387,3 +398,5 @@ where `move` only moves them. A name to say so, as ukrgen's
   change to examples/axpy.py hadn't arrived upstream: 0038 has it again.
 - 2026-10-23: phase 2, step 2b - ISHIFT, shl and shr, RVV's ZBA feature
   (asmgen 0039); phase 10 added: opd3's rename.
+- 2026-10-23: phase 2 done, step 2c - VLSCALE, SVE's VL-scaled add,
+  add_greg_voff on the operations (asmgen 0040).

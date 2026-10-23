@@ -15,13 +15,13 @@ from ...op import (
     operand_modifier as opd_mod
 )
 from .base import sve_opd3_base
-from ...aarch64.opd3 import aarch64_add
+from .scalar import sve_scalar_add
 
 class sve_add(sve_opd3_base):
     """
     SVE implementation of add (fadd)
     """
-    scalar_class = aarch64_add
+    scalar_class = sve_scalar_add
     # unpredicated fadd/fmul (vectors) exist; the predicated forms are
     # destructive: Zdn is both the destination and the first source
     unpredicated = True

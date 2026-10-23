@@ -49,7 +49,7 @@ add x0,x0,#8
 ### method add_greg_voff(dt=DOUBLE, offset=-2048, reg=x0)
 add x0,x0,#-32768
 ### method add_greg_voff(dt=DOUBLE, offset=-2049, reg=x0)
-add x0,x0,#-32784
+!ValueError: value of imm fits none of the forms: value of imm must be >= -4095; or value of imm must be a multiple of 4096
 ### method add_greg_voff(dt=DOUBLE, offset=-8, reg=x0)
 add x0,x0,#-128
 ### method add_greg_voff(dt=DOUBLE, offset=0, reg=x0)
@@ -57,7 +57,7 @@ add x0,x0,#0
 ### method add_greg_voff(dt=DOUBLE, offset=1, reg=x0)
 add x0,x0,#16
 ### method add_greg_voff(dt=DOUBLE, offset=2047, reg=x0)
-add x0,x0,#32752
+!ValueError: value of imm fits none of the forms: value of imm must be <= 4095; or value of imm must be a multiple of 4096
 ### method add_greg_voff(dt=DOUBLE, offset=2048, reg=x0)
 add x0,x0,#32768
 ### method add_greg_voff(dt=DOUBLE, offset=255, reg=x0)
@@ -75,7 +75,7 @@ add x0,x0,#640
 ### method add_greg_voff(dt=SINGLE, offset=-2048, reg=x0)
 add x0,x0,#-32768
 ### method add_greg_voff(dt=SINGLE, offset=-2049, reg=x0)
-add x0,x0,#-32784
+!ValueError: value of imm fits none of the forms: value of imm must be >= -4095; or value of imm must be a multiple of 4096
 ### method add_greg_voff(dt=SINGLE, offset=-8, reg=x0)
 add x0,x0,#-128
 ### method add_greg_voff(dt=SINGLE, offset=0, reg=x0)
@@ -83,7 +83,7 @@ add x0,x0,#0
 ### method add_greg_voff(dt=SINGLE, offset=1, reg=x0)
 add x0,x0,#16
 ### method add_greg_voff(dt=SINGLE, offset=2047, reg=x0)
-add x0,x0,#32752
+!ValueError: value of imm fits none of the forms: value of imm must be <= 4095; or value of imm must be a multiple of 4096
 ### method add_greg_voff(dt=SINGLE, offset=2048, reg=x0)
 add x0,x0,#32768
 ### method add_greg_voff(dt=SINGLE, offset=255, reg=x0)

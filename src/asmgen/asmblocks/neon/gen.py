@@ -22,6 +22,7 @@ from .opmem import neon_load, neon_store
 from .move import neon_move
 from ..aarch64.opd3 import aarch64_sub
 from ..aarch64.opd3 import aarch64_shl, aarch64_shr
+from ...registers import asm_data_type as _ADT
 
 class neon(aarch64):
     """
@@ -148,8 +149,8 @@ class neon(aarch64):
         return f"inline size_t get_simd_size() {{ return {self.simd_size}; }}"
 
     def add_greg_voff(self, *, reg : greg_base, offset : int, dt : adt):
-        byte_offset = self.simd_size*offset
-        return self.asmwrap(f"add {reg},{reg},#{byte_offset}")
+        # a fixed vector length: the byte count, within add's immediates
+        return self.add(adreg=reg, imm=self.simd_size*offset, cdreg=reg, a_dt=_ADT.UINT64, c_dt=_ADT.UINT64)
 
     def zero_vreg(self, *, vreg : vreg_base, dt : adt):
         suf = self.dt_suffixes[dt]

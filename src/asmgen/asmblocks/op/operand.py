@@ -79,6 +79,7 @@ class operand_modifier(Enum):
     BCAST      = auto() # Broadcasts a scalar across a vector/tile register
     VF         = auto() # Vector is replaced by a scalar
     ISHIFT = auto()     # the operand shifted left by an immediate first (bdreg_shift): add, sub
+    VLSCALE = auto()    # an immediate counting vector lengths, in bytes: SVE's addvl, incb
 
 
 def is_register_type(val : Any, rt : register_type) -> bool:

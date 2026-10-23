@@ -1,7 +1,3 @@
-method add_greg_voff(dt=DOUBLE, offset=-2049, reg=x0)
-method add_greg_voff(dt=DOUBLE, offset=2047, reg=x0)
-method add_greg_voff(dt=SINGLE, offset=-2049, reg=x0)
-method add_greg_voff(dt=SINGLE, offset=2047, reg=x0)
 method c_simd_size_function()
 method create_callconv(name=default)
 method freg(dt=DOUBLE, reg_idx=0)

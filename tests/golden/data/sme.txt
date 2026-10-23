@@ -2449,6 +2449,10 @@ add x12,x10,x11, LSL #63
 add x11,x10,#-4095
 ### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
 add x11,x10,#4095
+### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-{VLSCALE}
+add x11,x10,#-32
+### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-{VLSCALE} @far
+add x11,x10,#31
 ### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 add x12,x10,x11
 ### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64{ISHIFT} cdreg:REGISTER:GP:UINT64 bdreg_shift:IMMEDIATE:-:-
@@ -2459,6 +2463,10 @@ add x12,x10,x11, LSL #63
 add x11,x10,#-4095
 ### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
 add x11,x10,#4095
+### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-{VLSCALE}
+add x11,x10,#-32
+### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-{VLSCALE} @far
+add x11,x10,#31
 ### op add [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16
 !KeyError: <asm_data_type.BF16: 5>
 ### op add [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16{BLOCKLANE} cdreg:REGISTER:VEC:BF16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}

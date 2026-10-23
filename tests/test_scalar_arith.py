@@ -160,5 +160,33 @@ class test_shifts(unittest.TestCase):
         with self.assertRaises(NotImplementedError):     # what ukrgen's probe catches
             a.sub_greg_greg_shifted(dst=a.greg(1), reg1=a.greg(1), reg2=a.greg(2), shift=1)
 
+class test_vector_lengths(unittest.TestCase):
+    """
+    imm{VLSCALE}: an immediate count of vector lengths (SVE)
+    """
+    def vl(self, g, a, n, c):
+        return plain(g.add(adreg=g.greg(a), imm=n, cdreg=g.greg(c), a_dt=U, c_dt=U,
+                           operand_modifiers={"imm": {opd_mod.VLSCALE}}))
+
+    def test_sve(self):
+        g = make(sve)
+        self.assertEqual("incb x1, ALL, MUL #3", self.vl(g, 1, 3, 1))
+        self.assertEqual("decb x1, ALL, MUL #16", self.vl(g, 1, -16, 1))
+        self.assertEqual("addvl x1,x1,#17", self.vl(g, 1, 17, 1))
+        self.assertEqual("addvl x3,x1,#-32", self.vl(g, 1, -32, 3))
+        for bad in (32, -33):
+            with self.subTest(n=bad), self.assertRaises(ValueError):
+                self.vl(g, 1, bad, 1)
+        self.assertEqual("incb x1, ALL, MUL #16 ; incb x1, ALL, MUL #4",
+                         plain(g.add_greg_voff(reg=g.greg(1), offset=20, dt=adt.FP64)))
+
+    def test_fixed_lengths_count_bytes(self):
+        n = make(neon)
+        with self.assertRaises(ValueError):          # no VL-scaled form: a byte count instead
+            self.vl(n, 1, 2, 1)
+        self.assertEqual("add x1,x1,#32", plain(n.add_greg_voff(reg=n.greg(1), offset=2, dt=adt.FP64)))
+        with self.assertRaises(ValueError):          # 2047 * 16 bytes: no add immediate
+            n.add_greg_voff(reg=n.greg(1), offset=2047, dt=adt.FP64)
+
 if __name__ == "__main__":
     unittest.main()
