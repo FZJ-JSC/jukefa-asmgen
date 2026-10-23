@@ -32,7 +32,7 @@ from .opd3 import avx_fma,avx_mul,avx_add
 from .opmem.load import avx128_load,avx256_load,avx512_load
 from .opmem.store import avx128_store,avx256_store,avx512_store
 from ..x86.opd3 import x86_sub
-from ..x86.opd3 import x86_shl, x86_shr
+from ..x86.opd3 import x86_shift
 from .opset import avx_opset
 from ..op.opset import opset_modifier as _opset_mod
 
@@ -72,8 +72,7 @@ class avx512(avxbase):
         self.store = avx512_store(asmwrap=self.asmwrap, rpref=self.rpref)
         self.move = avx_move(asmwrap=self.asmwrap, rpref=self.rpref, simd_bytes=64)
         self.sub = x86_sub(asmwrap=self.asmwrap, rpref=self.rpref)
-        self.shl = x86_shl(asmwrap=self.asmwrap, rpref=self.rpref)
-        self.shr = x86_shr(asmwrap=self.asmwrap, rpref=self.rpref)
+        self.shift = x86_shift(asmwrap=self.asmwrap, rpref=self.rpref)
         self.set = avx_opset(asmwrap=self.asmwrap, rpref=self.rpref, evex=True)
 
     def get_req_flags(self) -> list[str]:

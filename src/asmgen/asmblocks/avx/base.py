@@ -37,6 +37,8 @@ from ..op.operand import operand_modifier as _opd_mod
 from ..op.move import move_modifier as _move_mod
 from ..op.scalar import BITS_GP as _BITS_GP
 from ..op.opset import opset_modifier as _opset_mod
+from ..x86.types import DT_SUFFIXES
+from ..op.opd3 import opd3_modifier as _opd3_mod
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
@@ -124,15 +126,7 @@ class avxbase(asmgen):
                 break
         return supported
 
-    dt_suffixes = {
-            adt.DOUBLE : "d",
-            adt.SINGLE : "s",
-            adt.HALF   : "h",
-            adt.SINT8  : "b",
-            adt.SINT16 : "w",
-            adt.SINT32 : "d",
-            adt.SINT64 : "q",
-            }
+    dt_suffixes = DT_SUFFIXES
     size_suffixes = {
             1 : 'b',
             2 : 'w',
@@ -496,10 +490,10 @@ class avxbase(asmgen):
         return self.set(dreg=greg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, constant="zero")
 
     def add_greg_imm(self, *, reg : greg_base, imm : int):
-        return self.add(adreg=reg, imm=imm, cdreg=reg, a_dt=_GP, c_dt=_GP)
+        return self.add(adreg=reg, bimm=imm, cdreg=reg, a_dt=_GP, c_dt=_GP)
 
     def mul_greg_imm(self, *, src : greg_base, dst : greg_base, factor : int) -> str:
-        return self.mul(adreg=src, imm=factor, cdreg=dst, a_dt=_GP, c_dt=_GP)
+        return self.mul(adreg=src, bimm=factor, cdreg=dst, a_dt=_GP, c_dt=_GP)
 
     def mul_greg_greg(self, *, dst : greg_base, reg1 : greg_base, reg2 : greg_base) -> str:
         return self.mul(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
@@ -535,10 +529,10 @@ class avxbase(asmgen):
         return self.add_greg_imm(reg=reg, imm=offset)
 
     def shift_greg_left(self, *, reg : greg_base, bit_count : int) -> str:
-        return self.shl(adreg=reg, imm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP)
+        return self.shift(adreg=reg, bimm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP, modifiers={_opd3_mod.SHL})
 
     def shift_greg_right(self, *, reg : greg_base, bit_count : int) -> str:
-        return self.shr(adreg=reg, imm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP)
+        return self.shift(adreg=reg, bimm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP, modifiers={_opd3_mod.SHR})
 
     def greg(self, reg_idx : int) -> greg_base:
         return x86_greg(reg_idx=reg_idx)

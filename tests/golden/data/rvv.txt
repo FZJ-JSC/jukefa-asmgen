@@ -25,7 +25,7 @@ sh1add t0,t2,t1
 ### method add_greg_imm(imm=-2048, reg=t0)
 add t0,t0,-2048
 ### method add_greg_imm(imm=-2049, reg=t0)
-!ValueError: value of imm must be >= -2048
+!ValueError: value of bimm must be >= -2048
 ### method add_greg_imm(imm=-8, reg=t0)
 add t0,t0,-8
 ### method add_greg_imm(imm=0, reg=t0)
@@ -35,7 +35,7 @@ add t0,t0,1
 ### method add_greg_imm(imm=2047, reg=t0)
 add t0,t0,2047
 ### method add_greg_imm(imm=2048, reg=t0)
-!ValueError: value of imm must be <= 2047
+!ValueError: value of bimm must be <= 2047
 ### method add_greg_imm(imm=255, reg=t0)
 add t0,t0,255
 ### method add_greg_imm(imm=256, reg=t0)
@@ -43,7 +43,7 @@ add t0,t0,256
 ### method add_greg_imm(imm=40, reg=t0)
 add t0,t0,40
 ### method add_greg_imm(imm=4096, reg=t0)
-!ValueError: value of imm must be <= 2047
+!ValueError: value of bimm must be <= 2047
 ### method add_greg_imm(imm=8, reg=t0)
 add t0,t0,8
 ### method add_greg_voff(dt=DOUBLE, offset=-2048, reg=t0)
@@ -824,9 +824,9 @@ add s6,s4,s5
 sh1add s6,s5,s4
 ### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64{ISHIFT} cdreg:REGISTER:GP:SINT64 bdreg_shift:IMMEDIATE:-:- @far
 sh3add s6,s5,s4
-### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 add s5,s4,-2048
-### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:- @far
 add s5,s4,2047
 ### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 add s6,s4,s5
@@ -834,9 +834,9 @@ add s6,s4,s5
 sh1add s6,s5,s4
 ### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64{ISHIFT} cdreg:REGISTER:GP:UINT64 bdreg_shift:IMMEDIATE:-:- @far
 sh3add s6,s5,s4
-### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:-
 add s5,s4,-2048
-### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 add s5,s4,2047
 ### op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:FP:DOUBLE{VF} cdreg:REGISTER:VEC:DOUBLE
 vfadd.vf v2,v1,f1
@@ -2060,29 +2060,29 @@ vmv.v.i v1,0
 vmv.v.i v1,0
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 vmv.v.i v1,0
-### op shl [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+### op shift [SHL] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 sll s6,s4,s5
-### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 slli s5,s4,0
-### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:- @far
 slli s5,s4,63
-### op shl [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+### op shift [SHL] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 sll s6,s4,s5
-### op shl [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+### op shift [SHL] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:-
 slli s5,s4,0
-### op shl [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+### op shift [SHL] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 slli s5,s4,63
-### op shr [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+### op shift [SHR] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 srl s6,s4,s5
-### op shr [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+### op shift [SHR] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 srli s5,s4,0
-### op shr [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+### op shift [SHR] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:- @far
 srli s5,s4,63
-### op shr [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+### op shift [SHR] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 srl s6,s4,s5
-### op shr [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+### op shift [SHR] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:-
 srli s5,s4,0
-### op shr [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+### op shift [SHR] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 srli s5,s4,63
 ### op store [GSTRIDE] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
 vsse64.v v1, (s4), s5
@@ -2450,13 +2450,13 @@ vse64.v v1, (s4)
 vse8.v v1, (s4)
 ### op sub [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 sub s6,s4,s5
-### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 add s5,s4,2047
-### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:- @far
 add s5,s4,-2048
 ### op sub [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 sub s6,s4,s5
-### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:-
 add s5,s4,2047
-### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 add s5,s4,-2048

@@ -22,6 +22,18 @@ follow - ukrgen (`pack`) and ukropt (`master`).
    ranges, offsets, shifts, lanes - is an operand constraint, and "can this
    ISA do X" is a question to the signatures, not a call that may raise.
 
+## Conventions
+
+- Asm-generating methods - operations' helpers too (`with_register`,
+  `zero_greg`, ...) - take keyword arguments only, type-annotated, and
+  return the text.
+- An immediate in a register operand's place is named after it: `bdreg`'s
+  is `bimm`, so `c = a << b` documents either form.
+- Operation classes are named `op<kind>`: `opmem`, `opd3`, `opset`
+  (`move` follows in phase 10, as `opmove`), each ISA's in
+  `<isa>/op<kind>/{__init__,base,signatures}.py`.
+- Features that would fit but nothing needs: docs/POSSIBLE_FEATURES.md.
+
 ## Audit (asmgen c5a9324, ukrgen da8ee04, ukropt fee96f1)
 
 ### What asmgen offers
@@ -213,7 +225,7 @@ and after alike.
 ### Phase 2: scalar arithmetic as operations [x]
 
 - [x] `add`, `sub`, `mul` on general registers (`op/scalar.py`): register
-      and register, register and immediate (`imm`, by name - no `bdreg`), in
+      and register, register and immediate (`bimm`, by name - no `bdreg`), in
       `UINT64` and `SINT64`. Immediate ranges as constraints: RISC-V
       -2048..2047 (`sub`: -2047..2048, an `addi` negated); AArch64 up to
       4095, or a multiple of 4096 up to 4095 * 4096, either sign
@@ -235,12 +247,13 @@ and after alike.
       whose features never were, as every feature. Replaces
       `{add,sub}_greg_greg_shifted`, which raise `NotImplementedError`
       where no form fits as before: ukrgen's probe catches that.
-- [x] Shifts as operations `shl` and `shr` (logical): `opd3`, as bit shifts
-      change elements - lane shifts only move them, so they are `move`'s
-      (`op/shift.py`). Immediate amounts 0..63; register amounts on RISC-V
-      and AArch64 (x86 takes them only in `%cl`: not offered).
-- [x] VL-scaled immediates: the operand modifier `VLSCALE` on `imm`, a
-      count of vector lengths - on SVE (and SME): -32..31, `incb`/`decb`
+- [x] Shifts as the operation `shift` with `opd3_modifier.SHL` or `SHR`
+      (logical): `opd3`, as bit shifts change elements - lane shifts only
+      move them, so they are `move`'s (`op/shift.py`). Immediate amounts
+      (`bimm`) 0..63; register amounts on RISC-V and AArch64 (x86 takes
+      them only in `%cl`: not offered).
+- [x] VL-scaled immediates: `opd3_modifier.VOFFSET`, as opmem's - `bimm`
+      counts vector lengths - on SVE (and SME): -32..31, `incb`/`decb`
       where the destination is the source and the count within 16 (as
       `add_greg_voff` wrote), `addvl` otherwise. A fixed vector length is
       a byte count: NEON's `add_greg_voff` adds `simd_size * offset`
@@ -286,7 +299,10 @@ golden kernels and ukropt's builds unchanged.
       `x86_move`), carried by the vector moves as their `scalar_op` (SME's
       through SVE's move), calls whose registers are all scalar handed to
       it. `move_modifier.BITS` (new): UINT64 into DOUBLE, UINT32 into
-      SINGLE, UINT16 into HALF. The old methods' texts kept - x86's
+      SINGLE, UINT16 into HALF (a conversion, `CAST`, is a possible
+      feature). The ISAs' suffix tables are shared: RISC-V's in
+      `riscv64/types.py`, x86's (`DT_SUFFIXES`, the AVX generators'
+      `dt_suffixes`) in `x86/types.py`. The old methods' texts kept - x86's
       `vmovs{d,s,h}` with two unprefixed registers too, which doesn't
       assemble (a fix for later).
 - [ ] Parameters: `mov_greg_to_param`, `mov_param_to_greg[_shift]` as
@@ -442,3 +458,8 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   FP16 broadcast vpbroadcastw (asmgen 0042).
 - 2026-10-23: phase 4, step 4a - the set operation (opset), CONST zero,
   the zero_* methods on it (asmgen 0043).
+- 2026-10-23: corrections to phases 2 and 3 (asmgen 0044): shift with
+  SHL/SHR for shl and shr; bimm for imm; opd3_modifier VOFFSET for the
+  operand modifier VLSCALE; helpers keyword-only, annotated; suffix tables
+  shared; docs/POSSIBLE_FEATURES.md. The snapshots exercise VOFFSET's
+  forms now (addvl), which their instantiator missed before.

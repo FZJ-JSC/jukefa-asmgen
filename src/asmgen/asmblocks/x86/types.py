@@ -7,6 +7,7 @@
 X86_64 register types (scalar: GPRs and xmm scalar FP)
 """
 from ...registers import greg_base, freg_base
+from ...registers import asm_data_type as adt
 
 #pylint: disable=too-few-public-methods
 class x86_greg(greg_base):
@@ -72,3 +73,14 @@ class avx_freg(freg_base):
     def __str__(self) -> str:
         return f"xmm{self.idx}"
 
+
+# type suffixes: vmovs{d,s,h}, vbroadcasts{d,s}, the generators' dt_suffixes
+DT_SUFFIXES = {
+        adt.DOUBLE : "d",
+        adt.SINGLE : "s",
+        adt.HALF   : "h",
+        adt.SINT8  : "b",
+        adt.SINT16 : "w",
+        adt.SINT32 : "d",
+        adt.SINT64 : "q",
+        }

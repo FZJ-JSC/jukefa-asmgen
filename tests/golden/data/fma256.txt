@@ -823,10 +823,10 @@ addq %rdx,%rsi
 leaq (%rcx,%rdx,1),%rsi
 ### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64{ISHIFT} cdreg:REGISTER:GP:SINT64 bdreg_shift:IMMEDIATE:-:- @far
 leaq (%rcx,%rdx,8),%rsi
-### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 movq %rcx,%rdx
 addq $-2147483648,%rdx
-### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:- @far
 movq %rcx,%rdx
 addq $2147483647,%rdx
 ### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
@@ -836,10 +836,10 @@ addq %rdx,%rsi
 leaq (%rcx,%rdx,1),%rsi
 ### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64{ISHIFT} cdreg:REGISTER:GP:UINT64 bdreg_shift:IMMEDIATE:-:- @far
 leaq (%rcx,%rdx,8),%rsi
-### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:-
 movq %rcx,%rdx
 addq $-2147483648,%rdx
-### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 movq %rcx,%rdx
 addq $2147483647,%rdx
 ### op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
@@ -2211,16 +2211,16 @@ vperm2f128 $0x11,%ymm1,%ymm1,%ymm2
 ### op mul [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 movq %rcx,%rsi
 imulq %rdx,%rsi
-### op mul [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+### op mul [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 imulq $-2147483648,%rcx,%rdx
-### op mul [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+### op mul [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:- @far
 imulq $2147483647,%rcx,%rdx
 ### op mul [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 movq %rcx,%rsi
 imulq %rdx,%rsi
-### op mul [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+### op mul [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:-
 imulq $-2147483648,%rcx,%rdx
-### op mul [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+### op mul [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 imulq $2147483647,%rcx,%rdx
 ### op mul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
 vmulpd %ymm1,%ymm2,%ymm3
@@ -2258,28 +2258,28 @@ vpxor %ymm1,%ymm1,%ymm1
 vpxor %ymm1,%ymm1,%ymm1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 vpxor %ymm1,%ymm1,%ymm1
-### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 movq %rcx,%rdx
 shlq $0,%rdx
-### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:- @far
 movq %rcx,%rdx
 shlq $63,%rdx
-### op shl [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+### op shift [SHL] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:-
 movq %rcx,%rdx
 shlq $0,%rdx
-### op shl [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+### op shift [SHL] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 movq %rcx,%rdx
 shlq $63,%rdx
-### op shr [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+### op shift [SHR] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 movq %rcx,%rdx
 shrq $0,%rdx
-### op shr [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+### op shift [SHR] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:- @far
 movq %rcx,%rdx
 shrq $63,%rdx
-### op shr [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+### op shift [SHR] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:-
 movq %rcx,%rdx
 shrq $0,%rdx
-### op shr [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+### op shift [SHR] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 movq %rcx,%rdx
 shrq $63,%rdx
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
@@ -3341,18 +3341,18 @@ vpextrb $15, %xmm1, (%rcx)
 ### op sub [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 movq %rcx,%rsi
 subq %rdx,%rsi
-### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 movq %rcx,%rdx
 subq $-2147483648,%rdx
-### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:- @far
 movq %rcx,%rdx
 subq $2147483647,%rdx
 ### op sub [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 movq %rcx,%rsi
 subq %rdx,%rsi
-### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:-
 movq %rcx,%rdx
 subq $-2147483648,%rdx
-### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 movq %rcx,%rdx
 subq $2147483647,%rdx

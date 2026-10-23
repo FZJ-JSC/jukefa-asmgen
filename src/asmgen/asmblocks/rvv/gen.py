@@ -22,7 +22,7 @@ from .opd3 import rvv_fma,rvv_mul,rvv_add
 from .opmem import rvv_load,rvv_store
 from .move import rvv_move
 from ..riscv64.opd3 import riscv64_sub
-from ..riscv64.opd3 import riscv64_shl, riscv64_shr
+from ..riscv64.opd3 import riscv64_shift
 from .opset import rvv_opset
 from ..op.opset import opset_modifier as _opset_mod
 
@@ -72,8 +72,7 @@ class rvv(riscv64):
                                lmul_getter=lambda : self.lmul)
         self.move = rvv_move(asmwrap=self.asmwrap)
         self.sub = riscv64_sub(asmwrap=self.asmwrap)
-        self.shl = riscv64_shl(asmwrap=self.asmwrap)
-        self.shr = riscv64_shr(asmwrap=self.asmwrap)
+        self.shift = riscv64_shift(asmwrap=self.asmwrap)
         self.set = rvv_opset(asmwrap=self.asmwrap)
 
     def get_parameters(self) -> list[str]:

@@ -97,7 +97,7 @@ class callconv:
         spreg = gen.greg(self.spreg)
         if self.spadd > 0:
             aligned_sp = ((self.spadd + self.spalign - 1) // self.spalign) * self.spalign
-            asmblock += gen.add(adreg=spreg, imm=-aligned_sp, cdreg=spreg,
+            asmblock += gen.add(adreg=spreg, bimm=-aligned_sp, cdreg=spreg,
                     a_dt=adt.UINT64, c_dt=adt.UINT64)
 
         rtype_off = 0
@@ -160,7 +160,7 @@ class callconv:
 
         if self.spadd > 0:
             aligned_sp = ((self.spadd + self.spalign - 1) // self.spalign) * self.spalign
-            asmblock += gen.add(adreg=spreg, imm=aligned_sp, cdreg=spreg,
+            asmblock += gen.add(adreg=spreg, bimm=aligned_sp, cdreg=spreg,
                     a_dt=adt.UINT64, c_dt=adt.UINT64)
 
         self.spadd = 0

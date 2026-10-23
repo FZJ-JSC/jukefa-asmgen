@@ -21,7 +21,7 @@ from .opd3 import neon_fma,neon_mul,neon_add
 from .opmem import neon_load, neon_store
 from .move import neon_move
 from ..aarch64.opd3 import aarch64_sub
-from ..aarch64.opd3 import aarch64_shl, aarch64_shr
+from ..aarch64.opd3 import aarch64_shift
 from ...registers import asm_data_type as _ADT
 from .opset import neon_opset
 from ..op.opset import opset_modifier as _opset_mod
@@ -90,8 +90,7 @@ class neon(aarch64):
         self.move = neon_move(asmwrap=self.asmwrap, dt_suffixes=self.dt_suffixes,
                               dt_idxsuffixes=self.dt_idxsuffixes)
         self.sub = aarch64_sub(asmwrap=self.asmwrap)
-        self.shl = aarch64_shl(asmwrap=self.asmwrap)
-        self.shr = aarch64_shr(asmwrap=self.asmwrap)
+        self.shift = aarch64_shift(asmwrap=self.asmwrap)
         self.set = neon_opset(asmwrap=self.asmwrap, dt_suffixes=self.dt_suffixes, dt_greg_pfx=self.dt_greg_pfx)
 
     def get_req_flags(self) -> list[str]:
@@ -153,7 +152,7 @@ class neon(aarch64):
 
     def add_greg_voff(self, *, reg : greg_base, offset : int, dt : adt):
         # a fixed vector length: the byte count, within add's immediates
-        return self.add(adreg=reg, imm=self.simd_size*offset, cdreg=reg, a_dt=_ADT.UINT64, c_dt=_ADT.UINT64)
+        return self.add(adreg=reg, bimm=self.simd_size*offset, cdreg=reg, a_dt=_ADT.UINT64, c_dt=_ADT.UINT64)
 
     def zero_vreg(self, *, vreg : vreg_base, dt : adt):
         return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")

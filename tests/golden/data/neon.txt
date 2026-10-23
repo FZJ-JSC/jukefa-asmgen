@@ -49,7 +49,7 @@ add x0,x0,#8
 ### method add_greg_voff(dt=DOUBLE, offset=-2048, reg=x0)
 add x0,x0,#-32768
 ### method add_greg_voff(dt=DOUBLE, offset=-2049, reg=x0)
-!ValueError: value of imm fits none of the forms: value of imm must be >= -4095; or value of imm must be a multiple of 4096
+!ValueError: value of bimm fits none of the forms: value of bimm must be >= -4095; or value of bimm must be a multiple of 4096
 ### method add_greg_voff(dt=DOUBLE, offset=-8, reg=x0)
 add x0,x0,#-128
 ### method add_greg_voff(dt=DOUBLE, offset=0, reg=x0)
@@ -57,7 +57,7 @@ add x0,x0,#0
 ### method add_greg_voff(dt=DOUBLE, offset=1, reg=x0)
 add x0,x0,#16
 ### method add_greg_voff(dt=DOUBLE, offset=2047, reg=x0)
-!ValueError: value of imm fits none of the forms: value of imm must be <= 4095; or value of imm must be a multiple of 4096
+!ValueError: value of bimm fits none of the forms: value of bimm must be <= 4095; or value of bimm must be a multiple of 4096
 ### method add_greg_voff(dt=DOUBLE, offset=2048, reg=x0)
 add x0,x0,#32768
 ### method add_greg_voff(dt=DOUBLE, offset=255, reg=x0)
@@ -75,7 +75,7 @@ add x0,x0,#640
 ### method add_greg_voff(dt=SINGLE, offset=-2048, reg=x0)
 add x0,x0,#-32768
 ### method add_greg_voff(dt=SINGLE, offset=-2049, reg=x0)
-!ValueError: value of imm fits none of the forms: value of imm must be >= -4095; or value of imm must be a multiple of 4096
+!ValueError: value of bimm fits none of the forms: value of bimm must be >= -4095; or value of bimm must be a multiple of 4096
 ### method add_greg_voff(dt=SINGLE, offset=-8, reg=x0)
 add x0,x0,#-128
 ### method add_greg_voff(dt=SINGLE, offset=0, reg=x0)
@@ -83,7 +83,7 @@ add x0,x0,#0
 ### method add_greg_voff(dt=SINGLE, offset=1, reg=x0)
 add x0,x0,#16
 ### method add_greg_voff(dt=SINGLE, offset=2047, reg=x0)
-!ValueError: value of imm fits none of the forms: value of imm must be <= 4095; or value of imm must be a multiple of 4096
+!ValueError: value of bimm fits none of the forms: value of bimm must be <= 4095; or value of bimm must be a multiple of 4096
 ### method add_greg_voff(dt=SINGLE, offset=2048, reg=x0)
 add x0,x0,#32768
 ### method add_greg_voff(dt=SINGLE, offset=255, reg=x0)
@@ -810,9 +810,9 @@ add x12,x10,x11
 add x12,x10,x11
 ### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64{ISHIFT} cdreg:REGISTER:GP:SINT64 bdreg_shift:IMMEDIATE:-:- @far
 add x12,x10,x11, LSL #63
-### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 add x11,x10,#-4095
-### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:- @far
 add x11,x10,#4095
 ### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 add x12,x10,x11
@@ -820,9 +820,9 @@ add x12,x10,x11
 add x12,x10,x11
 ### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64{ISHIFT} cdreg:REGISTER:GP:UINT64 bdreg_shift:IMMEDIATE:-:- @far
 add x12,x10,x11, LSL #63
-### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:-
 add x11,x10,#-4095
-### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 add x11,x10,#4095
 ### op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
 fadd v3.2d,v1.2d,v2.2d
@@ -2778,29 +2778,29 @@ dup v1.16b,wzr
 dup v1.8h,wzr
 ### op set [CONST] dreg:REGISTER:VEC:SINGLE {constant:zero}
 dup v1.4s,wzr
-### op shl [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+### op shift [SHL] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 lsl x12,x10,x11
-### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 lsl x11,x10,#0
-### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:- @far
 lsl x11,x10,#63
-### op shl [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+### op shift [SHL] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 lsl x12,x10,x11
-### op shl [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+### op shift [SHL] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:-
 lsl x11,x10,#0
-### op shl [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+### op shift [SHL] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 lsl x11,x10,#63
-### op shr [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+### op shift [SHR] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 lsr x12,x10,x11
-### op shr [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+### op shift [SHR] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 lsr x11,x10,#0
-### op shr [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+### op shift [SHR] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:- @far
 lsr x11,x10,#63
-### op shr [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+### op shift [SHR] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 lsr x12,x10,x11
-### op shr [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+### op shift [SHR] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:-
 lsr x11,x10,#0
-### op shr [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+### op shift [SHR] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 lsr x11,x10,#63
 ### op store [GOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 str d1, [x10, x11]
@@ -3770,9 +3770,9 @@ sub x12,x10,x11
 sub x12,x10,x11
 ### op sub [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64{ISHIFT} cdreg:REGISTER:GP:SINT64 bdreg_shift:IMMEDIATE:-:- @far
 sub x12,x10,x11, LSL #63
-### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 sub x11,x10,#-4095
-### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:- @far
 sub x11,x10,#4095
 ### op sub [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 sub x12,x10,x11
@@ -3780,7 +3780,7 @@ sub x12,x10,x11
 sub x12,x10,x11
 ### op sub [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64{ISHIFT} cdreg:REGISTER:GP:UINT64 bdreg_shift:IMMEDIATE:-:- @far
 sub x12,x10,x11, LSL #63
-### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:-
 sub x11,x10,#-4095
-### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 sub x11,x10,#4095

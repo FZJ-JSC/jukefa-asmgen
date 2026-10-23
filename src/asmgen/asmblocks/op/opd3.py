@@ -45,6 +45,9 @@ class opd3_modifier(operation_modifier):
     PART = auto()
     #VF = auto()
     MASK = auto()
+    SHL = auto()        # shift: left
+    SHR = auto()        # shift: right, logical
+    VOFFSET = auto()    # add: bimm counts vector lengths (bytes), as opmem's VOFFSET
 
 
 class opd3(operation):

@@ -27,6 +27,7 @@ from ..op.operand import operand_modifier as _opd_mod
 from ..op.move import move_modifier as _move_mod
 from ..op.scalar import BITS_GP as _BITS_GP
 from ..op.opset import opset_modifier as _opset_mod
+from ..op.opd3 import opd3_modifier as _opd3_mod
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
@@ -296,7 +297,7 @@ class aarch64(asmgen):
         return self.mul(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
 
     def add_greg_imm(self, *, reg : greg_base, imm : int) -> str:
-        return self.add(adreg=reg, imm=imm, cdreg=reg, a_dt=_GP, c_dt=_GP)
+        return self.add(adreg=reg, bimm=imm, cdreg=reg, a_dt=_GP, c_dt=_GP)
 
     def add_greg_greg(self, *, dst : greg_base,
                       reg1 : greg_base, reg2 : greg_base) -> str:
@@ -327,10 +328,10 @@ class aarch64(asmgen):
                                       f"in one instruction here: {err}") from err
 
     def shift_greg_left(self, *, reg : greg_base, bit_count : int) -> str:
-        return self.shl(adreg=reg, imm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP)
+        return self.shift(adreg=reg, bimm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP, modifiers={_opd3_mod.SHL})
 
     def shift_greg_right(self, *, reg : greg_base, bit_count : int) -> str:
-        return self.shr(adreg=reg, imm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP)
+        return self.shift(adreg=reg, bimm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP, modifiers={_opd3_mod.SHR})
 
     def zero_greg(self, *, greg : greg_base) -> str:
         return self.set(dreg=greg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, constant="zero")

@@ -27,11 +27,11 @@ from .move import sve_move
 
 from ..neon import neon
 from ..aarch64.opd3 import aarch64_sub
-from ..aarch64.opd3 import aarch64_shl, aarch64_shr
-from ..op.operand import operand_modifier as _opd_mod
+from ..aarch64.opd3 import aarch64_shift
 from ...registers import asm_data_type as _ADT
 from .opset import sve_opset
 from ..op.opset import opset_modifier as _opset_mod
+from ..op.opd3 import opd3_modifier as _opd3_mod
 
 class sve(aarch64):
     """
@@ -86,8 +86,7 @@ class sve(aarch64):
         self.move = sve_move(asmwrap=self.asmwrap,
                              dt_suffixes=self.dt_suffixes)
         self.sub = aarch64_sub(asmwrap=self.asmwrap)
-        self.shl = aarch64_shl(asmwrap=self.asmwrap)
-        self.shr = aarch64_shr(asmwrap=self.asmwrap)
+        self.shift = aarch64_shift(asmwrap=self.asmwrap)
         self.set = sve_opset(asmwrap=self.asmwrap, dt_suffixes=self.dt_suffixes)
 
     def get_req_flags(self) -> list[str]:
@@ -167,8 +166,8 @@ class sve(aarch64):
         out, left = "", offset
         while left:
             n = max(-16, min(16, left))
-            out += self.add(adreg=reg, imm=n, cdreg=reg, a_dt=_ADT.UINT64, c_dt=_ADT.UINT64,
-                            operand_modifiers={'imm': {_opd_mod.VLSCALE}})
+            out += self.add(adreg=reg, bimm=n, cdreg=reg, a_dt=_ADT.UINT64, c_dt=_ADT.UINT64,
+                            modifiers={_opd3_mod.VOFFSET})
             left -= n
         return out
 

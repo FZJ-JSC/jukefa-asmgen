@@ -11,6 +11,9 @@ from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.sve import sve
 from asmgen.registers import asm_data_type as adt
 from asmgen.asmblocks.op.operand import operand_modifier as opd_mod
+from asmgen.asmblocks.op.opd3 import opd3_modifier
+
+DIR = {'shl': {opd3_modifier.SHL}, 'shr': {opd3_modifier.SHR}}
 
 U = adt.UINT64
 
@@ -30,7 +33,7 @@ class test_scalar_arith(unittest.TestCase):
         return plain(getattr(g, op)(adreg=g.greg(a), bdreg=g.greg(b), cdreg=g.greg(c), a_dt=U, b_dt=U, c_dt=U))
 
     def ri(self, g, op, a, imm, c):
-        return plain(getattr(g, op)(adreg=g.greg(a), imm=imm, cdreg=g.greg(c), a_dt=U, c_dt=U))
+        return plain(getattr(g, op)(adreg=g.greg(a), bimm=imm, cdreg=g.greg(c), a_dt=U, c_dt=U))
 
     def test_riscv(self):
         g = make(rvv)
@@ -82,14 +85,14 @@ class test_scalar_arith(unittest.TestCase):
             with self.subTest(isa=ctor.__name__):
                 self.assertEqual(g.add(adreg=a, bdreg=b, cdreg=c, a_dt=U, b_dt=U, c_dt=U),
                                  g.add_greg_greg(dst=c, reg1=a, reg2=b))
-                self.assertEqual(g.add(adreg=a, imm=16, cdreg=a, a_dt=U, c_dt=U), g.add_greg_imm(reg=a, imm=16))
+                self.assertEqual(g.add(adreg=a, bimm=16, cdreg=a, a_dt=U, c_dt=U), g.add_greg_imm(reg=a, imm=16))
                 self.assertEqual(g.sub(adreg=a, bdreg=b, cdreg=c, a_dt=U, b_dt=U, c_dt=U),
                                  g.sub_greg_greg(dst=c, reg1=a, reg2=b))
 
     def test_vector_and_scalar_behind_one_name(self):
         g = make(rvv)
         names = [{n for n in s.operands} for s in g.add.get_signatures()]
-        self.assertIn({"adreg", "cdreg", "imm"}, names)
+        self.assertIn({"adreg", "cdreg", "bimm"}, names)
         v = g.vreg
         self.assertIn("vfadd.vv", g.add(adreg=v(1), bdreg=v(2), cdreg=v(3), a_dt=adt.FP64, b_dt=adt.FP64, c_dt=adt.FP64))
         self.assertTrue(hasattr(g.add, "get_base_inst"))          # the vector operation's own
@@ -97,10 +100,10 @@ class test_scalar_arith(unittest.TestCase):
 
 class test_shifts(unittest.TestCase):
     """
-    shl, shr; shifted operands (operand modifier ISHIFT, bdreg_shift)
+    shift (SHL, SHR); shifted operands (operand modifier ISHIFT, bdreg_shift)
     """
     def sh(self, g, op, a, imm, c):
-        return plain(getattr(g, op)(adreg=g.greg(a), imm=imm, cdreg=g.greg(c), a_dt=U, c_dt=U))
+        return plain(g.shift(adreg=g.greg(a), bimm=imm, cdreg=g.greg(c), a_dt=U, c_dt=U, modifiers=DIR[op]))
 
     def shifted(self, g, op, a, b, c, s):
         return plain(getattr(g, op)(adreg=g.greg(a), bdreg=g.greg(b), cdreg=g.greg(c), a_dt=U, b_dt=U, c_dt=U,
@@ -112,17 +115,17 @@ class test_shifts(unittest.TestCase):
         self.assertEqual(f"slli {x(3)},{x(1)},63", self.sh(r, "shl", 1, 63, 3))
         self.assertEqual(f"srli {x(3)},{x(1)},4", self.sh(r, "shr", 1, 4, 3))
         self.assertEqual(f"sll {x(3)},{x(1)},{x(2)}",
-                         plain(r.shl(adreg=r.greg(1), bdreg=r.greg(2), cdreg=r.greg(3), a_dt=U, b_dt=U, c_dt=U)))
+                         plain(r.shift(adreg=r.greg(1), bdreg=r.greg(2), cdreg=r.greg(3), a_dt=U, b_dt=U, c_dt=U, modifiers=DIR['shl'])))
         n = make(neon)
         self.assertEqual("lsl x3,x1,#5", self.sh(n, "shl", 1, 5, 3))
         self.assertEqual("lsr x3,x1,x2",
-                         plain(n.shr(adreg=n.greg(1), bdreg=n.greg(2), cdreg=n.greg(3), a_dt=U, b_dt=U, c_dt=U)))
+                         plain(n.shift(adreg=n.greg(1), bdreg=n.greg(2), cdreg=n.greg(3), a_dt=U, b_dt=U, c_dt=U, modifiers=DIR['shr'])))
         a = make(avx512)
         p = lambda i: a.rpref(a.greg(i))
         self.assertEqual(f"shlq $3,{p(1)}", self.sh(a, "shl", 1, 3, 1))
         self.assertEqual(f"movq {p(1)},{p(3)} ; shrq $3,{p(3)}", self.sh(a, "shr", 1, 3, 3))
         with self.assertRaises(ValueError):      # an amount in a register: only %cl, not offered
-            a.shl(adreg=a.greg(1), bdreg=a.greg(2), cdreg=a.greg(1), a_dt=U, b_dt=U, c_dt=U)
+            a.shift(adreg=a.greg(1), bdreg=a.greg(2), cdreg=a.greg(1), a_dt=U, b_dt=U, c_dt=U, modifiers=DIR['shl'])
         for g in (r, n, a):
             with self.subTest(isa=type(g).__name__), self.assertRaises(ValueError):
                 self.sh(g, "shl", 1, 64, 1)
@@ -154,19 +157,19 @@ class test_shifts(unittest.TestCase):
             g = make(ctor)
             r = g.greg(1)
             with self.subTest(isa=ctor.__name__):
-                self.assertEqual(g.shl(adreg=r, imm=3, cdreg=r, a_dt=U, c_dt=U), g.shift_greg_left(reg=r, bit_count=3))
-                self.assertEqual(g.shr(adreg=r, imm=3, cdreg=r, a_dt=U, c_dt=U), g.shift_greg_right(reg=r, bit_count=3))
+                self.assertEqual(g.shift(adreg=r, bimm=3, cdreg=r, a_dt=U, c_dt=U, modifiers=DIR['shl']), g.shift_greg_left(reg=r, bit_count=3))
+                self.assertEqual(g.shift(adreg=r, bimm=3, cdreg=r, a_dt=U, c_dt=U, modifiers=DIR['shr']), g.shift_greg_right(reg=r, bit_count=3))
         a = make(avx512)
         with self.assertRaises(NotImplementedError):     # what ukrgen's probe catches
             a.sub_greg_greg_shifted(dst=a.greg(1), reg1=a.greg(1), reg2=a.greg(2), shift=1)
 
 class test_vector_lengths(unittest.TestCase):
     """
-    imm{VLSCALE}: an immediate count of vector lengths (SVE)
+    VOFFSET: bimm counts vector lengths (SVE)
     """
     def vl(self, g, a, n, c):
-        return plain(g.add(adreg=g.greg(a), imm=n, cdreg=g.greg(c), a_dt=U, c_dt=U,
-                           operand_modifiers={"imm": {opd_mod.VLSCALE}}))
+        return plain(g.add(adreg=g.greg(a), bimm=n, cdreg=g.greg(c), a_dt=U, c_dt=U,
+                           modifiers={opd3_modifier.VOFFSET}))
 
     def test_sve(self):
         g = make(sve)

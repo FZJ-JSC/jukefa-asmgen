@@ -1,8 +1,10 @@
 """
-AArch64 scalar arithmetic on general registers: add, sub, mul
+AArch64 scalar arithmetic on general registers: add, sub, mul, shift
 """
 from ...op.constraint import anyof_constraint, minmax_constraint, multiple_constraint
+from ...op.opd3 import opd3_modifier
 from ...op.scalar import scalar_arith
+from ....registers import greg_base
 
 SHIFTED_MAX = 4095 * 4096
 
@@ -16,78 +18,64 @@ def _imm_forms():
     ])]]
 
 
-class aarch64_add(scalar_arith):
+class aarch64_addsub(scalar_arith):
+    """
+    add or sub (mnemonic): immediates, and B shifted left by 0 to 63
+    """
+    mnemonic = None
+
+    def imm_forms(self):
+        return _imm_forms()
+
+    def shift_forms(self):
+        return [([minmax_constraint(minval=0, maxval=63)], frozenset())]
+
+    def with_register(self, *, adreg : greg_base, bdreg : greg_base, cdreg : greg_base, modifiers : set) -> str:
+        return self.asmwrap(f"{self.mnemonic} {cdreg},{adreg},{bdreg}")
+
+    def with_immediate(self, *, adreg : greg_base, bimm : int, cdreg : greg_base, modifiers : set) -> str:
+        return self.asmwrap(f"{self.mnemonic} {cdreg},{adreg},#{bimm}")
+
+    def with_shifted(self, *, adreg : greg_base, bdreg : greg_base, bdreg_shift : int, cdreg : greg_base) -> str:
+        if not bdreg_shift:
+            return self.asmwrap(f"{self.mnemonic} {cdreg},{adreg},{bdreg}")
+        return self.asmwrap(f"{self.mnemonic} {cdreg},{adreg},{bdreg}, LSL #{bdreg_shift}")
+
+
+class aarch64_add(aarch64_addsub):
     """
     add
     """
-    def imm_forms(self):
-        return _imm_forms()
-
-    def with_register(self, c, a, b):
-        return self.asmwrap(f"add {c},{a},{b}")
-
-    def with_immediate(self, c, a, imm):
-        return self.asmwrap(f"add {c},{a},#{imm}")
-
-    def shift_forms(self):
-        return [([minmax_constraint(minval=0, maxval=63)], frozenset())]
-
-    def with_shifted(self, c, a, b, shift):
-        return self.asmwrap(f"add {c},{a},{b}, LSL #{shift}" if shift else f"add {c},{a},{b}")
+    mnemonic = "add"
 
 
-class aarch64_sub(scalar_arith):
+class aarch64_sub(aarch64_addsub):
     """
     sub
     """
-    def imm_forms(self):
-        return _imm_forms()
-
-    def with_register(self, c, a, b):
-        return self.asmwrap(f"sub {c},{a},{b}")
-
-    def with_immediate(self, c, a, imm):
-        return self.asmwrap(f"sub {c},{a},#{imm}")
-
-    def shift_forms(self):
-        return [([minmax_constraint(minval=0, maxval=63)], frozenset())]
-
-    def with_shifted(self, c, a, b, shift):
-        return self.asmwrap(f"sub {c},{a},{b}, LSL #{shift}" if shift else f"sub {c},{a},{b}")
+    mnemonic = "sub"
 
 
 class aarch64_mul(scalar_arith):
     """
     mul; no immediate form
     """
-    def with_register(self, c, a, b):
-        return self.asmwrap(f"mul {c},{a},{b}")
+    def with_register(self, *, adreg : greg_base, bdreg : greg_base, cdreg : greg_base, modifiers : set) -> str:
+        return self.asmwrap(f"mul {cdreg},{adreg},{bdreg}")
 
 
-class aarch64_shl(scalar_arith):
+class aarch64_shift(scalar_arith):
     """
-    lsl: logical shift left, by 0 to 63
+    lsl, lsr (by 0 to 63): opd3_modifier SHL or SHR
     """
+    def op_modifiers(self):
+        return [{opd3_modifier.SHL}, {opd3_modifier.SHR}]
+
     def imm_forms(self):
         return [[minmax_constraint(minval=0, maxval=63)]]
 
-    def with_register(self, c, a, b):
-        return self.asmwrap(f"lsl {c},{a},{b}")
+    def with_register(self, *, adreg : greg_base, bdreg : greg_base, cdreg : greg_base, modifiers : set) -> str:
+        return self.asmwrap(f"{'lsl' if opd3_modifier.SHL in modifiers else 'lsr'} {cdreg},{adreg},{bdreg}")
 
-    def with_immediate(self, c, a, imm):
-        return self.asmwrap(f"lsl {c},{a},#{imm}")
-
-
-class aarch64_shr(scalar_arith):
-    """
-    lsr: logical shift right, by 0 to 63
-    """
-    def imm_forms(self):
-        return [[minmax_constraint(minval=0, maxval=63)]]
-
-    def with_register(self, c, a, b):
-        return self.asmwrap(f"lsr {c},{a},{b}")
-
-    def with_immediate(self, c, a, imm):
-        return self.asmwrap(f"lsr {c},{a},#{imm}")
-
+    def with_immediate(self, *, adreg : greg_base, bimm : int, cdreg : greg_base, modifiers : set) -> str:
+        return self.asmwrap(f"{'lsl' if opd3_modifier.SHL in modifiers else 'lsr'} {cdreg},{adreg},#{bimm}")

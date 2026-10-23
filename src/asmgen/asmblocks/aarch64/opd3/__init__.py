@@ -6,4 +6,4 @@
 """
 Meta-module for AArch64 SIMD (NEON/SVE) opd3 operations
 """
-from .scalar import aarch64_add, aarch64_sub, aarch64_mul, aarch64_shl, aarch64_shr
+from .scalar import aarch64_add, aarch64_sub, aarch64_mul, aarch64_shift
