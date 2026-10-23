@@ -137,19 +137,42 @@ Also agreed:
 Each phase lists its steps and when it is done. Status: [ ] open, [~] in
 progress, [x] done.
 
-### Phase 0: a safety net [ ]
+### Phase 0: a safety net [~]
 
-- [ ] Golden snapshots: every old method and operation, every backend
-      (rvv, rvv071, neon, sve, sme, fma128, fma256, avx512), over a grid of
-      registers, types, immediates; recorded text compared on every run.
-- [ ] The snapshots assembled with each available toolchain, as
-      `test_asm_correct` does (rvv071: text only).
+- [x] Golden snapshots (`tests/golden`, `tests/test_golden.py`): every
+      base method as `test_asm_implemented` calls it, those with a data type
+      in FP64, FP32 and FP16, those with an immediate over values around
+      encodings' limits; every signature of every operation, instantiated to
+      satisfy its constraints (ranges, value sets, multiples, another operand
+      plus an offset), immediates at both ends of their ranges. Keys by
+      content, not position; errors recorded as behavior; the same under
+      every hash seed. About 13,000 entries over the eight backends, 30 s.
+      `python -m tests.golden record [BACKEND]` after an intended change,
+      `python -m tests.golden diff` to see one.
+- [x] The snapshots assembled by each backend's assembler (rvv071: text
+      only): the entries that don't assemble today are the baseline, an
+      entry that stops assembling fails.
 - [ ] `examples/axpy.py` run as a test.
 - [ ] ukrgen: snapshots of a few family-pipeline kernels per ISA.
 - [ ] ukropt: `pairs` and `fmaload` built for RVV, NEON, SVE, x86.
 
 Done when: the snapshots pass on the unchanged code, and a deliberate
-change to one method's output fails them.
+change to one method's output fails them. (Checked: RVV's `zero_vreg`
+changed fails exactly its three entries.)
+
+Found by the snapshots, for the phases to come:
+- SVE and SME advertise BF16 forms of `fadd`, `fmul` and some moves that
+  raise `KeyError` (no BF16 suffix): 30 and 40 signatures.
+- NEON's integer widening `fma` with `PART` raises "Unsupported datatype":
+  16 signatures.
+- SME's tile numbers per data type aren't constraints: 48 signatures can
+  only be instantiated by guessing.
+- 11 RVV and 11 SVE `move` forms are rejected by their own signatures
+  ("Invalid configuration").
+- Entries that don't assemble (fma128 346, fma256 286, avx512 289, neon
+  262, sve 312, sme 556, rvv 357): partly immediates swept past what
+  encodes, inline-only methods and label references - by design - partly
+  to triage.
 
 ### Phase 1: `fadd` → `add`, `fmul` → `mul` [ ]
 
@@ -278,3 +301,5 @@ ukropt:
 
 - 2026-10-23: audit and plan (asmgen c5a9324, ukrgen da8ee04, ukropt
   fee96f1).
+- 2026-10-23: phase 0 - golden snapshots of methods and operations on all
+  eight backends, with an assembly baseline.

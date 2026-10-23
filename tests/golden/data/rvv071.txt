@@ -1,0 +1,2354 @@
+### method add_greg_greg(dst=t0, reg1=t1, reg2=t2)
+add t0,t1,t2
+### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=-2048)
+!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=-2049)
+!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=-8)
+!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=0)
+!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=1)
+!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=2047)
+!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=2048)
+!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=255)
+!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=256)
+!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=4096)
+!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=8)
+!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+### method add_greg_imm(imm=-2048, reg=t0)
+add t0,t0,-2048
+### method add_greg_imm(imm=-2049, reg=t0)
+add t0,t0,-2049
+### method add_greg_imm(imm=-8, reg=t0)
+add t0,t0,-8
+### method add_greg_imm(imm=0, reg=t0)
+add t0,t0,0
+### method add_greg_imm(imm=1, reg=t0)
+add t0,t0,1
+### method add_greg_imm(imm=2047, reg=t0)
+add t0,t0,2047
+### method add_greg_imm(imm=2048, reg=t0)
+add t0,t0,2048
+### method add_greg_imm(imm=255, reg=t0)
+add t0,t0,255
+### method add_greg_imm(imm=256, reg=t0)
+add t0,t0,256
+### method add_greg_imm(imm=40, reg=t0)
+add t0,t0,40
+### method add_greg_imm(imm=4096, reg=t0)
+add t0,t0,4096
+### method add_greg_imm(imm=8, reg=t0)
+add t0,t0,8
+### method add_greg_voff(dt=DOUBLE, offset=-2048, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=DOUBLE, offset=-2049, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=DOUBLE, offset=-8, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=DOUBLE, offset=0, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=DOUBLE, offset=1, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=DOUBLE, offset=2047, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=DOUBLE, offset=2048, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=DOUBLE, offset=255, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=DOUBLE, offset=256, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=DOUBLE, offset=40, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=DOUBLE, offset=4096, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=DOUBLE, offset=8, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=HALF, offset=40, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=SINGLE, offset=-2048, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=SINGLE, offset=-2049, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=SINGLE, offset=-8, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=SINGLE, offset=0, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=SINGLE, offset=1, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=SINGLE, offset=2047, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=SINGLE, offset=2048, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=SINGLE, offset=255, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=SINGLE, offset=256, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=SINGLE, offset=40, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=SINGLE, offset=4096, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method add_greg_voff(dt=SINGLE, offset=8, reg=t0)
+!NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method c_simd_size_function()
+inline size_t get_simd_size() {
+    size_t byte_size = 0;
+    __asm__ volatile(
+        "vsetvli %[byte_size], zero, e8, m1\n\t"
+    : [byte_size] "=r" (byte_size)
+    :
+    :
+    );
+    return byte_size;
+}
+### method cb(cmp=NE, label=notequal, reg1=t0, reg2=t1)
+bne t0,t1,.notequal
+### method create_callconv(name=default)
+<asmgen.callconv.callconv.callconv object>
+### method fill_vector(dt=DOUBLE, sreg=f0, vreg=v1)
+vfmv.v.f v1, f0
+### method fill_vector(dt=HALF, sreg=f0, vreg=v1)
+vfmv.v.f v1, f0
+### method fill_vector(dt=SINGLE, sreg=f0, vreg=v1)
+vfmv.v.f v1, f0
+### method freg(dt=DOUBLE, reg_idx=0)
+f0
+### method freg(dt=HALF, reg_idx=0)
+f0
+### method freg(dt=SINGLE, reg_idx=0)
+f0
+### method get_param_value(name=dummy)
+dummy
+### method get_parameters()
+['LMUL', 'ZVFH']
+### method greg(reg_idx=0)
+t0
+### method greg_to_voffs(dt=DOUBLE, streg=t0, vreg=v1)
+vid.v v1
+vmul.vx v1,v1,t0
+### method greg_to_voffs(dt=HALF, streg=t0, vreg=v1)
+vid.v v1
+vmul.vx v1,v1,t0
+### method greg_to_voffs(dt=SINGLE, streg=t0, vreg=v1)
+vid.v v1
+vmul.vx v1,v1,t0
+### method indexable_elements(dt=DOUBLE)
+0
+### method indexable_elements(dt=HALF)
+0
+### method indexable_elements(dt=SINGLE)
+0
+### method is_vla()
+True
+### method isaclear()
+None
+### method isadata()
+
+### method isaendquirks(dt=DOUBLE, rt=<asmgen.registers.reg_tracker object>)
+
+### method isaendquirks(dt=HALF, rt=<asmgen.registers.reg_tracker object>)
+
+### method isaendquirks(dt=SINGLE, rt=<asmgen.registers.reg_tracker object>)
+
+### method isaquirks(dt=DOUBLE, rt=<asmgen.registers.reg_tracker object>)
+vsetvli t0, zero, e64, m1
+### method isaquirks(dt=HALF, rt=<asmgen.registers.reg_tracker object>)
+vsetvli t0, zero, e16, m1
+### method isaquirks(dt=SINGLE, rt=<asmgen.registers.reg_tracker object>)
+vsetvli t0, zero, e32, m1
+### method jfzero(dt=DOUBLE, freg1=f0, freg2=f1, greg=t0, label=someloop)
+fmv.d.x f1,zero
+feq.d t0,f0,f1
+bnez t0,.someloop
+### method jfzero(dt=HALF, freg1=f0, freg2=f1, greg=t0, label=someloop)
+fmv.h.x f1,zero
+feq.h t0,f0,f1
+bnez t0,.someloop
+### method jfzero(dt=SINGLE, freg1=f0, freg2=f1, greg=t0, label=someloop)
+fmv.w.x f1,zero
+feq.s t0,f0,f1
+bnez t0,.someloop
+### method jump(label=someloop)
+j .someloop
+### method jvzero(dt=DOUBLE, freg=f2, greg=t0, label=someloop, vreg1=v0, vreg2=v1)
+fmv.d.x f2,zero
+vmfne.vf v1,v0,f2
+vcpop.m t0,v1
+beqz t0,someloop
+### method jvzero(dt=HALF, freg=f2, greg=t0, label=someloop, vreg1=v0, vreg2=v1)
+fmv.h.x f2,zero
+vmfne.vf v1,v0,f2
+vcpop.m t0,v1
+beqz t0,someloop
+### method jvzero(dt=SINGLE, freg=f2, greg=t0, label=someloop, vreg1=v0, vreg2=v1)
+fmv.w.x f2,zero
+vmfne.vf v1,v0,f2
+vcpop.m t0,v1
+beqz t0,someloop
+### method jzero(label=someloop, reg=t0)
+beq t0,zero,.someloop
+### method kiterkleft(kleftreg=t1, kreg=t0, tmpreg=t2, unroll=4)
+andi t1,t0,3
+srli t0,t0,2
+### method label(label=label)
+.label:
+### method labelstr(label=label)
+.label
+### method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=-2048)
+fld f0, -2048(t0)
+### method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=-2049)
+fld f0, -2049(t0)
+### method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=-8)
+fld f0, -8(t0)
+### method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=0)
+fld f0, 0(t0)
+### method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=1)
+fld f0, 1(t0)
+### method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=2047)
+fld f0, 2047(t0)
+### method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=2048)
+fld f0, 2048(t0)
+### method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=255)
+fld f0, 255(t0)
+### method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=256)
+fld f0, 256(t0)
+### method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=4)
+fld f0, 4(t0)
+### method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=4096)
+fld f0, 4096(t0)
+### method load_freg(areg=t0, dst=f0, dt=DOUBLE, offset=8)
+fld f0, 8(t0)
+### method load_freg(areg=t0, dst=f0, dt=HALF, offset=4)
+flh f0, 4(t0)
+### method load_freg(areg=t0, dst=f0, dt=SINGLE, offset=4)
+flw f0, 4(t0)
+### method load_greg(areg=t0, dst=t1, offset=-2048)
+ld t1,-2048(t0)
+### method load_greg(areg=t0, dst=t1, offset=-2049)
+ld t1,-2049(t0)
+### method load_greg(areg=t0, dst=t1, offset=-8)
+ld t1,-8(t0)
+### method load_greg(areg=t0, dst=t1, offset=0)
+ld t1,0(t0)
+### method load_greg(areg=t0, dst=t1, offset=1)
+ld t1,1(t0)
+### method load_greg(areg=t0, dst=t1, offset=2047)
+ld t1,2047(t0)
+### method load_greg(areg=t0, dst=t1, offset=2048)
+ld t1,2048(t0)
+### method load_greg(areg=t0, dst=t1, offset=255)
+ld t1,255(t0)
+### method load_greg(areg=t0, dst=t1, offset=256)
+ld t1,256(t0)
+### method load_greg(areg=t0, dst=t1, offset=4)
+ld t1,4(t0)
+### method load_greg(areg=t0, dst=t1, offset=4096)
+ld t1,4096(t0)
+### method load_greg(areg=t0, dst=t1, offset=8)
+ld t1,8(t0)
+### method load_pointer(areg=t0, name=someparam)
+ld t0,%[someparam]
+### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-2048)
+fld f0, -2048(t0)
+### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-2049)
+fld f0, -2049(t0)
+### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-8)
+fld f0, -8(t0)
+### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=0)
+fld f0, 0(t0)
+### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=1)
+fld f0, 1(t0)
+### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=2047)
+fld f0, 2047(t0)
+### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=2048)
+fld f0, 2048(t0)
+### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=255)
+fld f0, 255(t0)
+### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=256)
+fld f0, 256(t0)
+### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=4)
+fld f0, 4(t0)
+### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=4096)
+fld f0, 4096(t0)
+### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=8)
+fld f0, 8(t0)
+### method load_scalar_immoff(areg=t0, dt=HALF, freg=f0, offset=4)
+flh f0, 4(t0)
+### method load_scalar_immoff(areg=t0, dt=SINGLE, freg=f0, offset=4)
+flw f0, 4(t0)
+### method load_tile
+!arguments TypeError: rvv.treg() missing 1 required positional argument: 'dt'
+### method load_vector(areg=t0, dt=DOUBLE, vreg=v0)
+vle.v v0, (t0)
+### method load_vector(areg=t0, dt=HALF, vreg=v0)
+vlh.v v0, (t0)
+### method load_vector(areg=t0, dt=SINGLE, vreg=v0)
+vlw.v v0, (t0)
+### method load_vector_bcast1(areg=t0, dt=DOUBLE, vreg=v0)
+vlse.v v0, (t0), zero
+### method load_vector_bcast1(areg=t0, dt=HALF, vreg=v0)
+vlsh.v v0, (t0), zero
+### method load_vector_bcast1(areg=t0, dt=SINGLE, vreg=v0)
+vlsw.v v0, (t0), zero
+### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=-2048, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=-2049, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=-8, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=0, vreg=v0)
+vlse.v v0, (t0), zero
+### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=1, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=2047, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=2048, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=255, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=256, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=4, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=4096, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=8, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=HALF, offset=4, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=HALF, offset=8, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=-2048, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=-2049, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=-8, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=0, vreg=v0)
+vlsw.v v0, (t0), zero
+### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=1, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=2047, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=2048, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=255, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=256, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=4, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=4096, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=8, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=-2048, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=-2049, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=-8, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=0, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=1, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=2047, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=2048, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=255, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=256, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=4, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=4096, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=8, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=HALF, offset=4, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=HALF, offset=8, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=-2048, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=-2049, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=-8, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=0, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=1, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=2047, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=2048, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=255, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=256, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=4, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=4096, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=8, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address increment
+### method load_vector_gather(areg=t0, dt=DOUBLE, it=INT32, offvreg=v1, vreg=v0)
+vluxei32.v v0, (t0), v1
+### method load_vector_gather(areg=t0, dt=HALF, it=INT32, offvreg=v1, vreg=v0)
+vluxei32.v v0, (t0), v1
+### method load_vector_gather(areg=t0, dt=SINGLE, it=INT32, offvreg=v1, vreg=v0)
+vluxei32.v v0, (t0), v1
+### method load_vector_gregstride(areg=t0, dt=DOUBLE, sreg=t1, vreg=v0)
+vlse.v v0, (t0), t1
+### method load_vector_gregstride(areg=t0, dt=HALF, sreg=t1, vreg=v0)
+vlsh.v v0, (t0), t1
+### method load_vector_gregstride(areg=t0, dt=SINGLE, sreg=t1, vreg=v0)
+vlsw.v v0, (t0), t1
+### method load_vector_immoff(areg=t0, dt=DOUBLE, offset=4, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_immoff(areg=t0, dt=HALF, offset=4, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_immoff(areg=t0, dt=SINGLE, offset=-2048, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_immoff(areg=t0, dt=SINGLE, offset=-2049, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_immoff(areg=t0, dt=SINGLE, offset=-8, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_immoff(areg=t0, dt=SINGLE, offset=0, vreg=v0)
+vlw.v v0, (t0)
+### method load_vector_immoff(areg=t0, dt=SINGLE, offset=1, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_immoff(areg=t0, dt=SINGLE, offset=2047, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_immoff(areg=t0, dt=SINGLE, offset=2048, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_immoff(areg=t0, dt=SINGLE, offset=255, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_immoff(areg=t0, dt=SINGLE, offset=256, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_immoff(areg=t0, dt=SINGLE, offset=4, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_immoff(areg=t0, dt=SINGLE, offset=4096, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_immoff(areg=t0, dt=SINGLE, offset=8, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_immstride(areg=t0, byte_stride=4, dt=DOUBLE, vreg=v0)
+!NotImplementedError: RVV has no load with immediate stride
+### method load_vector_immstride(areg=t0, byte_stride=4, dt=HALF, vreg=v0)
+!NotImplementedError: RVV has no load with immediate stride
+### method load_vector_immstride(areg=t0, byte_stride=4, dt=SINGLE, vreg=v0)
+!NotImplementedError: RVV has no load with immediate stride
+### method load_vector_lane(areg=t0, dt=DOUBLE, lane=1, vreg=v0)
+!NotImplementedError: Lane loads not implemented for RVV
+### method load_vector_lane(areg=t0, dt=HALF, lane=1, vreg=v0)
+!NotImplementedError: Lane loads not implemented for RVV
+### method load_vector_lane(areg=t0, dt=SINGLE, lane=1, vreg=v0)
+!NotImplementedError: Lane loads not implemented for RVV
+### method load_vector_voff(areg=t0, dt=DOUBLE, voffset=4, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_voff(areg=t0, dt=HALF, voffset=4, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method load_vector_voff(areg=t0, dt=SINGLE, voffset=4, vreg=v0)
+!NotImplementedError: RVV has no vector loads with address offset
+### method loopbegin(label=someloop, reg=t0)
+.someloop:
+addi t0,t0,-1
+### method loopbegin_nz(label=someloop, labelskip=someloop_nz, reg=t0)
+beq t0,zero,.someloop_nz
+.someloop:
+addi t0,t0,-1
+### method loopend(label=someloop, reg=t0)
+bnez t0,.someloop
+### method mask_all_true(dt=DOUBLE, reg=v0)
+!NotImplementedError: rvv071 has no mask to set
+### method mask_all_true(dt=HALF, reg=v0)
+!NotImplementedError: rvv071 has no mask to set
+### method mask_all_true(dt=SINGLE, reg=v0)
+!NotImplementedError: rvv071 has no mask to set
+### method max_bcast_immoff(dt=DOUBLE)
+0
+### method max_bcast_immoff(dt=HALF)
+0
+### method max_bcast_immoff(dt=SINGLE)
+0
+### method max_fload_immoff(dt=DOUBLE)
+2047
+### method max_fload_immoff(dt=HALF)
+2047
+### method max_fload_immoff(dt=SINGLE)
+2047
+### method max_fregs()
+32
+### method max_gregs()
+32
+### method max_load_immoff(dt=DOUBLE)
+0
+### method max_load_immoff(dt=HALF)
+0
+### method max_load_immoff(dt=SINGLE)
+0
+### method max_load_voff()
+0
+### method max_prefetch_offset()
+32760
+### method max_tregs(dt=DOUBLE)
+0
+### method max_tregs(dt=HALF)
+0
+### method max_tregs(dt=SINGLE)
+0
+### method max_vregs()
+32
+### method min_bcast_immoff(dt=DOUBLE)
+0
+### method min_bcast_immoff(dt=HALF)
+0
+### method min_bcast_immoff(dt=SINGLE)
+0
+### method min_fload_immoff(dt=DOUBLE)
+-2048
+### method min_fload_immoff(dt=HALF)
+-2048
+### method min_fload_immoff(dt=SINGLE)
+-2048
+### method min_load_immoff(dt=DOUBLE)
+0
+### method min_load_immoff(dt=HALF)
+0
+### method min_load_immoff(dt=SINGLE)
+0
+### method min_load_voff()
+0
+### method min_prefetch_offset()
+0
+### method mov_freg(dst=f1, dt=DOUBLE, src=f0)
+fmv.d f1,f0
+### method mov_freg(dst=f1, dt=HALF, src=f0)
+fmv.h f1,f0
+### method mov_freg(dst=f1, dt=SINGLE, src=f0)
+fmv.s f1,f0
+### method mov_greg(dst=t1, src=t0)
+add t1,t0,0
+### method mov_greg_imm(imm=-2048, reg=t0)
+li t0,-2048
+### method mov_greg_imm(imm=-2049, reg=t0)
+li t0,-2049
+### method mov_greg_imm(imm=-8, reg=t0)
+li t0,-8
+### method mov_greg_imm(imm=0, reg=t0)
+li t0,0
+### method mov_greg_imm(imm=1, reg=t0)
+li t0,1
+### method mov_greg_imm(imm=2047, reg=t0)
+li t0,2047
+### method mov_greg_imm(imm=2048, reg=t0)
+li t0,2048
+### method mov_greg_imm(imm=255, reg=t0)
+li t0,255
+### method mov_greg_imm(imm=256, reg=t0)
+li t0,256
+### method mov_greg_imm(imm=40, reg=t0)
+li t0,40
+### method mov_greg_imm(imm=4096, reg=t0)
+li t0,4096
+### method mov_greg_imm(imm=8, reg=t0)
+li t0,8
+### method mov_greg_to_freg(dst=f1, dt=DOUBLE, src=t0)
+fmv.d.x f1,t0
+### method mov_greg_to_freg(dst=f1, dt=HALF, src=t0)
+fmv.h.x f1,t0
+### method mov_greg_to_freg(dst=f1, dt=SINGLE, src=t0)
+fmv.w.x f1,t0
+### method mov_greg_to_param(param=someparam, src=t0)
+sd t0,%[someparam]
+### method mov_param_to_greg(dst=t0, param=someparam)
+ld t0,%[someparam]
+### method mov_param_to_greg_shift(bit_count=2, dst=t0, param=someparam)
+slli t0,%[someparam],2
+### method mul_greg_greg(dst=t0, reg1=t1, reg2=t2)
+mul t0,t1,t2
+### method mul_greg_imm(dst=t0, factor=40, src=t1)
+li t0,40
+mul t0,t1,t0
+### method prefetch_l1_immoff(areg=t0, offset=-2048)
+prefetch.r -2048(t0)
+### method prefetch_l1_immoff(areg=t0, offset=-2049)
+prefetch.r -2049(t0)
+### method prefetch_l1_immoff(areg=t0, offset=-8)
+prefetch.r -8(t0)
+### method prefetch_l1_immoff(areg=t0, offset=0)
+prefetch.r 0(t0)
+### method prefetch_l1_immoff(areg=t0, offset=1)
+prefetch.r 1(t0)
+### method prefetch_l1_immoff(areg=t0, offset=2047)
+prefetch.r 2047(t0)
+### method prefetch_l1_immoff(areg=t0, offset=2048)
+prefetch.r 2048(t0)
+### method prefetch_l1_immoff(areg=t0, offset=255)
+prefetch.r 255(t0)
+### method prefetch_l1_immoff(areg=t0, offset=256)
+prefetch.r 256(t0)
+### method prefetch_l1_immoff(areg=t0, offset=4096)
+prefetch.r 4096(t0)
+### method prefetch_l1_immoff(areg=t0, offset=8)
+prefetch.r 8(t0)
+### method ret()
+ret
+### method shift_greg_left(bit_count=4, reg=t0)
+slli t0,t0,4
+### method shift_greg_right(bit_count=4, reg=t0)
+srli t0,t0,4
+### method simd_size()
+1
+### method simd_size_to_greg(dt=DOUBLE, reg=t0)
+vsetvli t0, zero, e64, m1
+### method simd_size_to_greg(dt=HALF, reg=t0)
+vsetvli t0, zero, e16, m1
+### method simd_size_to_greg(dt=SINGLE, reg=t0)
+vsetvli t0, zero, e32, m1
+### method store_freg(areg=t0, dt=DOUBLE, offset=-2048, src=f0)
+fsd f0, -2048(t0)
+### method store_freg(areg=t0, dt=DOUBLE, offset=-2049, src=f0)
+fsd f0, -2049(t0)
+### method store_freg(areg=t0, dt=DOUBLE, offset=-8, src=f0)
+fsd f0, -8(t0)
+### method store_freg(areg=t0, dt=DOUBLE, offset=0, src=f0)
+fsd f0, 0(t0)
+### method store_freg(areg=t0, dt=DOUBLE, offset=1, src=f0)
+fsd f0, 1(t0)
+### method store_freg(areg=t0, dt=DOUBLE, offset=2047, src=f0)
+fsd f0, 2047(t0)
+### method store_freg(areg=t0, dt=DOUBLE, offset=2048, src=f0)
+fsd f0, 2048(t0)
+### method store_freg(areg=t0, dt=DOUBLE, offset=255, src=f0)
+fsd f0, 255(t0)
+### method store_freg(areg=t0, dt=DOUBLE, offset=256, src=f0)
+fsd f0, 256(t0)
+### method store_freg(areg=t0, dt=DOUBLE, offset=4, src=f0)
+fsd f0, 4(t0)
+### method store_freg(areg=t0, dt=DOUBLE, offset=4096, src=f0)
+fsd f0, 4096(t0)
+### method store_freg(areg=t0, dt=DOUBLE, offset=8, src=f0)
+fsd f0, 8(t0)
+### method store_freg(areg=t0, dt=HALF, offset=4, src=f0)
+fsh f0, 4(t0)
+### method store_freg(areg=t0, dt=SINGLE, offset=4, src=f0)
+fsw f0, 4(t0)
+### method store_greg(areg=t0, offset=-2048, src=t1)
+sd t1,-2048(t0)
+### method store_greg(areg=t0, offset=-2049, src=t1)
+sd t1,-2049(t0)
+### method store_greg(areg=t0, offset=-8, src=t1)
+sd t1,-8(t0)
+### method store_greg(areg=t0, offset=0, src=t1)
+sd t1,0(t0)
+### method store_greg(areg=t0, offset=1, src=t1)
+sd t1,1(t0)
+### method store_greg(areg=t0, offset=2047, src=t1)
+sd t1,2047(t0)
+### method store_greg(areg=t0, offset=2048, src=t1)
+sd t1,2048(t0)
+### method store_greg(areg=t0, offset=255, src=t1)
+sd t1,255(t0)
+### method store_greg(areg=t0, offset=256, src=t1)
+sd t1,256(t0)
+### method store_greg(areg=t0, offset=4, src=t1)
+sd t1,4(t0)
+### method store_greg(areg=t0, offset=4096, src=t1)
+sd t1,4096(t0)
+### method store_greg(areg=t0, offset=8, src=t1)
+sd t1,8(t0)
+### method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-2048)
+fsd f0, -2048(t0)
+### method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-2049)
+fsd f0, -2049(t0)
+### method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-8)
+fsd f0, -8(t0)
+### method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=0)
+fsd f0, 0(t0)
+### method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=1)
+fsd f0, 1(t0)
+### method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=2047)
+fsd f0, 2047(t0)
+### method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=2048)
+fsd f0, 2048(t0)
+### method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=255)
+fsd f0, 255(t0)
+### method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=256)
+fsd f0, 256(t0)
+### method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=4)
+fsd f0, 4(t0)
+### method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=4096)
+fsd f0, 4096(t0)
+### method store_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=8)
+fsd f0, 8(t0)
+### method store_scalar_immoff(areg=t0, dt=HALF, freg=f0, offset=4)
+fsh f0, 4(t0)
+### method store_scalar_immoff(areg=t0, dt=SINGLE, freg=f0, offset=4)
+fsw f0, 4(t0)
+### method store_tile
+!arguments TypeError: rvv.treg() missing 1 required positional argument: 'dt'
+### method store_vector(areg=t0, dt=DOUBLE, vreg=v0)
+vse.v v0, (t0)
+### method store_vector(areg=t0, dt=HALF, vreg=v0)
+vsh.v v0, (t0)
+### method store_vector(areg=t0, dt=SINGLE, vreg=v0)
+vsw.v v0, (t0)
+### method store_vector_gregstride(areg=t0, dt=DOUBLE, sreg=t1, vreg=v0)
+vsse.v v0, (t0), t1
+### method store_vector_gregstride(areg=t0, dt=HALF, sreg=t1, vreg=v0)
+vssh.v v0, (t0), t1
+### method store_vector_gregstride(areg=t0, dt=SINGLE, sreg=t1, vreg=v0)
+vssw.v v0, (t0), t1
+### method store_vector_immoff(areg=t0, dt=DOUBLE, offset=4, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_immoff(areg=t0, dt=HALF, offset=4, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_immoff(areg=t0, dt=SINGLE, offset=-2048, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_immoff(areg=t0, dt=SINGLE, offset=-2049, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_immoff(areg=t0, dt=SINGLE, offset=-8, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_immoff(areg=t0, dt=SINGLE, offset=0, vreg=v0)
+vsw.v v0, (t0)
+### method store_vector_immoff(areg=t0, dt=SINGLE, offset=1, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_immoff(areg=t0, dt=SINGLE, offset=2047, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_immoff(areg=t0, dt=SINGLE, offset=2048, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_immoff(areg=t0, dt=SINGLE, offset=255, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_immoff(areg=t0, dt=SINGLE, offset=256, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_immoff(areg=t0, dt=SINGLE, offset=4, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_immoff(areg=t0, dt=SINGLE, offset=4096, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_immoff(areg=t0, dt=SINGLE, offset=8, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_immstride(areg=t0, byte_stride=4, dt=DOUBLE, vreg=v0)
+!NotImplementedError: RVV has no store with immediate stride
+### method store_vector_immstride(areg=t0, byte_stride=4, dt=HALF, vreg=v0)
+!NotImplementedError: RVV has no store with immediate stride
+### method store_vector_immstride(areg=t0, byte_stride=4, dt=SINGLE, vreg=v0)
+!NotImplementedError: RVV has no store with immediate stride
+### method store_vector_lane(areg=t0, dt=DOUBLE, lane=1, vreg=v0)
+!NotImplementedError: Lane stores not implemented for RVV
+### method store_vector_lane(areg=t0, dt=HALF, lane=1, vreg=v0)
+!NotImplementedError: Lane stores not implemented for RVV
+### method store_vector_lane(areg=t0, dt=SINGLE, lane=1, vreg=v0)
+!NotImplementedError: Lane stores not implemented for RVV
+### method store_vector_scatter(areg=t0, dt=DOUBLE, it=INT32, offvreg=v1, vreg=v0)
+vsuxei32.v v0, (t0), v1
+### method store_vector_scatter(areg=t0, dt=HALF, it=INT32, offvreg=v1, vreg=v0)
+vsuxei32.v v0, (t0), v1
+### method store_vector_scatter(areg=t0, dt=SINGLE, it=INT32, offvreg=v1, vreg=v0)
+vsuxei32.v v0, (t0), v1
+### method store_vector_voff(areg=t0, dt=DOUBLE, voffset=4, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_voff(areg=t0, dt=HALF, voffset=4, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method store_vector_voff(areg=t0, dt=SINGLE, voffset=4, vreg=v0)
+!NotImplementedError: RVV has no vector stores with address offset
+### method sub_greg_greg(dst=t0, reg1=t1, reg2=t2)
+sub t0,t1,t2
+### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=-2048)
+!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=-2049)
+!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=-8)
+!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=0)
+!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=1)
+!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=2047)
+!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=2048)
+!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=255)
+!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=256)
+!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=4096)
+!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=8)
+!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+### method supported_on_host()
+False
+### method supportedby_cpuinfo(cpuinfo=invalid_isa)
+False
+### method treg(dt=DOUBLE, reg_idx=0)
+!NotImplementedError: RVV has no tiles (wait for IME/AME support)
+### method treg(dt=HALF, reg_idx=0)
+!NotImplementedError: RVV has no tiles (wait for IME/AME support)
+### method treg(dt=SINGLE, reg_idx=0)
+!NotImplementedError: RVV has no tiles (wait for IME/AME support)
+### method vlen_to_greg(dt=DOUBLE, reg=t0)
+!NotImplementedError: rvv071 has no vector length to read
+### method vlen_to_greg(dt=HALF, reg=t0)
+!NotImplementedError: rvv071 has no vector length to read
+### method vlen_to_greg(dt=SINGLE, reg=t0)
+!NotImplementedError: rvv071 has no vector length to read
+### method vreg(reg_idx=0)
+v0
+### method zero_freg(dt=DOUBLE, freg=f0)
+fcvt.d.w f0, zero
+### method zero_freg(dt=HALF, freg=f0)
+fcvt.h.w f0, zero
+### method zero_freg(dt=SINGLE, freg=f0)
+fcvt.s.w f0, zero
+### method zero_greg(greg=t0)
+add t0, zero, 0
+### method zero_treg
+!arguments NotImplementedError: RVV has no tiles (wait for IME/AME support)
+### method zero_vreg(dt=DOUBLE, vreg=v0)
+vmv.v.i v0,0
+### method zero_vreg(dt=HALF, vreg=v0)
+vmv.v.i v0,0
+### method zero_vreg(dt=SINGLE, vreg=v0)
+vmv.v.i v0,0
+### op fadd [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:FP:DOUBLE{VF} cdreg:REGISTER:VEC:DOUBLE
+vfadd.vf v2,v1,f1
+### op fadd [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+vfadd.vv v3,v1,v2
+### op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:HALF
+vfadd.vf v2,v1,f1
+### op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
+vfwadd.vf v2,v1,f1
+### op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
+vfadd.vv v3,v1,v2
+### op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
+vfwadd.vv v4,v1,v2
+### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
+vfwadd.vf v2,v1,f1
+### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:SINGLE
+vfadd.vf v2,v1,f1
+### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
+vfwadd.vv v4,v1,v2
+### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+vfadd.vv v3,v1,v2
+### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT16
+vadd.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwadd.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwaddsu.vv v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwaddsu.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16
+vadd.vv v3,v1,v2
+### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwadd.vv v4,v1,v2
+### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT32
+vadd.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwadd.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwaddsu.vv v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwaddsu.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32
+vadd.vv v3,v1,v2
+### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwadd.vv v4,v1,v2
+### op fadd [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:GP:SINT64{VF} cdreg:REGISTER:VEC:SINT64
+vadd.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64
+vadd.vv v3,v1,v2
+### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwadd.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT8
+vadd.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwaddsu.vv v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwaddsu.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwadd.vv v4,v1,v2
+### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8
+vadd.vv v3,v1,v2
+### op fadd [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwaddus.vv v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwaddus.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT16
+vaddu.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
+vwaddu.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16
+vaddu.vv v3,v1,v2
+### op fadd [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
+vwaddu.vv v4,v1,v2
+### op fadd [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwaddus.vv v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwaddus.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT32
+vaddu.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
+vwaddu.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32
+vaddu.vv v3,v1,v2
+### op fadd [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
+vwaddu.vv v4,v1,v2
+### op fadd [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:GP:UINT64{VF} cdreg:REGISTER:VEC:UINT64
+vaddu.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64
+vaddu.vv v3,v1,v2
+### op fadd [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwaddus.vv v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwaddus.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
+vwaddu.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT8
+vaddu.vx v2,v1,s4
+### op fadd [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
+vwaddu.vv v4,v1,v2
+### op fadd [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
+vaddu.vv v3,v1,v2
+### op fma [NP] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:FP:DOUBLE{VF} cdreg:REGISTER:VEC:DOUBLE
+vfnmsac.vf v2,f1,v1
+### op fma [NP] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+vfnmsac.vv v3,v2,v1
+### op fma [NP] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:HALF
+vfnmsac.vf v2,f1,v1
+### op fma [NP] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
+vfwnmsac.vf v2,f1,v1
+### op fma [NP] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
+vfnmsac.vv v3,v2,v1
+### op fma [NP] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
+vfwnmsac.vv v4,v2,v1
+### op fma [NP] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
+vfwnmsac.vf v2,f1,v1
+### op fma [NP] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:SINGLE
+vfnmsac.vf v2,f1,v1
+### op fma [NP] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
+vfwnmsac.vv v4,v2,v1
+### op fma [NP] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+vfnmsac.vv v3,v2,v1
+### op fma [NP] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT16
+vnmsac.vx v2,s4,v1
+### op fma [NP] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16
+vnmsac.vv v3,v2,v1
+### op fma [NP] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT32
+vnmsac.vx v2,s4,v1
+### op fma [NP] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32
+vnmsac.vv v3,v2,v1
+### op fma [NP] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:GP:SINT64{VF} cdreg:REGISTER:VEC:SINT64
+vnmsac.vx v2,s4,v1
+### op fma [NP] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64
+vnmsac.vv v3,v2,v1
+### op fma [NP] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT8
+vnmsac.vx v2,s4,v1
+### op fma [NP] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8
+vnmsac.vv v3,v2,v1
+### op fma [NP] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT16
+vnmsacu.vx v2,s4,v1
+### op fma [NP] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16
+vnmsacu.vv v3,v2,v1
+### op fma [NP] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT32
+vnmsacu.vx v2,s4,v1
+### op fma [NP] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32
+vnmsacu.vv v3,v2,v1
+### op fma [NP] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:GP:UINT64{VF} cdreg:REGISTER:VEC:UINT64
+vnmsacu.vx v2,s4,v1
+### op fma [NP] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64
+vnmsacu.vv v3,v2,v1
+### op fma [NP] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT8
+vnmsacu.vx v2,s4,v1
+### op fma [NP] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
+vnmsacu.vv v3,v2,v1
+### op fma [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:FP:DOUBLE{VF} cdreg:REGISTER:VEC:DOUBLE
+vfmacc.vf v2,f1,v1
+### op fma [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+vfmacc.vv v3,v2,v1
+### op fma [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:HALF
+vfmacc.vf v2,f1,v1
+### op fma [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
+vfwmacc.vf v2,f1,v1
+### op fma [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
+vfmacc.vv v3,v2,v1
+### op fma [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
+vfwmacc.vv v4,v2,v1
+### op fma [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
+vfwmacc.vf v2,f1,v1
+### op fma [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:SINGLE
+vfmacc.vf v2,f1,v1
+### op fma [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
+vfwmacc.vv v4,v2,v1
+### op fma [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+vfmacc.vv v3,v2,v1
+### op fma [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT16
+vmacc.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmacc.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmaccsu.vv v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmaccsu.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16
+vmacc.vv v3,v2,v1
+### op fma [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmacc.vv v4,v2,v1
+### op fma [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT32
+vmacc.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmacc.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmaccsu.vv v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmaccsu.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32
+vmacc.vv v3,v2,v1
+### op fma [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmacc.vv v4,v2,v1
+### op fma [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:GP:SINT64{VF} cdreg:REGISTER:VEC:SINT64
+vmacc.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64
+vmacc.vv v3,v2,v1
+### op fma [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmacc.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT8
+vmacc.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmaccsu.vv v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmaccsu.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmacc.vv v4,v2,v1
+### op fma [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8
+vmacc.vv v3,v2,v1
+### op fma [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmaccus.vv v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmaccus.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT16
+vmaccu.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
+vwmaccu.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16
+vmaccu.vv v3,v2,v1
+### op fma [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
+vwmaccu.vv v4,v2,v1
+### op fma [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmaccus.vv v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmaccus.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT32
+vmaccu.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
+vwmaccu.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32
+vmaccu.vv v3,v2,v1
+### op fma [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
+vwmaccu.vv v4,v2,v1
+### op fma [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:GP:UINT64{VF} cdreg:REGISTER:VEC:UINT64
+vmaccu.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64
+vmaccu.vv v3,v2,v1
+### op fma [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmaccus.vv v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmaccus.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
+vwmaccu.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT8
+vmaccu.vx v2,s4,v1
+### op fma [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
+vwmaccu.vv v4,v2,v1
+### op fma [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
+vmaccu.vv v3,v2,v1
+### op fmul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:FP:DOUBLE{VF} cdreg:REGISTER:VEC:DOUBLE
+vfmul.vf v2,v1,f1
+### op fmul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+vfmul.vv v3,v1,v2
+### op fmul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:HALF
+vfmul.vf v2,v1,f1
+### op fmul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
+vfwmul.vf v2,v1,f1
+### op fmul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
+vfmul.vv v3,v1,v2
+### op fmul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
+vfwmul.vv v4,v1,v2
+### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
+vfwmul.vf v2,v1,f1
+### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:SINGLE
+vfmul.vf v2,v1,f1
+### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
+vfwmul.vv v4,v1,v2
+### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+vfmul.vv v3,v1,v2
+### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT16
+vmul.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmul.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmulsu.vv v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmulsu.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16
+vmul.vv v3,v1,v2
+### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmul.vv v4,v1,v2
+### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT32
+vmul.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmul.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmulsu.vv v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmulsu.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32
+vmul.vv v3,v1,v2
+### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmul.vv v4,v1,v2
+### op fmul [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:GP:SINT64{VF} cdreg:REGISTER:VEC:SINT64
+vmul.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64
+vmul.vv v3,v1,v2
+### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmul.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT8
+vmul.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmulsu.vv v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmulsu.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmul.vv v4,v1,v2
+### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8
+vmul.vv v3,v1,v2
+### op fmul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmulus.vv v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmulus.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT16
+vmulu.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
+vwmulu.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16
+vmulu.vv v3,v1,v2
+### op fmul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
+vwmulu.vv v4,v1,v2
+### op fmul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmulus.vv v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmulus.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT32
+vmulu.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
+vwmulu.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32
+vmulu.vv v3,v1,v2
+### op fmul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
+vwmulu.vv v4,v1,v2
+### op fmul [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:GP:UINT64{VF} cdreg:REGISTER:VEC:UINT64
+vmulu.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64
+vmulu.vv v3,v1,v2
+### op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmulus.vv v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmulus.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
+vwmulu.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT8
+vmulu.vx v2,v1,s4
+### op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
+vwmulu.vv v4,v1,v2
+### op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
+vmulu.vv v3,v1,v2
+### op load [GSTRIDE] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vlse64.v v1, (s4), s5
+### op load [GSTRIDE] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vlse8.v v1, (s4), s5
+### op load [GSTRIDE] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vlse8.v v1, (s4), s5
+### op load [GSTRIDE] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vlse16.v v1, (s4), s5
+### op load [GSTRIDE] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vlse32.v v1, (s4), s5
+### op load [GSTRIDE] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vlse16.v v1, (s4), s5
+### op load [GSTRIDE] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vlse32.v v1, (s4), s5
+### op load [GSTRIDE] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vlse64.v v1, (s4), s5
+### op load [GSTRIDE] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vlse8.v v1, (s4), s5
+### op load [GSTRIDE] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vlse16.v v1, (s4), s5
+### op load [GSTRIDE] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vlse32.v v1, (s4), s5
+### op load [GSTRIDE] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vlse64.v v1, (s4), s5
+### op load [GSTRIDE] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vlse8.v v1, (s4), s5
+### op load [IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+fld f1, -2048(s4)
+### op load [IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+fld f1, 2047(s4)
+### op load [IOFFSET] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+flb f1, -2048(s4)
+### op load [IOFFSET] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+flb f1, 2047(s4)
+### op load [IOFFSET] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+flb f1, -2048(s4)
+### op load [IOFFSET] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+flb f1, 2047(s4)
+### op load [IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+flh f1, -2048(s4)
+### op load [IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+flh f1, 2047(s4)
+### op load [IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+flw f1, -2048(s4)
+### op load [IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+flw f1, 2047(s4)
+### op load [IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+lh s4, -2048(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+lh s4, 2047(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+lw s4, -2048(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+lw s4, 2047(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+ld s4, -2048(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+ld s4, 2047(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+lb s4, -2048(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+lb s4, 2047(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+lh s4, -2048(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+lh s4, 2047(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+lw s4, -2048(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+lw s4, 2047(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+ld s4, -2048(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+ld s4, 2047(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+lb s4, -2048(s5)
+### op load [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+lb s4, 2047(s5)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE gdreg:REGISTER:VEC:DOUBLE hdreg:REGISTER:VEC:DOUBLE {nstructs:8}
+vlseg8e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE gdreg:REGISTER:VEC:DOUBLE {nstructs:7}
+vlseg7e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE {nstructs:6}
+vlseg6e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE {nstructs:5}
+vlseg5e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE {nstructs:4}
+vlseg4e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE {nstructs:3}
+vlseg3e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE {nstructs:2}
+vlseg2e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE {nstructs:1}
+vlseg1e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE{BCAST} bdreg:REGISTER:VEC:DOUBLE{BCAST} cdreg:REGISTER:VEC:DOUBLE{BCAST} ddreg:REGISTER:VEC:DOUBLE{BCAST} edreg:REGISTER:VEC:DOUBLE{BCAST} fdreg:REGISTER:VEC:DOUBLE{BCAST} gdreg:REGISTER:VEC:DOUBLE{BCAST} hdreg:REGISTER:VEC:DOUBLE{BCAST} {nstructs:8}
+vlsseg8e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE{BCAST} bdreg:REGISTER:VEC:DOUBLE{BCAST} cdreg:REGISTER:VEC:DOUBLE{BCAST} ddreg:REGISTER:VEC:DOUBLE{BCAST} edreg:REGISTER:VEC:DOUBLE{BCAST} fdreg:REGISTER:VEC:DOUBLE{BCAST} gdreg:REGISTER:VEC:DOUBLE{BCAST} {nstructs:7}
+vlsseg7e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE{BCAST} bdreg:REGISTER:VEC:DOUBLE{BCAST} cdreg:REGISTER:VEC:DOUBLE{BCAST} ddreg:REGISTER:VEC:DOUBLE{BCAST} edreg:REGISTER:VEC:DOUBLE{BCAST} fdreg:REGISTER:VEC:DOUBLE{BCAST} {nstructs:6}
+vlsseg6e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE{BCAST} bdreg:REGISTER:VEC:DOUBLE{BCAST} cdreg:REGISTER:VEC:DOUBLE{BCAST} ddreg:REGISTER:VEC:DOUBLE{BCAST} edreg:REGISTER:VEC:DOUBLE{BCAST} {nstructs:5}
+vlsseg5e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE{BCAST} bdreg:REGISTER:VEC:DOUBLE{BCAST} cdreg:REGISTER:VEC:DOUBLE{BCAST} ddreg:REGISTER:VEC:DOUBLE{BCAST} {nstructs:4}
+vlsseg4e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE{BCAST} bdreg:REGISTER:VEC:DOUBLE{BCAST} cdreg:REGISTER:VEC:DOUBLE{BCAST} {nstructs:3}
+vlsseg3e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE{BCAST} bdreg:REGISTER:VEC:DOUBLE{BCAST} {nstructs:2}
+vlsseg2e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE{BCAST} {nstructs:1}
+vlsseg1e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:FP8E4M3 ddreg:REGISTER:VEC:FP8E4M3 edreg:REGISTER:VEC:FP8E4M3 fdreg:REGISTER:VEC:FP8E4M3 gdreg:REGISTER:VEC:FP8E4M3 hdreg:REGISTER:VEC:FP8E4M3 {nstructs:8}
+vlseg8e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:FP8E4M3 ddreg:REGISTER:VEC:FP8E4M3 edreg:REGISTER:VEC:FP8E4M3 fdreg:REGISTER:VEC:FP8E4M3 gdreg:REGISTER:VEC:FP8E4M3 {nstructs:7}
+vlseg7e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:FP8E4M3 ddreg:REGISTER:VEC:FP8E4M3 edreg:REGISTER:VEC:FP8E4M3 fdreg:REGISTER:VEC:FP8E4M3 {nstructs:6}
+vlseg6e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:FP8E4M3 ddreg:REGISTER:VEC:FP8E4M3 edreg:REGISTER:VEC:FP8E4M3 {nstructs:5}
+vlseg5e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:FP8E4M3 ddreg:REGISTER:VEC:FP8E4M3 {nstructs:4}
+vlseg4e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:FP8E4M3 {nstructs:3}
+vlseg3e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 {nstructs:2}
+vlseg2e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 {nstructs:1}
+vlseg1e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3{BCAST} bdreg:REGISTER:VEC:FP8E4M3{BCAST} cdreg:REGISTER:VEC:FP8E4M3{BCAST} ddreg:REGISTER:VEC:FP8E4M3{BCAST} edreg:REGISTER:VEC:FP8E4M3{BCAST} fdreg:REGISTER:VEC:FP8E4M3{BCAST} gdreg:REGISTER:VEC:FP8E4M3{BCAST} hdreg:REGISTER:VEC:FP8E4M3{BCAST} {nstructs:8}
+vlsseg8e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3{BCAST} bdreg:REGISTER:VEC:FP8E4M3{BCAST} cdreg:REGISTER:VEC:FP8E4M3{BCAST} ddreg:REGISTER:VEC:FP8E4M3{BCAST} edreg:REGISTER:VEC:FP8E4M3{BCAST} fdreg:REGISTER:VEC:FP8E4M3{BCAST} gdreg:REGISTER:VEC:FP8E4M3{BCAST} {nstructs:7}
+vlsseg7e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3{BCAST} bdreg:REGISTER:VEC:FP8E4M3{BCAST} cdreg:REGISTER:VEC:FP8E4M3{BCAST} ddreg:REGISTER:VEC:FP8E4M3{BCAST} edreg:REGISTER:VEC:FP8E4M3{BCAST} fdreg:REGISTER:VEC:FP8E4M3{BCAST} {nstructs:6}
+vlsseg6e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3{BCAST} bdreg:REGISTER:VEC:FP8E4M3{BCAST} cdreg:REGISTER:VEC:FP8E4M3{BCAST} ddreg:REGISTER:VEC:FP8E4M3{BCAST} edreg:REGISTER:VEC:FP8E4M3{BCAST} {nstructs:5}
+vlsseg5e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3{BCAST} bdreg:REGISTER:VEC:FP8E4M3{BCAST} cdreg:REGISTER:VEC:FP8E4M3{BCAST} ddreg:REGISTER:VEC:FP8E4M3{BCAST} {nstructs:4}
+vlsseg4e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3{BCAST} bdreg:REGISTER:VEC:FP8E4M3{BCAST} cdreg:REGISTER:VEC:FP8E4M3{BCAST} {nstructs:3}
+vlsseg3e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3{BCAST} bdreg:REGISTER:VEC:FP8E4M3{BCAST} {nstructs:2}
+vlsseg2e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3{BCAST} {nstructs:1}
+vlsseg1e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 cdreg:REGISTER:VEC:FP8E5M2 ddreg:REGISTER:VEC:FP8E5M2 edreg:REGISTER:VEC:FP8E5M2 fdreg:REGISTER:VEC:FP8E5M2 gdreg:REGISTER:VEC:FP8E5M2 hdreg:REGISTER:VEC:FP8E5M2 {nstructs:8}
+vlseg8e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 cdreg:REGISTER:VEC:FP8E5M2 ddreg:REGISTER:VEC:FP8E5M2 edreg:REGISTER:VEC:FP8E5M2 fdreg:REGISTER:VEC:FP8E5M2 gdreg:REGISTER:VEC:FP8E5M2 {nstructs:7}
+vlseg7e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 cdreg:REGISTER:VEC:FP8E5M2 ddreg:REGISTER:VEC:FP8E5M2 edreg:REGISTER:VEC:FP8E5M2 fdreg:REGISTER:VEC:FP8E5M2 {nstructs:6}
+vlseg6e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 cdreg:REGISTER:VEC:FP8E5M2 ddreg:REGISTER:VEC:FP8E5M2 edreg:REGISTER:VEC:FP8E5M2 {nstructs:5}
+vlseg5e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 cdreg:REGISTER:VEC:FP8E5M2 ddreg:REGISTER:VEC:FP8E5M2 {nstructs:4}
+vlseg4e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 cdreg:REGISTER:VEC:FP8E5M2 {nstructs:3}
+vlseg3e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 {nstructs:2}
+vlseg2e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 {nstructs:1}
+vlseg1e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2{BCAST} bdreg:REGISTER:VEC:FP8E5M2{BCAST} cdreg:REGISTER:VEC:FP8E5M2{BCAST} ddreg:REGISTER:VEC:FP8E5M2{BCAST} edreg:REGISTER:VEC:FP8E5M2{BCAST} fdreg:REGISTER:VEC:FP8E5M2{BCAST} gdreg:REGISTER:VEC:FP8E5M2{BCAST} hdreg:REGISTER:VEC:FP8E5M2{BCAST} {nstructs:8}
+vlsseg8e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2{BCAST} bdreg:REGISTER:VEC:FP8E5M2{BCAST} cdreg:REGISTER:VEC:FP8E5M2{BCAST} ddreg:REGISTER:VEC:FP8E5M2{BCAST} edreg:REGISTER:VEC:FP8E5M2{BCAST} fdreg:REGISTER:VEC:FP8E5M2{BCAST} gdreg:REGISTER:VEC:FP8E5M2{BCAST} {nstructs:7}
+vlsseg7e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2{BCAST} bdreg:REGISTER:VEC:FP8E5M2{BCAST} cdreg:REGISTER:VEC:FP8E5M2{BCAST} ddreg:REGISTER:VEC:FP8E5M2{BCAST} edreg:REGISTER:VEC:FP8E5M2{BCAST} fdreg:REGISTER:VEC:FP8E5M2{BCAST} {nstructs:6}
+vlsseg6e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2{BCAST} bdreg:REGISTER:VEC:FP8E5M2{BCAST} cdreg:REGISTER:VEC:FP8E5M2{BCAST} ddreg:REGISTER:VEC:FP8E5M2{BCAST} edreg:REGISTER:VEC:FP8E5M2{BCAST} {nstructs:5}
+vlsseg5e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2{BCAST} bdreg:REGISTER:VEC:FP8E5M2{BCAST} cdreg:REGISTER:VEC:FP8E5M2{BCAST} ddreg:REGISTER:VEC:FP8E5M2{BCAST} {nstructs:4}
+vlsseg4e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2{BCAST} bdreg:REGISTER:VEC:FP8E5M2{BCAST} cdreg:REGISTER:VEC:FP8E5M2{BCAST} {nstructs:3}
+vlsseg3e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2{BCAST} bdreg:REGISTER:VEC:FP8E5M2{BCAST} {nstructs:2}
+vlsseg2e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2{BCAST} {nstructs:1}
+vlsseg1e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF ddreg:REGISTER:VEC:HALF edreg:REGISTER:VEC:HALF fdreg:REGISTER:VEC:HALF gdreg:REGISTER:VEC:HALF hdreg:REGISTER:VEC:HALF {nstructs:8}
+vlseg8e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF ddreg:REGISTER:VEC:HALF edreg:REGISTER:VEC:HALF fdreg:REGISTER:VEC:HALF gdreg:REGISTER:VEC:HALF {nstructs:7}
+vlseg7e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF ddreg:REGISTER:VEC:HALF edreg:REGISTER:VEC:HALF fdreg:REGISTER:VEC:HALF {nstructs:6}
+vlseg6e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF ddreg:REGISTER:VEC:HALF edreg:REGISTER:VEC:HALF {nstructs:5}
+vlseg5e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF ddreg:REGISTER:VEC:HALF {nstructs:4}
+vlseg4e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {nstructs:3}
+vlseg3e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF {nstructs:2}
+vlseg2e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF {nstructs:1}
+vlseg1e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF{BCAST} bdreg:REGISTER:VEC:HALF{BCAST} cdreg:REGISTER:VEC:HALF{BCAST} ddreg:REGISTER:VEC:HALF{BCAST} edreg:REGISTER:VEC:HALF{BCAST} fdreg:REGISTER:VEC:HALF{BCAST} gdreg:REGISTER:VEC:HALF{BCAST} hdreg:REGISTER:VEC:HALF{BCAST} {nstructs:8}
+vlsseg8e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF{BCAST} bdreg:REGISTER:VEC:HALF{BCAST} cdreg:REGISTER:VEC:HALF{BCAST} ddreg:REGISTER:VEC:HALF{BCAST} edreg:REGISTER:VEC:HALF{BCAST} fdreg:REGISTER:VEC:HALF{BCAST} gdreg:REGISTER:VEC:HALF{BCAST} {nstructs:7}
+vlsseg7e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF{BCAST} bdreg:REGISTER:VEC:HALF{BCAST} cdreg:REGISTER:VEC:HALF{BCAST} ddreg:REGISTER:VEC:HALF{BCAST} edreg:REGISTER:VEC:HALF{BCAST} fdreg:REGISTER:VEC:HALF{BCAST} {nstructs:6}
+vlsseg6e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF{BCAST} bdreg:REGISTER:VEC:HALF{BCAST} cdreg:REGISTER:VEC:HALF{BCAST} ddreg:REGISTER:VEC:HALF{BCAST} edreg:REGISTER:VEC:HALF{BCAST} {nstructs:5}
+vlsseg5e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF{BCAST} bdreg:REGISTER:VEC:HALF{BCAST} cdreg:REGISTER:VEC:HALF{BCAST} ddreg:REGISTER:VEC:HALF{BCAST} {nstructs:4}
+vlsseg4e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF{BCAST} bdreg:REGISTER:VEC:HALF{BCAST} cdreg:REGISTER:VEC:HALF{BCAST} {nstructs:3}
+vlsseg3e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF{BCAST} bdreg:REGISTER:VEC:HALF{BCAST} {nstructs:2}
+vlsseg2e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF{BCAST} {nstructs:1}
+vlsseg1e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE ddreg:REGISTER:VEC:SINGLE edreg:REGISTER:VEC:SINGLE fdreg:REGISTER:VEC:SINGLE gdreg:REGISTER:VEC:SINGLE hdreg:REGISTER:VEC:SINGLE {nstructs:8}
+vlseg8e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE ddreg:REGISTER:VEC:SINGLE edreg:REGISTER:VEC:SINGLE fdreg:REGISTER:VEC:SINGLE gdreg:REGISTER:VEC:SINGLE {nstructs:7}
+vlseg7e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE ddreg:REGISTER:VEC:SINGLE edreg:REGISTER:VEC:SINGLE fdreg:REGISTER:VEC:SINGLE {nstructs:6}
+vlseg6e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE ddreg:REGISTER:VEC:SINGLE edreg:REGISTER:VEC:SINGLE {nstructs:5}
+vlseg5e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE ddreg:REGISTER:VEC:SINGLE {nstructs:4}
+vlseg4e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {nstructs:3}
+vlseg3e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE {nstructs:2}
+vlseg2e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE {nstructs:1}
+vlseg1e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE{BCAST} bdreg:REGISTER:VEC:SINGLE{BCAST} cdreg:REGISTER:VEC:SINGLE{BCAST} ddreg:REGISTER:VEC:SINGLE{BCAST} edreg:REGISTER:VEC:SINGLE{BCAST} fdreg:REGISTER:VEC:SINGLE{BCAST} gdreg:REGISTER:VEC:SINGLE{BCAST} hdreg:REGISTER:VEC:SINGLE{BCAST} {nstructs:8}
+vlsseg8e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE{BCAST} bdreg:REGISTER:VEC:SINGLE{BCAST} cdreg:REGISTER:VEC:SINGLE{BCAST} ddreg:REGISTER:VEC:SINGLE{BCAST} edreg:REGISTER:VEC:SINGLE{BCAST} fdreg:REGISTER:VEC:SINGLE{BCAST} gdreg:REGISTER:VEC:SINGLE{BCAST} {nstructs:7}
+vlsseg7e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE{BCAST} bdreg:REGISTER:VEC:SINGLE{BCAST} cdreg:REGISTER:VEC:SINGLE{BCAST} ddreg:REGISTER:VEC:SINGLE{BCAST} edreg:REGISTER:VEC:SINGLE{BCAST} fdreg:REGISTER:VEC:SINGLE{BCAST} {nstructs:6}
+vlsseg6e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE{BCAST} bdreg:REGISTER:VEC:SINGLE{BCAST} cdreg:REGISTER:VEC:SINGLE{BCAST} ddreg:REGISTER:VEC:SINGLE{BCAST} edreg:REGISTER:VEC:SINGLE{BCAST} {nstructs:5}
+vlsseg5e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE{BCAST} bdreg:REGISTER:VEC:SINGLE{BCAST} cdreg:REGISTER:VEC:SINGLE{BCAST} ddreg:REGISTER:VEC:SINGLE{BCAST} {nstructs:4}
+vlsseg4e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE{BCAST} bdreg:REGISTER:VEC:SINGLE{BCAST} cdreg:REGISTER:VEC:SINGLE{BCAST} {nstructs:3}
+vlsseg3e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE{BCAST} bdreg:REGISTER:VEC:SINGLE{BCAST} {nstructs:2}
+vlsseg2e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE{BCAST} {nstructs:1}
+vlsseg1e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 ddreg:REGISTER:VEC:SINT16 edreg:REGISTER:VEC:SINT16 fdreg:REGISTER:VEC:SINT16 gdreg:REGISTER:VEC:SINT16 hdreg:REGISTER:VEC:SINT16 {nstructs:8}
+vlseg8e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 ddreg:REGISTER:VEC:SINT16 edreg:REGISTER:VEC:SINT16 fdreg:REGISTER:VEC:SINT16 gdreg:REGISTER:VEC:SINT16 {nstructs:7}
+vlseg7e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 ddreg:REGISTER:VEC:SINT16 edreg:REGISTER:VEC:SINT16 fdreg:REGISTER:VEC:SINT16 {nstructs:6}
+vlseg6e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 ddreg:REGISTER:VEC:SINT16 edreg:REGISTER:VEC:SINT16 {nstructs:5}
+vlseg5e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 ddreg:REGISTER:VEC:SINT16 {nstructs:4}
+vlseg4e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {nstructs:3}
+vlseg3e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 {nstructs:2}
+vlseg2e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 {nstructs:1}
+vlseg1e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16{BCAST} bdreg:REGISTER:VEC:SINT16{BCAST} cdreg:REGISTER:VEC:SINT16{BCAST} ddreg:REGISTER:VEC:SINT16{BCAST} edreg:REGISTER:VEC:SINT16{BCAST} fdreg:REGISTER:VEC:SINT16{BCAST} gdreg:REGISTER:VEC:SINT16{BCAST} hdreg:REGISTER:VEC:SINT16{BCAST} {nstructs:8}
+vlsseg8e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16{BCAST} bdreg:REGISTER:VEC:SINT16{BCAST} cdreg:REGISTER:VEC:SINT16{BCAST} ddreg:REGISTER:VEC:SINT16{BCAST} edreg:REGISTER:VEC:SINT16{BCAST} fdreg:REGISTER:VEC:SINT16{BCAST} gdreg:REGISTER:VEC:SINT16{BCAST} {nstructs:7}
+vlsseg7e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16{BCAST} bdreg:REGISTER:VEC:SINT16{BCAST} cdreg:REGISTER:VEC:SINT16{BCAST} ddreg:REGISTER:VEC:SINT16{BCAST} edreg:REGISTER:VEC:SINT16{BCAST} fdreg:REGISTER:VEC:SINT16{BCAST} {nstructs:6}
+vlsseg6e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16{BCAST} bdreg:REGISTER:VEC:SINT16{BCAST} cdreg:REGISTER:VEC:SINT16{BCAST} ddreg:REGISTER:VEC:SINT16{BCAST} edreg:REGISTER:VEC:SINT16{BCAST} {nstructs:5}
+vlsseg5e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16{BCAST} bdreg:REGISTER:VEC:SINT16{BCAST} cdreg:REGISTER:VEC:SINT16{BCAST} ddreg:REGISTER:VEC:SINT16{BCAST} {nstructs:4}
+vlsseg4e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16{BCAST} bdreg:REGISTER:VEC:SINT16{BCAST} cdreg:REGISTER:VEC:SINT16{BCAST} {nstructs:3}
+vlsseg3e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16{BCAST} bdreg:REGISTER:VEC:SINT16{BCAST} {nstructs:2}
+vlsseg2e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16{BCAST} {nstructs:1}
+vlsseg1e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 ddreg:REGISTER:VEC:SINT32 edreg:REGISTER:VEC:SINT32 fdreg:REGISTER:VEC:SINT32 gdreg:REGISTER:VEC:SINT32 hdreg:REGISTER:VEC:SINT32 {nstructs:8}
+vlseg8e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 ddreg:REGISTER:VEC:SINT32 edreg:REGISTER:VEC:SINT32 fdreg:REGISTER:VEC:SINT32 gdreg:REGISTER:VEC:SINT32 {nstructs:7}
+vlseg7e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 ddreg:REGISTER:VEC:SINT32 edreg:REGISTER:VEC:SINT32 fdreg:REGISTER:VEC:SINT32 {nstructs:6}
+vlseg6e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 ddreg:REGISTER:VEC:SINT32 edreg:REGISTER:VEC:SINT32 {nstructs:5}
+vlseg5e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 ddreg:REGISTER:VEC:SINT32 {nstructs:4}
+vlseg4e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {nstructs:3}
+vlseg3e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 {nstructs:2}
+vlseg2e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 {nstructs:1}
+vlseg1e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32{BCAST} bdreg:REGISTER:VEC:SINT32{BCAST} cdreg:REGISTER:VEC:SINT32{BCAST} ddreg:REGISTER:VEC:SINT32{BCAST} edreg:REGISTER:VEC:SINT32{BCAST} fdreg:REGISTER:VEC:SINT32{BCAST} gdreg:REGISTER:VEC:SINT32{BCAST} hdreg:REGISTER:VEC:SINT32{BCAST} {nstructs:8}
+vlsseg8e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32{BCAST} bdreg:REGISTER:VEC:SINT32{BCAST} cdreg:REGISTER:VEC:SINT32{BCAST} ddreg:REGISTER:VEC:SINT32{BCAST} edreg:REGISTER:VEC:SINT32{BCAST} fdreg:REGISTER:VEC:SINT32{BCAST} gdreg:REGISTER:VEC:SINT32{BCAST} {nstructs:7}
+vlsseg7e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32{BCAST} bdreg:REGISTER:VEC:SINT32{BCAST} cdreg:REGISTER:VEC:SINT32{BCAST} ddreg:REGISTER:VEC:SINT32{BCAST} edreg:REGISTER:VEC:SINT32{BCAST} fdreg:REGISTER:VEC:SINT32{BCAST} {nstructs:6}
+vlsseg6e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32{BCAST} bdreg:REGISTER:VEC:SINT32{BCAST} cdreg:REGISTER:VEC:SINT32{BCAST} ddreg:REGISTER:VEC:SINT32{BCAST} edreg:REGISTER:VEC:SINT32{BCAST} {nstructs:5}
+vlsseg5e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32{BCAST} bdreg:REGISTER:VEC:SINT32{BCAST} cdreg:REGISTER:VEC:SINT32{BCAST} ddreg:REGISTER:VEC:SINT32{BCAST} {nstructs:4}
+vlsseg4e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32{BCAST} bdreg:REGISTER:VEC:SINT32{BCAST} cdreg:REGISTER:VEC:SINT32{BCAST} {nstructs:3}
+vlsseg3e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32{BCAST} bdreg:REGISTER:VEC:SINT32{BCAST} {nstructs:2}
+vlsseg2e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32{BCAST} {nstructs:1}
+vlsseg1e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 ddreg:REGISTER:VEC:SINT64 edreg:REGISTER:VEC:SINT64 fdreg:REGISTER:VEC:SINT64 gdreg:REGISTER:VEC:SINT64 hdreg:REGISTER:VEC:SINT64 {nstructs:8}
+vlseg8e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 ddreg:REGISTER:VEC:SINT64 edreg:REGISTER:VEC:SINT64 fdreg:REGISTER:VEC:SINT64 gdreg:REGISTER:VEC:SINT64 {nstructs:7}
+vlseg7e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 ddreg:REGISTER:VEC:SINT64 edreg:REGISTER:VEC:SINT64 fdreg:REGISTER:VEC:SINT64 {nstructs:6}
+vlseg6e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 ddreg:REGISTER:VEC:SINT64 edreg:REGISTER:VEC:SINT64 {nstructs:5}
+vlseg5e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 ddreg:REGISTER:VEC:SINT64 {nstructs:4}
+vlseg4e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 {nstructs:3}
+vlseg3e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 {nstructs:2}
+vlseg2e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 {nstructs:1}
+vlseg1e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64{BCAST} bdreg:REGISTER:VEC:SINT64{BCAST} cdreg:REGISTER:VEC:SINT64{BCAST} ddreg:REGISTER:VEC:SINT64{BCAST} edreg:REGISTER:VEC:SINT64{BCAST} fdreg:REGISTER:VEC:SINT64{BCAST} gdreg:REGISTER:VEC:SINT64{BCAST} hdreg:REGISTER:VEC:SINT64{BCAST} {nstructs:8}
+vlsseg8e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64{BCAST} bdreg:REGISTER:VEC:SINT64{BCAST} cdreg:REGISTER:VEC:SINT64{BCAST} ddreg:REGISTER:VEC:SINT64{BCAST} edreg:REGISTER:VEC:SINT64{BCAST} fdreg:REGISTER:VEC:SINT64{BCAST} gdreg:REGISTER:VEC:SINT64{BCAST} {nstructs:7}
+vlsseg7e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64{BCAST} bdreg:REGISTER:VEC:SINT64{BCAST} cdreg:REGISTER:VEC:SINT64{BCAST} ddreg:REGISTER:VEC:SINT64{BCAST} edreg:REGISTER:VEC:SINT64{BCAST} fdreg:REGISTER:VEC:SINT64{BCAST} {nstructs:6}
+vlsseg6e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64{BCAST} bdreg:REGISTER:VEC:SINT64{BCAST} cdreg:REGISTER:VEC:SINT64{BCAST} ddreg:REGISTER:VEC:SINT64{BCAST} edreg:REGISTER:VEC:SINT64{BCAST} {nstructs:5}
+vlsseg5e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64{BCAST} bdreg:REGISTER:VEC:SINT64{BCAST} cdreg:REGISTER:VEC:SINT64{BCAST} ddreg:REGISTER:VEC:SINT64{BCAST} {nstructs:4}
+vlsseg4e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64{BCAST} bdreg:REGISTER:VEC:SINT64{BCAST} cdreg:REGISTER:VEC:SINT64{BCAST} {nstructs:3}
+vlsseg3e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64{BCAST} bdreg:REGISTER:VEC:SINT64{BCAST} {nstructs:2}
+vlsseg2e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64{BCAST} {nstructs:1}
+vlsseg1e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 ddreg:REGISTER:VEC:SINT8 edreg:REGISTER:VEC:SINT8 fdreg:REGISTER:VEC:SINT8 gdreg:REGISTER:VEC:SINT8 hdreg:REGISTER:VEC:SINT8 {nstructs:8}
+vlseg8e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 ddreg:REGISTER:VEC:SINT8 edreg:REGISTER:VEC:SINT8 fdreg:REGISTER:VEC:SINT8 gdreg:REGISTER:VEC:SINT8 {nstructs:7}
+vlseg7e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 ddreg:REGISTER:VEC:SINT8 edreg:REGISTER:VEC:SINT8 fdreg:REGISTER:VEC:SINT8 {nstructs:6}
+vlseg6e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 ddreg:REGISTER:VEC:SINT8 edreg:REGISTER:VEC:SINT8 {nstructs:5}
+vlseg5e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 ddreg:REGISTER:VEC:SINT8 {nstructs:4}
+vlseg4e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {nstructs:3}
+vlseg3e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 {nstructs:2}
+vlseg2e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 {nstructs:1}
+vlseg1e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8{BCAST} bdreg:REGISTER:VEC:SINT8{BCAST} cdreg:REGISTER:VEC:SINT8{BCAST} ddreg:REGISTER:VEC:SINT8{BCAST} edreg:REGISTER:VEC:SINT8{BCAST} fdreg:REGISTER:VEC:SINT8{BCAST} gdreg:REGISTER:VEC:SINT8{BCAST} hdreg:REGISTER:VEC:SINT8{BCAST} {nstructs:8}
+vlsseg8e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8{BCAST} bdreg:REGISTER:VEC:SINT8{BCAST} cdreg:REGISTER:VEC:SINT8{BCAST} ddreg:REGISTER:VEC:SINT8{BCAST} edreg:REGISTER:VEC:SINT8{BCAST} fdreg:REGISTER:VEC:SINT8{BCAST} gdreg:REGISTER:VEC:SINT8{BCAST} {nstructs:7}
+vlsseg7e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8{BCAST} bdreg:REGISTER:VEC:SINT8{BCAST} cdreg:REGISTER:VEC:SINT8{BCAST} ddreg:REGISTER:VEC:SINT8{BCAST} edreg:REGISTER:VEC:SINT8{BCAST} fdreg:REGISTER:VEC:SINT8{BCAST} {nstructs:6}
+vlsseg6e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8{BCAST} bdreg:REGISTER:VEC:SINT8{BCAST} cdreg:REGISTER:VEC:SINT8{BCAST} ddreg:REGISTER:VEC:SINT8{BCAST} edreg:REGISTER:VEC:SINT8{BCAST} {nstructs:5}
+vlsseg5e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8{BCAST} bdreg:REGISTER:VEC:SINT8{BCAST} cdreg:REGISTER:VEC:SINT8{BCAST} ddreg:REGISTER:VEC:SINT8{BCAST} {nstructs:4}
+vlsseg4e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8{BCAST} bdreg:REGISTER:VEC:SINT8{BCAST} cdreg:REGISTER:VEC:SINT8{BCAST} {nstructs:3}
+vlsseg3e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8{BCAST} bdreg:REGISTER:VEC:SINT8{BCAST} {nstructs:2}
+vlsseg2e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8{BCAST} {nstructs:1}
+vlsseg1e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 ddreg:REGISTER:VEC:UINT16 edreg:REGISTER:VEC:UINT16 fdreg:REGISTER:VEC:UINT16 gdreg:REGISTER:VEC:UINT16 hdreg:REGISTER:VEC:UINT16 {nstructs:8}
+vlseg8e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 ddreg:REGISTER:VEC:UINT16 edreg:REGISTER:VEC:UINT16 fdreg:REGISTER:VEC:UINT16 gdreg:REGISTER:VEC:UINT16 {nstructs:7}
+vlseg7e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 ddreg:REGISTER:VEC:UINT16 edreg:REGISTER:VEC:UINT16 fdreg:REGISTER:VEC:UINT16 {nstructs:6}
+vlseg6e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 ddreg:REGISTER:VEC:UINT16 edreg:REGISTER:VEC:UINT16 {nstructs:5}
+vlseg5e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 ddreg:REGISTER:VEC:UINT16 {nstructs:4}
+vlseg4e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {nstructs:3}
+vlseg3e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 {nstructs:2}
+vlseg2e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 {nstructs:1}
+vlseg1e16.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16{BCAST} bdreg:REGISTER:VEC:UINT16{BCAST} cdreg:REGISTER:VEC:UINT16{BCAST} ddreg:REGISTER:VEC:UINT16{BCAST} edreg:REGISTER:VEC:UINT16{BCAST} fdreg:REGISTER:VEC:UINT16{BCAST} gdreg:REGISTER:VEC:UINT16{BCAST} hdreg:REGISTER:VEC:UINT16{BCAST} {nstructs:8}
+vlsseg8e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16{BCAST} bdreg:REGISTER:VEC:UINT16{BCAST} cdreg:REGISTER:VEC:UINT16{BCAST} ddreg:REGISTER:VEC:UINT16{BCAST} edreg:REGISTER:VEC:UINT16{BCAST} fdreg:REGISTER:VEC:UINT16{BCAST} gdreg:REGISTER:VEC:UINT16{BCAST} {nstructs:7}
+vlsseg7e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16{BCAST} bdreg:REGISTER:VEC:UINT16{BCAST} cdreg:REGISTER:VEC:UINT16{BCAST} ddreg:REGISTER:VEC:UINT16{BCAST} edreg:REGISTER:VEC:UINT16{BCAST} fdreg:REGISTER:VEC:UINT16{BCAST} {nstructs:6}
+vlsseg6e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16{BCAST} bdreg:REGISTER:VEC:UINT16{BCAST} cdreg:REGISTER:VEC:UINT16{BCAST} ddreg:REGISTER:VEC:UINT16{BCAST} edreg:REGISTER:VEC:UINT16{BCAST} {nstructs:5}
+vlsseg5e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16{BCAST} bdreg:REGISTER:VEC:UINT16{BCAST} cdreg:REGISTER:VEC:UINT16{BCAST} ddreg:REGISTER:VEC:UINT16{BCAST} {nstructs:4}
+vlsseg4e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16{BCAST} bdreg:REGISTER:VEC:UINT16{BCAST} cdreg:REGISTER:VEC:UINT16{BCAST} {nstructs:3}
+vlsseg3e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16{BCAST} bdreg:REGISTER:VEC:UINT16{BCAST} {nstructs:2}
+vlsseg2e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16{BCAST} {nstructs:1}
+vlsseg1e16.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 ddreg:REGISTER:VEC:UINT32 edreg:REGISTER:VEC:UINT32 fdreg:REGISTER:VEC:UINT32 gdreg:REGISTER:VEC:UINT32 hdreg:REGISTER:VEC:UINT32 {nstructs:8}
+vlseg8e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 ddreg:REGISTER:VEC:UINT32 edreg:REGISTER:VEC:UINT32 fdreg:REGISTER:VEC:UINT32 gdreg:REGISTER:VEC:UINT32 {nstructs:7}
+vlseg7e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 ddreg:REGISTER:VEC:UINT32 edreg:REGISTER:VEC:UINT32 fdreg:REGISTER:VEC:UINT32 {nstructs:6}
+vlseg6e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 ddreg:REGISTER:VEC:UINT32 edreg:REGISTER:VEC:UINT32 {nstructs:5}
+vlseg5e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 ddreg:REGISTER:VEC:UINT32 {nstructs:4}
+vlseg4e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {nstructs:3}
+vlseg3e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 {nstructs:2}
+vlseg2e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 {nstructs:1}
+vlseg1e32.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32{BCAST} bdreg:REGISTER:VEC:UINT32{BCAST} cdreg:REGISTER:VEC:UINT32{BCAST} ddreg:REGISTER:VEC:UINT32{BCAST} edreg:REGISTER:VEC:UINT32{BCAST} fdreg:REGISTER:VEC:UINT32{BCAST} gdreg:REGISTER:VEC:UINT32{BCAST} hdreg:REGISTER:VEC:UINT32{BCAST} {nstructs:8}
+vlsseg8e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32{BCAST} bdreg:REGISTER:VEC:UINT32{BCAST} cdreg:REGISTER:VEC:UINT32{BCAST} ddreg:REGISTER:VEC:UINT32{BCAST} edreg:REGISTER:VEC:UINT32{BCAST} fdreg:REGISTER:VEC:UINT32{BCAST} gdreg:REGISTER:VEC:UINT32{BCAST} {nstructs:7}
+vlsseg7e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32{BCAST} bdreg:REGISTER:VEC:UINT32{BCAST} cdreg:REGISTER:VEC:UINT32{BCAST} ddreg:REGISTER:VEC:UINT32{BCAST} edreg:REGISTER:VEC:UINT32{BCAST} fdreg:REGISTER:VEC:UINT32{BCAST} {nstructs:6}
+vlsseg6e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32{BCAST} bdreg:REGISTER:VEC:UINT32{BCAST} cdreg:REGISTER:VEC:UINT32{BCAST} ddreg:REGISTER:VEC:UINT32{BCAST} edreg:REGISTER:VEC:UINT32{BCAST} {nstructs:5}
+vlsseg5e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32{BCAST} bdreg:REGISTER:VEC:UINT32{BCAST} cdreg:REGISTER:VEC:UINT32{BCAST} ddreg:REGISTER:VEC:UINT32{BCAST} {nstructs:4}
+vlsseg4e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32{BCAST} bdreg:REGISTER:VEC:UINT32{BCAST} cdreg:REGISTER:VEC:UINT32{BCAST} {nstructs:3}
+vlsseg3e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32{BCAST} bdreg:REGISTER:VEC:UINT32{BCAST} {nstructs:2}
+vlsseg2e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32{BCAST} {nstructs:1}
+vlsseg1e32.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 ddreg:REGISTER:VEC:UINT64 edreg:REGISTER:VEC:UINT64 fdreg:REGISTER:VEC:UINT64 gdreg:REGISTER:VEC:UINT64 hdreg:REGISTER:VEC:UINT64 {nstructs:8}
+vlseg8e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 ddreg:REGISTER:VEC:UINT64 edreg:REGISTER:VEC:UINT64 fdreg:REGISTER:VEC:UINT64 gdreg:REGISTER:VEC:UINT64 {nstructs:7}
+vlseg7e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 ddreg:REGISTER:VEC:UINT64 edreg:REGISTER:VEC:UINT64 fdreg:REGISTER:VEC:UINT64 {nstructs:6}
+vlseg6e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 ddreg:REGISTER:VEC:UINT64 edreg:REGISTER:VEC:UINT64 {nstructs:5}
+vlseg5e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 ddreg:REGISTER:VEC:UINT64 {nstructs:4}
+vlseg4e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 {nstructs:3}
+vlseg3e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 {nstructs:2}
+vlseg2e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 {nstructs:1}
+vlseg1e64.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64{BCAST} bdreg:REGISTER:VEC:UINT64{BCAST} cdreg:REGISTER:VEC:UINT64{BCAST} ddreg:REGISTER:VEC:UINT64{BCAST} edreg:REGISTER:VEC:UINT64{BCAST} fdreg:REGISTER:VEC:UINT64{BCAST} gdreg:REGISTER:VEC:UINT64{BCAST} hdreg:REGISTER:VEC:UINT64{BCAST} {nstructs:8}
+vlsseg8e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64{BCAST} bdreg:REGISTER:VEC:UINT64{BCAST} cdreg:REGISTER:VEC:UINT64{BCAST} ddreg:REGISTER:VEC:UINT64{BCAST} edreg:REGISTER:VEC:UINT64{BCAST} fdreg:REGISTER:VEC:UINT64{BCAST} gdreg:REGISTER:VEC:UINT64{BCAST} {nstructs:7}
+vlsseg7e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64{BCAST} bdreg:REGISTER:VEC:UINT64{BCAST} cdreg:REGISTER:VEC:UINT64{BCAST} ddreg:REGISTER:VEC:UINT64{BCAST} edreg:REGISTER:VEC:UINT64{BCAST} fdreg:REGISTER:VEC:UINT64{BCAST} {nstructs:6}
+vlsseg6e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64{BCAST} bdreg:REGISTER:VEC:UINT64{BCAST} cdreg:REGISTER:VEC:UINT64{BCAST} ddreg:REGISTER:VEC:UINT64{BCAST} edreg:REGISTER:VEC:UINT64{BCAST} {nstructs:5}
+vlsseg5e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64{BCAST} bdreg:REGISTER:VEC:UINT64{BCAST} cdreg:REGISTER:VEC:UINT64{BCAST} ddreg:REGISTER:VEC:UINT64{BCAST} {nstructs:4}
+vlsseg4e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64{BCAST} bdreg:REGISTER:VEC:UINT64{BCAST} cdreg:REGISTER:VEC:UINT64{BCAST} {nstructs:3}
+vlsseg3e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64{BCAST} bdreg:REGISTER:VEC:UINT64{BCAST} {nstructs:2}
+vlsseg2e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64{BCAST} {nstructs:1}
+vlsseg1e64.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 ddreg:REGISTER:VEC:UINT8 edreg:REGISTER:VEC:UINT8 fdreg:REGISTER:VEC:UINT8 gdreg:REGISTER:VEC:UINT8 hdreg:REGISTER:VEC:UINT8 {nstructs:8}
+vlseg8e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 ddreg:REGISTER:VEC:UINT8 edreg:REGISTER:VEC:UINT8 fdreg:REGISTER:VEC:UINT8 gdreg:REGISTER:VEC:UINT8 {nstructs:7}
+vlseg7e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 ddreg:REGISTER:VEC:UINT8 edreg:REGISTER:VEC:UINT8 fdreg:REGISTER:VEC:UINT8 {nstructs:6}
+vlseg6e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 ddreg:REGISTER:VEC:UINT8 edreg:REGISTER:VEC:UINT8 {nstructs:5}
+vlseg5e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 ddreg:REGISTER:VEC:UINT8 {nstructs:4}
+vlseg4e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {nstructs:3}
+vlseg3e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 {nstructs:2}
+vlseg2e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 {nstructs:1}
+vlseg1e8.v v1, (s4)
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8{BCAST} bdreg:REGISTER:VEC:UINT8{BCAST} cdreg:REGISTER:VEC:UINT8{BCAST} ddreg:REGISTER:VEC:UINT8{BCAST} edreg:REGISTER:VEC:UINT8{BCAST} fdreg:REGISTER:VEC:UINT8{BCAST} gdreg:REGISTER:VEC:UINT8{BCAST} hdreg:REGISTER:VEC:UINT8{BCAST} {nstructs:8}
+vlsseg8e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8{BCAST} bdreg:REGISTER:VEC:UINT8{BCAST} cdreg:REGISTER:VEC:UINT8{BCAST} ddreg:REGISTER:VEC:UINT8{BCAST} edreg:REGISTER:VEC:UINT8{BCAST} fdreg:REGISTER:VEC:UINT8{BCAST} gdreg:REGISTER:VEC:UINT8{BCAST} {nstructs:7}
+vlsseg7e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8{BCAST} bdreg:REGISTER:VEC:UINT8{BCAST} cdreg:REGISTER:VEC:UINT8{BCAST} ddreg:REGISTER:VEC:UINT8{BCAST} edreg:REGISTER:VEC:UINT8{BCAST} fdreg:REGISTER:VEC:UINT8{BCAST} {nstructs:6}
+vlsseg6e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8{BCAST} bdreg:REGISTER:VEC:UINT8{BCAST} cdreg:REGISTER:VEC:UINT8{BCAST} ddreg:REGISTER:VEC:UINT8{BCAST} edreg:REGISTER:VEC:UINT8{BCAST} {nstructs:5}
+vlsseg5e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8{BCAST} bdreg:REGISTER:VEC:UINT8{BCAST} cdreg:REGISTER:VEC:UINT8{BCAST} ddreg:REGISTER:VEC:UINT8{BCAST} {nstructs:4}
+vlsseg4e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8{BCAST} bdreg:REGISTER:VEC:UINT8{BCAST} cdreg:REGISTER:VEC:UINT8{BCAST} {nstructs:3}
+vlsseg3e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8{BCAST} bdreg:REGISTER:VEC:UINT8{BCAST} {nstructs:2}
+vlsseg2e8.v v1, (s4), zero
+### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8{BCAST} {nstructs:1}
+vlsseg1e8.v v1, (s4), zero
+### op load [VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
+vluxei64.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vluxei8.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vluxei8.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vluxei16.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+vluxei32.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vluxei16.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+vluxei32.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
+vluxei64.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vluxei8.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vluxei16.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+vluxei32.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
+vluxei64.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vluxei8.v v1, (s4), v2
+### op load [] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64
+fld f1, 0(s4)
+### op load [] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64
+flb f1, 0(s4)
+### op load [] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64
+flb f1, 0(s4)
+### op load [] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64
+flh f1, 0(s4)
+### op load [] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64
+flw f1, 0(s4)
+### op load [] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64
+lh s4, 0(s5)
+### op load [] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64
+lw s4, 0(s5)
+### op load [] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64
+ld s4, 0(s5)
+### op load [] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64
+lb s4, 0(s5)
+### op load [] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64
+lh s4, 0(s5)
+### op load [] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64
+lw s4, 0(s5)
+### op load [] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64
+ld s4, 0(s5)
+### op load [] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64
+lb s4, 0(s5)
+### op load [] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64
+vle64.v v1, (s4)
+### op load [] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64
+vlse64.v v1, (s4), zero
+### op load [] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64
+vle8.v v1, (s4)
+### op load [] adreg:REGISTER:VEC:FP8E4M3{BCAST} agreg:REGISTER:GP:UINT64
+vlse8.v v1, (s4), zero
+### op load [] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64
+vle8.v v1, (s4)
+### op load [] adreg:REGISTER:VEC:FP8E5M2{BCAST} agreg:REGISTER:GP:UINT64
+vlse8.v v1, (s4), zero
+### op load [] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64
+vle16.v v1, (s4)
+### op load [] adreg:REGISTER:VEC:HALF{BCAST} agreg:REGISTER:GP:UINT64
+vlse16.v v1, (s4), zero
+### op load [] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64
+vle32.v v1, (s4)
+### op load [] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64
+vlse32.v v1, (s4), zero
+### op load [] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64
+vle16.v v1, (s4)
+### op load [] adreg:REGISTER:VEC:SINT16{BCAST} agreg:REGISTER:GP:UINT64
+vlse16.v v1, (s4), zero
+### op load [] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64
+vle32.v v1, (s4)
+### op load [] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64
+vlse32.v v1, (s4), zero
+### op load [] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64
+vle64.v v1, (s4)
+### op load [] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64
+vlse64.v v1, (s4), zero
+### op load [] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64
+vle8.v v1, (s4)
+### op load [] adreg:REGISTER:VEC:SINT8{BCAST} agreg:REGISTER:GP:UINT64
+vlse8.v v1, (s4), zero
+### op load [] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64
+vle16.v v1, (s4)
+### op load [] adreg:REGISTER:VEC:UINT16{BCAST} agreg:REGISTER:GP:UINT64
+vlse16.v v1, (s4), zero
+### op load [] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64
+vle32.v v1, (s4)
+### op load [] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64
+vlse32.v v1, (s4), zero
+### op load [] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64
+vle64.v v1, (s4)
+### op load [] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64
+vlse64.v v1, (s4), zero
+### op load [] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64
+vle8.v v1, (s4)
+### op load [] adreg:REGISTER:VEC:UINT8{BCAST} agreg:REGISTER:GP:UINT64
+vlse8.v v1, (s4), zero
+### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BCAST}
+vfmv.v.f v1,f1
+### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:VEC:DOUBLE{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
+vfslide1down.vf v1,v1,f1
+### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:VEC:DOUBLE{ILANE} bdreg_lane:IMMEDIATE:-:-
+vfmv.s.f v1,f1
+### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:VEC:HALF{BCAST}
+vfmv.v.f v1,f1
+### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:VEC:HALF{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
+vfslide1down.vf v1,v1,f1
+### op move [] adreg:REGISTER:FP:HALF bdreg:REGISTER:VEC:HALF{ILANE} bdreg_lane:IMMEDIATE:-:-
+vfmv.s.f v1,f1
+### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:VEC:SINGLE{BCAST}
+vfmv.v.f v1,f1
+### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:VEC:SINGLE{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
+vfslide1down.vf v1,v1,f1
+### op move [] adreg:REGISTER:FP:SINGLE bdreg:REGISTER:VEC:SINGLE{ILANE} bdreg_lane:IMMEDIATE:-:-
+vfmv.s.f v1,f1
+### op move [] adreg:REGISTER:GP:SINT16 bdreg:REGISTER:VEC:SINT16{BCAST}
+vmv.v.x v1,s4
+### op move [] adreg:REGISTER:GP:SINT16 bdreg:REGISTER:VEC:SINT16{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
+vslide1down.vx v1,v1,s4
+### op move [] adreg:REGISTER:GP:SINT16 bdreg:REGISTER:VEC:SINT16{ILANE} bdreg_lane:IMMEDIATE:-:-
+vmv.s.x v1,s4
+### op move [] adreg:REGISTER:GP:SINT32 bdreg:REGISTER:VEC:SINT32{BCAST}
+vmv.v.x v1,s4
+### op move [] adreg:REGISTER:GP:SINT32 bdreg:REGISTER:VEC:SINT32{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
+vslide1down.vx v1,v1,s4
+### op move [] adreg:REGISTER:GP:SINT32 bdreg:REGISTER:VEC:SINT32{ILANE} bdreg_lane:IMMEDIATE:-:-
+vmv.s.x v1,s4
+### op move [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:VEC:SINT64{BCAST}
+vmv.v.x v1,s4
+### op move [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:VEC:SINT64{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
+vslide1down.vx v1,v1,s4
+### op move [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:VEC:SINT64{ILANE} bdreg_lane:IMMEDIATE:-:-
+vmv.s.x v1,s4
+### op move [] adreg:REGISTER:GP:SINT8 bdreg:REGISTER:VEC:SINT8{BCAST}
+vmv.v.x v1,s4
+### op move [] adreg:REGISTER:GP:SINT8 bdreg:REGISTER:VEC:SINT8{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
+vslide1down.vx v1,v1,s4
+### op move [] adreg:REGISTER:GP:SINT8 bdreg:REGISTER:VEC:SINT8{ILANE} bdreg_lane:IMMEDIATE:-:-
+vmv.s.x v1,s4
+### op move [] adreg:REGISTER:GP:UINT16 bdreg:REGISTER:VEC:UINT16{BCAST}
+vmv.v.x v1,s4
+### op move [] adreg:REGISTER:GP:UINT16 bdreg:REGISTER:VEC:UINT16{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
+vslide1down.vx v1,v1,s4
+### op move [] adreg:REGISTER:GP:UINT16 bdreg:REGISTER:VEC:UINT16{ILANE} bdreg_lane:IMMEDIATE:-:-
+vmv.s.x v1,s4
+### op move [] adreg:REGISTER:GP:UINT32 bdreg:REGISTER:VEC:UINT32{BCAST}
+vmv.v.x v1,s4
+### op move [] adreg:REGISTER:GP:UINT32 bdreg:REGISTER:VEC:UINT32{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
+vslide1down.vx v1,v1,s4
+### op move [] adreg:REGISTER:GP:UINT32 bdreg:REGISTER:VEC:UINT32{ILANE} bdreg_lane:IMMEDIATE:-:-
+vmv.s.x v1,s4
+### op move [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:VEC:UINT64{BCAST}
+vmv.v.x v1,s4
+### op move [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:VEC:UINT64{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
+vslide1down.vx v1,v1,s4
+### op move [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:VEC:UINT64{ILANE} bdreg_lane:IMMEDIATE:-:-
+vmv.s.x v1,s4
+### op move [] adreg:REGISTER:GP:UINT8 bdreg:REGISTER:VEC:UINT8{BCAST}
+vmv.v.x v1,s4
+### op move [] adreg:REGISTER:GP:UINT8 bdreg:REGISTER:VEC:UINT8{FILLOTHERS,ILANESHIFT} bdreg_irot:IMMEDIATE:-:-
+vslide1down.vx v1,v1,s4
+### op move [] adreg:REGISTER:GP:UINT8 bdreg:REGISTER:VEC:UINT8{ILANE} bdreg_lane:IMMEDIATE:-:-
+vmv.s.x v1,s4
+### op move [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE
+vmv.v.v v2,v1
+### op move [] adreg:REGISTER:VEC:DOUBLE{FILLOTHERS,ILANESHIFT} bdreg:REGISTER:VEC:DOUBLE adreg_irot:IMMEDIATE:-:- fillreg:REGISTER:FP:DOUBLE
+!ValueError: Invalid configuration for rvv_move.
+### op move [] adreg:REGISTER:VEC:DOUBLE{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:DOUBLE adreg_irot:IMMEDIATE:-:-
+vslidedown.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:DOUBLE{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:DOUBLE adreg_irot:IMMEDIATE:-:- @far
+vslidedown.vi v2,v1,1
+### op move [] adreg:REGISTER:VEC:DOUBLE{ILANE} bdreg:REGISTER:FP:DOUBLE adreg_lane:IMMEDIATE:-:-
+vfmv.f.s f1,v1
+### op move [] adreg:REGISTER:VEC:DOUBLE{ILANE} bdreg:REGISTER:VEC:DOUBLE{BCAST} adreg_lane:IMMEDIATE:-:-
+vrgather.vi v2,v1,0
+### op move [] adreg:REGISTER:VEC:DOUBLE{ILANE} bdreg:REGISTER:VEC:DOUBLE{BCAST} adreg_lane:IMMEDIATE:-:- @far
+vrgather.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF
+vmv.v.v v2,v1
+### op move [] adreg:REGISTER:VEC:HALF{FILLOTHERS,ILANESHIFT} bdreg:REGISTER:VEC:HALF adreg_irot:IMMEDIATE:-:- fillreg:REGISTER:FP:HALF
+!ValueError: Invalid configuration for rvv_move.
+### op move [] adreg:REGISTER:VEC:HALF{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:HALF adreg_irot:IMMEDIATE:-:-
+vslidedown.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:HALF{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:HALF adreg_irot:IMMEDIATE:-:- @far
+vslidedown.vi v2,v1,1
+### op move [] adreg:REGISTER:VEC:HALF{ILANE} bdreg:REGISTER:FP:HALF adreg_lane:IMMEDIATE:-:-
+vfmv.f.s f1,v1
+### op move [] adreg:REGISTER:VEC:HALF{ILANE} bdreg:REGISTER:VEC:HALF{BCAST} adreg_lane:IMMEDIATE:-:-
+vrgather.vi v2,v1,0
+### op move [] adreg:REGISTER:VEC:HALF{ILANE} bdreg:REGISTER:VEC:HALF{BCAST} adreg_lane:IMMEDIATE:-:- @far
+vrgather.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE
+vmv.v.v v2,v1
+### op move [] adreg:REGISTER:VEC:SINGLE{FILLOTHERS,ILANESHIFT} bdreg:REGISTER:VEC:SINGLE adreg_irot:IMMEDIATE:-:- fillreg:REGISTER:FP:SINGLE
+!ValueError: Invalid configuration for rvv_move.
+### op move [] adreg:REGISTER:VEC:SINGLE{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:SINGLE adreg_irot:IMMEDIATE:-:-
+vslidedown.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:SINGLE{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:SINGLE adreg_irot:IMMEDIATE:-:- @far
+vslidedown.vi v2,v1,1
+### op move [] adreg:REGISTER:VEC:SINGLE{ILANE} bdreg:REGISTER:FP:SINGLE adreg_lane:IMMEDIATE:-:-
+vfmv.f.s f1,v1
+### op move [] adreg:REGISTER:VEC:SINGLE{ILANE} bdreg:REGISTER:VEC:SINGLE{BCAST} adreg_lane:IMMEDIATE:-:-
+vrgather.vi v2,v1,0
+### op move [] adreg:REGISTER:VEC:SINGLE{ILANE} bdreg:REGISTER:VEC:SINGLE{BCAST} adreg_lane:IMMEDIATE:-:- @far
+vrgather.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16
+vmv.v.v v2,v1
+### op move [] adreg:REGISTER:VEC:SINT16{FILLOTHERS,ILANESHIFT} bdreg:REGISTER:VEC:SINT16 adreg_irot:IMMEDIATE:-:- fillreg:REGISTER:GP:SINT16
+!ValueError: Invalid configuration for rvv_move.
+### op move [] adreg:REGISTER:VEC:SINT16{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:SINT16 adreg_irot:IMMEDIATE:-:-
+vslidedown.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:SINT16{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:SINT16 adreg_irot:IMMEDIATE:-:- @far
+vslidedown.vi v2,v1,1
+### op move [] adreg:REGISTER:VEC:SINT16{ILANE} bdreg:REGISTER:GP:SINT16 adreg_lane:IMMEDIATE:-:-
+vmv.x.s s4,v1
+### op move [] adreg:REGISTER:VEC:SINT16{ILANE} bdreg:REGISTER:VEC:SINT16{BCAST} adreg_lane:IMMEDIATE:-:-
+vrgather.vi v2,v1,0
+### op move [] adreg:REGISTER:VEC:SINT16{ILANE} bdreg:REGISTER:VEC:SINT16{BCAST} adreg_lane:IMMEDIATE:-:- @far
+vrgather.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32
+vmv.v.v v2,v1
+### op move [] adreg:REGISTER:VEC:SINT32{FILLOTHERS,ILANESHIFT} bdreg:REGISTER:VEC:SINT32 adreg_irot:IMMEDIATE:-:- fillreg:REGISTER:GP:SINT32
+!ValueError: Invalid configuration for rvv_move.
+### op move [] adreg:REGISTER:VEC:SINT32{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:SINT32 adreg_irot:IMMEDIATE:-:-
+vslidedown.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:SINT32{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:SINT32 adreg_irot:IMMEDIATE:-:- @far
+vslidedown.vi v2,v1,1
+### op move [] adreg:REGISTER:VEC:SINT32{ILANE} bdreg:REGISTER:GP:SINT32 adreg_lane:IMMEDIATE:-:-
+vmv.x.s s4,v1
+### op move [] adreg:REGISTER:VEC:SINT32{ILANE} bdreg:REGISTER:VEC:SINT32{BCAST} adreg_lane:IMMEDIATE:-:-
+vrgather.vi v2,v1,0
+### op move [] adreg:REGISTER:VEC:SINT32{ILANE} bdreg:REGISTER:VEC:SINT32{BCAST} adreg_lane:IMMEDIATE:-:- @far
+vrgather.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64
+vmv.v.v v2,v1
+### op move [] adreg:REGISTER:VEC:SINT64{FILLOTHERS,ILANESHIFT} bdreg:REGISTER:VEC:SINT64 adreg_irot:IMMEDIATE:-:- fillreg:REGISTER:GP:SINT64
+!ValueError: Invalid configuration for rvv_move.
+### op move [] adreg:REGISTER:VEC:SINT64{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:SINT64 adreg_irot:IMMEDIATE:-:-
+vslidedown.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:SINT64{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:SINT64 adreg_irot:IMMEDIATE:-:- @far
+vslidedown.vi v2,v1,1
+### op move [] adreg:REGISTER:VEC:SINT64{ILANE} bdreg:REGISTER:GP:SINT64 adreg_lane:IMMEDIATE:-:-
+vmv.x.s s4,v1
+### op move [] adreg:REGISTER:VEC:SINT64{ILANE} bdreg:REGISTER:VEC:SINT64{BCAST} adreg_lane:IMMEDIATE:-:-
+vrgather.vi v2,v1,0
+### op move [] adreg:REGISTER:VEC:SINT64{ILANE} bdreg:REGISTER:VEC:SINT64{BCAST} adreg_lane:IMMEDIATE:-:- @far
+vrgather.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8
+vmv.v.v v2,v1
+### op move [] adreg:REGISTER:VEC:SINT8{FILLOTHERS,ILANESHIFT} bdreg:REGISTER:VEC:SINT8 adreg_irot:IMMEDIATE:-:- fillreg:REGISTER:GP:SINT8
+!ValueError: Invalid configuration for rvv_move.
+### op move [] adreg:REGISTER:VEC:SINT8{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:SINT8 adreg_irot:IMMEDIATE:-:-
+vslidedown.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:SINT8{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:SINT8 adreg_irot:IMMEDIATE:-:- @far
+vslidedown.vi v2,v1,1
+### op move [] adreg:REGISTER:VEC:SINT8{ILANE} bdreg:REGISTER:GP:SINT8 adreg_lane:IMMEDIATE:-:-
+vmv.x.s s4,v1
+### op move [] adreg:REGISTER:VEC:SINT8{ILANE} bdreg:REGISTER:VEC:SINT8{BCAST} adreg_lane:IMMEDIATE:-:-
+vrgather.vi v2,v1,0
+### op move [] adreg:REGISTER:VEC:SINT8{ILANE} bdreg:REGISTER:VEC:SINT8{BCAST} adreg_lane:IMMEDIATE:-:- @far
+vrgather.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16
+vmv.v.v v2,v1
+### op move [] adreg:REGISTER:VEC:UINT16{FILLOTHERS,ILANESHIFT} bdreg:REGISTER:VEC:UINT16 adreg_irot:IMMEDIATE:-:- fillreg:REGISTER:GP:UINT16
+!ValueError: Invalid configuration for rvv_move.
+### op move [] adreg:REGISTER:VEC:UINT16{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:UINT16 adreg_irot:IMMEDIATE:-:-
+vslidedown.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:UINT16{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:UINT16 adreg_irot:IMMEDIATE:-:- @far
+vslidedown.vi v2,v1,1
+### op move [] adreg:REGISTER:VEC:UINT16{ILANE} bdreg:REGISTER:GP:UINT16 adreg_lane:IMMEDIATE:-:-
+vmv.x.s s4,v1
+### op move [] adreg:REGISTER:VEC:UINT16{ILANE} bdreg:REGISTER:VEC:UINT16{BCAST} adreg_lane:IMMEDIATE:-:-
+vrgather.vi v2,v1,0
+### op move [] adreg:REGISTER:VEC:UINT16{ILANE} bdreg:REGISTER:VEC:UINT16{BCAST} adreg_lane:IMMEDIATE:-:- @far
+vrgather.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32
+vmv.v.v v2,v1
+### op move [] adreg:REGISTER:VEC:UINT32{FILLOTHERS,ILANESHIFT} bdreg:REGISTER:VEC:UINT32 adreg_irot:IMMEDIATE:-:- fillreg:REGISTER:GP:UINT32
+!ValueError: Invalid configuration for rvv_move.
+### op move [] adreg:REGISTER:VEC:UINT32{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:UINT32 adreg_irot:IMMEDIATE:-:-
+vslidedown.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:UINT32{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:UINT32 adreg_irot:IMMEDIATE:-:- @far
+vslidedown.vi v2,v1,1
+### op move [] adreg:REGISTER:VEC:UINT32{ILANE} bdreg:REGISTER:GP:UINT32 adreg_lane:IMMEDIATE:-:-
+vmv.x.s s4,v1
+### op move [] adreg:REGISTER:VEC:UINT32{ILANE} bdreg:REGISTER:VEC:UINT32{BCAST} adreg_lane:IMMEDIATE:-:-
+vrgather.vi v2,v1,0
+### op move [] adreg:REGISTER:VEC:UINT32{ILANE} bdreg:REGISTER:VEC:UINT32{BCAST} adreg_lane:IMMEDIATE:-:- @far
+vrgather.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64
+vmv.v.v v2,v1
+### op move [] adreg:REGISTER:VEC:UINT64{FILLOTHERS,ILANESHIFT} bdreg:REGISTER:VEC:UINT64 adreg_irot:IMMEDIATE:-:- fillreg:REGISTER:GP:UINT64
+!ValueError: Invalid configuration for rvv_move.
+### op move [] adreg:REGISTER:VEC:UINT64{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:UINT64 adreg_irot:IMMEDIATE:-:-
+vslidedown.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:UINT64{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:UINT64 adreg_irot:IMMEDIATE:-:- @far
+vslidedown.vi v2,v1,1
+### op move [] adreg:REGISTER:VEC:UINT64{ILANE} bdreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:-
+vmv.x.s s4,v1
+### op move [] adreg:REGISTER:VEC:UINT64{ILANE} bdreg:REGISTER:VEC:UINT64{BCAST} adreg_lane:IMMEDIATE:-:-
+vrgather.vi v2,v1,0
+### op move [] adreg:REGISTER:VEC:UINT64{ILANE} bdreg:REGISTER:VEC:UINT64{BCAST} adreg_lane:IMMEDIATE:-:- @far
+vrgather.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8
+vmv.v.v v2,v1
+### op move [] adreg:REGISTER:VEC:UINT8{FILLOTHERS,ILANESHIFT} bdreg:REGISTER:VEC:UINT8 adreg_irot:IMMEDIATE:-:- fillreg:REGISTER:GP:UINT8
+!ValueError: Invalid configuration for rvv_move.
+### op move [] adreg:REGISTER:VEC:UINT8{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:UINT8 adreg_irot:IMMEDIATE:-:-
+vslidedown.vi v2,v1,31
+### op move [] adreg:REGISTER:VEC:UINT8{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:UINT8 adreg_irot:IMMEDIATE:-:- @far
+vslidedown.vi v2,v1,1
+### op move [] adreg:REGISTER:VEC:UINT8{ILANE} bdreg:REGISTER:GP:UINT8 adreg_lane:IMMEDIATE:-:-
+vmv.x.s s4,v1
+### op move [] adreg:REGISTER:VEC:UINT8{ILANE} bdreg:REGISTER:VEC:UINT8{BCAST} adreg_lane:IMMEDIATE:-:-
+vrgather.vi v2,v1,0
+### op move [] adreg:REGISTER:VEC:UINT8{ILANE} bdreg:REGISTER:VEC:UINT8{BCAST} adreg_lane:IMMEDIATE:-:- @far
+vrgather.vi v2,v1,31
+### op store [GSTRIDE] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vsse64.v v1, (s4), s5
+### op store [GSTRIDE] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vsse8.v v1, (s4), s5
+### op store [GSTRIDE] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vsse8.v v1, (s4), s5
+### op store [GSTRIDE] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vsse16.v v1, (s4), s5
+### op store [GSTRIDE] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vsse32.v v1, (s4), s5
+### op store [GSTRIDE] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vsse16.v v1, (s4), s5
+### op store [GSTRIDE] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vsse32.v v1, (s4), s5
+### op store [GSTRIDE] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vsse64.v v1, (s4), s5
+### op store [GSTRIDE] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vsse8.v v1, (s4), s5
+### op store [GSTRIDE] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vsse16.v v1, (s4), s5
+### op store [GSTRIDE] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vsse32.v v1, (s4), s5
+### op store [GSTRIDE] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vsse64.v v1, (s4), s5
+### op store [GSTRIDE] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
+vsse8.v v1, (s4), s5
+### op store [IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+fsd f1, -2048(s4)
+### op store [IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+fsd f1, 2047(s4)
+### op store [IOFFSET] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+fsb f1, -2048(s4)
+### op store [IOFFSET] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+fsb f1, 2047(s4)
+### op store [IOFFSET] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+fsb f1, -2048(s4)
+### op store [IOFFSET] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+fsb f1, 2047(s4)
+### op store [IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+fsh f1, -2048(s4)
+### op store [IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+fsh f1, 2047(s4)
+### op store [IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+fsw f1, -2048(s4)
+### op store [IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+fsw f1, 2047(s4)
+### op store [IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+sh s4, -2048(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+sh s4, 2047(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+sw s4, -2048(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+sw s4, 2047(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+sd s4, -2048(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+sd s4, 2047(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+sb s4, -2048(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+sb s4, 2047(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+sh s4, -2048(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+sh s4, 2047(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+sw s4, -2048(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+sw s4, 2047(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+sd s4, -2048(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+sd s4, 2047(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+sb s4, -2048(s5)
+### op store [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+sb s4, 2047(s5)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE gdreg:REGISTER:VEC:DOUBLE hdreg:REGISTER:VEC:DOUBLE {nstructs:8}
+vsseg8e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE gdreg:REGISTER:VEC:DOUBLE {nstructs:7}
+vsseg7e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE {nstructs:6}
+vsseg6e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE {nstructs:5}
+vsseg5e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE {nstructs:4}
+vsseg4e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE {nstructs:3}
+vsseg3e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE {nstructs:2}
+vsseg2e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE {nstructs:1}
+vsseg1e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:FP8E4M3 ddreg:REGISTER:VEC:FP8E4M3 edreg:REGISTER:VEC:FP8E4M3 fdreg:REGISTER:VEC:FP8E4M3 gdreg:REGISTER:VEC:FP8E4M3 hdreg:REGISTER:VEC:FP8E4M3 {nstructs:8}
+vsseg8e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:FP8E4M3 ddreg:REGISTER:VEC:FP8E4M3 edreg:REGISTER:VEC:FP8E4M3 fdreg:REGISTER:VEC:FP8E4M3 gdreg:REGISTER:VEC:FP8E4M3 {nstructs:7}
+vsseg7e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:FP8E4M3 ddreg:REGISTER:VEC:FP8E4M3 edreg:REGISTER:VEC:FP8E4M3 fdreg:REGISTER:VEC:FP8E4M3 {nstructs:6}
+vsseg6e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:FP8E4M3 ddreg:REGISTER:VEC:FP8E4M3 edreg:REGISTER:VEC:FP8E4M3 {nstructs:5}
+vsseg5e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:FP8E4M3 ddreg:REGISTER:VEC:FP8E4M3 {nstructs:4}
+vsseg4e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:FP8E4M3 {nstructs:3}
+vsseg3e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 {nstructs:2}
+vsseg2e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E4M3 {nstructs:1}
+vsseg1e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 cdreg:REGISTER:VEC:FP8E5M2 ddreg:REGISTER:VEC:FP8E5M2 edreg:REGISTER:VEC:FP8E5M2 fdreg:REGISTER:VEC:FP8E5M2 gdreg:REGISTER:VEC:FP8E5M2 hdreg:REGISTER:VEC:FP8E5M2 {nstructs:8}
+vsseg8e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 cdreg:REGISTER:VEC:FP8E5M2 ddreg:REGISTER:VEC:FP8E5M2 edreg:REGISTER:VEC:FP8E5M2 fdreg:REGISTER:VEC:FP8E5M2 gdreg:REGISTER:VEC:FP8E5M2 {nstructs:7}
+vsseg7e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 cdreg:REGISTER:VEC:FP8E5M2 ddreg:REGISTER:VEC:FP8E5M2 edreg:REGISTER:VEC:FP8E5M2 fdreg:REGISTER:VEC:FP8E5M2 {nstructs:6}
+vsseg6e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 cdreg:REGISTER:VEC:FP8E5M2 ddreg:REGISTER:VEC:FP8E5M2 edreg:REGISTER:VEC:FP8E5M2 {nstructs:5}
+vsseg5e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 cdreg:REGISTER:VEC:FP8E5M2 ddreg:REGISTER:VEC:FP8E5M2 {nstructs:4}
+vsseg4e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 cdreg:REGISTER:VEC:FP8E5M2 {nstructs:3}
+vsseg3e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 {nstructs:2}
+vsseg2e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:FP8E5M2 {nstructs:1}
+vsseg1e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF ddreg:REGISTER:VEC:HALF edreg:REGISTER:VEC:HALF fdreg:REGISTER:VEC:HALF gdreg:REGISTER:VEC:HALF hdreg:REGISTER:VEC:HALF {nstructs:8}
+vsseg8e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF ddreg:REGISTER:VEC:HALF edreg:REGISTER:VEC:HALF fdreg:REGISTER:VEC:HALF gdreg:REGISTER:VEC:HALF {nstructs:7}
+vsseg7e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF ddreg:REGISTER:VEC:HALF edreg:REGISTER:VEC:HALF fdreg:REGISTER:VEC:HALF {nstructs:6}
+vsseg6e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF ddreg:REGISTER:VEC:HALF edreg:REGISTER:VEC:HALF {nstructs:5}
+vsseg5e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF ddreg:REGISTER:VEC:HALF {nstructs:4}
+vsseg4e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {nstructs:3}
+vsseg3e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF {nstructs:2}
+vsseg2e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:HALF {nstructs:1}
+vsseg1e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE ddreg:REGISTER:VEC:SINGLE edreg:REGISTER:VEC:SINGLE fdreg:REGISTER:VEC:SINGLE gdreg:REGISTER:VEC:SINGLE hdreg:REGISTER:VEC:SINGLE {nstructs:8}
+vsseg8e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE ddreg:REGISTER:VEC:SINGLE edreg:REGISTER:VEC:SINGLE fdreg:REGISTER:VEC:SINGLE gdreg:REGISTER:VEC:SINGLE {nstructs:7}
+vsseg7e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE ddreg:REGISTER:VEC:SINGLE edreg:REGISTER:VEC:SINGLE fdreg:REGISTER:VEC:SINGLE {nstructs:6}
+vsseg6e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE ddreg:REGISTER:VEC:SINGLE edreg:REGISTER:VEC:SINGLE {nstructs:5}
+vsseg5e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE ddreg:REGISTER:VEC:SINGLE {nstructs:4}
+vsseg4e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {nstructs:3}
+vsseg3e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE {nstructs:2}
+vsseg2e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINGLE {nstructs:1}
+vsseg1e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 ddreg:REGISTER:VEC:SINT16 edreg:REGISTER:VEC:SINT16 fdreg:REGISTER:VEC:SINT16 gdreg:REGISTER:VEC:SINT16 hdreg:REGISTER:VEC:SINT16 {nstructs:8}
+vsseg8e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 ddreg:REGISTER:VEC:SINT16 edreg:REGISTER:VEC:SINT16 fdreg:REGISTER:VEC:SINT16 gdreg:REGISTER:VEC:SINT16 {nstructs:7}
+vsseg7e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 ddreg:REGISTER:VEC:SINT16 edreg:REGISTER:VEC:SINT16 fdreg:REGISTER:VEC:SINT16 {nstructs:6}
+vsseg6e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 ddreg:REGISTER:VEC:SINT16 edreg:REGISTER:VEC:SINT16 {nstructs:5}
+vsseg5e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 ddreg:REGISTER:VEC:SINT16 {nstructs:4}
+vsseg4e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {nstructs:3}
+vsseg3e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 {nstructs:2}
+vsseg2e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT16 {nstructs:1}
+vsseg1e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 ddreg:REGISTER:VEC:SINT32 edreg:REGISTER:VEC:SINT32 fdreg:REGISTER:VEC:SINT32 gdreg:REGISTER:VEC:SINT32 hdreg:REGISTER:VEC:SINT32 {nstructs:8}
+vsseg8e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 ddreg:REGISTER:VEC:SINT32 edreg:REGISTER:VEC:SINT32 fdreg:REGISTER:VEC:SINT32 gdreg:REGISTER:VEC:SINT32 {nstructs:7}
+vsseg7e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 ddreg:REGISTER:VEC:SINT32 edreg:REGISTER:VEC:SINT32 fdreg:REGISTER:VEC:SINT32 {nstructs:6}
+vsseg6e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 ddreg:REGISTER:VEC:SINT32 edreg:REGISTER:VEC:SINT32 {nstructs:5}
+vsseg5e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 ddreg:REGISTER:VEC:SINT32 {nstructs:4}
+vsseg4e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {nstructs:3}
+vsseg3e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 {nstructs:2}
+vsseg2e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT32 {nstructs:1}
+vsseg1e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 ddreg:REGISTER:VEC:SINT64 edreg:REGISTER:VEC:SINT64 fdreg:REGISTER:VEC:SINT64 gdreg:REGISTER:VEC:SINT64 hdreg:REGISTER:VEC:SINT64 {nstructs:8}
+vsseg8e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 ddreg:REGISTER:VEC:SINT64 edreg:REGISTER:VEC:SINT64 fdreg:REGISTER:VEC:SINT64 gdreg:REGISTER:VEC:SINT64 {nstructs:7}
+vsseg7e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 ddreg:REGISTER:VEC:SINT64 edreg:REGISTER:VEC:SINT64 fdreg:REGISTER:VEC:SINT64 {nstructs:6}
+vsseg6e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 ddreg:REGISTER:VEC:SINT64 edreg:REGISTER:VEC:SINT64 {nstructs:5}
+vsseg5e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 ddreg:REGISTER:VEC:SINT64 {nstructs:4}
+vsseg4e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 {nstructs:3}
+vsseg3e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 {nstructs:2}
+vsseg2e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT64 {nstructs:1}
+vsseg1e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 ddreg:REGISTER:VEC:SINT8 edreg:REGISTER:VEC:SINT8 fdreg:REGISTER:VEC:SINT8 gdreg:REGISTER:VEC:SINT8 hdreg:REGISTER:VEC:SINT8 {nstructs:8}
+vsseg8e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 ddreg:REGISTER:VEC:SINT8 edreg:REGISTER:VEC:SINT8 fdreg:REGISTER:VEC:SINT8 gdreg:REGISTER:VEC:SINT8 {nstructs:7}
+vsseg7e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 ddreg:REGISTER:VEC:SINT8 edreg:REGISTER:VEC:SINT8 fdreg:REGISTER:VEC:SINT8 {nstructs:6}
+vsseg6e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 ddreg:REGISTER:VEC:SINT8 edreg:REGISTER:VEC:SINT8 {nstructs:5}
+vsseg5e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 ddreg:REGISTER:VEC:SINT8 {nstructs:4}
+vsseg4e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {nstructs:3}
+vsseg3e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 {nstructs:2}
+vsseg2e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:SINT8 {nstructs:1}
+vsseg1e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 ddreg:REGISTER:VEC:UINT16 edreg:REGISTER:VEC:UINT16 fdreg:REGISTER:VEC:UINT16 gdreg:REGISTER:VEC:UINT16 hdreg:REGISTER:VEC:UINT16 {nstructs:8}
+vsseg8e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 ddreg:REGISTER:VEC:UINT16 edreg:REGISTER:VEC:UINT16 fdreg:REGISTER:VEC:UINT16 gdreg:REGISTER:VEC:UINT16 {nstructs:7}
+vsseg7e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 ddreg:REGISTER:VEC:UINT16 edreg:REGISTER:VEC:UINT16 fdreg:REGISTER:VEC:UINT16 {nstructs:6}
+vsseg6e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 ddreg:REGISTER:VEC:UINT16 edreg:REGISTER:VEC:UINT16 {nstructs:5}
+vsseg5e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 ddreg:REGISTER:VEC:UINT16 {nstructs:4}
+vsseg4e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {nstructs:3}
+vsseg3e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 {nstructs:2}
+vsseg2e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT16 {nstructs:1}
+vsseg1e16.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 ddreg:REGISTER:VEC:UINT32 edreg:REGISTER:VEC:UINT32 fdreg:REGISTER:VEC:UINT32 gdreg:REGISTER:VEC:UINT32 hdreg:REGISTER:VEC:UINT32 {nstructs:8}
+vsseg8e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 ddreg:REGISTER:VEC:UINT32 edreg:REGISTER:VEC:UINT32 fdreg:REGISTER:VEC:UINT32 gdreg:REGISTER:VEC:UINT32 {nstructs:7}
+vsseg7e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 ddreg:REGISTER:VEC:UINT32 edreg:REGISTER:VEC:UINT32 fdreg:REGISTER:VEC:UINT32 {nstructs:6}
+vsseg6e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 ddreg:REGISTER:VEC:UINT32 edreg:REGISTER:VEC:UINT32 {nstructs:5}
+vsseg5e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 ddreg:REGISTER:VEC:UINT32 {nstructs:4}
+vsseg4e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {nstructs:3}
+vsseg3e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 {nstructs:2}
+vsseg2e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT32 {nstructs:1}
+vsseg1e32.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 ddreg:REGISTER:VEC:UINT64 edreg:REGISTER:VEC:UINT64 fdreg:REGISTER:VEC:UINT64 gdreg:REGISTER:VEC:UINT64 hdreg:REGISTER:VEC:UINT64 {nstructs:8}
+vsseg8e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 ddreg:REGISTER:VEC:UINT64 edreg:REGISTER:VEC:UINT64 fdreg:REGISTER:VEC:UINT64 gdreg:REGISTER:VEC:UINT64 {nstructs:7}
+vsseg7e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 ddreg:REGISTER:VEC:UINT64 edreg:REGISTER:VEC:UINT64 fdreg:REGISTER:VEC:UINT64 {nstructs:6}
+vsseg6e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 ddreg:REGISTER:VEC:UINT64 edreg:REGISTER:VEC:UINT64 {nstructs:5}
+vsseg5e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 ddreg:REGISTER:VEC:UINT64 {nstructs:4}
+vsseg4e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 {nstructs:3}
+vsseg3e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 {nstructs:2}
+vsseg2e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT64 {nstructs:1}
+vsseg1e64.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 ddreg:REGISTER:VEC:UINT8 edreg:REGISTER:VEC:UINT8 fdreg:REGISTER:VEC:UINT8 gdreg:REGISTER:VEC:UINT8 hdreg:REGISTER:VEC:UINT8 {nstructs:8}
+vsseg8e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 ddreg:REGISTER:VEC:UINT8 edreg:REGISTER:VEC:UINT8 fdreg:REGISTER:VEC:UINT8 gdreg:REGISTER:VEC:UINT8 {nstructs:7}
+vsseg7e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 ddreg:REGISTER:VEC:UINT8 edreg:REGISTER:VEC:UINT8 fdreg:REGISTER:VEC:UINT8 {nstructs:6}
+vsseg6e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 ddreg:REGISTER:VEC:UINT8 edreg:REGISTER:VEC:UINT8 {nstructs:5}
+vsseg5e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 ddreg:REGISTER:VEC:UINT8 {nstructs:4}
+vsseg4e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {nstructs:3}
+vsseg3e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 {nstructs:2}
+vsseg2e8.v v1, (s4)
+### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 {nstructs:1}
+vsseg1e8.v v1, (s4)
+### op store [VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
+vsuxei64.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vsuxei8.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vsuxei8.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vsuxei16.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+vsuxei32.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vsuxei16.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+vsuxei32.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
+vsuxei64.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vsuxei8.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vsuxei16.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+vsuxei32.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
+vsuxei64.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vsuxei8.v v1, (s4), v2
+### op store [] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64
+fsd f1, 0(s4)
+### op store [] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64
+fsb f1, 0(s4)
+### op store [] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64
+fsb f1, 0(s4)
+### op store [] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64
+fsh f1, 0(s4)
+### op store [] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64
+fsw f1, 0(s4)
+### op store [] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64
+sh s4, 0(s5)
+### op store [] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64
+sw s4, 0(s5)
+### op store [] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64
+sd s4, 0(s5)
+### op store [] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64
+sb s4, 0(s5)
+### op store [] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64
+sh s4, 0(s5)
+### op store [] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64
+sw s4, 0(s5)
+### op store [] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64
+sd s4, 0(s5)
+### op store [] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64
+sb s4, 0(s5)
+### op store [] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64
+vse64.v v1, (s4)
+### op store [] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64
+vse8.v v1, (s4)
+### op store [] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64
+vse8.v v1, (s4)
+### op store [] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64
+vse16.v v1, (s4)
+### op store [] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64
+vse32.v v1, (s4)
+### op store [] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64
+vse16.v v1, (s4)
+### op store [] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64
+vse32.v v1, (s4)
+### op store [] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64
+vse64.v v1, (s4)
+### op store [] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64
+vse8.v v1, (s4)
+### op store [] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64
+vse16.v v1, (s4)
+### op store [] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64
+vse32.v v1, (s4)
+### op store [] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64
+vse64.v v1, (s4)
+### op store [] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64
+vse8.v v1, (s4)
