@@ -2318,6 +2318,50 @@ vmulpd %zmm1,%zmm2,%zmm3
 vmulph %zmm1,%zmm2,%zmm3
 ### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vmulps %zmm1,%zmm2,%zmm3
+### op set [CONSTMASK] dreg:REGISTER:MASK:DOUBLE {mask:allfalse}
+kxorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:DOUBLE {mask:alltrue}
+kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:HALF {mask:allfalse}
+kxorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:HALF {mask:alltrue}
+kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINGLE {mask:allfalse}
+kxorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINGLE {mask:alltrue}
+kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT16 {mask:allfalse}
+kxorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT16 {mask:alltrue}
+kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT32 {mask:allfalse}
+kxorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT32 {mask:alltrue}
+kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT64 {mask:allfalse}
+kxorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT64 {mask:alltrue}
+kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT8 {mask:allfalse}
+kxorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT8 {mask:alltrue}
+kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT16 {mask:allfalse}
+kxorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT16 {mask:alltrue}
+kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT32 {mask:allfalse}
+kxorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT32 {mask:alltrue}
+kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT64 {mask:allfalse}
+kxorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT64 {mask:alltrue}
+kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT8 {mask:allfalse}
+kxorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT8 {mask:alltrue}
+kxnorw %k1,%k1,%k1
 ### op set [CONST] dreg:REGISTER:FP:DOUBLE {constant:one}
 vpternlogd $0xff,%xmm1,%xmm1,%xmm1
 vpsllq $54,%xmm1,%xmm1

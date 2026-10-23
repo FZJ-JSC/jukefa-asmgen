@@ -41,3 +41,7 @@ class avx_opset(vector_opset):
             return ones + self.asmwrap(f"vpsrl{suf} ${right},{p},{p}")
         # bytes: |-1| = 1
         return ones + self.asmwrap(f"vpabsb {p},{p}")
+
+    def mask_reg(self, *, dreg : data_reg, dt : adt, mask : str) -> str:
+        p = self.rpref(dreg)
+        return self.asmwrap(f"{'kxnorw' if 'alltrue' == mask else 'kxorw'} {p},{p},{p}")

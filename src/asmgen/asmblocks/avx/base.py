@@ -595,7 +595,7 @@ class avxbase(asmgen):
         register, vpcmpeqd on an AVX2 vector mask
         """
         if isinstance(reg, avx512_mreg):
-            return self.asmwrap(f"kxnorw {self.rpref(reg)},{self.rpref(reg)},{self.rpref(reg)}")
+            return self.set(dreg=reg, dt=dt, modifiers={_opset_mod.CONSTMASK}, mask="alltrue")
         r = self.rpref(reg)
         return self.asmwrap(f"vpcmpeqd {r},{r},{r}")
 

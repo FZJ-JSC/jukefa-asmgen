@@ -355,8 +355,13 @@ instruction stream:
       value past 32 bits as `movabs`). `mov_greg_imm` on it, its texts
       kept. Zero done, `zero_greg`, `zero_freg`, `zero_vreg`,
       `zero_treg` on it, their texts kept; `"ones"` and values to come.
-- [ ] `CONSTMASK`: `mask="alltrue"` and `"allfalse"`. Replaces
-      `mask_all_true`.
+- [x] `CONSTMASK`: `mask="alltrue"` and `"allfalse"` (a structural
+      parameter), on mask registers: SVE and SME `ptrue p.<T>` (`pn` too)
+      and `pfalse p.b`; AVX-512 `kxnorw` and `kxorw`. `mask_all_true` on
+      it - AVX's form for a vector register as a mask (`vpcmpeqd`) stays
+      the method's. Kept as it was: `kxnorw` sets 16 bits whatever the
+      type, too few for FP16 and bytes in zmm (32 and 64 elements) - for
+      `kxnord`/`kxnorq` later.
 - [ ] `VLEN`: bytes, or elements of `dt` where given - on every backend
       (RVV and rvv071 `vsetvli`/`csrr vlenb`, SVE/SME `cnt*`/`rdvl`,
       NEON/x86 constants). Replaces `simd_size_to_greg` and `vlen_to_greg`;
@@ -364,8 +369,8 @@ instruction stream:
 - [ ] `INDEX`: a vector of element index times a stride register. Replaces
       `greg_to_voffs`.
 - [ ] `c_simd_size_function` on `set(VLEN)`, `static inline`.
-- [~] Wrappers for the above: the `zero_*` methods and `mov_greg_imm`
-      done.
+- [~] Wrappers for the above: the `zero_*` methods, `mov_greg_imm` and
+      `mask_all_true` done.
 
 Checked (step 4a): no snapshot entry changed, `set`'s new; ukrgen's golden
 kernels - zeroing their accumulators through `zero_vreg` - and ukropt's
@@ -479,3 +484,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   forms now (addvl), which their instantiator missed before.
 - 2026-10-23: phase 4, step 4b - CONST one, values in general registers,
   mov_greg_imm on set (asmgen 0045).
+- 2026-10-23: phase 4, step 4c - CONSTMASK alltrue, allfalse;
+  mask_all_true on set (asmgen 0046).

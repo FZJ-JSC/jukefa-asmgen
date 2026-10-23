@@ -26,3 +26,9 @@ class sve_opset(vector_opset):
         if dt in (adt.DOUBLE, adt.SINGLE, adt.HALF):
             return self.asmwrap(f"fdup {dreg}.{self.dt_suffixes[dt]},#1.0")
         return self.asmwrap(f"dup {dreg}.{self.dt_suffixes[dt]},#1")
+
+    def mask_reg(self, *, dreg : data_reg, dt : adt, mask : str) -> str:
+        if "alltrue" == mask:
+            return self.asmwrap(f"ptrue {dreg}.{self.dt_suffixes[dt]}")
+        # pfalse is .b only; a predicate-as-counter register is its p's
+        return self.asmwrap(f"pfalse p{dreg.idx}.b")

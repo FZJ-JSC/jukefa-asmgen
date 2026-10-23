@@ -6,6 +6,7 @@ alone (0.6, phase 4 of docs/V06_REWORK.md): a constant (CONST), a mask
     gen.set(dreg=v, dt=adt.DOUBLE, modifiers={opset_modifier.CONST}, constant="zero")
     gen.set(dreg=v, dt=adt.SINGLE, modifiers={opset_modifier.CONST}, constant="one")   1.0 each
     gen.set(dreg=r, dt=adt.UINT64, modifiers={opset_modifier.CONST}, value=1234)
+    gen.set(dreg=m, dt=adt.DOUBLE, modifiers={opset_modifier.CONSTMASK}, mask="alltrue")
 
 The register set is dreg, the operation's one output; forms with inputs
 name them. A vector ISA's set carries its base ISA's for general and
@@ -31,7 +32,7 @@ class opset_modifier(operation_modifier):
     What set sets
     """
     CONST = auto()      # a constant: constant="zero" or "one" (1, 1.0 in dt), or value=<int>
-    CONSTMASK = auto()  # a mask: mask="alltrue" or "allfalse" (to come)
+    CONSTMASK = auto()  # a mask: mask="alltrue" or "allfalse"
     VLEN = auto()       # the vector length: bytes, or elements of dt (to come)
     INDEX = auto()      # element indices times a stride (to come)
 
@@ -58,6 +59,16 @@ def zero_signatures(rtype, dts) -> list[operation_signature]:
     CONST zero of a register of rtype
     """
     return const_signatures(rtype, dts, "zero")
+
+
+def mask_signatures(dts) -> list[operation_signature]:
+    """
+    CONSTMASK mask="alltrue" or "allfalse" of a mask register, per element
+    type
+    """
+    return [operation_signature(modifiers={opset_modifier.CONSTMASK}, structural_params={"mask": mask},
+                                operands={"dreg": osh(ot.REGISTER, orl.DATA, rt.MASK, dt)})
+            for mask in ("alltrue", "allfalse") for dt in dts]
 
 
 def value_signatures() -> list[operation_signature]:
@@ -174,15 +185,23 @@ class vector_opset(opset):
 
     # pylint: disable-next=arguments-differ
     def implementation(self, *, dreg, dt, modifiers=None, operand_modifiers=None, constant=None,
-                       value=None, **kwargs) -> str:
+                       value=None, mask=None, **kwargs) -> str:
         # If a scalar register is passed, forward to the base ISA's set
         if self.scalar_op is not None and isinstance(dreg, (greg_base, freg_base)):
             given = {k: v for k, v in (("constant", constant), ("value", value)) if v is not None}
             return self.scalar_op(dreg=dreg, dt=dt, modifiers=modifiers, operand_modifiers=operand_modifiers,
                                   **given, **scalar_operands(kwargs))
+        if mask is not None:
+            return self.mask_reg(dreg=dreg, dt=dt, mask=mask)
         if "one" == constant:
             return self.one_reg(dreg=dreg, dt=dt)
         return self.zero_reg(dreg=dreg, dt=dt)
+
+    def mask_reg(self, *, dreg : data_reg, dt : adt, mask : str) -> str:
+        """
+        A mask register all true or all false for elements of dt
+        """
+        raise NotImplementedError(self.NIE_MESSAGE)
 
     def one_reg(self, *, dreg : data_reg, dt : adt) -> str:
         """

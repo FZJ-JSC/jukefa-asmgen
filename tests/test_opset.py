@@ -97,3 +97,37 @@ class test_one_and_values(unittest.TestCase):
             with self.subTest(isa=ctor.__name__):
                 self.assertEqual(g.set(dreg=g.greg(1), dt=adt.UINT64, modifiers=CONST, value=4096),
                                  g.mov_greg_imm(reg=g.greg(1), imm=4096))
+
+
+class test_masks(unittest.TestCase):
+    """
+    CONSTMASK: mask registers all true or all false
+    """
+    def mask(self, g, reg, dt, mask):
+        return g.set(dreg=reg, dt=dt, modifiers={opset_modifier.CONSTMASK}, mask=mask).strip()
+
+    def test_sve_sme(self):
+        for ctor in (sve, sme):
+            g = make(ctor)
+            with self.subTest(isa=ctor.__name__):
+                self.assertEqual("ptrue p1.d", self.mask(g, g.mreg(1), adt.DOUBLE, "alltrue"))
+                self.assertEqual("pfalse p1.b", self.mask(g, g.mreg(1), adt.SINGLE, "allfalse"))
+                self.assertEqual("ptrue pn8.s", self.mask(g, g.mreg(8, is_pn=True), adt.SINGLE, "alltrue"))
+                self.assertEqual(g.mask_all_true(reg=g.mreg(2), dt=adt.HALF),
+                                 g.set(dreg=g.mreg(2), dt=adt.HALF, modifiers={opset_modifier.CONSTMASK}, mask="alltrue"))
+
+    def test_avx512(self):
+        g = make(avx512)
+        self.assertEqual("kxnorw %k1,%k1,%k1", self.mask(g, g.mreg(1), adt.DOUBLE, "alltrue"))
+        self.assertEqual("kxorw %k1,%k1,%k1", self.mask(g, g.mreg(1), adt.DOUBLE, "allfalse"))
+        self.assertEqual(g.mask_all_true(reg=g.mreg(1), dt=adt.SINGLE),
+                         g.set(dreg=g.mreg(1), dt=adt.SINGLE, modifiers={opset_modifier.CONSTMASK}, mask="alltrue"))
+
+    def test_no_masks_no_forms(self):
+        for ctor in (rvv, neon):
+            kinds = {o.rtype.name for s in make(ctor).set.get_signatures() for o in s.operands.values() if o.rtype}
+            with self.subTest(isa=ctor.__name__):
+                self.assertNotIn("MASK", kinds)
+        with self.assertRaises(ValueError):
+            g = make(sve)
+            self.mask(g, g.mreg(1), adt.DOUBLE, "sometrue")

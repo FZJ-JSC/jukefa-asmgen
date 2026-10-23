@@ -179,7 +179,7 @@ class sve(aarch64):
         return self.asmwrap(f"cnt{suf} {reg}")
 
     def mask_all_true(self, *, reg, dt : adt) -> str:
-        return self.ptrue(reg, dt)
+        return self.set(dreg=reg, dt=dt, modifiers={_opset_mod.CONSTMASK}, mask="alltrue")
 
     def greg_to_voffs(self, *, streg : greg_base, vreg : vreg_base, dt : adt) -> str:
         suf = self.dt_suffixes[dt]
