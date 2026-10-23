@@ -4997,14 +4997,32 @@ mul z3.d,z1.d,z2.d[1]
 mul z3.b,z1.b,z2.b[0]
 ### op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16} @far
 mul z3.b,z1.b,z2.b[15]
+### op set [CONST] dreg:REGISTER:FP:DOUBLE {constant:one}
+fmov d1,#1.0
 ### op set [CONST] dreg:REGISTER:FP:DOUBLE {constant:zero}
 fmov d1,xzr
+### op set [CONST] dreg:REGISTER:FP:HALF {constant:one}
+fmov h1,#1.0
 ### op set [CONST] dreg:REGISTER:FP:HALF {constant:zero}
 fmov h1,wzr
+### op set [CONST] dreg:REGISTER:FP:SINGLE {constant:one}
+fmov s1,#1.0
 ### op set [CONST] dreg:REGISTER:FP:SINGLE {constant:zero}
 fmov s1,wzr
+### op set [CONST] dreg:REGISTER:GP:SINT64 value:IMMEDIATE:-:-
+mov x10,#-9223372036854775808
+### op set [CONST] dreg:REGISTER:GP:SINT64 value:IMMEDIATE:-:- @far
+mov x10,#18446744073709551615
+### op set [CONST] dreg:REGISTER:GP:SINT64 {constant:one}
+mov x10,#1
 ### op set [CONST] dreg:REGISTER:GP:SINT64 {constant:zero}
 mov x10,#0
+### op set [CONST] dreg:REGISTER:GP:UINT64 value:IMMEDIATE:-:-
+mov x10,#-9223372036854775808
+### op set [CONST] dreg:REGISTER:GP:UINT64 value:IMMEDIATE:-:- @far
+mov x10,#18446744073709551615
+### op set [CONST] dreg:REGISTER:GP:UINT64 {constant:one}
+mov x10,#1
 ### op set [CONST] dreg:REGISTER:GP:UINT64 {constant:zero}
 mov x10,#0
 ### op set [CONST] dreg:REGISTER:TILE:DOUBLE {constant:zero}
@@ -5033,30 +5051,52 @@ zero {za0.s}
 zero {za0.d}
 ### op set [CONST] dreg:REGISTER:TILE:UINT8 {constant:zero}
 zero {za0.b}
+### op set [CONST] dreg:REGISTER:VEC:DOUBLE {constant:one}
+fdup z1.d,#1.0
 ### op set [CONST] dreg:REGISTER:VEC:DOUBLE {constant:zero}
 dup z1.d,#0
 ### op set [CONST] dreg:REGISTER:VEC:FP8E4M3 {constant:zero}
 dup z1.b,#0
 ### op set [CONST] dreg:REGISTER:VEC:FP8E5M2 {constant:zero}
 dup z1.b,#0
+### op set [CONST] dreg:REGISTER:VEC:HALF {constant:one}
+fdup z1.h,#1.0
 ### op set [CONST] dreg:REGISTER:VEC:HALF {constant:zero}
 dup z1.h,#0
+### op set [CONST] dreg:REGISTER:VEC:SINGLE {constant:one}
+fdup z1.s,#1.0
 ### op set [CONST] dreg:REGISTER:VEC:SINGLE {constant:zero}
 dup z1.s,#0
+### op set [CONST] dreg:REGISTER:VEC:SINT16 {constant:one}
+dup z1.h,#1
 ### op set [CONST] dreg:REGISTER:VEC:SINT16 {constant:zero}
 dup z1.h,#0
+### op set [CONST] dreg:REGISTER:VEC:SINT32 {constant:one}
+dup z1.s,#1
 ### op set [CONST] dreg:REGISTER:VEC:SINT32 {constant:zero}
 dup z1.s,#0
+### op set [CONST] dreg:REGISTER:VEC:SINT64 {constant:one}
+dup z1.d,#1
 ### op set [CONST] dreg:REGISTER:VEC:SINT64 {constant:zero}
 dup z1.d,#0
+### op set [CONST] dreg:REGISTER:VEC:SINT8 {constant:one}
+dup z1.b,#1
 ### op set [CONST] dreg:REGISTER:VEC:SINT8 {constant:zero}
 dup z1.b,#0
+### op set [CONST] dreg:REGISTER:VEC:UINT16 {constant:one}
+dup z1.h,#1
 ### op set [CONST] dreg:REGISTER:VEC:UINT16 {constant:zero}
 dup z1.h,#0
+### op set [CONST] dreg:REGISTER:VEC:UINT32 {constant:one}
+dup z1.s,#1
 ### op set [CONST] dreg:REGISTER:VEC:UINT32 {constant:zero}
 dup z1.s,#0
+### op set [CONST] dreg:REGISTER:VEC:UINT64 {constant:one}
+dup z1.d,#1
 ### op set [CONST] dreg:REGISTER:VEC:UINT64 {constant:zero}
 dup z1.d,#0
+### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:one}
+dup z1.b,#1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 dup z1.b,#0
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64

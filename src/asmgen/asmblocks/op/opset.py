@@ -4,6 +4,8 @@ alone (0.6, phase 4 of docs/V06_REWORK.md): a constant (CONST), a mask
 (CONSTMASK), the vector length (VLEN), indices (INDEX).
 
     gen.set(dreg=v, dt=adt.DOUBLE, modifiers={opset_modifier.CONST}, constant="zero")
+    gen.set(dreg=v, dt=adt.SINGLE, modifiers={opset_modifier.CONST}, constant="one")   1.0 each
+    gen.set(dreg=r, dt=adt.UINT64, modifiers={opset_modifier.CONST}, value=1234)
 
 The register set is dreg, the operation's one output; forms with inputs
 name them. A vector ISA's set carries its base ISA's for general and
@@ -16,6 +18,7 @@ from enum import auto
 from typing import Callable
 
 from .modifier import operation_modifier
+from .constraint import minmax_constraint
 from .operand import operand_shape as osh, operand_type as ot, operand_role as orl, register_type as rt
 from .operation import operation
 from .scalar import GREG_DTS, scalar_operands
@@ -27,7 +30,7 @@ class opset_modifier(operation_modifier):
     """
     What set sets
     """
-    CONST = auto()      # a constant: constant="zero"
+    CONST = auto()      # a constant: constant="zero" or "one" (1, 1.0 in dt), or value=<int>
     CONSTMASK = auto()  # a mask: mask="alltrue" or "allfalse" (to come)
     VLEN = auto()       # the vector length: bytes, or elements of dt (to come)
     INDEX = auto()      # element indices times a stride (to come)
@@ -38,12 +41,45 @@ VREG_DTS = (adt.DOUBLE, adt.SINGLE, adt.HALF, adt.UINT64, adt.SINT64, adt.UINT32
             adt.UINT16, adt.SINT16, adt.UINT8, adt.SINT8)
 
 
+INT_DTS = (adt.UINT64, adt.SINT64, adt.UINT32, adt.SINT32, adt.UINT16, adt.SINT16, adt.UINT8, adt.SINT8)
+
+
+def const_signatures(rtype, dts, constant : str = "zero") -> list[operation_signature]:
+    """
+    CONST constant ("zero", "one") of a register of rtype, one signature per
+    type
+    """
+    return [operation_signature(modifiers={opset_modifier.CONST}, structural_params={"constant": constant},
+                                operands={"dreg": osh(ot.REGISTER, orl.DATA, rtype, dt)}) for dt in dts]
+
+
 def zero_signatures(rtype, dts) -> list[operation_signature]:
     """
-    CONST zero of a register of rtype, one signature per type
+    CONST zero of a register of rtype
     """
-    return [operation_signature(modifiers={opset_modifier.CONST}, structural_params={"constant": "zero"},
-                                operands={"dreg": osh(ot.REGISTER, orl.DATA, rtype, dt)}) for dt in dts]
+    return const_signatures(rtype, dts, "zero")
+
+
+def value_signatures() -> list[operation_signature]:
+    """
+    CONST value=<int> of a general register: any 64-bit value, materialized
+    in as many instructions as it takes
+    """
+    value = osh(ot.IMMEDIATE, orl.PARAM, None, None,
+                value_constraints=[minmax_constraint(minval=-2**63, maxval=2**64 - 1)])
+    return [operation_signature(modifiers={opset_modifier.CONST}, structural_params={},
+                                operands={"dreg": osh(ot.REGISTER, orl.DATA, rt.GP, dt), "value": value})
+            for dt in GREG_DTS]
+
+
+def scalar_signatures(*, one_freg_dts=()) -> list[operation_signature]:
+    """
+    A base ISA's: zero, one and values in general registers, zero (and one,
+    where the ISA has it without a scratch register) in floating-point ones
+    """
+    return (zero_signatures(rt.GP, GREG_DTS) + zero_signatures(rt.FP, FREG_DTS)
+            + const_signatures(rt.GP, GREG_DTS, "one") + const_signatures(rt.FP, one_freg_dts, "one")
+            + value_signatures())
 
 
 class opset(operation):
@@ -76,16 +112,41 @@ class scalar_opset(opset):
         """
         The ISA's signatures (its opset/signatures.py)
         """
-        return zero_signatures(rt.GP, GREG_DTS) + zero_signatures(rt.FP, FREG_DTS)
+        return scalar_signatures()
 
     def get_signatures(self) -> list[operation_signature]:
         return self.signatures
 
     # pylint: disable-next=arguments-differ
-    def implementation(self, *, dreg : data_reg, dt : adt, modifiers=None, constant=None, **_) -> str:
+    def implementation(self, *, dreg : data_reg, dt : adt, modifiers=None, constant=None,
+                       value=None, **_) -> str:
+        if value is not None:
+            return self.value_greg(dreg=dreg, value=value)
+        if "one" == constant:
+            if isinstance(dreg, greg_base):
+                return self.one_greg(dreg=dreg)
+            return self.one_freg(dreg=dreg, dt=dt)
         if isinstance(dreg, greg_base):
             return self.zero_greg(dreg=dreg)
         return self.zero_freg(dreg=dreg, dt=dt)
+
+    def one_greg(self, *, dreg : greg_base) -> str:
+        """
+        A general register set to 1
+        """
+        return self.value_greg(dreg=dreg, value=1)
+
+    def one_freg(self, *, dreg : freg_base, dt : adt) -> str:
+        """
+        A floating-point register set to 1.0
+        """
+        raise NotImplementedError(self.NIE_MESSAGE)
+
+    def value_greg(self, *, dreg : greg_base, value : int) -> str:
+        """
+        A general register set to value, in as many instructions as it takes
+        """
+        raise NotImplementedError(self.NIE_MESSAGE)
 
     def zero_greg(self, *, dreg : greg_base) -> str:
         """
@@ -112,12 +173,22 @@ class vector_opset(opset):
         return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
 
     # pylint: disable-next=arguments-differ
-    def implementation(self, *, dreg, dt, modifiers=None, operand_modifiers=None, constant=None, **kwargs) -> str:
+    def implementation(self, *, dreg, dt, modifiers=None, operand_modifiers=None, constant=None,
+                       value=None, **kwargs) -> str:
         # If a scalar register is passed, forward to the base ISA's set
         if self.scalar_op is not None and isinstance(dreg, (greg_base, freg_base)):
+            given = {k: v for k, v in (("constant", constant), ("value", value)) if v is not None}
             return self.scalar_op(dreg=dreg, dt=dt, modifiers=modifiers, operand_modifiers=operand_modifiers,
-                                  constant=constant, **scalar_operands(kwargs))
+                                  **given, **scalar_operands(kwargs))
+        if "one" == constant:
+            return self.one_reg(dreg=dreg, dt=dt)
         return self.zero_reg(dreg=dreg, dt=dt)
+
+    def one_reg(self, *, dreg : data_reg, dt : adt) -> str:
+        """
+        Every element of a vector register 1 (1.0) in dt
+        """
+        raise NotImplementedError(self.NIE_MESSAGE)
 
     def zero_reg(self, *, dreg : data_reg, dt : adt) -> str:
         """

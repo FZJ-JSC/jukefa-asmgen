@@ -483,8 +483,7 @@ class avxbase(asmgen):
         return self.asmwrap(f"leaq (,%[{param}],{1<<bit_count}),{pdst}")
 
     def mov_greg_imm(self, *, reg : greg_base, imm : int):
-        preg = self.rpref(reg)
-        return self.asmwrap(f"movq ${imm},{preg}")
+        return self.set(dreg=reg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, value=imm)
 
     def zero_greg(self, *, greg : greg_base):
         return self.set(dreg=greg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, constant="zero")

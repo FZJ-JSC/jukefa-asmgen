@@ -283,7 +283,7 @@ class aarch64(asmgen):
         return self.asmwrap(f"str {src},%[{param}]")
 
     def mov_greg_imm(self, *, reg : greg_base, imm : int) -> str:
-        return self.asmwrap(f"mov {reg},#{imm}")
+        return self.set(dreg=reg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, value=imm)
 
     def mul_greg_imm(self, *, src : greg_base, dst : greg_base, factor):
         assert src != dst

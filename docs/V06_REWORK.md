@@ -340,7 +340,20 @@ instruction stream:
       adds tiles) as their `scalar_op` - each in `<isa>/opset/{__init__,
       base,signatures}.py`, as the other operations. RISC-V's FP suffix
       tables are `riscv64/types.py`'s now, the generator's and the
-      operations' alike. Zero done, `zero_greg`, `zero_freg`, `zero_vreg`,
+      operations' alike.
+      Step 4b: `constant="one"` - 1 for integers, 1.0 for floating-point
+      types, in dt's element size: general registers everywhere;
+      floating-point ones on AArch64 (`fmov #1.0`) and x86; vectors on RVV
+      (integers: `vmv.v.i`), NEON (`fmov #1.0`, `movi #1` up to 32 bits),
+      SVE (`fdup #1.0`, `dup #1`) and x86 (all bits set - `vpcmpeqd`,
+      `vpternlogd` with AVX-512 - shifted into place; `vpabsb` for
+      bytes; checked by running them). Forms needing a scratch register
+      aren't offered (docs/POSSIBLE_FEATURES.md). And `value=<int>` for
+      general registers, any 64-bit value: RISC-V `li`; AArch64 `mov`
+      where it encodes (`movz`, `movn`, a bitmask immediate), else `movz`
+      and `movk` (checked under QEMU); x86 `movq` (the assembler encodes a
+      value past 32 bits as `movabs`). `mov_greg_imm` on it, its texts
+      kept. Zero done, `zero_greg`, `zero_freg`, `zero_vreg`,
       `zero_treg` on it, their texts kept; `"ones"` and values to come.
 - [ ] `CONSTMASK`: `mask="alltrue"` and `"allfalse"`. Replaces
       `mask_all_true`.
@@ -351,7 +364,8 @@ instruction stream:
 - [ ] `INDEX`: a vector of element index times a stride register. Replaces
       `greg_to_voffs`.
 - [ ] `c_simd_size_function` on `set(VLEN)`, `static inline`.
-- [~] Wrappers for the above: the `zero_*` methods done.
+- [~] Wrappers for the above: the `zero_*` methods and `mov_greg_imm`
+      done.
 
 Checked (step 4a): no snapshot entry changed, `set`'s new; ukrgen's golden
 kernels - zeroing their accumulators through `zero_vreg` - and ukropt's
@@ -463,3 +477,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   operand modifier VLSCALE; helpers keyword-only, annotated; suffix tables
   shared; docs/POSSIBLE_FEATURES.md. The snapshots exercise VOFFSET's
   forms now (addvl), which their instantiator missed before.
+- 2026-10-23: phase 4, step 4b - CONST one, values in general registers,
+  mov_greg_imm on set (asmgen 0045).

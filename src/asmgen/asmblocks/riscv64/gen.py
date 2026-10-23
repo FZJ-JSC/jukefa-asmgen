@@ -250,7 +250,7 @@ class riscv64(asmgen):
         return self.asmwrap(f"sd {src},{offset}({areg})")
 
     def mov_greg_imm(self, *, reg : greg_base, imm : int) -> str:
-        return self.asmwrap(f"li {reg},{imm}")
+        return self.set(dreg=reg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, value=imm)
 
     def mul_greg_imm(self, *, src : greg_base, dst : greg_base, factor : int) -> str:
         assert src != dst

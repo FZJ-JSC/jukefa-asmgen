@@ -20,3 +20,6 @@ class rvv_opset(vector_opset):
 
     def zero_reg(self, *, dreg : data_reg, dt : adt) -> str:
         return self.asmwrap(f"vmv.v.i {dreg},0")
+
+    def one_reg(self, *, dreg : data_reg, dt : adt) -> str:
+        return self.asmwrap(f"vmv.v.i {dreg},1")

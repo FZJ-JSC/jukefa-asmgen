@@ -26,3 +26,15 @@ reworking them (docs/V06_REWORK.md), to be picked up when a caller needs it.
 - RVV's `VOFFSET`: no instruction adds vector lengths; `csrr vlenb` and a
   multiply or shift would - `set(VLEN)` (phase 4) gives the length.
 - Vector `sub` (`vfsub`, `fsub`, `vsubpd`).
+
+## set
+
+- More constants: `constant="allbits"` (every bit set, in any type - zero's
+  complement; little use so far), and mathematical ones - e, pi - in
+  floating-point types.
+- `constant="one"` where it takes a scratch register: floating-point 1.0 on
+  RISC-V without Zfa (`fli.d` has it with Zfa) and in RVV registers
+  (`vfmv.v.f` from a floating-point register, or `vmv.v.x` of its bits),
+  64-bit integers in NEON registers (`movi` has no such immediate; `dup`
+  from a general register). The forms offered take none.
+

@@ -1,13 +1,11 @@
 """
-riscv64 set's signatures: CONST zero
+riscv64's set signatures: CONST zero, one, values
 """
-from ...op.operand import register_type as rt
-from ...op.opset import FREG_DTS, zero_signatures
-from ...op.scalar import GREG_DTS
+from ...op.opset import scalar_signatures
 
 
 def make_riscv64_opset_signatures() -> list:
     """
-    CONST zero of the registers set reaches here
+    zero in general and floating-point registers, one in general ones (1.0 takes a scratch register), values in general ones
     """
-    return zero_signatures(rt.GP, GREG_DTS) + zero_signatures(rt.FP, FREG_DTS)
+    return scalar_signatures()

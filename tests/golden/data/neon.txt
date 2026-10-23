@@ -2758,26 +2758,62 @@ mul v3.16b,v1.16b,v2.16b
 mul v3.16b,v1.16b,v2.b[0]
 ### op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{ILANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- @far
 mul v3.16b,v1.16b,v2.b[15]
+### op set [CONST] dreg:REGISTER:FP:DOUBLE {constant:one}
+fmov d1,#1.0
 ### op set [CONST] dreg:REGISTER:FP:DOUBLE {constant:zero}
 fmov d1,xzr
+### op set [CONST] dreg:REGISTER:FP:HALF {constant:one}
+fmov h1,#1.0
 ### op set [CONST] dreg:REGISTER:FP:HALF {constant:zero}
 fmov h1,wzr
+### op set [CONST] dreg:REGISTER:FP:SINGLE {constant:one}
+fmov s1,#1.0
 ### op set [CONST] dreg:REGISTER:FP:SINGLE {constant:zero}
 fmov s1,wzr
+### op set [CONST] dreg:REGISTER:GP:SINT64 value:IMMEDIATE:-:-
+mov x10,#-9223372036854775808
+### op set [CONST] dreg:REGISTER:GP:SINT64 value:IMMEDIATE:-:- @far
+mov x10,#18446744073709551615
+### op set [CONST] dreg:REGISTER:GP:SINT64 {constant:one}
+mov x10,#1
 ### op set [CONST] dreg:REGISTER:GP:SINT64 {constant:zero}
 mov x10,#0
+### op set [CONST] dreg:REGISTER:GP:UINT64 value:IMMEDIATE:-:-
+mov x10,#-9223372036854775808
+### op set [CONST] dreg:REGISTER:GP:UINT64 value:IMMEDIATE:-:- @far
+mov x10,#18446744073709551615
+### op set [CONST] dreg:REGISTER:GP:UINT64 {constant:one}
+mov x10,#1
 ### op set [CONST] dreg:REGISTER:GP:UINT64 {constant:zero}
 mov x10,#0
+### op set [CONST] dreg:REGISTER:VEC:DOUBLE {constant:one}
+fmov v1.2d,#1.0
 ### op set [CONST] dreg:REGISTER:VEC:DOUBLE {constant:zero}
 dup v1.2d,xzr
 ### op set [CONST] dreg:REGISTER:VEC:FP8E4M3 {constant:zero}
 dup v1.16b,wzr
 ### op set [CONST] dreg:REGISTER:VEC:FP8E5M2 {constant:zero}
 dup v1.16b,wzr
+### op set [CONST] dreg:REGISTER:VEC:HALF {constant:one}
+fmov v1.8h,#1.0
 ### op set [CONST] dreg:REGISTER:VEC:HALF {constant:zero}
 dup v1.8h,wzr
+### op set [CONST] dreg:REGISTER:VEC:SINGLE {constant:one}
+fmov v1.4s,#1.0
 ### op set [CONST] dreg:REGISTER:VEC:SINGLE {constant:zero}
 dup v1.4s,wzr
+### op set [CONST] dreg:REGISTER:VEC:SINT16 {constant:one}
+movi v1.8h,#1
+### op set [CONST] dreg:REGISTER:VEC:SINT32 {constant:one}
+movi v1.4s,#1
+### op set [CONST] dreg:REGISTER:VEC:SINT8 {constant:one}
+movi v1.16b,#1
+### op set [CONST] dreg:REGISTER:VEC:UINT16 {constant:one}
+movi v1.8h,#1
+### op set [CONST] dreg:REGISTER:VEC:UINT32 {constant:one}
+movi v1.4s,#1
+### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:one}
+movi v1.16b,#1
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 lsl x12,x10,x11
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-

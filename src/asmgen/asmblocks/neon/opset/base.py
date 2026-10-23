@@ -23,3 +23,8 @@ class neon_opset(vector_opset):
 
     def zero_reg(self, *, dreg : data_reg, dt : adt) -> str:
         return self.asmwrap(f"dup {dreg}.{self.dt_suffixes[dt]},{self.dt_greg_pfx[dt]}zr")
+
+    def one_reg(self, *, dreg : data_reg, dt : adt) -> str:
+        if dt in (adt.DOUBLE, adt.SINGLE, adt.HALF):
+            return self.asmwrap(f"fmov {dreg}.{self.dt_suffixes[dt]},#1.0")
+        return self.asmwrap(f"movi {dreg}.{self.dt_suffixes[dt]},#1")

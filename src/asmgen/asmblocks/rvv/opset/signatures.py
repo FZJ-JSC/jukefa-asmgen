@@ -1,12 +1,12 @@
 """
-RVV set's signatures: CONST zero
+RVV set signatures: CONST zero, one
 """
 from ...op.operand import register_type as rt
-from ...op.opset import VREG_DTS, zero_signatures
+from ...op.opset import INT_DTS, VREG_DTS, const_signatures, zero_signatures
 
 
 def make_rvv_opset_signatures() -> list:
     """
-    CONST zero of the registers set reaches here
+    zero in any type, one in integers (1.0 takes a scratch register)
     """
-    return zero_signatures(rt.VEC, VREG_DTS)
+    return zero_signatures(rt.VEC, VREG_DTS) + const_signatures(rt.VEC, INT_DTS, "one")

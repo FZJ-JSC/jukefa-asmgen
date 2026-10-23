@@ -19,3 +19,6 @@ class riscv64_opset(scalar_opset):
 
     def zero_freg(self, *, dreg : freg_base, dt : adt) -> str:
         return self.asmwrap(f"fcvt.{FCDT_SUFFIXES[dt]}.w {dreg}, zero")
+
+    def value_greg(self, *, dreg : greg_base, value : int) -> str:
+        return self.asmwrap(f"li {dreg},{value}")

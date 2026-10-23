@@ -2202,36 +2202,96 @@ imulq $2147483647,%rcx,%rdx
 vmulpd %xmm1,%xmm2,%xmm3
 ### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vmulps %xmm1,%xmm2,%xmm3
+### op set [CONST] dreg:REGISTER:FP:DOUBLE {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpsllq $54,%xmm1,%xmm1
+vpsrlq $2,%xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:FP:DOUBLE {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [CONST] dreg:REGISTER:FP:HALF {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpsllw $12,%xmm1,%xmm1
+vpsrlw $2,%xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:FP:HALF {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [CONST] dreg:REGISTER:FP:SINGLE {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpslld $25,%xmm1,%xmm1
+vpsrld $2,%xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:FP:SINGLE {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [CONST] dreg:REGISTER:GP:SINT64 value:IMMEDIATE:-:-
+movq $-9223372036854775808,%rcx
+### op set [CONST] dreg:REGISTER:GP:SINT64 value:IMMEDIATE:-:- @far
+movq $-1,%rcx
+### op set [CONST] dreg:REGISTER:GP:SINT64 {constant:one}
+movq $1,%rcx
 ### op set [CONST] dreg:REGISTER:GP:SINT64 {constant:zero}
 movq $0,%rcx
+### op set [CONST] dreg:REGISTER:GP:UINT64 value:IMMEDIATE:-:-
+movq $-9223372036854775808,%rcx
+### op set [CONST] dreg:REGISTER:GP:UINT64 value:IMMEDIATE:-:- @far
+movq $-1,%rcx
+### op set [CONST] dreg:REGISTER:GP:UINT64 {constant:one}
+movq $1,%rcx
 ### op set [CONST] dreg:REGISTER:GP:UINT64 {constant:zero}
 movq $0,%rcx
+### op set [CONST] dreg:REGISTER:VEC:DOUBLE {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpsllq $54,%xmm1,%xmm1
+vpsrlq $2,%xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:VEC:DOUBLE {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [CONST] dreg:REGISTER:VEC:HALF {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpsllw $12,%xmm1,%xmm1
+vpsrlw $2,%xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:VEC:HALF {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [CONST] dreg:REGISTER:VEC:SINGLE {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpslld $25,%xmm1,%xmm1
+vpsrld $2,%xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:VEC:SINGLE {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [CONST] dreg:REGISTER:VEC:SINT16 {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpsrlw $15,%xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:VEC:SINT16 {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [CONST] dreg:REGISTER:VEC:SINT32 {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpsrld $31,%xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:VEC:SINT32 {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [CONST] dreg:REGISTER:VEC:SINT64 {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpsrlq $63,%xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:VEC:SINT64 {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [CONST] dreg:REGISTER:VEC:SINT8 {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpabsb %xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:VEC:SINT8 {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [CONST] dreg:REGISTER:VEC:UINT16 {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpsrlw $15,%xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:VEC:UINT16 {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [CONST] dreg:REGISTER:VEC:UINT32 {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpsrld $31,%xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:VEC:UINT32 {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [CONST] dreg:REGISTER:VEC:UINT64 {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpsrlq $63,%xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:VEC:UINT64 {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:one}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+vpabsb %xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
