@@ -218,6 +218,24 @@ class asmgen(ABC):
         """
         return []
 
+    @property
+    def fadd(self):
+        """
+        Deprecated (0.6): add - the operation adds integer registers too
+        """
+        import warnings
+        warnings.warn("asmgen: fadd is deprecated, use add", DeprecationWarning, stacklevel=2)
+        return self.add
+
+    @property
+    def fmul(self):
+        """
+        Deprecated (0.6): mul - the operation multiplies integer registers too
+        """
+        import warnings
+        warnings.warn("asmgen: fmul is deprecated, use mul", DeprecationWarning, stacklevel=2)
+        return self.mul
+
     def get_reg_tracker(self) -> reg_tracker:
         """
         A register tracker for this ISA: every register file with its size,

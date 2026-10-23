@@ -816,18 +816,14 @@ vpxor %ymm0,%ymm0,%ymm0
 vpxor %ymm0,%ymm0,%ymm0
 ### method zero_vreg(dt=SINGLE, vreg=ymm0)
 vpxor %ymm0,%ymm0,%ymm0
-### op fadd [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+### op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
 vaddpd %ymm1,%ymm2,%ymm3
-### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+### op add [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vaddps %ymm1,%ymm2,%ymm3
 ### op fma [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
 vfmadd231pd %ymm1,%ymm2,%ymm3
 ### op fma [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vfmadd231ps %ymm1,%ymm2,%ymm3
-### op fmul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
-vmulpd %ymm1,%ymm2,%ymm3
-### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
-vmulps %ymm1,%ymm2,%ymm3
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
 vmovsh -2147483648(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
@@ -2168,6 +2164,10 @@ vextractf128 $1,%ymm1,%xmm2
 vperm2f128 $0x0,%ymm1,%ymm1,%ymm2
 ### op move [] adreg:REGISTER:VEC:SINGLE{IBLOCK} bdreg:REGISTER:VEC:SINGLE{BCAST,BLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:4,bdreg_blocksize:4} @far
 vperm2f128 $0x11,%ymm1,%ymm1,%ymm2
+### op mul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+vmulpd %ymm1,%ymm2,%ymm3
+### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+vmulps %ymm1,%ymm2,%ymm3
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
 vmovsh %xmm1, -2147483648(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far

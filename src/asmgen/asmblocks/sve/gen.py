@@ -19,7 +19,7 @@ from ...registers import (
 )
 
 from .types import sve_vreg,sve_preg
-from .opd3 import sve_fma,sve_fmul,sve_fadd
+from .opd3 import sve_fma,sve_mul,sve_add
 from .opmem.load import sve_load
 from .opmem.store import sve_store
 
@@ -68,10 +68,10 @@ class sve(aarch64):
         self.fma = sve_fma(asmwrap=self.asmwrap,
                            dt_suffixes=self.dt_suffixes,
                            dt_idxsuffixes=self.dt_suffixes)
-        self.fmul = sve_fmul(asmwrap=self.asmwrap,
+        self.mul = sve_mul(asmwrap=self.asmwrap,
                            dt_suffixes=self.dt_suffixes,
                            dt_idxsuffixes=self.dt_suffixes)
-        self.fadd = sve_fadd(asmwrap=self.asmwrap,
+        self.add = sve_add(asmwrap=self.asmwrap,
                              dt_suffixes=self.dt_suffixes,
                              dt_idxsuffixes=self.dt_suffixes)
 

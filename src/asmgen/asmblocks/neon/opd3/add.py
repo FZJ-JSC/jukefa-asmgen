@@ -4,7 +4,7 @@
 # Copyright (C) 2021 Stepan Nassyr <s.nassyr@xcpp.org>
 # ------------------------------------------------------------------------------
 """
-NEON/ASIMD fadd instruction
+NEON/ASIMD add (fadd)
 """
 
 from typing import Any
@@ -18,9 +18,9 @@ from ...op import (
 )
 from .base import neon_opd3_base
 
-class neon_fadd(neon_opd3_base):
+class neon_add(neon_opd3_base):
     """
-    NEON/ASIMD implementation of fadd
+    NEON/ASIMD implementation of add (fadd)
     """
     widens = False
 

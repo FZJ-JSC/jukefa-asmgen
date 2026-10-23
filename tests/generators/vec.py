@@ -259,12 +259,12 @@ class vec_test_generator:
                           extra_prepare=extra_prepare)
 
     @classmethod
-    def generate_vec_fmul_fp32(cls, testcase, rt : reg_tracker, vg : vargen):
+    def generate_vec_mul_fp32(cls, testcase, rt : reg_tracker, vg : vargen):
         """
         Tests correctness of an ASM block that performs an FMUL instruction
         on SIMD/vector registers filled with FP32 elements
         """
-        test_name = "vec_fmul_fp32"
+        test_name = "vec_mul_fp32"
 
         simd_nelements = "get_simd_size()/sizeof(float)"
 
@@ -300,10 +300,10 @@ class vec_test_generator:
         asmblock += testcase.gen.load_vector(areg=bareg, vreg=bvreg, dt=dt.SINGLE)
         rt.unuse_reg(type_tag="greg", idx=bareg_idx)
         try:
-            asmblock += testcase.gen.fmul(adreg=avreg, bdreg=bvreg, cdreg=avreg,
+            asmblock += testcase.gen.mul(adreg=avreg, bdreg=bvreg, cdreg=avreg,
                                          a_dt=dt.SINGLE, b_dt=dt.SINGLE, c_dt=dt.SINGLE)
         except:
-            asmblock += testcase.gen.fmul(adreg=avreg, bdreg=bvreg, cdreg=avreg,
+            asmblock += testcase.gen.mul(adreg=avreg, bdreg=bvreg, cdreg=avreg,
                                           amreg=testcase.gen.mreg(0),
                                           modifiers={mod_d3.MASK},
                                           a_dt=dt.SINGLE, b_dt=dt.SINGLE, c_dt=dt.SINGLE)
@@ -325,12 +325,12 @@ class vec_test_generator:
                           extra_prepare=extra_prepare)
 
     @classmethod
-    def generate_vec_fmul_fp64(cls, testcase, rt : reg_tracker, vg : vargen):
+    def generate_vec_mul_fp64(cls, testcase, rt : reg_tracker, vg : vargen):
         """
         Tests correctness of an ASM block that performs an FMUL instruction
         on SIMD/vector registers filled with FP64 elements
         """
-        test_name = "vec_fmul_fp64"
+        test_name = "vec_mul_fp64"
 
         simd_nelements = "get_simd_size()/sizeof(double)"
 
@@ -367,10 +367,10 @@ class vec_test_generator:
         rt.unuse_reg(type_tag="greg", idx=bareg_idx)
 
         try:
-            asmblock += testcase.gen.fmul(adreg=avreg, bdreg=bvreg, cdreg=avreg,
+            asmblock += testcase.gen.mul(adreg=avreg, bdreg=bvreg, cdreg=avreg,
                                          a_dt=dt.DOUBLE, b_dt=dt.DOUBLE, c_dt=dt.DOUBLE)
         except:
-            asmblock += testcase.gen.fmul(adreg=avreg, bdreg=bvreg, cdreg=avreg,
+            asmblock += testcase.gen.mul(adreg=avreg, bdreg=bvreg, cdreg=avreg,
                                           amreg=testcase.gen.mreg(0),
                                           modifiers={mod_d3.MASK},
                                           a_dt=dt.DOUBLE, b_dt=dt.DOUBLE, c_dt=dt.DOUBLE)

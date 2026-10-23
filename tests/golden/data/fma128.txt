@@ -816,18 +816,14 @@ vpxor %xmm0,%xmm0,%xmm0
 vpxor %xmm0,%xmm0,%xmm0
 ### method zero_vreg(dt=SINGLE, vreg=xmm0)
 vpxor %xmm0,%xmm0,%xmm0
-### op fadd [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+### op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
 vaddpd %xmm1,%xmm2,%xmm3
-### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+### op add [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vaddps %xmm1,%xmm2,%xmm3
 ### op fma [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
 vfmadd231pd %xmm1,%xmm2,%xmm3
 ### op fma [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vfmadd231ps %xmm1,%xmm2,%xmm3
-### op fmul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
-vmulpd %xmm1,%xmm2,%xmm3
-### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
-vmulps %xmm1,%xmm2,%xmm3
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
 vmovsh -2147483648(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
@@ -2144,6 +2140,10 @@ vbroadcastss %xmm1,%xmm1
 vmovaps %xmm1,%xmm2
 ### op move [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE
 vmovaps %xmm1,%xmm2
+### op mul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+vmulpd %xmm1,%xmm2,%xmm3
+### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+vmulps %xmm1,%xmm2,%xmm3
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
 vmovsh %xmm1, -2147483648(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far

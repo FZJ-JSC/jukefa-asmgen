@@ -4,7 +4,7 @@
 # Copyright (C) 2021 Stepan Nassyr <s.nassyr@xcpp.org>
 # ------------------------------------------------------------------------------
 """
-NEON/ASIMD fmul instruction
+NEON/ASIMD mul (fmul)
 """
 
 from typing import Any
@@ -15,9 +15,9 @@ from ....registers import (
 from ...op import opd3_modifier as mod,operand_modifier as opd_mod
 from .base import neon_opd3_base
 
-class neon_fmul(neon_opd3_base):
+class neon_mul(neon_opd3_base):
     """
-    NEON/ASIMD implementation of fmul
+    NEON/ASIMD implementation of mul (fmul)
     """
     widens = False
 

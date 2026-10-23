@@ -818,105 +818,105 @@ vmv.v.i v0,0
 vmv.v.i v0,0
 ### method zero_vreg(dt=SINGLE, vreg=v0)
 vmv.v.i v0,0
-### op fadd [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:FP:DOUBLE{VF} cdreg:REGISTER:VEC:DOUBLE
+### op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:FP:DOUBLE{VF} cdreg:REGISTER:VEC:DOUBLE
 vfadd.vf v2,v1,f1
-### op fadd [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+### op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
 vfadd.vv v3,v1,v2
-### op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:HALF
+### op add [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:HALF
 vfadd.vf v2,v1,f1
-### op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
 vfwadd.vf v2,v1,f1
-### op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
+### op add [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
 vfadd.vv v3,v1,v2
-### op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
 vfwadd.vv v4,v1,v2
-### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
 vfwadd.vf v2,v1,f1
-### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:SINGLE
+### op add [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:SINGLE
 vfadd.vf v2,v1,f1
-### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
 vfwadd.vv v4,v1,v2
-### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+### op add [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vfadd.vv v3,v1,v2
-### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT16
+### op add [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT16
 vadd.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
 vwadd.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
 vwaddsu.vv v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
 vwaddsu.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16
+### op add [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16
 vadd.vv v3,v1,v2
-### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
 vwadd.vv v4,v1,v2
-### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT32
+### op add [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT32
 vadd.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
 vwadd.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
 vwaddsu.vv v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
 vwaddsu.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32
+### op add [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32
 vadd.vv v3,v1,v2
-### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
 vwadd.vv v4,v1,v2
-### op fadd [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:GP:SINT64{VF} cdreg:REGISTER:VEC:SINT64
+### op add [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:GP:SINT64{VF} cdreg:REGISTER:VEC:SINT64
 vadd.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64
+### op add [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64
 vadd.vv v3,v1,v2
-### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
 vwadd.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT8
+### op add [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT8
 vadd.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
 vwaddsu.vv v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
 vwaddsu.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
 vwadd.vv v4,v1,v2
-### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8
+### op add [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8
 vadd.vv v3,v1,v2
-### op fadd [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
 vwaddus.vv v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
 vwaddus.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT16
+### op add [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT16
 vaddu.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
 vwaddu.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16
+### op add [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16
 vaddu.vv v3,v1,v2
-### op fadd [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
 vwaddu.vv v4,v1,v2
-### op fadd [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
 vwaddus.vv v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
 vwaddus.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT32
+### op add [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT32
 vaddu.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
 vwaddu.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32
+### op add [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32
 vaddu.vv v3,v1,v2
-### op fadd [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
 vwaddu.vv v4,v1,v2
-### op fadd [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:GP:UINT64{VF} cdreg:REGISTER:VEC:UINT64
+### op add [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:GP:UINT64{VF} cdreg:REGISTER:VEC:UINT64
 vaddu.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64
+### op add [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64
 vaddu.vv v3,v1,v2
-### op fadd [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
 vwaddus.vv v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
 vwaddus.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
 vwaddu.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT8
+### op add [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT8
 vaddu.vx v2,v1,s4
-### op fadd [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
+### op add [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
 vwaddu.vv v4,v1,v2
-### op fadd [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
+### op add [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
 vaddu.vv v3,v1,v2
 ### op fma [NP] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:FP:DOUBLE{VF} cdreg:REGISTER:VEC:DOUBLE
 vfnmsac.vf v2,f1,v1
@@ -1070,106 +1070,6 @@ vmaccu.vx v2,s4,v1
 vwmaccu.vv v4,v2,v1
 ### op fma [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
 vmaccu.vv v3,v2,v1
-### op fmul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:FP:DOUBLE{VF} cdreg:REGISTER:VEC:DOUBLE
-vfmul.vf v2,v1,f1
-### op fmul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
-vfmul.vv v3,v1,v2
-### op fmul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:HALF
-vfmul.vf v2,v1,f1
-### op fmul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
-vfwmul.vf v2,v1,f1
-### op fmul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
-vfmul.vv v3,v1,v2
-### op fmul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
-vfwmul.vv v4,v1,v2
-### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
-vfwmul.vf v2,v1,f1
-### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:SINGLE
-vfmul.vf v2,v1,f1
-### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
-vfwmul.vv v4,v1,v2
-### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
-vfmul.vv v3,v1,v2
-### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT16
-vmul.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
-vwmul.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
-vwmulsu.vv v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
-vwmulsu.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16
-vmul.vv v3,v1,v2
-### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
-vwmul.vv v4,v1,v2
-### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT32
-vmul.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
-vwmul.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
-vwmulsu.vv v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
-vwmulsu.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32
-vmul.vv v3,v1,v2
-### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
-vwmul.vv v4,v1,v2
-### op fmul [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:GP:SINT64{VF} cdreg:REGISTER:VEC:SINT64
-vmul.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64
-vmul.vv v3,v1,v2
-### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
-vwmul.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT8
-vmul.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
-vwmulsu.vv v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
-vwmulsu.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
-vwmul.vv v4,v1,v2
-### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8
-vmul.vv v3,v1,v2
-### op fmul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
-vwmulus.vv v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
-vwmulus.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT16
-vmulu.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
-vwmulu.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16
-vmulu.vv v3,v1,v2
-### op fmul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
-vwmulu.vv v4,v1,v2
-### op fmul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
-vwmulus.vv v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
-vwmulus.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT32
-vmulu.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
-vwmulu.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32
-vmulu.vv v3,v1,v2
-### op fmul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
-vwmulu.vv v4,v1,v2
-### op fmul [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:GP:UINT64{VF} cdreg:REGISTER:VEC:UINT64
-vmulu.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64
-vmulu.vv v3,v1,v2
-### op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
-vwmulus.vv v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
-vwmulus.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
-vwmulu.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT8
-vmulu.vx v2,v1,s4
-### op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
-vwmulu.vv v4,v1,v2
-### op fmul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
-vmulu.vv v3,v1,v2
 ### op load [GSTRIDE] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
 vlse64.v v1, (s4), s5
 ### op load [GSTRIDE] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
@@ -1988,6 +1888,106 @@ vmv.x.s s4,v1
 vrgather.vi v2,v1,0
 ### op move [] adreg:REGISTER:VEC:UINT8{ILANE} bdreg:REGISTER:VEC:UINT8{BCAST} adreg_lane:IMMEDIATE:-:- @far
 vrgather.vi v2,v1,31
+### op mul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:FP:DOUBLE{VF} cdreg:REGISTER:VEC:DOUBLE
+vfmul.vf v2,v1,f1
+### op mul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+vfmul.vv v3,v1,v2
+### op mul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:HALF
+vfmul.vf v2,v1,f1
+### op mul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:FP:HALF{VF} cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
+vfwmul.vf v2,v1,f1
+### op mul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
+vfmul.vv v3,v1,v2
+### op mul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:SINGLE {widening_method:VEC_GROUP}
+vfwmul.vv v4,v1,v2
+### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
+vfwmul.vf v2,v1,f1
+### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:FP:SINGLE{VF} cdreg:REGISTER:VEC:SINGLE
+vfmul.vf v2,v1,f1
+### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:DOUBLE {widening_method:VEC_GROUP}
+vfwmul.vv v4,v1,v2
+### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+vfmul.vv v3,v1,v2
+### op mul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT16
+vmul.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmul.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmulsu.vv v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmulsu.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16
+vmul.vv v3,v1,v2
+### op mul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmul.vv v4,v1,v2
+### op mul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT32
+vmul.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmul.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmulsu.vv v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmulsu.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32
+vmul.vv v3,v1,v2
+### op mul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmul.vv v4,v1,v2
+### op mul [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:GP:SINT64{VF} cdreg:REGISTER:VEC:SINT64
+vmul.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64
+vmul.vv v3,v1,v2
+### op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmul.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT8
+vmul.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmulsu.vv v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmulsu.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmul.vv v4,v1,v2
+### op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8
+vmul.vv v3,v1,v2
+### op mul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16 cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmulus.vv v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:SINT16{VF} cdreg:REGISTER:VEC:SINT32 {widening_method:VEC_GROUP}
+vwmulus.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT16
+vmulu.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:GP:UINT16{VF} cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
+vwmulu.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16
+vmulu.vv v3,v1,v2
+### op mul [] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT32 {widening_method:VEC_GROUP}
+vwmulu.vv v4,v1,v2
+### op mul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32 cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmulus.vv v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:SINT32{VF} cdreg:REGISTER:VEC:SINT64 {widening_method:VEC_GROUP}
+vwmulus.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT32
+vmulu.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:GP:UINT32{VF} cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
+vwmulu.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32
+vmulu.vv v3,v1,v2
+### op mul [] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT64 {widening_method:VEC_GROUP}
+vwmulu.vv v4,v1,v2
+### op mul [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:GP:UINT64{VF} cdreg:REGISTER:VEC:UINT64
+vmulu.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64
+vmulu.vv v3,v1,v2
+### op mul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8 cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmulus.vv v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
+vwmulus.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
+vwmulu.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT8
+vmulu.vx v2,v1,s4
+### op mul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT16 {widening_method:VEC_GROUP}
+vwmulu.vv v4,v1,v2
+### op mul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
+vmulu.vv v3,v1,v2
 ### op store [GSTRIDE] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
 vsse64.v v1, (s4), s5
 ### op store [GSTRIDE] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64

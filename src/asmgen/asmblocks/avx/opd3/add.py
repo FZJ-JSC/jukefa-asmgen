@@ -4,7 +4,7 @@
 # Copyright (C) 2021 Stepan Nassyr <s.nassyr@xcpp.org>
 # ------------------------------------------------------------------------------
 """
-AVX fmul instruction
+AVX add (vadd)
 """
 
 from typing import Any
@@ -17,13 +17,13 @@ from ....registers import asm_data_type as adt
 
 from .base import avx_opd3_base
 
-class avx_fmul(avx_opd3_base):
+class avx_add(avx_opd3_base):
     """
-    AVX implementation of fmul
+    AVX implementation of add (vadd)
     """
 
     def get_base_inst(self, modifiers : set[mod]):
-        return "vmul"
+        return "vadd"
 
     def diagnose_failure(self, modifiers: set[mod],
                          operand_modifiers : dict[str,set[opd_mod]],
@@ -31,4 +31,4 @@ class avx_fmul(avx_opd3_base):
                          dts : dict[str,adt]):
         super().diagnose_failure(modifiers, operand_modifiers, kwargs, dts)
         if mod.NP in modifiers:
-            raise ValueError("AVX fmul has no NP form")
+            raise ValueError("AVX add has no NP form")

@@ -17,7 +17,7 @@ from ..aarch64 import aarch64
 
 from ..aarch64.types import aarch64_freg
 from .types import neon_vreg
-from .opd3 import neon_fma,neon_fmul,neon_fadd
+from .opd3 import neon_fma,neon_mul,neon_add
 from .opmem import neon_load, neon_store
 from .move import neon_move
 
@@ -73,10 +73,10 @@ class neon(aarch64):
         self.fma = neon_fma(asmwrap=self.asmwrap,
                             dt_suffixes=self.dt_suffixes,
                             dt_idxsuffixes=self.dt_idxsuffixes)
-        self.fmul = neon_fmul(asmwrap=self.asmwrap,
+        self.mul = neon_mul(asmwrap=self.asmwrap,
                               dt_suffixes=self.dt_suffixes,
                               dt_idxsuffixes=self.dt_idxsuffixes)
-        self.fadd = neon_fadd(asmwrap=self.asmwrap,
+        self.add = neon_add(asmwrap=self.asmwrap,
                               dt_suffixes=self.dt_suffixes,
                               dt_idxsuffixes=self.dt_idxsuffixes)
 

@@ -4,7 +4,7 @@
 # Copyright (C) 2021 Stepan Nassyr <s.nassyr@xcpp.org>
 # ------------------------------------------------------------------------------
 """
-SVE fmul instruction
+SVE add (fadd)
 """
 
 from typing import Any
@@ -14,12 +14,11 @@ from ...op import (
     opd3_modifier as mod,
     operand_modifier as opd_mod
 )
-
 from .base import sve_opd3_base
 
-class sve_fmul(sve_opd3_base):
+class sve_add(sve_opd3_base):
     """
-    SVE implementation of fmul
+    SVE implementation of add (fadd)
     """
     # unpredicated fadd/fmul (vectors) exist; the predicated forms are
     # destructive: Zdn is both the destination and the first source
@@ -27,7 +26,7 @@ class sve_fmul(sve_opd3_base):
     destructive = True
     widens = False
 
-    inst_base = "mul"
+    inst_base = "add"
 
     def diagnose_failure(self, modifiers : set[mod],
                          operand_modifiers : dict[str,set[opd_mod]],
@@ -35,4 +34,4 @@ class sve_fmul(sve_opd3_base):
                          dts : dict[str,adt]):
         super().diagnose_failure(modifiers, operand_modifiers, kwargs, dts)
         if mod.NP in modifiers:
-            raise ValueError("SVE mul has no NP-form")
+            raise ValueError("NEON add has no NP-form")

@@ -11,12 +11,12 @@ from asmgen.asmblocks.op import opd3_modifier as mod
 
 from .test_neon_opd3 import test_neon_opd3_base
 
-class test_neon_fadd(test_neon_opd3_base):
+class test_neon_add(test_neon_opd3_base):
     """
     Testsuite for NEON/ASIMD fadd
     """
 
-    def test_standard_fadd(self):
+    def test_standard_add(self):
         """
         Correctness tests for some known cases
         """
@@ -27,7 +27,7 @@ class test_neon_fadd(test_neon_opd3_base):
         ]
         for dt, expected in cases:
             with self.subTest(dt=dt.name):
-                res = self.gen.fadd(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
+                res = self.gen.add(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
                                     a_dt=dt, b_dt=dt, c_dt=dt)
                 self.assertEqual(res, expected)
 
@@ -38,6 +38,6 @@ class test_neon_fadd(test_neon_opd3_base):
         # 1. NP is unsupported in fadd
         with self.subTest(error="unsupported NP"):
             with self.assertRaisesRegex(ValueError, "NEON add has no NP-form"):
-                self.gen.fadd(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
+                self.gen.add(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
                               a_dt=adt.FP32, b_dt=adt.FP32, c_dt=adt.FP32,
                               modifiers={mod.NP})

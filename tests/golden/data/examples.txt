@@ -44,7 +44,7 @@ addq $192,%rsi
 addq $-1,%rdx
 test %rdx,%rdx
 jnz .loop
-### axpy --isa avx512 --arith fmul_fadd --unroll 1
+### axpy --isa avx512 --arith mul_add --unroll 1
 .section .text
 .global myfunction
 myfunction:
@@ -64,7 +64,7 @@ addq $64,%rsi
 addq $-1,%rdx
 test %rdx,%rdx
 jnz .loop
-### axpy --isa avx512 --arith fmul_fadd --unroll 3
+### axpy --isa avx512 --arith mul_add --unroll 3
 .section .text
 .global myfunction
 myfunction:
@@ -140,7 +140,7 @@ addq $48,%rsi
 addq $-1,%rdx
 test %rdx,%rdx
 jnz .loop
-### axpy --isa fma128 --arith fmul_fadd --unroll 1
+### axpy --isa fma128 --arith mul_add --unroll 1
 .section .text
 .global myfunction
 myfunction:
@@ -160,7 +160,7 @@ addq $16,%rsi
 addq $-1,%rdx
 test %rdx,%rdx
 jnz .loop
-### axpy --isa fma128 --arith fmul_fadd --unroll 3
+### axpy --isa fma128 --arith mul_add --unroll 3
 .section .text
 .global myfunction
 myfunction:
@@ -236,7 +236,7 @@ addq $96,%rsi
 addq $-1,%rdx
 test %rdx,%rdx
 jnz .loop
-### axpy --isa fma256 --arith fmul_fadd --unroll 1
+### axpy --isa fma256 --arith mul_add --unroll 1
 .section .text
 .global myfunction
 myfunction:
@@ -256,7 +256,7 @@ addq $32,%rsi
 addq $-1,%rdx
 test %rdx,%rdx
 jnz .loop
-### axpy --isa fma256 --arith fmul_fadd --unroll 3
+### axpy --isa fma256 --arith mul_add --unroll 3
 .section .text
 .global myfunction
 myfunction:
@@ -330,7 +330,7 @@ add x0,x0,#48
 add x1,x1,#48
 add x2,x2,#-1
 cbnz x2,.loop
-### axpy --isa neon --arith fmul_fadd --unroll 1
+### axpy --isa neon --arith mul_add --unroll 1
 .section .text
 .global myfunction
 myfunction:
@@ -349,7 +349,7 @@ add x0,x0,#16
 add x1,x1,#16
 add x2,x2,#-1
 cbnz x2,.loop
-### axpy --isa neon --arith fmul_fadd --unroll 3
+### axpy --isa neon --arith mul_add --unroll 3
 .section .text
 .global myfunction
 myfunction:
@@ -428,7 +428,7 @@ add a0,a0,t0
 add a1,a1,t0
 add a2,a2,-1
 bne a2,zero,.loop
-### axpy --isa rvv --arith fmul_fadd --unroll 1
+### axpy --isa rvv --arith mul_add --unroll 1
 .section .text
 .global myfunction
 myfunction:
@@ -448,7 +448,7 @@ add a0,a0,t0
 add a1,a1,t0
 add a2,a2,-1
 bne a2,zero,.loop
-### axpy --isa rvv --arith fmul_fadd --unroll 3
+### axpy --isa rvv --arith mul_add --unroll 3
 .section .text
 .global myfunction
 myfunction:
@@ -536,7 +536,7 @@ incb x1, ALL, MUL #3
 add x2,x2,#-1
 cbnz x2,.loop
 smstop
-### axpy --isa sme --arith fmul_fadd --unroll 1
+### axpy --isa sme --arith mul_add --unroll 1
 .section .text
 .global myfunction
 myfunction:
@@ -560,7 +560,7 @@ incb x1, ALL, MUL #1
 add x2,x2,#-1
 cbnz x2,.loop
 smstop
-### axpy --isa sme --arith fmul_fadd --unroll 3
+### axpy --isa sme --arith mul_add --unroll 3
 .section .text
 .global myfunction
 myfunction:
@@ -642,7 +642,7 @@ incb x0, ALL, MUL #3
 incb x1, ALL, MUL #3
 add x2,x2,#-1
 cbnz x2,.loop
-### axpy --isa sve --arith fmul_fadd --unroll 1
+### axpy --isa sve --arith mul_add --unroll 1
 .section .text
 .global myfunction
 myfunction:
@@ -663,7 +663,7 @@ incb x0, ALL, MUL #1
 incb x1, ALL, MUL #1
 add x2,x2,#-1
 cbnz x2,.loop
-### axpy --isa sve --arith fmul_fadd --unroll 3
+### axpy --isa sve --arith mul_add --unroll 3
 .section .text
 .global myfunction
 myfunction:

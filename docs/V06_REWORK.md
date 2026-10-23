@@ -186,12 +186,27 @@ Found by the snapshots, for the phases to come:
   without the BF16 vector extensions, SME with SME2: axpy's SME code uses
   predicate-as-counter registers).
 
-### Phase 1: `fadd` → `add`, `fmul` → `mul` [ ]
+### Phase 1: `fadd` → `add`, `fmul` → `mul` [x]
 
-- [ ] Operations and classes renamed (`rvv_fadd` → `rvv_add`, ...), `fadd`
-      and `fmul` kept as deprecated aliases.
-- [ ] ukrgen: op names in presets and composition follow (the IR dispatches
-      by name; the aliases bridge until then).
+- [x] Operations and classes renamed: `{avx,neon,rvv,sve}/opd3/fadd.py` and
+      `fmul.py` became `add.py` and `mul.py`, `rvv_fadd` became `rvv_add`
+      and so on, the generators' attributes `add` and `mul`. Docstrings and
+      messages name the operations; the instructions' mnemonics stay.
+- [x] Deprecated for one release: `gen.fadd` and `gen.fmul` (properties on
+      the base class, warning), the old class names (the `opd3` packages'
+      module `__getattr__`, warning), axpy's `--arith fmul_fadd` (now
+      `mul_add`). `tests/test_renamed.py` checks them.
+- [x] ukrgen: op names follow (its 0157) - the packing configurations'
+      `pack-tileop`, the presets, `op_support_builder.ast_op_map`, the
+      scheduler's op keys (`fmul` kept there as an alias). Configurations
+      still saying `fmul(...)` keep working through the aliases.
+
+Checked: the snapshots, with keys `op fadd`/`op fmul` read as `op
+add`/`op mul` and the classes' names in error messages as their new ones,
+are identical on all eight backends and for axpy; ukrgen's packing kernels
+(RVV, AVX-512, SVE) and golden kernels are identical. `test_asm_correct`'s
+execution scenarios (ten on three backends) fail in this environment before
+and after alike.
 
 `fma` stays: fused multiply-accumulate.
 
@@ -319,3 +334,5 @@ ukropt:
   eight backends, with an assembly baseline.
 - 2026-10-23: phase 0 done - axpy as a test (fixed), ukrgen's golden
   kernels (its 0156), ukropt's build checks (its 0010).
+- 2026-10-23: phase 1 done - fadd/fmul renamed add/mul, the old names
+  deprecated (asmgen 0037, ukrgen 0157).

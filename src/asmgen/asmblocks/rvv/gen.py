@@ -18,7 +18,7 @@ from ...registers import (
 from ..riscv64 import riscv64
 from .types import rvv_vreg
 
-from .opd3 import rvv_fma,rvv_fmul,rvv_fadd
+from .opd3 import rvv_fma,rvv_mul,rvv_add
 from .opmem import rvv_load,rvv_store
 from .move import rvv_move
 
@@ -57,8 +57,8 @@ class rvv(riscv64):
     def __init__(self):
         super().__init__()
         self.fma = rvv_fma(asmwrap=self.asmwrap)
-        self.fmul = rvv_fmul(asmwrap=self.asmwrap)
-        self.fadd = rvv_fadd(asmwrap=self.asmwrap)
+        self.mul = rvv_mul(asmwrap=self.asmwrap)
+        self.add = rvv_add(asmwrap=self.asmwrap)
 
         self.lmul = 1
 

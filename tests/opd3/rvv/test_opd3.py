@@ -36,7 +36,7 @@ class test_rvv_opd3(unittest.TestCase):
                              cdreg=self.gen.vreg(0),
                              a_dt=adt.FP64, b_dt=adt.FP64, c_dt=adt.FP64))
 
-    def test_fmul_fp64(self):
+    def test_mul_fp64(self):
         """
         fp64 fmul instruction
         """
@@ -44,7 +44,7 @@ class test_rvv_opd3(unittest.TestCase):
         self.assertEqual(
                 # Note: operand order different from FMA!
                 "vfmul.vv v0,v1,v2\n",
-                self.gen.fmul(adreg=self.gen.vreg(1),
+                self.gen.mul(adreg=self.gen.vreg(1),
                               bdreg=self.gen.vreg(2),
                               cdreg=self.gen.vreg(0),
                               a_dt=adt.FP64, b_dt=adt.FP64, c_dt=adt.FP64))
@@ -62,30 +62,30 @@ class test_rvv_opd3(unittest.TestCase):
                              a_dt=adt.FP64, b_dt=adt.FP64, c_dt=adt.FP64,
                              operand_modifiers={'bdreg':{opd_mod.VF}}))
 
-    def test_fmul_vf_fp64(self):
+    def test_mul_vf_fp64(self):
         """
         fp64 fmul VF-form instruction
         """
 
         self.assertEqual(
                 "vfmul.vf v0,v1,f2\n",
-                self.gen.fmul(adreg=self.gen.vreg(1),
+                self.gen.mul(adreg=self.gen.vreg(1),
                              bdreg=self.gen.freg(2, dt=adt.FP64),
                              cdreg=self.gen.vreg(0),
                              a_dt=adt.FP64, b_dt=adt.FP64, c_dt=adt.FP64,
                              operand_modifiers={'bdreg':{opd_mod.VF}}))
 
 
-    def test_fmul_vf_fp64_a_is_freg(self):
+    def test_mul_vf_fp64_a_is_freg(self):
         """
         fp64 fmul VF-form instruction with wrong dreg as freg
         """
 
 
-        err_msg = "Invalid configuration for rvv_fmul"
+        err_msg = "Invalid configuration for rvv_mul"
         with self.assertRaisesRegex(
                 ValueError, err_msg):
-            self.gen.fmul(adreg=self.gen.freg(1, dt=adt.FP64),
+            self.gen.mul(adreg=self.gen.freg(1, dt=adt.FP64),
                           bdreg=self.gen.vreg(2),
                           cdreg=self.gen.vreg(0),
                           a_dt=adt.FP64, b_dt=adt.FP64, c_dt=adt.FP64,
@@ -142,13 +142,13 @@ class test_rvv_opd3(unittest.TestCase):
                          a_dt=adt.FP8E5M2, b_dt=adt.FP8E5M2, c_dt=adt.FP32,
                          widening_method=wm.VEC_GROUP)
 
-    def test_fmul_np(self):
+    def test_mul_np(self):
         """
         fp64 fmul does not support NP mod
         """
         with self.assertRaisesRegex(
-                ValueError, "rvv_fmul does not support these modifiers at all: {NP}"):
-            self.gen.fmul(adreg=self.gen.vreg(2),
+                ValueError, "rvv_mul does not support these modifiers at all: {NP}"):
+            self.gen.mul(adreg=self.gen.vreg(2),
                           bdreg=self.gen.vreg(3),
                           cdreg=self.gen.vreg(0),
                           a_dt=adt.FP64, b_dt=adt.FP64, c_dt=adt.FP64,

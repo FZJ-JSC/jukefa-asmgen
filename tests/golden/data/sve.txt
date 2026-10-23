@@ -2411,61 +2411,61 @@ dup z0.d,#0
 dup z0.h,#0
 ### method zero_vreg(dt=SINGLE, vreg=z0)
 dup z0.s,#0
-### op fadd [MASK] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16 amreg:REGISTER:MASK:BF16
+### op add [MASK] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16 amreg:REGISTER:MASK:BF16
 !KeyError: <asm_data_type.BF16: 5>
-### op fadd [MASK] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE amreg:REGISTER:MASK:DOUBLE
+### op add [MASK] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE amreg:REGISTER:MASK:DOUBLE
 fadd z1.d,p1/m,z1.d,z2.d
-### op fadd [MASK] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF amreg:REGISTER:MASK:HALF
+### op add [MASK] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF amreg:REGISTER:MASK:HALF
 fadd z1.h,p1/m,z1.h,z2.h
-### op fadd [MASK] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE amreg:REGISTER:MASK:SINGLE
+### op add [MASK] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE amreg:REGISTER:MASK:SINGLE
 fadd z1.s,p1/m,z1.s,z2.s
-### op fadd [MASK] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 amreg:REGISTER:MASK:SINT16
+### op add [MASK] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 amreg:REGISTER:MASK:SINT16
 add z1.h,p1/m,z1.h,z2.h
-### op fadd [MASK] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 amreg:REGISTER:MASK:SINT32
+### op add [MASK] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 amreg:REGISTER:MASK:SINT32
 add z1.s,p1/m,z1.s,z2.s
-### op fadd [MASK] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 amreg:REGISTER:MASK:SINT64
+### op add [MASK] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 amreg:REGISTER:MASK:SINT64
 add z1.d,p1/m,z1.d,z2.d
-### op fadd [MASK] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 amreg:REGISTER:MASK:SINT8
+### op add [MASK] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 amreg:REGISTER:MASK:SINT8
 add z1.b,p1/m,z1.b,z2.b
-### op fadd [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16
+### op add [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16
 !KeyError: <asm_data_type.BF16: 5>
-### op fadd [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16{BLOCKLANE} cdreg:REGISTER:VEC:BF16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
+### op add [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16{BLOCKLANE} cdreg:REGISTER:VEC:BF16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
 !KeyError: <asm_data_type.BF16: 5>
-### op fadd [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16{BLOCKLANE} cdreg:REGISTER:VEC:BF16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
+### op add [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16{BLOCKLANE} cdreg:REGISTER:VEC:BF16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
 !KeyError: <asm_data_type.BF16: 5>
-### op fadd [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+### op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
 fadd z3.d,z1.d,z2.d
-### op fadd [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
+### op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
 fadd z3.d,z1.d,z2.d[0]
-### op fadd [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far
+### op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far
 fadd z3.d,z1.d,z2.d[1]
-### op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
+### op add [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
 fadd z3.h,z1.h,z2.h
-### op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{BLOCKLANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
+### op add [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{BLOCKLANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
 fadd z3.h,z1.h,z2.h[0]
-### op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{BLOCKLANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
+### op add [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{BLOCKLANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
 fadd z3.h,z1.h,z2.h[7]
-### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+### op add [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 fadd z3.s,z1.s,z2.s
-### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE{BLOCKLANE} cdreg:REGISTER:VEC:SINGLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4}
+### op add [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE{BLOCKLANE} cdreg:REGISTER:VEC:SINGLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4}
 fadd z3.s,z1.s,z2.s[0]
-### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE{BLOCKLANE} cdreg:REGISTER:VEC:SINGLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4} @far
+### op add [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE{BLOCKLANE} cdreg:REGISTER:VEC:SINGLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4} @far
 fadd z3.s,z1.s,z2.s[3]
-### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16{BLOCKLANE} cdreg:REGISTER:VEC:SINT16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
+### op add [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16{BLOCKLANE} cdreg:REGISTER:VEC:SINT16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
 add z3.h,z1.h,z2.h[0]
-### op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16{BLOCKLANE} cdreg:REGISTER:VEC:SINT16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
+### op add [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16{BLOCKLANE} cdreg:REGISTER:VEC:SINT16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
 add z3.h,z1.h,z2.h[7]
-### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32{BLOCKLANE} cdreg:REGISTER:VEC:SINT32 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4}
+### op add [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32{BLOCKLANE} cdreg:REGISTER:VEC:SINT32 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4}
 add z3.s,z1.s,z2.s[0]
-### op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32{BLOCKLANE} cdreg:REGISTER:VEC:SINT32 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4} @far
+### op add [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32{BLOCKLANE} cdreg:REGISTER:VEC:SINT32 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4} @far
 add z3.s,z1.s,z2.s[3]
-### op fadd [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{BLOCKLANE} cdreg:REGISTER:VEC:SINT64 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
+### op add [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{BLOCKLANE} cdreg:REGISTER:VEC:SINT64 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
 add z3.d,z1.d,z2.d[0]
-### op fadd [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{BLOCKLANE} cdreg:REGISTER:VEC:SINT64 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far
+### op add [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{BLOCKLANE} cdreg:REGISTER:VEC:SINT64 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far
 add z3.d,z1.d,z2.d[1]
-### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16}
+### op add [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16}
 add z3.b,z1.b,z2.b[0]
-### op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16} @far
+### op add [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16} @far
 add z3.b,z1.b,z2.b[15]
 ### op fma [MASK,NP] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16 amreg:REGISTER:MASK:BF16
 !KeyError: <asm_data_type.BF16: 5>
@@ -2755,62 +2755,6 @@ mla z3.d,z1.d,z2.d[1]
 mla z3.b,z1.b,z2.b[0]
 ### op fma [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16} @far
 mla z3.b,z1.b,z2.b[15]
-### op fmul [MASK] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16 amreg:REGISTER:MASK:BF16
-!KeyError: <asm_data_type.BF16: 5>
-### op fmul [MASK] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE amreg:REGISTER:MASK:DOUBLE
-fmul z1.d,p1/m,z1.d,z2.d
-### op fmul [MASK] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF amreg:REGISTER:MASK:HALF
-fmul z1.h,p1/m,z1.h,z2.h
-### op fmul [MASK] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE amreg:REGISTER:MASK:SINGLE
-fmul z1.s,p1/m,z1.s,z2.s
-### op fmul [MASK] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 amreg:REGISTER:MASK:SINT16
-mul z1.h,p1/m,z1.h,z2.h
-### op fmul [MASK] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 amreg:REGISTER:MASK:SINT32
-mul z1.s,p1/m,z1.s,z2.s
-### op fmul [MASK] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 amreg:REGISTER:MASK:SINT64
-mul z1.d,p1/m,z1.d,z2.d
-### op fmul [MASK] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 amreg:REGISTER:MASK:SINT8
-mul z1.b,p1/m,z1.b,z2.b
-### op fmul [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16
-!KeyError: <asm_data_type.BF16: 5>
-### op fmul [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16{BLOCKLANE} cdreg:REGISTER:VEC:BF16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
-!KeyError: <asm_data_type.BF16: 5>
-### op fmul [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16{BLOCKLANE} cdreg:REGISTER:VEC:BF16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
-!KeyError: <asm_data_type.BF16: 5>
-### op fmul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
-fmul z3.d,z1.d,z2.d
-### op fmul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
-fmul z3.d,z1.d,z2.d[0]
-### op fmul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far
-fmul z3.d,z1.d,z2.d[1]
-### op fmul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
-fmul z3.h,z1.h,z2.h
-### op fmul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{BLOCKLANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
-fmul z3.h,z1.h,z2.h[0]
-### op fmul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{BLOCKLANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
-fmul z3.h,z1.h,z2.h[7]
-### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
-fmul z3.s,z1.s,z2.s
-### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE{BLOCKLANE} cdreg:REGISTER:VEC:SINGLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4}
-fmul z3.s,z1.s,z2.s[0]
-### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE{BLOCKLANE} cdreg:REGISTER:VEC:SINGLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4} @far
-fmul z3.s,z1.s,z2.s[3]
-### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16{BLOCKLANE} cdreg:REGISTER:VEC:SINT16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
-mul z3.h,z1.h,z2.h[0]
-### op fmul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16{BLOCKLANE} cdreg:REGISTER:VEC:SINT16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
-mul z3.h,z1.h,z2.h[7]
-### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32{BLOCKLANE} cdreg:REGISTER:VEC:SINT32 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4}
-mul z3.s,z1.s,z2.s[0]
-### op fmul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32{BLOCKLANE} cdreg:REGISTER:VEC:SINT32 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4} @far
-mul z3.s,z1.s,z2.s[3]
-### op fmul [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{BLOCKLANE} cdreg:REGISTER:VEC:SINT64 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
-mul z3.d,z1.d,z2.d[0]
-### op fmul [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{BLOCKLANE} cdreg:REGISTER:VEC:SINT64 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far
-mul z3.d,z1.d,z2.d[1]
-### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16}
-mul z3.b,z1.b,z2.b[0]
-### op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16} @far
-mul z3.b,z1.b,z2.b[15]
 ### op load [GOFFSET,MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 offreg:REGISTER:GP:SINT64
 ld1h {z1.h}, p1/z, [x10, x11, lsl #1]
 ### op load [GOFFSET,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE offreg:REGISTER:GP:SINT64
@@ -3949,6 +3893,62 @@ mov z1.b,w10
 dup z1.b,z2.b[0]
 ### op move [] bdreg:REGISTER:VEC:UINT8{BCAST} adreg:REGISTER:VEC:UINT8{ILANE} adreg_lane:IMMEDIATE:-:- @far
 dup z1.b,z2.b[63]
+### op mul [MASK] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16 amreg:REGISTER:MASK:BF16
+!KeyError: <asm_data_type.BF16: 5>
+### op mul [MASK] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE amreg:REGISTER:MASK:DOUBLE
+fmul z1.d,p1/m,z1.d,z2.d
+### op mul [MASK] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF amreg:REGISTER:MASK:HALF
+fmul z1.h,p1/m,z1.h,z2.h
+### op mul [MASK] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE amreg:REGISTER:MASK:SINGLE
+fmul z1.s,p1/m,z1.s,z2.s
+### op mul [MASK] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 amreg:REGISTER:MASK:SINT16
+mul z1.h,p1/m,z1.h,z2.h
+### op mul [MASK] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 amreg:REGISTER:MASK:SINT32
+mul z1.s,p1/m,z1.s,z2.s
+### op mul [MASK] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 amreg:REGISTER:MASK:SINT64
+mul z1.d,p1/m,z1.d,z2.d
+### op mul [MASK] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 amreg:REGISTER:MASK:SINT8
+mul z1.b,p1/m,z1.b,z2.b
+### op mul [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16
+!KeyError: <asm_data_type.BF16: 5>
+### op mul [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16{BLOCKLANE} cdreg:REGISTER:VEC:BF16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
+!KeyError: <asm_data_type.BF16: 5>
+### op mul [] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16{BLOCKLANE} cdreg:REGISTER:VEC:BF16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
+!KeyError: <asm_data_type.BF16: 5>
+### op mul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+fmul z3.d,z1.d,z2.d
+### op mul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
+fmul z3.d,z1.d,z2.d[0]
+### op mul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far
+fmul z3.d,z1.d,z2.d[1]
+### op mul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
+fmul z3.h,z1.h,z2.h
+### op mul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{BLOCKLANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
+fmul z3.h,z1.h,z2.h[0]
+### op mul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{BLOCKLANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
+fmul z3.h,z1.h,z2.h[7]
+### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+fmul z3.s,z1.s,z2.s
+### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE{BLOCKLANE} cdreg:REGISTER:VEC:SINGLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4}
+fmul z3.s,z1.s,z2.s[0]
+### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE{BLOCKLANE} cdreg:REGISTER:VEC:SINGLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4} @far
+fmul z3.s,z1.s,z2.s[3]
+### op mul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16{BLOCKLANE} cdreg:REGISTER:VEC:SINT16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
+mul z3.h,z1.h,z2.h[0]
+### op mul [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16{BLOCKLANE} cdreg:REGISTER:VEC:SINT16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
+mul z3.h,z1.h,z2.h[7]
+### op mul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32{BLOCKLANE} cdreg:REGISTER:VEC:SINT32 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4}
+mul z3.s,z1.s,z2.s[0]
+### op mul [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32{BLOCKLANE} cdreg:REGISTER:VEC:SINT32 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4} @far
+mul z3.s,z1.s,z2.s[3]
+### op mul [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{BLOCKLANE} cdreg:REGISTER:VEC:SINT64 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
+mul z3.d,z1.d,z2.d[0]
+### op mul [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{BLOCKLANE} cdreg:REGISTER:VEC:SINT64 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far
+mul z3.d,z1.d,z2.d[1]
+### op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16}
+mul z3.b,z1.b,z2.b[0]
+### op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16} @far
+mul z3.b,z1.b,z2.b[15]
 ### op store [GOFFSET,MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 offreg:REGISTER:GP:SINT64
 st1h {z1.h}, p1, [x10, x11, lsl #1]
 ### op store [GOFFSET,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE offreg:REGISTER:GP:SINT64

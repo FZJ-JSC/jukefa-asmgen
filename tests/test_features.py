@@ -65,14 +65,14 @@ class test_features_per_isa(unittest.TestCase):
 
     def test_neon(self):
         g = neon()
-        fma, fadd = self.rows(g.fma), self.rows(g.fadd)
+        fma, fadd = self.rows(g.fma), self.rows(g.add)
         self.assertEqual({"FHM"}, fma["HALF->SINGLE"])
         self.assertEqual({"FP8FMA"}, fma["FP8E4M3->HALF"])        # not FHM
         self.assertNotIn("HALF->SINGLE", fadd)                    # no faddl for floats
         self.assertNotIn("FP8E4M3->FP8E4M3", fma)                 # FP8 only widens
 
     def test_sve(self):
-        fma, fmul = self.rows(sve().fma), self.rows(sve().fmul)
+        fma, fmul = self.rows(sve().fma), self.rows(sve().mul)
         self.assertEqual({"BF16"}, fma["BF16->SINGLE"])           # bfmlalb: no SVE2
         self.assertEqual({"B16B16"}, fmul["BF16->BF16"])
         self.assertEqual(set(), fma["HALF->HALF"])

@@ -115,20 +115,20 @@ method treg(dt=HALF, reg_idx=0)
 method treg(dt=SINGLE, reg_idx=0)
 method vreg(reg_idx=0)
 method zero_freg(dt=DOUBLE, freg=s0)
-op fadd [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
-op fadd [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far
-op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{BLOCKLANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
-op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{BLOCKLANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
-op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE{BLOCKLANE} cdreg:REGISTER:VEC:SINGLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4}
-op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE{BLOCKLANE} cdreg:REGISTER:VEC:SINGLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4} @far
-op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16{BLOCKLANE} cdreg:REGISTER:VEC:SINT16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
-op fadd [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16{BLOCKLANE} cdreg:REGISTER:VEC:SINT16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
-op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32{BLOCKLANE} cdreg:REGISTER:VEC:SINT32 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4}
-op fadd [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32{BLOCKLANE} cdreg:REGISTER:VEC:SINT32 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4} @far
-op fadd [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{BLOCKLANE} cdreg:REGISTER:VEC:SINT64 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
-op fadd [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{BLOCKLANE} cdreg:REGISTER:VEC:SINT64 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far
-op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16}
-op fadd [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16} @far
+op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
+op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far
+op add [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{BLOCKLANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
+op add [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{BLOCKLANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
+op add [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE{BLOCKLANE} cdreg:REGISTER:VEC:SINGLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4}
+op add [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE{BLOCKLANE} cdreg:REGISTER:VEC:SINGLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4} @far
+op add [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16{BLOCKLANE} cdreg:REGISTER:VEC:SINT16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}
+op add [] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16{BLOCKLANE} cdreg:REGISTER:VEC:SINT16 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8} @far
+op add [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32{BLOCKLANE} cdreg:REGISTER:VEC:SINT32 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4}
+op add [] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32{BLOCKLANE} cdreg:REGISTER:VEC:SINT32 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:4} @far
+op add [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{BLOCKLANE} cdreg:REGISTER:VEC:SINT64 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
+op add [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{BLOCKLANE} cdreg:REGISTER:VEC:SINT64 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far
+op add [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16}
+op add [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16} @far
 op fma [NP,PART] adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:HALF part:IMMEDIATE:-:- {widening_method:SPLIT_INTERLEAVED}
 op fma [NP,PART] adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:HALF part:IMMEDIATE:-:- {widening_method:SPLIT_INTERLEAVED} @far
 op fma [NP,PART] adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:VEC:SINGLE part:IMMEDIATE:-:- {widening_method:SPLIT_INTERLEAVED}
@@ -189,8 +189,6 @@ op fma [PART] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8{BLOCKLANE} cdreg
 op fma [PART] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8{BLOCKLANE} cdreg:REGISTER:VEC:UINT32 bdreg_lane:IMMEDIATE:-:- part:IMMEDIATE:-:- {bdreg_blocksize:16,widening_method:SPLIT_INTERLEAVED} @far
 op fma [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16}
 op fma [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16} @far
-op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16}
-op fmul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16} @far
 op fopa [MASK,NP] adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:TILE:HALF amreg:REGISTER:MASK:FP8E4M3 bmreg:REGISTER:MASK:FP8E4M3 {widening_method:DOT_NEIGHBOURS}
 op fopa [MASK,NP] adreg:REGISTER:VEC:FP8E4M3 bdreg:REGISTER:VEC:FP8E4M3 cdreg:REGISTER:TILE:SINGLE amreg:REGISTER:MASK:FP8E4M3 bmreg:REGISTER:MASK:FP8E4M3 {widening_method:DOT_NEIGHBOURS}
 op fopa [MASK,NP] adreg:REGISTER:VEC:FP8E5M2 bdreg:REGISTER:VEC:FP8E5M2 cdreg:REGISTER:TILE:HALF amreg:REGISTER:MASK:FP8E5M2 bmreg:REGISTER:MASK:FP8E5M2 {widening_method:DOT_NEIGHBOURS}
@@ -416,6 +414,8 @@ op move [] bdreg:REGISTER:VEC:SINT8 adreg:REGISTER:VEC:SINT8
 op move [] bdreg:REGISTER:VEC:UINT16 adreg:REGISTER:VEC:UINT16
 op move [] bdreg:REGISTER:VEC:UINT32 adreg:REGISTER:VEC:UINT32
 op move [] bdreg:REGISTER:VEC:UINT8 adreg:REGISTER:VEC:UINT8
+op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16}
+op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16} @far
 op store [GOFFSET,MASK,NT,STRUCT] agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16 ddreg:REGISTER:VEC:BF16 offreg:REGISTER:GP:SINT64 {nstructs:4}
 op store [GOFFSET,MASK,NT,STRUCT] agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 offreg:REGISTER:GP:SINT64 {nstructs:2}
 op store [GOFFSET,MASK,NT,STRUCT] agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE offreg:REGISTER:GP:SINT64 {nstructs:4}

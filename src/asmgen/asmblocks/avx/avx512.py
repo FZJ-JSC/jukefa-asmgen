@@ -27,7 +27,7 @@ from .base import avxbase
 from .types import x86_greg,avx_freg,xmm_vreg,ymm_vreg,zmm_vreg,reg_prefixer
 
 from .move import avx_move
-from .opd3 import avx_fma,avx_fmul,avx_fadd
+from .opd3 import avx_fma,avx_mul,avx_add
 
 from .opmem.load import avx128_load,avx256_load,avx512_load
 from .opmem.store import avx128_store,avx256_store,avx512_store
@@ -49,14 +49,14 @@ class avx512(avxbase):
                      rpref=self.rpref,
                      has_fp16=True
                      )
-        self.fmul = avx_fmul(
+        self.mul = avx_mul(
                      asmwrap=self.asmwrap,
                      dt_suffixes=self.dt_suffixes,
                      it_suffixes=self.it_suffixes,
                      rpref=self.rpref,
                      has_fp16=True
                      )
-        self.fadd = avx_fadd(
+        self.add = avx_add(
                      asmwrap=self.asmwrap,
                      dt_suffixes=self.dt_suffixes,
                      it_suffixes=self.it_suffixes,

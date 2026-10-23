@@ -12,12 +12,12 @@ from asmgen.asmblocks.op import opd3_modifier as mod
 
 from .test_sve_opd3 import test_sve_opd3_base
 
-class test_sve_fadd(test_sve_opd3_base):
+class test_sve_add(test_sve_opd3_base):
     """
     Testsuite for SVE fadd instruction
     """
 
-    def test_standard_fadd(self):
+    def test_standard_add(self):
         """
         Test some known instructions for correctness
         """
@@ -28,7 +28,7 @@ class test_sve_fadd(test_sve_opd3_base):
         ]
         for dt, expected in cases:
             with self.subTest(dt=dt.name):
-                res = self.gen.fadd(adreg=self.v0, bdreg=self.v2, cdreg=self.v0, amreg=self.p0,
+                res = self.gen.add(adreg=self.v0, bdreg=self.v2, cdreg=self.v0, amreg=self.p0,
                                     a_dt=dt, b_dt=dt, c_dt=dt, modifiers={mod.MASK})
                 self.assertEqual(res, expected)
 
@@ -38,6 +38,6 @@ class test_sve_fadd(test_sve_opd3_base):
         """
         with self.subTest(error="unsupported NP"):
             with self.assertRaisesRegex(ValueError, "add has no NP-form"):
-                self.gen.fadd(adreg=self.v0, bdreg=self.v2, cdreg=self.v0, amreg=self.p0,
+                self.gen.add(adreg=self.v0, bdreg=self.v2, cdreg=self.v0, amreg=self.p0,
                               a_dt=adt.FP32, b_dt=adt.FP32, c_dt=adt.FP32,
                               modifiers={mod.MASK, mod.NP})

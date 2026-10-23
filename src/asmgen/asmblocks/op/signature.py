@@ -140,9 +140,9 @@ class operation_signature:
 #ld{STRUCT}(adreg.v.FP64,bdreg.v.FP64,cdreg.v.FP64,ddreg.v.FP64,agreg.UINT64,nstructs=4,ioffset)
 #ld{LANE}(adreg.v.FP32,agreg.UINT64,lane,ioffset)
 #ld{GATHER}(adreg.v.FP64,agreg,offvreg.SINT64)
-#fmul{VF}(adreg.v.FP16,bdreg.f.FP16,cdreg.v.FP32, widening_method=VEC_MULTI, cdreg2.v.FP32)
-#fmul{VF}(adreg.v.FP16,bdreg.f.FP16,cdreg.v.FP32, widening_method=SPLIT_CONTIGUOUS, part)
-#fmul{VF}(adreg.v.FP16,bdreg.f.FP16,cdreg.v.FP32, widening_method=VEC_GROUP)
+#mul{VF}(adreg.v.FP16,bdreg.f.FP16,cdreg.v.FP32, widening_method=VEC_MULTI, cdreg2.v.FP32)
+#mul{VF}(adreg.v.FP16,bdreg.f.FP16,cdreg.v.FP32, widening_method=SPLIT_CONTIGUOUS, part)
+#mul{VF}(adreg.v.FP16,bdreg.f.FP16,cdreg.v.FP32, widening_method=VEC_GROUP)
 #st{ROW}(adreg.t.FP32, agreg, voffset, rowreg=agreg.SINT32, immrow)
 
 # possible dependencies

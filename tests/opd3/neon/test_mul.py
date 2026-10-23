@@ -12,12 +12,12 @@ from asmgen.asmblocks.op import opd3_modifier as mod
 
 from .test_neon_opd3 import test_neon_opd3_base
 
-class test_neon_fmul(test_neon_opd3_base):
+class test_neon_mul(test_neon_opd3_base):
     """
     Testsuite for NEON/ASIMD fmul
     """
 
-    def test_standard_fmul(self):
+    def test_standard_mul(self):
         """
         Test some known instructions for correctness
         """
@@ -29,7 +29,7 @@ class test_neon_fmul(test_neon_opd3_base):
         ]
         for dt, expected in cases:
             with self.subTest(dt=dt.name):
-                res = self.gen.fmul(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
+                res = self.gen.mul(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
                                     a_dt=dt, b_dt=dt, c_dt=dt)
                 self.assertEqual(res, expected)
 
@@ -40,14 +40,14 @@ class test_neon_fmul(test_neon_opd3_base):
         # NP is unsupported in fmul
         with self.subTest(error="unsupported NP"):
             with self.assertRaisesRegex(ValueError, "NEON mul has no NP-form"):
-                self.gen.fmul(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
+                self.gen.mul(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
                               a_dt=adt.FP32, b_dt=adt.FP32, c_dt=adt.FP32,
                               modifiers={mod.NP})
 
         # Widening without PART modifier
         with self.subTest(error="widening missing PART"):
-            with self.assertRaisesRegex(ValueError, "Invalid configuration for neon_fmul"):
-                self.gen.fmul(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
+            with self.assertRaisesRegex(ValueError, "Invalid configuration for neon_mul"):
+                self.gen.mul(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
                               a_dt=adt.FP16, b_dt=adt.FP16, c_dt=adt.FP32)
 
         # Non-widening integer MUL
@@ -55,6 +55,6 @@ class test_neon_fmul(test_neon_opd3_base):
             with self.assertRaisesRegex(
                     ValueError,
                     "Only widening unsigned integer MUL supported in NEON"):
-                self.gen.fmul(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
+                self.gen.mul(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
                               a_dt=adt.UINT32, b_dt=adt.UINT32, c_dt=adt.UINT32,
                               modifiers=set())

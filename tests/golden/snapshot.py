@@ -24,7 +24,7 @@ from asmgen.registers import asm_data_type as adt
 
 HERE = os.path.dirname(__file__)
 DATA = os.path.join(HERE, "data")
-OPERATIONS = ("load", "store", "move", "fma", "fadd", "fmul", "fopa")
+OPERATIONS = ("load", "store", "move", "fma", "add", "mul", "fopa")
 DTS = (adt.FP64, adt.FP32, adt.FP16)
 IMMEDIATES = (0, 1, 8, 255, 256, 2047, 2048, 4096, -8, -2048, -2049)
 IMM_PARAMS = ("imm", "offset", "ioffset", "shift")
@@ -413,7 +413,7 @@ def examples_snapshot() -> dict:
         [os.path.join(os.path.dirname(EXAMPLES), "src"), os.environ.get("PYTHONPATH", "")]))
     out = {}
     for isa in module.ISA_MODULES:
-        for arith in ("fma", "fmul_fadd"):
+        for arith in ("fma", "mul_add"):
             for unroll in (1, 3):
                 r = subprocess.run([sys.executable, script, "--isa", isa, "--arith", arith,
                                     "--unroll", str(unroll)], capture_output=True, text=True, env=env)

@@ -57,7 +57,7 @@ class opd3(operation):
       fma      op1, op2, op3      : op3      <-   op1 * op2      + op3
       fma.np   op1, op2, op3      : op3      <- -(op1 * op2)     + op3
       fma.idx  op1, op2, op3, idx : op3      <-   op1 * op2[idx] + op3
-      fmul     op1, op2, op3      : op3      <-   op1 * op2
+      mul      op1, op2, op3      : op3      <-   op1 * op2
       opa      op1, op2, op3      : op3      <-   op1 o op2      + op3
       dota     op1, op2, op3      : op3      <-   op1 . op2      + op3
       dota.idx op1, op2, op3      : op3[idx] <-   op1 . op2      + op3[idx]

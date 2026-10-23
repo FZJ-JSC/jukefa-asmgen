@@ -822,11 +822,11 @@ vpxorq %zmm0,%zmm0,%zmm0
 vpxorq %zmm0,%zmm0,%zmm0
 ### method zero_vreg(dt=SINGLE, vreg=zmm0)
 vpxorq %zmm0,%zmm0,%zmm0
-### op fadd [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+### op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
 vaddpd %zmm1,%zmm2,%zmm3
-### op fadd [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
+### op add [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
 vaddph %zmm1,%zmm2,%zmm3
-### op fadd [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+### op add [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vaddps %zmm1,%zmm2,%zmm3
 ### op fma [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
 vfmadd231pd %zmm1,%zmm2,%zmm3
@@ -834,12 +834,6 @@ vfmadd231pd %zmm1,%zmm2,%zmm3
 vfmadd231ph %zmm1,%zmm2,%zmm3
 ### op fma [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vfmadd231ps %zmm1,%zmm2,%zmm3
-### op fmul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
-vmulpd %zmm1,%zmm2,%zmm3
-### op fmul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
-vmulph %zmm1,%zmm2,%zmm3
-### op fmul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
-vmulps %zmm1,%zmm2,%zmm3
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
 vmovsh -2147483648(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
@@ -2260,6 +2254,12 @@ valignq $1,%zmm1,%zmm1,%zmm2
 valignq $7,%zmm1,%zmm1,%zmm2
 ### op move [] adreg:REGISTER:VEC:UINT64{ILANESHIFT,INVALIDOTHERS} bdreg:REGISTER:VEC:UINT64 adreg_irot:IMMEDIATE:-:- @far
 valignq $1,%zmm1,%zmm1,%zmm2
+### op mul [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE
+vmulpd %zmm1,%zmm2,%zmm3
+### op mul [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF
+vmulph %zmm1,%zmm2,%zmm3
+### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
+vmulps %zmm1,%zmm2,%zmm3
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
 vmovsh %xmm1, -2147483648(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
