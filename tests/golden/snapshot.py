@@ -24,7 +24,7 @@ from asmgen.registers import asm_data_type as adt
 
 HERE = os.path.dirname(__file__)
 DATA = os.path.join(HERE, "data")
-OPERATIONS = ("load", "store", "move", "fma", "add", "sub", "mul", "fopa")
+OPERATIONS = ("load", "store", "move", "fma", "add", "sub", "mul", "shl", "shr", "fopa")
 DTS = (adt.FP64, adt.FP32, adt.FP16)
 IMMEDIATES = (0, 1, 8, 255, 256, 2047, 2048, 4096, -8, -2048, -2049)
 IMM_PARAMS = ("imm", "offset", "ioffset", "shift")
@@ -349,7 +349,7 @@ def compare(name: str) -> tuple[list, list, list]:
 ASSEMBLERS = {
     # the assemblers themselves: compiler drivers check -march against their
     # own (older) lists - GCC 13's has no +sme
-    "rvv": ["riscv64-linux-gnu-as", "-march=rv64gcv_zfh_zvfh"],
+    "rvv": ["riscv64-linux-gnu-as", "-march=rv64gcv_zba_zfh_zvfh"],
     "neon": ["aarch64-linux-gnu-as", "-march=armv8.6-a+fp16+fp16fml+bf16+i8mm+dotprod"],
     "sve": ["aarch64-linux-gnu-as", "-march=armv9-a+sve2+bf16+i8mm+f64mm"],
     "sme": ["aarch64-linux-gnu-as", "-march=armv9-a+sme2+sme-f64f64+sme-i16i64+bf16"],

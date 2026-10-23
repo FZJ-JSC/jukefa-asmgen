@@ -2,27 +2,27 @@
 movq %r9,%r8
 addq %r10,%r8
 ### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=-2048)
-!NotImplementedError: x86's lea scales a register by 1, 2, 4 or 8, not by 2^-2048
+!NotImplementedError: x86 has no add of a register shifted by -2048 in one instruction here: value of bdreg_shift must be >= 0
 ### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=-2049)
-!NotImplementedError: x86's lea scales a register by 1, 2, 4 or 8, not by 2^-2049
+!NotImplementedError: x86 has no add of a register shifted by -2049 in one instruction here: value of bdreg_shift must be >= 0
 ### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=-8)
-!NotImplementedError: x86's lea scales a register by 1, 2, 4 or 8, not by 2^-8
+!NotImplementedError: x86 has no add of a register shifted by -8 in one instruction here: value of bdreg_shift must be >= 0
 ### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=0)
 leaq (%r9,%r10,1),%r8
 ### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=1)
 leaq (%r9,%r10,2),%r8
 ### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=2047)
-!NotImplementedError: x86's lea scales a register by 1, 2, 4 or 8, not by 2^2047
+!NotImplementedError: x86 has no add of a register shifted by 2047 in one instruction here: value of bdreg_shift must be <= 3
 ### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=2048)
-!NotImplementedError: x86's lea scales a register by 1, 2, 4 or 8, not by 2^2048
+!NotImplementedError: x86 has no add of a register shifted by 2048 in one instruction here: value of bdreg_shift must be <= 3
 ### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=255)
-!NotImplementedError: x86's lea scales a register by 1, 2, 4 or 8, not by 2^255
+!NotImplementedError: x86 has no add of a register shifted by 255 in one instruction here: value of bdreg_shift must be <= 3
 ### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=256)
-!NotImplementedError: x86's lea scales a register by 1, 2, 4 or 8, not by 2^256
+!NotImplementedError: x86 has no add of a register shifted by 256 in one instruction here: value of bdreg_shift must be <= 3
 ### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=4096)
-!NotImplementedError: x86's lea scales a register by 1, 2, 4 or 8, not by 2^4096
+!NotImplementedError: x86 has no add of a register shifted by 4096 in one instruction here: value of bdreg_shift must be <= 3
 ### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=8)
-!NotImplementedError: x86's lea scales a register by 1, 2, 4 or 8, not by 2^8
+!NotImplementedError: x86 has no add of a register shifted by 8 in one instruction here: value of bdreg_shift must be <= 3
 ### method add_greg_imm(imm=-2048, reg=r8)
 addq $-2048,%r8
 ### method add_greg_imm(imm=-2049, reg=r8)
@@ -767,27 +767,27 @@ vmovups %zmm0,256(%r8)
 movq %r9,%r8
 subq %r10,%r8
 ### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=-2048)
-!NotImplementedError: x86 has no subtraction of a scaled register in one instruction
+!NotImplementedError: x86 has no sub of a register shifted by -2048 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=-2049)
-!NotImplementedError: x86 has no subtraction of a scaled register in one instruction
+!NotImplementedError: x86 has no sub of a register shifted by -2049 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=-8)
-!NotImplementedError: x86 has no subtraction of a scaled register in one instruction
+!NotImplementedError: x86 has no sub of a register shifted by -8 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=0)
-!NotImplementedError: x86 has no subtraction of a scaled register in one instruction
+!NotImplementedError: x86 has no sub of a register shifted by 0 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=1)
-!NotImplementedError: x86 has no subtraction of a scaled register in one instruction
+!NotImplementedError: x86 has no sub of a register shifted by 1 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=2047)
-!NotImplementedError: x86 has no subtraction of a scaled register in one instruction
+!NotImplementedError: x86 has no sub of a register shifted by 2047 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=2048)
-!NotImplementedError: x86 has no subtraction of a scaled register in one instruction
+!NotImplementedError: x86 has no sub of a register shifted by 2048 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=255)
-!NotImplementedError: x86 has no subtraction of a scaled register in one instruction
+!NotImplementedError: x86 has no sub of a register shifted by 255 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=256)
-!NotImplementedError: x86 has no subtraction of a scaled register in one instruction
+!NotImplementedError: x86 has no sub of a register shifted by 256 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=4096)
-!NotImplementedError: x86 has no subtraction of a scaled register in one instruction
+!NotImplementedError: x86 has no sub of a register shifted by 4096 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=8)
-!NotImplementedError: x86 has no subtraction of a scaled register in one instruction
+!NotImplementedError: x86 has no sub of a register shifted by 8 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
 ### method supported_on_host()
 True
 ### method supportedby_cpuinfo(cpuinfo=invalid_isa)
@@ -825,6 +825,10 @@ vpxorq %zmm0,%zmm0,%zmm0
 ### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 movq %rcx,%rsi
 addq %rdx,%rsi
+### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64{ISHIFT} cdreg:REGISTER:GP:SINT64 bdreg_shift:IMMEDIATE:-:-
+leaq (%rcx,%rdx,1),%rsi
+### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64{ISHIFT} cdreg:REGISTER:GP:SINT64 bdreg_shift:IMMEDIATE:-:- @far
+leaq (%rcx,%rdx,8),%rsi
 ### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
 movq %rcx,%rdx
 addq $-2147483648,%rdx
@@ -834,6 +838,10 @@ addq $2147483647,%rdx
 ### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 movq %rcx,%rsi
 addq %rdx,%rsi
+### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64{ISHIFT} cdreg:REGISTER:GP:UINT64 bdreg_shift:IMMEDIATE:-:-
+leaq (%rcx,%rdx,1),%rsi
+### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64{ISHIFT} cdreg:REGISTER:GP:UINT64 bdreg_shift:IMMEDIATE:-:- @far
+leaq (%rcx,%rdx,8),%rsi
 ### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
 movq %rcx,%rdx
 addq $-2147483648,%rdx
@@ -2292,6 +2300,30 @@ vmulpd %zmm1,%zmm2,%zmm3
 vmulph %zmm1,%zmm2,%zmm3
 ### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vmulps %zmm1,%zmm2,%zmm3
+### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+movq %rcx,%rdx
+shlq $0,%rdx
+### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+movq %rcx,%rdx
+shlq $63,%rdx
+### op shl [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+movq %rcx,%rdx
+shlq $0,%rdx
+### op shl [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+movq %rcx,%rdx
+shlq $63,%rdx
+### op shr [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+movq %rcx,%rdx
+shrq $0,%rdx
+### op shr [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+movq %rcx,%rdx
+shrq $63,%rdx
+### op shr [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+movq %rcx,%rdx
+shrq $0,%rdx
+### op shr [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+movq %rcx,%rdx
+shrq $63,%rdx
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
 vmovsh %xmm1, -2147483648(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far

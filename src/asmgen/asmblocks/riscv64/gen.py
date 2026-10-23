@@ -24,6 +24,7 @@ from ...callconv.callconv import callconv
 
 from .opmem import riscv64_load,riscv64_store
 from ...registers import asm_data_type as _ADT
+from ..op.operand import operand_modifier as _opd_mod
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
@@ -276,20 +277,29 @@ class riscv64(asmgen):
 
     def add_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
                               reg2 : greg_base, shift : int) -> str:
-        raise NotImplementedError(
-                "RISC-V adds a shifted register in one instruction only with Zba "
-                "(sh1add, sh2add, sh3add), which isn't supported")
+        try:
+            return self.add(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP,
+                          operand_modifiers={'bdreg': {_opd_mod.ISHIFT}}, bdreg_shift=shift)
+        except ValueError as err:
+            # no form (or not with these features): what callers probing it expect
+            raise NotImplementedError(f"RISC-V has no add of a register shifted by {shift} "
+                                      f"in one instruction here: {err}") from err
 
     def sub_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
                               reg2 : greg_base, shift : int) -> str:
-        raise NotImplementedError(
-                "RISC-V has no subtraction of a shifted register in one instruction")
+        try:
+            return self.sub(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP,
+                          operand_modifiers={'bdreg': {_opd_mod.ISHIFT}}, bdreg_shift=shift)
+        except ValueError as err:
+            # no form (or not with these features): what callers probing it expect
+            raise NotImplementedError(f"RISC-V has no sub of a register shifted by {shift} "
+                                      f"in one instruction here: {err}") from err
 
     def shift_greg_left(self, *, reg : greg_base, bit_count : int) -> str:
-        return self.asmwrap(f"slli {reg},{reg},{bit_count}")
+        return self.shl(adreg=reg, imm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP)
 
     def shift_greg_right(self, *, reg : greg_base, bit_count : int) -> str:
-        return self.asmwrap(f"srli {reg},{reg},{bit_count}")
+        return self.shr(adreg=reg, imm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP)
 
     def zero_greg(self, *, greg : greg_base) -> str:
         return self.asmwrap(f"add {greg}, zero, 0")

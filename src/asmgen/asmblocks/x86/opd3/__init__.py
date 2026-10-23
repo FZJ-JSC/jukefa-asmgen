@@ -38,6 +38,13 @@ class x86_add(x86_scalar_arith):
         pa, pc = self.rpref(a), self.rpref(c)
         return self._copy(pa, pc) + self.asmwrap(f"addq ${imm},{pc}")
 
+    def shift_forms(self):
+        # lea scales the index by 1, 2, 4 or 8; it has no subtraction
+        return [([minmax_constraint(minval=0, maxval=3)], frozenset())]
+
+    def with_shifted(self, c, a, b, shift):
+        return self.asmwrap(f"leaq ({self.rpref(a)},{self.rpref(b)},{1 << shift}),{self.rpref(c)}")
+
 
 class x86_sub(x86_scalar_arith):
     """
@@ -72,3 +79,36 @@ class x86_mul(x86_scalar_arith):
 
     def with_immediate(self, c, a, imm):
         return self.asmwrap(f"imulq ${imm},{self.rpref(a)},{self.rpref(c)}")
+
+
+class x86_shift(x86_scalar_arith):
+    """
+    A shift by an immediate, 0 to 63: the amount in a register would have
+    to be %cl, so that form isn't offered
+    """
+    mnemonic = None
+
+    def has_register_form(self):
+        return False
+
+    def imm_forms(self):
+        return [[minmax_constraint(minval=0, maxval=63)]]
+
+    def with_immediate(self, c, a, imm):
+        pa, pc = self.rpref(a), self.rpref(c)
+        return self._copy(pa, pc) + self.asmwrap(f"{self.mnemonic} ${imm},{pc}")
+
+
+class x86_shl(x86_shift):
+    """
+    shlq: logical shift left
+    """
+    mnemonic = "shlq"
+
+
+class x86_shr(x86_shift):
+    """
+    shrq: logical shift right
+    """
+    mnemonic = "shrq"
+

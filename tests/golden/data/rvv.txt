@@ -1,27 +1,27 @@
 ### method add_greg_greg(dst=t0, reg1=t1, reg2=t2)
 add t0,t1,t2
 ### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=-2048)
-!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+!NotImplementedError: RISC-V has no add of a register shifted by -2048 in one instruction here: value of bdreg_shift must be >= 1
 ### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=-2049)
-!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+!NotImplementedError: RISC-V has no add of a register shifted by -2049 in one instruction here: value of bdreg_shift must be >= 1
 ### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=-8)
-!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+!NotImplementedError: RISC-V has no add of a register shifted by -8 in one instruction here: value of bdreg_shift must be >= 1
 ### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=0)
-!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+!NotImplementedError: RISC-V has no add of a register shifted by 0 in one instruction here: value of bdreg_shift must be >= 1
 ### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=1)
-!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+sh1add t0,t2,t1
 ### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=2047)
-!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+!NotImplementedError: RISC-V has no add of a register shifted by 2047 in one instruction here: value of bdreg_shift must be <= 3
 ### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=2048)
-!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+!NotImplementedError: RISC-V has no add of a register shifted by 2048 in one instruction here: value of bdreg_shift must be <= 3
 ### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=255)
-!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+!NotImplementedError: RISC-V has no add of a register shifted by 255 in one instruction here: value of bdreg_shift must be <= 3
 ### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=256)
-!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+!NotImplementedError: RISC-V has no add of a register shifted by 256 in one instruction here: value of bdreg_shift must be <= 3
 ### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=4096)
-!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+!NotImplementedError: RISC-V has no add of a register shifted by 4096 in one instruction here: value of bdreg_shift must be <= 3
 ### method add_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=8)
-!NotImplementedError: RISC-V adds a shifted register in one instruction only with Zba (sh1add, sh2add, sh3add), which isn't supported
+!NotImplementedError: RISC-V has no add of a register shifted by 8 in one instruction here: value of bdreg_shift must be <= 3
 ### method add_greg_imm(imm=-2048, reg=t0)
 add t0,t0,-2048
 ### method add_greg_imm(imm=-2049, reg=t0)
@@ -126,7 +126,7 @@ f0
 ### method get_param_value(name=dummy)
 dummy
 ### method get_parameters()
-['LMUL', 'ZVFH']
+['LMUL', 'ZVFH', 'ZBA']
 ### method greg(reg_idx=0)
 t0
 ### method greg_to_voffs(dt=DOUBLE, streg=t0, vreg=v1)
@@ -763,27 +763,27 @@ vsuxei32.v v0, (t0), v1
 ### method sub_greg_greg(dst=t0, reg1=t1, reg2=t2)
 sub t0,t1,t2
 ### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=-2048)
-!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+!NotImplementedError: RISC-V has no sub of a register shifted by -2048 in one instruction here: riscv64_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=-2049)
-!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+!NotImplementedError: RISC-V has no sub of a register shifted by -2049 in one instruction here: riscv64_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=-8)
-!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+!NotImplementedError: RISC-V has no sub of a register shifted by -8 in one instruction here: riscv64_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=0)
-!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+!NotImplementedError: RISC-V has no sub of a register shifted by 0 in one instruction here: riscv64_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=1)
-!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+!NotImplementedError: RISC-V has no sub of a register shifted by 1 in one instruction here: riscv64_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=2047)
-!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+!NotImplementedError: RISC-V has no sub of a register shifted by 2047 in one instruction here: riscv64_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=2048)
-!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+!NotImplementedError: RISC-V has no sub of a register shifted by 2048 in one instruction here: riscv64_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=255)
-!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+!NotImplementedError: RISC-V has no sub of a register shifted by 255 in one instruction here: riscv64_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=256)
-!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+!NotImplementedError: RISC-V has no sub of a register shifted by 256 in one instruction here: riscv64_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=4096)
-!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+!NotImplementedError: RISC-V has no sub of a register shifted by 4096 in one instruction here: riscv64_sub does not support these modifiers at all: {ISHIFT}
 ### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=8)
-!NotImplementedError: RISC-V has no subtraction of a shifted register in one instruction
+!NotImplementedError: RISC-V has no sub of a register shifted by 8 in one instruction here: riscv64_sub does not support these modifiers at all: {ISHIFT}
 ### method supported_on_host()
 False
 ### method supportedby_cpuinfo(cpuinfo=invalid_isa)
@@ -820,12 +820,20 @@ vmv.v.i v0,0
 vmv.v.i v0,0
 ### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 add s6,s4,s5
+### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64{ISHIFT} cdreg:REGISTER:GP:SINT64 bdreg_shift:IMMEDIATE:-:-
+sh1add s6,s5,s4
+### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64{ISHIFT} cdreg:REGISTER:GP:SINT64 bdreg_shift:IMMEDIATE:-:- @far
+sh3add s6,s5,s4
 ### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
 add s5,s4,-2048
 ### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
 add s5,s4,2047
 ### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 add s6,s4,s5
+### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64{ISHIFT} cdreg:REGISTER:GP:UINT64 bdreg_shift:IMMEDIATE:-:-
+sh1add s6,s5,s4
+### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64{ISHIFT} cdreg:REGISTER:GP:UINT64 bdreg_shift:IMMEDIATE:-:- @far
+sh3add s6,s5,s4
 ### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
 add s5,s4,-2048
 ### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
@@ -2004,6 +2012,30 @@ vmulu.vx v2,v1,s4
 vwmulu.vv v4,v1,v2
 ### op mul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
 vmulu.vv v3,v1,v2
+### op shl [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+sll s6,s4,s5
+### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+slli s5,s4,0
+### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+slli s5,s4,63
+### op shl [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+sll s6,s4,s5
+### op shl [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+slli s5,s4,0
+### op shl [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+slli s5,s4,63
+### op shr [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+srl s6,s4,s5
+### op shr [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+srli s5,s4,0
+### op shr [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+srli s5,s4,63
+### op shr [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+srl s6,s4,s5
+### op shr [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+srli s5,s4,0
+### op shr [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+srli s5,s4,63
 ### op store [GSTRIDE] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64
 vsse64.v v1, (s4), s5
 ### op store [GSTRIDE] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64

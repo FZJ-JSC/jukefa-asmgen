@@ -22,6 +22,7 @@ from .opd3 import rvv_fma,rvv_mul,rvv_add
 from .opmem import rvv_load,rvv_store
 from .move import rvv_move
 from ..riscv64.opd3 import riscv64_sub
+from ..riscv64.opd3 import riscv64_shl, riscv64_shr
 
 
 # pylint: disable=too-many-public-methods
@@ -31,7 +32,7 @@ class rvv(riscv64):
     RISC-V RVV 1.0 asmgen implementation
     """
     # Zvfh: half-precision vector arithmetic
-    FEATURES = ('ZVFH',)
+    FEATURES = ('ZVFH', 'ZBA')
 
 
     dt_suffixes = {
@@ -69,6 +70,8 @@ class rvv(riscv64):
                                lmul_getter=lambda : self.lmul)
         self.move = rvv_move(asmwrap=self.asmwrap)
         self.sub = riscv64_sub(asmwrap=self.asmwrap)
+        self.shl = riscv64_shl(asmwrap=self.asmwrap)
+        self.shr = riscv64_shr(asmwrap=self.asmwrap)
 
     def get_parameters(self) -> list[str]:
         return ["LMUL"]

@@ -35,8 +35,11 @@ class test_shifted_adds(unittest.TestCase):
         with self.assertRaises(NotImplementedError):
             g.sub_greg_greg_shifted(dst=g.greg(0), reg1=g.greg(0), reg2=g.greg(9), shift=1)
         r = rvv()
+        r.set_features([])          # the baseline ISA: no Zba, no shifted add
         with self.assertRaises(NotImplementedError):
             r.add_greg_greg_shifted(dst=r.greg(0), reg1=r.greg(0), reg2=r.greg(9), shift=1)
+        r.set_features(["ZBA"])
+        self.assertIn("sh1add", r.add_greg_greg_shifted(dst=r.greg(0), reg1=r.greg(0), reg2=r.greg(9), shift=1))
 
 
 class test_riscv_fp_suffixes(unittest.TestCase):

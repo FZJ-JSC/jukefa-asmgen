@@ -78,6 +78,7 @@ class operand_modifier(Enum):
     COL        = auto() # Selects a column within a tile register
     BCAST      = auto() # Broadcasts a scalar across a vector/tile register
     VF         = auto() # Vector is replaced by a scalar
+    ISHIFT = auto()     # the operand shifted left by an immediate first (bdreg_shift): add, sub
 
 
 def is_register_type(val : Any, rt : register_type) -> bool:

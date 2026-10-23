@@ -226,12 +226,19 @@ and after alike.
       bits, as `add_greg_imm` always did. x86's two-operand forms now keep a
       destination that is the second source (`addq a,c`; `negq c` then
       `addq a,c` for `sub`), which the old methods overwrote.
-- [ ] Shifted operands with an operation modifier `ISHIFT` and the shift as
-      a constrained immediate (AArch64 `lsl #0..63`, x86 `lea` scales 1, 2,
-      4, 8, RISC-V's `shNadd` with Zba): replaces
-      `{add,sub}_greg_greg_shifted` and ukrgen's probe.
-- [ ] Shifts of general registers left and right as an operation (name to
-      settle here: `op/shift.py` is about lane and block moves).
+- [x] Shifted operands: the operand modifier `ISHIFT` on `bdreg`, the
+      amount an immediate `bdreg_shift` (as `ILANE` and `bdreg_lane`):
+      c = a + (b << s). AArch64 `add`, `sub` with `LSL #0..63`; x86 `add`
+      through `lea`, scales 1, 2, 4, 8 (0..3); RISC-V `add` through Zba's
+      `sh1add`..`sh3add` (1..3), with the new RVV feature `ZBA` - off where
+      features are set (ukrgen: `set_features([])`), on in a generator
+      whose features never were, as every feature. Replaces
+      `{add,sub}_greg_greg_shifted`, which raise `NotImplementedError`
+      where no form fits as before: ukrgen's probe catches that.
+- [x] Shifts as operations `shl` and `shr` (logical): `opd3`, as bit shifts
+      change elements - lane shifts only move them, so they are `move`'s
+      (`op/shift.py`). Immediate amounts 0..63; register amounts on RISC-V
+      and AArch64 (x86 takes them only in `%cl`: not offered).
 - [ ] VL-scaled immediates for SVE's `addvl` (-32..31): replaces
       `add_greg_voff` and `max_add_voff`.
 - [x] Vector generators delegate scalar registers to their base ISA's
@@ -243,15 +250,22 @@ and after alike.
       alone. `opd3.__call__` takes `bdreg` optional: with an immediate in
       its place the operands go by name.
 - [~] Wrappers: `add_greg_greg`, `add_greg_imm`, `sub_greg_greg`,
-      `mul_greg_greg`, `mul_greg_imm` done (RISC-V's and AArch64's
-      `mul_greg_imm` keep their two instructions); `shift_greg_left/right`,
-      `{add,sub}_greg_greg_shifted`, `add_greg_voff` with their steps.
+      `mul_greg_greg`, `mul_greg_imm` (RISC-V's and AArch64's
+      `mul_greg_imm` keep their two instructions), `shift_greg_left/right`,
+      `{add,sub}_greg_greg_shifted` done; `add_greg_voff` with step 2c.
 - [x] asmgen's own `callconv` (stack pointer) on the operations.
 
 Checked (step 2a): the snapshots changed in three entries only, RISC-V's
 `add_greg_imm` with -2049, 2048 and 4096 - now an error, before text that
 didn't assemble - besides the scalar signatures' new entries; ukrgen's
 golden kernels and ukropt's builds unchanged.
+
+Checked (step 2b): the snapshots changed only in entries that were errors,
+or text that didn't assemble - AArch64's shifted add and sub with shifts
+outside 0..63, 48 entries over NEON, SVE and SME, raise now - besides RISC-V's
+shifted add with `ZBA` (the snapshots enable every feature) and the new
+signatures' entries; ukrgen's golden kernels and ukropt's builds unchanged.
+A debug print in `operation.execute`'s unsupported-modifier error is gone.
 
 ### Phase 3: moves [ ]
 
@@ -347,6 +361,16 @@ ukropt:
       mode, `asmwrap`); host checks; `c_simd_size_function`; `nop()`.
 - [ ] `examples/axpy.py` and `examples/rvv_lmul.py` work.
 
+### Phase 10: `opd3` renamed [ ]
+
+With `bdreg` optional - an immediate in its place - and shifts among its
+operations, `opd3` is the transforming operation: what changes elements,
+where `move` only moves them. A name to say so, as ukrgen's
+`lsc_transformation`: `optransform`, say. After the other phases.
+
+- [ ] `opd3` (class, module, modifier enum) renamed, the old names
+      deprecated for a release.
+
 ## Log
 
 - 2026-10-23: audit and plan (asmgen c5a9324, ukrgen da8ee04, ukropt
@@ -361,3 +385,5 @@ ukropt:
   operations, the old methods and callconv on them (asmgen 0038; revised:
   the scalar operation a member of the vector one, as in rvv_opmem). 0037's
   change to examples/axpy.py hadn't arrived upstream: 0038 has it again.
+- 2026-10-23: phase 2, step 2b - ISHIFT, shl and shr, RVV's ZBA feature
+  (asmgen 0039); phase 10 added: opd3's rename.

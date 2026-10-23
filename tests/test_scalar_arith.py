@@ -10,6 +10,7 @@ from asmgen.asmblocks.neon import neon
 from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.sve import sve
 from asmgen.registers import asm_data_type as adt
+from asmgen.asmblocks.op.operand import operand_modifier as opd_mod
 
 U = adt.UINT64
 
@@ -93,6 +94,71 @@ class test_scalar_arith(unittest.TestCase):
         self.assertIn("vfadd.vv", g.add(adreg=v(1), bdreg=v(2), cdreg=v(3), a_dt=adt.FP64, b_dt=adt.FP64, c_dt=adt.FP64))
         self.assertTrue(hasattr(g.add, "get_base_inst"))          # the vector operation's own
 
+
+class test_shifts(unittest.TestCase):
+    """
+    shl, shr; shifted operands (operand modifier ISHIFT, bdreg_shift)
+    """
+    def sh(self, g, op, a, imm, c):
+        return plain(getattr(g, op)(adreg=g.greg(a), imm=imm, cdreg=g.greg(c), a_dt=U, c_dt=U))
+
+    def shifted(self, g, op, a, b, c, s):
+        return plain(getattr(g, op)(adreg=g.greg(a), bdreg=g.greg(b), cdreg=g.greg(c), a_dt=U, b_dt=U, c_dt=U,
+                                    operand_modifiers={"bdreg": {opd_mod.ISHIFT}}, bdreg_shift=s))
+
+    def test_shl_shr(self):
+        r = make(rvv)
+        x = lambda i: str(r.greg(i))
+        self.assertEqual(f"slli {x(3)},{x(1)},63", self.sh(r, "shl", 1, 63, 3))
+        self.assertEqual(f"srli {x(3)},{x(1)},4", self.sh(r, "shr", 1, 4, 3))
+        self.assertEqual(f"sll {x(3)},{x(1)},{x(2)}",
+                         plain(r.shl(adreg=r.greg(1), bdreg=r.greg(2), cdreg=r.greg(3), a_dt=U, b_dt=U, c_dt=U)))
+        n = make(neon)
+        self.assertEqual("lsl x3,x1,#5", self.sh(n, "shl", 1, 5, 3))
+        self.assertEqual("lsr x3,x1,x2",
+                         plain(n.shr(adreg=n.greg(1), bdreg=n.greg(2), cdreg=n.greg(3), a_dt=U, b_dt=U, c_dt=U)))
+        a = make(avx512)
+        p = lambda i: a.rpref(a.greg(i))
+        self.assertEqual(f"shlq $3,{p(1)}", self.sh(a, "shl", 1, 3, 1))
+        self.assertEqual(f"movq {p(1)},{p(3)} ; shrq $3,{p(3)}", self.sh(a, "shr", 1, 3, 3))
+        with self.assertRaises(ValueError):      # an amount in a register: only %cl, not offered
+            a.shl(adreg=a.greg(1), bdreg=a.greg(2), cdreg=a.greg(1), a_dt=U, b_dt=U, c_dt=U)
+        for g in (r, n, a):
+            with self.subTest(isa=type(g).__name__), self.assertRaises(ValueError):
+                self.sh(g, "shl", 1, 64, 1)
+
+    def test_shifted_operands(self):
+        n = make(neon)
+        self.assertEqual("add x3,x1,x2, LSL #3", self.shifted(n, "add", 1, 2, 3, 3))
+        self.assertEqual("sub x3,x1,x2, LSL #63", self.shifted(n, "sub", 1, 2, 3, 63))
+        self.assertEqual("add x3,x1,x2", self.shifted(n, "add", 1, 2, 3, 0))
+        a = make(avx512)
+        p = lambda i: a.rpref(a.greg(i))
+        self.assertEqual(f"leaq ({p(1)},{p(2)},8),{p(3)}", self.shifted(a, "add", 1, 2, 3, 3))
+        for op, s in (("add", 4), ("sub", 1)):           # lea: scales 1..8, no subtraction
+            with self.subTest(op=op, shift=s), self.assertRaises(ValueError):
+                self.shifted(a, op, 1, 2, 3, s)
+        r = make(rvv)
+        r.set_features([])
+        with self.assertRaises(ValueError):              # Zba: not in the baseline
+            self.shifted(r, "add", 1, 2, 3, 2)
+        r.set_features(["ZBA"])
+        x = lambda i: str(r.greg(i))
+        self.assertEqual(f"sh2add {x(3)},{x(2)},{x(1)}", self.shifted(r, "add", 1, 2, 3, 2))
+        for s in (0, 4):
+            with self.subTest(shift=s), self.assertRaises(ValueError):
+                self.shifted(r, "add", 1, 2, 3, s)
+
+    def test_old_methods_on_top(self):
+        for ctor in (rvv, neon, avx512):
+            g = make(ctor)
+            r = g.greg(1)
+            with self.subTest(isa=ctor.__name__):
+                self.assertEqual(g.shl(adreg=r, imm=3, cdreg=r, a_dt=U, c_dt=U), g.shift_greg_left(reg=r, bit_count=3))
+                self.assertEqual(g.shr(adreg=r, imm=3, cdreg=r, a_dt=U, c_dt=U), g.shift_greg_right(reg=r, bit_count=3))
+        a = make(avx512)
+        with self.assertRaises(NotImplementedError):     # what ukrgen's probe catches
+            a.sub_greg_greg_shifted(dst=a.greg(1), reg1=a.greg(1), reg2=a.greg(2), shift=1)
 
 if __name__ == "__main__":
     unittest.main()

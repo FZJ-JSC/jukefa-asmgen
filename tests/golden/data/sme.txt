@@ -1,25 +1,25 @@
 ### method add_greg_greg(dst=x0, reg1=x1, reg2=x2)
 add x0,x1,x2
 ### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=-2048)
-add x0,x1,x2, LSL #-2048
+!NotImplementedError: AArch64 has no add of a register shifted by -2048 in one instruction here: value of bdreg_shift must be >= 0
 ### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=-2049)
-add x0,x1,x2, LSL #-2049
+!NotImplementedError: AArch64 has no add of a register shifted by -2049 in one instruction here: value of bdreg_shift must be >= 0
 ### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=-8)
-add x0,x1,x2, LSL #-8
+!NotImplementedError: AArch64 has no add of a register shifted by -8 in one instruction here: value of bdreg_shift must be >= 0
 ### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=0)
 add x0,x1,x2
 ### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=1)
 add x0,x1,x2, LSL #1
 ### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=2047)
-add x0,x1,x2, LSL #2047
+!NotImplementedError: AArch64 has no add of a register shifted by 2047 in one instruction here: value of bdreg_shift must be <= 63
 ### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=2048)
-add x0,x1,x2, LSL #2048
+!NotImplementedError: AArch64 has no add of a register shifted by 2048 in one instruction here: value of bdreg_shift must be <= 63
 ### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=255)
-add x0,x1,x2, LSL #255
+!NotImplementedError: AArch64 has no add of a register shifted by 255 in one instruction here: value of bdreg_shift must be <= 63
 ### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=256)
-add x0,x1,x2, LSL #256
+!NotImplementedError: AArch64 has no add of a register shifted by 256 in one instruction here: value of bdreg_shift must be <= 63
 ### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=4096)
-add x0,x1,x2, LSL #4096
+!NotImplementedError: AArch64 has no add of a register shifted by 4096 in one instruction here: value of bdreg_shift must be <= 63
 ### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=8)
 add x0,x1,x2, LSL #8
 ### method add_greg_imm(imm=-2048, reg=x0)
@@ -2364,25 +2364,25 @@ st1w {z0.s}, p0, [x0, #4, MUL VL]
 ### method sub_greg_greg(dst=x0, reg1=x1, reg2=x2)
 sub x0,x1,x2
 ### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=-2048)
-sub x0,x1,x2, LSL #-2048
+!NotImplementedError: AArch64 has no sub of a register shifted by -2048 in one instruction here: value of bdreg_shift must be >= 0
 ### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=-2049)
-sub x0,x1,x2, LSL #-2049
+!NotImplementedError: AArch64 has no sub of a register shifted by -2049 in one instruction here: value of bdreg_shift must be >= 0
 ### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=-8)
-sub x0,x1,x2, LSL #-8
+!NotImplementedError: AArch64 has no sub of a register shifted by -8 in one instruction here: value of bdreg_shift must be >= 0
 ### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=0)
 sub x0,x1,x2
 ### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=1)
 sub x0,x1,x2, LSL #1
 ### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=2047)
-sub x0,x1,x2, LSL #2047
+!NotImplementedError: AArch64 has no sub of a register shifted by 2047 in one instruction here: value of bdreg_shift must be <= 63
 ### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=2048)
-sub x0,x1,x2, LSL #2048
+!NotImplementedError: AArch64 has no sub of a register shifted by 2048 in one instruction here: value of bdreg_shift must be <= 63
 ### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=255)
-sub x0,x1,x2, LSL #255
+!NotImplementedError: AArch64 has no sub of a register shifted by 255 in one instruction here: value of bdreg_shift must be <= 63
 ### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=256)
-sub x0,x1,x2, LSL #256
+!NotImplementedError: AArch64 has no sub of a register shifted by 256 in one instruction here: value of bdreg_shift must be <= 63
 ### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=4096)
-sub x0,x1,x2, LSL #4096
+!NotImplementedError: AArch64 has no sub of a register shifted by 4096 in one instruction here: value of bdreg_shift must be <= 63
 ### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=8)
 sub x0,x1,x2, LSL #8
 ### method supported_on_host()
@@ -2441,12 +2441,20 @@ add z1.d,p1/m,z1.d,z2.d
 add z1.b,p1/m,z1.b,z2.b
 ### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 add x12,x10,x11
+### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64{ISHIFT} cdreg:REGISTER:GP:SINT64 bdreg_shift:IMMEDIATE:-:-
+add x12,x10,x11
+### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64{ISHIFT} cdreg:REGISTER:GP:SINT64 bdreg_shift:IMMEDIATE:-:- @far
+add x12,x10,x11, LSL #63
 ### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
 add x11,x10,#-4095
 ### op add [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
 add x11,x10,#4095
 ### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 add x12,x10,x11
+### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64{ISHIFT} cdreg:REGISTER:GP:UINT64 bdreg_shift:IMMEDIATE:-:-
+add x12,x10,x11
+### op add [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64{ISHIFT} cdreg:REGISTER:GP:UINT64 bdreg_shift:IMMEDIATE:-:- @far
+add x12,x10,x11, LSL #63
 ### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
 add x11,x10,#-4095
 ### op add [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
@@ -4965,6 +4973,30 @@ mul z3.d,z1.d,z2.d[1]
 mul z3.b,z1.b,z2.b[0]
 ### op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16} @far
 mul z3.b,z1.b,z2.b[15]
+### op shl [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+lsl x12,x10,x11
+### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+lsl x11,x10,#0
+### op shl [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+lsl x11,x10,#63
+### op shl [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+lsl x12,x10,x11
+### op shl [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+lsl x11,x10,#0
+### op shl [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+lsl x11,x10,#63
+### op shr [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
+lsr x12,x10,x11
+### op shr [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
+lsr x11,x10,#0
+### op shr [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
+lsr x11,x10,#63
+### op shr [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
+lsr x12,x10,x11
+### op shr [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
+lsr x11,x10,#0
+### op shr [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far
+lsr x11,x10,#63
 ### op store [GOFFSET,MASK,NT,STRUCT] agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16 ddreg:REGISTER:VEC:BF16 offreg:REGISTER:GP:SINT64 {nstructs:4}
 stnt1h {z1.h, z5.h, z9.h, z13.h}, p8, [x10, x11, lsl #1]
 ### op store [GOFFSET,MASK,NT,STRUCT] agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 offreg:REGISTER:GP:SINT64 {nstructs:2}
@@ -5803,12 +5835,20 @@ str x10, [x11]
 strb w10, [x11]
 ### op sub [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 sub x12,x10,x11
+### op sub [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64{ISHIFT} cdreg:REGISTER:GP:SINT64 bdreg_shift:IMMEDIATE:-:-
+sub x12,x10,x11
+### op sub [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64{ISHIFT} cdreg:REGISTER:GP:SINT64 bdreg_shift:IMMEDIATE:-:- @far
+sub x12,x10,x11, LSL #63
 ### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:-
 sub x11,x10,#-4095
 ### op sub [] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 imm:IMMEDIATE:-:- @far
 sub x11,x10,#4095
 ### op sub [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64
 sub x12,x10,x11
+### op sub [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64{ISHIFT} cdreg:REGISTER:GP:UINT64 bdreg_shift:IMMEDIATE:-:-
+sub x12,x10,x11
+### op sub [] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:GP:UINT64{ISHIFT} cdreg:REGISTER:GP:UINT64 bdreg_shift:IMMEDIATE:-:- @far
+sub x12,x10,x11, LSL #63
 ### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:-
 sub x11,x10,#-4095
 ### op sub [] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 imm:IMMEDIATE:-:- @far

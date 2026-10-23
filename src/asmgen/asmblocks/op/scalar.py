@@ -16,6 +16,7 @@ from typing import Callable
 from ...registers import asm_data_type as adt
 from .opd3 import opd3
 from .operand import operand_shape as osh, operand_type as ot, operand_role as orl, register_type as rt
+from .operand import operand_modifier as opd_mod
 from .signature import operation_signature
 
 GREG_DTS = (adt.UINT64, adt.SINT64)
@@ -37,13 +38,33 @@ class scalar_arith(opd3):
         """
         return []
 
+    def has_register_form(self) -> bool:
+        """
+        Whether B can be any general register (x86's shifts take only %cl)
+        """
+        return True
+
+    def shift_forms(self) -> list[tuple[list, frozenset]]:
+        """
+        Forms adding a register shifted left first (operand modifier ISHIFT
+        on bdreg, the amount bdreg_shift): the amount's constraints and the
+        features each needs; none: no such form
+        """
+        return []
+
     def make_signatures(self) -> list[operation_signature]:
         sigs = []
         for dt in GREG_DTS:
-            def reg(dt=dt):
-                return osh(ot.REGISTER, orl.DATA, rt.GP, dt)
-            sigs.append(operation_signature(modifiers=set(), structural_params={},
-                                            operands={"adreg": reg(), "bdreg": reg(), "cdreg": reg()}))
+            def reg(dt=dt, mods=None):
+                return osh(ot.REGISTER, orl.DATA, rt.GP, dt, modifiers=set(mods or ()))
+            if self.has_register_form():
+                sigs.append(operation_signature(modifiers=set(), structural_params={},
+                                                operands={"adreg": reg(), "bdreg": reg(), "cdreg": reg()}))
+            for constraints, requires in self.shift_forms():
+                amount = osh(ot.IMMEDIATE, orl.PARAM, None, None, value_constraints=list(constraints))
+                sigs.append(operation_signature(modifiers=set(), structural_params={}, requires=frozenset(requires),
+                                                operands={"adreg": reg(), "bdreg": reg(mods={opd_mod.ISHIFT}),
+                                                          "cdreg": reg(), "bdreg_shift": amount}))
             for constraints in self.imm_forms():
                 imm = osh(ot.IMMEDIATE, orl.PARAM, None, None, value_constraints=list(constraints))
                 sigs.append(operation_signature(modifiers=set(), structural_params={},
@@ -54,7 +75,9 @@ class scalar_arith(opd3):
         return self._signatures
 
     # pylint: disable-next=arguments-differ
-    def implementation(self, *, adreg, cdreg, bdreg=None, imm=None, **_) -> str:
+    def implementation(self, *, adreg, cdreg, bdreg=None, imm=None, bdreg_shift=None, **_) -> str:
+        if bdreg_shift is not None:
+            return self.with_shifted(cdreg, adreg, bdreg, bdreg_shift)
         if imm is not None:
             return self.with_immediate(cdreg, adreg, imm)
         return self.with_register(cdreg, adreg, bdreg)
@@ -63,6 +86,12 @@ class scalar_arith(opd3):
         raise NotImplementedError(self.NIE_MESSAGE)
 
     def with_immediate(self, c, a, imm : int) -> str:
+        raise NotImplementedError(self.NIE_MESSAGE)
+
+    def with_shifted(self, c, a, b, shift : int) -> str:
+        """
+        c = a + (b << shift), or minus
+        """
         raise NotImplementedError(self.NIE_MESSAGE)
 
 

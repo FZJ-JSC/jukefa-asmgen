@@ -92,8 +92,6 @@ class operation(ABC):
 
         unsupported_mods = all_operand_mods - all_supported_operand_mods
         if unsupported_mods:
-            print(f"MODS: {all_operand_mods}")
-            print(f"SUP MODS: {all_supported_operand_mods}")
             unsup_mod_string = "|".join(m.name for m in unsupported_mods)
             raise ValueError(
                     (f"{type(self).__name__} does not support "

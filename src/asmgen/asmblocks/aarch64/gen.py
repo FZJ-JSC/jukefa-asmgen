@@ -23,6 +23,7 @@ from ...callconv.callconv import callconv
 
 from .opmem import aarch64_load, aarch64_store
 from ...registers import asm_data_type as _ADT
+from ..op.operand import operand_modifier as _opd_mod
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
@@ -307,19 +308,29 @@ class aarch64(asmgen):
 
     def add_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
                               reg2 : greg_base, shift : int) -> str:
-        return self.asmwrap(f"add {dst},{reg1},{reg2}, LSL #{shift}" if shift
-                            else f"add {dst},{reg1},{reg2}")
+        try:
+            return self.add(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP,
+                          operand_modifiers={'bdreg': {_opd_mod.ISHIFT}}, bdreg_shift=shift)
+        except ValueError as err:
+            # no form (or not with these features): what callers probing it expect
+            raise NotImplementedError(f"AArch64 has no add of a register shifted by {shift} "
+                                      f"in one instruction here: {err}") from err
 
     def sub_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
                               reg2 : greg_base, shift : int) -> str:
-        return self.asmwrap(f"sub {dst},{reg1},{reg2}, LSL #{shift}" if shift
-                            else f"sub {dst},{reg1},{reg2}")
+        try:
+            return self.sub(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP,
+                          operand_modifiers={'bdreg': {_opd_mod.ISHIFT}}, bdreg_shift=shift)
+        except ValueError as err:
+            # no form (or not with these features): what callers probing it expect
+            raise NotImplementedError(f"AArch64 has no sub of a register shifted by {shift} "
+                                      f"in one instruction here: {err}") from err
 
     def shift_greg_left(self, *, reg : greg_base, bit_count : int) -> str:
-        return self.asmwrap(f"lsl {reg},{reg},#{bit_count}")
+        return self.shl(adreg=reg, imm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP)
 
     def shift_greg_right(self, *, reg : greg_base, bit_count : int) -> str:
-        return self.asmwrap(f"lsr {reg},{reg},#{bit_count}")
+        return self.shr(adreg=reg, imm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP)
 
     def zero_greg(self, *, greg : greg_base) -> str:
         return self.mov_greg_imm(reg=greg, imm=0)

@@ -33,6 +33,7 @@ from .opd3 import avx_fma,avx_mul,avx_add
 from .opmem.load import avx128_load,avx256_load,avx512_load
 from .opmem.store import avx128_store,avx256_store,avx512_store
 from ...registers import asm_data_type as _ADT
+from ..op.operand import operand_modifier as _opd_mod
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
@@ -513,28 +514,33 @@ class avxbase(asmgen):
 
     def add_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
                               reg2 : greg_base, shift : int) -> str:
-        if not 0 <= shift <= 3:
-            raise NotImplementedError(
-                    f"x86's lea scales a register by 1, 2, 4 or 8, not by 2^{shift}")
-        return self.asmwrap(f"leaq ({self.rpref(reg1)},{self.rpref(reg2)},{1 << shift}),"
-                            f"{self.rpref(dst)}")
+        try:
+            return self.add(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP,
+                          operand_modifiers={'bdreg': {_opd_mod.ISHIFT}}, bdreg_shift=shift)
+        except ValueError as err:
+            # no form (or not with these features): what callers probing it expect
+            raise NotImplementedError(f"x86 has no add of a register shifted by {shift} "
+                                      f"in one instruction here: {err}") from err
 
     def sub_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
                               reg2 : greg_base, shift : int) -> str:
-        raise NotImplementedError(
-                "x86 has no subtraction of a scaled register in one instruction")
+        try:
+            return self.sub(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP,
+                          operand_modifiers={'bdreg': {_opd_mod.ISHIFT}}, bdreg_shift=shift)
+        except ValueError as err:
+            # no form (or not with these features): what callers probing it expect
+            raise NotImplementedError(f"x86 has no sub of a register shifted by {shift} "
+                                      f"in one instruction here: {err}") from err
 
     def add_greg_voff(self, *, reg : greg_base, offset : int, dt : adt) -> str:
         offset = offset*self.simd_size
         return self.add_greg_imm(reg=reg, imm=offset)
 
     def shift_greg_left(self, *, reg : greg_base, bit_count : int) -> str:
-        preg = self.rpref(reg)
-        return self.asmwrap(f"shlq ${bit_count},{preg}")
+        return self.shl(adreg=reg, imm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP)
 
     def shift_greg_right(self, *, reg : greg_base, bit_count : int) -> str:
-        preg = self.rpref(reg)
-        return self.asmwrap(f"shrq ${bit_count},{preg}")
+        return self.shr(adreg=reg, imm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP)
 
     def greg(self, reg_idx : int) -> greg_base:
         return x86_greg(reg_idx=reg_idx)
