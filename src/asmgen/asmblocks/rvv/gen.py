@@ -73,7 +73,7 @@ class rvv(riscv64):
         self.move = rvv_move(asmwrap=self.asmwrap)
         self.sub = riscv64_sub(asmwrap=self.asmwrap)
         self.shift = riscv64_shift(asmwrap=self.asmwrap)
-        self.set = rvv_opset(asmwrap=self.asmwrap)
+        self.set = rvv_opset(asmwrap=self.asmwrap, lmul_getter=lambda : self.lmul)
 
     def get_parameters(self) -> list[str]:
         return ["LMUL"]
@@ -137,28 +137,6 @@ class rvv(riscv64):
     @property
     def simd_size(self):
         return 1
-
-    def simd_size_to_greg(self, *, reg : greg_base,
-                          dt : adt) -> str:
-        esfx = adt_size(dt)*8
-        return self.asmwrap(f"vsetvli {reg}, zero, e{esfx}, m{self.lmul}, ta, ma")
-
-    @property
-    def c_simd_size_function(self):
-        pre_oi = self.output_inline
-        self.set_output_inline(yesno=True)
-        result  = "inline size_t get_simd_size() {\n"
-        result += "    size_t byte_size = 0;\n"
-        result += "    __asm__ volatile(\n"
-        result += "        "+self.asmwrap(f"vsetvli %[byte_size], zero, e8, m{self.lmul}, ta, ma")
-        result += "    : [byte_size] \"=r\" (byte_size)\n"
-        result += "    :\n"
-        result += "    :\n"
-        result += "    );\n"
-        result += "    return byte_size;\n"
-        result += "}"
-        self.set_output_inline(yesno=pre_oi)
-        return result
 
     def add_greg_voff(self, *, reg : greg_base, offset : int,
                       dt : adt) -> str:

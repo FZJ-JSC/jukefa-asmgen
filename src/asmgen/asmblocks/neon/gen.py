@@ -143,13 +143,6 @@ class neon(aarch64):
     def simd_size(self):
         return 16
 
-    def simd_size_to_greg(self, *, reg: greg_base, dt: adt) -> str:
-        return self.mov_greg_imm(reg=reg, imm=16//adt_size(dt))
-
-    @property
-    def c_simd_size_function(self):
-        return f"inline size_t get_simd_size() {{ return {self.simd_size}; }}"
-
     def add_greg_voff(self, *, reg : greg_base, offset : int, dt : adt):
         # a fixed vector length: the byte count, within add's immediates
         return self.add(adreg=reg, bimm=self.simd_size*offset, cdreg=reg, a_dt=_ADT.UINT64, c_dt=_ADT.UINT64)

@@ -128,34 +128,9 @@ class sve(aarch64):
         return 1
 
 
-    def simd_size_to_greg(self, *, reg: greg_base, dt: adt) -> str:
-        suf = self.dt_mnem_suffixes[dt]
-        result  = self.asmwrap(f"mov {reg},#0")
-        result += self.asmwrap(f"inc{suf} {reg}")
-
-        return result
-
     def indexable_elements(self, dt : adt) -> int:
         # 128 bits are indexable
         return 16//adt_size(dt)
-
-    @property
-    def c_simd_size_function(self) -> str:
-        pre_oi = self.output_inline
-        self.set_output_inline(yesno=True)
-        result  = "inline size_t get_simd_size() {\n"
-        result += "    size_t byte_size = 0;\n"
-        result += "    __asm__ volatile(\n"
-        result += "        "+self.asmwrap("mov %[byte_size],#0")
-        result += "        "+self.asmwrap("incb %[byte_size]")
-        result += "    : [byte_size] \"=r\" (byte_size)\n"
-        result += "    :\n"
-        result += "    :\n"
-        result += "    );\n"
-        result += "    return byte_size;\n"
-        result += "}"
-        self.set_output_inline(yesno=pre_oi)
-        return result
 
     def add_greg_voff(self, *, reg : greg_base, offset : int, dt : adt) -> str:
         """
@@ -170,13 +145,6 @@ class sve(aarch64):
                             modifiers={_opd3_mod.VOFFSET})
             left -= n
         return out
-
-    def vlen_to_greg(self, *, reg, dt : adt) -> str:
-        """
-        The vector length in elements of dt into a general register: cnt{b,h,w,d}
-        """
-        suf = {1: 'b', 2: 'h', 4: 'w', 8: 'd'}[adt_size(dt)]
-        return self.asmwrap(f"cnt{suf} {reg}")
 
     def mask_all_true(self, *, reg, dt : adt) -> str:
         return self.set(dreg=reg, dt=dt, modifiers={_opset_mod.CONSTMASK}, mask="alltrue")

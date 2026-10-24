@@ -340,14 +340,6 @@ class avxbase(asmgen):
     def max_mregs(self):
         return 0
 
-    @property
-    def c_simd_size_function(self):
-        result  = f"inline size_t get_simd_size() {{ return {self.simd_size}; }}"
-        return result
-
-    def simd_size_to_greg(self, *, reg: greg_base, dt: adt) -> str:
-        return self.mov_greg_imm(reg=reg, imm=self.simd_size//adt_size(dt))
-
     def kiterkleft_pow2(self, *, kreg : greg_base,
                         kleftreg : greg_base,
                         unroll : int) -> str:

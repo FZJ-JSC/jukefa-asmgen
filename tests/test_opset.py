@@ -145,3 +145,44 @@ class test_masks(unittest.TestCase):
         with self.assertRaises(ValueError):
             g = make(sve)
             self.mask(g, g.mreg(1), adt.DOUBLE, "sometrue")
+
+
+class test_vlen(unittest.TestCase):
+    """
+    VLEN: the vector length into a general register - bytes, or elements of
+    dt; simd_size_to_greg, vlen_to_greg and c_simd_size_function on it
+    """
+    def vlen(self, g, dt=None):
+        return g.set(dreg=g.greg(1), dt=dt, modifiers={opset_modifier.VLEN}).strip()
+
+    def test_every_backend(self):
+        from asmgen.asmblocks.rvv071 import rvv071
+        r, n, s, a = make(rvv), make(neon), make(sve), make(avx512)
+        x = str(r.greg(1))
+        self.assertEqual(f"vsetvli {x}, zero, e8, m1, ta, ma", self.vlen(r))
+        self.assertEqual(f"vsetvli {x}, zero, e64, m1, ta, ma", self.vlen(r, adt.DOUBLE))
+        r.set_parameter(name="LMUL", value=2)
+        self.assertEqual(f"vsetvli {x}, zero, e32, m2, ta, ma", self.vlen(r, adt.SINGLE))
+        self.assertEqual(f"vsetvli {x}, zero, e16, m1", self.vlen(make(rvv071), adt.HALF))
+        self.assertEqual("mov x1,#16", self.vlen(n))
+        self.assertEqual("mov x1,#4", self.vlen(n, adt.SINGLE))
+        self.assertEqual("cntb x1", self.vlen(s))
+        self.assertEqual("cntd x1", self.vlen(s, adt.DOUBLE))
+        self.assertEqual(f"movq $8,{a.rpref(a.greg(1))}", self.vlen(a, adt.DOUBLE))
+
+    def test_methods_on_it(self):
+        for ctor in (rvv, neon, sve, sme, fma256, avx512):
+            g = make(ctor)
+            with self.subTest(isa=ctor.__name__):
+                v = g.set(dreg=g.greg(1), dt=adt.SINGLE, modifiers={opset_modifier.VLEN})
+                self.assertEqual(v, g.simd_size_to_greg(reg=g.greg(1), dt=adt.SINGLE))
+                self.assertEqual(v, g.vlen_to_greg(reg=g.greg(1), dt=adt.SINGLE))
+                c = g.c_simd_size_function
+                self.assertTrue(c.startswith("static inline size_t get_simd_size()"), c[:60])
+
+    def test_c_helper_asm(self):
+        c = make(sme).c_simd_size_function
+        self.assertIn('"smstart', c)
+        self.assertIn('"cntb %[byte_size]', c)
+        self.assertIn('"smstop', c)
+        self.assertEqual("static inline size_t get_simd_size() { return 64; }", make(avx512).c_simd_size_function)

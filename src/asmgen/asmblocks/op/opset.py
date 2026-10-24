@@ -7,6 +7,8 @@ alone (0.6, phase 4 of docs/V06_REWORK.md): a constant (CONST), a mask
     gen.set(dreg=v, dt=adt.SINGLE, modifiers={opset_modifier.CONST}, constant="one")   1.0 each
     gen.set(dreg=r, dt=adt.UINT64, modifiers={opset_modifier.CONST}, value=1234)
     gen.set(dreg=m, dt=adt.DOUBLE, modifiers={opset_modifier.CONSTMASK}, mask="alltrue")
+    gen.set(dreg=r, modifiers={opset_modifier.VLEN})                  bytes
+    gen.set(dreg=r, dt=adt.DOUBLE, modifiers={opset_modifier.VLEN})   elements
 
 The register set is dreg, the operation's one output; forms with inputs
 name them. A vector ISA's set carries its base ISA's for general and
@@ -33,7 +35,7 @@ class opset_modifier(operation_modifier):
     """
     CONST = auto()      # a constant: constant="zero" or "one" (1, 1.0 in dt), or value=<int>
     CONSTMASK = auto()  # a mask: mask="alltrue" or "allfalse"
-    VLEN = auto()       # the vector length: bytes, or elements of dt (to come)
+    VLEN = auto()       # the vector length: bytes, or elements of dt where given
     INDEX = auto()      # element indices times a stride (to come)
 
 
@@ -71,6 +73,36 @@ def mask_signatures(dts, rtype=rt.MASK) -> list[operation_signature]:
             for mask in ("alltrue", "allfalse") for dt in dts]
 
 
+VLEN_UNITS = ("bytes", adt.DOUBLE, adt.SINGLE, adt.HALF, *INT_DTS)
+
+
+def vlen_signatures(units=VLEN_UNITS) -> list[operation_signature]:
+    """
+    VLEN into a general register: bytes, or elements of a type (the
+    structural parameter unit, from set's dt)
+    """
+    return [operation_signature(modifiers={opset_modifier.VLEN}, structural_params={"unit": unit},
+                                operands={"dreg": osh(ot.REGISTER, orl.DATA, rt.GP, adt.UINT64)})
+            for unit in units]
+
+
+class inline_operand(greg_base):
+    """
+    An inline asm operand (%[name]) where a general register goes: the C
+    helpers' asm (c_simd_size_function)
+    """
+    # pylint: disable-next=super-init-not-called
+    def __init__(self, name : str):
+        self.name = name
+
+    def __str__(self) -> str:
+        return f"%[{self.name}]"
+
+    @property
+    def idx(self) -> int:
+        return -1
+
+
 def value_signatures() -> list[operation_signature]:
     """
     CONST value=<int> of a general register: any 64-bit value, materialized
@@ -100,8 +132,13 @@ class opset(operation):
     NIE_MESSAGE = "Method not implemented"
 
     # pylint: disable-next=arguments-differ
-    def __call__(self, *, dreg, dt : adt, modifiers=None, operand_modifiers=None, **kwargs) -> str:
-        return self.execute(dregs=[], dts={"dreg": dt}, modifiers=modifiers or set(),
+    def __call__(self, *, dreg, dt : adt | None = None, modifiers=None, operand_modifiers=None, **kwargs) -> str:
+        modifiers = set(modifiers or ())
+        if opset_modifier.VLEN in modifiers:
+            # the count lands in a general register; dt, where given, is what it counts
+            kwargs["unit"] = "bytes" if dt is None else dt
+            dt = adt.UINT64
+        return self.execute(dregs=[], dts={"dreg": dt}, modifiers=modifiers,
                             operand_modifiers=operand_modifiers or {}, dreg=dreg, dt=dt, **kwargs)
 
     @abstractmethod
@@ -185,7 +222,9 @@ class vector_opset(opset):
 
     # pylint: disable-next=arguments-differ
     def implementation(self, *, dreg, dt, modifiers=None, operand_modifiers=None, constant=None,
-                       value=None, mask=None, **kwargs) -> str:
+                       value=None, mask=None, unit=None, **kwargs) -> str:
+        if opset_modifier.VLEN in set(modifiers or ()):
+            return self.vlen(dreg=dreg, unit=unit)
         # If a scalar register is passed, forward to the base ISA's set
         if self.scalar_op is not None and isinstance(dreg, (greg_base, freg_base)):
             given = {k: v for k, v in (("constant", constant), ("value", value)) if v is not None}
@@ -200,6 +239,13 @@ class vector_opset(opset):
     def mask_reg(self, *, dreg : data_reg, dt : adt, mask : str) -> str:
         """
         A mask register all true or all false for elements of dt
+        """
+        raise NotImplementedError(self.NIE_MESSAGE)
+
+    def vlen(self, *, dreg : greg_base, unit) -> str:
+        """
+        The vector length into a general register: bytes (unit "bytes") or
+        elements of the type unit
         """
         raise NotImplementedError(self.NIE_MESSAGE)
 

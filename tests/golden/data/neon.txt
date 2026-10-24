@@ -97,7 +97,7 @@ add x0,x0,#65536
 ### method add_greg_voff(dt=SINGLE, offset=8, reg=x0)
 add x0,x0,#128
 ### method c_simd_size_function()
-inline size_t get_simd_size() { return 16; }
+static inline size_t get_simd_size() { return 16; }
 ### method cb(cmp=NE, label=notequal, reg1=x0, reg2=x1)
 cmp x0,x1
 b.ne .notequal
@@ -781,11 +781,11 @@ False
 ### method treg(dt=SINGLE, reg_idx=0)
 !NotImplementedError: NEON has no tiles, use SME
 ### method vlen_to_greg(dt=DOUBLE, reg=x0)
-!NotImplementedError: neon has no vector length to read
+mov x0,#2
 ### method vlen_to_greg(dt=HALF, reg=x0)
-!NotImplementedError: neon has no vector length to read
+mov x0,#8
 ### method vlen_to_greg(dt=SINGLE, reg=x0)
-!NotImplementedError: neon has no vector length to read
+mov x0,#4
 ### method vreg(reg_idx=0)
 v0
 ### method zero_freg(dt=DOUBLE, freg=s0)
@@ -2814,6 +2814,30 @@ movi v1.8h,#1
 movi v1.4s,#1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:one}
 movi v1.16b,#1
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:DOUBLE}
+mov x10,#2
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:HALF}
+mov x10,#2
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINGLE}
+mov x10,#2
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT16}
+mov x10,#2
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT32}
+mov x10,#2
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT64}
+mov x10,#2
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT8}
+mov x10,#2
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT16}
+mov x10,#2
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT32}
+mov x10,#2
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT64}
+mov x10,#2
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT8}
+mov x10,#2
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:bytes}
+mov x10,#2
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 lsl x12,x10,x11
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-

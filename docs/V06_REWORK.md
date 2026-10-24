@@ -367,15 +367,26 @@ instruction stream:
       finish it. Kept as it was: `kxnorw` sets 16 bits whatever the
       type, too few for FP16 and bytes in zmm (32 and 64 elements) - for
       `kxnord`/`kxnorq` later.
-- [ ] `VLEN`: bytes, or elements of `dt` where given - on every backend
-      (RVV and rvv071 `vsetvli`/`csrr vlenb`, SVE/SME `cnt*`/`rdvl`,
-      NEON/x86 constants). Replaces `simd_size_to_greg` and `vlen_to_greg`;
-      ukrgen's vector length works on RVV, NEON and x86.
+- [x] `VLEN`: `set(dreg=r, modifiers={VLEN})` bytes, with `dt=` elements
+      of dt (the structural parameter `unit`; the register UINT64) - on
+      every backend: RVV `vsetvli r, zero, e<bits>, m<LMUL>, ta, ma` (a
+      register group's; it sets the vector type too) and rvv071's without
+      the policies; SVE and SME `cnt{b,h,w,d}` (`simd_size_to_greg`'s
+      `mov #0` and `inc` merged into it); NEON and x86 constants.
+      `simd_size_to_greg` and `vlen_to_greg` are one implementation each in
+      the base class, on it: every backend has both, ukrgen's vector length
+      works on RVV, NEON and x86.
 - [ ] `INDEX`: a vector of element index times a stride register. Replaces
       `greg_to_voffs`.
-- [ ] `c_simd_size_function` on `set(VLEN)`, `static inline`.
-- [~] Wrappers for the above: the `zero_*` methods, `mov_greg_imm` and
-      `mask_all_true` done.
+- [x] `c_simd_size_function` on `set(VLEN)`, `static inline`: one
+      implementation in the base class - a constant where the length is
+      fixed, else `set(VLEN)` into the inline asm operand `%[byte_size]`
+      (`inline_operand`); SME counts in streaming mode (`smstart`,
+      `smstop` around it). ukropt's own `static` fix leaves it be (its
+      0011).
+- [~] Wrappers for the above: the `zero_*` methods, `mov_greg_imm`,
+      `mask_all_true`, `simd_size_to_greg` and `vlen_to_greg` done;
+      `greg_to_voffs` with `INDEX`.
 
 Checked (step 4a): no snapshot entry changed, `set`'s new; ukrgen's golden
 kernels - zeroing their accumulators through `zero_vreg` - and ukropt's
@@ -493,3 +504,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   mask_all_true on set (asmgen 0046).
 - 2026-10-23: phase 4 - AVX2's vector-register masks in its set;
   mask_all_true on set alone (asmgen 0047).
+- 2026-10-23: phase 4, step 4d - VLEN on every backend; simd_size_to_greg,
+  vlen_to_greg and c_simd_size_function on it (asmgen 0048, ukropt 0011).

@@ -4,7 +4,7 @@ neon's set
 from typing import Callable
 
 from ...op.opset import vector_opset
-from ....registers import asm_data_type as adt, data_reg
+from ....registers import asm_data_type as adt, adt_size, data_reg, greg_base
 from ...aarch64.opset import aarch64_opset
 from .signatures import make_neon_opset_signatures
 
@@ -28,3 +28,6 @@ class neon_opset(vector_opset):
         if dt in (adt.DOUBLE, adt.SINGLE, adt.HALF):
             return self.asmwrap(f"fmov {dreg}.{self.dt_suffixes[dt]},#1.0")
         return self.asmwrap(f"movi {dreg}.{self.dt_suffixes[dt]},#1")
+
+    def vlen(self, *, dreg : greg_base, unit) -> str:
+        return self.scalar_op.value_greg(dreg=dreg, value=16 if "bytes" == unit else 16 // adt_size(unit))

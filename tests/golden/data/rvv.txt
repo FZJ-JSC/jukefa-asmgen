@@ -97,7 +97,7 @@ add t0,t0,8
 ### method add_greg_voff(dt=SINGLE, offset=8, reg=t0)
 !NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
 ### method c_simd_size_function()
-inline size_t get_simd_size() {
+static inline size_t get_simd_size() {
     size_t byte_size = 0;
     __asm__ volatile(
         "vsetvli %[byte_size], zero, e8, m1, ta, ma\n\t"
@@ -795,11 +795,11 @@ False
 ### method treg(dt=SINGLE, reg_idx=0)
 !NotImplementedError: RVV has no tiles (wait for IME/AME support)
 ### method vlen_to_greg(dt=DOUBLE, reg=t0)
-!NotImplementedError: rvv has no vector length to read
+vsetvli t0, zero, e64, m1, ta, ma
 ### method vlen_to_greg(dt=HALF, reg=t0)
-!NotImplementedError: rvv has no vector length to read
+vsetvli t0, zero, e16, m1, ta, ma
 ### method vlen_to_greg(dt=SINGLE, reg=t0)
-!NotImplementedError: rvv has no vector length to read
+vsetvli t0, zero, e32, m1, ta, ma
 ### method vreg(reg_idx=0)
 v0
 ### method zero_freg(dt=DOUBLE, freg=f0)
@@ -2088,6 +2088,30 @@ vmv.v.i v1,0
 vmv.v.i v1,1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 vmv.v.i v1,0
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:DOUBLE}
+vsetvli s4, zero, e64, m1, ta, ma
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:HALF}
+vsetvli s4, zero, e64, m1, ta, ma
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINGLE}
+vsetvli s4, zero, e64, m1, ta, ma
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT16}
+vsetvli s4, zero, e64, m1, ta, ma
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT32}
+vsetvli s4, zero, e64, m1, ta, ma
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT64}
+vsetvli s4, zero, e64, m1, ta, ma
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT8}
+vsetvli s4, zero, e64, m1, ta, ma
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT16}
+vsetvli s4, zero, e64, m1, ta, ma
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT32}
+vsetvli s4, zero, e64, m1, ta, ma
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT64}
+vsetvli s4, zero, e64, m1, ta, ma
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT8}
+vsetvli s4, zero, e64, m1, ta, ma
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:bytes}
+vsetvli s4, zero, e64, m1, ta, ma
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 sll s6,s4,s5
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-

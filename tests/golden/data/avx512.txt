@@ -98,7 +98,7 @@ addq $262144,%r8
 ### method add_greg_voff(dt=SINGLE, offset=8, reg=r8)
 addq $512,%r8
 ### method c_simd_size_function()
-inline size_t get_simd_size() { return 64; }
+static inline size_t get_simd_size() { return 64; }
 ### method cb(cmp=NE, label=notequal, reg1=r8, reg2=r9)
 cmp %r9,%r8
 jne .notequal
@@ -799,11 +799,11 @@ False
 ### method treg(dt=SINGLE, reg_idx=0)
 !NotImplementedError: Not tile support in AVX (will be supported with AMX)
 ### method vlen_to_greg(dt=DOUBLE, reg=r8)
-!NotImplementedError: avx512 has no vector length to read
+movq $8,%r8
 ### method vlen_to_greg(dt=HALF, reg=r8)
-!NotImplementedError: avx512 has no vector length to read
+movq $32,%r8
 ### method vlen_to_greg(dt=SINGLE, reg=r8)
-!NotImplementedError: avx512 has no vector length to read
+movq $16,%r8
 ### method vreg(reg_idx=0)
 zmm0
 ### method zero_freg(dt=DOUBLE, freg=xmm0)
@@ -2454,6 +2454,30 @@ vpternlogd $0xff,%zmm1,%zmm1,%zmm1
 vpabsb %zmm1,%zmm1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 vpxorq %zmm1,%zmm1,%zmm1
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:DOUBLE}
+movq $8,%rcx
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:HALF}
+movq $8,%rcx
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINGLE}
+movq $8,%rcx
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT16}
+movq $8,%rcx
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT32}
+movq $8,%rcx
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT64}
+movq $8,%rcx
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT8}
+movq $8,%rcx
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT16}
+movq $8,%rcx
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT32}
+movq $8,%rcx
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT64}
+movq $8,%rcx
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT8}
+movq $8,%rcx
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:bytes}
+movq $8,%rcx
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 movq %rcx,%rdx
 shlq $0,%rdx

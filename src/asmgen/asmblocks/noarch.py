@@ -262,12 +262,12 @@ class asmgen(ABC):
                 rt.clobbered_regs[tag].discard(idx)
         return rt
 
-    def vlen_to_greg(self, *, reg, dt : asm_data_type) -> str:
+    def vlen_to_greg(self, *, reg, dt) -> str:
         """
-        The vector length in elements of dt into a general register, for
-        vector-length agnostic ISAs that don't keep it in one
+        dt's elements in a vector into reg: set(VLEN) (0.6, phase 4)
         """
-        raise NotImplementedError(f"{type(self).__name__} has no vector length to read")
+        from .op.opset import opset_modifier   # pylint: disable=import-outside-toplevel
+        return self.set(dreg=reg, dt=dt, modifiers={opset_modifier.VLEN})
 
     def mask_all_true(self, *, reg, dt : asm_data_type) -> str:
         """
@@ -403,32 +403,44 @@ class asmgen(ABC):
         raise NotImplementedError(NIE_MESSAGE)
 
     @property
-    @abstractmethod
     def c_simd_size_function(self) -> str:
         """
-        Returns a string that contains a c function definition for 
-        determining the SIMD size in bytes at runtime
-
-        :return: string containing a c function called get_simd_size()
-        :rtype: str
+        A C function, get_simd_size(), returning the vector length in bytes:
+        the constant where it is fixed, else set(VLEN) in inline asm
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        if not self.is_vla:
+            return f"static inline size_t get_simd_size() {{ return {self.simd_size}; }}"
+        pre = self.output_inline
+        self.set_output_inline(yesno=True)
+        try:
+            asm = self._c_simd_size_asm()
+        finally:
+            self.set_output_inline(yesno=pre)
+        result  = "static inline size_t get_simd_size() {\n"
+        result += "    size_t byte_size = 0;\n"
+        result += "    __asm__ volatile(\n"
+        result += "".join("        " + line + "\n" for line in asm.splitlines() if line.strip())
+        result += "    : [byte_size] \"=r\" (byte_size)\n"
+        result += "    :\n"
+        result += "    :\n"
+        result += "    );\n"
+        result += "    return byte_size;\n"
+        result += "}"
+        return result
 
-    @abstractmethod
-    def simd_size_to_greg(self, *, reg : greg_type,
-                          dt : asm_data_type) -> str:
+    def _c_simd_size_asm(self) -> str:
         """
-        Returns a string containing instructions for writing the SIMD size
-        in elements to a GP register
+        c_simd_size_function's asm: set(VLEN) into the operand byte_size
+        """
+        from .op.opset import inline_operand, opset_modifier   # pylint: disable=import-outside-toplevel
+        return self.set(dreg=inline_operand("byte_size"), modifiers={opset_modifier.VLEN})
 
-        :param reg: GP register to write simd size to
-        :type reg: greg_type
-        :param dt: Element data type
-        :type dt: class:`asmgen.registers.asm_data_type`
-        :return: string containing the instructions
-        :rtype: str
+    def simd_size_to_greg(self, *, reg, dt) -> str:
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        dt's elements in a vector into reg: set(VLEN) (0.6, phase 4)
+        """
+        from .op.opset import opset_modifier   # pylint: disable=import-outside-toplevel
+        return self.set(dreg=reg, dt=dt, modifiers={opset_modifier.VLEN})
 
     @abstractmethod
     def kiterkleft(self, *, kreg : greg_type,

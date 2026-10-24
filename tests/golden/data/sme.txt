@@ -1691,12 +1691,11 @@ incb x0, ALL, MUL #16
 ### method add_greg_voff(dt=SINGLE, offset=8, reg=x0)
 incb x0, ALL, MUL #8
 ### method c_simd_size_function()
-inline size_t get_simd_size() {
+static inline size_t get_simd_size() {
     size_t byte_size = 0;
     __asm__ volatile(
         "smstart\n\t"
-        "mov %[byte_size],#0\n\t"
-        "incb %[byte_size]\n\t"
+        "cntb %[byte_size]\n\t"
         "smstop\n\t"
     : [byte_size] "=r" (byte_size)
     :
@@ -2207,14 +2206,11 @@ lsr x0,x0,#4
 ### method simd_size()
 1
 ### method simd_size_to_greg(dt=DOUBLE, reg=x0)
-mov x0,#0
-incd x0
+cntd x0
 ### method simd_size_to_greg(dt=HALF, reg=x0)
-mov x0,#0
-inch x0
+cnth x0
 ### method simd_size_to_greg(dt=SINGLE, reg=x0)
-mov x0,#0
-incw x0
+cntw x0
 ### method store_freg(areg=x0, dt=DOUBLE, offset=-2048, src=d0)
 str d0,[x0,#-2048]
 ### method store_freg(areg=x0, dt=DOUBLE, offset=-2049, src=d0)
@@ -5151,6 +5147,30 @@ dup z1.d,#0
 dup z1.b,#1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 dup z1.b,#0
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:DOUBLE}
+cntd x10
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:HALF}
+cntd x10
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINGLE}
+cntd x10
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT16}
+cntd x10
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT32}
+cntd x10
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT64}
+cntd x10
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT8}
+cntd x10
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT16}
+cntd x10
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT32}
+cntd x10
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT64}
+cntd x10
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT8}
+cntd x10
+### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:bytes}
+cntd x10
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 lsl x12,x10,x11
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-

@@ -57,26 +57,6 @@ class sme(sve):
                                   dt_suffixes=self.dt_suffixes)
         self.set = sme_opset(asmwrap=self.asmwrap, dt_suffixes=self.dt_suffixes)
 
-    @property
-    def c_simd_size_function(self):
-        pre_oi = self.output_inline
-        self.set_output_inline(yesno=True)
-        result  = "inline size_t get_simd_size() {\n"
-        result += "    size_t byte_size = 0;\n"
-        result += "    __asm__ volatile(\n"
-        result += "        "+self.asmwrap("smstart")
-        result += "        "+self.asmwrap("mov %[byte_size],#0")
-        result += "        "+self.asmwrap("incb %[byte_size]")
-        result += "        "+self.asmwrap("smstop")
-        result += "    : [byte_size] \"=r\" (byte_size)\n"
-        result += "    :\n"
-        result += "    :\n"
-        result += "    );\n"
-        result += "    return byte_size;\n"
-        result += "}"
-        self.set_output_inline(yesno=pre_oi)
-        return result
-
     def max_tregs(self, dt : adt) -> int:
         return adt_size(dt)
     def max_mregs(self):
@@ -259,3 +239,8 @@ class sme(sve):
                    treg : treg_base, dt : adt) -> str:
         raise NotImplementedError(
             "SME has no tile storing instruction, use extract_tile_row/column and store_vector*")
+
+    def _c_simd_size_asm(self) -> str:
+        # the streaming vector length: counted in streaming mode
+        return self.asmwrap("smstart") + super()._c_simd_size_asm() + self.asmwrap("smstop")
+

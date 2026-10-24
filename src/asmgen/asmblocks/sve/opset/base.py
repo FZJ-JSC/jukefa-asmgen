@@ -4,7 +4,7 @@ sve's set
 from typing import Callable
 
 from ...op.opset import vector_opset
-from ....registers import asm_data_type as adt, data_reg
+from ....registers import asm_data_type as adt, adt_size, data_reg, greg_base
 from ...aarch64.opset import aarch64_opset
 from .signatures import make_sve_opset_signatures
 
@@ -32,3 +32,7 @@ class sve_opset(vector_opset):
             return self.asmwrap(f"ptrue {dreg}.{self.dt_suffixes[dt]}")
         # pfalse is .b only; a predicate-as-counter register is its p's
         return self.asmwrap(f"pfalse p{dreg.idx}.b")
+
+    def vlen(self, *, dreg : greg_base, unit) -> str:
+        suf = {1: "b", 2: "h", 4: "w", 8: "d"}[1 if "bytes" == unit else adt_size(unit)]
+        return self.asmwrap(f"cnt{suf} {dreg}")

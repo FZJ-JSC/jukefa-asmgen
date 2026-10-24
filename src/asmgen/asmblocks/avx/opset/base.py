@@ -4,7 +4,7 @@ avx's set
 from typing import Callable
 
 from ...op.opset import vector_opset
-from ....registers import asm_data_type as adt, data_reg
+from ....registers import asm_data_type as adt, adt_size, data_reg, greg_base
 from ..types import avx512_mreg
 from ...x86.opset import x86_opset
 from .signatures import make_avx_opset_signatures
@@ -20,8 +20,10 @@ class avx_opset(vector_opset):
     AVX set: vpxor v,v,v - vpxorq with AVX-512 (evex); general and
     floating-point registers x86's
     """
-    def __init__(self, *, asmwrap : Callable[[str], str], rpref : Callable, evex : bool = False):
+    def __init__(self, *, asmwrap : Callable[[str], str], rpref : Callable, evex : bool = False,
+                 simd_bytes : int = 32):
         self.asmwrap = asmwrap
+        self.simd_bytes = simd_bytes
         self.rpref = rpref
         self.evex = evex
         self.scalar_op = x86_opset(asmwrap=asmwrap, rpref=rpref, evex=evex)
@@ -49,3 +51,7 @@ class avx_opset(vector_opset):
             return self.asmwrap(f"{'kxnorw' if 'alltrue' == mask else 'kxorw'} {p},{p},{p}")
         # a vector register as a mask (AVX2): every bit set, or none
         return self.asmwrap(f"{'vpcmpeqd' if 'alltrue' == mask else 'vpxor'} {p},{p},{p}")
+
+    def vlen(self, *, dreg : greg_base, unit) -> str:
+        n = self.simd_bytes if "bytes" == unit else self.simd_bytes // adt_size(unit)
+        return self.scalar_op.value_greg(dreg=dreg, value=n)

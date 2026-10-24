@@ -44,8 +44,10 @@ class test_gather_support(unittest.TestCase):
     def test_vlen_to_greg(self):
         s = sve()
         self.assertEqual("cntd x8", plain(s.vlen_to_greg(reg=s.greg(8), dt=adt.FP64)))
-        with self.assertRaises(NotImplementedError):
-            avx512().vlen_to_greg(reg=avx512().greg(8), dt=adt.FP64)
+        # every backend has it now (set(VLEN)): a fixed length is a constant
+        a = avx512()
+        a.set_output_inline(yesno=False)
+        self.assertEqual(f"movq $8,{a.rpref(a.greg(8))}", plain(a.vlen_to_greg(reg=a.greg(8), dt=adt.FP64)))
 
 
 if __name__ == "__main__":

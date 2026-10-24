@@ -73,7 +73,7 @@ class avx512(avxbase):
         self.move = avx_move(asmwrap=self.asmwrap, rpref=self.rpref, simd_bytes=64)
         self.sub = x86_sub(asmwrap=self.asmwrap, rpref=self.rpref)
         self.shift = x86_shift(asmwrap=self.asmwrap, rpref=self.rpref)
-        self.set = avx_opset(asmwrap=self.asmwrap, rpref=self.rpref, evex=True)
+        self.set = avx_opset(asmwrap=self.asmwrap, rpref=self.rpref, evex=True, simd_bytes=self.simd_size)
 
     def get_req_flags(self) -> list[str]:
         return ['avx512f']

@@ -496,6 +496,7 @@ class asm_test_implementation_tests(unittest.TestCase):
 
         allowed_not_tested= [
             '__init__',
+            '_c_simd_size_asm',     # c_simd_size_function's, tested through it
             '__annotate_func__',
             'operands',
             'set_output_inline',
