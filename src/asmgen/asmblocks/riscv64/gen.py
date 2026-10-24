@@ -24,6 +24,7 @@ from ...callconv.callconv import callconv
 
 
 from .opmem import riscv64_load,riscv64_store
+from .opmem import riscv64_prefetch
 from ...registers import asm_data_type as _ADT
 from ..op.operand import operand_modifier as _opd_mod
 from ..op.move import move_modifier as _move_mod
@@ -82,6 +83,7 @@ class riscv64(asmgen):
 
         self.load = riscv64_load(asmwrap=self.asmwrap)
         self.store = riscv64_store(asmwrap=self.asmwrap)
+        self.prefetch = riscv64_prefetch(asmwrap=self.asmwrap)
 
     def create_callconv(self, name : str = "default"):
 
@@ -296,14 +298,6 @@ class riscv64(asmgen):
         # indices as riscv64_greg names them: ra, sp, gp, tp, s0 (fp), zero
         return {"greg": {"ra": 26, "sp": 27, "gp": 28, "tp": 29, "fp": 30, "zero": 31}}
 
-    @property
-    def min_prefetch_offset(self):
-        return 0
-
-    @property
-    def max_prefetch_offset(self):
-        return 32760
-
     def min_load_immoff(self, dt : adt):
         _ = dt # explicitly unused
         return 0
@@ -319,7 +313,3 @@ class riscv64(asmgen):
     def max_fload_immoff(self, dt : adt):
         _ = dt # explicitly unused
         return (1<<11) -1
-
-    def prefetch_l1_immoff(self, *, areg : greg_base, offset : int) -> str:
-        # Needs Zicbop
-        return self.asmwrap(f"prefetch.r {offset}({areg})")

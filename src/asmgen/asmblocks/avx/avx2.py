@@ -11,6 +11,7 @@ from copy import deepcopy
 from typing import Union
 from abc import abstractmethod
 
+from ..x86.opmem import x86_prefetch
 from ...asmdata import asm_data
 from ...registers import (
     reg_tracker,
@@ -67,6 +68,7 @@ class fma128(avxbase):
 
         self.load = avx128_load(asmwrap=self.asmwrap, rpref=self.rpref)
         self.store = avx128_store(asmwrap=self.asmwrap, rpref=self.rpref)
+        self.prefetch = x86_prefetch(asmwrap=self.asmwrap, rpref=self.rpref)
         self.move = avx_move(asmwrap=self.asmwrap, rpref=self.rpref, simd_bytes=16)
         self.sub = x86_sub(asmwrap=self.asmwrap, rpref=self.rpref)
         self.shift = x86_shift(asmwrap=self.asmwrap, rpref=self.rpref)
@@ -135,6 +137,7 @@ class fma256(avxbase):
 
         self.load = avx256_load(asmwrap=self.asmwrap, rpref=self.rpref)
         self.store = avx256_store(asmwrap=self.asmwrap, rpref=self.rpref)
+        self.prefetch = x86_prefetch(asmwrap=self.asmwrap, rpref=self.rpref)
         self.move = avx_move(asmwrap=self.asmwrap, rpref=self.rpref, simd_bytes=32)
         self.sub = x86_sub(asmwrap=self.asmwrap, rpref=self.rpref)
         self.shift = x86_shift(asmwrap=self.asmwrap, rpref=self.rpref)

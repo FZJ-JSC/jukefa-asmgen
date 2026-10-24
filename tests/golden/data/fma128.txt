@@ -494,8 +494,6 @@ vpcmpeqd %xmm1,%xmm1,%xmm1
 63
 ### method max_load_voff()
 1
-### method max_prefetch_offset()
-2147483648
 ### method max_tregs(dt=DOUBLE)
 0
 ### method max_tregs(dt=HALF)
@@ -523,8 +521,6 @@ vpcmpeqd %xmm1,%xmm1,%xmm1
 ### method min_load_immoff(dt=SINGLE)
 0
 ### method min_load_voff()
-0
-### method min_prefetch_offset()
 0
 ### method mov_freg(dst=xmm1, dt=DOUBLE, src=xmm0)
 vmovsd xmm0, xmm1
@@ -575,28 +571,6 @@ movq %r9,%r8
 imulq %r10,%r8
 ### method mul_greg_imm(dst=r8, factor=40, src=r9)
 imulq $40,%r9,%r8
-### method prefetch_l1_immoff(areg=r8, offset=-2048)
-prefetcht0 -2048(%r8)
-### method prefetch_l1_immoff(areg=r8, offset=-2049)
-prefetcht0 -2049(%r8)
-### method prefetch_l1_immoff(areg=r8, offset=-8)
-prefetcht0 -8(%r8)
-### method prefetch_l1_immoff(areg=r8, offset=0)
-prefetcht0 0(%r8)
-### method prefetch_l1_immoff(areg=r8, offset=1)
-prefetcht0 1(%r8)
-### method prefetch_l1_immoff(areg=r8, offset=2047)
-prefetcht0 2047(%r8)
-### method prefetch_l1_immoff(areg=r8, offset=2048)
-prefetcht0 2048(%r8)
-### method prefetch_l1_immoff(areg=r8, offset=255)
-prefetcht0 255(%r8)
-### method prefetch_l1_immoff(areg=r8, offset=256)
-prefetcht0 256(%r8)
-### method prefetch_l1_immoff(areg=r8, offset=4096)
-prefetcht0 4096(%r8)
-### method prefetch_l1_immoff(areg=r8, offset=8)
-prefetcht0 8(%r8)
 ### method ret()
 ret
 ### method shift_greg_left(bit_count=4, reg=r8)
@@ -2226,6 +2200,14 @@ imulq $2147483647,%rcx,%rdx
 vmulpd %xmm1,%xmm2,%xmm3
 ### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vmulps %xmm1,%xmm2,%xmm3
+### op prefetch [GOFFSET] agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
+prefetcht0 (%rcx,%rdx)
+### op prefetch [IOFFSET] agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+prefetcht0 -2147483648(%rcx)
+### op prefetch [IOFFSET] agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+prefetcht0 2147483647(%rcx)
+### op prefetch [] agreg:REGISTER:GP:UINT64
+prefetcht0 (%rcx)
 ### op set [CONSTMASK] dreg:REGISTER:VEC:DOUBLE {mask:allfalse}
 vpxor %xmm1,%xmm1,%xmm1
 ### op set [CONSTMASK] dreg:REGISTER:VEC:DOUBLE {mask:alltrue}

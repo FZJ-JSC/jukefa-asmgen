@@ -2094,8 +2094,6 @@ ptrue p1.s
 252
 ### method max_load_voff()
 7
-### method max_prefetch_offset()
-32760
 ### method max_tregs(dt=DOUBLE)
 8
 ### method max_tregs(dt=HALF)
@@ -2124,8 +2122,6 @@ ptrue p1.s
 0
 ### method min_load_voff()
 -8
-### method min_prefetch_offset()
-0
 ### method mov_freg(dst=s1, dt=DOUBLE, src=s0)
 fmov s1,s0
 ### method mov_freg(dst=s1, dt=HALF, src=s0)
@@ -2175,28 +2171,6 @@ mul x0,x1,x2
 ### method mul_greg_imm(dst=x0, factor=40, src=x1)
 mov x0,#40
 mul x0,x1,x0
-### method prefetch_l1_immoff(areg=x0, offset=-2048)
-prfm pldl1strm,[x0,#-2048]
-### method prefetch_l1_immoff(areg=x0, offset=-2049)
-prfm pldl1strm,[x0,#-2049]
-### method prefetch_l1_immoff(areg=x0, offset=-8)
-prfm pldl1strm,[x0,#-8]
-### method prefetch_l1_immoff(areg=x0, offset=0)
-prfm pldl1strm,[x0,#0]
-### method prefetch_l1_immoff(areg=x0, offset=1)
-prfm pldl1strm,[x0,#1]
-### method prefetch_l1_immoff(areg=x0, offset=2047)
-prfm pldl1strm,[x0,#2047]
-### method prefetch_l1_immoff(areg=x0, offset=2048)
-prfm pldl1strm,[x0,#2048]
-### method prefetch_l1_immoff(areg=x0, offset=255)
-prfm pldl1strm,[x0,#255]
-### method prefetch_l1_immoff(areg=x0, offset=256)
-prfm pldl1strm,[x0,#256]
-### method prefetch_l1_immoff(areg=x0, offset=4096)
-prfm pldl1strm,[x0,#4096]
-### method prefetch_l1_immoff(areg=x0, offset=8)
-prfm pldl1strm,[x0,#8]
 ### method ret()
 ret
 ### method shift_greg_left(bit_count=4, reg=x0)
@@ -5019,6 +4993,12 @@ mul z3.d,z1.d,z2.d[1]
 mul z3.b,z1.b,z2.b[0]
 ### op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{BLOCKLANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:16} @far
 mul z3.b,z1.b,z2.b[15]
+### op prefetch [GOFFSET] agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
+prfm PLDL1KEEP, [x10, x11]
+### op prefetch [IOFFSET] agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+prfm PLDL1KEEP, [x10]
+### op prefetch [] agreg:REGISTER:GP:UINT64
+prfm PLDL1KEEP, [x10]
 ### op set [CONSTMASK] dreg:REGISTER:MASK:DOUBLE {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:DOUBLE {mask:alltrue}

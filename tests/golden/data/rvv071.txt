@@ -497,8 +497,6 @@ bnez t0,.someloop
 0
 ### method max_load_voff()
 0
-### method max_prefetch_offset()
-32760
 ### method max_tregs(dt=DOUBLE)
 0
 ### method max_tregs(dt=HALF)
@@ -526,8 +524,6 @@ bnez t0,.someloop
 ### method min_load_immoff(dt=SINGLE)
 0
 ### method min_load_voff()
-0
-### method min_prefetch_offset()
 0
 ### method mov_freg(dst=f1, dt=DOUBLE, src=f0)
 fmv.d f1,f0
@@ -578,28 +574,6 @@ mul t0,t1,t2
 ### method mul_greg_imm(dst=t0, factor=40, src=t1)
 li t0,40
 mul t0,t1,t0
-### method prefetch_l1_immoff(areg=t0, offset=-2048)
-prefetch.r -2048(t0)
-### method prefetch_l1_immoff(areg=t0, offset=-2049)
-prefetch.r -2049(t0)
-### method prefetch_l1_immoff(areg=t0, offset=-8)
-prefetch.r -8(t0)
-### method prefetch_l1_immoff(areg=t0, offset=0)
-prefetch.r 0(t0)
-### method prefetch_l1_immoff(areg=t0, offset=1)
-prefetch.r 1(t0)
-### method prefetch_l1_immoff(areg=t0, offset=2047)
-prefetch.r 2047(t0)
-### method prefetch_l1_immoff(areg=t0, offset=2048)
-prefetch.r 2048(t0)
-### method prefetch_l1_immoff(areg=t0, offset=255)
-prefetch.r 255(t0)
-### method prefetch_l1_immoff(areg=t0, offset=256)
-prefetch.r 256(t0)
-### method prefetch_l1_immoff(areg=t0, offset=4096)
-prefetch.r 4096(t0)
-### method prefetch_l1_immoff(areg=t0, offset=8)
-prefetch.r 8(t0)
 ### method ret()
 ret
 ### method shift_greg_left(bit_count=4, reg=t0)
@@ -2054,6 +2028,12 @@ vmulu.vx v2,v1,s4
 vwmulu.vv v4,v1,v2
 ### op mul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
 vmulu.vv v3,v1,v2
+### op prefetch [IOFFSET] agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+prefetch.r -2048(s4)
+### op prefetch [IOFFSET] agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+prefetch.r 2047(s4)
+### op prefetch [] agreg:REGISTER:GP:UINT64
+prefetch.r 0(s4)
 ### op set [CONST] dreg:REGISTER:FP:DOUBLE {constant:zero}
 fcvt.d.w f1, zero
 ### op set [CONST] dreg:REGISTER:FP:HALF {constant:zero}

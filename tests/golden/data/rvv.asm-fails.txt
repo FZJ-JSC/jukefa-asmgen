@@ -26,7 +26,6 @@ method max_load_immoff(dt=DOUBLE)
 method max_load_immoff(dt=HALF)
 method max_load_immoff(dt=SINGLE)
 method max_load_voff()
-method max_prefetch_offset()
 method max_tregs(dt=DOUBLE)
 method max_tregs(dt=HALF)
 method max_tregs(dt=SINGLE)
@@ -41,21 +40,9 @@ method min_load_immoff(dt=DOUBLE)
 method min_load_immoff(dt=HALF)
 method min_load_immoff(dt=SINGLE)
 method min_load_voff()
-method min_prefetch_offset()
 method mov_greg_to_param(param=someparam, src=t0)
 method mov_param_to_greg(dst=t0, param=someparam)
 method mov_param_to_greg_shift(bit_count=2, dst=t0, param=someparam)
-method prefetch_l1_immoff(areg=t0, offset=-2048)
-method prefetch_l1_immoff(areg=t0, offset=-2049)
-method prefetch_l1_immoff(areg=t0, offset=-8)
-method prefetch_l1_immoff(areg=t0, offset=0)
-method prefetch_l1_immoff(areg=t0, offset=1)
-method prefetch_l1_immoff(areg=t0, offset=2047)
-method prefetch_l1_immoff(areg=t0, offset=2048)
-method prefetch_l1_immoff(areg=t0, offset=255)
-method prefetch_l1_immoff(areg=t0, offset=256)
-method prefetch_l1_immoff(areg=t0, offset=4096)
-method prefetch_l1_immoff(areg=t0, offset=8)
 method simd_size()
 method supported_on_host()
 method supportedby_cpuinfo(cpuinfo=invalid_isa)
@@ -164,6 +151,9 @@ op mul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8 cdreg:REGISTER:VEC:SI
 op mul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:SINT8{VF} cdreg:REGISTER:VEC:SINT16 {widening_method:VEC_GROUP}
 op mul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:GP:UINT8{VF} cdreg:REGISTER:VEC:UINT8
 op mul [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
+op prefetch [IOFFSET] agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
+op prefetch [IOFFSET] agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
+op prefetch [] agreg:REGISTER:GP:UINT64
 op set [PARAM,VLEN] param:NAME:-:-
 op store [IOFFSET] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
 op store [IOFFSET] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far

@@ -11,6 +11,7 @@ from copy import deepcopy
 from typing import Union
 from abc import abstractmethod
 
+from ..x86.opmem import x86_prefetch
 from ...asmdata import asm_data
 from ...registers import (
     reg_tracker,
@@ -71,6 +72,7 @@ class avx512(avxbase):
 
         self.load = avx512_load(asmwrap=self.asmwrap, rpref=self.rpref)
         self.store = avx512_store(asmwrap=self.asmwrap, rpref=self.rpref)
+        self.prefetch = x86_prefetch(asmwrap=self.asmwrap, rpref=self.rpref)
         self.move = avx_move(asmwrap=self.asmwrap, rpref=self.rpref, simd_bytes=64)
         self.sub = x86_sub(asmwrap=self.asmwrap, rpref=self.rpref)
         self.shift = x86_shift(asmwrap=self.asmwrap, rpref=self.rpref)

@@ -513,14 +513,6 @@ class avxbase(asmgen):
     def zero_freg(self, *, freg : freg_base, dt : adt) -> str:
         return self.set(dreg=freg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
-    @property
-    def min_prefetch_offset(self):
-        return 0
-
-    @property
-    def max_prefetch_offset(self):
-        return 2**31
-
     def min_load_immoff(self, dt : adt):
         return 0
 
@@ -566,10 +558,6 @@ class avxbase(asmgen):
         register, vpcmpeqd on an AVX2 vector mask
         """
         return self.set(dreg=reg, dt=dt, modifiers={_opset_mod.CONSTMASK}, mask="alltrue")
-
-    def prefetch_l1_immoff(self, *, areg : greg_base, offset : int):
-        preg = self.rpref(areg)
-        return self.asmwrap(f"prefetcht0 {offset}({preg})")
 
     def load_vector_voff(self, *, areg : greg_base, voffset : int, vreg : vreg_base, dt : adt):
         suf = 'p'+self.dt_suffixes[dt]

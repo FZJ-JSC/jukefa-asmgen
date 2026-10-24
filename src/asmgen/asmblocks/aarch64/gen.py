@@ -22,6 +22,7 @@ from .types import aarch64_greg,aarch64_freg
 from ...callconv.callconv import callconv
 
 from .opmem import aarch64_load, aarch64_store
+from .opmem import aarch64_prefetch
 from ...registers import asm_data_type as _ADT
 from ..op.operand import operand_modifier as _opd_mod
 from ..op.move import move_modifier as _move_mod
@@ -76,6 +77,7 @@ class aarch64(asmgen):
             }
         self.load = aarch64_load(asmwrap=self.asmwrap)
         self.store = aarch64_store(asmwrap=self.asmwrap)
+        self.prefetch = aarch64_prefetch(asmwrap=self.asmwrap)
         self.default_callconv = "aapcs64"
 
     def create_callconv(self, name : str = "default"):
@@ -330,20 +332,8 @@ class aarch64(asmgen):
     def freg(self, reg_idx : int, dt : adt) -> freg_base:
         return aarch64_freg(reg_idx=reg_idx, dt=dt)
 
-    @property
-    def min_prefetch_offset(self):
-        return 0
-
-    @property
-    def max_prefetch_offset(self):
-        return 32760
-
     def min_fload_immoff(self, dt : adt):
         return 0
 
     def max_fload_immoff(self, dt : adt):
         return 4095
-
-    def prefetch_l1_immoff(self, *, areg : greg_base,
-                         offset : int) -> str:
-        return self.asmwrap(f"prfm pldl1strm,[{areg},#{offset}]")

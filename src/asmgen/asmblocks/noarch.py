@@ -560,28 +560,6 @@ class asmgen(ABC):
 
     @property
     @abstractmethod
-    def min_prefetch_offset(self) -> int:
-        """
-        Returns the minimum immediate prefetch offset in bytes (can be negative)
-
-        :return: Minimum immediate prefetch offset
-        :rtype: int
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @property
-    @abstractmethod
-    def max_prefetch_offset(self) -> int:
-        """
-        Returns the maximum immediate prefetch offset in bytes (can be negative)
-
-        :return: Maximum immediate prefetch offset
-        :rtype: int
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @property
-    @abstractmethod
     def min_load_voff(self) -> int:
         """
         Returns the minimum immediate offset in number of SIMD/vector registers
@@ -1211,21 +1189,6 @@ class asmgen(ABC):
             return self.set(dreg=vreg, dt=dt, modifiers={opset_modifier.STINDEX}, streg=streg)
         except ValueError as err:
             raise NotImplementedError(f"{type(self).__name__} has no index vector here: {err}") from err
-
-    @abstractmethod
-    def prefetch_l1_immoff(self, *, areg : greg_type, offset : int):
-        """
-        Returns the string containing the instruction(s) to issue a prefetch 
-        targeting the L1 cache
-
-        :param areg: GP register containing the base address
-        :type areg: class:`asmgen.register.greg_base`
-        :param offset: immediate offset in bytes
-        :type offset: int
-        :return: String containing the required ASM instructions
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
 
     def load_pointer(self, *, areg : greg_type, name : str):
         """

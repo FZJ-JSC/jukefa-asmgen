@@ -417,8 +417,7 @@ builds unchanged.
 - [ ] Every old load and store mapped onto `load`/`store` signatures, the
       missing modifiers added: plain, `IOFFSET`, `GOFFSET`, VL-scaled
       offsets, `BCAST` (with offset and post-increment), strides (register,
-      immediate), gather and scatter, lanes, tiles, and prefetch (from
-      `riscv64/opmem/prefetch.py` to every ISA).
+      immediate), gather and scatter, lanes and tiles.
 - [x] Scalar loads and stores (`load_greg`, `store_greg`, `load_freg`,
       `store_freg`, `*_scalar_immoff`): one implementation each in the base
       class, on `load` and `store` - whose vector ISAs' carry the base
@@ -444,9 +443,17 @@ builds unchanged.
       format (a space after the comma; x86's `load_pointer` says `movq`
       for `mov`); the forms compile in asm statements with "m" operands
       (`tests/test_opmem_param.py`). PARAM has no offset forms.
+- [x] `gen.prefetch` on every generator: the base ISA's scalar prefetch
+      operation (RISC-V `prefetch.r`, AArch64 `prfm PLDL1KEEP`, x86
+      `prefetcht0`), plain and with `IOFFSET`. The legacy
+      `prefetch_l1_immoff`, `min_prefetch_offset` and `max_prefetch_offset`
+      are gone without a deprecation: nothing used them. Prefetches and
+      non-temporal accesses get their full support with ukrgen 0.3: levels
+      and write prefetches; RISC-V's `prefetch.r` needs Zicbop (its
+      signatures don't require it yet) and an offset that's a multiple of
+      32 (not constrained yet).
 - [ ] The limits become constraints: `max/min_load_immoff`,
-      `max/min_fload_immoff`, `max/min_bcast_immoff`, `max/min_load_voff`,
-      `max/min_prefetch_offset`.
+      `max/min_fload_immoff`, `max/min_bcast_immoff`, `max/min_load_voff`.
 - [ ] rvv071: its operations print 0.7.1's mnemonics and `vsetvli`, their
       signatures offer only the element width `vsetvli` set; FP32 and FP64
       kernels build.
@@ -569,3 +576,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   c_simd_size_function on it; operand_type.NAME (asmgen 0053).
 - 2026-10-24: load and store with PARAM; mov_greg_to_param,
   mov_param_to_greg and load_pointer on them (asmgen 0054).
+- 2026-10-24: gen.prefetch on every generator; prefetch_l1_immoff and the
+  prefetch offset limits removed (asmgen 0055).
