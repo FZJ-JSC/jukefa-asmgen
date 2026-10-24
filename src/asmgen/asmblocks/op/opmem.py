@@ -7,6 +7,7 @@
 Operation on n data operands and 1 address operand and related structures
 """
 
+import dataclasses
 from enum import Enum,auto
 
 from abc import abstractmethod
@@ -15,6 +16,7 @@ from .operation import operation
 from .signature import operation_signature
 from .modifier import operation_modifier
 from .operand import operand_modifier
+from .operand import operand_shape as osh, operand_type as ot, operand_role as orl
 from .misc import make_ord_prefix
 
 from ...registers import (
@@ -46,6 +48,7 @@ class opmem_modifier(operation_modifier):
     #ROW = auto()     # Row of a treg
     #COL = auto()     # Column of a treg
     NT  = auto()     # Non-temporal ld/st
+    PARAM = auto()   # The memory is an inline asm operand %[param] (inline asm only): no address register
 
 class opmem_action(Enum):
     """
@@ -64,7 +67,7 @@ class opmem(operation):
     NIE_MESSAGE="Method not implemented"
 
     def __call__(self, *, dregs : list[data_reg]|None = None,
-                 areg : greg_base, dt : adt|None = None,
+                 areg : greg_base|None = None, dt : adt|None = None,
                  modifiers : set[opmem_modifier] = None,
                  operand_modifiers : dict[str,set[operand_modifier]] = None,
                  **kwargs) -> str:
@@ -98,7 +101,7 @@ class opmem(operation):
 
         return self.execute(
             dregs=dregs,
-            gregs=[areg],
+            gregs=[areg] if areg is not None else [],
             dts={
                 make_ord_prefix(i)+'dreg' : dt for i in range(len(dregs))
             },
@@ -136,3 +139,24 @@ class dummy_opmem(opmem):
                        operand_modifiers : dict[str,set[operand_modifier]],
                        **kwargs) -> str:
         raise NotImplementedError(self.NIE_MESSAGE)
+
+
+def param_signatures(signatures : list[operation_signature]) -> list[operation_signature]:
+    """
+    The PARAM forms of plain loads and stores: the same data operands, the
+    memory an inline asm operand %[param] instead of an address register's
+    (inline asm only)
+
+    :param signatures: an opmem's signatures; those without modifiers that
+        have a data and an address register get a PARAM form
+    :return: the PARAM forms
+    """
+    out = []
+    for s in signatures:
+        if s.modifiers or 'agreg' not in s.operands or 'adreg' not in s.operands:
+            continue
+        operands = {k: v for k, v in s.operands.items() if k != 'agreg'}
+        operands['param'] = osh(ot.NAME, orl.PARAM, None, None)
+        out.append(dataclasses.replace(s, modifiers={opmem_modifier.PARAM}, operands=operands))
+    return out
+

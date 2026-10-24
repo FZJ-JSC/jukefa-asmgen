@@ -248,7 +248,7 @@ movq 4096(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=8)
 movq 8(%r8), %r9
 ### method load_pointer(areg=r8, name=someparam)
-mov %[someparam],%r8
+movq %[someparam], %r8
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-2048)
 vmovsd -2048(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-2049)
@@ -565,9 +565,9 @@ vmovd %r8d,%xmm1
 ### method mov_greg_to_freg(dst=xmm1, dt=SINGLE, src=r8)
 vmovd %r8d,%xmm1
 ### method mov_greg_to_param(param=someparam, src=r8)
-movq %r8,%[someparam]
+movq %r8, %[someparam]
 ### method mov_param_to_greg(dst=r8, param=someparam)
-movq %[someparam],%r8
+movq %[someparam], %r8
 ### method mov_param_to_greg_shift(bit_count=2, dst=r8, param=someparam)
 leaq (,%[someparam],4),%r8
 ### method mul_greg_greg(dst=r8, reg1=r9, reg2=r10)
@@ -1930,6 +1930,30 @@ vgatherqpd %ymm2, (%rcx,%ymm3,1), %ymm1
 vgatherdps %ymm2, (%rcx,%ymm3,1), %ymm1
 ### op load [MASK,VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT64 vidxreg:REGISTER:VEC:UINT64 {it:INT64}
 vgatherqpd %ymm2, (%rcx,%ymm3,1), %ymm1
+### op load [PARAM] adreg:REGISTER:FP:BF16 param:NAME:-:-
+vmovsh %[p], %xmm1
+### op load [PARAM] adreg:REGISTER:FP:DOUBLE param:NAME:-:-
+vmovsd %[p], %xmm1
+### op load [PARAM] adreg:REGISTER:FP:HALF param:NAME:-:-
+vmovsh %[p], %xmm1
+### op load [PARAM] adreg:REGISTER:FP:SINGLE param:NAME:-:-
+vmovss %[p], %xmm1
+### op load [PARAM] adreg:REGISTER:GP:SINT16 param:NAME:-:-
+movw %[p], %rcx
+### op load [PARAM] adreg:REGISTER:GP:SINT32 param:NAME:-:-
+movl %[p], %rcx
+### op load [PARAM] adreg:REGISTER:GP:SINT64 param:NAME:-:-
+movq %[p], %rcx
+### op load [PARAM] adreg:REGISTER:GP:SINT8 param:NAME:-:-
+movb %[p], %rcx
+### op load [PARAM] adreg:REGISTER:GP:UINT16 param:NAME:-:-
+movw %[p], %rcx
+### op load [PARAM] adreg:REGISTER:GP:UINT32 param:NAME:-:-
+movl %[p], %rcx
+### op load [PARAM] adreg:REGISTER:GP:UINT64 param:NAME:-:-
+movq %[p], %rcx
+### op load [PARAM] adreg:REGISTER:GP:UINT8 param:NAME:-:-
+movb %[p], %rcx
 ### op load [VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
 vmovdqu -2147483648(%rcx), %ymm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
@@ -3279,6 +3303,30 @@ vmovdqu %ymm1, 2147483647(%rcx)
 vpextrb $0, %xmm1, -2147483648(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
 vpextrb $15, %xmm1, 2147483647(%rcx)
+### op store [PARAM] adreg:REGISTER:FP:BF16 param:NAME:-:-
+vmovsh %xmm1, %[p]
+### op store [PARAM] adreg:REGISTER:FP:DOUBLE param:NAME:-:-
+vmovsd %xmm1, %[p]
+### op store [PARAM] adreg:REGISTER:FP:HALF param:NAME:-:-
+vmovsh %xmm1, %[p]
+### op store [PARAM] adreg:REGISTER:FP:SINGLE param:NAME:-:-
+vmovss %xmm1, %[p]
+### op store [PARAM] adreg:REGISTER:GP:SINT16 param:NAME:-:-
+movw %rcx, %[p]
+### op store [PARAM] adreg:REGISTER:GP:SINT32 param:NAME:-:-
+movl %rcx, %[p]
+### op store [PARAM] adreg:REGISTER:GP:SINT64 param:NAME:-:-
+movq %rcx, %[p]
+### op store [PARAM] adreg:REGISTER:GP:SINT8 param:NAME:-:-
+movb %rcx, %[p]
+### op store [PARAM] adreg:REGISTER:GP:UINT16 param:NAME:-:-
+movw %rcx, %[p]
+### op store [PARAM] adreg:REGISTER:GP:UINT32 param:NAME:-:-
+movl %rcx, %[p]
+### op store [PARAM] adreg:REGISTER:GP:UINT64 param:NAME:-:-
+movq %rcx, %[p]
+### op store [PARAM] adreg:REGISTER:GP:UINT8 param:NAME:-:-
+movb %rcx, %[p]
 ### op store [VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
 vmovdqu %ymm1, -2147483648(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far

@@ -305,16 +305,15 @@ golden kernels and ukropt's builds unchanged.
       `dt_suffixes`) in `x86/types.py`. The old methods' texts kept - x86's
       `vmovs{d,s,h}` with two unprefixed registers too, which doesn't
       assemble (a fix for later).
-- [~] Parameters, inline output only: `opset_modifier.PARAM` done - set's
+- [x] Parameters, inline asm only: `opset_modifier.PARAM` - set's
       destination an inline asm register operand `%[param]`, no dreg
       (`operand_type.NAME`, new, for the name) - for VLEN on RVV, NEON, SVE
-      and SME, which `c_simd_size_function` uses. `mov_greg_to_param`,
-      `mov_param_to_greg`, `load_pointer` as `load`/`store` with
-      `opmem_modifier.PARAM` with phase 5: they read and write memory
-      operands (`ld`/`sd`, `ldr`/`str`, `movq` with `%[param]`).
-      `mov_param_to_greg_shift` takes `%[param]` as a register on RISC-V
-      and x86 (`slli`, `leaq`) and as nothing that assembles on AArch64;
-      no caller uses it.
+      and SME, which `c_simd_size_function` uses; and `opmem_modifier.PARAM`
+      (phase 5): `mov_greg_to_param`, `mov_param_to_greg` and `load_pointer`
+      are `load`/`store` from and to the memory operand `%[param]`.
+      `mov_param_to_greg_shift` stays as it is, to go in phase 9: no caller
+      uses it, it takes `%[param]` as a register on RISC-V and x86 (`slli`,
+      `leaq`) and as nothing that assembles on AArch64.
 - [x] A broadcast from a register is a `move` with `BCAST`: `fill_vector`
       is one method in the base class now, the backends' five gone. Its
       texts changed in their spacing, and SVE writes `mov z.d,d` (the
@@ -435,6 +434,16 @@ builds unchanged.
 - [x] `callconv`/`fngen` spills, fills and stack parameters on
       `load`/`store` themselves (`IOFFSET` where the offset isn't 0), not
       constructed names.
+- [x] Parameters: `opmem_modifier.PARAM`, the memory an inline asm operand
+      `%[param]` and no address register (`areg` is optional in
+      `load`/`store`, and in every opmem's implementation); each scalar
+      opmem's plain load and store signatures have a PARAM form
+      (`param_signatures`), which the vector opmems carry as they carry the
+      rest. `mov_greg_to_param`, `mov_param_to_greg`, `load_pointer`: one
+      implementation each in the base class, on them. Their texts differ in
+      format (a space after the comma; x86's `load_pointer` says `movq`
+      for `mov`); the forms compile in asm statements with "m" operands
+      (`tests/test_opmem_param.py`). PARAM has no offset forms.
 - [ ] The limits become constraints: `max/min_load_immoff`,
       `max/min_fload_immoff`, `max/min_bcast_immoff`, `max/min_load_voff`,
       `max/min_prefetch_offset`.
@@ -472,6 +481,14 @@ ukrgen:
       probes and compatibility shims gone; IR op names `add`/`mul`.
 - [ ] The old mechanism into `legacy/`; the family pipeline's stages
       (`irmod`, `variant`) no longer import from it.
+- [ ] Its tests along with it: `models/test_loop`, `models/test_addr_resolver`,
+      `specializers/test_lsc_specializer`, `lsc` and `sto`'s `test_vecdir`,
+      `flow/test_pack`, `flow/stages` - they can't load since asmgen moved
+      `asmblocks/operations` to `asmblocks/op` (`emitters/asm.py`,
+      `specializers/asm.py`, `models/addr_parameters.py` import it).
+- [ ] A test for the signature emitter's address resolution, as
+      `test_addr_resolver` was for the old one: different numbers of
+      address registers, and phased, rotating and blocked advances.
 
 ukropt:
 - [ ] `pairs` and `fmaload` without their workarounds: immediates through
@@ -550,3 +567,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   pools, set's forms (asmgen 0052).
 - 2026-10-23: set with PARAM: VLEN into an inline asm operand,
   c_simd_size_function on it; operand_type.NAME (asmgen 0053).
+- 2026-10-24: load and store with PARAM; mov_greg_to_param,
+  mov_param_to_greg and load_pointer on them (asmgen 0054).

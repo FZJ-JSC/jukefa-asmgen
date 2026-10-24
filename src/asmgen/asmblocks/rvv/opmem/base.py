@@ -248,7 +248,7 @@ class rvv_opmem(opmem):
 
 
     def implementation(self, *, dregs : list[data_reg],
-                       agreg : greg_base,
+                       agreg : greg_base|None = None,
                        modifiers : set[mod],
                        operand_modifiers : dict[str,set[opd_mod]],
                        **kwargs) -> str:

@@ -191,6 +191,19 @@ op fma [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{ILANE} cdreg:REGIS
 op fma [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{ILANE} cdreg:REGISTER:VEC:SINT64 bdreg_lane:IMMEDIATE:-:- @far
 op fma [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{ILANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:-
 op fma [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{ILANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- @far
+op load [PARAM] adreg:REGISTER:FP:DOUBLE param:NAME:-:-
+op load [PARAM] adreg:REGISTER:FP:FP8E4M3 param:NAME:-:-
+op load [PARAM] adreg:REGISTER:FP:FP8E5M2 param:NAME:-:-
+op load [PARAM] adreg:REGISTER:FP:HALF param:NAME:-:-
+op load [PARAM] adreg:REGISTER:FP:SINGLE param:NAME:-:-
+op load [PARAM] adreg:REGISTER:GP:SINT16 param:NAME:-:-
+op load [PARAM] adreg:REGISTER:GP:SINT32 param:NAME:-:-
+op load [PARAM] adreg:REGISTER:GP:SINT64 param:NAME:-:-
+op load [PARAM] adreg:REGISTER:GP:SINT8 param:NAME:-:-
+op load [PARAM] adreg:REGISTER:GP:UINT16 param:NAME:-:-
+op load [PARAM] adreg:REGISTER:GP:UINT32 param:NAME:-:-
+op load [PARAM] adreg:REGISTER:GP:UINT64 param:NAME:-:-
+op load [PARAM] adreg:REGISTER:GP:UINT8 param:NAME:-:-
 op load [POSTINC] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 op load [POSTINC] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 op load [POSTINC] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
@@ -210,6 +223,19 @@ op mul [] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64{ILANE} cdreg:REGIS
 op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{ILANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:-
 op mul [] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8{ILANE} cdreg:REGISTER:VEC:SINT8 bdreg_lane:IMMEDIATE:-:- @far
 op set [PARAM,VLEN] param:NAME:-:-
+op store [PARAM] adreg:REGISTER:FP:DOUBLE param:NAME:-:-
+op store [PARAM] adreg:REGISTER:FP:FP8E4M3 param:NAME:-:-
+op store [PARAM] adreg:REGISTER:FP:FP8E5M2 param:NAME:-:-
+op store [PARAM] adreg:REGISTER:FP:HALF param:NAME:-:-
+op store [PARAM] adreg:REGISTER:FP:SINGLE param:NAME:-:-
+op store [PARAM] adreg:REGISTER:GP:SINT16 param:NAME:-:-
+op store [PARAM] adreg:REGISTER:GP:SINT32 param:NAME:-:-
+op store [PARAM] adreg:REGISTER:GP:SINT64 param:NAME:-:-
+op store [PARAM] adreg:REGISTER:GP:SINT8 param:NAME:-:-
+op store [PARAM] adreg:REGISTER:GP:UINT16 param:NAME:-:-
+op store [PARAM] adreg:REGISTER:GP:UINT32 param:NAME:-:-
+op store [PARAM] adreg:REGISTER:GP:UINT64 param:NAME:-:-
+op store [PARAM] adreg:REGISTER:GP:UINT8 param:NAME:-:-
 op store [POSTINC] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 op store [POSTINC] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 op store [POSTINC] adreg:REGISTER:FP:FP8E5M2 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64

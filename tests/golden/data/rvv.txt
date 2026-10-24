@@ -253,7 +253,7 @@ ld t1, 4(t0)
 ### method load_greg(areg=t0, dst=t1, offset=8)
 ld t1, 8(t0)
 ### method load_pointer(areg=t0, name=someparam)
-ld t0,%[someparam]
+ld t0, %[someparam]
 ### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-2048)
 fld f0, -2048(t0)
 ### method load_scalar_immoff(areg=t0, dt=DOUBLE, freg=f0, offset=-2049)
@@ -568,9 +568,9 @@ fmv.h.x f1,t0
 ### method mov_greg_to_freg(dst=f1, dt=SINGLE, src=t0)
 fmv.w.x f1,t0
 ### method mov_greg_to_param(param=someparam, src=t0)
-sd t0,%[someparam]
+sd t0, %[someparam]
 ### method mov_param_to_greg(dst=t0, param=someparam)
-ld t0,%[someparam]
+ld t0, %[someparam]
 ### method mov_param_to_greg_shift(bit_count=2, dst=t0, param=someparam)
 slli t0,%[someparam],2
 ### method mul_greg_greg(dst=t0, reg1=t1, reg2=t2)
@@ -1168,6 +1168,32 @@ ld s4, 2047(s5)
 lb s4, -2048(s5)
 ### op load [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
 lb s4, 2047(s5)
+### op load [PARAM] adreg:REGISTER:FP:DOUBLE param:NAME:-:-
+fld f1, %[p]
+### op load [PARAM] adreg:REGISTER:FP:FP8E4M3 param:NAME:-:-
+flb f1, %[p]
+### op load [PARAM] adreg:REGISTER:FP:FP8E5M2 param:NAME:-:-
+flb f1, %[p]
+### op load [PARAM] adreg:REGISTER:FP:HALF param:NAME:-:-
+flh f1, %[p]
+### op load [PARAM] adreg:REGISTER:FP:SINGLE param:NAME:-:-
+flw f1, %[p]
+### op load [PARAM] adreg:REGISTER:GP:SINT16 param:NAME:-:-
+lh s4, %[p]
+### op load [PARAM] adreg:REGISTER:GP:SINT32 param:NAME:-:-
+lw s4, %[p]
+### op load [PARAM] adreg:REGISTER:GP:SINT64 param:NAME:-:-
+ld s4, %[p]
+### op load [PARAM] adreg:REGISTER:GP:SINT8 param:NAME:-:-
+lb s4, %[p]
+### op load [PARAM] adreg:REGISTER:GP:UINT16 param:NAME:-:-
+lh s4, %[p]
+### op load [PARAM] adreg:REGISTER:GP:UINT32 param:NAME:-:-
+lw s4, %[p]
+### op load [PARAM] adreg:REGISTER:GP:UINT64 param:NAME:-:-
+ld s4, %[p]
+### op load [PARAM] adreg:REGISTER:GP:UINT8 param:NAME:-:-
+lb s4, %[p]
 ### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE gdreg:REGISTER:VEC:DOUBLE hdreg:REGISTER:VEC:DOUBLE {nstructs:8}
 vlseg8e64.v v1, (s4)
 ### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE gdreg:REGISTER:VEC:DOUBLE {nstructs:7}
@@ -2227,6 +2253,32 @@ sd s4, 2047(s5)
 sb s4, -2048(s5)
 ### op store [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
 sb s4, 2047(s5)
+### op store [PARAM] adreg:REGISTER:FP:DOUBLE param:NAME:-:-
+fsd f1, %[p]
+### op store [PARAM] adreg:REGISTER:FP:FP8E4M3 param:NAME:-:-
+fsb f1, %[p]
+### op store [PARAM] adreg:REGISTER:FP:FP8E5M2 param:NAME:-:-
+fsb f1, %[p]
+### op store [PARAM] adreg:REGISTER:FP:HALF param:NAME:-:-
+fsh f1, %[p]
+### op store [PARAM] adreg:REGISTER:FP:SINGLE param:NAME:-:-
+fsw f1, %[p]
+### op store [PARAM] adreg:REGISTER:GP:SINT16 param:NAME:-:-
+sh s4, %[p]
+### op store [PARAM] adreg:REGISTER:GP:SINT32 param:NAME:-:-
+sw s4, %[p]
+### op store [PARAM] adreg:REGISTER:GP:SINT64 param:NAME:-:-
+sd s4, %[p]
+### op store [PARAM] adreg:REGISTER:GP:SINT8 param:NAME:-:-
+sb s4, %[p]
+### op store [PARAM] adreg:REGISTER:GP:UINT16 param:NAME:-:-
+sh s4, %[p]
+### op store [PARAM] adreg:REGISTER:GP:UINT32 param:NAME:-:-
+sw s4, %[p]
+### op store [PARAM] adreg:REGISTER:GP:UINT64 param:NAME:-:-
+sd s4, %[p]
+### op store [PARAM] adreg:REGISTER:GP:UINT8 param:NAME:-:-
+sb s4, %[p]
 ### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE gdreg:REGISTER:VEC:DOUBLE hdreg:REGISTER:VEC:DOUBLE {nstructs:8}
 vsseg8e64.v v1, (s4)
 ### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE gdreg:REGISTER:VEC:DOUBLE {nstructs:7}

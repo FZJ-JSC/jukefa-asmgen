@@ -936,6 +936,15 @@ class asmgen(ABC):
         kwargs = {"modifiers": {opmem_modifier.IOFFSET}, "ioffset": offset} if offset else {}
         return getattr(self, action)(dregs=[reg], areg=areg, dt=dt, **kwargs)
 
+    def _param_memory(self, action : str, *, reg : greg_type, param : str) -> str:
+        """
+        A general purpose register loaded from or stored to the inline asm
+        operand %[param]: the load or store operation with PARAM
+        """
+        from .op.opmem import opmem_modifier   # pylint: disable=import-outside-toplevel
+        return getattr(self, action)(dregs=[reg], dt=asm_data_type.UINT64,
+                                     modifiers={opmem_modifier.PARAM}, param=param)
+
     def load_greg(self, *, areg : greg_type, offset : int, dst : greg_type) -> str:
         """
         A load through load (0.6, phase 5)
@@ -965,7 +974,6 @@ class asmgen(ABC):
         """
         raise NotImplementedError(NIE_MESSAGE)
 
-    @abstractmethod
     def mov_greg_to_param(self, *, src : greg_type, param : str) -> str:
         """
         Returns the string containing the instruction(s) to copy the content of a
@@ -978,9 +986,8 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._param_memory("store", reg=src, param=param)
 
-    @abstractmethod
     def mov_param_to_greg(self, *, param : str, dst : greg_type) -> str:
         """
         Returns the string containing the instruction(s) to copy the content of an
@@ -993,7 +1000,7 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._param_memory("load", reg=dst, param=param)
 
     @abstractmethod
     def mov_param_to_greg_shift(self, *, param : str, dst : greg_type,
@@ -1220,7 +1227,6 @@ class asmgen(ABC):
         """
         raise NotImplementedError(NIE_MESSAGE)
 
-    @abstractmethod
     def load_pointer(self, *, areg : greg_type, name : str):
         """
         Returns the string containing the instruction(s) to load a pointer from an
@@ -1233,7 +1239,7 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._param_memory("load", reg=areg, param=name)
 
     def load_scalar_immoff(self, *, areg : greg_type, offset : int, freg : freg_type, dt : asm_data_type) -> str:
         """

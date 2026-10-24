@@ -1848,7 +1848,7 @@ ldr x1, [x0, #4096]
 ### method load_greg(areg=x0, dst=x1, offset=8)
 ldr x1, [x0, #8]
 ### method load_pointer(areg=x0, name=someparam)
-ldr x0,%[someparam]
+ldr x0, %[someparam]
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=-2048)
 !ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=-2049)
@@ -2165,9 +2165,9 @@ fmov d1,w0
 ### method mov_greg_to_freg(dst=d1, dt=SINGLE, src=x0)
 fmov d1,w0
 ### method mov_greg_to_param(param=someparam, src=x0)
-str x0,%[someparam]
+str x0, %[someparam]
 ### method mov_param_to_greg(dst=x0, param=someparam)
-ldr x0,%[someparam]
+ldr x0, %[someparam]
 ### method mov_param_to_greg_shift(bit_count=2, dst=x0, param=someparam)
 ldr x0,%[someparam,LSL#2]
 ### method mul_greg_greg(dst=x0, reg1=x1, reg2=x2)
@@ -3847,6 +3847,32 @@ ld1b {za0v.b[w12, 15]}, p1/z, [x10]
 ld1b {za0h.b[w12, 0]}, p1/z, [x10]
 ### op load [MASK] agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 adreg:REGISTER:TILE:UINT8{ROW} adreg_rowreg:REGISTER:GP:SINT32 adreg_immrow:IMMEDIATE:-:- @far
 ld1b {za0h.b[w12, 15]}, p1/z, [x10]
+### op load [PARAM] adreg:REGISTER:FP:DOUBLE param:NAME:-:-
+ldr d1, %[p]
+### op load [PARAM] adreg:REGISTER:FP:FP8E4M3 param:NAME:-:-
+ldr b1, %[p]
+### op load [PARAM] adreg:REGISTER:FP:FP8E5M2 param:NAME:-:-
+ldr b1, %[p]
+### op load [PARAM] adreg:REGISTER:FP:HALF param:NAME:-:-
+ldr h1, %[p]
+### op load [PARAM] adreg:REGISTER:FP:SINGLE param:NAME:-:-
+ldr s1, %[p]
+### op load [PARAM] adreg:REGISTER:GP:SINT16 param:NAME:-:-
+ldrh w10, %[p]
+### op load [PARAM] adreg:REGISTER:GP:SINT32 param:NAME:-:-
+ldr w10, %[p]
+### op load [PARAM] adreg:REGISTER:GP:SINT64 param:NAME:-:-
+ldr x10, %[p]
+### op load [PARAM] adreg:REGISTER:GP:SINT8 param:NAME:-:-
+ldrb w10, %[p]
+### op load [PARAM] adreg:REGISTER:GP:UINT16 param:NAME:-:-
+ldrh w10, %[p]
+### op load [PARAM] adreg:REGISTER:GP:UINT32 param:NAME:-:-
+ldr w10, %[p]
+### op load [PARAM] adreg:REGISTER:GP:UINT64 param:NAME:-:-
+ldr x10, %[p]
+### op load [PARAM] adreg:REGISTER:GP:UINT8 param:NAME:-:-
+ldrb w10, %[p]
 ### op load [POSTINC] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:SINT64
 ldr d1, [x10], #-256
 ### op load [POSTINC] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:SINT64 @far
@@ -5933,6 +5959,32 @@ st1b {za0v.b[w12, 15]}, p1, [x10]
 st1b {za0h.b[w12, 0]}, p1, [x10]
 ### op store [MASK] agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 adreg:REGISTER:TILE:UINT8{ROW} adreg_rowreg:REGISTER:GP:SINT32 adreg_immrow:IMMEDIATE:-:- @far
 st1b {za0h.b[w12, 15]}, p1, [x10]
+### op store [PARAM] adreg:REGISTER:FP:DOUBLE param:NAME:-:-
+str d1, %[p]
+### op store [PARAM] adreg:REGISTER:FP:FP8E4M3 param:NAME:-:-
+str b1, %[p]
+### op store [PARAM] adreg:REGISTER:FP:FP8E5M2 param:NAME:-:-
+str b1, %[p]
+### op store [PARAM] adreg:REGISTER:FP:HALF param:NAME:-:-
+str h1, %[p]
+### op store [PARAM] adreg:REGISTER:FP:SINGLE param:NAME:-:-
+str s1, %[p]
+### op store [PARAM] adreg:REGISTER:GP:SINT16 param:NAME:-:-
+strh w10, %[p]
+### op store [PARAM] adreg:REGISTER:GP:SINT32 param:NAME:-:-
+str w10, %[p]
+### op store [PARAM] adreg:REGISTER:GP:SINT64 param:NAME:-:-
+str x10, %[p]
+### op store [PARAM] adreg:REGISTER:GP:SINT8 param:NAME:-:-
+strb w10, %[p]
+### op store [PARAM] adreg:REGISTER:GP:UINT16 param:NAME:-:-
+strh w10, %[p]
+### op store [PARAM] adreg:REGISTER:GP:UINT32 param:NAME:-:-
+str w10, %[p]
+### op store [PARAM] adreg:REGISTER:GP:UINT64 param:NAME:-:-
+str x10, %[p]
+### op store [PARAM] adreg:REGISTER:GP:UINT8 param:NAME:-:-
+strb w10, %[p]
 ### op store [POSTINC] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:SINT64
 str d1, [x10], #-256
 ### op store [POSTINC] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:SINT64 @far

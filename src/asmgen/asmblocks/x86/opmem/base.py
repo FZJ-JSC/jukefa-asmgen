@@ -21,6 +21,7 @@ from ....registers import asm_data_type as adt, adt_size
 from ..types import x86_greg, avx_freg
 
 from .signatures import make_x86_64_opmem_signatures
+from ...op.opmem import param_signatures
 
 class x86_opmem(opmem):
     """
@@ -35,7 +36,8 @@ class x86_opmem(opmem):
         self.asmwrap = asmwrap
         self.rpref = rpref
 
-        self.signatures = make_x86_64_opmem_signatures()
+        sigs = make_x86_64_opmem_signatures()
+        self.signatures = sigs + param_signatures(sigs)
 
     def get_signatures(self) -> list[operation_signature]:
         return self.signatures
@@ -121,6 +123,8 @@ class x86_opmem(opmem):
         :param dt: data type to use
         """
 
+        if mod.PARAM in modifiers:
+            return f"%[{kwargs['param']}]"
         offset = kwargs.get("ioffset", 0) if mod.IOFFSET in modifiers else 0
 
         pareg = self.rpref(areg)
@@ -134,7 +138,7 @@ class x86_opmem(opmem):
 
         return f"{offset}({register_part})" if offset != 0 else f"({register_part})"
 
-    def implementation(self, *, dregs: list, agreg: x86_greg,
+    def implementation(self, *, dregs: list, agreg : x86_greg|None = None,
                        modifiers: set[mod],
                        operand_modifiers : dict[str,set[opd_mod]],
                        **kwargs) -> str:

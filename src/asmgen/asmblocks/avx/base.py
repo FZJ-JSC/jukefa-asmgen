@@ -448,14 +448,6 @@ class avxbase(asmgen):
         return self.move(dregs=[src, dst], dts=[dt, dt])
 
 
-    def mov_greg_to_param(self, *, src : greg_base, param : str):
-        preg = self.rpref(src)
-        return self.asmwrap(f"movq {preg},%[{param}]")
-
-    def mov_param_to_greg(self, *, param : str, dst : greg_base):
-        preg = self.rpref(dst)
-        return self.asmwrap(f"movq %[{param}],{preg}")
-
     def mov_param_to_greg_shift(self, *, param : str, dst : greg_base, bit_count : int):
         pdst = self.rpref(dst)
         return self.asmwrap(f"leaq (,%[{param}],{1<<bit_count}),{pdst}")
@@ -578,10 +570,6 @@ class avxbase(asmgen):
     def prefetch_l1_immoff(self, *, areg : greg_base, offset : int):
         preg = self.rpref(areg)
         return self.asmwrap(f"prefetcht0 {offset}({preg})")
-
-    def load_pointer(self, *, areg : greg_base, name : str):
-        preg = self.rpref(areg)
-        return self.asmwrap(f"mov %[{name}],{preg}")
 
     def load_vector_voff(self, *, areg : greg_base, voffset : int, vreg : vreg_base, dt : adt):
         suf = 'p'+self.dt_suffixes[dt]

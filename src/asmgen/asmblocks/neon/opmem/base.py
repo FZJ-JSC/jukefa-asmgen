@@ -261,7 +261,7 @@ class neon_opmem(opmem):
     # I don't know how pylint counts it, but it's not 16
     # pylint: disable-next=too-many-locals
     def implementation(self, *,
-                       dregs: list, agreg: aarch64_greg,
+                       dregs: list, agreg : aarch64_greg|None = None,
                        modifiers: set[mod],
                        operand_modifiers : dict[str,set[opd_mod]],
                        **kwargs) -> str:

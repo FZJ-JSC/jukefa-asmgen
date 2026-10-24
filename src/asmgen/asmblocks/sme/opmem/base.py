@@ -192,7 +192,7 @@ class sme_opmem(opmem):
 
     # Inlining any params or breaking the method up IMHO doesn't impove readability
     # pylint: disable-next=too-many-locals
-    def implementation(self, *, dregs: list, agreg: aarch64_greg,
+    def implementation(self, *, dregs: list, agreg : aarch64_greg|None = None,
                        modifiers: set[mod],
                        operand_modifiers : dict[str,set[opd_mod]],
                        **kwargs) -> str:

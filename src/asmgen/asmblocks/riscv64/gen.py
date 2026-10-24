@@ -234,14 +234,8 @@ class riscv64(asmgen):
         # There is no mov instruction?
         return self.move(dregs=[src, dst], dts=[_GP, _GP])
 
-    def mov_param_to_greg(self, *, param : str, dst : greg_base) -> str:
-        return self.asmwrap(f"ld {dst},%[{param}]")
-
     def mov_param_to_greg_shift(self, *, param : str, dst : greg_base, bit_count : int) -> str:
         return self.asmwrap(f"slli {dst},%[{param}],{bit_count}")
-
-    def mov_greg_to_param(self, *, src : greg_base, param : str) -> str:
-        return self.asmwrap(f"sd {src},%[{param}]")
 
     def mov_greg_imm(self, *, reg : greg_base, imm : int) -> str:
         return self.set(dreg=reg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, value=imm)
@@ -329,6 +323,3 @@ class riscv64(asmgen):
     def prefetch_l1_immoff(self, *, areg : greg_base, offset : int) -> str:
         # Needs Zicbop
         return self.asmwrap(f"prefetch.r {offset}({areg})")
-
-    def load_pointer(self, *, areg : greg_base, name : str) -> str:
-        return self.asmwrap(f"ld {areg},%[{name}]")

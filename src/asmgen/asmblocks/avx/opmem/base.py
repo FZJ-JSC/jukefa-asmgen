@@ -248,7 +248,7 @@ class avx_opmem(opmem):
 
     # It's fine
     # pylint: disable-next=too-many-return-statements
-    def implementation(self, *, dregs: list[data_reg], agreg: x86_greg,
+    def implementation(self, *, dregs: list[data_reg], agreg : x86_greg|None = None,
                        modifiers: set[mod],
                        operand_modifiers : dict[str,set[opd_mod]],
                        **kwargs) -> str:

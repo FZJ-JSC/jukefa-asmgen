@@ -23,6 +23,7 @@ from ..types import riscv64_greg,riscv64_freg
 
 
 from .signatures import make_riscv64_opmem_signatures
+from ...op.opmem import param_signatures
 
 
 class riscv64_opmem(opmem):
@@ -37,7 +38,8 @@ class riscv64_opmem(opmem):
         self.action = action
         self.asmwrap = asmwrap
 
-        self.signatures = make_riscv64_opmem_signatures()
+        sigs = make_riscv64_opmem_signatures()
+        self.signatures = sigs + param_signatures(sigs)
 
     def diagnose_unsupported_mods(self, modifiers: set[mod]):
         """
@@ -117,6 +119,8 @@ class riscv64_opmem(opmem):
         
         :return: string containing the addressing
         """
+        if mod.PARAM in modifiers:
+            return f"%[{kwargs['param']}]"
         if not isinstance(areg, riscv64_greg):
             raise ValueError(f"{areg} is not a riscv64_greg")
 
@@ -126,7 +130,7 @@ class riscv64_opmem(opmem):
     def get_signatures(self) -> list[operation_signature]:
         return self.signatures
 
-    def implementation(self, *, dregs : list[data_reg], agreg : greg_base,
+    def implementation(self, *, dregs : list[data_reg], agreg : greg_base|None = None,
                        modifiers : set[mod],
                        operand_modifiers : dict[str,set[opd_mod]],
                        **kwargs) -> str:

@@ -22,6 +22,7 @@ from ....registers import asm_data_type as adt, adt_size
 from ..types import aarch64_greg, aarch64_freg
 
 from .signatures import make_aarch64_opmem_signatures
+from ...op.opmem import param_signatures
 
 class aarch64_opmem(opmem):
     """
@@ -34,7 +35,8 @@ class aarch64_opmem(opmem):
         self.action = action
         self.asmwrap=asmwrap
 
-        self.signatures = make_aarch64_opmem_signatures()
+        sigs = make_aarch64_opmem_signatures()
+        self.signatures = sigs + param_signatures(sigs)
 
     def get_signatures(self) -> list[operation_signature]:
         return self.signatures
@@ -119,6 +121,8 @@ class aarch64_opmem(opmem):
         
         :return: string containing the addressing
         """
+        if mod.PARAM in modifiers:
+            return f"%[{kwargs['param']}]"
         if not isinstance(areg, aarch64_greg):
             raise ValueError(f"{areg} is not an aarch64_greg")
 
@@ -161,7 +165,7 @@ class aarch64_opmem(opmem):
 
         return base
 
-    def implementation(self, *, dregs: list, agreg: aarch64_greg,
+    def implementation(self, *, dregs: list, agreg : aarch64_greg|None = None,
                        modifiers: set[mod], **kwargs) -> str:
 
         if len(dregs) != 1:

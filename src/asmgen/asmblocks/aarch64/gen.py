@@ -266,15 +266,9 @@ class aarch64(asmgen):
         # fmov's immediate can't encode 0.0: the zero register can
         return self.set(dreg=freg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
-    def mov_param_to_greg(self, *, param : str, dst : greg_base) -> str:
-        return self.asmwrap(f"ldr {dst},%[{param}]")
-
     def mov_param_to_greg_shift(self, *, param : str,
                                 dst : greg_base, bit_count : int) -> str:
         return self.asmwrap(f"ldr {dst},%[{param},LSL#{bit_count}]")
-
-    def mov_greg_to_param(self, *, src : greg_base, param : str) -> str:
-        return self.asmwrap(f"str {src},%[{param}]")
 
     def mov_greg_imm(self, *, reg : greg_base, imm : int) -> str:
         return self.set(dreg=reg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, value=imm)
@@ -353,7 +347,3 @@ class aarch64(asmgen):
     def prefetch_l1_immoff(self, *, areg : greg_base,
                          offset : int) -> str:
         return self.asmwrap(f"prfm pldl1strm,[{areg},#{offset}]")
-
-    def load_pointer(self, *, areg : greg_base,
-                     name : str) -> str:
-        return self.asmwrap(f"ldr {areg},%[{name}]")
