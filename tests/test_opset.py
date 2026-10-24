@@ -190,11 +190,11 @@ class test_vlen(unittest.TestCase):
 
 class test_index(unittest.TestCase):
     """
-    INDEX: element i of a vector register is i times a stride register;
+    STINDEX: element i of a vector register is i times a stride register;
     greg_to_voffs on it
     """
     def index(self, g, dt):
-        return g.set(dreg=g.vreg(2), dt=dt, modifiers={opset_modifier.INDEX}, streg=g.greg(1)).strip().replace("\n", " ; ")
+        return g.set(dreg=g.vreg(2), dt=dt, modifiers={opset_modifier.STINDEX}, streg=g.greg(1)).strip().replace("\n", " ; ")
 
     def test_backends(self):
         r, s = make(rvv), make(sve)
@@ -219,5 +219,5 @@ class test_index(unittest.TestCase):
         for ctor in (rvv, sve, fma256, avx512):
             g = make(ctor)
             with self.subTest(isa=ctor.__name__):
-                self.assertEqual(g.set(dreg=g.vreg(2), dt=adt.SINGLE, modifiers={opset_modifier.INDEX}, streg=g.greg(1)),
+                self.assertEqual(g.set(dreg=g.vreg(2), dt=adt.SINGLE, modifiers={opset_modifier.STINDEX}, streg=g.greg(1)),
                                  g.greg_to_voffs(streg=g.greg(1), vreg=g.vreg(2), dt=adt.SINGLE))

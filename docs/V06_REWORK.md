@@ -367,8 +367,9 @@ instruction stream:
       finish it. Kept as it was: `kxnorw` sets 16 bits whatever the
       type, too few for FP16 and bytes in zmm (32 and 64 elements) - for
       `kxnord`/`kxnorq` later.
-- [x] `VLEN`: `set(dreg=r, modifiers={VLEN})` bytes, with `dt=` elements
-      of dt (the structural parameter `unit`; the register UINT64) - on
+- [x] `VLEN`: `set(dreg=r, dt=dt, modifiers={VLEN})`, elements of dt -
+      bytes where dt isn't given (UINT8, the default; the register is
+      UINT64, the only case where set's dt isn't dreg's) - on
       every backend: RVV `vsetvli r, zero, e<bits>, m<LMUL>, ta, ma` (a
       register group's; it sets the vector type too) and rvv071's without
       the policies; SVE and SME `cnt{b,h,w,d}` (`simd_size_to_greg`'s
@@ -376,10 +377,12 @@ instruction stream:
       `simd_size_to_greg` and `vlen_to_greg` are one implementation each in
       the base class, on it: every backend has both, ukrgen's vector length
       works on RVV, NEON and x86.
-- [x] `INDEX`: `set(dreg=v, dt=dt, modifiers={INDEX}, streg=r)`, element i
+- [x] `STINDEX` (indices from a stride, where a `VINDEX` would hold any
+      offsets): `set(dreg=v, dt=dt, modifiers={STINDEX}, streg=r)`, element i
       is i * r - RVV `vid.v` and `vmul.vx`; SVE and SME `index` (a w
       register below 8 bytes); AVX the stride broadcast times a table the
-      generator keeps in its data (its `index_table` hands set the label),
+      generator keeps in its data (its `index_table` hands set the label; `rip` named through
+      `rpref` like a register),
       2- to 8-byte elements (no byte multiply). NEON has none.
       `greg_to_voffs` is one implementation in the base class on it,
       raising `NotImplementedError` where there's no form, as ukrgen's
@@ -421,7 +424,8 @@ builds unchanged.
       took the register's own name whatever dt was. `load_pointer` goes
       with the parameters.
 - [x] `callconv`/`fngen` spills, fills and stack parameters on
-      `load`/`store` (`callconv.stack_access`), not constructed names.
+      `load`/`store` themselves (`IOFFSET` where the offset isn't 0), not
+      constructed names.
 - [ ] The limits become constraints: `max/min_load_immoff`,
       `max/min_fload_immoff`, `max/min_bcast_immoff`, `max/min_load_voff`,
       `max/min_prefetch_offset`.
@@ -529,3 +533,7 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   (asmgen 0049).
 - 2026-10-23: phase 5, step 5a - scalar loads and stores, callconv's and
   fngen's on load and store (asmgen 0050, ukrgen 0158).
+- 2026-10-23: corrections to phases 4 and 5 (asmgen 0051): VLEN counts
+  elements of dt, UINT8 by default (no unit); STINDEX for INDEX; rip named
+  by rpref; the base methods' type annotations back; set's modifiers
+  annotated; no stack_access helper.

@@ -2454,56 +2454,34 @@ vpternlogd $0xff,%zmm1,%zmm1,%zmm1
 vpabsb %zmm1,%zmm1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 vpxorq %zmm1,%zmm1,%zmm1
-### op set [INDEX] dreg:REGISTER:VEC:DOUBLE streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:DOUBLE streg:REGISTER:GP:UINT64
 vpbroadcastq %rcx,%zmm1
 vpmuludq .iota_64x8(%rip),%zmm1,%zmm1
-### op set [INDEX] dreg:REGISTER:VEC:HALF streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:HALF streg:REGISTER:GP:UINT64
 vpbroadcastw %ecx,%zmm1
 vpmullw .iota_16x32(%rip),%zmm1,%zmm1
-### op set [INDEX] dreg:REGISTER:VEC:SINGLE streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINGLE streg:REGISTER:GP:UINT64
 vpbroadcastd %ecx,%zmm1
 vpmulld .iota_32x16(%rip),%zmm1,%zmm1
-### op set [INDEX] dreg:REGISTER:VEC:SINT16 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINT16 streg:REGISTER:GP:UINT64
 vpbroadcastw %ecx,%zmm1
 vpmullw .iota_16x32(%rip),%zmm1,%zmm1
-### op set [INDEX] dreg:REGISTER:VEC:SINT32 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINT32 streg:REGISTER:GP:UINT64
 vpbroadcastd %ecx,%zmm1
 vpmulld .iota_32x16(%rip),%zmm1,%zmm1
-### op set [INDEX] dreg:REGISTER:VEC:SINT64 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINT64 streg:REGISTER:GP:UINT64
 vpbroadcastq %rcx,%zmm1
 vpmuludq .iota_64x8(%rip),%zmm1,%zmm1
-### op set [INDEX] dreg:REGISTER:VEC:UINT16 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:UINT16 streg:REGISTER:GP:UINT64
 vpbroadcastw %ecx,%zmm1
 vpmullw .iota_16x32(%rip),%zmm1,%zmm1
-### op set [INDEX] dreg:REGISTER:VEC:UINT32 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:UINT32 streg:REGISTER:GP:UINT64
 vpbroadcastd %ecx,%zmm1
 vpmulld .iota_32x16(%rip),%zmm1,%zmm1
-### op set [INDEX] dreg:REGISTER:VEC:UINT64 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:UINT64 streg:REGISTER:GP:UINT64
 vpbroadcastq %rcx,%zmm1
 vpmuludq .iota_64x8(%rip),%zmm1,%zmm1
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:DOUBLE}
-movq $8,%rcx
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:HALF}
-movq $8,%rcx
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINGLE}
-movq $8,%rcx
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT16}
-movq $8,%rcx
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT32}
-movq $8,%rcx
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT64}
-movq $8,%rcx
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT8}
-movq $8,%rcx
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT16}
-movq $8,%rcx
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT32}
-movq $8,%rcx
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT64}
-movq $8,%rcx
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT8}
-movq $8,%rcx
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:bytes}
+### op set [VLEN] dreg:REGISTER:GP:UINT64
 movq $8,%rcx
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-
 movq %rcx,%rdx

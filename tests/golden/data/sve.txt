@@ -4121,55 +4121,33 @@ dup z1.d,#0
 dup z1.b,#1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 dup z1.b,#0
-### op set [INDEX] dreg:REGISTER:VEC:DOUBLE streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:DOUBLE streg:REGISTER:GP:UINT64
 index z1.d,#0,x10
-### op set [INDEX] dreg:REGISTER:VEC:FP8E4M3 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:FP8E4M3 streg:REGISTER:GP:UINT64
 index z1.b,#0,w10
-### op set [INDEX] dreg:REGISTER:VEC:FP8E5M2 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:FP8E5M2 streg:REGISTER:GP:UINT64
 index z1.b,#0,w10
-### op set [INDEX] dreg:REGISTER:VEC:HALF streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:HALF streg:REGISTER:GP:UINT64
 index z1.h,#0,w10
-### op set [INDEX] dreg:REGISTER:VEC:SINGLE streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINGLE streg:REGISTER:GP:UINT64
 index z1.s,#0,w10
-### op set [INDEX] dreg:REGISTER:VEC:SINT16 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINT16 streg:REGISTER:GP:UINT64
 index z1.h,#0,w10
-### op set [INDEX] dreg:REGISTER:VEC:SINT32 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINT32 streg:REGISTER:GP:UINT64
 index z1.s,#0,w10
-### op set [INDEX] dreg:REGISTER:VEC:SINT64 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINT64 streg:REGISTER:GP:UINT64
 index z1.d,#0,x10
-### op set [INDEX] dreg:REGISTER:VEC:SINT8 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINT8 streg:REGISTER:GP:UINT64
 index z1.b,#0,w10
-### op set [INDEX] dreg:REGISTER:VEC:UINT16 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:UINT16 streg:REGISTER:GP:UINT64
 index z1.h,#0,w10
-### op set [INDEX] dreg:REGISTER:VEC:UINT32 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:UINT32 streg:REGISTER:GP:UINT64
 index z1.s,#0,w10
-### op set [INDEX] dreg:REGISTER:VEC:UINT64 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:UINT64 streg:REGISTER:GP:UINT64
 index z1.d,#0,x10
-### op set [INDEX] dreg:REGISTER:VEC:UINT8 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:UINT8 streg:REGISTER:GP:UINT64
 index z1.b,#0,w10
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:DOUBLE}
-cntd x10
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:HALF}
-cntd x10
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINGLE}
-cntd x10
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT16}
-cntd x10
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT32}
-cntd x10
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT64}
-cntd x10
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT8}
-cntd x10
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT16}
-cntd x10
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT32}
-cntd x10
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT64}
-cntd x10
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT8}
-cntd x10
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:bytes}
+### op set [VLEN] dreg:REGISTER:GP:UINT64
 cntd x10
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 lsl x12,x10,x11

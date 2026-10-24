@@ -122,11 +122,11 @@ dummy
 ### method greg(reg_idx=0)
 x0
 ### method greg_to_voffs(dt=DOUBLE, streg=x0, vreg=v1)
-!NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {INDEX}
+!NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {STINDEX}
 ### method greg_to_voffs(dt=HALF, streg=x0, vreg=v1)
-!NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {INDEX}
+!NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {STINDEX}
 ### method greg_to_voffs(dt=SINGLE, streg=x0, vreg=v1)
-!NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {INDEX}
+!NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {STINDEX}
 ### method indexable_elements(dt=DOUBLE)
 2
 ### method indexable_elements(dt=HALF)
@@ -2814,29 +2814,7 @@ movi v1.8h,#1
 movi v1.4s,#1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:one}
 movi v1.16b,#1
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:DOUBLE}
-mov x10,#2
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:HALF}
-mov x10,#2
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINGLE}
-mov x10,#2
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT16}
-mov x10,#2
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT32}
-mov x10,#2
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT64}
-mov x10,#2
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT8}
-mov x10,#2
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT16}
-mov x10,#2
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT32}
-mov x10,#2
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT64}
-mov x10,#2
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT8}
-mov x10,#2
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:bytes}
+### op set [VLEN] dreg:REGISTER:GP:UINT64
 mov x10,#2
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 lsl x12,x10,x11

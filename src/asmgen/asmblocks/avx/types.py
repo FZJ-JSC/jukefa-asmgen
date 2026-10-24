@@ -97,11 +97,15 @@ class reg_prefixer:
         register with a '%%' for inline ASM and '%' for normal ASM
         """
 
-        if not isinstance(reg, (x86_greg, avx_freg,
-                                xmm_vreg, ymm_vreg, zmm_vreg,
-                                avx512_mreg)):
+        if "rip" == reg:
+            # the instruction pointer: RIP-relative addresses
+            regstr = "rip"
+        elif not isinstance(reg, (x86_greg, avx_freg,
+                                  xmm_vreg, ymm_vreg, zmm_vreg,
+                                  avx512_mreg)):
             raise ValueError(f"{reg} is not a x86 or AVX register")
-        regstr = str(reg)
+        else:
+            regstr = str(reg)
         if isinstance(reg, x86_greg):
             regstr = reg.name(size)
         # If there is a [ it's probably a parameter

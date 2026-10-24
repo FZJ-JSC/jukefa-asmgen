@@ -2,7 +2,7 @@
 SVE set signatures: CONST zero, one
 """
 from ...op.operand import register_type as rt
-from ...op.opset import INT_DTS, const_signatures, mask_signatures, index_signatures, vlen_signatures, zero_signatures
+from ...op.opset import INT_DTS, const_signatures, mask_signatures, stindex_signatures, vlen_signatures, zero_signatures
 from ....registers import asm_data_type as adt
 
 ONE_DTS = (adt.DOUBLE, adt.SINGLE, adt.HALF, *INT_DTS)
@@ -17,4 +17,4 @@ def make_sve_opset_signatures(*, dt_suffixes : dict) -> list:
             + const_signatures(rt.VEC, [dt for dt in ONE_DTS if dt in dt_suffixes], "one")
             + mask_signatures(list(dt_suffixes))
             + vlen_signatures()
-            + index_signatures(list(dt_suffixes)))
+            + stindex_signatures(list(dt_suffixes)))

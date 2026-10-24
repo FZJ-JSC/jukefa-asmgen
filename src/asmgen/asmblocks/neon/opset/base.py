@@ -29,5 +29,5 @@ class neon_opset(vector_opset):
             return self.asmwrap(f"fmov {dreg}.{self.dt_suffixes[dt]},#1.0")
         return self.asmwrap(f"movi {dreg}.{self.dt_suffixes[dt]},#1")
 
-    def vlen(self, *, dreg : greg_base, unit) -> str:
-        return self.scalar_op.value_greg(dreg=dreg, value=16 if "bytes" == unit else 16 // adt_size(unit))
+    def vlen(self, *, dreg : greg_base, dt : adt = adt.UINT8) -> str:
+        return self.scalar_op.value_greg(dreg=dreg, value=16 // adt_size(dt))

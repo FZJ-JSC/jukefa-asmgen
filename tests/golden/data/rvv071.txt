@@ -2088,62 +2088,40 @@ vmv.v.i v1,0
 vmv.v.i v1,1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 vmv.v.i v1,0
-### op set [INDEX] dreg:REGISTER:VEC:DOUBLE streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:DOUBLE streg:REGISTER:GP:UINT64
 vid.v v1
 vmul.vx v1,v1,s4
-### op set [INDEX] dreg:REGISTER:VEC:HALF streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:HALF streg:REGISTER:GP:UINT64
 vid.v v1
 vmul.vx v1,v1,s4
-### op set [INDEX] dreg:REGISTER:VEC:SINGLE streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINGLE streg:REGISTER:GP:UINT64
 vid.v v1
 vmul.vx v1,v1,s4
-### op set [INDEX] dreg:REGISTER:VEC:SINT16 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINT16 streg:REGISTER:GP:UINT64
 vid.v v1
 vmul.vx v1,v1,s4
-### op set [INDEX] dreg:REGISTER:VEC:SINT32 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINT32 streg:REGISTER:GP:UINT64
 vid.v v1
 vmul.vx v1,v1,s4
-### op set [INDEX] dreg:REGISTER:VEC:SINT64 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINT64 streg:REGISTER:GP:UINT64
 vid.v v1
 vmul.vx v1,v1,s4
-### op set [INDEX] dreg:REGISTER:VEC:SINT8 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:SINT8 streg:REGISTER:GP:UINT64
 vid.v v1
 vmul.vx v1,v1,s4
-### op set [INDEX] dreg:REGISTER:VEC:UINT16 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:UINT16 streg:REGISTER:GP:UINT64
 vid.v v1
 vmul.vx v1,v1,s4
-### op set [INDEX] dreg:REGISTER:VEC:UINT32 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:UINT32 streg:REGISTER:GP:UINT64
 vid.v v1
 vmul.vx v1,v1,s4
-### op set [INDEX] dreg:REGISTER:VEC:UINT64 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:UINT64 streg:REGISTER:GP:UINT64
 vid.v v1
 vmul.vx v1,v1,s4
-### op set [INDEX] dreg:REGISTER:VEC:UINT8 streg:REGISTER:GP:UINT64
+### op set [STINDEX] dreg:REGISTER:VEC:UINT8 streg:REGISTER:GP:UINT64
 vid.v v1
 vmul.vx v1,v1,s4
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:DOUBLE}
-vsetvli s4, zero, e64, m1
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:HALF}
-vsetvli s4, zero, e64, m1
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINGLE}
-vsetvli s4, zero, e64, m1
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT16}
-vsetvli s4, zero, e64, m1
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT32}
-vsetvli s4, zero, e64, m1
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT64}
-vsetvli s4, zero, e64, m1
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:SINT8}
-vsetvli s4, zero, e64, m1
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT16}
-vsetvli s4, zero, e64, m1
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT32}
-vsetvli s4, zero, e64, m1
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT64}
-vsetvli s4, zero, e64, m1
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:UINT8}
-vsetvli s4, zero, e64, m1
-### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:bytes}
+### op set [VLEN] dreg:REGISTER:GP:UINT64
 vsetvli s4, zero, e64, m1
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 sll s6,s4,s5

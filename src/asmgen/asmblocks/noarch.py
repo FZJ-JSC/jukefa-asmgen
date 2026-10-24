@@ -262,7 +262,7 @@ class asmgen(ABC):
                 rt.clobbered_regs[tag].discard(idx)
         return rt
 
-    def vlen_to_greg(self, *, reg, dt) -> str:
+    def vlen_to_greg(self, *, reg, dt : asm_data_type) -> str:
         """
         dt's elements in a vector into reg: set(VLEN) (0.6, phase 4)
         """
@@ -435,7 +435,7 @@ class asmgen(ABC):
         from .op.opset import inline_operand, opset_modifier   # pylint: disable=import-outside-toplevel
         return self.set(dreg=inline_operand("byte_size"), modifiers={opset_modifier.VLEN})
 
-    def simd_size_to_greg(self, *, reg, dt) -> str:
+    def simd_size_to_greg(self, *, reg : greg_type, dt : asm_data_type) -> str:
         """
         dt's elements in a vector into reg: set(VLEN) (0.6, phase 4)
         """
@@ -925,7 +925,8 @@ class asmgen(ABC):
         """
         raise NotImplementedError(NIE_MESSAGE)
 
-    def _scalar_memory(self, action : str, *, areg, offset : int, reg, dt) -> str:
+    def _scalar_memory(self, action : str, *, areg : greg_type, offset : int,
+                       reg : greg_type | freg_type, dt : asm_data_type) -> str:
         """
         A scalar register loaded or stored at areg plus offset: the load or
         store operation, IOFFSET where the offset isn't 0
@@ -934,13 +935,13 @@ class asmgen(ABC):
         kwargs = {"modifiers": {opmem_modifier.IOFFSET}, "ioffset": offset} if offset else {}
         return getattr(self, action)(dregs=[reg], areg=areg, dt=dt, **kwargs)
 
-    def load_greg(self, *, areg, offset, dst) -> str:
+    def load_greg(self, *, areg : greg_type, offset : int, dst : greg_type) -> str:
         """
         A load through load (0.6, phase 5)
         """
         return self._scalar_memory("load", areg=areg, offset=offset, reg=dst, dt=asm_data_type.UINT64)
 
-    def store_greg(self, *, areg, offset, src) -> str:
+    def store_greg(self, *, areg : greg_type, offset : int, src : greg_type) -> str:
         """
         A store through store (0.6, phase 5)
         """
@@ -1192,14 +1193,14 @@ class asmgen(ABC):
         """
         raise NotImplementedError(NIE_MESSAGE)
 
-    def greg_to_voffs(self, *, streg, vreg, dt) -> str:
+    def greg_to_voffs(self, *, streg : greg_type, vreg : vreg_type, dt : asm_data_type) -> str:
         """
-        Element i of vreg i * streg: set(INDEX) (0.6, phase 4); raises
+        Element i of vreg i * streg: set(STINDEX) (0.6, phase 4); raises
         NotImplementedError where the ISA has no form, as callers expect
         """
         from .op.opset import opset_modifier   # pylint: disable=import-outside-toplevel
         try:
-            return self.set(dreg=vreg, dt=dt, modifiers={opset_modifier.INDEX}, streg=streg)
+            return self.set(dreg=vreg, dt=dt, modifiers={opset_modifier.STINDEX}, streg=streg)
         except ValueError as err:
             raise NotImplementedError(f"{type(self).__name__} has no index vector here: {err}") from err
 
@@ -1233,25 +1234,25 @@ class asmgen(ABC):
         """
         raise NotImplementedError(NIE_MESSAGE)
 
-    def load_scalar_immoff(self, *, areg, offset, freg, dt) -> str:
+    def load_scalar_immoff(self, *, areg : greg_type, offset : int, freg : freg_type, dt : asm_data_type) -> str:
         """
         A load through load (0.6, phase 5)
         """
         return self._scalar_memory("load", areg=areg, offset=offset, reg=freg, dt=dt)
 
-    def store_scalar_immoff(self, *, areg, offset, freg, dt) -> str:
+    def store_scalar_immoff(self, *, areg : greg_type, offset : int, freg : freg_type, dt : asm_data_type) -> str:
         """
         A store through store (0.6, phase 5)
         """
         return self._scalar_memory("store", areg=areg, offset=offset, reg=freg, dt=dt)
 
-    def load_freg(self, *, areg, offset, dst, dt) -> str:
+    def load_freg(self, *, areg : greg_type, offset : int, dst : freg_type, dt : asm_data_type) -> str:
         """
         A load through load (0.6, phase 5)
         """
         return self._scalar_memory("load", areg=areg, offset=offset, reg=dst, dt=dt)
 
-    def store_freg(self, *, areg, offset, src, dt) -> str:
+    def store_freg(self, *, areg : greg_type, offset : int, src : freg_type, dt : asm_data_type) -> str:
         """
         A store through store (0.6, phase 5)
         """

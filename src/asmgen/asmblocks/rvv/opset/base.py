@@ -27,12 +27,12 @@ class rvv_opset(vector_opset):
     def one_reg(self, *, dreg : data_reg, dt : adt) -> str:
         return self.asmwrap(f"vmv.v.i {dreg},1")
 
-    def vlen(self, *, dreg : greg_base, unit) -> str:
+    def vlen(self, *, dreg : greg_base, dt : adt = adt.UINT8) -> str:
         # vsetvli's VLMAX: a register group's elements (bytes: e8); it sets
         # the vector type too, and RVV 0.7.1's has no tail and mask policy
-        bits = 8 if "bytes" == unit else 8 * adt_size(unit)
+        bits = 8 * adt_size(dt)
         policy = ", ta, ma" if self.policy else ""
         return self.asmwrap(f"vsetvli {dreg}, zero, e{bits}, m{self.lmul_getter()}{policy}")
 
-    def index_reg(self, *, dreg : data_reg, dt : adt, streg : greg_base) -> str:
+    def stindex_reg(self, *, dreg : data_reg, dt : adt, streg : greg_base) -> str:
         return self.asmwrap(f"vid.v {dreg}") + self.asmwrap(f"vmul.vx {dreg},{dreg},{streg}")

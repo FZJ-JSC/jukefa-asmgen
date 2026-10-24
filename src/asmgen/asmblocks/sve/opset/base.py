@@ -33,11 +33,11 @@ class sve_opset(vector_opset):
         # pfalse is .b only; a predicate-as-counter register is its p's
         return self.asmwrap(f"pfalse p{dreg.idx}.b")
 
-    def vlen(self, *, dreg : greg_base, unit) -> str:
-        suf = {1: "b", 2: "h", 4: "w", 8: "d"}[1 if "bytes" == unit else adt_size(unit)]
+    def vlen(self, *, dreg : greg_base, dt : adt = adt.UINT8) -> str:
+        suf = {1: "b", 2: "h", 4: "w", 8: "d"}[adt_size(dt)]
         return self.asmwrap(f"cnt{suf} {dreg}")
 
-    def index_reg(self, *, dreg : data_reg, dt : adt, streg : greg_base) -> str:
+    def stindex_reg(self, *, dreg : data_reg, dt : adt, streg : greg_base) -> str:
         # w for elements below 8 bytes
         step = streg.get_wreg() if adt_size(dt) < 8 else streg
         return self.asmwrap(f"index {dreg}.{self.dt_suffixes[dt]},#0,{step}")
