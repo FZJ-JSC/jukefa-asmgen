@@ -360,8 +360,12 @@ class avx128_opmem(avx_opmem):
         return f"vpextr{self.ie_suffixes[size]} ${lane}, {pdreg}, {addressing}"
 
     def build_bcast(self, dreg: xmm_vreg, areg: x86_greg, dt: adt, addressing: str) -> str:
-        suf = "ss" if adt_size(dt) == 4 else "sd"
         pdreg = self.rpref(dreg)
+        if adt_size(dt) == 8 and type(dreg) is xmm_vreg:   # pylint: disable=unidiomatic-typecheck
+            # vbroadcastsd has no xmm destination: vmovddup puts the double in
+            # both halves
+            return f"vmovddup {addressing}, {pdreg}"
+        suf = "ss" if adt_size(dt) == 4 else "sd"
         return f"vbroadcast{suf} {addressing}, {pdreg}"
 
     def build_gather(self, dreg: xmm_vreg|ymm_vreg, mreg : xmm_vreg|ymm_vreg,

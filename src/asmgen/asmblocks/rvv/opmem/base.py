@@ -12,6 +12,7 @@ from typing import Any,Callable
 from ....registers import (
     asm_data_type as adt,
     adt_size,
+    ait_size,
     data_reg,
     greg_base
 )
@@ -203,7 +204,11 @@ class rvv_opmem(opmem):
         if mod.VINDEX in modifiers:
             inst_name += "i"
 
-        inst_name += str(adt_size(dt)*8)
+        if mod.VINDEX in modifiers:
+            # indexed: the EEW is the index's width (the data's is vtype's SEW)
+            inst_name += str(ait_size(kwargs["it"])*8)
+        else:
+            inst_name += str(adt_size(dt)*8)
 
         inst_name += ".v"
 

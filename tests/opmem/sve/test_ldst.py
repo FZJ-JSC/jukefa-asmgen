@@ -83,7 +83,7 @@ class test_sve_opmem(unittest.TestCase):
         with self.subTest(dt="FP32"):
             res = self.load(dregs=[self.z0], areg=self.x0, amreg=self.p1, dt=adt.FP32,
                             modifiers={mod.MASK, mod.VINDEX}, vidxreg=self.z1, it=ait.INT32)
-            self.assertEqual(res, "ld1w {z0.s}, p1/z, [x0, z1.s, sxtw #2]\n")
+            self.assertEqual(res, "ld1w {z0.s}, p1/z, [x0, z1.s, sxtw]\n")
 
         with self.subTest(dt="FP64"):
             res = self.load(dregs=[self.z0], areg=self.x0, amreg=self.p1, dt=adt.FP64,

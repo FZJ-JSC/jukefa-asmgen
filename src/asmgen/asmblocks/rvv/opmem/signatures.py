@@ -127,19 +127,23 @@ def make_rvv_opmem_signatures(get_lmul: Callable[[],int], has_bcast=False):
                     operands=bcast_operands
                 ))
 
-        # VINDEX
-        sigs.append(sig(
-            modifiers={mod.VINDEX},
-            structural_params={
-                'it': index_type_map[adt_size(dt)]
-                },
-            operands={
-                'adreg': osh(ot.REGISTER, orl.DATA, rt.VEC, dt),
-                'agreg': osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
-                'vidxreg': osh(ot.REGISTER, orl.ADDRESS, rt.VEC,
-                               vidx_type_map[adt_size(dt)])
-                }
-            ))
+        # VINDEX: byte offsets, of any width up to the data's (EMUL <= LMUL;
+        # wider ones would make the index a register group)
+        for isize, it in index_type_map.items():
+            if isize > adt_size(dt):
+                continue
+            sigs.append(sig(
+                modifiers={mod.VINDEX},
+                structural_params={
+                    'it': it
+                    },
+                operands={
+                    'adreg': osh(ot.REGISTER, orl.DATA, rt.VEC, dt),
+                    'agreg': osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
+                    'vidxreg': osh(ot.REGISTER, orl.ADDRESS, rt.VEC,
+                                   vidx_type_map[isize])
+                    }
+                ))
         # GSTRIDE
         sigs.append(sig(
             modifiers={mod.GSTRIDE},

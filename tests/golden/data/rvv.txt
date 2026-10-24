@@ -1584,30 +1584,66 @@ vlsseg3e8.v v1, (s4), zero
 vlsseg2e8.v v1, (s4), zero
 ### op load [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8{BCAST} {nstructs:1}
 vlsseg1e8.v v1, (s4), zero
+### op load [VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vluxei16.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+vluxei32.v v1, (s4), v2
 ### op load [VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
 vluxei64.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vluxei8.v v1, (s4), v2
 ### op load [VINDEX] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
 vluxei8.v v1, (s4), v2
 ### op load [VINDEX] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
 vluxei8.v v1, (s4), v2
 ### op load [VINDEX] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
 vluxei16.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vluxei8.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vluxei16.v v1, (s4), v2
 ### op load [VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
 vluxei32.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vluxei8.v v1, (s4), v2
 ### op load [VINDEX] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vluxei16.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vluxei8.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
 vluxei16.v v1, (s4), v2
 ### op load [VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
 vluxei32.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vluxei8.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vluxei16.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+vluxei32.v v1, (s4), v2
 ### op load [VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
 vluxei64.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vluxei8.v v1, (s4), v2
 ### op load [VINDEX] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
 vluxei8.v v1, (s4), v2
 ### op load [VINDEX] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
 vluxei16.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vluxei8.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vluxei16.v v1, (s4), v2
 ### op load [VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+vluxei32.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vluxei8.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vluxei16.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
 vluxei32.v v1, (s4), v2
 ### op load [VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
 vluxei64.v v1, (s4), v2
+### op load [VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vluxei8.v v1, (s4), v2
 ### op load [VINDEX] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
 vluxei8.v v1, (s4), v2
 ### op load [] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64
@@ -2467,30 +2503,66 @@ vsseg3e8.v v1, (s4)
 vsseg2e8.v v1, (s4)
 ### op store [STRUCT] agreg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:UINT8 {nstructs:1}
 vsseg1e8.v v1, (s4)
+### op store [VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vsuxei16.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+vsuxei32.v v1, (s4), v2
 ### op store [VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
 vsuxei64.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vsuxei8.v v1, (s4), v2
 ### op store [VINDEX] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
 vsuxei8.v v1, (s4), v2
 ### op store [VINDEX] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
 vsuxei8.v v1, (s4), v2
 ### op store [VINDEX] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
 vsuxei16.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vsuxei8.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vsuxei16.v v1, (s4), v2
 ### op store [VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
 vsuxei32.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vsuxei8.v v1, (s4), v2
 ### op store [VINDEX] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vsuxei16.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vsuxei8.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
 vsuxei16.v v1, (s4), v2
 ### op store [VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
 vsuxei32.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vsuxei8.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vsuxei16.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+vsuxei32.v v1, (s4), v2
 ### op store [VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
 vsuxei64.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vsuxei8.v v1, (s4), v2
 ### op store [VINDEX] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
 vsuxei8.v v1, (s4), v2
 ### op store [VINDEX] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
 vsuxei16.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vsuxei8.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vsuxei16.v v1, (s4), v2
 ### op store [VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+vsuxei32.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vsuxei8.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT16 {it:INT16}
+vsuxei16.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
 vsuxei32.v v1, (s4), v2
 ### op store [VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
 vsuxei64.v v1, (s4), v2
+### op store [VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
+vsuxei8.v v1, (s4), v2
 ### op store [VINDEX] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 vidxreg:REGISTER:VEC:SINT8 {it:INT8}
 vsuxei8.v v1, (s4), v2
 ### op store [] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64

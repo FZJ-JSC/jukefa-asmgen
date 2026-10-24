@@ -66,7 +66,7 @@ def make_sve_opmem_signatures(bcast_supported=False):
     """
     sigs = []
 
-    def add_sig(dt, *, mods, opd_mods=None, nstructs=1):
+    def add_sig(dt, *, mods, opd_mods=None, nstructs=1, idx_size=None):
         if opd_mods is None:
             opd_mods = {}
 
@@ -98,7 +98,7 @@ def make_sve_opmem_signatures(bcast_supported=False):
 
         if mod.VINDEX in mods:
             # SVE gathers/scatters
-            idx_sz = adt_size(dt)
+            idx_sz = idx_size or adt_size(dt)
             # Fallback to 32-bit indices if size < 4 to prevent KeyError
             # if the >= 4 filter is removed
             idx_dt = INDEX_ADT_SIZE_MAP.get(idx_sz, adt.SINT32)
@@ -151,6 +151,9 @@ def make_sve_opmem_signatures(bcast_supported=False):
             #       (requires unpacking loops/multiple gathers as SVE only
             # provides 32-bit or 64-bit index elements).
             add_sig(dt, mods={mod.MASK, mod.VINDEX})
+            if adt_size(dt) == 8:
+                # 32-bit offsets in 64-bit lanes, sign-extended
+                add_sig(dt, mods={mod.MASK, mod.VINDEX}, idx_size=4)
             add_sig(dt, mods={mod.MASK, mod.VINDEX, mod.IOFFSET})
 
         # Address modification

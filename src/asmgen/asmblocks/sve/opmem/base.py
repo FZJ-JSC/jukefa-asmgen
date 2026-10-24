@@ -172,6 +172,11 @@ class sve_opmem(opmem):
         if not isinstance(areg, aarch64_greg):
             raise ValueError(f"{areg} is not an aarch64_greg")
 
+        if mod.VINDEX in modifiers and mod.IOFFSET in modifiers:
+            # gathers and scatters with vector bases: [z.d, #imm]
+            lanes = ".s" if adt_size(dt) == 4 else ".d"
+            return f"[{kwargs['vidxreg']}{lanes}, #{kwargs['ioffset']}]"
+
         if mod.VOFFSET in modifiers:
             return f"[{areg}, #{kwargs['voffset']}, MUL VL]"
 
@@ -189,13 +194,12 @@ class sve_opmem(opmem):
 
         if mod.VINDEX in modifiers:
             vidxreg = kwargs["vidxreg"]
-            idx_esuf = self.get_index_suffix(kwargs["it"])
-            size = adt_size(dt)
-
-            # Scatter/Gather
-            if size == 4:
-                return f"[{areg}, {vidxreg}{idx_esuf}, sxtw #2]"
-            return f"[{areg}, {vidxreg}{idx_esuf}]"
+            # Scatter/Gather: byte offsets - as RVV's (which can't scale),
+            # AVX's (scale 1), greg_to_voffs's and the old methods' - in the
+            # data's lanes, 32-bit ones sign-extended
+            lanes = ".s" if adt_size(dt) == 4 else ".d"
+            extend = ", sxtw" if ait_size(kwargs["it"]) == 4 else ""
+            return f"[{areg}, {vidxreg}{lanes}{extend}]"
 
         return f"[{areg}]"
 

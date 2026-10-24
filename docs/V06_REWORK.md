@@ -452,6 +452,18 @@ builds unchanged.
       and write prefetches; RISC-V's `prefetch.r` needs Zicbop (its
       signatures don't require it yet) and an offset that's a multiple of
       32 (not constrained yet).
+- [x] opmem fixes the old vector methods need, found comparing their texts
+      with load and store's over the snapshots' calls (asmgen 0056):
+      gathers and scatters take byte offsets on every ISA - RVV can't scale
+      them, AVX's use scale 1, `greg_to_voffs` builds them, the old methods
+      took them - where SVE's 32-bit ones were scaled by the element size
+      (`sxtw #2`), which ukrgen's FP32 gathers on SVE would have got wrong;
+      SVE's 32-bit offsets in 64-bit lanes (`[x, z.d, sxtw]`), and its
+      vector bases printed `[z.d, #imm]` (they printed a scalar base's
+      `[x, #imm]`); RVV's index narrower than the data (`vluxei32.v` under
+      SEW 64; wider ones would take a register group), the mnemonic's EEW
+      the index's; AVX's FP64 broadcast into an xmm register is `vmovddup`
+      (`vbroadcastsd` has no xmm destination).
 - [ ] The limits become constraints: `max/min_load_immoff`,
       `max/min_fload_immoff`, `max/min_bcast_immoff`, `max/min_load_voff`.
 - [ ] rvv071: its operations print 0.7.1's mnemonics and `vsetvli`, their
@@ -578,3 +590,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   mov_param_to_greg and load_pointer on them (asmgen 0054).
 - 2026-10-24: gen.prefetch on every generator; prefetch_l1_immoff and the
   prefetch offset limits removed (asmgen 0055).
+- 2026-10-24: gathers and scatters on byte offsets everywhere, SVE's and
+  RVV's index forms, AVX's 128-bit FP64 broadcast (asmgen 0056).

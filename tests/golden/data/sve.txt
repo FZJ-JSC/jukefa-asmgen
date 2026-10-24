@@ -2808,29 +2808,29 @@ ldr x10, [x11, x12]
 ### op load [GOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 ldrb w10, [x11, x12]
 ### op load [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE vidxreg:REGISTER:VEC:SINT64 ioffset:IMMEDIATE:-:- {it:INT64}
-ld1d {z1.d}, p1/z, [x10, #0]
+ld1d {z1.d}, p1/z, [z2.d, #0]
 ### op load [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE vidxreg:REGISTER:VEC:SINT64 ioffset:IMMEDIATE:-:- {it:INT64} @far
-ld1d {z1.d}, p1/z, [x10, #248]
+ld1d {z1.d}, p1/z, [z2.d, #248]
 ### op load [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE vidxreg:REGISTER:VEC:SINT32 ioffset:IMMEDIATE:-:- {it:INT32}
-ld1w {z1.s}, p1/z, [x10, #0]
+ld1w {z1.s}, p1/z, [z2.s, #0]
 ### op load [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE vidxreg:REGISTER:VEC:SINT32 ioffset:IMMEDIATE:-:- {it:INT32} @far
-ld1w {z1.s}, p1/z, [x10, #124]
+ld1w {z1.s}, p1/z, [z2.s, #124]
 ### op load [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 vidxreg:REGISTER:VEC:SINT32 ioffset:IMMEDIATE:-:- {it:INT32}
-ld1w {z1.s}, p1/z, [x10, #0]
+ld1w {z1.s}, p1/z, [z2.s, #0]
 ### op load [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 vidxreg:REGISTER:VEC:SINT32 ioffset:IMMEDIATE:-:- {it:INT32} @far
-ld1w {z1.s}, p1/z, [x10, #124]
+ld1w {z1.s}, p1/z, [z2.s, #124]
 ### op load [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 vidxreg:REGISTER:VEC:SINT64 ioffset:IMMEDIATE:-:- {it:INT64}
-ld1d {z1.d}, p1/z, [x10, #0]
+ld1d {z1.d}, p1/z, [z2.d, #0]
 ### op load [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 vidxreg:REGISTER:VEC:SINT64 ioffset:IMMEDIATE:-:- {it:INT64} @far
-ld1d {z1.d}, p1/z, [x10, #248]
+ld1d {z1.d}, p1/z, [z2.d, #248]
 ### op load [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 vidxreg:REGISTER:VEC:SINT32 ioffset:IMMEDIATE:-:- {it:INT32}
-ld1w {z1.s}, p1/z, [x10, #0]
+ld1w {z1.s}, p1/z, [z2.s, #0]
 ### op load [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 vidxreg:REGISTER:VEC:SINT32 ioffset:IMMEDIATE:-:- {it:INT32} @far
-ld1w {z1.s}, p1/z, [x10, #124]
+ld1w {z1.s}, p1/z, [z2.s, #124]
 ### op load [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 vidxreg:REGISTER:VEC:SINT64 ioffset:IMMEDIATE:-:- {it:INT64}
-ld1d {z1.d}, p1/z, [x10, #0]
+ld1d {z1.d}, p1/z, [z2.d, #0]
 ### op load [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 vidxreg:REGISTER:VEC:SINT64 ioffset:IMMEDIATE:-:- {it:INT64} @far
-ld1d {z1.d}, p1/z, [x10, #248]
+ld1d {z1.d}, p1/z, [z2.d, #248]
 ### op load [IOFFSET,MASK] adreg:REGISTER:VEC:BF16{BCAST,BLOCK} agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- {adreg_blocksize:8}
 ld1rqh {z1.h}, p1/z, [x10, #-128]
 ### op load [IOFFSET,MASK] adreg:REGISTER:VEC:BF16{BCAST,BLOCK} agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- {adreg_blocksize:8} @far
@@ -3137,16 +3137,22 @@ ld4rb {z1.b, z2.b, z3.b, z4.b}, p1/z, [x10]
 ld3rb {z1.b, z2.b, z3.b}, p1/z, [x10]
 ### op load [MASK,STRUCT] adreg:REGISTER:VEC:UINT8{BCAST} agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 bdreg:REGISTER:VEC:UINT8{BCAST} {nstructs:2}
 ld2rb {z1.b, z2.b}, p1/z, [x10]
+### op load [MASK,VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+ld1d {z1.d}, p1/z, [x10, z2.d, sxtw]
 ### op load [MASK,VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE vidxreg:REGISTER:VEC:SINT64 {it:INT64}
 ld1d {z1.d}, p1/z, [x10, z2.d]
 ### op load [MASK,VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE vidxreg:REGISTER:VEC:SINT32 {it:INT32}
-ld1w {z1.s}, p1/z, [x10, z2.s, sxtw #2]
+ld1w {z1.s}, p1/z, [x10, z2.s, sxtw]
 ### op load [MASK,VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
-ld1w {z1.s}, p1/z, [x10, z2.s, sxtw #2]
+ld1w {z1.s}, p1/z, [x10, z2.s, sxtw]
+### op load [MASK,VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+ld1d {z1.d}, p1/z, [x10, z2.d, sxtw]
 ### op load [MASK,VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
 ld1d {z1.d}, p1/z, [x10, z2.d]
 ### op load [MASK,VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
-ld1w {z1.s}, p1/z, [x10, z2.s, sxtw #2]
+ld1w {z1.s}, p1/z, [x10, z2.s, sxtw]
+### op load [MASK,VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+ld1d {z1.d}, p1/z, [x10, z2.d, sxtw]
 ### op load [MASK,VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
 ld1d {z1.d}, p1/z, [x10, z2.d]
 ### op load [MASK,VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 voffset:IMMEDIATE:-:-
@@ -4236,29 +4242,29 @@ str x10, [x11, x12]
 ### op store [GOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 strb w10, [x11, x12]
 ### op store [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE vidxreg:REGISTER:VEC:SINT64 ioffset:IMMEDIATE:-:- {it:INT64}
-st1d {z1.d}, p1, [x10, #0]
+st1d {z1.d}, p1, [z2.d, #0]
 ### op store [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE vidxreg:REGISTER:VEC:SINT64 ioffset:IMMEDIATE:-:- {it:INT64} @far
-st1d {z1.d}, p1, [x10, #248]
+st1d {z1.d}, p1, [z2.d, #248]
 ### op store [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE vidxreg:REGISTER:VEC:SINT32 ioffset:IMMEDIATE:-:- {it:INT32}
-st1w {z1.s}, p1, [x10, #0]
+st1w {z1.s}, p1, [z2.s, #0]
 ### op store [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE vidxreg:REGISTER:VEC:SINT32 ioffset:IMMEDIATE:-:- {it:INT32} @far
-st1w {z1.s}, p1, [x10, #124]
+st1w {z1.s}, p1, [z2.s, #124]
 ### op store [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 vidxreg:REGISTER:VEC:SINT32 ioffset:IMMEDIATE:-:- {it:INT32}
-st1w {z1.s}, p1, [x10, #0]
+st1w {z1.s}, p1, [z2.s, #0]
 ### op store [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 vidxreg:REGISTER:VEC:SINT32 ioffset:IMMEDIATE:-:- {it:INT32} @far
-st1w {z1.s}, p1, [x10, #124]
+st1w {z1.s}, p1, [z2.s, #124]
 ### op store [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 vidxreg:REGISTER:VEC:SINT64 ioffset:IMMEDIATE:-:- {it:INT64}
-st1d {z1.d}, p1, [x10, #0]
+st1d {z1.d}, p1, [z2.d, #0]
 ### op store [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 vidxreg:REGISTER:VEC:SINT64 ioffset:IMMEDIATE:-:- {it:INT64} @far
-st1d {z1.d}, p1, [x10, #248]
+st1d {z1.d}, p1, [z2.d, #248]
 ### op store [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 vidxreg:REGISTER:VEC:SINT32 ioffset:IMMEDIATE:-:- {it:INT32}
-st1w {z1.s}, p1, [x10, #0]
+st1w {z1.s}, p1, [z2.s, #0]
 ### op store [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 vidxreg:REGISTER:VEC:SINT32 ioffset:IMMEDIATE:-:- {it:INT32} @far
-st1w {z1.s}, p1, [x10, #124]
+st1w {z1.s}, p1, [z2.s, #124]
 ### op store [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 vidxreg:REGISTER:VEC:SINT64 ioffset:IMMEDIATE:-:- {it:INT64}
-st1d {z1.d}, p1, [x10, #0]
+st1d {z1.d}, p1, [z2.d, #0]
 ### op store [IOFFSET,MASK,VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 vidxreg:REGISTER:VEC:SINT64 ioffset:IMMEDIATE:-:- {it:INT64} @far
-st1d {z1.d}, p1, [x10, #248]
+st1d {z1.d}, p1, [z2.d, #248]
 ### op store [IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
 str d1, [x10]
 ### op store [IOFFSET] adreg:REGISTER:FP:FP8E4M3 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
@@ -4369,16 +4375,22 @@ st4b {z1.b, z2.b, z3.b, z4.b}, p1, [x10]
 st3b {z1.b, z2.b, z3.b}, p1, [x10]
 ### op store [MASK,STRUCT] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 bdreg:REGISTER:VEC:UINT8 {nstructs:2}
 st2b {z1.b, z2.b}, p1, [x10]
+### op store [MASK,VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+st1d {z1.d}, p1, [x10, z2.d, sxtw]
 ### op store [MASK,VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE vidxreg:REGISTER:VEC:SINT64 {it:INT64}
 st1d {z1.d}, p1, [x10, z2.d]
 ### op store [MASK,VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE vidxreg:REGISTER:VEC:SINT32 {it:INT32}
-st1w {z1.s}, p1, [x10, z2.s, sxtw #2]
+st1w {z1.s}, p1, [x10, z2.s, sxtw]
 ### op store [MASK,VINDEX] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
-st1w {z1.s}, p1, [x10, z2.s, sxtw #2]
+st1w {z1.s}, p1, [x10, z2.s, sxtw]
+### op store [MASK,VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+st1d {z1.d}, p1, [x10, z2.d, sxtw]
 ### op store [MASK,VINDEX] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
 st1d {z1.d}, p1, [x10, z2.d]
 ### op store [MASK,VINDEX] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
-st1w {z1.s}, p1, [x10, z2.s, sxtw #2]
+st1w {z1.s}, p1, [x10, z2.s, sxtw]
+### op store [MASK,VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 vidxreg:REGISTER:VEC:SINT32 {it:INT32}
+st1d {z1.d}, p1, [x10, z2.d, sxtw]
 ### op store [MASK,VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 vidxreg:REGISTER:VEC:SINT64 {it:INT64}
 st1d {z1.d}, p1, [x10, z2.d]
 ### op store [MASK,VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 voffset:IMMEDIATE:-:-

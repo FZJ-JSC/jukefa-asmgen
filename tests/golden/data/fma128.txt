@@ -1049,21 +1049,21 @@ vmovupd -2147483648(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
 vmovupd 2147483647(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vbroadcastsd -2147483648(%rcx,%rdx,1), %xmm1
+vmovddup -2147483648(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vbroadcastsd 2147483647(%rcx,%rdx,1), %xmm1
+vmovddup 2147483647(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vbroadcastsd -2147483648(%rcx,%rdx,2), %xmm1
+vmovddup -2147483648(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vbroadcastsd 2147483647(%rcx,%rdx,2), %xmm1
+vmovddup 2147483647(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vbroadcastsd -2147483648(%rcx,%rdx,4), %xmm1
+vmovddup -2147483648(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vbroadcastsd 2147483647(%rcx,%rdx,4), %xmm1
+vmovddup 2147483647(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vbroadcastsd -2147483648(%rcx,%rdx,8), %xmm1
+vmovddup -2147483648(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vbroadcastsd 2147483647(%rcx,%rdx,8), %xmm1
+vmovddup 2147483647(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
 vmovdqu -2147483648(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
@@ -1177,21 +1177,21 @@ vmovdqu -2147483648(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
 vmovdqu 2147483647(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vbroadcastsd -2147483648(%rcx,%rdx,1), %xmm1
+vmovddup -2147483648(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vbroadcastsd 2147483647(%rcx,%rdx,1), %xmm1
+vmovddup 2147483647(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vbroadcastsd -2147483648(%rcx,%rdx,2), %xmm1
+vmovddup -2147483648(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vbroadcastsd 2147483647(%rcx,%rdx,2), %xmm1
+vmovddup 2147483647(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vbroadcastsd -2147483648(%rcx,%rdx,4), %xmm1
+vmovddup -2147483648(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vbroadcastsd 2147483647(%rcx,%rdx,4), %xmm1
+vmovddup 2147483647(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vbroadcastsd -2147483648(%rcx,%rdx,8), %xmm1
+vmovddup -2147483648(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vbroadcastsd 2147483647(%rcx,%rdx,8), %xmm1
+vmovddup 2147483647(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
 vmovdqu -2147483648(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
@@ -1273,21 +1273,21 @@ vmovdqu -2147483648(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
 vmovdqu 2147483647(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vbroadcastsd -2147483648(%rcx,%rdx,1), %xmm1
+vmovddup -2147483648(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vbroadcastsd 2147483647(%rcx,%rdx,1), %xmm1
+vmovddup 2147483647(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vbroadcastsd -2147483648(%rcx,%rdx,2), %xmm1
+vmovddup -2147483648(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vbroadcastsd 2147483647(%rcx,%rdx,2), %xmm1
+vmovddup 2147483647(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vbroadcastsd -2147483648(%rcx,%rdx,4), %xmm1
+vmovddup -2147483648(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vbroadcastsd 2147483647(%rcx,%rdx,4), %xmm1
+vmovddup 2147483647(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vbroadcastsd -2147483648(%rcx,%rdx,8), %xmm1
+vmovddup -2147483648(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vbroadcastsd 2147483647(%rcx,%rdx,8), %xmm1
+vmovddup 2147483647(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
 vmovdqu -2147483648(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
@@ -1361,9 +1361,9 @@ vmovupd -2147483648(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
 vmovupd 2147483647(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vbroadcastsd -2147483648(%rcx,%rdx), %xmm1
+vmovddup -2147483648(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vbroadcastsd 2147483647(%rcx,%rdx), %xmm1
+vmovddup 2147483647(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
 vmovdqu -2147483648(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
@@ -1393,9 +1393,9 @@ vmovdqu -2147483648(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
 vmovdqu 2147483647(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vbroadcastsd -2147483648(%rcx,%rdx), %xmm1
+vmovddup -2147483648(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vbroadcastsd 2147483647(%rcx,%rdx), %xmm1
+vmovddup 2147483647(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
 vmovdqu -2147483648(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
@@ -1417,9 +1417,9 @@ vmovdqu -2147483648(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
 vmovdqu 2147483647(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vbroadcastsd -2147483648(%rcx,%rdx), %xmm1
+vmovddup -2147483648(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vbroadcastsd 2147483647(%rcx,%rdx), %xmm1
+vmovddup 2147483647(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
 vmovdqu -2147483648(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
@@ -1537,13 +1537,13 @@ vmovupd (%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:8}
 vmovupd (%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vbroadcastsd (%rcx,%rdx,1), %xmm1
+vmovddup (%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vbroadcastsd (%rcx,%rdx,2), %xmm1
+vmovddup (%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vbroadcastsd (%rcx,%rdx,4), %xmm1
+vmovddup (%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vbroadcastsd (%rcx,%rdx,8), %xmm1
+vmovddup (%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
 vmovdqu (%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
@@ -1601,13 +1601,13 @@ vmovdqu (%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:8}
 vmovdqu (%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vbroadcastsd (%rcx,%rdx,1), %xmm1
+vmovddup (%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vbroadcastsd (%rcx,%rdx,2), %xmm1
+vmovddup (%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vbroadcastsd (%rcx,%rdx,4), %xmm1
+vmovddup (%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vbroadcastsd (%rcx,%rdx,8), %xmm1
+vmovddup (%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
 vmovdqu (%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
@@ -1649,13 +1649,13 @@ vmovdqu (%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:8}
 vmovdqu (%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vbroadcastsd (%rcx,%rdx,1), %xmm1
+vmovddup (%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vbroadcastsd (%rcx,%rdx,2), %xmm1
+vmovddup (%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vbroadcastsd (%rcx,%rdx,4), %xmm1
+vmovddup (%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vbroadcastsd (%rcx,%rdx,8), %xmm1
+vmovddup (%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
 vmovdqu (%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
@@ -1693,7 +1693,7 @@ vmovdqu (%rcx,%rdx), %xmm1
 ### op load [GOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 vmovupd (%rcx,%rdx), %xmm1
 ### op load [GOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
-vbroadcastsd (%rcx,%rdx), %xmm1
+vmovddup (%rcx,%rdx), %xmm1
 ### op load [GOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 vmovdqu (%rcx,%rdx), %xmm1
 ### op load [GOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
@@ -1709,7 +1709,7 @@ vbroadcastss (%rcx,%rdx), %xmm1
 ### op load [GOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 vmovdqu (%rcx,%rdx), %xmm1
 ### op load [GOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
-vbroadcastsd (%rcx,%rdx), %xmm1
+vmovddup (%rcx,%rdx), %xmm1
 ### op load [GOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 vmovdqu (%rcx,%rdx), %xmm1
 ### op load [GOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
@@ -1721,7 +1721,7 @@ vbroadcastss (%rcx,%rdx), %xmm1
 ### op load [GOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 vmovdqu (%rcx,%rdx), %xmm1
 ### op load [GOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
-vbroadcastsd (%rcx,%rdx), %xmm1
+vmovddup (%rcx,%rdx), %xmm1
 ### op load [GOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 vmovdqu (%rcx,%rdx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
@@ -1785,9 +1785,9 @@ vmovupd -2147483648(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
 vmovupd 2147483647(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vbroadcastsd -2147483648(%rcx), %xmm1
+vmovddup -2147483648(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vbroadcastsd 2147483647(%rcx), %xmm1
+vmovddup 2147483647(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:DOUBLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
 vmovsd -2147483648(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:DOUBLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
@@ -1837,9 +1837,9 @@ vmovdqu -2147483648(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
 vmovdqu 2147483647(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vbroadcastsd -2147483648(%rcx), %xmm1
+vmovddup -2147483648(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vbroadcastsd 2147483647(%rcx), %xmm1
+vmovddup 2147483647(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
 vpinsrq $0, -2147483648(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
@@ -1877,9 +1877,9 @@ vmovdqu -2147483648(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
 vmovdqu 2147483647(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vbroadcastsd -2147483648(%rcx), %xmm1
+vmovddup -2147483648(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vbroadcastsd 2147483647(%rcx), %xmm1
+vmovddup 2147483647(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
 vpinsrq $0, -2147483648(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
@@ -1941,9 +1941,9 @@ vmovupd -1073741824(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
 vmovupd 1073741808(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vbroadcastsd -1073741824(%rcx), %xmm1
+vmovddup -1073741824(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vbroadcastsd 1073741808(%rcx), %xmm1
+vmovddup 1073741808(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:DOUBLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
 vmovsd -1073741824(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:DOUBLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
@@ -1993,9 +1993,9 @@ vmovdqu -1073741824(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
 vmovdqu 1073741808(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vbroadcastsd -1073741824(%rcx), %xmm1
+vmovddup -1073741824(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vbroadcastsd 1073741808(%rcx), %xmm1
+vmovddup 1073741808(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
 vpinsrq $0, -1073741824(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
@@ -2033,9 +2033,9 @@ vmovdqu -1073741824(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
 vmovdqu 1073741808(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vbroadcastsd -1073741824(%rcx), %xmm1
+vmovddup -1073741824(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vbroadcastsd 1073741808(%rcx), %xmm1
+vmovddup 1073741808(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
 vpinsrq $0, -1073741824(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
@@ -2081,7 +2081,7 @@ vpinsrw $7, (%rcx), %xmm1, %xmm1
 ### op load [] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64
 vmovupd (%rcx), %xmm1
 ### op load [] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64
-vbroadcastsd (%rcx), %xmm1
+vmovddup (%rcx), %xmm1
 ### op load [] adreg:REGISTER:VEC:DOUBLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:-
 vmovsd (%rcx), %xmm1
 ### op load [] adreg:REGISTER:VEC:DOUBLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- @far
@@ -2117,7 +2117,7 @@ vpinsrd $3, (%rcx), %xmm1, %xmm1
 ### op load [] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64
 vmovdqu (%rcx), %xmm1
 ### op load [] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64
-vbroadcastsd (%rcx), %xmm1
+vmovddup (%rcx), %xmm1
 ### op load [] adreg:REGISTER:VEC:SINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:-
 vpinsrq $0, (%rcx), %xmm1, %xmm1
 ### op load [] adreg:REGISTER:VEC:SINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- @far
@@ -2145,7 +2145,7 @@ vpinsrd $3, (%rcx), %xmm1, %xmm1
 ### op load [] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64
 vmovdqu (%rcx), %xmm1
 ### op load [] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64
-vbroadcastsd (%rcx), %xmm1
+vmovddup (%rcx), %xmm1
 ### op load [] adreg:REGISTER:VEC:UINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:-
 vpinsrq $0, (%rcx), %xmm1, %xmm1
 ### op load [] adreg:REGISTER:VEC:UINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- @far
