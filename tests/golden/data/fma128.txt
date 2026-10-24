@@ -2246,6 +2246,50 @@ kxnorw %k1,%k1,%k1
 kxorw %k1,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT8 {mask:alltrue}
 kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:VEC:DOUBLE {mask:allfalse}
+vpxor %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:DOUBLE {mask:alltrue}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:HALF {mask:allfalse}
+vpxor %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:HALF {mask:alltrue}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:SINGLE {mask:allfalse}
+vpxor %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:SINGLE {mask:alltrue}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:SINT16 {mask:allfalse}
+vpxor %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:SINT16 {mask:alltrue}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:SINT32 {mask:allfalse}
+vpxor %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:SINT32 {mask:alltrue}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:SINT64 {mask:allfalse}
+vpxor %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:SINT64 {mask:alltrue}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:SINT8 {mask:allfalse}
+vpxor %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:SINT8 {mask:alltrue}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:UINT16 {mask:allfalse}
+vpxor %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:UINT16 {mask:alltrue}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:UINT32 {mask:allfalse}
+vpxor %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:UINT32 {mask:alltrue}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:UINT64 {mask:allfalse}
+vpxor %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:UINT64 {mask:alltrue}
+vpcmpeqd %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:UINT8 {mask:allfalse}
+vpxor %xmm1,%xmm1,%xmm1
+### op set [CONSTMASK] dreg:REGISTER:VEC:UINT8 {mask:alltrue}
+vpcmpeqd %xmm1,%xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:FP:DOUBLE {constant:one}
 vpcmpeqd %xmm1,%xmm1,%xmm1
 vpsllq $54,%xmm1,%xmm1

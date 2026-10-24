@@ -123,6 +123,20 @@ class test_masks(unittest.TestCase):
         self.assertEqual(g.mask_all_true(reg=g.mreg(1), dt=adt.SINGLE),
                          g.set(dreg=g.mreg(1), dt=adt.SINGLE, modifiers={opset_modifier.CONSTMASK}, mask="alltrue"))
 
+    def test_avx2_vector_masks(self):
+        from asmgen.asmblocks.avx import fma128
+        for ctor in (fma128, fma256):
+            g = make(ctor)
+            v = g.vreg(3)
+            p = g.rpref(v)
+            with self.subTest(isa=ctor.__name__):
+                self.assertEqual(f"vpcmpeqd {p},{p},{p}", self.mask(g, v, adt.DOUBLE, "alltrue"))
+                self.assertEqual(f"vpxor {p},{p},{p}", self.mask(g, v, adt.DOUBLE, "allfalse"))
+                self.assertEqual(f"vpcmpeqd {p},{p},{p}", g.mask_all_true(reg=v, dt=adt.SINGLE).strip())
+        g = make(avx512)
+        with self.assertRaises(ValueError):              # AVX-512's masks are k registers
+            self.mask(g, g.vreg(3), adt.DOUBLE, "alltrue")
+
     def test_no_masks_no_forms(self):
         for ctor in (rvv, neon):
             kinds = {o.rtype.name for s in make(ctor).set.get_signatures() for o in s.operands.values() if o.rtype}

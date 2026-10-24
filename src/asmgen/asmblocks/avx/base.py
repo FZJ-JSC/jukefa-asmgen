@@ -594,10 +594,7 @@ class avxbase(asmgen):
         those instructions clear their mask: kxnorw on an AVX-512 mask
         register, vpcmpeqd on an AVX2 vector mask
         """
-        if isinstance(reg, avx512_mreg):
-            return self.set(dreg=reg, dt=dt, modifiers={_opset_mod.CONSTMASK}, mask="alltrue")
-        r = self.rpref(reg)
-        return self.asmwrap(f"vpcmpeqd {r},{r},{r}")
+        return self.set(dreg=reg, dt=dt, modifiers={_opset_mod.CONSTMASK}, mask="alltrue")
 
     def greg_to_voffs(self, *, streg : greg_base, vreg : vreg_base, dt : adt) -> str:
 

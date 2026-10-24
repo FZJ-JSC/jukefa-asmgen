@@ -61,13 +61,13 @@ def zero_signatures(rtype, dts) -> list[operation_signature]:
     return const_signatures(rtype, dts, "zero")
 
 
-def mask_signatures(dts) -> list[operation_signature]:
+def mask_signatures(dts, rtype=rt.MASK) -> list[operation_signature]:
     """
-    CONSTMASK mask="alltrue" or "allfalse" of a mask register, per element
-    type
+    CONSTMASK mask="alltrue" or "allfalse" of a mask register - or a vector
+    register where masks are those (AVX2) - per element type
     """
     return [operation_signature(modifiers={opset_modifier.CONSTMASK}, structural_params={"mask": mask},
-                                operands={"dreg": osh(ot.REGISTER, orl.DATA, rt.MASK, dt)})
+                                operands={"dreg": osh(ot.REGISTER, orl.DATA, rtype, dt)})
             for mask in ("alltrue", "allfalse") for dt in dts]
 
 

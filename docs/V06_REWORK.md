@@ -358,8 +358,13 @@ instruction stream:
 - [x] `CONSTMASK`: `mask="alltrue"` and `"allfalse"` (a structural
       parameter), on mask registers: SVE and SME `ptrue p.<T>` (`pn` too)
       and `pfalse p.b`; AVX-512 `kxnorw` and `kxorw`. `mask_all_true` on
-      it - AVX's form for a vector register as a mask (`vpcmpeqd`) stays
-      the method's. Kept as it was: `kxnorw` sets 16 bits whatever the
+      it. AVX2's masks are vector registers (its gathers' and scatters'):
+      `vpcmpeqd` and `vpxor`, signatures of the AVX2 generators' set (the
+      implementation tells a k register from a vector one by its type).
+      Open: AVX2's `mreg()` still makes k registers, which AVX2 can't use,
+      and its tracker has no mask registers (`max_mregs` 0) - `mreg()` as
+      a vector register, sharing the tracker's vector registers, would
+      finish it. Kept as it was: `kxnorw` sets 16 bits whatever the
       type, too few for FP16 and bytes in zmm (32 and 64 elements) - for
       `kxnord`/`kxnorq` later.
 - [ ] `VLEN`: bytes, or elements of `dt` where given - on every backend
@@ -486,3 +491,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   mov_greg_imm on set (asmgen 0045).
 - 2026-10-23: phase 4, step 4c - CONSTMASK alltrue, allfalse;
   mask_all_true on set (asmgen 0046).
+- 2026-10-23: phase 4 - AVX2's vector-register masks in its set;
+  mask_all_true on set alone (asmgen 0047).

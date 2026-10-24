@@ -5,6 +5,7 @@ from typing import Callable
 
 from ...op.opset import vector_opset
 from ....registers import asm_data_type as adt, data_reg
+from ..types import avx512_mreg
 from ...x86.opset import x86_opset
 from .signatures import make_avx_opset_signatures
 from ...x86.opset.base import ONE_SHIFTS
@@ -24,7 +25,7 @@ class avx_opset(vector_opset):
         self.rpref = rpref
         self.evex = evex
         self.scalar_op = x86_opset(asmwrap=asmwrap, rpref=rpref, evex=evex)
-        self.signatures = make_avx_opset_signatures()
+        self.signatures = make_avx_opset_signatures(evex=evex)
 
     def zero_reg(self, *, dreg : data_reg, dt : adt) -> str:
         p = self.rpref(dreg)
@@ -44,4 +45,7 @@ class avx_opset(vector_opset):
 
     def mask_reg(self, *, dreg : data_reg, dt : adt, mask : str) -> str:
         p = self.rpref(dreg)
-        return self.asmwrap(f"{'kxnorw' if 'alltrue' == mask else 'kxorw'} {p},{p},{p}")
+        if isinstance(dreg, avx512_mreg):
+            return self.asmwrap(f"{'kxnorw' if 'alltrue' == mask else 'kxorw'} {p},{p},{p}")
+        # a vector register as a mask (AVX2): every bit set, or none
+        return self.asmwrap(f"{'vpcmpeqd' if 'alltrue' == mask else 'vpxor'} {p},{p},{p}")
