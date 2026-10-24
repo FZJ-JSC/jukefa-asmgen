@@ -4121,6 +4121,8 @@ dup z1.d,#0
 dup z1.b,#1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 dup z1.b,#0
+### op set [PARAM,VLEN] param:NAME:-:-
+cntb %[p]
 ### op set [STINDEX] dreg:REGISTER:VEC:DOUBLE streg:REGISTER:GP:UINT64
 index z1.d,#0,x10
 ### op set [STINDEX] dreg:REGISTER:VEC:FP8E4M3 streg:REGISTER:GP:UINT64

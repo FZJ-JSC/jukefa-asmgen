@@ -10,6 +10,7 @@ alone (0.6, phase 4 of docs/V06_REWORK.md): a constant (CONST), a mask
     gen.set(dreg=r, modifiers={opset_modifier.VLEN})                  bytes
     gen.set(dreg=r, dt=adt.DOUBLE, modifiers={opset_modifier.VLEN})   elements
     gen.set(dreg=v, dt=adt.DOUBLE, modifiers={opset_modifier.STINDEX}, streg=r)   i * r
+    gen.set(modifiers={opset_modifier.VLEN, opset_modifier.PARAM}, param="n")    %[n], inline
 
 The register set is dreg, the operation's one output; forms with inputs
 name them. A vector ISA's set carries its base ISA's for general and
@@ -39,6 +40,7 @@ class opset_modifier(operation_modifier):
     CONSTMASK = auto()  # a mask: mask="alltrue" or "allfalse"
     VLEN = auto()       # the vector length in elements of dt (bytes: UINT8, the default)
     STINDEX = auto()    # indices from a stride register: element i is i * streg
+    PARAM = auto()      # the destination an inline asm register operand %[param], no dreg: inline only
 
 
 FREG_DTS = (adt.DOUBLE, adt.SINGLE, adt.HALF)
@@ -84,10 +86,20 @@ def vlen_signatures() -> list[operation_signature]:
                                 operands={"dreg": osh(ot.REGISTER, orl.DATA, rt.GP, adt.UINT64)})]
 
 
-class inline_operand(greg_base):
+def vlen_param_signatures() -> list[operation_signature]:
     """
-    An inline asm operand (%[name]) where a general register goes: the C
-    helpers' asm (c_simd_size_function)
+    VLEN into an inline asm register operand named param (PARAM): inline
+    output only - C helpers' asm
+    """
+    return [operation_signature(modifiers={opset_modifier.VLEN, opset_modifier.PARAM}, structural_params={},
+                                operands={"param": osh(ot.NAME, orl.PARAM, None, None)})]
+
+
+class _inline_param(greg_base):
+    """
+    Where an inline asm register operand %[name] goes in place of a general
+    register: what PARAM hands the ISAs' implementations, which write
+    str(dreg)
     """
     # pylint: disable-next=super-init-not-called
     def __init__(self, name : str):
@@ -141,7 +153,7 @@ class opset(operation):
     NIE_MESSAGE = "Method not implemented"
 
     # pylint: disable-next=arguments-differ
-    def __call__(self, *, dreg, dt : adt | None = None,
+    def __call__(self, *, dreg=None, dt : adt | None = None,
                  modifiers : set[opset_modifier] | None = None,
                  operand_modifiers : dict[str, set[operand_modifier]] | None = None,
                  **kwargs) -> str:
@@ -152,13 +164,19 @@ class opset(operation):
         """
         modifiers = set(modifiers or ())
         dts = {"dreg": dt}
-        if opset_modifier.VLEN in modifiers:
+        if opset_modifier.PARAM in modifiers:
+            # no dreg: an inline asm operand, by its name (param)
+            dts = {}
+            dt = adt.UINT8 if dt is None else dt
+        elif opset_modifier.VLEN in modifiers:
             dt = adt.UINT8 if dt is None else dt
             dts = {"dreg": adt.UINT64}
         elif dt is None:
             raise ValueError(f"{type(self).__name__}: set needs dt (only VLEN counts bytes without it)")
+        if dreg is not None:
+            kwargs["dreg"] = dreg
         return self.execute(dregs=[], dts=dts, modifiers=modifiers,
-                            operand_modifiers=operand_modifiers or {}, dreg=dreg, dt=dt, **kwargs)
+                            operand_modifiers=operand_modifiers or {}, dt=dt, **kwargs)
 
     @abstractmethod
     # pylint: disable-next=arguments-differ
@@ -240,8 +258,10 @@ class vector_opset(opset):
         return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
 
     # pylint: disable-next=arguments-differ
-    def implementation(self, *, dreg, dt, modifiers=None, operand_modifiers=None, constant=None,
-                       value=None, mask=None, streg=None, **kwargs) -> str:
+    def implementation(self, *, dreg=None, dt=None, modifiers=None, operand_modifiers=None, constant=None,
+                       value=None, mask=None, streg=None, param=None, **kwargs) -> str:
+        if opset_modifier.PARAM in set(modifiers or ()):
+            dreg = _inline_param(param)
         if opset_modifier.VLEN in set(modifiers or ()):
             return self.vlen(dreg=dreg, dt=dt)
         if opset_modifier.STINDEX in set(modifiers or ()):

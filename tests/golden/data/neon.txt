@@ -2814,6 +2814,8 @@ movi v1.8h,#1
 movi v1.4s,#1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:one}
 movi v1.16b,#1
+### op set [PARAM,VLEN] param:NAME:-:-
+mov %[p],#16
 ### op set [VLEN] dreg:REGISTER:GP:UINT64
 mov x10,#2
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64

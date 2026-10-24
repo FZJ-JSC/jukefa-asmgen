@@ -430,10 +430,11 @@ class asmgen(ABC):
 
     def _c_simd_size_asm(self) -> str:
         """
-        c_simd_size_function's asm: set(VLEN) into the operand byte_size
+        c_simd_size_function's asm: set(VLEN) into the inline asm operand
+        byte_size (PARAM)
         """
-        from .op.opset import inline_operand, opset_modifier   # pylint: disable=import-outside-toplevel
-        return self.set(dreg=inline_operand("byte_size"), modifiers={opset_modifier.VLEN})
+        from .op.opset import opset_modifier   # pylint: disable=import-outside-toplevel
+        return self.set(modifiers={opset_modifier.VLEN, opset_modifier.PARAM}, param="byte_size")
 
     def simd_size_to_greg(self, *, reg : greg_type, dt : asm_data_type) -> str:
         """

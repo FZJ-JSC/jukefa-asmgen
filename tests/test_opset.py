@@ -247,3 +247,24 @@ class test_avx2_masks(unittest.TestCase):
         self.assertEqual("k3", str(g.mreg(3)))
         self.assertEqual({"k0": 0}, g.reserved_registers()["mreg"])
         self.assertNotIn(("mreg", "vreg", None), g.shared_registers())
+
+
+class test_param(unittest.TestCase):
+    """
+    PARAM: set's destination an inline asm register operand %[param], no
+    dreg - c_simd_size_function's
+    """
+    def test_vlen_into_a_param(self):
+        from asmgen.asmblocks.op.opset import opset_modifier as M
+        for ctor, text in ((rvv, "vsetvli %[n], zero, e8, m1, ta, ma"), (sve, "cntb %[n]"), (neon, "mov %[n],#16")):
+            g = make(ctor)
+            with self.subTest(isa=ctor.__name__):
+                self.assertEqual(text, g.set(modifiers={M.VLEN, M.PARAM}, param="n").strip())
+        g = make(sve)
+        self.assertEqual("cntd %[n]", g.set(dt=adt.DOUBLE, modifiers={M.VLEN, M.PARAM}, param="n").strip())
+        self.assertIn('"cntb %[byte_size]', make(sme).c_simd_size_function)
+
+    def test_dt_needed_but_for_vlen(self):
+        g = make(rvv)
+        with self.assertRaises(ValueError):
+            g.set(dreg=g.vreg(1), modifiers=CONST, constant="zero")

@@ -305,10 +305,16 @@ golden kernels and ukropt's builds unchanged.
       `dt_suffixes`) in `x86/types.py`. The old methods' texts kept - x86's
       `vmovs{d,s,h}` with two unprefixed registers too, which doesn't
       assemble (a fix for later).
-- [ ] Parameters: `mov_greg_to_param`, `mov_param_to_greg[_shift]` as
-      `load`/`store` with a `PARAM` modifier, inline output only - with
-      phase 5: they read and write memory (`ld`/`sd`, `ldr`/`str`, `movq`
-      with `%[param]`), and no caller uses them.
+- [~] Parameters, inline output only: `opset_modifier.PARAM` done - set's
+      destination an inline asm register operand `%[param]`, no dreg
+      (`operand_type.NAME`, new, for the name) - for VLEN on RVV, NEON, SVE
+      and SME, which `c_simd_size_function` uses. `mov_greg_to_param`,
+      `mov_param_to_greg`, `load_pointer` as `load`/`store` with
+      `opmem_modifier.PARAM` with phase 5: they read and write memory
+      operands (`ld`/`sd`, `ldr`/`str`, `movq` with `%[param]`).
+      `mov_param_to_greg_shift` takes `%[param]` as a register on RISC-V
+      and x86 (`slli`, `leaq`) and as nothing that assembles on AArch64;
+      no caller uses it.
 - [x] A broadcast from a register is a `move` with `BCAST`: `fill_vector`
       is one method in the base class now, the backends' five gone. Its
       texts changed in their spacing, and SVE writes `mov z.d,d` (the
@@ -394,8 +400,9 @@ instruction stream:
       only from xmm or memory.
 - [x] `c_simd_size_function` on `set(VLEN)`, `static inline`: one
       implementation in the base class - a constant where the length is
-      fixed, else `set(VLEN)` into the inline asm operand `%[byte_size]`
-      (`inline_operand`); SME counts in streaming mode (`smstart`,
+      fixed, else `set(modifiers={VLEN, PARAM}, param="byte_size")`, the
+      inline asm operand `%[byte_size]` as the destination; SME counts in
+      streaming mode (`smstart`,
       `smstop` around it). ukropt's own `static` fix leaves it be (its
       0011).
 - [x] Wrappers for the above: the `zero_*` methods, `mov_greg_imm`,
@@ -541,3 +548,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   annotated; no stack_access helper.
 - 2026-10-23: AVX2's masks are vector registers: mreg, the tracker's
   pools, set's forms (asmgen 0052).
+- 2026-10-23: set with PARAM: VLEN into an inline asm operand,
+  c_simd_size_function on it; operand_type.NAME (asmgen 0053).

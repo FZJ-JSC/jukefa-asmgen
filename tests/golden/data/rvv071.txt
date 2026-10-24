@@ -2088,6 +2088,8 @@ vmv.v.i v1,0
 vmv.v.i v1,1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 vmv.v.i v1,0
+### op set [PARAM,VLEN] param:NAME:-:-
+vsetvli %[p], zero, e8, m1
 ### op set [STINDEX] dreg:REGISTER:VEC:DOUBLE streg:REGISTER:GP:UINT64
 vid.v v1
 vmul.vx v1,v1,s4

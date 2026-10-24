@@ -30,6 +30,7 @@ class operand_type(Enum):
     """
     REGISTER = auto()
     IMMEDIATE = auto()
+    NAME = auto()       # an inline asm operand's name, %[name]: inline output only
 
 class operand_role(Enum):
     """

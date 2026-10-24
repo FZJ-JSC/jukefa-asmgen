@@ -214,6 +214,9 @@ def instantiate(gen, opname: str, sig, far: bool = False) -> dict | None:
     for _ in range(len(pending) + 1):
         later = []
         for name, shape in pending:
+            if "NAME" == shape.otype.name:
+                imms[name] = values[name] = "p"
+                continue
             if "IMMEDIATE" == shape.otype.name:
                 mm = _minmax(shape)
                 start = (mm[1] if far else mm[0]) if mm else 0
