@@ -35,6 +35,7 @@ from ..x86.opd3 import x86_sub
 from ..x86.opd3 import x86_shift
 from .opset import avx_opset
 from ..op.opset import opset_modifier as _opset_mod
+from .types import avx512_mreg
 
 class avx512(avxbase):
     """
@@ -82,6 +83,27 @@ class avx512(avxbase):
         return 32
     def max_vregs(self):
         return 32
+    def mreg(self, reg_idx : int):
+        """
+        An AVX-512 mask register, k0..k7
+        """
+        return avx512_mreg(reg_idx)
+
+    def shared_registers(self):
+        """
+        Floating-point registers are vector registers; masks are k registers,
+        their own
+        """
+        return [("freg", "vreg", None)]
+
+    def reserved_registers(self) -> dict[str, dict[str, int]]:
+        """
+        AVX2's, and k0, which can't be a write mask
+        """
+        regs = super().reserved_registers()
+        regs["mreg"] = {"k0": 0}
+        return regs
+
     def max_mregs(self):
         return 8
 

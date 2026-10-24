@@ -144,15 +144,11 @@ class avxbase(asmgen):
 
     def shared_registers(self) -> list[tuple[str, str, dict[int, int] | None]]:
         # a scalar FP register is the low part of the vector register
-        return [("freg", "vreg", None)]
+        return [("freg", "vreg", None), ("mreg", "vreg", None)]
 
     def reserved_registers(self) -> dict[str, dict[str, int]]:
         # indices as x86_greg names them: rbp, rsp; k0 can't be a write mask
-        regs = {"greg": {"rbp": 14, "rsp": 15}}
-        mregs = self.max_mregs()
-        if mregs:
-            regs["mreg"] = {"k0": 0}
-        return regs
+        return {"greg": {"rbp": 14, "rsp": 15}}
 
     def iota_label(self, size : int, count : int) -> str:
         """
@@ -343,7 +339,8 @@ class avxbase(asmgen):
     def max_gregs(self):
         return 16
     def max_mregs(self):
-        return 0
+        # every vector register can be a mask (shared_registers)
+        return self.max_vregs()
 
     def kiterkleft_pow2(self, *, kreg : greg_base,
                         kleftreg : greg_base,
@@ -565,9 +562,10 @@ class avxbase(asmgen):
 
     def mreg(self, reg_idx : int):
         """
-        An AVX-512 mask register, k0..k7
+        AVX2's masks are vector registers - gathers', masked loads' and stores',
+        variable blends' - any of them: mask i is vector register i
         """
-        return avx512_mreg(reg_idx)
+        return self.vreg(reg_idx)
 
     def mask_all_true(self, *, reg, dt : adt) -> str:
         """

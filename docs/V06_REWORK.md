@@ -361,10 +361,12 @@ instruction stream:
       it. AVX2's masks are vector registers (its gathers' and scatters'):
       `vpcmpeqd` and `vpxor`, signatures of the AVX2 generators' set (the
       implementation tells a k register from a vector one by its type).
-      Open: AVX2's `mreg()` still makes k registers, which AVX2 can't use,
-      and its tracker has no mask registers (`max_mregs` 0) - `mreg()` as
-      a vector register, sharing the tracker's vector registers, would
-      finish it. Kept as it was: `kxnorw` sets 16 bits whatever the
+      AVX2's `mreg(i)` is `vreg(i)` - its gathers, masked loads and
+      stores (`vmaskmov`, `vpmaskmov`) and variable blends take any vector
+      register as a mask, none a general register - and the tracker
+      shares the two pools (`max_mregs` is `max_vregs`), as NEON's floating-
+      point and vector registers; AVX-512's are k registers, k0 reserved.
+      AVX2's set has no k-register forms. Kept as it was: `kxnorw` sets 16 bits whatever the
       type, too few for FP16 and bytes in zmm (32 and 64 elements) - for
       `kxnord`/`kxnorq` later.
 - [x] `VLEN`: `set(dreg=r, dt=dt, modifiers={VLEN})`, elements of dt -
@@ -537,3 +539,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   elements of dt, UINT8 by default (no unit); STINDEX for INDEX; rip named
   by rpref; the base methods' type annotations back; set's modifiers
   annotated; no stack_access helper.
+- 2026-10-23: AVX2's masks are vector registers: mreg, the tracker's
+  pools, set's forms (asmgen 0052).

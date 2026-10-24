@@ -221,3 +221,29 @@ class test_index(unittest.TestCase):
             with self.subTest(isa=ctor.__name__):
                 self.assertEqual(g.set(dreg=g.vreg(2), dt=adt.SINGLE, modifiers={opset_modifier.STINDEX}, streg=g.greg(1)),
                                  g.greg_to_voffs(streg=g.greg(1), vreg=g.vreg(2), dt=adt.SINGLE))
+
+
+class test_avx2_masks(unittest.TestCase):
+    """
+    AVX2's masks are vector registers: mreg(i) is vreg(i), the tracker
+    shares their pool; AVX-512's are k registers, k0 reserved
+    """
+    def test_avx2(self):
+        from asmgen.asmblocks.avx import fma128
+        for ctor in (fma128, fma256):
+            g = make(ctor)
+            with self.subTest(isa=ctor.__name__):
+                self.assertEqual(str(g.vreg(3)), str(g.mreg(3)))
+                rt = g.get_reg_tracker()
+                m = rt.reserve_any_reg("mreg")
+                self.assertNotEqual(m, rt.reserve_any_reg("vreg"))     # one pool
+                p = g.rpref(g.mreg(2))
+                self.assertEqual(f"vpcmpeqd {p},{p},{p}", g.mask_all_true(reg=g.mreg(2), dt=adt.DOUBLE).strip())
+                kinds = {o.rtype.name for s in g.set.get_signatures() for o in s.operands.values() if o.rtype}
+                self.assertNotIn("MASK", kinds)                        # no k registers on AVX2
+
+    def test_avx512(self):
+        g = make(avx512)
+        self.assertEqual("k3", str(g.mreg(3)))
+        self.assertEqual({"k0": 0}, g.reserved_registers()["mreg"])
+        self.assertNotIn(("mreg", "vreg", None), g.shared_registers())

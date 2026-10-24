@@ -464,12 +464,12 @@ sub $1, %r8
 ### method loopend(label=someloop, reg=r8)
 cmp $0x0,%r8
 jne .someloop
-### method mask_all_true(dt=DOUBLE, reg=k1)
-kxnorw %k1,%k1,%k1
-### method mask_all_true(dt=HALF, reg=k1)
-kxnorw %k1,%k1,%k1
-### method mask_all_true(dt=SINGLE, reg=k1)
-kxnorw %k1,%k1,%k1
+### method mask_all_true(dt=DOUBLE, reg=xmm1)
+vpcmpeqd %xmm1,%xmm1,%xmm1
+### method mask_all_true(dt=HALF, reg=xmm1)
+vpcmpeqd %xmm1,%xmm1,%xmm1
+### method mask_all_true(dt=SINGLE, reg=xmm1)
+vpcmpeqd %xmm1,%xmm1,%xmm1
 ### method max_bcast_immoff(dt=DOUBLE)
 31
 ### method max_bcast_immoff(dt=HALF)
@@ -2202,50 +2202,6 @@ imulq $2147483647,%rcx,%rdx
 vmulpd %xmm1,%xmm2,%xmm3
 ### op mul [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vmulps %xmm1,%xmm2,%xmm3
-### op set [CONSTMASK] dreg:REGISTER:MASK:DOUBLE {mask:allfalse}
-kxorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:DOUBLE {mask:alltrue}
-kxnorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:HALF {mask:allfalse}
-kxorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:HALF {mask:alltrue}
-kxnorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:SINGLE {mask:allfalse}
-kxorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:SINGLE {mask:alltrue}
-kxnorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:SINT16 {mask:allfalse}
-kxorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:SINT16 {mask:alltrue}
-kxnorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:SINT32 {mask:allfalse}
-kxorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:SINT32 {mask:alltrue}
-kxnorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:SINT64 {mask:allfalse}
-kxorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:SINT64 {mask:alltrue}
-kxnorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:SINT8 {mask:allfalse}
-kxorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:SINT8 {mask:alltrue}
-kxnorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:UINT16 {mask:allfalse}
-kxorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:UINT16 {mask:alltrue}
-kxnorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:UINT32 {mask:allfalse}
-kxorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:UINT32 {mask:alltrue}
-kxnorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:UINT64 {mask:allfalse}
-kxorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:UINT64 {mask:alltrue}
-kxnorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:UINT8 {mask:allfalse}
-kxorw %k1,%k1,%k1
-### op set [CONSTMASK] dreg:REGISTER:MASK:UINT8 {mask:alltrue}
-kxnorw %k1,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:VEC:DOUBLE {mask:allfalse}
 vpxor %xmm1,%xmm1,%xmm1
 ### op set [CONSTMASK] dreg:REGISTER:VEC:DOUBLE {mask:alltrue}
