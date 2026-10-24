@@ -1228,7 +1228,47 @@ class asmgen(ABC):
         """
         return self._scalar_memory("store", areg=areg, offset=offset, reg=src, dt=dt)
 
-    @abstractmethod
+    def _vector_memory(self, action : str, *, areg : greg_type, vreg : vreg_type,
+                       dt : asm_data_type, modifiers : tuple = (), bcast : bool = False,
+                       lane : int | None = None, **kwargs) -> str:
+        """
+        A vector register loaded or stored through load or store, for the old
+        vector methods: offset modifiers only where the offset isn't 0, the
+        all-true predicate the ISA's setup makes where vector instructions name
+        one (SVE, SME) - as the old methods assumed - and NotImplementedError
+        where the ISA has no such form, as they raised
+
+        :param modifiers: opmem modifiers' names
+        :param bcast: the element broadcast to every lane
+        :param lane: the one lane loaded or stored
+        """
+        # pylint: disable=import-outside-toplevel
+        from .op.opmem import opmem_modifier
+        from .op.operand import operand_modifier
+        mods = {opmem_modifier[m] for m in modifiers}
+        for name, modifier in (("ioffset", opmem_modifier.IOFFSET), ("voffset", opmem_modifier.VOFFSET)):
+            if name in kwargs:
+                if kwargs[name]:
+                    mods.add(modifier)
+                else:
+                    del kwargs[name]
+        operand_mods = set()
+        if bcast:
+            operand_mods.add(operand_modifier.BCAST)
+        if lane is not None:
+            operand_mods.add(operand_modifier.ILANE)
+            kwargs["adreg_lane"] = lane
+        if operand_mods:
+            kwargs["operand_modifiers"] = {"adreg": operand_mods}
+        predicate = self.isa_setup().all_true_predicate(rt=None, dt=dt)
+        if predicate is not None:
+            mods.add(opmem_modifier.MASK)
+            kwargs["amreg"] = predicate
+        try:
+            return getattr(self, action)(dregs=[vreg], areg=areg, dt=dt, modifiers=mods, **kwargs)
+        except ValueError as err:
+            raise NotImplementedError(f"{type(self).__name__} has no such {action}: {err}") from err
+
     def load_vector_voff(self, *, areg : greg_type, voffset : int,
                          vreg : vreg_type, dt : asm_data_type):
         """
@@ -1247,9 +1287,8 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("load", areg=areg, vreg=vreg, dt=dt, voffset=voffset)
 
-    @abstractmethod
     def load_vector_immoff(self, *, areg : greg_type, offset : int,
                            vreg : vreg_type, dt : asm_data_type):
         """
@@ -1268,9 +1307,8 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("load", areg=areg, vreg=vreg, dt=dt, ioffset=offset)
 
-    @abstractmethod
     def load_vector(self, *, areg : greg_type, vreg : vreg_type, dt : asm_data_type):
         """
         Returns the string containing the instruction(s) to load contiguous elements
@@ -1285,7 +1323,7 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("load", areg=areg, vreg=vreg, dt=dt)
 
     def fill_vector(self, *, sreg : freg_base, vreg : vreg_base, dt : asm_data_type) -> str:
         """
@@ -1296,7 +1334,6 @@ class asmgen(ABC):
         return self.move(dregs=[sreg, vreg], dts=[dt, dt],
                          operand_modifiers={'bdreg': {operand_modifier.BCAST}})
 
-    @abstractmethod
     def load_vector_lane(self, *, areg : greg_base,
                          vreg : vreg_base, lane : int, dt : asm_data_type) -> str:
         """
@@ -1314,9 +1351,8 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("load", areg=areg, vreg=vreg, dt=dt, lane=lane)
 
-    @abstractmethod
     def load_vector_immstride(self, *, areg : greg_type, byte_stride : int,
                     vreg : vreg_type, dt : asm_data_type):
         """
@@ -1335,9 +1371,9 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("load", areg=areg, vreg=vreg, dt=dt,
+                                   modifiers=("ISTRIDE",), istride=byte_stride)
 
-    @abstractmethod
     def load_vector_gregstride(self, *, areg : greg_type, sreg : greg_type,
                     vreg : vreg_type, dt : asm_data_type):
         """
@@ -1356,9 +1392,9 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("load", areg=areg, vreg=vreg, dt=dt,
+                                   modifiers=("GSTRIDE",), streg=sreg)
 
-    @abstractmethod
     def load_vector_gather(self, *, areg : greg_type, offvreg : vreg_type,
                            vreg : vreg_type, dt : asm_data_type,
                            it : asm_index_type):
@@ -1380,9 +1416,9 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("load", areg=areg, vreg=vreg, dt=dt,
+                                   modifiers=("VINDEX",), vidxreg=offvreg, it=it)
 
-    @abstractmethod
     def load_vector_bcast1(self, *, areg : greg_type,
                           vreg : vreg_type, dt : asm_data_type):
         """
@@ -1398,9 +1434,8 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("load", areg=areg, vreg=vreg, dt=dt, bcast=True)
 
-    @abstractmethod
     def load_vector_bcast1_immoff(self, *, areg : greg_type, offset : int,
                                vreg : vreg_type, dt : asm_data_type):
         """
@@ -1420,9 +1455,9 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("load", areg=areg, vreg=vreg, dt=dt, bcast=True,
+                                   ioffset=offset)
 
-    @abstractmethod
     def load_vector_bcast1_inc(self, *, areg : greg_type, offset : int,
                               vreg : vreg_type, dt : asm_data_type):
         """
@@ -1443,9 +1478,9 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("load", areg=areg, vreg=vreg, dt=dt, bcast=True,
+                                   modifiers=("POSTINC",), iinc=offset)
 
-    @abstractmethod
     def store_vector(self, *, areg : greg_type,
                      vreg : vreg_type, dt : asm_data_type):
         """
@@ -1461,9 +1496,8 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("store", areg=areg, vreg=vreg, dt=dt)
 
-    @abstractmethod
     def store_vector_lane(self, *, areg : greg_base,
                           vreg : vreg_base, lane : int, dt : asm_data_type) -> str:
         """
@@ -1481,9 +1515,8 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("store", areg=areg, vreg=vreg, dt=dt, lane=lane)
 
-    @abstractmethod
     def store_vector_voff(self, *, areg : greg_type, voffset : int,
                           vreg : vreg_type, dt : asm_data_type):
         """
@@ -1502,9 +1535,8 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("store", areg=areg, vreg=vreg, dt=dt, voffset=voffset)
 
-    @abstractmethod
     def store_vector_immoff(self, *, areg : greg_type, offset : int,
                            vreg : vreg_type, dt : asm_data_type):
         """
@@ -1523,9 +1555,8 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("store", areg=areg, vreg=vreg, dt=dt, ioffset=offset)
 
-    @abstractmethod
     def store_vector_immstride(self, *, areg : greg_type, byte_stride : int,
                     vreg : vreg_type, dt : asm_data_type):
         """
@@ -1544,9 +1575,9 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("store", areg=areg, vreg=vreg, dt=dt,
+                                   modifiers=("ISTRIDE",), istride=byte_stride)
 
-    @abstractmethod
     def store_vector_gregstride(self, *, areg : greg_type, sreg : greg_type,
                     vreg : vreg_type, dt : asm_data_type):
         """
@@ -1565,9 +1596,9 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("store", areg=areg, vreg=vreg, dt=dt,
+                                   modifiers=("GSTRIDE",), streg=sreg)
 
-    @abstractmethod
     def store_vector_scatter(self, *, areg : greg_type, offvreg : vreg_type,
                              vreg : vreg_type, dt : asm_data_type,
                              it : asm_index_type):
@@ -1589,7 +1620,8 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return self._vector_memory("store", areg=areg, vreg=vreg, dt=dt,
+                                   modifiers=("VINDEX",), vidxreg=offvreg, it=it)
 
     @abstractmethod
     def load_tile(self, *, areg : greg_type,

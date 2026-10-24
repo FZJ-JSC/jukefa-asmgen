@@ -464,6 +464,31 @@ builds unchanged.
       SEW 64; wider ones would take a register group), the mnemonic's EEW
       the index's; AVX's FP64 broadcast into an xmm register is `vmovddup`
       (`vbroadcastsd` has no xmm destination).
+- [x] The old vector loads and stores (`load_vector`, `_immoff`, `_voff`,
+      `_lane`, `_gregstride`, `_immstride`, `_gather`, `_bcast1`,
+      `_bcast1_immoff`, `_bcast1_inc`, and the stores): one implementation
+      each in the base class, on `load` and `store` (`_vector_memory`):
+      offset modifiers only where the offset isn't 0 (NEON's plain load is
+      `ld1`, `ldr q` with an offset), the all-true predicate the ISA's setup
+      makes where vector instructions name one (SVE, SME), and
+      NotImplementedError where the ISA has no such form, as before.
+      AVX-512's gather and scatter set `k2` all-true and use it, as the old
+      ones did (the operations themselves take the mask as `amreg`); AVX2's
+      gather raises - it needs a mask register the method has no parameter
+      for (its old text didn't assemble). RVV's, NEON's, SVE's and AVX's
+      versions are gone; rvv071 keeps RVV's, which print 0.7.1's mnemonics,
+      until its port. Every changed snapshot entry is one of: a different
+      message where both raise; format (spaces, braces, `#0`); text that
+      never assembled now raising (offsets that don't encode, `ld1r`
+      post-increments other than the element size, x86's `vmovuph` and
+      `vbroadcastsh`, AVX2's gathers) or now valid (x86 FP16 loads are
+      `vmovdqu`); forms the operations had and the old methods refused
+      (AVX's lane stores, offsets of 0); xmm broadcasts naming xmm (and
+      `vmovddup` for FP64), where they named ymm; SVE's FP64 gathers with
+      32-bit indices sign-extending them (`sxtw`), where the old ones read
+      64-bit offsets; and RVV's FP16 gathers with 32-bit indices raising:
+      their index would need an aligned register group (reserved encoding,
+      though it assembled).
 - [ ] The limits become constraints: `max/min_load_immoff`,
       `max/min_fload_immoff`, `max/min_bcast_immoff`, `max/min_load_voff`.
 - [ ] rvv071: its operations print 0.7.1's mnemonics and `vsetvli`, their
@@ -592,3 +617,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   prefetch offset limits removed (asmgen 0055).
 - 2026-10-24: gathers and scatters on byte offsets everywhere, SVE's and
   RVV's index forms, AVX's 128-bit FP64 broadcast (asmgen 0056).
+- 2026-10-24: the old vector loads and stores on load and store (asmgen 0057).

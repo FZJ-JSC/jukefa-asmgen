@@ -269,11 +269,11 @@ ldr s0, [x0, #4]
 ### method load_tile
 !arguments TypeError: neon.treg() missing 1 required positional argument: 'dt'
 ### method load_vector(areg=x0, dt=DOUBLE, vreg=v0)
-ldr q0, [x0]
+ld1 {v0.2d}, [x0]
 ### method load_vector(areg=x0, dt=HALF, vreg=v0)
-ldr q0, [x0]
+ld1 {v0.8h}, [x0]
 ### method load_vector(areg=x0, dt=SINGLE, vreg=v0)
-ldr q0, [x0]
+ld1 {v0.4s}, [x0]
 ### method load_vector_bcast1(areg=x0, dt=DOUBLE, vreg=v0)
 ld1r {v0.2d}, [x0]
 ### method load_vector_bcast1(areg=x0, dt=HALF, vreg=v0)
@@ -281,137 +281,137 @@ ld1r {v0.8h}, [x0]
 ### method load_vector_bcast1(areg=x0, dt=SINGLE, vreg=v0)
 ld1r {v0.4s}, [x0]
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=-2048, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=-2049, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=-8, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=0, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+ld1r {v0.2d}, [x0]
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=1, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=2047, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=2048, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=255, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=256, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=4, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=4096, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=8, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=HALF, offset=4, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=HALF, offset=8, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=-2048, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=-2049, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=-8, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=0, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+ld1r {v0.4s}, [x0]
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=1, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=2047, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=2048, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=255, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=256, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=4, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=4096, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=8, vreg=v0)
-!NotImplementedError: load_vector_bcast1_immoff doesn't make sense with NEON, use load_vector_bcast1_inc or load_vector_voff + fma_idx instead
+!NotImplementedError: neon has no such load: VOFFSET/IOFFSET cannot be combined with STRUCT, ILANE, or BCAST
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=-2048, vreg=v0)
-ld1r {v0.2d}, [x0], #-2048
+!NotImplementedError: neon has no such load: value of iinc must be one of: [8]
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=-2049, vreg=v0)
-ld1r {v0.2d}, [x0], #-2049
+!NotImplementedError: neon has no such load: value of iinc must be one of: [8]
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=-8, vreg=v0)
-ld1r {v0.2d}, [x0], #-8
+!NotImplementedError: neon has no such load: value of iinc must be one of: [8]
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=0, vreg=v0)
-ld1r {v0.2d}, [x0], #0
+!NotImplementedError: neon has no such load: value of iinc must be one of: [8]
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=1, vreg=v0)
-ld1r {v0.2d}, [x0], #1
+!NotImplementedError: neon has no such load: value of iinc must be one of: [8]
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=2047, vreg=v0)
-ld1r {v0.2d}, [x0], #2047
+!NotImplementedError: neon has no such load: value of iinc must be one of: [8]
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=2048, vreg=v0)
-ld1r {v0.2d}, [x0], #2048
+!NotImplementedError: neon has no such load: value of iinc must be one of: [8]
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=255, vreg=v0)
-ld1r {v0.2d}, [x0], #255
+!NotImplementedError: neon has no such load: value of iinc must be one of: [8]
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=256, vreg=v0)
-ld1r {v0.2d}, [x0], #256
+!NotImplementedError: neon has no such load: value of iinc must be one of: [8]
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=4, vreg=v0)
-ld1r {v0.2d}, [x0], #4
+!NotImplementedError: neon has no such load: value of iinc must be one of: [8]
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=4096, vreg=v0)
-ld1r {v0.2d}, [x0], #4096
+!NotImplementedError: neon has no such load: value of iinc must be one of: [8]
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=8, vreg=v0)
 ld1r {v0.2d}, [x0], #8
 ### method load_vector_bcast1_inc(areg=x0, dt=HALF, offset=4, vreg=v0)
-ld1r {v0.8h}, [x0], #4
+!NotImplementedError: neon has no such load: value of iinc must be one of: [2]
 ### method load_vector_bcast1_inc(areg=x0, dt=HALF, offset=8, vreg=v0)
-ld1r {v0.8h}, [x0], #8
+!NotImplementedError: neon has no such load: value of iinc must be one of: [2]
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=-2048, vreg=v0)
-ld1r {v0.4s}, [x0], #-2048
+!NotImplementedError: neon has no such load: value of iinc must be one of: [4]
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=-2049, vreg=v0)
-ld1r {v0.4s}, [x0], #-2049
+!NotImplementedError: neon has no such load: value of iinc must be one of: [4]
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=-8, vreg=v0)
-ld1r {v0.4s}, [x0], #-8
+!NotImplementedError: neon has no such load: value of iinc must be one of: [4]
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=0, vreg=v0)
-ld1r {v0.4s}, [x0], #0
+!NotImplementedError: neon has no such load: value of iinc must be one of: [4]
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=1, vreg=v0)
-ld1r {v0.4s}, [x0], #1
+!NotImplementedError: neon has no such load: value of iinc must be one of: [4]
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=2047, vreg=v0)
-ld1r {v0.4s}, [x0], #2047
+!NotImplementedError: neon has no such load: value of iinc must be one of: [4]
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=2048, vreg=v0)
-ld1r {v0.4s}, [x0], #2048
+!NotImplementedError: neon has no such load: value of iinc must be one of: [4]
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=255, vreg=v0)
-ld1r {v0.4s}, [x0], #255
+!NotImplementedError: neon has no such load: value of iinc must be one of: [4]
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=256, vreg=v0)
-ld1r {v0.4s}, [x0], #256
+!NotImplementedError: neon has no such load: value of iinc must be one of: [4]
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=4, vreg=v0)
 ld1r {v0.4s}, [x0], #4
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=4096, vreg=v0)
-ld1r {v0.4s}, [x0], #4096
+!NotImplementedError: neon has no such load: value of iinc must be one of: [4]
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=8, vreg=v0)
-ld1r {v0.4s}, [x0], #8
+!NotImplementedError: neon has no such load: value of iinc must be one of: [4]
 ### method load_vector_gather(areg=x0, dt=DOUBLE, it=INT32, offvreg=v1, vreg=v0)
-!NotImplementedError: NEON has no load with vector register stride
+!NotImplementedError: neon has no such load: NEON has no ld/st with 1D vector offset indices
 ### method load_vector_gather(areg=x0, dt=HALF, it=INT32, offvreg=v1, vreg=v0)
-!NotImplementedError: NEON has no load with vector register stride
+!NotImplementedError: neon has no such load: NEON has no ld/st with 1D vector offset indices
 ### method load_vector_gather(areg=x0, dt=SINGLE, it=INT32, offvreg=v1, vreg=v0)
-!NotImplementedError: NEON has no load with vector register stride
+!NotImplementedError: neon has no such load: NEON has no ld/st with 1D vector offset indices
 ### method load_vector_gregstride(areg=x0, dt=DOUBLE, sreg=x1, vreg=v0)
-!NotImplementedError: NEON has no load with scalar register stride
+!NotImplementedError: neon has no such load: NEON has no ld/st with GP-reg strides
 ### method load_vector_gregstride(areg=x0, dt=HALF, sreg=x1, vreg=v0)
-!NotImplementedError: NEON has no load with scalar register stride
+!NotImplementedError: neon has no such load: NEON has no ld/st with GP-reg strides
 ### method load_vector_gregstride(areg=x0, dt=SINGLE, sreg=x1, vreg=v0)
-!NotImplementedError: NEON has no load with scalar register stride
+!NotImplementedError: neon has no such load: NEON has no ld/st with GP-reg strides
 ### method load_vector_immoff(areg=x0, dt=DOUBLE, offset=4, vreg=v0)
 ldr q0, [x0, #4]
 ### method load_vector_immoff(areg=x0, dt=HALF, offset=4, vreg=v0)
 ldr q0, [x0, #4]
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=-2048, vreg=v0)
-ldr q0, [x0, #-2048]
+!NotImplementedError: neon has no such load: value of ioffset must satisfy one of: value of ioffset must be >= -256; or value of ioffset must be >= 0
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=-2049, vreg=v0)
-ldr q0, [x0, #-2049]
+!NotImplementedError: neon has no such load: value of ioffset must satisfy one of: value of ioffset must be >= -256; or value of ioffset must be >= 0
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=-8, vreg=v0)
 ldr q0, [x0, #-8]
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=0, vreg=v0)
-ldr q0, [x0, #0]
+ld1 {v0.4s}, [x0]
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=1, vreg=v0)
 ldr q0, [x0, #1]
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=2047, vreg=v0)
-ldr q0, [x0, #2047]
+!NotImplementedError: neon has no such load: value of ioffset must satisfy one of: value of ioffset must be <= 255; or value of ioffset must be a multiple of 16
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=2048, vreg=v0)
 ldr q0, [x0, #2048]
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=255, vreg=v0)
@@ -425,11 +425,11 @@ ldr q0, [x0, #4096]
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=8, vreg=v0)
 ldr q0, [x0, #8]
 ### method load_vector_immstride(areg=x0, byte_stride=4, dt=DOUBLE, vreg=v0)
-!NotImplementedError: NEON has no load with immediate stride
+!NotImplementedError: neon has no such load: NEON has no ld/st with immediate strides
 ### method load_vector_immstride(areg=x0, byte_stride=4, dt=HALF, vreg=v0)
-!NotImplementedError: NEON has no load with immediate stride
+!NotImplementedError: neon has no such load: NEON has no ld/st with immediate strides
 ### method load_vector_immstride(areg=x0, byte_stride=4, dt=SINGLE, vreg=v0)
-!NotImplementedError: NEON has no load with immediate stride
+!NotImplementedError: neon has no such load: NEON has no ld/st with immediate strides
 ### method load_vector_lane(areg=x0, dt=DOUBLE, lane=1, vreg=v0)
 ld1 {v0.d}[1], [x0]
 ### method load_vector_lane(areg=x0, dt=HALF, lane=1, vreg=v0)
@@ -657,33 +657,33 @@ str s0, [x0, #4]
 ### method store_tile
 !arguments TypeError: neon.treg() missing 1 required positional argument: 'dt'
 ### method store_vector(areg=x0, dt=DOUBLE, vreg=v0)
-str q0, [x0]
+st1 {v0.2d}, [x0]
 ### method store_vector(areg=x0, dt=HALF, vreg=v0)
-str q0, [x0]
+st1 {v0.8h}, [x0]
 ### method store_vector(areg=x0, dt=SINGLE, vreg=v0)
-str q0, [x0]
+st1 {v0.4s}, [x0]
 ### method store_vector_gregstride(areg=x0, dt=DOUBLE, sreg=x1, vreg=v0)
-!NotImplementedError: NEON has no store with scalar register stride
+!NotImplementedError: neon has no such store: NEON has no ld/st with GP-reg strides
 ### method store_vector_gregstride(areg=x0, dt=HALF, sreg=x1, vreg=v0)
-!NotImplementedError: NEON has no store with scalar register stride
+!NotImplementedError: neon has no such store: NEON has no ld/st with GP-reg strides
 ### method store_vector_gregstride(areg=x0, dt=SINGLE, sreg=x1, vreg=v0)
-!NotImplementedError: NEON has no store with scalar register stride
+!NotImplementedError: neon has no such store: NEON has no ld/st with GP-reg strides
 ### method store_vector_immoff(areg=x0, dt=DOUBLE, offset=4, vreg=v0)
 str q0, [x0, #4]
 ### method store_vector_immoff(areg=x0, dt=HALF, offset=4, vreg=v0)
 str q0, [x0, #4]
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=-2048, vreg=v0)
-str q0, [x0, #-2048]
+!NotImplementedError: neon has no such store: value of ioffset must satisfy one of: value of ioffset must be >= -256; or value of ioffset must be >= 0
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=-2049, vreg=v0)
-str q0, [x0, #-2049]
+!NotImplementedError: neon has no such store: value of ioffset must satisfy one of: value of ioffset must be >= -256; or value of ioffset must be >= 0
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=-8, vreg=v0)
 str q0, [x0, #-8]
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=0, vreg=v0)
-str q0, [x0, #0]
+st1 {v0.4s}, [x0]
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=1, vreg=v0)
 str q0, [x0, #1]
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=2047, vreg=v0)
-str q0, [x0, #2047]
+!NotImplementedError: neon has no such store: value of ioffset must satisfy one of: value of ioffset must be <= 255; or value of ioffset must be a multiple of 16
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=2048, vreg=v0)
 str q0, [x0, #2048]
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=255, vreg=v0)
@@ -697,11 +697,11 @@ str q0, [x0, #4096]
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=8, vreg=v0)
 str q0, [x0, #8]
 ### method store_vector_immstride(areg=x0, byte_stride=4, dt=DOUBLE, vreg=v0)
-!NotImplementedError: NEON has no store with immediate stride
+!NotImplementedError: neon has no such store: NEON has no ld/st with immediate strides
 ### method store_vector_immstride(areg=x0, byte_stride=4, dt=HALF, vreg=v0)
-!NotImplementedError: NEON has no store with immediate stride
+!NotImplementedError: neon has no such store: NEON has no ld/st with immediate strides
 ### method store_vector_immstride(areg=x0, byte_stride=4, dt=SINGLE, vreg=v0)
-!NotImplementedError: NEON has no store with immediate stride
+!NotImplementedError: neon has no such store: NEON has no ld/st with immediate strides
 ### method store_vector_lane(areg=x0, dt=DOUBLE, lane=1, vreg=v0)
 st1 {v0.d}[1], [x0]
 ### method store_vector_lane(areg=x0, dt=HALF, lane=1, vreg=v0)
@@ -709,11 +709,11 @@ st1 {v0.h}[1], [x0]
 ### method store_vector_lane(areg=x0, dt=SINGLE, lane=1, vreg=v0)
 st1 {v0.s}[1], [x0]
 ### method store_vector_scatter(areg=x0, dt=DOUBLE, it=INT32, offvreg=v1, vreg=v0)
-!NotImplementedError: NEON has no store with vector register stride
+!NotImplementedError: neon has no such store: NEON has no ld/st with 1D vector offset indices
 ### method store_vector_scatter(areg=x0, dt=HALF, it=INT32, offvreg=v1, vreg=v0)
-!NotImplementedError: NEON has no store with vector register stride
+!NotImplementedError: neon has no such store: NEON has no ld/st with 1D vector offset indices
 ### method store_vector_scatter(areg=x0, dt=SINGLE, it=INT32, offvreg=v1, vreg=v0)
-!NotImplementedError: NEON has no store with vector register stride
+!NotImplementedError: neon has no such store: NEON has no ld/st with 1D vector offset indices
 ### method store_vector_voff(areg=x0, dt=DOUBLE, voffset=4, vreg=v0)
 str q0, [x0, #64]
 ### method store_vector_voff(areg=x0, dt=HALF, voffset=4, vreg=v0)

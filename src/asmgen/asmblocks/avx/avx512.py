@@ -13,6 +13,7 @@ from abc import abstractmethod
 
 from ..x86.opmem import x86_prefetch
 from ...asmdata import asm_data
+from ...registers import asm_index_type
 from ...registers import (
     reg_tracker,
     asm_data_type as adt,
@@ -126,52 +127,28 @@ class avx512(avxbase):
     def vreg(self, reg_idx : int):
         return zmm_vreg(reg_idx)
 
-    def load_vector_bcast1(self, *, areg : greg_base,
-                          vreg : vreg_base, dt : adt):
-        suf = 's'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pv = self.rpref(vreg)
-        return self.asmwrap(f"vbroadcast{suf} ({pa}),{pv}")
-
-    def load_vector_bcast1_immoff(self, *, areg : greg_base, offset : int,
-                               vreg : vreg_base, dt : adt):
-        suf = 's'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pv = self.rpref(vreg)
-        return self.asmwrap(f"vbroadcast{suf} {offset}({pa}),{pv}")
+    def _k2_vindex(self, action : str, *, areg : greg_base, offvreg : vreg_base,
+                   vreg : vreg_base, dt : adt, it : asm_index_type) -> str:
+        """
+        The old gather and scatter: k2 set all-true - the instruction clears
+        it - then the access masked by it, as the old methods did
+        """
+        # pylint: disable=import-outside-toplevel
+        from ..op.opmem import opmem_modifier
+        from ..op.opset import opset_modifier
+        k2 = self.mreg(2)
+        try:
+            access = getattr(self, action)(dregs=[vreg], areg=areg, dt=dt, it=it, amreg=k2, vidxreg=offvreg,
+                                           modifiers={opmem_modifier.MASK, opmem_modifier.VINDEX})
+        except ValueError as err:
+            raise NotImplementedError(f"avx512 has no such {action}: {err}") from err
+        return self.set(dreg=k2, dt=dt, modifiers={opset_modifier.CONSTMASK}, mask="alltrue") + access
 
     def load_vector_gather(self, *, areg : greg_base, offvreg : vreg_base,
-                           vreg : vreg_base, dt : adt,
-                           it : ait):
-        suf = 'p'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pv = self.rpref(vreg)
-        pov = self.rpref(offvreg)
-        address = f"({pa},{pov},1)"
-        isuf = self.it_suffixes[it]
-        maskreg = '%k2'
-        if self.output_inline:
-            maskreg = '%%k2'
-        masksuf = self.size_mask_suffixes[adt_size(dt)]
-
-        asmblock = self.asmwrap(f"kxnor{masksuf} {maskreg},{maskreg},{maskreg}")
-        asmblock += self.asmwrap(f"vgather{isuf}{suf} {address},{pv}{{{maskreg}}}")
-        return asmblock
+                           vreg : vreg_base, dt : adt, it : asm_index_type) -> str:
+        return self._k2_vindex("load", areg=areg, offvreg=offvreg, vreg=vreg, dt=dt, it=it)
 
     def store_vector_scatter(self, *, areg : greg_base, offvreg : vreg_base,
-                           vreg : vreg_base, dt : adt,
-                           it : ait):
-        suf = 'p'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pv = self.rpref(vreg)
-        pov = self.rpref(offvreg)
-        address = f"({pa},{pov},1)"
-        isuf = self.it_suffixes[it]
-        maskreg = '%k2'
-        if self.output_inline:
-            maskreg = '%%k2'
-        masksuf = self.size_mask_suffixes[adt_size(dt)]
+                             vreg : vreg_base, dt : adt, it : asm_index_type) -> str:
+        return self._k2_vindex("store", areg=areg, offvreg=offvreg, vreg=vreg, dt=dt, it=it)
 
-        asmblock = self.asmwrap(f"kxnor{masksuf} {maskreg},{maskreg},{maskreg}")
-        asmblock += self.asmwrap(f"vscatter{isuf}{suf} {pv},{address}{{{maskreg}}}")
-        return asmblock

@@ -188,66 +188,6 @@ class rvv(riscv64):
         # the mask register is vector register 0
         return [("mreg", "vreg", {0: 0})]
 
-    def load_vector(self, *, areg : greg_base,
-                    vreg : vreg_base, dt : adt) -> str:
-        dt_suf = self.dt_suffixes[dt]
-        return self.asmwrap(f"vl{dt_suf}.v {vreg}, ({areg})")
-
-    # I'm not seeing equivalents in RVV, I think you're supposed to do things differently
-    # (LMUL > 1?), vector index?
-    def load_vector_voff(self, *, areg : greg_base, voffset : int,
-                         vreg : vreg_base, dt : adt) -> str:
-        #raise NotImplementedError("RVV has no vector loads with address offset")
-        # We can still load the vector - with max_load_{imm,v}off being 0, the generator will
-        # just always pass an offset of 0 and add any offset to the address register after
-        if voffset != 0:
-            raise NotImplementedError("RVV has no vector loads with address offset")
-        return self.load_vector(areg=areg, vreg=vreg, dt=dt)
-
-    def load_vector_immoff(self, *, areg : greg_base, offset : int,
-                         vreg : vreg_base, dt : adt) -> str:
-        #raise NotImplementedError("RVV has no vector loads with address offset")
-        # We can still load the vector - with max_load_{imm,v}off being 0, the generator will
-        # just always pass an offset of 0 and add any offset to the address register after
-        if offset != 0:
-            raise NotImplementedError("RVV has no vector loads with address offset")
-        return self.load_vector(areg=areg, vreg=vreg, dt=dt)
-
-    def load_vector_bcast1(self, *, areg : greg_base,
-                          vreg : vreg_base, dt : adt) -> str:
-        dt_suf = self.dt_suffixes[dt]
-        return self.asmwrap(f"vls{dt_suf}.v {vreg}, ({areg}), zero")
-
-    def load_vector_bcast1_immoff(self, *, areg : greg_base, offset : int,
-                               vreg : vreg_base, dt : adt) -> str:
-        if offset != 0:
-            raise NotImplementedError("RVV has no vector loads with address offset")
-        return self.load_vector_bcast1(areg=areg, vreg=vreg, dt=dt)
-
-    def load_vector_bcast1_inc(self, *, areg : greg_base, offset : int,
-                              vreg : vreg_base, dt : adt) -> str:
-        raise NotImplementedError("RVV has no vector loads with address increment")
-
-    def store_vector(self, *, areg : greg_base,
-                     vreg : vreg_base, dt : adt) -> str:
-        dt_suf = self.dt_suffixes[dt]
-        return self.asmwrap(f"vs{dt_suf}.v {vreg}, ({areg})")
-
-    def store_vector_voff(self, *, areg : greg_base, voffset : int,
-                          vreg : vreg_base, dt : adt) -> str:
-        if voffset != 0:
-            raise NotImplementedError("RVV has no vector stores with address offset")
-        return self.store_vector(areg=areg, vreg=vreg, dt=dt)
-
-    def store_vector_immoff(self, *, areg : greg_base, offset : int,
-                         vreg : vreg_base, dt : adt) -> str:
-        #raise NotImplementedError("RVV has no vector stores with address offset")
-        # We can still store the vector - with max_store_{imm,v}off being 0, the generator will
-        # just always pass an offset of 0 and add any offset to the address register after
-        if offset != 0:
-            raise NotImplementedError("RVV has no vector stores with address offset")
-        return self.store_vector(areg=areg, vreg=vreg, dt=dt)
-
     def vsetvli(self, *, vlreg : greg_base, avlreg : greg_base, dt : adt) -> str:
         """
         Set RVV vlen by requesting an AVL
@@ -278,37 +218,6 @@ class rvv(riscv64):
         dt_size = 'e'+str(adt_size(dt)*8)
         return self.asmwrap(f"vsetvli {reg}, zero, {dt_size}, m{self.lmul}, ta, ma")
 
-    def load_vector_immstride(self, *, areg : greg_base, byte_stride : int,
-                    vreg : vreg_base, dt : adt) -> str:
-        raise NotImplementedError("RVV has no load with immediate stride")
-
-    def load_vector_gregstride(self, *, areg : greg_base, sreg : greg_base,
-                    vreg : vreg_base, dt : adt) -> str:
-        dt_suf = self.dt_suffixes[dt]
-        return self.asmwrap(f"vls{dt_suf}.v {vreg}, ({areg}), {sreg}")
-
-    def load_vector_gather(self, *, areg : greg_base, offvreg : vreg_base,
-                           vreg : vreg_base, dt : adt,
-                           it : ait) -> str:
-        i_suf = self.it_suffixes[it]
-        return self.asmwrap(f"vlux{i_suf}.v {vreg}, ({areg}), {offvreg}")
-
-    def store_vector_immstride(self, *, areg : greg_base, byte_stride : int,
-                    vreg : vreg_base, dt : adt) -> str:
-        raise NotImplementedError("RVV has no store with immediate stride")
-
-    def store_vector_gregstride(self, *, areg : greg_base, sreg : greg_base,
-                    vreg : vreg_base, dt : adt) -> str:
-        dt_suf = self.dt_suffixes[dt]
-        return self.asmwrap(f"vss{dt_suf}.v {vreg}, ({areg}), {sreg}")
-
-    def store_vector_scatter(self, *, areg : greg_base, offvreg : vreg_base,
-                             vreg : vreg_base, dt : adt,
-                             it : ait) -> str:
-        i_suf = self.it_suffixes[it]
-        return self.asmwrap(f"vsux{i_suf}.v {vreg}, ({areg}), {offvreg}")
-
-    # Unsupported functionality:
     def max_tregs(self, dt : adt) -> int:
         return 0
 
@@ -329,11 +238,3 @@ class rvv(riscv64):
                    treg : treg_base,
                    dt : adt) -> str:
         raise NotImplementedError(self.rvv_no_tile_message)
-
-    def load_vector_lane(self, *, areg : greg_base,
-                         vreg : vreg_base, lane : int, dt : adt) -> str:
-        raise NotImplementedError("Lane loads not implemented for RVV")
-
-    def store_vector_lane(self, *, areg : greg_base,
-                         vreg : vreg_base, lane : int, dt : adt) -> str:
-        raise NotImplementedError("Lane stores not implemented for RVV")

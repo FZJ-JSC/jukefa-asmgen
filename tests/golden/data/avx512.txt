@@ -280,182 +280,180 @@ vmovss 4(%r8), %xmm0
 ### method load_tile
 !arguments TypeError: avxbase.treg() missing 1 required positional argument: 'dt'
 ### method load_vector(areg=r8, dt=DOUBLE, vreg=zmm0)
-vmovupd (%r8),%zmm0
+vmovupd (%r8), %zmm0
 ### method load_vector(areg=r8, dt=HALF, vreg=zmm0)
-vmovuph (%r8),%zmm0
+vmovdqu64 (%r8), %zmm0
 ### method load_vector(areg=r8, dt=SINGLE, vreg=zmm0)
-vmovups (%r8),%zmm0
+vmovups (%r8), %zmm0
 ### method load_vector_bcast1(areg=r8, dt=DOUBLE, vreg=zmm0)
-vbroadcastsd (%r8),%zmm0
+vbroadcastsd (%r8), %zmm0
 ### method load_vector_bcast1(areg=r8, dt=HALF, vreg=zmm0)
-vbroadcastsh (%r8),%zmm0
+!NotImplementedError: avx512 has no such load: Invalid configuration for avx512_load.
 ### method load_vector_bcast1(areg=r8, dt=SINGLE, vreg=zmm0)
-vbroadcastss (%r8),%zmm0
+vbroadcastss (%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=-2048, vreg=zmm0)
-vbroadcastsd -2048(%r8),%zmm0
+vbroadcastsd -2048(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=-2049, vreg=zmm0)
-vbroadcastsd -2049(%r8),%zmm0
+vbroadcastsd -2049(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=-8, vreg=zmm0)
-vbroadcastsd -8(%r8),%zmm0
+vbroadcastsd -8(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=0, vreg=zmm0)
-vbroadcastsd 0(%r8),%zmm0
+vbroadcastsd (%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=1, vreg=zmm0)
-vbroadcastsd 1(%r8),%zmm0
+vbroadcastsd 1(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=2047, vreg=zmm0)
-vbroadcastsd 2047(%r8),%zmm0
+vbroadcastsd 2047(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=2048, vreg=zmm0)
-vbroadcastsd 2048(%r8),%zmm0
+vbroadcastsd 2048(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=255, vreg=zmm0)
-vbroadcastsd 255(%r8),%zmm0
+vbroadcastsd 255(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=256, vreg=zmm0)
-vbroadcastsd 256(%r8),%zmm0
+vbroadcastsd 256(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=4, vreg=zmm0)
-vbroadcastsd 4(%r8),%zmm0
+vbroadcastsd 4(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=4096, vreg=zmm0)
-vbroadcastsd 4096(%r8),%zmm0
+vbroadcastsd 4096(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=8, vreg=zmm0)
-vbroadcastsd 8(%r8),%zmm0
+vbroadcastsd 8(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=HALF, offset=4, vreg=zmm0)
-vbroadcastsh 4(%r8),%zmm0
+!NotImplementedError: avx512 has no such load: Invalid configuration for avx512_load.
 ### method load_vector_bcast1_immoff(areg=r8, dt=HALF, offset=8, vreg=zmm0)
-vbroadcastsh 8(%r8),%zmm0
+!NotImplementedError: avx512 has no such load: Invalid configuration for avx512_load.
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=-2048, vreg=zmm0)
-vbroadcastss -2048(%r8),%zmm0
+vbroadcastss -2048(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=-2049, vreg=zmm0)
-vbroadcastss -2049(%r8),%zmm0
+vbroadcastss -2049(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=-8, vreg=zmm0)
-vbroadcastss -8(%r8),%zmm0
+vbroadcastss -8(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=0, vreg=zmm0)
-vbroadcastss 0(%r8),%zmm0
+vbroadcastss (%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=1, vreg=zmm0)
-vbroadcastss 1(%r8),%zmm0
+vbroadcastss 1(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=2047, vreg=zmm0)
-vbroadcastss 2047(%r8),%zmm0
+vbroadcastss 2047(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=2048, vreg=zmm0)
-vbroadcastss 2048(%r8),%zmm0
+vbroadcastss 2048(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=255, vreg=zmm0)
-vbroadcastss 255(%r8),%zmm0
+vbroadcastss 255(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=256, vreg=zmm0)
-vbroadcastss 256(%r8),%zmm0
+vbroadcastss 256(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=4, vreg=zmm0)
-vbroadcastss 4(%r8),%zmm0
+vbroadcastss 4(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=4096, vreg=zmm0)
-vbroadcastss 4096(%r8),%zmm0
+vbroadcastss 4096(%r8), %zmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=8, vreg=zmm0)
-vbroadcastss 8(%r8),%zmm0
+vbroadcastss 8(%r8), %zmm0
 ### method load_vector_bcast1_inc(areg=r8, dt=DOUBLE, offset=-2048, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=DOUBLE, offset=-2049, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=DOUBLE, offset=-8, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=DOUBLE, offset=0, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=DOUBLE, offset=1, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=DOUBLE, offset=2047, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=DOUBLE, offset=2048, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=DOUBLE, offset=255, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=DOUBLE, offset=256, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=DOUBLE, offset=4, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=DOUBLE, offset=4096, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=DOUBLE, offset=8, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=HALF, offset=4, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=HALF, offset=8, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=SINGLE, offset=-2048, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=SINGLE, offset=-2049, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=SINGLE, offset=-8, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=SINGLE, offset=0, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=SINGLE, offset=1, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=SINGLE, offset=2047, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=SINGLE, offset=2048, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=SINGLE, offset=255, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=SINGLE, offset=256, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=SINGLE, offset=4, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=SINGLE, offset=4096, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=r8, dt=SINGLE, offset=8, vreg=zmm0)
-!NotImplementedError: AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead
+!NotImplementedError: avx512 has no such load: Base X86_64 has no postinc ld/st
 ### method load_vector_gather(areg=r8, dt=DOUBLE, it=INT32, offvreg=zmm1, vreg=zmm0)
-kxnorb %k2,%k2,%k2
-vgatherdpd (%r8,%zmm1,1),%zmm0{%k2}
+!NotImplementedError: avx512 has no such load: Invalid configuration for avx512_load.
 ### method load_vector_gather(areg=r8, dt=HALF, it=INT32, offvreg=zmm1, vreg=zmm0)
-kxnord %k2,%k2,%k2
-vgatherdph (%r8,%zmm1,1),%zmm0{%k2}
+!NotImplementedError: avx512 has no such load: Invalid configuration for avx512_load.
 ### method load_vector_gather(areg=r8, dt=SINGLE, it=INT32, offvreg=zmm1, vreg=zmm0)
 kxnorw %k2,%k2,%k2
-vgatherdps (%r8,%zmm1,1),%zmm0{%k2}
+vgatherdps (%r8,%zmm1,1), %zmm0{%k2}
 ### method load_vector_gregstride(areg=r8, dt=DOUBLE, sreg=r9, vreg=zmm0)
-!NotImplementedError: AVX has no load with scalar register stride
+!NotImplementedError: avx512 has no such load: Base X86_64 has no ld/st with GP-reg strides
 ### method load_vector_gregstride(areg=r8, dt=HALF, sreg=r9, vreg=zmm0)
-!NotImplementedError: AVX has no load with scalar register stride
+!NotImplementedError: avx512 has no such load: Base X86_64 has no ld/st with GP-reg strides
 ### method load_vector_gregstride(areg=r8, dt=SINGLE, sreg=r9, vreg=zmm0)
-!NotImplementedError: AVX has no load with scalar register stride
+!NotImplementedError: avx512 has no such load: Base X86_64 has no ld/st with GP-reg strides
 ### method load_vector_immoff(areg=r8, dt=DOUBLE, offset=4, vreg=zmm0)
-vmovupd 4(%r8),%zmm0
+vmovupd 4(%r8), %zmm0
 ### method load_vector_immoff(areg=r8, dt=HALF, offset=4, vreg=zmm0)
-vmovuph 4(%r8),%zmm0
+vmovdqu64 4(%r8), %zmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=-2048, vreg=zmm0)
-vmovups -2048(%r8),%zmm0
+vmovups -2048(%r8), %zmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=-2049, vreg=zmm0)
-vmovups -2049(%r8),%zmm0
+vmovups -2049(%r8), %zmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=-8, vreg=zmm0)
-vmovups -8(%r8),%zmm0
+vmovups -8(%r8), %zmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=0, vreg=zmm0)
-vmovups (%r8),%zmm0
+vmovups (%r8), %zmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=1, vreg=zmm0)
-vmovups 1(%r8),%zmm0
+vmovups 1(%r8), %zmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=2047, vreg=zmm0)
-vmovups 2047(%r8),%zmm0
+vmovups 2047(%r8), %zmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=2048, vreg=zmm0)
-vmovups 2048(%r8),%zmm0
+vmovups 2048(%r8), %zmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=255, vreg=zmm0)
-vmovups 255(%r8),%zmm0
+vmovups 255(%r8), %zmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=256, vreg=zmm0)
-vmovups 256(%r8),%zmm0
+vmovups 256(%r8), %zmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=4, vreg=zmm0)
-vmovups 4(%r8),%zmm0
+vmovups 4(%r8), %zmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=4096, vreg=zmm0)
-vmovups 4096(%r8),%zmm0
+vmovups 4096(%r8), %zmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=8, vreg=zmm0)
-vmovups 8(%r8),%zmm0
+vmovups 8(%r8), %zmm0
 ### method load_vector_immstride(areg=r8, byte_stride=4, dt=DOUBLE, vreg=zmm0)
-!NotImplementedError: AVX has no load with immediate stride
+!NotImplementedError: avx512 has no such load: Base X86_64 has no ld/st with immediate strides
 ### method load_vector_immstride(areg=r8, byte_stride=4, dt=HALF, vreg=zmm0)
-!NotImplementedError: AVX has no load with immediate stride
+!NotImplementedError: avx512 has no such load: Base X86_64 has no ld/st with immediate strides
 ### method load_vector_immstride(areg=r8, byte_stride=4, dt=SINGLE, vreg=zmm0)
-!NotImplementedError: AVX has no load with immediate stride
+!NotImplementedError: avx512 has no such load: Base X86_64 has no ld/st with immediate strides
 ### method load_vector_lane(areg=r8, dt=DOUBLE, lane=1, vreg=zmm0)
-!NotImplementedError: Lane loads not yet implemented for AVX
+!NotImplementedError: avx512 has no such load: Invalid configuration for avx512_load.
 ### method load_vector_lane(areg=r8, dt=HALF, lane=1, vreg=zmm0)
-!NotImplementedError: Lane loads not yet implemented for AVX
+!NotImplementedError: avx512 has no such load: Invalid configuration for avx512_load.
 ### method load_vector_lane(areg=r8, dt=SINGLE, lane=1, vreg=zmm0)
-!NotImplementedError: Lane loads not yet implemented for AVX
+!NotImplementedError: avx512 has no such load: Invalid configuration for avx512_load.
 ### method load_vector_voff(areg=r8, dt=DOUBLE, voffset=4, vreg=zmm0)
-vmovupd 256(%r8),%zmm0
+vmovupd 256(%r8), %zmm0
 ### method load_vector_voff(areg=r8, dt=HALF, voffset=4, vreg=zmm0)
-vmovuph 256(%r8),%zmm0
+vmovdqu64 256(%r8), %zmm0
 ### method load_vector_voff(areg=r8, dt=SINGLE, voffset=4, vreg=zmm0)
-vmovups 256(%r8),%zmm0
+vmovups 256(%r8), %zmm0
 ### method loopbegin(label=someloop, reg=r8)
 .someloop:
 sub $1, %r8
@@ -671,72 +669,70 @@ vmovss %xmm0, 4(%r8)
 ### method store_tile
 !arguments TypeError: avxbase.treg() missing 1 required positional argument: 'dt'
 ### method store_vector(areg=r8, dt=DOUBLE, vreg=zmm0)
-vmovupd %zmm0,(%r8)
+vmovupd %zmm0, (%r8)
 ### method store_vector(areg=r8, dt=HALF, vreg=zmm0)
-vmovuph %zmm0,(%r8)
+vmovdqu64 %zmm0, (%r8)
 ### method store_vector(areg=r8, dt=SINGLE, vreg=zmm0)
-vmovups %zmm0,(%r8)
+vmovups %zmm0, (%r8)
 ### method store_vector_gregstride(areg=r8, dt=DOUBLE, sreg=r9, vreg=zmm0)
-!NotImplementedError: AVX has no store with scalar register stride
+!NotImplementedError: avx512 has no such store: Base X86_64 has no ld/st with GP-reg strides
 ### method store_vector_gregstride(areg=r8, dt=HALF, sreg=r9, vreg=zmm0)
-!NotImplementedError: AVX has no store with scalar register stride
+!NotImplementedError: avx512 has no such store: Base X86_64 has no ld/st with GP-reg strides
 ### method store_vector_gregstride(areg=r8, dt=SINGLE, sreg=r9, vreg=zmm0)
-!NotImplementedError: AVX has no store with scalar register stride
+!NotImplementedError: avx512 has no such store: Base X86_64 has no ld/st with GP-reg strides
 ### method store_vector_immoff(areg=r8, dt=DOUBLE, offset=4, vreg=zmm0)
-vmovupd %zmm0,4(%r8)
+vmovupd %zmm0, 4(%r8)
 ### method store_vector_immoff(areg=r8, dt=HALF, offset=4, vreg=zmm0)
-vmovuph %zmm0,4(%r8)
+vmovdqu64 %zmm0, 4(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=-2048, vreg=zmm0)
-vmovups %zmm0,-2048(%r8)
+vmovups %zmm0, -2048(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=-2049, vreg=zmm0)
-vmovups %zmm0,-2049(%r8)
+vmovups %zmm0, -2049(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=-8, vreg=zmm0)
-vmovups %zmm0,-8(%r8)
+vmovups %zmm0, -8(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=0, vreg=zmm0)
-vmovups %zmm0,(%r8)
+vmovups %zmm0, (%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=1, vreg=zmm0)
-vmovups %zmm0,1(%r8)
+vmovups %zmm0, 1(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=2047, vreg=zmm0)
-vmovups %zmm0,2047(%r8)
+vmovups %zmm0, 2047(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=2048, vreg=zmm0)
-vmovups %zmm0,2048(%r8)
+vmovups %zmm0, 2048(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=255, vreg=zmm0)
-vmovups %zmm0,255(%r8)
+vmovups %zmm0, 255(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=256, vreg=zmm0)
-vmovups %zmm0,256(%r8)
+vmovups %zmm0, 256(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=4, vreg=zmm0)
-vmovups %zmm0,4(%r8)
+vmovups %zmm0, 4(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=4096, vreg=zmm0)
-vmovups %zmm0,4096(%r8)
+vmovups %zmm0, 4096(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=8, vreg=zmm0)
-vmovups %zmm0,8(%r8)
+vmovups %zmm0, 8(%r8)
 ### method store_vector_immstride(areg=r8, byte_stride=4, dt=DOUBLE, vreg=zmm0)
-!NotImplementedError: AVX has no store with immediate stride
+!NotImplementedError: avx512 has no such store: Base X86_64 has no ld/st with immediate strides
 ### method store_vector_immstride(areg=r8, byte_stride=4, dt=HALF, vreg=zmm0)
-!NotImplementedError: AVX has no store with immediate stride
+!NotImplementedError: avx512 has no such store: Base X86_64 has no ld/st with immediate strides
 ### method store_vector_immstride(areg=r8, byte_stride=4, dt=SINGLE, vreg=zmm0)
-!NotImplementedError: AVX has no store with immediate stride
+!NotImplementedError: avx512 has no such store: Base X86_64 has no ld/st with immediate strides
 ### method store_vector_lane(areg=r8, dt=DOUBLE, lane=1, vreg=zmm0)
-!NotImplementedError: Lane stores not yet implemented for AVX
+vmovhpd %xmm0,(%r8)
 ### method store_vector_lane(areg=r8, dt=HALF, lane=1, vreg=zmm0)
-!NotImplementedError: Lane stores not yet implemented for AVX
+vpextrw $1, %xmm0, (%r8)
 ### method store_vector_lane(areg=r8, dt=SINGLE, lane=1, vreg=zmm0)
-!NotImplementedError: Lane stores not yet implemented for AVX
+vextractps $1, %xmm0, (%r8)
 ### method store_vector_scatter(areg=r8, dt=DOUBLE, it=INT32, offvreg=zmm1, vreg=zmm0)
-kxnorb %k2,%k2,%k2
-vscatterdpd %zmm0,(%r8,%zmm1,1){%k2}
+!NotImplementedError: avx512 has no such store: Invalid configuration for avx512_store.
 ### method store_vector_scatter(areg=r8, dt=HALF, it=INT32, offvreg=zmm1, vreg=zmm0)
-kxnord %k2,%k2,%k2
-vscatterdph %zmm0,(%r8,%zmm1,1){%k2}
+!NotImplementedError: avx512 has no such store: Invalid configuration for avx512_store.
 ### method store_vector_scatter(areg=r8, dt=SINGLE, it=INT32, offvreg=zmm1, vreg=zmm0)
 kxnorw %k2,%k2,%k2
-vscatterdps %zmm0,(%r8,%zmm1,1){%k2}
+vscatterdps %zmm0, (%r8,%zmm1,1){%k2}
 ### method store_vector_voff(areg=r8, dt=DOUBLE, voffset=4, vreg=zmm0)
-vmovupd %zmm0,256(%r8)
+vmovupd %zmm0, 256(%r8)
 ### method store_vector_voff(areg=r8, dt=HALF, voffset=4, vreg=zmm0)
-vmovuph %zmm0,256(%r8)
+vmovdqu64 %zmm0, 256(%r8)
 ### method store_vector_voff(areg=r8, dt=SINGLE, voffset=4, vreg=zmm0)
-vmovups %zmm0,256(%r8)
+vmovups %zmm0, 256(%r8)
 ### method sub_greg_greg(dst=r8, reg1=r9, reg2=r10)
 movq %r9,%r8
 subq %r10,%r8

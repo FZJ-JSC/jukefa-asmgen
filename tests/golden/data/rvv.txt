@@ -297,113 +297,113 @@ vlse16.v v0, (t0), zero
 ### method load_vector_bcast1(areg=t0, dt=SINGLE, vreg=v0)
 vlse32.v v0, (t0), zero
 ### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=-2048, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=-2049, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=-8, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=0, vreg=v0)
 vlse64.v v0, (t0), zero
 ### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=1, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=2047, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=2048, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=255, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=256, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=4, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=4096, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=DOUBLE, offset=8, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=HALF, offset=4, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=HALF, offset=8, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=-2048, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=-2049, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=-8, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=0, vreg=v0)
 vlse32.v v0, (t0), zero
 ### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=1, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=2047, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=2048, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=255, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=256, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=4, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=4096, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_immoff(areg=t0, dt=SINGLE, offset=8, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=-2048, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=-2049, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=-8, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=0, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=1, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=2047, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=2048, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=255, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=256, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=4, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=4096, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=DOUBLE, offset=8, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=HALF, offset=4, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=HALF, offset=8, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=-2048, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=-2049, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=-8, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=0, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=1, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=2047, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=2048, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=255, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=256, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=4, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=4096, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=t0, dt=SINGLE, offset=8, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address increment
+!NotImplementedError: rvv has no such load: RVV has no postinc ld/st
 ### method load_vector_gather(areg=t0, dt=DOUBLE, it=INT32, offvreg=v1, vreg=v0)
 vluxei32.v v0, (t0), v1
 ### method load_vector_gather(areg=t0, dt=HALF, it=INT32, offvreg=v1, vreg=v0)
-vluxei32.v v0, (t0), v1
+!NotImplementedError: rvv has no such load: Invalid configuration for rvv_load.
 ### method load_vector_gather(areg=t0, dt=SINGLE, it=INT32, offvreg=v1, vreg=v0)
 vluxei32.v v0, (t0), v1
 ### method load_vector_gregstride(areg=t0, dt=DOUBLE, sreg=t1, vreg=v0)
@@ -413,51 +413,51 @@ vlse16.v v0, (t0), t1
 ### method load_vector_gregstride(areg=t0, dt=SINGLE, sreg=t1, vreg=v0)
 vlse32.v v0, (t0), t1
 ### method load_vector_immoff(areg=t0, dt=DOUBLE, offset=4, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=HALF, offset=4, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=-2048, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=-2049, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=-8, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=0, vreg=v0)
 vle32.v v0, (t0)
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=1, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=2047, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=2048, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=255, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=256, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=4, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=4096, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=8, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immstride(areg=t0, byte_stride=4, dt=DOUBLE, vreg=v0)
-!NotImplementedError: RVV has no load with immediate stride
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate strides
 ### method load_vector_immstride(areg=t0, byte_stride=4, dt=HALF, vreg=v0)
-!NotImplementedError: RVV has no load with immediate stride
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate strides
 ### method load_vector_immstride(areg=t0, byte_stride=4, dt=SINGLE, vreg=v0)
-!NotImplementedError: RVV has no load with immediate stride
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate strides
 ### method load_vector_lane(areg=t0, dt=DOUBLE, lane=1, vreg=v0)
-!NotImplementedError: Lane loads not implemented for RVV
+!NotImplementedError: rvv has no such load: RVV has no immediate lane selection ld/st
 ### method load_vector_lane(areg=t0, dt=HALF, lane=1, vreg=v0)
-!NotImplementedError: Lane loads not implemented for RVV
+!NotImplementedError: rvv has no such load: RVV has no immediate lane selection ld/st
 ### method load_vector_lane(areg=t0, dt=SINGLE, lane=1, vreg=v0)
-!NotImplementedError: Lane loads not implemented for RVV
+!NotImplementedError: rvv has no such load: RVV has no immediate lane selection ld/st
 ### method load_vector_voff(areg=t0, dt=DOUBLE, voffset=4, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with vector offsets
 ### method load_vector_voff(areg=t0, dt=HALF, voffset=4, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with vector offsets
 ### method load_vector_voff(areg=t0, dt=SINGLE, voffset=4, vreg=v0)
-!NotImplementedError: RVV has no vector loads with address offset
+!NotImplementedError: rvv has no such load: RVV has no ld/st with vector offsets
 ### method loopbegin(label=someloop, reg=t0)
 .someloop:
 addi t0,t0,-1
@@ -683,57 +683,57 @@ vsse16.v v0, (t0), t1
 ### method store_vector_gregstride(areg=t0, dt=SINGLE, sreg=t1, vreg=v0)
 vsse32.v v0, (t0), t1
 ### method store_vector_immoff(areg=t0, dt=DOUBLE, offset=4, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=HALF, offset=4, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=-2048, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=-2049, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=-8, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=0, vreg=v0)
 vse32.v v0, (t0)
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=1, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=2047, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=2048, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=255, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=256, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=4, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=4096, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=8, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immstride(areg=t0, byte_stride=4, dt=DOUBLE, vreg=v0)
-!NotImplementedError: RVV has no store with immediate stride
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate strides
 ### method store_vector_immstride(areg=t0, byte_stride=4, dt=HALF, vreg=v0)
-!NotImplementedError: RVV has no store with immediate stride
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate strides
 ### method store_vector_immstride(areg=t0, byte_stride=4, dt=SINGLE, vreg=v0)
-!NotImplementedError: RVV has no store with immediate stride
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate strides
 ### method store_vector_lane(areg=t0, dt=DOUBLE, lane=1, vreg=v0)
-!NotImplementedError: Lane stores not implemented for RVV
+!NotImplementedError: rvv has no such store: RVV has no immediate lane selection ld/st
 ### method store_vector_lane(areg=t0, dt=HALF, lane=1, vreg=v0)
-!NotImplementedError: Lane stores not implemented for RVV
+!NotImplementedError: rvv has no such store: RVV has no immediate lane selection ld/st
 ### method store_vector_lane(areg=t0, dt=SINGLE, lane=1, vreg=v0)
-!NotImplementedError: Lane stores not implemented for RVV
+!NotImplementedError: rvv has no such store: RVV has no immediate lane selection ld/st
 ### method store_vector_scatter(areg=t0, dt=DOUBLE, it=INT32, offvreg=v1, vreg=v0)
 vsuxei32.v v0, (t0), v1
 ### method store_vector_scatter(areg=t0, dt=HALF, it=INT32, offvreg=v1, vreg=v0)
-vsuxei32.v v0, (t0), v1
+!NotImplementedError: rvv has no such store: Invalid configuration for rvv_store.
 ### method store_vector_scatter(areg=t0, dt=SINGLE, it=INT32, offvreg=v1, vreg=v0)
 vsuxei32.v v0, (t0), v1
 ### method store_vector_voff(areg=t0, dt=DOUBLE, voffset=4, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with vector offsets
 ### method store_vector_voff(areg=t0, dt=HALF, voffset=4, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with vector offsets
 ### method store_vector_voff(areg=t0, dt=SINGLE, voffset=4, vreg=v0)
-!NotImplementedError: RVV has no vector stores with address offset
+!NotImplementedError: rvv has no such store: RVV has no ld/st with vector offsets
 ### method sub_greg_greg(dst=t0, reg1=t1, reg2=t2)
 sub t0,t1,t2
 ### method sub_greg_greg_shifted(dst=t0, reg1=t1, reg2=t2, shift=-2048)

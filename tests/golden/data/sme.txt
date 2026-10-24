@@ -1880,179 +1880,179 @@ ldr s0, [x0, #4]
 ### method load_tile
 !arguments TypeError: sme.treg() missing 1 required positional argument: 'dt'
 ### method load_vector(areg=x0, dt=DOUBLE, vreg=z0)
-ld1d z0.d, p0/z, [x0]
+ld1d {z0.d}, p0/z, [x0]
 ### method load_vector(areg=x0, dt=HALF, vreg=z0)
-ld1h z0.h, p0/z, [x0]
+ld1h {z0.h}, p0/z, [x0]
 ### method load_vector(areg=x0, dt=SINGLE, vreg=z0)
-ld1w z0.s, p0/z, [x0]
+ld1w {z0.s}, p0/z, [x0]
 ### method load_vector_bcast1(areg=x0, dt=DOUBLE, vreg=z0)
-ld1rd z0.d, p0/z, [x0]
+ld1rd {z0.d}, p0/z, [x0]
 ### method load_vector_bcast1(areg=x0, dt=HALF, vreg=z0)
-ld1rh z0.h, p0/z, [x0]
+ld1rh {z0.h}, p0/z, [x0]
 ### method load_vector_bcast1(areg=x0, dt=SINGLE, vreg=z0)
-ld1rw z0.s, p0/z, [x0]
+ld1rw {z0.s}, p0/z, [x0]
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=-2048, vreg=z0)
-ld1rd z0.d, p0/z, [x0, #-2048]
+!NotImplementedError: sme has no such load: value of ioffset must be >= 0
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=-2049, vreg=z0)
-ld1rd z0.d, p0/z, [x0, #-2049]
+!NotImplementedError: sme has no such load: value of ioffset must be >= 0
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=-8, vreg=z0)
-ld1rd z0.d, p0/z, [x0, #-8]
+!NotImplementedError: sme has no such load: value of ioffset must be >= 0
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=0, vreg=z0)
-ld1rd z0.d, p0/z, [x0, #0]
+ld1rd {z0.d}, p0/z, [x0]
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=1, vreg=z0)
-ld1rd z0.d, p0/z, [x0, #1]
+!NotImplementedError: sme has no such load: value of ioffset must be a multiple of 8
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=2047, vreg=z0)
-ld1rd z0.d, p0/z, [x0, #2047]
+!NotImplementedError: sme has no such load: value of ioffset must be <= 504
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=2048, vreg=z0)
-ld1rd z0.d, p0/z, [x0, #2048]
+!NotImplementedError: sme has no such load: value of ioffset must be <= 504
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=255, vreg=z0)
-ld1rd z0.d, p0/z, [x0, #255]
+!NotImplementedError: sme has no such load: value of ioffset must be a multiple of 8
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=256, vreg=z0)
-ld1rd z0.d, p0/z, [x0, #256]
+ld1rd {z0.d}, p0/z, [x0, #256]
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=4, vreg=z0)
-ld1rd z0.d, p0/z, [x0, #4]
+!NotImplementedError: sme has no such load: value of ioffset must be a multiple of 8
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=4096, vreg=z0)
-ld1rd z0.d, p0/z, [x0, #4096]
+!NotImplementedError: sme has no such load: value of ioffset must be <= 504
 ### method load_vector_bcast1_immoff(areg=x0, dt=DOUBLE, offset=8, vreg=z0)
-ld1rd z0.d, p0/z, [x0, #8]
+ld1rd {z0.d}, p0/z, [x0, #8]
 ### method load_vector_bcast1_immoff(areg=x0, dt=HALF, offset=4, vreg=z0)
-ld1rh z0.h, p0/z, [x0, #4]
+ld1rh {z0.h}, p0/z, [x0, #4]
 ### method load_vector_bcast1_immoff(areg=x0, dt=HALF, offset=8, vreg=z0)
-ld1rh z0.h, p0/z, [x0, #8]
+ld1rh {z0.h}, p0/z, [x0, #8]
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=-2048, vreg=z0)
-ld1rw z0.s, p0/z, [x0, #-2048]
+!NotImplementedError: sme has no such load: value of ioffset must be >= 0
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=-2049, vreg=z0)
-ld1rw z0.s, p0/z, [x0, #-2049]
+!NotImplementedError: sme has no such load: value of ioffset must be >= 0
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=-8, vreg=z0)
-ld1rw z0.s, p0/z, [x0, #-8]
+!NotImplementedError: sme has no such load: value of ioffset must be >= 0
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=0, vreg=z0)
-ld1rw z0.s, p0/z, [x0, #0]
+ld1rw {z0.s}, p0/z, [x0]
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=1, vreg=z0)
-ld1rw z0.s, p0/z, [x0, #1]
+!NotImplementedError: sme has no such load: value of ioffset must be a multiple of 4
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=2047, vreg=z0)
-ld1rw z0.s, p0/z, [x0, #2047]
+!NotImplementedError: sme has no such load: value of ioffset must be <= 252
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=2048, vreg=z0)
-ld1rw z0.s, p0/z, [x0, #2048]
+!NotImplementedError: sme has no such load: value of ioffset must be <= 252
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=255, vreg=z0)
-ld1rw z0.s, p0/z, [x0, #255]
+!NotImplementedError: sme has no such load: value of ioffset must be <= 252
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=256, vreg=z0)
-ld1rw z0.s, p0/z, [x0, #256]
+!NotImplementedError: sme has no such load: value of ioffset must be <= 252
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=4, vreg=z0)
-ld1rw z0.s, p0/z, [x0, #4]
+ld1rw {z0.s}, p0/z, [x0, #4]
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=4096, vreg=z0)
-ld1rw z0.s, p0/z, [x0, #4096]
+!NotImplementedError: sme has no such load: value of ioffset must be <= 252
 ### method load_vector_bcast1_immoff(areg=x0, dt=SINGLE, offset=8, vreg=z0)
-ld1rw z0.s, p0/z, [x0, #8]
+ld1rw {z0.s}, p0/z, [x0, #8]
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=-2048, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=-2049, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=-8, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=0, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=1, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=2047, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=2048, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=255, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=256, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=4, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=4096, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=DOUBLE, offset=8, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=HALF, offset=4, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=HALF, offset=8, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=-2048, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=-2049, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=-8, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=0, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=1, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=2047, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=2048, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=255, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=256, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=4, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=4096, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_bcast1_inc(areg=x0, dt=SINGLE, offset=8, vreg=z0)
-!NotImplementedError: SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead
+!NotImplementedError: sme has no such load: SME has no postinc ld/st
 ### method load_vector_gather(areg=x0, dt=DOUBLE, it=INT32, offvreg=z1, vreg=z0)
-ld1d z0.d, p0/z,[x0, z1.d]
+ld1d {z0.d}, p0/z, [x0, z1.d, sxtw]
 ### method load_vector_gather(areg=x0, dt=HALF, it=INT32, offvreg=z1, vreg=z0)
-ld1h z0.h, p0/z,[x0, z1.h]
+!NotImplementedError: sme has no such load: SME has no gather/scatter
 ### method load_vector_gather(areg=x0, dt=SINGLE, it=INT32, offvreg=z1, vreg=z0)
-ld1w z0.s, p0/z,[x0, z1.s, SXTW]
+ld1w {z0.s}, p0/z, [x0, z1.s, sxtw]
 ### method load_vector_gregstride(areg=x0, dt=DOUBLE, sreg=x1, vreg=z0)
-!NotImplementedError: SVE has no load with scalar register stride
+!NotImplementedError: sme has no such load: SME has no ld/st with GP-reg strides
 ### method load_vector_gregstride(areg=x0, dt=HALF, sreg=x1, vreg=z0)
-!NotImplementedError: SVE has no load with scalar register stride
+!NotImplementedError: sme has no such load: SME has no ld/st with GP-reg strides
 ### method load_vector_gregstride(areg=x0, dt=SINGLE, sreg=x1, vreg=z0)
-!NotImplementedError: SVE has no load with scalar register stride
+!NotImplementedError: sme has no such load: SME has no ld/st with GP-reg strides
 ### method load_vector_immoff(areg=x0, dt=DOUBLE, offset=4, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate element offsets
 ### method load_vector_immoff(areg=x0, dt=HALF, offset=4, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate element offsets
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=-2048, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate element offsets
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=-2049, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate element offsets
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=-8, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate element offsets
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=0, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+ld1w {z0.s}, p0/z, [x0]
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=1, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate element offsets
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=2047, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate element offsets
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=2048, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate element offsets
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=255, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate element offsets
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=256, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate element offsets
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=4, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate element offsets
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=4096, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate element offsets
 ### method load_vector_immoff(areg=x0, dt=SINGLE, offset=8, vreg=z0)
-!NotImplementedError: SVE has no vector loads with immediate offset, use load_vector_voff
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate element offsets
 ### method load_vector_immstride(areg=x0, byte_stride=4, dt=DOUBLE, vreg=z0)
-!NotImplementedError: SVE has no load with immediate stride
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate strides
 ### method load_vector_immstride(areg=x0, byte_stride=4, dt=HALF, vreg=z0)
-!NotImplementedError: SVE has no load with immediate stride
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate strides
 ### method load_vector_immstride(areg=x0, byte_stride=4, dt=SINGLE, vreg=z0)
-!NotImplementedError: SVE has no load with immediate stride
+!NotImplementedError: sme has no such load: SME has no ld/st with immediate strides
 ### method load_vector_lane(areg=x0, dt=DOUBLE, lane=1, vreg=z0)
-!NotImplementedError: Lane loads not yet implemented for SVE
+!NotImplementedError: sme has no such load: SME has no immediate lane ld/st
 ### method load_vector_lane(areg=x0, dt=HALF, lane=1, vreg=z0)
-!NotImplementedError: Lane loads not yet implemented for SVE
+!NotImplementedError: sme has no such load: SME has no immediate lane ld/st
 ### method load_vector_lane(areg=x0, dt=SINGLE, lane=1, vreg=z0)
-!NotImplementedError: Lane loads not yet implemented for SVE
+!NotImplementedError: sme has no such load: SME has no immediate lane ld/st
 ### method load_vector_voff(areg=x0, dt=DOUBLE, voffset=4, vreg=z0)
-ld1d z0.d, p0/z, [x0, #4, MUL VL]
+ld1d {z0.d}, p0/z, [x0, #4, MUL VL]
 ### method load_vector_voff(areg=x0, dt=HALF, voffset=4, vreg=z0)
-ld1h z0.h, p0/z, [x0, #4, MUL VL]
+ld1h {z0.h}, p0/z, [x0, #4, MUL VL]
 ### method load_vector_voff(areg=x0, dt=SINGLE, voffset=4, vreg=z0)
-ld1w z0.s, p0/z, [x0, #4, MUL VL]
+ld1w {z0.s}, p0/z, [x0, #4, MUL VL]
 ### method loopbegin(label=someloop, reg=x0)
 .someloop:
 sub x0,x0,1
@@ -2274,57 +2274,57 @@ st1h {z0.h}, p0, [x0]
 ### method store_vector(areg=x0, dt=SINGLE, vreg=z0)
 st1w {z0.s}, p0, [x0]
 ### method store_vector_gregstride(areg=x0, dt=DOUBLE, sreg=x1, vreg=z0)
-!NotImplementedError: SVE has no store with scalar register stride
+!NotImplementedError: sme has no such store: SME has no ld/st with GP-reg strides
 ### method store_vector_gregstride(areg=x0, dt=HALF, sreg=x1, vreg=z0)
-!NotImplementedError: SVE has no store with scalar register stride
+!NotImplementedError: sme has no such store: SME has no ld/st with GP-reg strides
 ### method store_vector_gregstride(areg=x0, dt=SINGLE, sreg=x1, vreg=z0)
-!NotImplementedError: SVE has no store with scalar register stride
+!NotImplementedError: sme has no such store: SME has no ld/st with GP-reg strides
 ### method store_vector_immoff(areg=x0, dt=DOUBLE, offset=4, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate element offsets
 ### method store_vector_immoff(areg=x0, dt=HALF, offset=4, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate element offsets
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=-2048, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate element offsets
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=-2049, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate element offsets
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=-8, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate element offsets
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=0, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+st1w {z0.s}, p0, [x0]
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=1, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate element offsets
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=2047, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate element offsets
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=2048, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate element offsets
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=255, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate element offsets
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=256, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate element offsets
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=4, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate element offsets
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=4096, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate element offsets
 ### method store_vector_immoff(areg=x0, dt=SINGLE, offset=8, vreg=z0)
-!NotImplementedError: SVE has no vector stores with immediate offset, use store_vector_voff
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate element offsets
 ### method store_vector_immstride(areg=x0, byte_stride=4, dt=DOUBLE, vreg=z0)
-!NotImplementedError: RVV has no store with immediate stride
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate strides
 ### method store_vector_immstride(areg=x0, byte_stride=4, dt=HALF, vreg=z0)
-!NotImplementedError: RVV has no store with immediate stride
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate strides
 ### method store_vector_immstride(areg=x0, byte_stride=4, dt=SINGLE, vreg=z0)
-!NotImplementedError: RVV has no store with immediate stride
+!NotImplementedError: sme has no such store: SME has no ld/st with immediate strides
 ### method store_vector_lane(areg=x0, dt=DOUBLE, lane=1, vreg=z0)
-!NotImplementedError: Lane stores not yet implemented for SVE
+!NotImplementedError: sme has no such store: SME has no immediate lane ld/st
 ### method store_vector_lane(areg=x0, dt=HALF, lane=1, vreg=z0)
-!NotImplementedError: Lane stores not yet implemented for SVE
+!NotImplementedError: sme has no such store: SME has no immediate lane ld/st
 ### method store_vector_lane(areg=x0, dt=SINGLE, lane=1, vreg=z0)
-!NotImplementedError: Lane stores not yet implemented for SVE
+!NotImplementedError: sme has no such store: SME has no immediate lane ld/st
 ### method store_vector_scatter(areg=x0, dt=DOUBLE, it=INT32, offvreg=z1, vreg=z0)
-st1d z0.d, p0, [x0, z1.d]
+st1d {z0.d}, p0, [x0, z1.d, sxtw]
 ### method store_vector_scatter(areg=x0, dt=HALF, it=INT32, offvreg=z1, vreg=z0)
-st1h z0.h, p0, [x0, z1.h]
+!NotImplementedError: sme has no such store: SME has no gather/scatter
 ### method store_vector_scatter(areg=x0, dt=SINGLE, it=INT32, offvreg=z1, vreg=z0)
-st1w z0.s, p0, [x0, z1.s, SXTW]
+st1w {z0.s}, p0, [x0, z1.s, sxtw]
 ### method store_vector_voff(areg=x0, dt=DOUBLE, voffset=4, vreg=z0)
 st1d {z0.d}, p0, [x0, #4, MUL VL]
 ### method store_vector_voff(areg=x0, dt=HALF, voffset=4, vreg=z0)

@@ -179,60 +179,6 @@ class sve(aarch64):
     def max_add_voff(self) -> int:
         return 16
 
-    def load_vector(self, *, areg : greg_base,
-                    vreg : vreg_base, dt : adt) -> str:
-        suf = self.dt_suffixes[dt]
-        msuf = self.dt_mnem_suffixes[dt]
-        return self.asmwrap(f"ld1{msuf} {vreg}.{suf}, p0/z, [{areg}]")
-
-    def load_vector_voff(self, *, areg : greg_base, voffset : int,
-                         vreg : vreg_base, dt : adt) -> str:
-        suf = self.dt_suffixes[dt]
-        msuf = self.dt_mnem_suffixes[dt]
-        if voffset > self.max_load_voff:
-            raise ValueError(f"voffset {voffset} > {self.max_load_voff}")
-        return self.asmwrap(f"ld1{msuf} {vreg}.{suf}, p0/z, [{areg}, #{voffset}, MUL VL]")
-
-    def load_vector_immoff(self, *, areg : greg_base, offset : int,
-                           vreg : vreg_base, dt : adt) -> str:
-        raise NotImplementedError(
-            "SVE has no vector loads with immediate offset, use load_vector_voff")
-
-    def load_vector_bcast1(self, *, areg : greg_base,
-                          vreg : vreg_base, dt : adt) -> str:
-        suf = self.dt_suffixes[dt]
-        msuf = self.dt_mnem_suffixes[dt]
-        return self.asmwrap(f"ld1r{msuf} {vreg}.{suf}, p0/z, [{areg}]")
-
-    def load_vector_bcast1_immoff(self, *, areg : greg_base, offset : int,
-                               vreg : vreg_base, dt : adt) -> str:
-        suf = self.dt_suffixes[dt]
-        msuf = self.dt_mnem_suffixes[dt]
-        return self.asmwrap(f"ld1r{msuf} {vreg}.{suf}, p0/z, [{areg}, #{offset}]")
-
-    def load_vector_bcast1_inc(self, *, areg : greg_base, offset : int,
-                              vreg : vreg_base, dt : adt) -> str:
-        raise NotImplementedError(
-                "SVE doesn't have a post-index ld1r{suf}, use load_vector_bcast1_immoff instead")
-
-    def store_vector_voff(self, *, areg : greg_base, voffset : int,
-                          vreg : vreg_base, dt : adt) -> str:
-        suf = self.dt_suffixes[dt]
-        msuf = self.dt_mnem_suffixes[dt]
-        address = f"[{areg}, #{voffset}, MUL VL]"
-        if 0 == voffset:
-            address = f"[{areg}]"
-        return self.asmwrap(f"st1{msuf} {{{vreg}.{suf}}}, p0, {address}")
-
-    def store_vector_immoff(self, *, areg : greg_base, offset : int,
-                           vreg : vreg_base, dt : adt) -> str:
-        raise NotImplementedError(
-            "SVE has no vector stores with immediate offset, use store_vector_voff")
-
-    def store_vector(self, *, areg : greg_base,
-                     vreg : vreg_base, dt : adt) -> str:
-        return self.store_vector_voff(areg=areg, voffset=0, vreg=vreg, dt=dt)
-
     def mreg(self, idx : int, is_pn : bool = False) -> sve_preg:
         """
         returns an SVE predicate register with the specified index
@@ -262,48 +208,6 @@ class sve(aarch64):
         return self.asmwrap(f"ptrue {reg}.{suf}")
 
 
-    def load_vector_immstride(self, *, areg : greg_base, byte_stride : int,
-                    vreg : vreg_base, dt : adt) -> str:
-        raise NotImplementedError("SVE has no load with immediate stride")
-
-    def load_vector_gregstride(self, *, areg : greg_base, sreg : greg_base,
-                    vreg : vreg_base, dt : adt) -> str:
-        raise NotImplementedError("SVE has no load with scalar register stride")
-
-    def load_vector_gather(self, *, areg : greg_base, offvreg : vreg_base,
-                           vreg : vreg_base, dt : adt,
-                           it : ait) -> str:
-        if ait_size(it) not in [4,8]:
-            raise ValueError("index size must be 4 or 8 bytes!")
-        suf = self.dt_suffixes[dt]
-        msuf = self.dt_mnem_suffixes[dt]
-        xtnd = ""
-        if (ait_size(it) == 4) and (adt_size(dt) == 4):
-            xtnd = ", SXTW"
-        return self.asmwrap(f"ld1{msuf} {vreg}.{suf}, p0/z,[{areg}, {offvreg}.{suf}{xtnd}]")
-
-    def store_vector_immstride(self, *, areg : greg_base, byte_stride : int,
-                    vreg : vreg_base, dt : adt) -> str:
-        raise NotImplementedError("RVV has no store with immediate stride")
-
-    def store_vector_gregstride(self, *, areg : greg_base, sreg : greg_base,
-                    vreg : vreg_base, dt : adt) -> str:
-        raise NotImplementedError("SVE has no store with scalar register stride")
-
-    def store_vector_scatter(self, *, areg : greg_base, offvreg : vreg_base,
-                             vreg : vreg_base, dt : adt,
-                             it : ait) -> str:
-        if ait_size(it) not in [4,8]:
-            raise ValueError("index size must be 4 or 8 bytes!")
-        suf = self.dt_suffixes[dt]
-        msuf = self.dt_mnem_suffixes[dt]
-        xtnd = ""
-        if (ait_size(it) == 4) and (adt_size(dt) == 4):
-            xtnd = ", SXTW"
-        return self.asmwrap(f"st1{msuf} {vreg}.{suf}, p0, [{areg}, {offvreg}.{suf}{xtnd}]")
-
-
-    # Unsupported functionality:
     def max_tregs(self, dt : adt) -> int:
         return 0
 
@@ -322,11 +226,3 @@ class sve(aarch64):
                    treg : treg_base,
                    dt : adt) -> str:
         raise NotImplementedError("SVE has no tiles, use SME")
-
-    def load_vector_lane(self, *, areg : greg_base,
-                         vreg : vreg_base, lane : int, dt : adt) -> str:
-        raise NotImplementedError("Lane loads not yet implemented for SVE")
-
-    def store_vector_lane(self, *, areg : greg_base,
-                         vreg : vreg_base, lane : int, dt : adt) -> str:
-        raise NotImplementedError("Lane stores not yet implemented for SVE")

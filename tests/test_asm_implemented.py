@@ -121,7 +121,8 @@ allowed_not_implemented = {
                   'fma_vf',
                   'fma_np_vf',
                   ],
-        'fma128' : ['sub_greg_greg_shifted',
+        'fma128' : ['load_vector_gather',   # AVX2's gathers need a mask register
+                   'sub_greg_greg_shifted',
                  'vlen_to_greg',
                  'load_vector_bcast1_inc',
                     'load_vector_immstride',
@@ -140,7 +141,8 @@ allowed_not_implemented = {
                     'fma_vf',
                     'fma_np_vf',
                     ],
-        'fma256' : ['sub_greg_greg_shifted',
+        'fma256' : ['load_vector_gather',   # AVX2's gathers need a mask register
+                   'sub_greg_greg_shifted',
                  'vlen_to_greg',
                  'load_vector_bcast1_inc',
                     'load_vector_immstride',
@@ -495,6 +497,7 @@ class asm_test_implementation_tests(unittest.TestCase):
             '_c_simd_size_asm',     # c_simd_size_function's, tested through it
             '_scalar_memory',       # the scalar loads' and stores', tested through them
             '_param_memory',        # the parameter loads' and stores', tested through them
+            '_vector_memory',       # the old vector loads' and stores', tested through them
             '__annotate_func__',
             'operands',
             'set_output_inline',

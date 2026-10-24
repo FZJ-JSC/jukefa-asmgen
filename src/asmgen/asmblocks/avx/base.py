@@ -12,6 +12,7 @@ from typing import Union
 from abc import abstractmethod
 
 from ...asmdata import asm_data
+from ...registers import asm_index_type
 from ...registers import (
     adt_size,
     freg_base,
@@ -559,85 +560,6 @@ class avxbase(asmgen):
         """
         return self.set(dreg=reg, dt=dt, modifiers={_opset_mod.CONSTMASK}, mask="alltrue")
 
-    def load_vector_voff(self, *, areg : greg_base, voffset : int, vreg : vreg_base, dt : adt):
-        suf = 'p'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pv = self.rpref(vreg)
-        address = f"{voffset*self.simd_size}({pa})"
-        if 0 == voffset:
-            address = f"({pa})"
-        return self.asmwrap(f"vmovu{suf} {address},{pv}")
-
-    def load_vector_immoff(self, *, areg : greg_base, offset : int, vreg : vreg_base, dt : adt):
-        suf = 'p'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pv = self.rpref(vreg)
-        address = f"{offset}({pa})"
-        if 0 == offset:
-            address = f"({pa})"
-        return self.asmwrap(f"vmovu{suf} {address},{pv}")
-
-    def load_vector(self, *, areg : greg_base, vreg : vreg_base, dt : adt):
-        return self.load_vector_voff(areg=areg, voffset=0, vreg=vreg, dt=dt)
-
-    def load_vector_bcast1_inc(self, *, areg : greg_base, offset : int, vreg : vreg_base, dt : adt):
-        raise NotImplementedError(
-                "AVX doesn't have a post-index load, use load_vector_bcast1_immoff instead")
-
-    def store_vector_immoff(self, *, areg : greg_base, offset : int, vreg : vreg_base, dt : adt):
-        suf = 'p'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pv = self.rpref(vreg)
-        address = f"{offset}({pa})"
-        if 0 == offset:
-            address = f"({pa})"
-        return self.asmwrap(f"vmovu{suf} {pv},{address}")
-
-    def store_vector_voff(self, *, areg : greg_base, voffset : int, vreg : vreg_base, dt : adt):
-        suf = 'p'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pv = self.rpref(vreg)
-        address = f"{voffset*self.simd_size}({pa})"
-        if 0 == voffset:
-            address = f"({pa})"
-        return self.asmwrap(f"vmovu{suf} {pv},{address}")
-
-    def store_vector(self, *, areg : greg_base, vreg : vreg_base, dt : adt):
-        return self.store_vector_voff(areg=areg, voffset=0, vreg=vreg, dt=dt)
-
-
-    def load_vector_immstride(self, *, areg : greg_base, byte_stride : int,
-                    vreg : vreg_base, dt : adt):
-        raise NotImplementedError("AVX has no load with immediate stride")
-
-    def load_vector_gregstride(self, *, areg : greg_base, sreg : greg_base,
-                    vreg : vreg_base, dt : adt):
-        raise NotImplementedError("AVX has no load with scalar register stride")
-
-    def load_vector_gather(self, *, areg : greg_base, offvreg : vreg_base,
-                           vreg : vreg_base, dt : adt,
-                           it : ait):
-        suf = 'p'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pv = self.rpref(vreg)
-        pov = self.rpref(offvreg)
-        address = f"({pa})"
-        isuf = self.it_suffixes[it]
-        return self.asmwrap(f"vgather{isuf}{suf} {address},{pov},{pv}")
-
-    def store_vector_immstride(self, *, areg : greg_base, byte_stride : int,
-                    vreg : vreg_base, dt : adt):
-        raise NotImplementedError("AVX has no store with immediate stride")
-
-    def store_vector_gregstride(self, *, areg : greg_base, sreg : greg_base,
-                    vreg : vreg_base, dt : adt):
-        raise NotImplementedError("AVX has no store with scalar register stride")
-
-    def store_vector_scatter(self, *, areg : greg_base, offvreg : vreg_base,
-                             vreg : vreg_base, dt : adt, it : ait):
-        raise NotImplementedError("AVX has no store with vector register stride")
-
-    # Unsupported functionality:
     def max_tregs(self, dt : adt):
         return 0
 
@@ -660,11 +582,12 @@ class avxbase(asmgen):
                    dt : adt):
         raise NotImplementedError(self.avx_no_tile_message)
 
-    def load_vector_lane(self, *, areg : greg_base,
-                         vreg : vreg_base, lane : int, dt : adt) -> str:
-        raise NotImplementedError("Lane loads not yet implemented for AVX")
+    def load_vector_gather(self, *, areg : greg_base, offvreg : vreg_base,
+                           vreg : vreg_base, dt : adt, it : asm_index_type) -> str:
+        raise NotImplementedError("AVX2's gathers need a mask register, which load_vector_gather "
+                                  "has no parameter for: load with MASK and VINDEX")
 
-    def store_vector_lane(self, *, areg : greg_base,
-                         vreg : vreg_base, lane : int, dt : adt) -> str:
-        raise NotImplementedError("Lane stores not yet implemented for AVX")
+    def store_vector_scatter(self, *, areg : greg_base, offvreg : vreg_base,
+                             vreg : vreg_base, dt : adt, it : asm_index_type) -> str:
+        raise NotImplementedError("AVX2 has no scatters")
 

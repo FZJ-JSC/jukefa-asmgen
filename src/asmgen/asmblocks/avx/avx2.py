@@ -92,20 +92,6 @@ class fma128(avxbase):
     def vreg(self, reg_idx):
         return xmm_vreg(reg_idx)
 
-    def load_vector_bcast1(self, *, areg : greg_base,
-                          vreg : vreg_base, dt : adt):
-        suf = 's'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pv = self.rpref(self.xmm_to_ymm(vreg))
-        return self.asmwrap(f"vbroadcast{suf} ({pa}),{pv}")
-
-    def load_vector_bcast1_immoff(self, *, areg : greg_base, offset : int,
-                               vreg : vreg_base, dt : adt):
-        suf = 's'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pv = self.rpref(self.xmm_to_ymm(vreg))
-        return self.asmwrap(f"vbroadcast{suf} {offset}({pa}),{pv}")
-
 class fma256(avxbase):
     """
     X86_64/AVX/FMA 256 bit asmgem implementation
@@ -160,18 +146,3 @@ class fma256(avxbase):
 
     def vreg(self, reg_idx : int):
         return ymm_vreg(reg_idx)
-
-    def load_vector_bcast1(self, *, areg : greg_base,
-                          vreg : vreg_base, dt : adt):
-        suf = 's'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pv = self.rpref(vreg)
-        return self.asmwrap(f"vbroadcast{suf} ({pa}),{pv}")
-
-    def load_vector_bcast1_immoff(self, *, areg : greg_base, offset : int,
-                               vreg : vreg_base, dt : adt):
-        suf = 's'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pv = self.rpref(vreg)
-        return self.asmwrap(f"vbroadcast{suf} {offset}({pa}),{pv}")
-
