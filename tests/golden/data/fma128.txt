@@ -126,7 +126,7 @@ r8
 vpbroadcastq %r8,%xmm1
 vpmuludq .iota_64x2(%rip),%xmm1,%xmm1
 ### method greg_to_voffs(dt=HALF, streg=r8, vreg=xmm1)
-vpbroadcastw %r8w,%xmm1
+vpbroadcastw %r8d,%xmm1
 vpmullw .iota_16x8(%rip),%xmm1,%xmm1
 ### method greg_to_voffs(dt=SINGLE, streg=r8, vreg=xmm1)
 vpbroadcastd %r8d,%xmm1
@@ -2382,6 +2382,33 @@ vpcmpeqd %xmm1,%xmm1,%xmm1
 vpabsb %xmm1,%xmm1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 vpxor %xmm1,%xmm1,%xmm1
+### op set [INDEX] dreg:REGISTER:VEC:DOUBLE streg:REGISTER:GP:UINT64
+vpbroadcastq %rcx,%xmm1
+vpmuludq .iota_64x2(%rip),%xmm1,%xmm1
+### op set [INDEX] dreg:REGISTER:VEC:HALF streg:REGISTER:GP:UINT64
+vpbroadcastw %ecx,%xmm1
+vpmullw .iota_16x8(%rip),%xmm1,%xmm1
+### op set [INDEX] dreg:REGISTER:VEC:SINGLE streg:REGISTER:GP:UINT64
+vpbroadcastd %ecx,%xmm1
+vpmulld .iota_32x4(%rip),%xmm1,%xmm1
+### op set [INDEX] dreg:REGISTER:VEC:SINT16 streg:REGISTER:GP:UINT64
+vpbroadcastw %ecx,%xmm1
+vpmullw .iota_16x8(%rip),%xmm1,%xmm1
+### op set [INDEX] dreg:REGISTER:VEC:SINT32 streg:REGISTER:GP:UINT64
+vpbroadcastd %ecx,%xmm1
+vpmulld .iota_32x4(%rip),%xmm1,%xmm1
+### op set [INDEX] dreg:REGISTER:VEC:SINT64 streg:REGISTER:GP:UINT64
+vpbroadcastq %rcx,%xmm1
+vpmuludq .iota_64x2(%rip),%xmm1,%xmm1
+### op set [INDEX] dreg:REGISTER:VEC:UINT16 streg:REGISTER:GP:UINT64
+vpbroadcastw %ecx,%xmm1
+vpmullw .iota_16x8(%rip),%xmm1,%xmm1
+### op set [INDEX] dreg:REGISTER:VEC:UINT32 streg:REGISTER:GP:UINT64
+vpbroadcastd %ecx,%xmm1
+vpmulld .iota_32x4(%rip),%xmm1,%xmm1
+### op set [INDEX] dreg:REGISTER:VEC:UINT64 streg:REGISTER:GP:UINT64
+vpbroadcastq %rcx,%xmm1
+vpmuludq .iota_64x2(%rip),%xmm1,%xmm1
 ### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:DOUBLE}
 movq $2,%rcx
 ### op set [VLEN] dreg:REGISTER:GP:UINT64 {unit:HALF}

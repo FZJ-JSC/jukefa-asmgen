@@ -84,3 +84,12 @@ DT_SUFFIXES = {
         adt.SINT32 : "d",
         adt.SINT64 : "q",
         }
+
+
+# element sizes' suffixes: vpbroadcast{b,w,d,q}, vpmull{w,d}
+SIZE_SUFFIXES = {
+        1 : 'b',
+        2 : 'w',
+        4 : 'd',
+        8 : 'q',
+        }

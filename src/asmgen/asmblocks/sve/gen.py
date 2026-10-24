@@ -149,14 +149,6 @@ class sve(aarch64):
     def mask_all_true(self, *, reg, dt : adt) -> str:
         return self.set(dreg=reg, dt=dt, modifiers={_opset_mod.CONSTMASK}, mask="alltrue")
 
-    def greg_to_voffs(self, *, streg : greg_base, vreg : vreg_base, dt : adt) -> str:
-        suf = self.dt_suffixes[dt]
-        cstreg = str(streg)
-        if adt_size(dt) < 8:
-            cstreg = streg.get_wreg()
-        return self.asmwrap(f"index {vreg}.{suf},#0,{cstreg}")
-
-
     def zero_vreg(self, *, vreg : vreg_base, dt : adt) -> str:
         return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 

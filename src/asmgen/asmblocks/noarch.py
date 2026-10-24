@@ -1205,22 +1205,16 @@ class asmgen(ABC):
         """
         raise NotImplementedError(NIE_MESSAGE)
 
-    @abstractmethod
-    def greg_to_voffs(self, *, streg : greg_type, vreg : vreg_type, dt : asm_data_type) -> str:
+    def greg_to_voffs(self, *, streg, vreg, dt) -> str:
         """
-        Returns the string containing the instruction(s) to create indices
-        for a gather/scatter instruction with the value in the GP register as stride
-
-        :param reg: GP register containing the stride
-        :type reg: class:`asmgen.register.greg_base`
-        :param reg: Vector register to write the indices to
-        :type reg: class:`asmgen.register.vreg_base`
-        :param dt: Data type of the value
-        :type dt: class:`asmgen.registers.asm_data_type`
-        :return: String containing the required ASM instructions
-        :rtype: str
+        Element i of vreg i * streg: set(INDEX) (0.6, phase 4); raises
+        NotImplementedError where the ISA has no form, as callers expect
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        from .op.opset import opset_modifier   # pylint: disable=import-outside-toplevel
+        try:
+            return self.set(dreg=vreg, dt=dt, modifiers={opset_modifier.INDEX}, streg=streg)
+        except ValueError as err:
+            raise NotImplementedError(f"{type(self).__name__} has no index vector here: {err}") from err
 
     @abstractmethod
     def prefetch_l1_immoff(self, *, areg : greg_type, offset : int):

@@ -180,15 +180,6 @@ class rvv(riscv64):
         """
         return self.asmwrap(f"vsetvli zero,zero,e{adt_size(dt) * 8},m{lmul},ta,ma")
 
-    def greg_to_voffs(self, *, streg : greg_base, vreg : vreg_base, dt : adt) -> str:
-        """
-        An index vector of byte offsets 0, s, 2s... for indexed loads and
-        stores (vluxei, vsuxei), the stride s in bytes in streg. For a
-        constant stride vlse/vsse do the same without an index vector, but a
-        gather is a choice of its own
-        """
-        return self.asmwrap(f"vid.v {vreg}") + self.asmwrap(f"vmul.vx {vreg},{vreg},{streg}")
-
     def max_mregs(self) -> int:
         # masked instructions take their mask in v0
         return 1

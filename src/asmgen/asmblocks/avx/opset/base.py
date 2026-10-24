@@ -9,6 +9,7 @@ from ..types import avx512_mreg
 from ...x86.opset import x86_opset
 from .signatures import make_avx_opset_signatures
 from ...x86.opset.base import ONE_SHIFTS
+from ...x86.types import SIZE_SUFFIXES
 
 # 1 from all bits set: a logical right shift by the element's bits less one
 INT_SHIFTS = {adt.UINT64: ("q", 63), adt.SINT64: ("q", 63), adt.UINT32: ("d", 31), adt.SINT32: ("d", 31),
@@ -21,8 +22,11 @@ class avx_opset(vector_opset):
     floating-point registers x86's
     """
     def __init__(self, *, asmwrap : Callable[[str], str], rpref : Callable, evex : bool = False,
-                 simd_bytes : int = 32):
+                 simd_bytes : int = 32, index_table : Callable[[adt], str] | None = None,
+                 inline : Callable[[], bool] = lambda : False):
         self.asmwrap = asmwrap
+        self.index_table = index_table
+        self.inline = inline
         self.simd_bytes = simd_bytes
         self.rpref = rpref
         self.evex = evex
@@ -55,3 +59,19 @@ class avx_opset(vector_opset):
     def vlen(self, *, dreg : greg_base, unit) -> str:
         n = self.simd_bytes if "bytes" == unit else self.simd_bytes // adt_size(unit)
         return self.scalar_op.value_greg(dreg=dreg, value=n)
+
+    def index_reg(self, *, dreg : data_reg, dt : adt, streg : greg_base) -> str:
+        # the stride broadcast, times 0, 1, 2, ... - a table the generator
+        # keeps in its data (index_table: registered, its label as written)
+        size = adt_size(dt)
+        suf = SIZE_SUFFIXES[size]
+        label = self.index_table(dt)
+        rip = "%%rip" if self.inline() else "%rip"
+        # the broadcast's source: r32 for 1 and 2 bytes too
+        pst, pv = self.rpref(streg, size=max(4, size)), self.rpref(dreg)
+        result = self.asmwrap(f"vpbroadcast{suf} {pst},{pv}")
+        if 8 == size:
+            # vpmullq is AVX512DQ; for strides below 4 GB the low dwords
+            # suffice (vpmuludq, AVX512F on zmm)
+            return result + self.asmwrap(f"vpmuludq {label}({rip}),{pv},{pv}")
+        return result + self.asmwrap(f"vpmull{suf} {label}({rip}),{pv},{pv}")

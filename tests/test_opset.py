@@ -186,3 +186,38 @@ class test_vlen(unittest.TestCase):
         self.assertIn('"cntb %[byte_size]', c)
         self.assertIn('"smstop', c)
         self.assertEqual("static inline size_t get_simd_size() { return 64; }", make(avx512).c_simd_size_function)
+
+
+class test_index(unittest.TestCase):
+    """
+    INDEX: element i of a vector register is i times a stride register;
+    greg_to_voffs on it
+    """
+    def index(self, g, dt):
+        return g.set(dreg=g.vreg(2), dt=dt, modifiers={opset_modifier.INDEX}, streg=g.greg(1)).strip().replace("\n", " ; ")
+
+    def test_backends(self):
+        r, s = make(rvv), make(sve)
+        self.assertEqual(f"vid.v v2 ; vmul.vx v2,v2,{r.greg(1)}", self.index(r, adt.DOUBLE))
+        self.assertEqual("index z2.d,#0,x1", self.index(s, adt.DOUBLE))
+        self.assertEqual("index z2.s,#0,w1", self.index(s, adt.SINGLE))
+        a = make(avx512)
+        text = self.index(a, adt.DOUBLE)
+        self.assertIn("vpmuludq", text)
+        self.assertTrue(any("iota_64x8" in str(k) for k in a.asmdata), "the index table registered")
+
+    def test_where_there_is_none(self):
+        n = make(neon)
+        with self.assertRaises(ValueError):
+            self.index(n, adt.DOUBLE)
+        with self.assertRaises(NotImplementedError):     # what ukrgen's emitter catches
+            n.greg_to_voffs(streg=n.greg(1), vreg=n.vreg(2), dt=adt.DOUBLE)
+        with self.assertRaises(ValueError):              # no byte multiply on AVX
+            self.index(make(avx512), adt.SINT8)
+
+    def test_greg_to_voffs_on_it(self):
+        for ctor in (rvv, sve, fma256, avx512):
+            g = make(ctor)
+            with self.subTest(isa=ctor.__name__):
+                self.assertEqual(g.set(dreg=g.vreg(2), dt=adt.SINGLE, modifiers={opset_modifier.INDEX}, streg=g.greg(1)),
+                                 g.greg_to_voffs(streg=g.greg(1), vreg=g.vreg(2), dt=adt.SINGLE))

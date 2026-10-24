@@ -70,7 +70,8 @@ class fma128(avxbase):
         self.move = avx_move(asmwrap=self.asmwrap, rpref=self.rpref, simd_bytes=16)
         self.sub = x86_sub(asmwrap=self.asmwrap, rpref=self.rpref)
         self.shift = x86_shift(asmwrap=self.asmwrap, rpref=self.rpref)
-        self.set = avx_opset(asmwrap=self.asmwrap, rpref=self.rpref, evex=False, simd_bytes=self.simd_size)
+        self.set = avx_opset(asmwrap=self.asmwrap, rpref=self.rpref, evex=False, simd_bytes=self.simd_size,
+                              index_table=self.index_table, inline=lambda : self.output_inline)
 
     def get_req_flags(self):
         return ['fma', 'avx']
@@ -137,7 +138,8 @@ class fma256(avxbase):
         self.move = avx_move(asmwrap=self.asmwrap, rpref=self.rpref, simd_bytes=32)
         self.sub = x86_sub(asmwrap=self.asmwrap, rpref=self.rpref)
         self.shift = x86_shift(asmwrap=self.asmwrap, rpref=self.rpref)
-        self.set = avx_opset(asmwrap=self.asmwrap, rpref=self.rpref, evex=False, simd_bytes=self.simd_size)
+        self.set = avx_opset(asmwrap=self.asmwrap, rpref=self.rpref, evex=False, simd_bytes=self.simd_size,
+                              index_table=self.index_table, inline=lambda : self.output_inline)
 
     def get_req_flags(self):
         return ['fma', 'avx']

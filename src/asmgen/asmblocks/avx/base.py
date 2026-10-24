@@ -39,6 +39,7 @@ from ..op.scalar import BITS_GP as _BITS_GP
 from ..op.opset import opset_modifier as _opset_mod
 from ..x86.types import DT_SUFFIXES
 from ..op.opd3 import opd3_modifier as _opd3_mod
+from ..x86.types import SIZE_SUFFIXES
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
@@ -127,12 +128,7 @@ class avxbase(asmgen):
         return supported
 
     dt_suffixes = DT_SUFFIXES
-    size_suffixes = {
-            1 : 'b',
-            2 : 'w',
-            4 : 'd',
-            8 : 'q',
-            }
+    size_suffixes = SIZE_SUFFIXES
 
     size_mask_suffixes = {
             1 : 'q', # AVX512BW
@@ -171,6 +167,15 @@ class avxbase(asmgen):
         :rtype: str
         """
         return f"iota_{size*8}x{count}"
+
+    def index_table(self, dt : adt) -> str:
+        """
+        The table 0, 1, 2, ... of dt's element size for a vector, registered in
+        the generator's data where it isn't yet: its label, as written
+        """
+        count = self.simd_size // adt_size(dt)
+        self.ensure_indices(dt, count)
+        return self.labelstr(self.iota_label(adt_size(dt), count))
 
     def ensure_indices(self, dt : adt, count : int):
         """
@@ -587,32 +592,6 @@ class avxbase(asmgen):
         register, vpcmpeqd on an AVX2 vector mask
         """
         return self.set(dreg=reg, dt=dt, modifiers={_opset_mod.CONSTMASK}, mask="alltrue")
-
-    def greg_to_voffs(self, *, streg : greg_base, vreg : vreg_base, dt : adt) -> str:
-
-        dt_size = adt_size(dt)
-        index_count = self.simd_size//adt_size(dt)
-        self.ensure_indices(dt, index_count)
-        label = self.iota_label(dt_size, index_count)
-        label = self.labelstr(label)
-
-        pst = self.rpref(streg,size=dt_size)
-        pv = self.rpref(vreg)
-
-        suf = self.size_suffixes[dt_size]
-        result  = self.asmwrap(f"vpbroadcast{suf} {pst},{pv}")
-        #TODO: properly handle RIP
-        rip = '%rip'
-        if self.output_inline:
-            rip = '%%rip'
-        if 8 == dt_size:
-            # vpmullq is AVX512DQ; for strides below 4 GB the low dwords
-            # suffice (vpmuludq, AVX512F on zmm)
-            result += self.asmwrap(f"vpmuludq {label}({rip}),{pv},{pv}")
-        else:
-            result += self.asmwrap(f"vpmull{suf} {label}({rip}),{pv},{pv}")
-
-        return result
 
     def prefetch_l1_immoff(self, *, areg : greg_base, offset : int):
         preg = self.rpref(areg)

@@ -191,10 +191,6 @@ class neon(aarch64):
     def max_add_voff(self) -> int:
         return 4096//self.simd_size
 
-    def greg_to_voffs(self, *, streg : greg_base, vreg : vreg_base, dt : adt) -> str:
-        raise NotImplementedError(
-                "NEON has no instruction for creating vector indices")
-
     def load_vector(self, *, areg : greg_base,
                     vreg : vreg_base, dt : adt) -> str:
         if not isinstance(vreg, neon_vreg):

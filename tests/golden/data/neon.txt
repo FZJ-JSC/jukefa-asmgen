@@ -122,11 +122,11 @@ dummy
 ### method greg(reg_idx=0)
 x0
 ### method greg_to_voffs(dt=DOUBLE, streg=x0, vreg=v1)
-!NotImplementedError: NEON has no instruction for creating vector indices
+!NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {INDEX}
 ### method greg_to_voffs(dt=HALF, streg=x0, vreg=v1)
-!NotImplementedError: NEON has no instruction for creating vector indices
+!NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {INDEX}
 ### method greg_to_voffs(dt=SINGLE, streg=x0, vreg=v1)
-!NotImplementedError: NEON has no instruction for creating vector indices
+!NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {INDEX}
 ### method indexable_elements(dt=DOUBLE)
 2
 ### method indexable_elements(dt=HALF)

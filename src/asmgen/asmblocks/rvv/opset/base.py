@@ -33,3 +33,6 @@ class rvv_opset(vector_opset):
         bits = 8 if "bytes" == unit else 8 * adt_size(unit)
         policy = ", ta, ma" if self.policy else ""
         return self.asmwrap(f"vsetvli {dreg}, zero, e{bits}, m{self.lmul_getter()}{policy}")
+
+    def index_reg(self, *, dreg : data_reg, dt : adt, streg : greg_base) -> str:
+        return self.asmwrap(f"vid.v {dreg}") + self.asmwrap(f"vmul.vx {dreg},{dreg},{streg}")

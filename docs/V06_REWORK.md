@@ -321,7 +321,7 @@ The parameter moves left for phase 5, phase 3 is done. Checked (step 3b):
 the snapshots changed in `fill_vector`'s entries only, every one
 assembling; ukrgen's golden kernels and ukropt's builds unchanged.
 
-### Phase 4: the `set` operation [~]
+### Phase 4: the `set` operation [x]
 
 A new operation class for values that come from nowhere but the
 instruction stream:
@@ -376,17 +376,26 @@ instruction stream:
       `simd_size_to_greg` and `vlen_to_greg` are one implementation each in
       the base class, on it: every backend has both, ukrgen's vector length
       works on RVV, NEON and x86.
-- [ ] `INDEX`: a vector of element index times a stride register. Replaces
-      `greg_to_voffs`.
+- [x] `INDEX`: `set(dreg=v, dt=dt, modifiers={INDEX}, streg=r)`, element i
+      is i * r - RVV `vid.v` and `vmul.vx`; SVE and SME `index` (a w
+      register below 8 bytes); AVX the stride broadcast times a table the
+      generator keeps in its data (its `index_table` hands set the label),
+      2- to 8-byte elements (no byte multiply). NEON has none.
+      `greg_to_voffs` is one implementation in the base class on it,
+      raising `NotImplementedError` where there's no form, as ukrgen's
+      emitter expects. AVX's 2-byte broadcast took `%cx`, which doesn't
+      assemble: the source is r32 now. Kept as it was: on AVX2 the
+      broadcast from a general register is AVX-512's (VL) - AVX2 has it
+      only from xmm or memory.
 - [x] `c_simd_size_function` on `set(VLEN)`, `static inline`: one
       implementation in the base class - a constant where the length is
       fixed, else `set(VLEN)` into the inline asm operand `%[byte_size]`
       (`inline_operand`); SME counts in streaming mode (`smstart`,
       `smstop` around it). ukropt's own `static` fix leaves it be (its
       0011).
-- [~] Wrappers for the above: the `zero_*` methods, `mov_greg_imm`,
-      `mask_all_true`, `simd_size_to_greg` and `vlen_to_greg` done;
-      `greg_to_voffs` with `INDEX`.
+- [x] Wrappers for the above: the `zero_*` methods, `mov_greg_imm`,
+      `mask_all_true`, `simd_size_to_greg`, `vlen_to_greg`,
+      `greg_to_voffs`.
 
 Checked (step 4a): no snapshot entry changed, `set`'s new; ukrgen's golden
 kernels - zeroing their accumulators through `zero_vreg` - and ukropt's
@@ -506,3 +515,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   mask_all_true on set alone (asmgen 0047).
 - 2026-10-23: phase 4, step 4d - VLEN on every backend; simd_size_to_greg,
   vlen_to_greg and c_simd_size_function on it (asmgen 0048, ukropt 0011).
+- 2026-10-23: phase 4 done, step 4e - INDEX; greg_to_voffs on it
+  (asmgen 0049).
