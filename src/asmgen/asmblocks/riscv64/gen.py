@@ -243,12 +243,6 @@ class riscv64(asmgen):
     def mov_greg_to_param(self, *, src : greg_base, param : str) -> str:
         return self.asmwrap(f"sd {src},%[{param}]")
 
-    def load_greg(self, *, areg : greg_base, offset : int, dst : greg_base) -> str:
-        return self.asmwrap(f"ld {dst},{offset}({areg})")
-
-    def store_greg(self, *, areg : greg_base, offset : int, src : greg_base) -> str:
-        return self.asmwrap(f"sd {src},{offset}({areg})")
-
     def mov_greg_imm(self, *, reg : greg_base, imm : int) -> str:
         return self.set(dreg=reg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, value=imm)
 
@@ -338,25 +332,3 @@ class riscv64(asmgen):
 
     def load_pointer(self, *, areg : greg_base, name : str) -> str:
         return self.asmwrap(f"ld {areg},%[{name}]")
-
-    def load_scalar_immoff(self, *, areg : greg_base, offset : int,
-                           freg : freg_base,  dt : adt) -> str:
-        dt_suf = self.fdt_suffixes[dt]
-        return self.asmwrap(f"fl{dt_suf} {freg}, {offset}({areg})")
-
-    def store_scalar_immoff(self, *, areg : greg_base, offset : int,
-                            freg : freg_base,  dt : adt) -> str:
-        dt_suf = self.fdt_suffixes[dt]
-        return self.asmwrap(f"fs{dt_suf} {freg}, {offset}({areg})")
-
-    def load_freg(self, *, areg : greg_base, offset : int,
-                           dst : freg_base,  dt : adt) -> str:
-        return self.load_scalar_immoff(areg=areg,
-            offset=offset,
-            freg=dst, dt=dt)
-
-    def store_freg(self, *, areg : greg_base, offset : int,
-                            src : freg_base,  dt : adt) -> str:
-        return self.store_scalar_immoff(areg=areg,
-            offset=offset,
-            freg=src, dt=dt)

@@ -401,17 +401,27 @@ Checked (step 4a): no snapshot entry changed, `set`'s new; ukrgen's golden
 kernels - zeroing their accumulators through `zero_vreg` - and ukropt's
 builds unchanged.
 
-### Phase 5: memory [ ]
+### Phase 5: memory [~]
 
 - [ ] Every old load and store mapped onto `load`/`store` signatures, the
       missing modifiers added: plain, `IOFFSET`, `GOFFSET`, VL-scaled
       offsets, `BCAST` (with offset and post-increment), strides (register,
       immediate), gather and scatter, lanes, tiles, and prefetch (from
       `riscv64/opmem/prefetch.py` to every ISA).
-- [ ] Scalar loads and stores (`load_greg`, `load_freg`, `load_pointer`,
-      `*_scalar_immoff`) delegated to the base ISA.
-- [ ] `callconv`/`fngen` spills, fills and stack parameters on
-      `load`/`store`, not constructed names.
+- [x] Scalar loads and stores (`load_greg`, `store_greg`, `load_freg`,
+      `store_freg`, `*_scalar_immoff`): one implementation each in the base
+      class, on `load` and `store` - whose vector ISAs' carry the base
+      ISA's scalar `opmem` already - `IOFFSET` where the offset isn't 0.
+      Their texts are `opmem`'s now, which differ in format only (a space
+      after commas; AArch64 writes `[sp]` for `[sp,#0]`): the snapshots
+      and ukrgen's golden kernels are the same but for that (its 0158
+      records them anew). Offsets past what encodes, text that didn't
+      assemble, raise now (`opmem`'s constraints); AArch64's FP loads name
+      the register as dt says (`ldr s0` for SINGLE), where the old methods
+      took the register's own name whatever dt was. `load_pointer` goes
+      with the parameters.
+- [x] `callconv`/`fngen` spills, fills and stack parameters on
+      `load`/`store` (`callconv.stack_access`), not constructed names.
 - [ ] The limits become constraints: `max/min_load_immoff`,
       `max/min_fload_immoff`, `max/min_bcast_immoff`, `max/min_load_voff`,
       `max/min_prefetch_offset`.
@@ -517,3 +527,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   vlen_to_greg and c_simd_size_function on it (asmgen 0048, ukropt 0011).
 - 2026-10-23: phase 4 done, step 4e - INDEX; greg_to_voffs on it
   (asmgen 0049).
+- 2026-10-23: phase 5, step 5a - scalar loads and stores, callconv's and
+  fngen's on load and store (asmgen 0050, ukrgen 0158).

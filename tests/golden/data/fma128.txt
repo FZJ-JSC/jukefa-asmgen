@@ -196,87 +196,87 @@ shrq $2, %r8
 ### method labelstr(label=label)
 .label
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=-2048)
-vmovsd -2048(%r8),%xmm0
+vmovsd -2048(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=-2049)
-vmovsd -2049(%r8),%xmm0
+vmovsd -2049(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=-8)
-vmovsd -8(%r8),%xmm0
+vmovsd -8(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=0)
-vmovsd (%r8),%xmm0
+vmovsd (%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=1)
-vmovsd 1(%r8),%xmm0
+vmovsd 1(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=2047)
-vmovsd 2047(%r8),%xmm0
+vmovsd 2047(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=2048)
-vmovsd 2048(%r8),%xmm0
+vmovsd 2048(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=255)
-vmovsd 255(%r8),%xmm0
+vmovsd 255(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=256)
-vmovsd 256(%r8),%xmm0
+vmovsd 256(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=4)
-vmovsd 4(%r8),%xmm0
+vmovsd 4(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=4096)
-vmovsd 4096(%r8),%xmm0
+vmovsd 4096(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=8)
-vmovsd 8(%r8),%xmm0
+vmovsd 8(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=HALF, offset=4)
-vmovsh 4(%r8),%xmm0
+vmovsh 4(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=SINGLE, offset=4)
-vmovss 4(%r8),%xmm0
+vmovss 4(%r8), %xmm0
 ### method load_greg(areg=r8, dst=r9, offset=-2048)
-movq -2048(%r8),%r9
+movq -2048(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=-2049)
-movq -2049(%r8),%r9
+movq -2049(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=-8)
-movq -8(%r8),%r9
+movq -8(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=0)
-movq (%r8),%r9
+movq (%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=1)
-movq 1(%r8),%r9
+movq 1(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=2047)
-movq 2047(%r8),%r9
+movq 2047(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=2048)
-movq 2048(%r8),%r9
+movq 2048(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=255)
-movq 255(%r8),%r9
+movq 255(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=256)
-movq 256(%r8),%r9
+movq 256(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=4)
-movq 4(%r8),%r9
+movq 4(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=4096)
-movq 4096(%r8),%r9
+movq 4096(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=8)
-movq 8(%r8),%r9
+movq 8(%r8), %r9
 ### method load_pointer(areg=r8, name=someparam)
 mov %[someparam],%r8
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-2048)
-vmovsd -2048(%r8),%xmm0
+vmovsd -2048(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-2049)
-vmovsd -2049(%r8),%xmm0
+vmovsd -2049(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-8)
-vmovsd -8(%r8),%xmm0
+vmovsd -8(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=0)
-vmovsd (%r8),%xmm0
+vmovsd (%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=1)
-vmovsd 1(%r8),%xmm0
+vmovsd 1(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=2047)
-vmovsd 2047(%r8),%xmm0
+vmovsd 2047(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=2048)
-vmovsd 2048(%r8),%xmm0
+vmovsd 2048(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=255)
-vmovsd 255(%r8),%xmm0
+vmovsd 255(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=256)
-vmovsd 256(%r8),%xmm0
+vmovsd 256(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=4)
-vmovsd 4(%r8),%xmm0
+vmovsd 4(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=4096)
-vmovsd 4096(%r8),%xmm0
+vmovsd 4096(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=8)
-vmovsd 8(%r8),%xmm0
+vmovsd 8(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=HALF, freg=xmm0, offset=4)
-vmovsh 4(%r8),%xmm0
+vmovsh 4(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=SINGLE, freg=xmm0, offset=4)
-vmovss 4(%r8),%xmm0
+vmovss 4(%r8), %xmm0
 ### method load_tile
 !arguments TypeError: avxbase.treg() missing 1 required positional argument: 'dt'
 ### method load_vector(areg=r8, dt=DOUBLE, vreg=xmm0)
@@ -612,85 +612,85 @@ movq $8,%r8
 ### method simd_size_to_greg(dt=SINGLE, reg=r8)
 movq $4,%r8
 ### method store_freg(areg=r8, dt=DOUBLE, offset=-2048, src=xmm0)
-vmovsd %xmm0,-2048(%r8)
+vmovsd %xmm0, -2048(%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=-2049, src=xmm0)
-vmovsd %xmm0,-2049(%r8)
+vmovsd %xmm0, -2049(%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=-8, src=xmm0)
-vmovsd %xmm0,-8(%r8)
+vmovsd %xmm0, -8(%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=0, src=xmm0)
-vmovsd %xmm0,(%r8)
+vmovsd %xmm0, (%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=1, src=xmm0)
-vmovsd %xmm0,1(%r8)
+vmovsd %xmm0, 1(%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=2047, src=xmm0)
-vmovsd %xmm0,2047(%r8)
+vmovsd %xmm0, 2047(%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=2048, src=xmm0)
-vmovsd %xmm0,2048(%r8)
+vmovsd %xmm0, 2048(%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=255, src=xmm0)
-vmovsd %xmm0,255(%r8)
+vmovsd %xmm0, 255(%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=256, src=xmm0)
-vmovsd %xmm0,256(%r8)
+vmovsd %xmm0, 256(%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=4, src=xmm0)
-vmovsd %xmm0,4(%r8)
+vmovsd %xmm0, 4(%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=4096, src=xmm0)
-vmovsd %xmm0,4096(%r8)
+vmovsd %xmm0, 4096(%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=8, src=xmm0)
-vmovsd %xmm0,8(%r8)
+vmovsd %xmm0, 8(%r8)
 ### method store_freg(areg=r8, dt=HALF, offset=4, src=xmm0)
-vmovsh %xmm0,4(%r8)
+vmovsh %xmm0, 4(%r8)
 ### method store_freg(areg=r8, dt=SINGLE, offset=4, src=xmm0)
-vmovss %xmm0,4(%r8)
+vmovss %xmm0, 4(%r8)
 ### method store_greg(areg=r8, offset=-2048, src=r9)
-movq %r9,-2048(%r8)
+movq %r9, -2048(%r8)
 ### method store_greg(areg=r8, offset=-2049, src=r9)
-movq %r9,-2049(%r8)
+movq %r9, -2049(%r8)
 ### method store_greg(areg=r8, offset=-8, src=r9)
-movq %r9,-8(%r8)
+movq %r9, -8(%r8)
 ### method store_greg(areg=r8, offset=0, src=r9)
-movq %r9,(%r8)
+movq %r9, (%r8)
 ### method store_greg(areg=r8, offset=1, src=r9)
-movq %r9,1(%r8)
+movq %r9, 1(%r8)
 ### method store_greg(areg=r8, offset=2047, src=r9)
-movq %r9,2047(%r8)
+movq %r9, 2047(%r8)
 ### method store_greg(areg=r8, offset=2048, src=r9)
-movq %r9,2048(%r8)
+movq %r9, 2048(%r8)
 ### method store_greg(areg=r8, offset=255, src=r9)
-movq %r9,255(%r8)
+movq %r9, 255(%r8)
 ### method store_greg(areg=r8, offset=256, src=r9)
-movq %r9,256(%r8)
+movq %r9, 256(%r8)
 ### method store_greg(areg=r8, offset=4, src=r9)
-movq %r9,4(%r8)
+movq %r9, 4(%r8)
 ### method store_greg(areg=r8, offset=4096, src=r9)
-movq %r9,4096(%r8)
+movq %r9, 4096(%r8)
 ### method store_greg(areg=r8, offset=8, src=r9)
-movq %r9,8(%r8)
+movq %r9, 8(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-2048)
-vmovsd %xmm0,-2048(%r8)
+vmovsd %xmm0, -2048(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-2049)
-vmovsd %xmm0,-2049(%r8)
+vmovsd %xmm0, -2049(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-8)
-vmovsd %xmm0,-8(%r8)
+vmovsd %xmm0, -8(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=0)
-vmovsd %xmm0,(%r8)
+vmovsd %xmm0, (%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=1)
-vmovsd %xmm0,1(%r8)
+vmovsd %xmm0, 1(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=2047)
-vmovsd %xmm0,2047(%r8)
+vmovsd %xmm0, 2047(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=2048)
-vmovsd %xmm0,2048(%r8)
+vmovsd %xmm0, 2048(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=255)
-vmovsd %xmm0,255(%r8)
+vmovsd %xmm0, 255(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=256)
-vmovsd %xmm0,256(%r8)
+vmovsd %xmm0, 256(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=4)
-vmovsd %xmm0,4(%r8)
+vmovsd %xmm0, 4(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=4096)
-vmovsd %xmm0,4096(%r8)
+vmovsd %xmm0, 4096(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=8)
-vmovsd %xmm0,8(%r8)
+vmovsd %xmm0, 8(%r8)
 ### method store_scalar_immoff(areg=r8, dt=HALF, freg=xmm0, offset=4)
-vmovsh %xmm0,4(%r8)
+vmovsh %xmm0, 4(%r8)
 ### method store_scalar_immoff(areg=r8, dt=SINGLE, freg=xmm0, offset=4)
-vmovss %xmm0,4(%r8)
+vmovss %xmm0, 4(%r8)
 ### method store_tile
 !arguments TypeError: avxbase.treg() missing 1 required positional argument: 'dt'
 ### method store_vector(areg=r8, dt=DOUBLE, vreg=xmm0)

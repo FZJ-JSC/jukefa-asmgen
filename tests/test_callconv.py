@@ -79,67 +79,67 @@ class test_callconv_gemmukr(unittest.TestCase,callconv_testsuite_type_hinter):
     expected_save_blocks = [
         (riscv64,(
             "add sp,sp,-64\n"
-            "sd a0,0(sp)\n"
-            "sd a1,8(sp)\n"
-            "sd a2,16(sp)\n"
-            "sd a3,24(sp)\n"
-            "sd a4,32(sp)\n"
-            "sd a5,40(sp)\n"
-            "sd a6,48(sp)\n"
-            "sd a7,56(sp)\n"
+            "sd a0, 0(sp)\n"
+            "sd a1, 8(sp)\n"
+            "sd a2, 16(sp)\n"
+            "sd a3, 24(sp)\n"
+            "sd a4, 32(sp)\n"
+            "sd a5, 40(sp)\n"
+            "sd a6, 48(sp)\n"
+            "sd a7, 56(sp)\n"
         )),
         (aarch64, (
             "add sp,sp,#-64\n"
-            "str x0,[sp,#0]\n"
-            "str x1,[sp,#8]\n"
-            "str x2,[sp,#16]\n"
-            "str x3,[sp,#24]\n"
-            "str x4,[sp,#32]\n"
-            "str x5,[sp,#40]\n"
-            "str x6,[sp,#48]\n"
-            "str x7,[sp,#56]\n")
+            "str x0, [sp]\n"
+            "str x1, [sp, #8]\n"
+            "str x2, [sp, #16]\n"
+            "str x3, [sp, #24]\n"
+            "str x4, [sp, #32]\n"
+            "str x5, [sp, #40]\n"
+            "str x6, [sp, #48]\n"
+            "str x7, [sp, #56]\n")
          ),
         (avxbase,(
             "addq $-48,%rsp\n"
-            "movq %r8,(%rsp)\n"
-            "movq %r9,8(%rsp)\n"
-            "movq %rcx,16(%rsp)\n"
-            "movq %rdx,24(%rsp)\n"
-            "movq %rsi,32(%rsp)\n"
-            "movq %rdi,40(%rsp)\n")
+            "movq %r8, (%rsp)\n"
+            "movq %r9, 8(%rsp)\n"
+            "movq %rcx, 16(%rsp)\n"
+            "movq %rdx, 24(%rsp)\n"
+            "movq %rsi, 32(%rsp)\n"
+            "movq %rdi, 40(%rsp)\n")
          )
     ]
 
     expected_restore_blocks = [
         (riscv64,(
-            "ld a0,0(sp)\n"
-            "ld a1,8(sp)\n"
-            "ld a2,16(sp)\n"
-            "ld a3,24(sp)\n"
-            "ld a4,32(sp)\n"
-            "ld a5,40(sp)\n"
-            "ld a6,48(sp)\n"
-            "ld a7,56(sp)\n"
+            "ld a0, 0(sp)\n"
+            "ld a1, 8(sp)\n"
+            "ld a2, 16(sp)\n"
+            "ld a3, 24(sp)\n"
+            "ld a4, 32(sp)\n"
+            "ld a5, 40(sp)\n"
+            "ld a6, 48(sp)\n"
+            "ld a7, 56(sp)\n"
             "add sp,sp,64\n")
          ),
         (aarch64, (
-            "ldr x0,[sp,#0]\n"
-            "ldr x1,[sp,#8]\n"
-            "ldr x2,[sp,#16]\n"
-            "ldr x3,[sp,#24]\n"
-            "ldr x4,[sp,#32]\n"
-            "ldr x5,[sp,#40]\n"
-            "ldr x6,[sp,#48]\n"
-            "ldr x7,[sp,#56]\n"
+            "ldr x0, [sp]\n"
+            "ldr x1, [sp, #8]\n"
+            "ldr x2, [sp, #16]\n"
+            "ldr x3, [sp, #24]\n"
+            "ldr x4, [sp, #32]\n"
+            "ldr x5, [sp, #40]\n"
+            "ldr x6, [sp, #48]\n"
+            "ldr x7, [sp, #56]\n"
             "add sp,sp,#64\n")
          ),
         (avxbase,(
-            "movq (%rsp),%r8\n"
-            "movq 8(%rsp),%r9\n"
-            "movq 16(%rsp),%rcx\n"
-            "movq 24(%rsp),%rdx\n"
-            "movq 32(%rsp),%rsi\n"
-            "movq 40(%rsp),%rdi\n"
+            "movq (%rsp), %r8\n"
+            "movq 8(%rsp), %r9\n"
+            "movq 16(%rsp), %rcx\n"
+            "movq 24(%rsp), %rdx\n"
+            "movq 32(%rsp), %rsi\n"
+            "movq 40(%rsp), %rdi\n"
             "addq $48,%rsp\n")
          )
     ]

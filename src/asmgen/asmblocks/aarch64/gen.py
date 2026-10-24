@@ -266,12 +266,6 @@ class aarch64(asmgen):
         # fmov's immediate can't encode 0.0: the zero register can
         return self.set(dreg=freg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
-    def load_greg(self, *, areg : greg_base, offset : int, dst : greg_base) -> str:
-        return self.asmwrap(f"ldr {dst},[{areg},#{offset}]")
-
-    def store_greg(self, *, areg : greg_base, offset : int, src : greg_base) -> str:
-        return self.asmwrap(f"str {src},[{areg},#{offset}]")
-
     def mov_param_to_greg(self, *, param : str, dst : greg_base) -> str:
         return self.asmwrap(f"ldr {dst},%[{param}]")
 
@@ -355,22 +349,6 @@ class aarch64(asmgen):
 
     def max_fload_immoff(self, dt : adt):
         return 4095
-
-    def load_scalar_immoff(self, *, areg : greg_base,
-                           offset : int, freg : freg_base,
-                           dt : adt) -> str:
-        return self.asmwrap(f"ldr {freg},[{areg},#{offset}]")
-
-    def store_scalar_immoff(self, *, areg : greg_base,
-                            offset : int, freg : freg_base,
-                            dt : adt) -> str:
-        return self.asmwrap(f"str {freg},[{areg},#{offset}]")
-
-    def load_freg(self, *, areg : greg_base, offset : int, dst: freg_base, dt : adt):
-        return self.load_scalar_immoff(areg=areg, offset=offset, freg=dst, dt=dt)
-
-    def store_freg(self, *, areg : greg_base, offset : int, src: freg_base, dt : adt):
-        return self.store_scalar_immoff(areg=areg, offset=offset, freg=src, dt=dt)
 
     def prefetch_l1_immoff(self, *, areg : greg_base,
                          offset : int) -> str:

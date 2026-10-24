@@ -185,87 +185,87 @@ lsr x0,x0,#2
 ### method labelstr(label=label)
 .label
 ### method load_freg(areg=x0, dst=d0, dt=DOUBLE, offset=-2048)
-ldr d0,[x0,#-2048]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method load_freg(areg=x0, dst=d0, dt=DOUBLE, offset=-2049)
-ldr d0,[x0,#-2049]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method load_freg(areg=x0, dst=d0, dt=DOUBLE, offset=-8)
-ldr d0,[x0,#-8]
+ldr d0, [x0, #-8]
 ### method load_freg(areg=x0, dst=d0, dt=DOUBLE, offset=0)
-ldr d0,[x0,#0]
+ldr d0, [x0]
 ### method load_freg(areg=x0, dst=d0, dt=DOUBLE, offset=1)
-ldr d0,[x0,#1]
+ldr d0, [x0, #1]
 ### method load_freg(areg=x0, dst=d0, dt=DOUBLE, offset=2047)
-ldr d0,[x0,#2047]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be a multiple of 8; or value of ioffset must be <= 255
 ### method load_freg(areg=x0, dst=d0, dt=DOUBLE, offset=2048)
-ldr d0,[x0,#2048]
+ldr d0, [x0, #2048]
 ### method load_freg(areg=x0, dst=d0, dt=DOUBLE, offset=255)
-ldr d0,[x0,#255]
+ldr d0, [x0, #255]
 ### method load_freg(areg=x0, dst=d0, dt=DOUBLE, offset=256)
-ldr d0,[x0,#256]
+ldr d0, [x0, #256]
 ### method load_freg(areg=x0, dst=d0, dt=DOUBLE, offset=4)
-ldr d0,[x0,#4]
+ldr d0, [x0, #4]
 ### method load_freg(areg=x0, dst=d0, dt=DOUBLE, offset=4096)
-ldr d0,[x0,#4096]
+ldr d0, [x0, #4096]
 ### method load_freg(areg=x0, dst=d0, dt=DOUBLE, offset=8)
-ldr d0,[x0,#8]
+ldr d0, [x0, #8]
 ### method load_freg(areg=x0, dst=d0, dt=HALF, offset=4)
-ldr d0,[x0,#4]
+ldr h0, [x0, #4]
 ### method load_freg(areg=x0, dst=d0, dt=SINGLE, offset=4)
-ldr d0,[x0,#4]
+ldr s0, [x0, #4]
 ### method load_greg(areg=x0, dst=x1, offset=-2048)
-ldr x1,[x0,#-2048]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method load_greg(areg=x0, dst=x1, offset=-2049)
-ldr x1,[x0,#-2049]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method load_greg(areg=x0, dst=x1, offset=-8)
-ldr x1,[x0,#-8]
+ldr x1, [x0, #-8]
 ### method load_greg(areg=x0, dst=x1, offset=0)
-ldr x1,[x0,#0]
+ldr x1, [x0]
 ### method load_greg(areg=x0, dst=x1, offset=1)
-ldr x1,[x0,#1]
+ldr x1, [x0, #1]
 ### method load_greg(areg=x0, dst=x1, offset=2047)
-ldr x1,[x0,#2047]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be a multiple of 8; or value of ioffset must be <= 255
 ### method load_greg(areg=x0, dst=x1, offset=2048)
-ldr x1,[x0,#2048]
+ldr x1, [x0, #2048]
 ### method load_greg(areg=x0, dst=x1, offset=255)
-ldr x1,[x0,#255]
+ldr x1, [x0, #255]
 ### method load_greg(areg=x0, dst=x1, offset=256)
-ldr x1,[x0,#256]
+ldr x1, [x0, #256]
 ### method load_greg(areg=x0, dst=x1, offset=4)
-ldr x1,[x0,#4]
+ldr x1, [x0, #4]
 ### method load_greg(areg=x0, dst=x1, offset=4096)
-ldr x1,[x0,#4096]
+ldr x1, [x0, #4096]
 ### method load_greg(areg=x0, dst=x1, offset=8)
-ldr x1,[x0,#8]
+ldr x1, [x0, #8]
 ### method load_pointer(areg=x0, name=someparam)
 ldr x0,%[someparam]
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=-2048)
-ldr d0,[x0,#-2048]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=-2049)
-ldr d0,[x0,#-2049]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=-8)
-ldr d0,[x0,#-8]
+ldr d0, [x0, #-8]
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=0)
-ldr d0,[x0,#0]
+ldr d0, [x0]
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=1)
-ldr d0,[x0,#1]
+ldr d0, [x0, #1]
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=2047)
-ldr d0,[x0,#2047]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be a multiple of 8; or value of ioffset must be <= 255
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=2048)
-ldr d0,[x0,#2048]
+ldr d0, [x0, #2048]
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=255)
-ldr d0,[x0,#255]
+ldr d0, [x0, #255]
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=256)
-ldr d0,[x0,#256]
+ldr d0, [x0, #256]
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=4)
-ldr d0,[x0,#4]
+ldr d0, [x0, #4]
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=4096)
-ldr d0,[x0,#4096]
+ldr d0, [x0, #4096]
 ### method load_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=8)
-ldr d0,[x0,#8]
+ldr d0, [x0, #8]
 ### method load_scalar_immoff(areg=x0, dt=HALF, freg=d0, offset=4)
-ldr d0,[x0,#4]
+ldr h0, [x0, #4]
 ### method load_scalar_immoff(areg=x0, dt=SINGLE, freg=d0, offset=4)
-ldr d0,[x0,#4]
+ldr s0, [x0, #4]
 ### method load_tile
 !arguments TypeError: neon.treg() missing 1 required positional argument: 'dt'
 ### method load_vector(areg=x0, dt=DOUBLE, vreg=v0)
@@ -601,85 +601,85 @@ mov x0,#8
 ### method simd_size_to_greg(dt=SINGLE, reg=x0)
 mov x0,#4
 ### method store_freg(areg=x0, dt=DOUBLE, offset=-2048, src=d0)
-str d0,[x0,#-2048]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method store_freg(areg=x0, dt=DOUBLE, offset=-2049, src=d0)
-str d0,[x0,#-2049]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method store_freg(areg=x0, dt=DOUBLE, offset=-8, src=d0)
-str d0,[x0,#-8]
+str d0, [x0, #-8]
 ### method store_freg(areg=x0, dt=DOUBLE, offset=0, src=d0)
-str d0,[x0,#0]
+str d0, [x0]
 ### method store_freg(areg=x0, dt=DOUBLE, offset=1, src=d0)
-str d0,[x0,#1]
+str d0, [x0, #1]
 ### method store_freg(areg=x0, dt=DOUBLE, offset=2047, src=d0)
-str d0,[x0,#2047]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be a multiple of 8; or value of ioffset must be <= 255
 ### method store_freg(areg=x0, dt=DOUBLE, offset=2048, src=d0)
-str d0,[x0,#2048]
+str d0, [x0, #2048]
 ### method store_freg(areg=x0, dt=DOUBLE, offset=255, src=d0)
-str d0,[x0,#255]
+str d0, [x0, #255]
 ### method store_freg(areg=x0, dt=DOUBLE, offset=256, src=d0)
-str d0,[x0,#256]
+str d0, [x0, #256]
 ### method store_freg(areg=x0, dt=DOUBLE, offset=4, src=d0)
-str d0,[x0,#4]
+str d0, [x0, #4]
 ### method store_freg(areg=x0, dt=DOUBLE, offset=4096, src=d0)
-str d0,[x0,#4096]
+str d0, [x0, #4096]
 ### method store_freg(areg=x0, dt=DOUBLE, offset=8, src=d0)
-str d0,[x0,#8]
+str d0, [x0, #8]
 ### method store_freg(areg=x0, dt=HALF, offset=4, src=d0)
-str d0,[x0,#4]
+str h0, [x0, #4]
 ### method store_freg(areg=x0, dt=SINGLE, offset=4, src=d0)
-str d0,[x0,#4]
+str s0, [x0, #4]
 ### method store_greg(areg=x0, offset=-2048, src=x1)
-str x1,[x0,#-2048]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method store_greg(areg=x0, offset=-2049, src=x1)
-str x1,[x0,#-2049]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method store_greg(areg=x0, offset=-8, src=x1)
-str x1,[x0,#-8]
+str x1, [x0, #-8]
 ### method store_greg(areg=x0, offset=0, src=x1)
-str x1,[x0,#0]
+str x1, [x0]
 ### method store_greg(areg=x0, offset=1, src=x1)
-str x1,[x0,#1]
+str x1, [x0, #1]
 ### method store_greg(areg=x0, offset=2047, src=x1)
-str x1,[x0,#2047]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be a multiple of 8; or value of ioffset must be <= 255
 ### method store_greg(areg=x0, offset=2048, src=x1)
-str x1,[x0,#2048]
+str x1, [x0, #2048]
 ### method store_greg(areg=x0, offset=255, src=x1)
-str x1,[x0,#255]
+str x1, [x0, #255]
 ### method store_greg(areg=x0, offset=256, src=x1)
-str x1,[x0,#256]
+str x1, [x0, #256]
 ### method store_greg(areg=x0, offset=4, src=x1)
-str x1,[x0,#4]
+str x1, [x0, #4]
 ### method store_greg(areg=x0, offset=4096, src=x1)
-str x1,[x0,#4096]
+str x1, [x0, #4096]
 ### method store_greg(areg=x0, offset=8, src=x1)
-str x1,[x0,#8]
+str x1, [x0, #8]
 ### method store_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=-2048)
-str d0,[x0,#-2048]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method store_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=-2049)
-str d0,[x0,#-2049]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method store_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=-8)
-str d0,[x0,#-8]
+str d0, [x0, #-8]
 ### method store_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=0)
-str d0,[x0,#0]
+str d0, [x0]
 ### method store_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=1)
-str d0,[x0,#1]
+str d0, [x0, #1]
 ### method store_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=2047)
-str d0,[x0,#2047]
+!ValueError: value of ioffset must satisfy one of: value of ioffset must be a multiple of 8; or value of ioffset must be <= 255
 ### method store_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=2048)
-str d0,[x0,#2048]
+str d0, [x0, #2048]
 ### method store_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=255)
-str d0,[x0,#255]
+str d0, [x0, #255]
 ### method store_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=256)
-str d0,[x0,#256]
+str d0, [x0, #256]
 ### method store_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=4)
-str d0,[x0,#4]
+str d0, [x0, #4]
 ### method store_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=4096)
-str d0,[x0,#4096]
+str d0, [x0, #4096]
 ### method store_scalar_immoff(areg=x0, dt=DOUBLE, freg=d0, offset=8)
-str d0,[x0,#8]
+str d0, [x0, #8]
 ### method store_scalar_immoff(areg=x0, dt=HALF, freg=d0, offset=4)
-str d0,[x0,#4]
+str h0, [x0, #4]
 ### method store_scalar_immoff(areg=x0, dt=SINGLE, freg=d0, offset=4)
-str d0,[x0,#4]
+str s0, [x0, #4]
 ### method store_tile
 !arguments TypeError: neon.treg() missing 1 required positional argument: 'dt'
 ### method store_vector(areg=x0, dt=DOUBLE, vreg=v0)

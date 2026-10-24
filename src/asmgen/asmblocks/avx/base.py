@@ -451,22 +451,6 @@ class avxbase(asmgen):
         return self.move(dregs=[src, dst], dts=[dt, dt])
 
 
-    def load_greg(self, *, areg : greg_base, offset : int, dst : greg_base) -> str:
-        pareg = self.rpref(areg)
-        pdst = self.rpref(dst)
-        address = f"{offset}({pareg})"
-        if 0 == offset:
-            address = f"({pareg})"
-        return self.asmwrap(f"movq {address},{pdst}")
-
-    def store_greg(self, *, areg : greg_base, offset : int, src : greg_base) -> str:
-        pareg = self.rpref(areg)
-        psrc = self.rpref(src)
-        address = f"{offset}({pareg})"
-        if 0 == offset:
-            address = f"({pareg})"
-        return self.asmwrap(f"movq {psrc},{address}")
-
     def mov_greg_to_param(self, *, src : greg_base, param : str):
         preg = self.rpref(src)
         return self.asmwrap(f"movq {preg},%[{param}]")
@@ -618,30 +602,6 @@ class avxbase(asmgen):
         if 0 == offset:
             address = f"({pa})"
         return self.asmwrap(f"vmovu{suf} {address},{pv}")
-
-    def load_scalar_immoff(self, *, areg : greg_base, offset : int, freg : freg_base, dt : adt):
-        suf = 's'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pf = self.rpref(freg)
-        address = f"{offset}({pa})"
-        if 0 == offset:
-            address = f"({pa})"
-        return self.asmwrap(f"vmov{suf} {address},{pf}")
-
-    def store_scalar_immoff(self, *, areg : greg_base, offset : int, freg : freg_base, dt : adt):
-        suf = 's'+self.dt_suffixes[dt]
-        pa = self.rpref(areg)
-        pf = self.rpref(freg)
-        address = f"{offset}({pa})"
-        if 0 == offset:
-            address = f"({pa})"
-        return self.asmwrap(f"vmov{suf} {pf},{address}")
-
-    def load_freg(self, *, areg : greg_base, offset : int, dst: freg_base, dt : adt):
-        return self.load_scalar_immoff(areg=areg, offset=offset, freg=dst, dt=dt)
-
-    def store_freg(self, *, areg : greg_base, offset : int, src: freg_base, dt : adt):
-        return self.store_scalar_immoff(areg=areg, offset=offset, freg=src, dt=dt)
 
     def load_vector(self, *, areg : greg_base, vreg : vreg_base, dt : adt):
         return self.load_vector_voff(areg=areg, voffset=0, vreg=vreg, dt=dt)

@@ -13,6 +13,21 @@ from ..asmblocks.noarch import asmgen
 from ..registers import asm_data_type as adt, greg_base, data_reg
 
 #pylint: disable=too-many-instance-attributes,too-many-positional-arguments
+
+def stack_access(gen, action : str):
+    """
+    Spills and fills, stack parameters: a register stored to or loaded from
+    areg plus offset through the generator's store or load (0.6, phase 5) -
+    called as the old store_<type>/load_<type> were (areg, offset, src or
+    dst, dt for floating-point registers)
+    """
+    from ..asmblocks.op.opmem import opmem_modifier   # pylint: disable=import-outside-toplevel
+    def access(*, areg, offset : int, src=None, dst=None, dt=adt.UINT64) -> str:
+        kwargs = {"modifiers": {opmem_modifier.IOFFSET}, "ioffset": offset} if offset else {}
+        return getattr(gen, action)(dregs=[src if dst is None else dst], areg=areg, dt=dt, **kwargs)
+    return access
+
+
 class callconv:
     """
     ISA-independent calling-convention abstraction
@@ -102,7 +117,7 @@ class callconv:
 
         rtype_off = 0
         for type_tag,reg_list in reg_indices.items():
-            store = getattr(gen,f"store_{type_tag}")
+            store = stack_access(gen, "store")
             self.sp_rtype_offsets[type_tag] = rtype_off
             kwargs = {}
             if 'freg' == type_tag:
@@ -142,7 +157,7 @@ class callconv:
         asmblock = ""
 
         for type_tag,reg_list in reg_indices.items():
-            load = getattr(gen,f"load_{type_tag}")
+            load = stack_access(gen, "load")
 
             kwargs = {}
             if 'freg' == type_tag:

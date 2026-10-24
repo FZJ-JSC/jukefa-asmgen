@@ -7,7 +7,7 @@
 Utilities for generating C-callable functions in ASM
 """
 
-from .callconv import callconv
+from .callconv import callconv, stack_access
 from ..asmblocks.noarch import asmgen
 from ..registers import reg_tracker
 
@@ -111,7 +111,7 @@ class fngen:
 
         for name,(tag,off) in self.required_loads.items():
             loadblock += self.gen.asmwrap(f"# loading {name}")
-            loadblock += self.gen.load_greg(
+            loadblock += stack_access(self.gen, "load")(
                     areg=self.gen.greg(cc.spreg),
                     offset=off+aligned_sp_shift, # Assuming 64 bit/ 8 byte pointers
                     dst=self.gen.greg(self.rt.aliased_regs[tag][name])
