@@ -38,3 +38,13 @@ reworking them (docs/V06_REWORK.md), to be picked up when a caller needs it.
   64-bit integers in NEON registers (`movi` has no such immediate; `dup`
   from a general register). The forms offered take none.
 
+## Lanes by index on RVV
+
+RVV has no instruction taking a lane by an encoded index the way NEON's
+and SVE's by-element forms do - but `vrgather.vi` takes a 5-bit immediate
+index (lanes 0-31) and gives 0 for a lane the vector doesn't have. Within a
+known range of vector lengths that's a by-element operand; used
+vector-length-agnostically it needs code paths switched at run time.
+Giving up vector-length agnosticism on some platform could gain
+performance (not investigated).
+

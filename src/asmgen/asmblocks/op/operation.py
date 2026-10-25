@@ -268,20 +268,9 @@ class operation(ABC):
         :param operand_modifiers: operand name: modifiers it has, among its own
         :return: the signatures, in the operation's order
         """
-        def has(s):
-            for name, dt in (dts or {}).items():
-                if name not in s.operands or s.operands[name].dt != dt:
-                    return False
-            for name, rtype in (rtypes or {}).items():
-                if name not in s.operands or s.operands[name].rtype != rtype:
-                    return False
-            if modifiers and not set(modifiers) <= set(s.modifiers or ()):
-                return False
-            for name, mods in (operand_modifiers or {}).items():
-                if name not in s.operands or not set(mods) <= set(s.operands[name].modifiers or ()):
-                    return False
-            return True
-        return [s for s in self.get_signatures() if has(s)]
+        return [s for s in self.get_signatures()
+                if s.offers(dts=dts, rtypes=rtypes, modifiers=modifiers,
+                            operand_modifiers=operand_modifiers)]
 
 
     @abstractmethod

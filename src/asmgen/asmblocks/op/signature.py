@@ -65,9 +65,8 @@ class operation_signature:
             if kwargs.get(param) != val:
                 return False
 
-        for name, dt in dts.items():
-            if name in self.operands and self.operands[name].dt != dt:
-                return False
+        if not self._dts_match(dts, known_only=True):
+            return False
 
         for name in self.operands:
             if name not in kwargs:
@@ -110,6 +109,45 @@ class operation_signature:
             if name not in self.operands:
                 return False
 
+        return True
+
+    def _dts_match(self, dts: dict[str, 'adt'], *, known_only: bool) -> bool:
+        """
+        Whether the named operands have these data types - names the
+        signature doesn't have passing where known_only (a call's dts name
+        every operand it might), failing otherwise (a question names an
+        operand)
+        """
+        for name, dt in dts.items():
+            if name not in self.operands:
+                if known_only:
+                    continue
+                return False
+            if self.operands[name].dt != dt:
+                return False
+        return True
+
+    def offers(self, *, dts: dict[str, 'adt'] | None = None,
+               rtypes: dict[str, Any] | None = None,
+               modifiers: set[operation_modifier] | None = None,
+               operand_modifiers: dict[str, set[operand_modifier]] | None = None) -> bool:
+        """
+        Whether the signature is a form for a partial description - what
+        operation.forms asks: these operands with these data and register
+        types, these modifiers among its own. match_intent asks of a
+        complete call: modifiers and operand modifiers equal, every operand
+        given, its registers' types, the structural parameters.
+        """
+        if not self._dts_match(dts or {}, known_only=False):
+            return False
+        for name, rtype in (rtypes or {}).items():
+            if name not in self.operands or self.operands[name].rtype != rtype:
+                return False
+        if modifiers and not set(modifiers) <= set(self.modifiers or ()):
+            return False
+        for name, mods in (operand_modifiers or {}).items():
+            if name not in self.operands or not set(mods) <= set(self.operands[name].modifiers or ()):
+                return False
         return True
 
     def validate_allocation(self, kwargs: dict[str, Any]):
