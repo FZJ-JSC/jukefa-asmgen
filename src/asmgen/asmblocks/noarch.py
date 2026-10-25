@@ -590,18 +590,6 @@ class asmgen(ABC):
         """
         raise NotImplementedError(NIE_MESSAGE)
 
-    @property
-    @abstractmethod
-    def are_fregs_in_vregs(self) -> bool:
-        """
-        Returns True if for the underlying ISA scalar registers are contained 
-        inside vector registers, which is for example the case with ARM NEON and SVE
-
-        :return : True if scalar regs are inside vector regs, otherwise False
-        :rtype: bool
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
     @abstractmethod
     def max_tregs(self, dt : asm_data_type) -> int:
         """

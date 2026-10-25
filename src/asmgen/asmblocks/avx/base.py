@@ -301,10 +301,6 @@ class avxbase(asmgen):
             raise ValueError("Not an XMM register: {vreg}")
         return ymm_vreg(idx)
 
-    @property
-    def are_fregs_in_vregs(self):
-        return True
-
     def label(self, *, label : str) -> str:
         asmblock = self.asmwrap(f"{self.labelstr(label)}:")
         return asmblock

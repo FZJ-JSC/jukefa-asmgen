@@ -103,10 +103,6 @@ class aarch64(asmgen):
 
         return deepcopy(self.callconvs[name])
 
-    @property
-    def are_fregs_in_vregs(self) -> bool:
-        return True
-
     def label(self, *, label : str) -> str:
         return self.asmwrap(f"{self.labelstr(label)}:")
 

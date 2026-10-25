@@ -105,10 +105,6 @@ class riscv64(asmgen):
         _ = dt # explicitly unused
         return riscv64_freg(reg_idx)
 
-    @property
-    def are_fregs_in_vregs(self) -> bool:
-        return False
-
     def label(self, *, label : str) -> str:
         return self.asmwrap(f"{self.labelstr(label)}:")
 

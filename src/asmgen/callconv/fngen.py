@@ -112,11 +112,9 @@ class fngen:
             unused_parameters = set()
 
         used_gregs = self.rt.get_clobbered_regs('greg')
-        used_fregs = self.rt.get_clobbered_regs('freg')
-
-        if self.gen.are_fregs_in_vregs:
-            used_vregs = self.rt.get_clobbered_regs('vreg')
-            used_fregs = list(set(used_fregs).union(set(used_vregs)))
+        # an FP register is clobbered where the vector register it's part of
+        # is (AArch64's d8 in v8): the tracker knows the files it shares
+        used_fregs = list(self.rt.get_clobbered_regs('freg', through_shared=True))
 
         sr_count = len(set(used_gregs).intersection(cc.callee_save_lists['greg']))
         sr_count += len(set(used_fregs).intersection(cc.callee_save_lists['freg']))

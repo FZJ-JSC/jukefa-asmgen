@@ -49,6 +49,41 @@ class test_available(unittest.TestCase):
             neon().get_reg_tracker().available("nosuchtype")
 
 
+class test_pools(unittest.TestCase):
+    """
+    pool(tag): the types whose registers are the same registers (share);
+    capacity(tags): how many registers they are together
+    """
+    def test_files(self):
+        rt = sve().get_reg_tracker()                  # FP registers are vector registers
+        self.assertEqual({"freg", "vreg"}, rt.pool("freg"))
+        self.assertEqual(32, rt.capacity(rt.pool("vreg")))
+        rt = rvv().get_reg_tracker()                  # own FP registers; v0 is the mask
+        self.assertEqual({"freg"}, rt.pool("freg"))
+        self.assertEqual({"mreg", "vreg"}, rt.pool("vreg"))
+        self.assertEqual(32, rt.capacity(rt.pool("vreg")))
+        rt = fma256().get_reg_tracker()               # AVX2: FP, masks and vectors one file
+        self.assertEqual({"freg", "mreg", "vreg"}, rt.pool("mreg"))
+        self.assertEqual(16, rt.capacity(rt.pool("vreg")))
+        rt = avx512().get_reg_tracker()               # k registers apart
+        self.assertEqual({"mreg"}, rt.pool("mreg"))
+
+    def test_capacity_counts_shared_once(self):
+        rt = rvv().get_reg_tracker()
+        self.assertEqual(32 + 32, rt.capacity({"vreg", "freg"}))   # apart
+        rt = neon().get_reg_tracker()
+        self.assertEqual(32, rt.capacity({"vreg", "freg"}))        # one file
+
+    def test_clobbers_through_shared(self):
+        rt = neon().get_reg_tracker()
+        rt.reserve_specific_reg("vreg", 9)
+        rt.clobbered_regs["vreg"].add(10)             # recorded however: still the d register's
+        self.assertTrue({9, 10} <= rt.get_clobbered_regs("freg", through_shared=True))
+        rt = rvv().get_reg_tracker()
+        rt.reserve_specific_reg("vreg", 9)
+        self.assertNotIn(9, rt.get_clobbered_regs("freg", through_shared=True))
+
+
 class test_counts_are_methods(unittest.TestCase):
     def test_every_generator(self):
         for gen in GENERATORS:

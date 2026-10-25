@@ -253,11 +253,67 @@ class reg_tracker:
         """
         return self.used_regs[type_tag]
 
-    def get_clobbered_regs(self, type_tag : str) -> set[int]:
+    def get_clobbered_regs(self, type_tag : str, through_shared : bool = False) -> set[int]:
         """
         Returns the list of register indices of the specified type that were clobbered
+
+        :param through_shared: also those clobbered as another type sharing
+            them (share), in this type's indices - AArch64's d8 where v8 was
         """
-        return self.clobbered_regs[type_tag]
+        if not through_shared:
+            return self.clobbered_regs[type_tag]
+        regs = set(self.clobbered_regs[type_tag])
+        for other, mapping in self.shared.get(type_tag, []):
+            mine = {theirs: ours for ours, theirs in mapping.items()}
+            regs |= {mine[i] for i in self.clobbered_regs[other] if i in mine}
+        return regs
+
+    def pool(self, type_tag : str) -> frozenset[str]:
+        """
+        The register types whose registers are type_tag's, type_tag among
+        them - one register file, as share declared it: AArch64's and x86's
+        FP and vector registers, RVV's mask and vector registers
+
+        :param type_tag: tag/type name of the registers
+        :return: the types
+        """
+        if type_tag not in self.registered_types:
+            raise ValueError(f"Type not tracked: {type_tag}")
+        seen, todo = {type_tag}, [type_tag]
+        while todo:
+            for other, _ in self.shared.get(todo.pop(), []):
+                if other not in seen:
+                    seen.add(other)
+                    todo.append(other)
+        return frozenset(seen)
+
+    def capacity(self, type_tags) -> int:
+        """
+        How many registers the types' allocatable registers are together, a
+        register of several of them (share) counted once - a pool's size
+
+        :param type_tags: a tag, or several (a pool)
+        :return: the number of registers, reserved ones included
+        """
+        tags = {type_tags} if isinstance(type_tags, str) else set(type_tags)
+        for tag in tags:
+            if tag not in self.registered_types:
+                raise ValueError(f"Type not tracked: {tag}")
+        allocatable = {tag: set(self.available_regs[tag]) for tag in tags}
+        parent : dict[tuple[str, int], tuple[str, int]] = {}
+        def find(reg):
+            parent.setdefault(reg, reg)
+            while parent[reg] != reg:
+                parent[reg] = parent[parent[reg]]
+                reg = parent[reg]
+            return reg
+        for tag in tags:
+            for idx in allocatable[tag]:
+                for other, i in self._counterparts(tag, idx):
+                    if other in tags and i in allocatable[other]:
+                        parent[find((tag, idx))] = find((other, i))
+                find((tag, idx))
+        return len({find(reg) for reg in list(parent)})
 
 
 class asm_data_type(Enum):

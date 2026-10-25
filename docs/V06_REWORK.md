@@ -591,6 +591,14 @@ builds unchanged.
       `subtile_path` reads the size only for lane and block levels (its
       0166); its other uses were guarded by `is_vla` or are lanes of
       fixed-size vectors.
+- [x] Shared register files from the tracker (asmgen 0072): `pool(tag)` - the
+      types whose registers are the same registers, as `shared_registers`
+      declared them - `capacity(tags)` - how many registers they are
+      together - and `get_clobbered_regs(tag, through_shared=True)`.
+      `are_fregs_in_vregs`, which repeated `shared_registers` (FP registers
+      in the vector file on AArch64 and x86), is gone: fngen asks the
+      tracker, ukrgen's builder groups its components by pool (its 0170),
+      ukropt's pairs too (its 0014).
 - [x] `max_*regs`: methods in the base class and every backend - they were
       by now; `tests/test_reg_available.py` holds every generator to it.
 - [~] Compiler flags from the generator and its enabled features (asmgen
@@ -730,3 +738,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-25: op.refusal (asmgen 0070).
 - 2026-10-25: phase 8 under way - ukrgen's probes and shims, its old mechanism
   in legacy/ (ukrgen 0168, 0169).
+- 2026-10-25: the tracker's pools; are_fregs_in_vregs retired (asmgen 0072).
