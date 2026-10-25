@@ -30,6 +30,10 @@ class neon(aarch64):
     """
     NEON/ASIMD implementation of asmgen
     """
+
+    MARCH_BASE = "armv8.2-a"
+    MARCH_EXTENSIONS = {"FP16": "fp16", "FHM": "fp16fml", "BF16": "bf16", "FP8FMA": "fp8fma",
+                        "DOTPROD": "dotprod", "I8MM": "i8mm"}
     # FEAT_FP16, FEAT_FHM (fmlal), FEAT_BF16, FEAT_FP8FMA, FEAT_DotProd, FEAT_I8MM
     FEATURES = ('FP16', 'FHM', 'BF16', 'FP8FMA', 'DOTPROD', 'I8MM')
 

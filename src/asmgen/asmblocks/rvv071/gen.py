@@ -7,6 +7,7 @@
 RISC-V RVV 0.7.1 asm generator and related types
 """
 
+from ..noarch import compiler_family
 from ..rvv import rvv
 
 from ...registers import asm_data_type as adt, adt_size, greg_base, vreg_base
@@ -36,6 +37,18 @@ class rvv071(rvv):
     #: XTheadVector: 0.7.1's vector instructions th.-prefixed, as mainline
     #: binutils and GCC take them; off, unprefixed (EPI's toolchain, -mepi)
     ENCODING_FEATURES = {"XTheadVector": True}
+
+    def compiler_flags(self, compiler : str = "gcc") -> list[str]:
+        """
+        XTheadVector's -march (GCC, LLVM); without it EPI's toolchain's
+        -mepi, which takes the unprefixed forms
+        """
+        if not self._encoding_features()["XTheadVector"]:
+            return ["-mepi"]
+        if "arm" == compiler_family(compiler):
+            raise NotImplementedError("armclang targets no RISC-V")
+        extensions = ["zba"] if "ZBA" in self.enabled_features() else []
+        return ["-march=" + "_".join(["rv64gc"] + extensions + ["xtheadvector"])]
 
     def asmwrap(self, code : str) -> str:
         """

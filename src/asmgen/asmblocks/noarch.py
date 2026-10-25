@@ -14,6 +14,7 @@ Base ASM generator class and ISA-independent utilities
 
 from .op.operation import operation
 from enum import Enum,auto
+import re
 from abc import ABC, abstractmethod
 from typing import TypeAlias,Union,TYPE_CHECKING
 
@@ -198,6 +199,26 @@ class asmgen(ABC):
         if self.output_inline:
             return f".{label}%="
         return f".{label}"
+
+    def enabled_features(self) -> set[str]:
+        """
+        The ISA extensions this generator may use: those set_features
+        enabled, every one of FEATURES without a call
+        """
+        features = getattr(self, "features", None)
+        return set(self.FEATURES) if features is None else set(features)
+
+    def compiler_flags(self, compiler : str = "gcc") -> list[str]:
+        """
+        The flags a C compiler needs to compile and assemble this generator's
+        output: its ISA and the extensions it may use (enabled_features) -
+        set_features([]) first for the baseline's alone
+
+        :param compiler: the compiler's name or path - gcc, g++, clang,
+            clang++, cross-prefixed or not; armclang where it targets the ISA
+        :return: the flags
+        """
+        raise NotImplementedError(NIE_MESSAGE)
 
     #: one nop: its bytes and encoding, for align's offsets
     NOP_BYTES : int = 0
@@ -1643,3 +1664,18 @@ class asmgen(ABC):
         :rtype: str
         """
         raise NotImplementedError(f"{type(self).__name__} has no whole-tile store: store its rows or columns: store with the tile's slice operands")
+
+
+def compiler_family(compiler : str) -> str:
+    """
+    A C compiler's family by its name or path: "gnu" (gcc, g++), "llvm"
+    (clang, clang++), "arm" (armclang) - cross prefixes and versions allowed
+    """
+    name = compiler.replace("\\", "/").rsplit("/", 1)[-1]
+    if "armclang" in name:
+        return "arm"
+    if "clang" in name:
+        return "llvm"
+    if re.search(r"(^|-)(gcc|g\+\+|cc|c\+\+)(-\d+(\.\d+)*)?$", name):
+        return "gnu"
+    raise ValueError(f"{compiler}: no known compiler (gcc, g++, clang, clang++, armclang)")

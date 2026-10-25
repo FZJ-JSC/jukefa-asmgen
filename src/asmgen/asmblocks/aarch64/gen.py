@@ -10,6 +10,7 @@ ARM64/AArch64 asm generator and related types
 from copy import deepcopy
 from typing import Union
 
+from ..noarch import compiler_family
 from ..noarch import asmgen,comparison
 from ...registers import (
     adt_size,
@@ -36,6 +37,17 @@ class aarch64(asmgen):
     """
     ARM64/AArch64 asmgen implementation
     """
+
+    #: -march's base, and the features as its extensions (per backend)
+    MARCH_BASE = "armv8-a"
+    MARCH_EXTENSIONS : dict[str, str] = {}
+
+    def compiler_flags(self, compiler : str = "gcc") -> list[str]:
+        compiler_family(compiler)
+        enabled = self.enabled_features()
+        extensions = [self.MARCH_EXTENSIONS[f] for f in self.FEATURES
+                      if f in enabled and f in self.MARCH_EXTENSIONS]
+        return ["-march=" + "+".join([self.MARCH_BASE] + extensions)]
 
     #: the nop: nop
     NOP_BYTES = 4

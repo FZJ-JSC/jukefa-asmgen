@@ -63,8 +63,11 @@ def make(name: str):
 def _plain(value) -> str:
     """
     A value as text without what varies between runs: registers by their
-    names (their __str__), other objects without their addresses
+    names (their __str__), other objects without their addresses, sets in
+    order (a set's order follows the run's string hashing)
     """
+    if isinstance(value, (set, frozenset)):
+        return "{" + ", ".join(sorted(_plain(v) for v in value)) + "}"
     text = str(value) if type(value).__str__ is not object.__str__ else repr(value)
     return re.sub(r" at 0x[0-9a-f]+", "", text)
 

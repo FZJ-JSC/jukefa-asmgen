@@ -113,8 +113,12 @@ static inline size_t get_simd_size() {
 }
 ### method cb(cmp=NE, label=notequal, reg1=t0, reg2=t1)
 bne t0,t1,.notequal
+### method compiler_flags()
+['-march=rv64gcv_zba_zfh_zvfh']
 ### method create_callconv(name=default)
 <asmgen.callconv.callconv.callconv object>
+### method enabled_features()
+{ZBA, ZVFH}
 ### method fill_vector(dt=DOUBLE, sreg=f0, vreg=v1)
 vfmv.v.f v1,f0
 ### method fill_vector(dt=HALF, sreg=f0, vreg=v1)

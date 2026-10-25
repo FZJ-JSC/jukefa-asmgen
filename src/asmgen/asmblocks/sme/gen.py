@@ -29,6 +29,11 @@ class sme(sve):
     """
     SME asmgen implementation
     """
+
+    MARCH_BASE = "armv9-a+sme"
+    MARCH_EXTENSIONS = sve.MARCH_EXTENSIONS | {"SME2": "sme2", "F64F64": "sme-f64f64", "I16I64": "sme-i16i64",
+                                            "F16F16": "sme-f16f16", "SME_B16B16": "sme-b16b16",
+                                            "F8F16": "sme-f8f16", "F8F32": "sme-f8f32"}
     # SVE's, and SME's own: FEAT_SME2, FEAT_SME_F64F64, _I16I64, _F16F16,
     # _B16B16, _F8F16, _F8F32
     FEATURES = sve.FEATURES + ("SME2", "F64F64", "I16I64", "F16F16", "SME_B16B16",

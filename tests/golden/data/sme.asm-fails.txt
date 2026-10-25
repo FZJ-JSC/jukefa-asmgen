@@ -1,5 +1,7 @@
 method c_simd_size_function()
+method compiler_flags()
 method create_callconv(name=default)
+method enabled_features()
 method freg(dt=DOUBLE, reg_idx=0)
 method freg(dt=HALF, reg_idx=0)
 method freg(dt=SINGLE, reg_idx=0)

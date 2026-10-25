@@ -106,8 +106,12 @@ static inline size_t get_simd_size() { return 64; }
 ### method cb(cmp=NE, label=notequal, reg1=r8, reg2=r9)
 cmp %r9,%r8
 jne .notequal
+### method compiler_flags()
+['-mavx512f', '-mavx512vl', '-mavx512dq', '-mavx512bw', '-mavx512fp16', '-mavx512bf16']
 ### method create_callconv(name=default)
 <asmgen.callconv.callconv.callconv object>
+### method enabled_features()
+{BF16, BW, DQ, FP16, VL}
 ### method fill_vector(dt=DOUBLE, sreg=xmm0, vreg=zmm1)
 vbroadcastsd %xmm0,%zmm1
 ### method fill_vector(dt=HALF, sreg=xmm0, vreg=zmm1)

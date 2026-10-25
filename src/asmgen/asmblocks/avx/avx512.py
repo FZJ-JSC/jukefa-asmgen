@@ -11,6 +11,7 @@ from copy import deepcopy
 from typing import Union
 from abc import abstractmethod
 
+from ..noarch import compiler_family
 from ..x86.opmem import x86_prefetch
 from ...asmdata import asm_data
 from ...registers import asm_index_type
@@ -45,6 +46,15 @@ class avx512(avxbase):
     """
     # AVX512VL, AVX512DQ, AVX512BW, AVX512-FP16, AVX512-BF16
     FEATURES = ('VL', 'DQ', 'BW', 'FP16', 'BF16')
+    #: the features as compiler flags
+    FEATURE_FLAGS = {"VL": "-mavx512vl", "DQ": "-mavx512dq", "BW": "-mavx512bw",
+                     "FP16": "-mavx512fp16", "BF16": "-mavx512bf16"}
+
+    def compiler_flags(self, compiler : str = "gcc") -> list[str]:
+        if "arm" == compiler_family(compiler):
+            raise NotImplementedError("armclang targets no x86")
+        enabled = self.enabled_features()
+        return ["-mavx512f"] + [self.FEATURE_FLAGS[f] for f in self.FEATURES if f in enabled]
 
 
     def __init__(self):

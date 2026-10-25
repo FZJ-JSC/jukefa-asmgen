@@ -105,8 +105,12 @@ static inline size_t get_simd_size() { return 16; }
 ### method cb(cmp=NE, label=notequal, reg1=x0, reg2=x1)
 cmp x0,x1
 b.ne .notequal
+### method compiler_flags()
+['-march=armv8.2-a+fp16+fp16fml+bf16+fp8fma+dotprod+i8mm']
 ### method create_callconv(name=default)
 <asmgen.callconv.callconv.callconv object>
+### method enabled_features()
+{BF16, DOTPROD, FHM, FP16, FP8FMA, I8MM}
 ### method fill_vector(dt=DOUBLE, sreg=d0, vreg=v1)
 dup v1.2d,v0.d[0]
 ### method fill_vector(dt=HALF, sreg=d0, vreg=v1)

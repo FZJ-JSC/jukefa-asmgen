@@ -592,8 +592,15 @@ builds unchanged.
       fixed-size vectors.
 - [x] `max_*regs`: methods in the base class and every backend - they were
       by now; `tests/test_reg_available.py` holds every generator to it.
-- [ ] Compiler flags from the generator and its enabled features (or an
-      improved `compiler_presets`), its users moved.
+- [~] Compiler flags from the generator and its enabled features (asmgen
+      0068): `gen.compiler_flags(compiler)` - the ISA's and those of the
+      extensions it may use, `gen.enabled_features()` (set_features', all
+      without a call); RISC-V's `-march` extensions in their order, rvv071's
+      XTheadVector's (`-mepi` without it, EPI's toolchain), AArch64's by
+      backend (`MARCH_BASE`, `MARCH_EXTENSIONS`), AVX-512's per feature;
+      gcc and clang alike, armclang for AArch64. Its users move in phase 8:
+      `compilation/tools` (test_asm_correct's `compiler_presets` table) and
+      ukropt's `-march` by ISA name.
 
 ### Phase 8: the callers [ ]
 
@@ -712,3 +719,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-25: the register tracker's available(tag) (asmgen 0065).
 - 2026-10-25: simd_size raising on vector-length-agnostic ISAs (asmgen 0066).
 - 2026-10-25: indexable_elements removed (asmgen 0067).
+- 2026-10-25: gen.compiler_flags, gen.enabled_features (asmgen 0068).

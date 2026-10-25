@@ -11,6 +11,7 @@ from copy import deepcopy
 from typing import Union
 from abc import abstractmethod
 
+from ..noarch import compiler_family
 from ..x86.opmem.displacement import ENCODING_FEATURES as X86_ENCODING_FEATURES
 from ...asmdata import asm_data
 from ...registers import asm_index_type
@@ -53,6 +54,11 @@ class avxbase(asmgen):
     #: the nop: nop
     NOP_BYTES = 1
     NOP_ENCODING = 0x90
+
+    def compiler_flags(self, compiler : str = "gcc") -> list[str]:
+        if "arm" == compiler_family(compiler):
+            raise NotImplementedError("armclang targets no x86")
+        return ["-mavx2", "-mfma"]
 
     #: x86's displacements: disp8 on, disp32 off by default (x86/opmem/displacement.py)
     ENCODING_FEATURES = dict(X86_ENCODING_FEATURES)

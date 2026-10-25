@@ -37,6 +37,10 @@ class sve(aarch64):
     """
     SVE asmgen implementation
     """
+
+    MARCH_BASE = "armv8.2-a+sve"
+    MARCH_EXTENSIONS = {"SVE2": "sve2", "BF16": "bf16", "B16B16": "sve-b16b16", "FP8FMA": "fp8fma",
+                        "I8MM": "i8mm"}
     # FEAT_SVE2 (fmlalb/fmlalt), FEAT_BF16, FEAT_FP8FMA, FEAT_I8MM
     FEATURES = ('SVE2', 'BF16', 'B16B16', 'FP8FMA', 'I8MM')
 

@@ -305,6 +305,8 @@ function_tests = [
         ['nop', {}],
         ['align', {'bytes' : lambda gen : 64}],
         ['asmfile_annotations', {}],
+        ['enabled_features', {}],
+        ['compiler_flags', {}],
         ['add_greg_voff', {'reg' : lambda gen : gen.greg(0),
                            'offset' : lambda gen : 40,
                            'dt' : lambda gen : adt.DOUBLE}],

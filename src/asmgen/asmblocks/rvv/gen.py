@@ -7,6 +7,7 @@
 RISC-V RVV 1.0 asm generator and related types
 """
 
+from ..noarch import compiler_family
 from ...registers import (
     reg_tracker,
     asm_data_type as adt,
@@ -33,6 +34,16 @@ class rvv(riscv64):
     """
     RISC-V RVV 1.0 asmgen implementation
     """
+
+    #: the features as -march's extensions
+    MARCH_EXTENSIONS = {"ZBA": "zba", "ZVFH": "zfh_zvfh"}
+
+    def compiler_flags(self, compiler : str = "gcc") -> list[str]:
+        if "arm" == compiler_family(compiler):
+            raise NotImplementedError("armclang targets no RISC-V")
+        extensions = sorted(self.MARCH_EXTENSIONS[f] for f in self.enabled_features()
+                            if f in self.MARCH_EXTENSIONS)
+        return ["-march=" + "_".join(["rv64gcv"] + extensions)]
 
     #: the mask population count (0.7.1: vmpopc.m)
     vpopc = "vcpop.m"
