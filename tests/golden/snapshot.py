@@ -111,7 +111,12 @@ def method_entries(name: str) -> dict:
     out = {}
     for mname, args in function_tests:
         gen = make(name)
-        fn = getattr(gen, mname, None)
+        try:
+            fn = getattr(gen, mname, None)
+        except Exception as err:  # pylint: disable=broad-except
+            # a property raising (simd_size on vector-length-agnostic ISAs)
+            out[f"method {mname}"] = _error(err)
+            continue
         if fn is None:
             out[f"method {mname}"] = "!missing"
             continue

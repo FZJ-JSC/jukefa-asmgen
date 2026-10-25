@@ -2135,8 +2135,8 @@ ret
 lsl x0,x0,#4
 ### method shift_greg_right(bit_count=4, reg=x0)
 lsr x0,x0,#4
-### method simd_size()
-1
+### method simd_size
+!NotImplementedError: sve is vector-length-agnostic: its vector length is known at run time only (set with VLEN, c_simd_size_function)
 ### method simd_size_to_greg(dt=DOUBLE, reg=x0)
 cntd x0
 ### method simd_size_to_greg(dt=HALF, reg=x0)

@@ -578,7 +578,14 @@ builds unchanged.
       vector registers, AVX2's masks and vectors). `available_reg_count`
       was no such count - the allocatable total, reservations or not.
 - [ ] Lane ranges as operand constraints: replaces `indexable_elements`.
-- [ ] `simd_size` raises on VLA.
+- [x] `simd_size` raises on VLA (asmgen 0066): NotImplementedError on SVE,
+      SME, RVV and rvv071, whose vector length is known at run time only
+      (`set` with VLEN, `c_simd_size_function`) - it was 1, and callers
+      dividing it by an element's size counted 0 lanes. RVV's
+      `indexable_elements`, which was that (0), raises too. ukrgen's
+      `subtile_path` reads the size only for lane and block levels (its
+      0166); its other uses were guarded by `is_vla` or are lanes of
+      fixed-size vectors.
 - [x] `max_*regs`: methods in the base class and every backend - they were
       by now; `tests/test_reg_available.py` holds every generator to it.
 - [ ] Compiler flags from the generator and its enabled features (or an
@@ -699,3 +706,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   (asmgen 0063).
 - 2026-10-25: op.fits and op.forms (asmgen 0064).
 - 2026-10-25: the register tracker's available(tag) (asmgen 0065).
+- 2026-10-25: simd_size raising on vector-length-agnostic ISAs (asmgen 0066).

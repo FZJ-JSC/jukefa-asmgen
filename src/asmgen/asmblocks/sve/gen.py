@@ -127,7 +127,11 @@ class sve(aarch64):
 
     @property
     def simd_size(self) -> int:
-        return 1
+        # compile-time knowledge: a vector-length-agnostic ISA's length is the
+        # machine's, known at run time (set with VLEN, c_simd_size_function)
+        raise NotImplementedError(f"{type(self).__name__} is vector-length-agnostic: its vector "
+                                  "length is known at run time only (set with VLEN, "
+                                  "c_simd_size_function)")
 
 
     def indexable_elements(self, dt : adt) -> int:

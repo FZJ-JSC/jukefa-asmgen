@@ -28,7 +28,9 @@ from .testcase import testcase
 
 
 allowed_not_implemented = {
-        'rvv' : ['add_greg_greg_shifted',
+        'rvv' : ['simd_size',   # vector-length-agnostic: known at run time only
+                   'indexable_elements',   # vector-length-agnostic: known at run time only
+                   'add_greg_greg_shifted',
                  'sub_greg_greg_shifted',
                  'mask_all_true',
                  'vlen_to_greg',
@@ -51,7 +53,9 @@ allowed_not_implemented = {
                  'fma_idx',
                  'fma_np_idx',
                  ],
-        'rvv071' : ['add_greg_greg_shifted',
+        'rvv071' : ['simd_size',   # vector-length-agnostic: known at run time only
+                   'indexable_elements',   # vector-length-agnostic: known at run time only
+                   'add_greg_greg_shifted',
                  'sub_greg_greg_shifted',
                  'mask_all_true',
                  'vlen_to_greg',
@@ -74,7 +78,8 @@ allowed_not_implemented = {
                     'fma_idx',
                     'fma_np_idx',
                     ],
-        'sve' : ['load_vector_bcast1_inc',
+        'sve' : ['simd_size',   # vector-length-agnostic: known at run time only
+                   'load_vector_bcast1_inc',
                  'load_vector_immstride',
                  'load_vector_gregstride',
                  'load_vector_immoff',
@@ -90,7 +95,8 @@ allowed_not_implemented = {
                  'fma_vf',
                  'fma_np_vf',
                  ],
-        'sme' : ['load_vector_bcast1_inc',
+        'sme' : ['simd_size',   # vector-length-agnostic: known at run time only
+                   'load_vector_bcast1_inc',
                  'load_vector_immstride',
                  'load_vector_gregstride',
                  'load_vector_immoff',

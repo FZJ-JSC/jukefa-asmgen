@@ -484,10 +484,12 @@ class asmgen(ABC):
     @abstractmethod
     def simd_size(self) -> int:
         """
-        Returns the SIMD size in bytes or 1 if the ISA is vector-length-agnostic
+        The SIMD size in bytes, known at compile time - raising on
+        vector-length-agnostic ISAs, whose length is the machine's (set with
+        VLEN gives it at run time; is_vla tells them apart)
 
-        :return: SIMD size in bytes or 1 for VLA ISAs
-        :rtype: 1
+        :return: SIMD size in bytes
+        :rtype: int
         """
         raise NotImplementedError(NIE_MESSAGE)
 

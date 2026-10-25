@@ -135,13 +135,18 @@ class rvv(riscv64):
         return True
 
     def indexable_elements(self, dt : adt):
-        return self.simd_size//adt_size(dt)
+        raise NotImplementedError("RVV indexes no lanes by an encoded index: its lane count is "
+                                  "the vector length, known at run time only")
     def max_vregs(self):
         return 32//self.lmul
 
     @property
-    def simd_size(self):
-        return 1
+    def simd_size(self) -> int:
+        # compile-time knowledge: a vector-length-agnostic ISA's length is the
+        # machine's, known at run time (set with VLEN, c_simd_size_function)
+        raise NotImplementedError(f"{type(self).__name__} is vector-length-agnostic: its vector "
+                                  "length is known at run time only (set with VLEN, "
+                                  "c_simd_size_function)")
 
     def add_greg_voff(self, *, reg : greg_base, offset : int,
                       dt : adt) -> str:

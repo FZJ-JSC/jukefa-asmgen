@@ -143,11 +143,11 @@ th.vmul.vx v1,v1,t0
 th.vid.v v1
 th.vmul.vx v1,v1,t0
 ### method indexable_elements(dt=DOUBLE)
-0
+!NotImplementedError: RVV indexes no lanes by an encoded index: its lane count is the vector length, known at run time only
 ### method indexable_elements(dt=HALF)
-0
+!NotImplementedError: RVV indexes no lanes by an encoded index: its lane count is the vector length, known at run time only
 ### method indexable_elements(dt=SINGLE)
-0
+!NotImplementedError: RVV indexes no lanes by an encoded index: its lane count is the vector length, known at run time only
 ### method is_vla()
 True
 ### method isaclear()
@@ -546,8 +546,8 @@ ret
 slli t0,t0,4
 ### method shift_greg_right(bit_count=4, reg=t0)
 srli t0,t0,4
-### method simd_size()
-1
+### method simd_size
+!NotImplementedError: rvv071 is vector-length-agnostic: its vector length is known at run time only (set with VLEN, c_simd_size_function)
 ### method simd_size_to_greg(dt=DOUBLE, reg=t0)
 th.vsetvli t0, zero, e64, m1
 ### method simd_size_to_greg(dt=HALF, reg=t0)
