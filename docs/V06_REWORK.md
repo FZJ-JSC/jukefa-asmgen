@@ -577,7 +577,11 @@ builds unchanged.
       `reserve_any_reg` could still give, shared files counted (SVE's FP and
       vector registers, AVX2's masks and vectors). `available_reg_count`
       was no such count - the allocatable total, reservations or not.
-- [ ] Lane ranges as operand constraints: replaces `indexable_elements`.
+- [x] Lane ranges as operand constraints: every lane operand on every
+      backend has its range as a constraint (`minmax_constraint`: `minval`,
+      `maxval`; `op.forms` finds the signatures). `indexable_elements` is
+      gone (asmgen 0067): nothing called it - ukrgen's `unvec` only after a
+      raise (its 0167).
 - [x] `simd_size` raises on VLA (asmgen 0066): NotImplementedError on SVE,
       SME, RVV and rvv071, whose vector length is known at run time only
       (`set` with VLEN, `c_simd_size_function`) - it was 1, and callers
@@ -707,3 +711,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-25: op.fits and op.forms (asmgen 0064).
 - 2026-10-25: the register tracker's available(tag) (asmgen 0065).
 - 2026-10-25: simd_size raising on vector-length-agnostic ISAs (asmgen 0066).
+- 2026-10-25: indexable_elements removed (asmgen 0067).

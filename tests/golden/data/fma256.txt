@@ -135,12 +135,6 @@ vpmullw .iota_16x16(%rip),%ymm1,%ymm1
 ### method greg_to_voffs(dt=SINGLE, streg=r8, vreg=ymm1)
 vpbroadcastd %r8d,%ymm1
 vpmulld .iota_32x8(%rip),%ymm1,%ymm1
-### method indexable_elements(dt=DOUBLE)
-4
-### method indexable_elements(dt=HALF)
-16
-### method indexable_elements(dt=SINGLE)
-8
 ### method is_vla()
 False
 ### method isaclear()

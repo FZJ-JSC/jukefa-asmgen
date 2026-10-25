@@ -582,18 +582,6 @@ class asmgen(ABC):
         raise NotImplementedError(NIE_MESSAGE)
 
     @abstractmethod
-    def indexable_elements(self, dt : asm_data_type) -> int:
-        """
-        Returns the number of directly indexable elements in a SIMD/vector register
-
-        :param dt: Data type to check
-        :type dt: class:`asmgen.registers.asm_data_type`
-        :return: Number of directly indexable elements
-        :rtype: int
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
     def max_tregs(self, dt : asm_data_type) -> int:
         """
         Returns the number of available tile registers for a given data type

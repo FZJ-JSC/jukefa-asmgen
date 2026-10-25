@@ -332,8 +332,6 @@ class avxbase(asmgen):
     def is_vla(self):
         return False
 
-    def indexable_elements(self, dt : adt):
-        return self.simd_size//adt_size(dt)
     def max_gregs(self):
         return 16
     def max_mregs(self):

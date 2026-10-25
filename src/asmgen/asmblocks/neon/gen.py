@@ -136,8 +136,6 @@ class neon(aarch64):
     def is_vla(self) -> bool:
         return False
 
-    def indexable_elements(self, dt : adt) -> int:
-        return self.simd_size//adt_size(dt)
     def max_vregs(self):
         return 32
 

@@ -1736,12 +1736,6 @@ index z1.d,#0,x0
 index z1.h,#0,w0
 ### method greg_to_voffs(dt=SINGLE, streg=x0, vreg=z1)
 index z1.s,#0,w0
-### method indexable_elements(dt=DOUBLE)
-2
-### method indexable_elements(dt=HALF)
-8
-### method indexable_elements(dt=SINGLE)
-4
 ### method is_vla()
 True
 ### method isaclear()

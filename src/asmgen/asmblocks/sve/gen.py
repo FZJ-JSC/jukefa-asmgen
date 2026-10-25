@@ -134,10 +134,6 @@ class sve(aarch64):
                                   "c_simd_size_function)")
 
 
-    def indexable_elements(self, dt : adt) -> int:
-        # 128 bits are indexable
-        return 16//adt_size(dt)
-
     def add_greg_voff(self, *, reg : greg_base, offset : int, dt : adt) -> str:
         """
         A register moved by offset vector lengths in bytes: incb forward, decb

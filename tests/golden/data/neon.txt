@@ -131,12 +131,6 @@ x0
 !NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {STINDEX}
 ### method greg_to_voffs(dt=SINGLE, streg=x0, vreg=v1)
 !NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {STINDEX}
-### method indexable_elements(dt=DOUBLE)
-2
-### method indexable_elements(dt=HALF)
-8
-### method indexable_elements(dt=SINGLE)
-4
 ### method is_vla()
 False
 ### method isaclear()

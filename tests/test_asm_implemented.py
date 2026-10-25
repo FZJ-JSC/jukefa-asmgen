@@ -29,7 +29,6 @@ from .testcase import testcase
 
 allowed_not_implemented = {
         'rvv' : ['simd_size',   # vector-length-agnostic: known at run time only
-                   'indexable_elements',   # vector-length-agnostic: known at run time only
                    'add_greg_greg_shifted',
                  'sub_greg_greg_shifted',
                  'mask_all_true',
@@ -54,7 +53,6 @@ allowed_not_implemented = {
                  'fma_np_idx',
                  ],
         'rvv071' : ['simd_size',   # vector-length-agnostic: known at run time only
-                   'indexable_elements',   # vector-length-agnostic: known at run time only
                    'add_greg_greg_shifted',
                  'sub_greg_greg_shifted',
                  'mask_all_true',
@@ -212,7 +210,6 @@ function_tests = [
         ['is_vla', None],
         ['supported_on_host', None],
         ['supportedby_cpuinfo', {'cpuinfo' : lambda gen : 'invalid_isa'}],
-        ['indexable_elements', {'dt' : lambda gen : adt.DOUBLE} ],
         ['max_vregs', None],
         ['max_gregs', None],
         ['max_fregs', None],

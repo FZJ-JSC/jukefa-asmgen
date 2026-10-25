@@ -134,9 +134,6 @@ class rvv(riscv64):
     def is_vla(self):
         return True
 
-    def indexable_elements(self, dt : adt):
-        raise NotImplementedError("RVV indexes no lanes by an encoded index: its lane count is "
-                                  "the vector length, known at run time only")
     def max_vregs(self):
         return 32//self.lmul
 

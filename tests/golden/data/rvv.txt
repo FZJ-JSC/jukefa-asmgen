@@ -142,12 +142,6 @@ vmul.vx v1,v1,t0
 ### method greg_to_voffs(dt=SINGLE, streg=t0, vreg=v1)
 vid.v v1
 vmul.vx v1,v1,t0
-### method indexable_elements(dt=DOUBLE)
-!NotImplementedError: RVV indexes no lanes by an encoded index: its lane count is the vector length, known at run time only
-### method indexable_elements(dt=HALF)
-!NotImplementedError: RVV indexes no lanes by an encoded index: its lane count is the vector length, known at run time only
-### method indexable_elements(dt=SINGLE)
-!NotImplementedError: RVV indexes no lanes by an encoded index: its lane count is the vector length, known at run time only
 ### method is_vla()
 True
 ### method isaclear()
