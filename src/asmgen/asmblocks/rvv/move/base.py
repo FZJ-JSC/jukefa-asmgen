@@ -35,6 +35,12 @@ class rvv_move(move):
     def get_signatures(self) -> list[operation_signature]:
         return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
 
+    def element0(self, dst, src, floating : bool) -> str:
+        """
+        Element 0 of the vector src into the scalar register dst
+        """
+        return f"{'vfmv.f.s' if floating else 'vmv.x.s'} {dst},{src}"
+
     def implementation(self, *, dregs : list[data_reg],
                        dts : dict[str, adt],
                        modifiers : set[mod],
@@ -55,8 +61,7 @@ class rvv_move(move):
             inst = "vfslide1down.vf" if floating else "vslide1down.vx"
             return self.asmwrap(f"{inst} {dst},{dst},{src}")
         if omod.ILANE in amods and not isinstance(dst, type(src)):
-            inst = "vfmv.f.s" if floating else "vmv.x.s"
-            return self.asmwrap(f"{inst} {dst},{src}")
+            return self.asmwrap(self.element0(dst, src, floating))
         if omod.ILANESHIFT in amods:
             if omod.FILLOTHERS in amods:
                 floating = dts['bdreg'].name in ("DOUBLE", "SINGLE", "HALF")

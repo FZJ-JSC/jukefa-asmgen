@@ -161,8 +161,8 @@ progress, [x] done.
       every hash seed. About 13,000 entries over the eight backends, 30 s.
       `python -m tests.golden record [BACKEND]` after an intended change,
       `python -m tests.golden diff` to see one.
-- [x] The snapshots assembled by each backend's assembler (rvv071: text
-      only): the entries that don't assemble today are the baseline, an
+- [x] The snapshots assembled by each backend's assembler (rvv071: through
+      XTheadVector since phase 5): the entries that don't assemble today are the baseline, an
       entry that stops assembling fails.
 - [x] `examples/axpy.py` run as a test (`tests/test_examples.py`): every
       ISA it offers, both arithmetic forms, unrolled once and three times,
@@ -412,9 +412,9 @@ Checked (step 4a): no snapshot entry changed, `set`'s new; ukrgen's golden
 kernels - zeroing their accumulators through `zero_vreg` - and ukropt's
 builds unchanged.
 
-### Phase 5: memory [~]
+### Phase 5: memory [x]
 
-- [ ] Every old load and store mapped onto `load`/`store` signatures, the
+- [x] Every old load and store mapped onto `load`/`store` signatures, the
       missing modifiers added: plain, `IOFFSET`, `GOFFSET`, VL-scaled
       offsets, `BCAST` (with offset and post-increment), strides (register,
       immediate), gather and scatter, lanes and tiles.
@@ -512,10 +512,28 @@ builds unchanged.
       SME's are slices, rows and columns, which `load`/`store` have - so
       one base-class implementation each raises NotImplementedError saying
       so, for the five ISAs' stubs (asmgen 0059).
-- [ ] rvv071: its operations print 0.7.1's mnemonics and `vsetvli`, their
-      signatures offer only the element width `vsetvli` set; FP32 and FP64
-      kernels build.
-- [ ] Wrappers for the old methods.
+- [x] rvv071 (asmgen 0060): its operations print 0.7.1's forms - loads and
+      stores with the element width as a letter (`vle.v` 64 bits, `vlw.v`,
+      `vlh.v`, `vlb.v`), `vls*.v` strides and broadcasts, `vlx*.v` and
+      `vsux*.v` indices, `vlseg<nf>*.v` segments (`rvv071/opmem.py`);
+      element 0 into a general purpose register `vext.x.v`, and no FP
+      slides (`rvv071/move.py`); `vmpopc.m`; `vsetvli` without policies (phase
+      4). Loads and stores are right at the width `vsetvli` set - 0.7.1's
+      width letters sign-extend to SEW - which is the kernel's one width
+      (mixed precision isn't a goal); its indices are SEW-wide, so they're
+      as wide as the data. RVV's old methods it kept are gone: the base
+      class's run on these. The snapshots assemble rvv071 now, through
+      binutils' XTheadVector (th.-prefixed mnemonics; the generator prints
+      T-Head's toolchain's unprefixed ones): its entries that don't assemble
+      are RVV's own (opd3's unsigned forms, `vwaddsu.vv` with a scalar), none
+      of 0.7.1's. ukrgen's RVV FP64 and FP32 configurations build for rvv071,
+      every family, and assemble as 0.7.1.
+- [x] Wrappers for the old methods: every old load, store and prefetch of
+      the base interface is one now (scalar, parameter, vector, tile), or
+      gone (the prefetch and offset limits). NEON's six own post-increment
+      methods (`load_vector_inc`, `_lane_inc`, `_lane_greginc` and their
+      stores), outside the base interface and unused, stay as they are
+      until phase 9.
 
 ### Phase 6: framing and directives [ ]
 
@@ -642,3 +660,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-25: x86's disp8 and disp32 as encoding features; the offset limits
   removed (asmgen 0058).
 - 2026-10-25: load_tile and store_tile raising in the base class only (asmgen 0059).
+- 2026-10-25: rvv071 ported to 0.7.1's forms; its snapshots assembled
+  through XTheadVector (asmgen 0060).

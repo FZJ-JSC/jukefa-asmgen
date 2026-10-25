@@ -33,6 +33,9 @@ class rvv(riscv64):
     """
     RISC-V RVV 1.0 asmgen implementation
     """
+
+    #: the mask population count (0.7.1: vmpopc.m)
+    vpopc = "vcpop.m"
     # Zvfh: half-precision vector arithmetic
     FEATURES = ('ZVFH', 'ZBA')
 
@@ -118,7 +121,7 @@ class rvv(riscv64):
         # vec filled with 1 where element not-zero
         asmblock += self.asmwrap(f"vmfne.vf {vreg2},{vreg1},{freg}")
         # greg has number of elements that are not zero
-        asmblock += self.asmwrap(f"vcpop.m {greg},{vreg2}")
+        asmblock += self.asmwrap(f"{self.vpopc} {greg},{vreg2}")
         # if non-zero number of elements are non-zero, i.e greg has non-zero number,
         # we do not have zero, so we don't jump
         # So we jump when zero
