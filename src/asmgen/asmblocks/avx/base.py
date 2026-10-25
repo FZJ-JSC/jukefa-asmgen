@@ -50,6 +50,10 @@ class avxbase(asmgen):
     Base X86_64/AVX/FMA asmgem implementation
     """
 
+    #: the nop: nop
+    NOP_BYTES = 1
+    NOP_ENCODING = 0x90
+
     #: x86's displacements: disp8 on, disp32 off by default (x86/opmem/displacement.py)
     ENCODING_FEATURES = dict(X86_ENCODING_FEATURES)
 

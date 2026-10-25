@@ -37,6 +37,10 @@ class aarch64(asmgen):
     ARM64/AArch64 asmgen implementation
     """
 
+    #: the nop: nop
+    NOP_BYTES = 4
+    NOP_ENCODING = 0xd503201f
+
     dt_greg_pfx = {
             adt.DOUBLE : "x",
             adt.SINGLE : "w",

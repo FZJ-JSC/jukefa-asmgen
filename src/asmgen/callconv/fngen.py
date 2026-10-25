@@ -18,13 +18,36 @@ class fngen:
     Class for generating calling-convention-compliant functions in ASM
     """
 
-    def __init__(self, gen : asmgen, rt : reg_tracker):
+    def __init__(self, gen : asmgen, rt : reg_tracker | None = None):
         self.gen = gen
         self.rt = rt
 
         self.required_loads : dict[str,tuple[str,int]] = dict()
 
         self.debug_block : str = ""
+
+    def function(self, name : str, body : str, *, align : int | None = None,
+                 offset : int = 0, data : str = "") -> str:
+        """
+        The function in assembly: its section and alignment, .global and
+        .type, the label, the body - its instructions through the return -
+        .size, then the data it keeps (constants in their own section). What
+        the file says once, gen.asmfile_annotations, is apart from it.
+
+        :param name: the function's symbol
+        :param body: its instructions, saves to return
+        :param align: the function's alignment in bytes, if any
+        :param offset: where it starts past that boundary, in bytes (nops)
+        :param data: its data, after it
+        """
+        gen = self.gen
+        text = gen.asmwrap(".text")
+        if align:
+            text += gen.align(align, offset)
+        text += gen.asmwrap(f".global {name}")
+        text += gen.asmwrap(f".type {name}, %function")
+        text += gen.asmwrap(f"{name}:")
+        return text + body + gen.asmwrap(f".size {name}, .-{name}") + data
 
     def init_cc(self, cc : callconv,
                 reverse_alias_map : dict[str,str] = None,

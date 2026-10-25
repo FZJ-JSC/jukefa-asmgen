@@ -97,6 +97,10 @@ addq $2560,%r8
 addq $262144,%r8
 ### method add_greg_voff(dt=SINGLE, offset=8, reg=r8)
 addq $512,%r8
+### method align(bytes=64)
+.balign 64
+### method asmfile_annotations()
+.section .note.GNU-stack,"",%progbits
 ### method c_simd_size_function()
 static inline size_t get_simd_size() { return 64; }
 ### method cb(cmp=NE, label=notequal, reg1=r8, reg2=r9)
@@ -532,6 +536,8 @@ movq %r9,%r8
 imulq %r10,%r8
 ### method mul_greg_imm(dst=r8, factor=40, src=r9)
 imulq $40,%r9,%r8
+### method nop()
+nop
 ### method ret()
 ret
 ### method shift_greg_left(bit_count=4, reg=r8)

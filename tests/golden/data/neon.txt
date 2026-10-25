@@ -96,6 +96,10 @@ add x0,x0,#640
 add x0,x0,#65536
 ### method add_greg_voff(dt=SINGLE, offset=8, reg=x0)
 add x0,x0,#128
+### method align(bytes=64)
+.balign 64
+### method asmfile_annotations()
+.section .note.GNU-stack,"",%progbits
 ### method c_simd_size_function()
 static inline size_t get_simd_size() { return 16; }
 ### method cb(cmp=NE, label=notequal, reg1=x0, reg2=x1)
@@ -520,6 +524,8 @@ mul x0,x1,x2
 ### method mul_greg_imm(dst=x0, factor=40, src=x1)
 mov x0,#40
 mul x0,x1,x0
+### method nop()
+nop
 ### method ret()
 ret
 ### method shift_greg_left(bit_count=4, reg=x0)

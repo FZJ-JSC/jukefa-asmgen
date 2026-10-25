@@ -199,6 +199,56 @@ class asmgen(ABC):
             return f".{label}%="
         return f".{label}"
 
+    #: one nop: its bytes and encoding, for align's offsets
+    NOP_BYTES : int = 0
+    NOP_ENCODING : int = 0
+    #: a shorter nop, (bytes, encoding), for what's left of an offset
+    SHORT_NOP : tuple[int, int] | None = None
+
+    def nop(self) -> str:
+        """
+        One nop
+        """
+        return self.asmwrap("nop")
+
+    def align(self, bytes : int, offset : int = 0) -> str:   # pylint: disable=redefined-builtin
+        """
+        What follows aligned to bytes, offset bytes past the boundary: .balign
+        - the assembler pads code with nops - then offset bytes of nops,
+        written as their encodings so the assembler can't compress them.
+        (Zeros, which .space writes, aren't safe to execute: a loop head's
+        padding runs.)
+
+        :param bytes: the alignment, a power of 2
+        :param offset: bytes past the boundary: nops of NOP_BYTES, then one
+            SHORT_NOP for what's left, if the ISA has one
+        """
+        if bytes < 1 or bytes & (bytes - 1):
+            raise ValueError(f"alignment {bytes} isn't a power of 2")
+        if not 0 <= offset < bytes:
+            raise ValueError(f"offset {offset} isn't within the alignment {bytes}")
+        text = self.asmwrap(f".balign {bytes}")
+        if offset:
+            count, rest = divmod(offset, self.NOP_BYTES) if self.NOP_BYTES else (0, offset)
+            if not self.NOP_BYTES or (rest and (self.SHORT_NOP is None or rest != self.SHORT_NOP[0])):
+                raise ValueError(f"{type(self).__name__}'s nops are {self.NOP_BYTES} bytes: "
+                                 f"no offset of {offset}")
+            if count:
+                text += self.asmwrap(f".fill {count}, {self.NOP_BYTES}, {self.NOP_ENCODING:#x}")
+            if rest:
+                text += self.asmwrap(f".fill 1, {self.SHORT_NOP[0]}, {self.SHORT_NOP[1]:#x}")
+        return text
+
+    def asmfile_annotations(self) -> str:
+        """
+        What an assembly file says once, whatever functions it holds: that it
+        needs no executable stack (GNU linkers assume one without the note).
+        Nothing in inline asm, whose compiler writes it.
+        """
+        if self.output_inline:
+            return ""
+        return self.asmwrap('.section .note.GNU-stack,"",%progbits')
+
     def asmwrap(self, code : str) -> str:
         """
         Wrap the ASM instruction according according to output_inline

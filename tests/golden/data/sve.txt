@@ -1690,6 +1690,10 @@ incb x0, ALL, MUL #16
 incb x0, ALL, MUL #16
 ### method add_greg_voff(dt=SINGLE, offset=8, reg=x0)
 incb x0, ALL, MUL #8
+### method align(bytes=64)
+.balign 64
+### method asmfile_annotations()
+.section .note.GNU-stack,"",%progbits
 ### method c_simd_size_function()
 static inline size_t get_simd_size() {
     size_t byte_size = 0;
@@ -2123,6 +2127,8 @@ mul x0,x1,x2
 ### method mul_greg_imm(dst=x0, factor=40, src=x1)
 mov x0,#40
 mul x0,x1,x0
+### method nop()
+nop
 ### method ret()
 ret
 ### method shift_greg_left(bit_count=4, reg=x0)

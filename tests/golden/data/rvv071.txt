@@ -96,6 +96,10 @@ add t0,t0,8
 !NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
 ### method add_greg_voff(dt=SINGLE, offset=8, reg=t0)
 !NotImplementedError: RVV doesn't have an instruction to add a vector offset to a gp register
+### method align(bytes=64)
+.balign 64
+### method asmfile_annotations()
+.section .note.GNU-stack,"",%progbits
 ### method c_simd_size_function()
 static inline size_t get_simd_size() {
     size_t byte_size = 0;
@@ -534,6 +538,8 @@ mul t0,t1,t2
 ### method mul_greg_imm(dst=t0, factor=40, src=t1)
 li t0,40
 mul t0,t1,t0
+### method nop()
+nop
 ### method ret()
 ret
 ### method shift_greg_left(bit_count=4, reg=t0)

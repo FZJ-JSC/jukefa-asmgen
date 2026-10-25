@@ -538,14 +538,29 @@ builds unchanged.
       stores), outside the base interface and unused, stay as they are
       until phase 9.
 
-### Phase 6: framing and directives [ ]
+### Phase 6: framing and directives [x]
 
-- [ ] `fngen` writes the function: section, alignment, `.global`, label,
-      body, return, and the file's GNU-stack note.
-- [ ] Loop heads aligned through it (ukrgen's `loop-align`).
-- [ ] `gen.nop()`.
-- [ ] One implementation for standalone output; `asmwrap`/`cppgen` keep the
-      inline one.
+- [x] `fngen.function(name, body, align=, offset=, data=)` writes the function:
+      `.text`, its alignment, `.global`, `.type name, %function`, the label,
+      the body (its instructions through the return), `.size name, .-name`,
+      then its data (asmgen 0063); `fngen`'s register tracker is optional
+      for it. What a file says once - the GNU-stack note - is
+      `gen.asmfile_annotations()`, nothing in inline asm.
+- [x] `gen.align(bytes, offset=0)`: `.balign`, then `offset` bytes of nops
+      written as their encodings (`NOP_BYTES`, `NOP_ENCODING`: RISC-V's and
+      AArch64's 4 bytes, x86's 1) - not `.space`, whose zeros aren't safe
+      to run at a loop head. Padding to an offset is the generator's, not
+      the caller's, after all: ukrgen's `loop-align` and ukropt's padding
+      are on it; RISC-V adds a `c.nop` (`SHORT_NOP`) for 2 mod 4.
+- [x] `gen.nop()`.
+- [ ] Later, if wanted: CFI (`.cfi_startproc`, the stack adjustment, where
+      each register is saved: `callconv` knows), `.ident` with the
+      generator's version and configuration; behind parameters, ISA
+      directives (`.arch_extension sve`, `.option arch, +v`), `.hidden`, x86
+      CET and AArch64 BTI markings.
+- [x] One implementation for standalone output; `asmwrap`/`cppgen` keep the
+      inline one: ukrgen's emitter and BLIS injector (its 0165) and ukropt's
+      pairs and sweep (its 0013) frame and align through it.
 
 ### Phase 7: questions instead of trials [ ]
 
@@ -670,3 +685,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   gate; operations' get_signatures filters their all_signatures (asmgen 0061).
 - 2026-10-25: rvv071's XTheadVector: th.-prefixed vector instructions by
   default, unprefixed without (asmgen 0062).
+- 2026-10-25: fngen.function, gen.align, gen.nop, gen.asmfile_annotations
+  (asmgen 0063).

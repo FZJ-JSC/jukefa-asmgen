@@ -42,6 +42,12 @@ class riscv64(asmgen):
     RISC-V 64bit asmgen implementation
     """
 
+    #: the nop: addi x0, x0, 0
+    NOP_BYTES = 4
+    NOP_ENCODING = 0x00000013
+    #: c.nop, for an offset of 2 mod 4: the C extension (rv64gc)
+    SHORT_NOP = (2, 0x0001)
+
     fdt_suffixes = FDT_SUFFIXES
 
     fcdt_suffixes = FCDT_SUFFIXES
