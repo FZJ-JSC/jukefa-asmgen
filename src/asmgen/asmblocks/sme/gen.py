@@ -230,16 +230,6 @@ class sme(sve):
         return self.asmwrap(
             f"st1{msuf} {{{treg}h.{suf}[{rreg_str},{roff}]}},p0/m,{address}")
 
-    def load_tile(self, *, areg : greg_base,
-                   treg : treg_base, dt : adt) -> str:
-        raise NotImplementedError(
-            "SME has no tile loading instruction, use load_vector* and insert_tile_row/column")
-
-    def store_tile(self, *, areg : greg_base,
-                   treg : treg_base, dt : adt) -> str:
-        raise NotImplementedError(
-            "SME has no tile storing instruction, use extract_tile_row/column and store_vector*")
-
     def _c_simd_size_asm(self) -> str:
         # the streaming vector length: counted in streaming mode
         return self.asmwrap("smstart") + super()._c_simd_size_asm() + self.asmwrap("smstop")

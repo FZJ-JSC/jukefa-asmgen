@@ -207,13 +207,3 @@ class rvv(riscv64):
 
     def zero_treg(self, *, treg : treg_base, dt : adt) -> str:
         raise NotImplementedError(self.rvv_no_tile_message)
-
-    def load_tile(self, *, areg : greg_base,
-                   treg : treg_base,
-                   dt : adt) -> str:
-        raise NotImplementedError(self.rvv_no_tile_message)
-
-    def store_tile(self, *, areg : greg_base,
-                   treg : treg_base,
-                   dt : adt) -> str:
-        raise NotImplementedError(self.rvv_no_tile_message)

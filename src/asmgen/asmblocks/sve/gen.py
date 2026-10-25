@@ -196,13 +196,3 @@ class sve(aarch64):
 
     def zero_treg(self, *, treg : treg_base, dt : adt) -> str:
         raise NotImplementedError("SVE has no tiles, use SME")
-
-    def load_tile(self, *, areg : greg_base,
-                   treg : treg_base,
-                   dt : adt) -> str:
-        raise NotImplementedError("SVE has no tiles, use SME")
-
-    def store_tile(self, *, areg : greg_base,
-                   treg : treg_base,
-                   dt : adt) -> str:
-        raise NotImplementedError("SVE has no tiles, use SME")

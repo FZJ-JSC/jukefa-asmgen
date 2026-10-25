@@ -1568,7 +1568,6 @@ class asmgen(ABC):
         return self._vector_memory("store", areg=areg, vreg=vreg, dt=dt,
                                    modifiers=("VINDEX",), vidxreg=offvreg, it=it)
 
-    @abstractmethod
     def load_tile(self, *, areg : greg_type,
                   treg : treg_type, dt : asm_data_type):
         """
@@ -1584,9 +1583,8 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        raise NotImplementedError(f"{type(self).__name__} has no whole-tile load: load its rows or columns: load with the tile's slice operands")
 
-    @abstractmethod
     def store_tile(self, *, areg : greg_type,
                    treg : treg_type, dt : asm_data_type):
         """
@@ -1602,7 +1600,7 @@ class asmgen(ABC):
         :return: String containing the required ASM instructions
         :rtype: str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        raise NotImplementedError(f"{type(self).__name__} has no whole-tile store: store its rows or columns: store with the tile's slice operands")
 
 
 def _features_in_parameters(raw):

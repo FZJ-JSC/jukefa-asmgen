@@ -549,16 +549,6 @@ class avxbase(asmgen):
     def zero_treg(self, *, treg : treg_base, dt : adt):
         raise NotImplementedError(self.avx_no_tile_message)
 
-    def load_tile(self, *, areg : greg_base,
-                   treg : treg_base,
-                   dt : adt):
-        raise NotImplementedError(self.avx_no_tile_message)
-
-    def store_tile(self, *, areg : greg_base,
-                   treg : treg_base,
-                   dt : adt):
-        raise NotImplementedError(self.avx_no_tile_message)
-
     def load_vector_gather(self, *, areg : greg_base, offvreg : vreg_base,
                            vreg : vreg_base, dt : adt, it : asm_index_type) -> str:
         raise NotImplementedError("AVX2's gathers need a mask register, which load_vector_gather "

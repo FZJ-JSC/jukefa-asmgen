@@ -508,6 +508,10 @@ builds unchanged.
       `max/min_fload_immoff`, `max/min_bcast_immoff`, `max/min_load_voff`):
       nothing used them; the constraints say what encodes. `max_add_voff`
       stays while `examples/axpy.py` asks it (phase 7: a query).
+- [x] `load_tile`/`store_tile`: no ISA has whole-tile loads or stores -
+      SME's are slices, rows and columns, which `load`/`store` have - so
+      one base-class implementation each raises NotImplementedError saying
+      so, for the five ISAs' stubs (asmgen 0059).
 - [ ] rvv071: its operations print 0.7.1's mnemonics and `vsetvli`, their
       signatures offer only the element width `vsetvli` set; FP32 and FP64
       kernels build.
@@ -637,3 +641,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-24: the old vector loads and stores on load and store (asmgen 0057).
 - 2026-10-25: x86's disp8 and disp32 as encoding features; the offset limits
   removed (asmgen 0058).
+- 2026-10-25: load_tile and store_tile raising in the base class only (asmgen 0059).
