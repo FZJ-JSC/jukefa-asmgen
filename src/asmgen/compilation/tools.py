@@ -20,13 +20,32 @@ from .compiler_presets import (
     cross_lib_flags
 )
 
+def baseline_flags(gen, executable : str) -> list[str]:
+    """
+    A generator's compiler flags at its baseline - no optional extensions,
+    which older compilers may not know - its features as they were after
+    """
+    features = getattr(gen, "features", None)
+    gen.set_features([])
+    try:
+        return gen.compiler_flags(executable)
+    finally:
+        gen.set_features(sorted(gen.FEATURES) if features is None else sorted(features))
+
+
 class compiler:
     """
     Simple wrapper around a compiler for directly compiling 
     sources into libraries and executables
     """
-    def __init__(self, executable, arch):
+    def __init__(self, executable, arch, gen=None):
+        """
+        :param gen: the generator whose output it compiles: its
+            compiler_flags at its baseline (no optional extensions) - the
+            compiler_presets table where there's none
+        """
         self.executable = executable
+        self.unsupported = None
         if self.executable in default_flags:
             self.flags = default_flags[self.executable]
         if self.executable in output_flag:
@@ -35,7 +54,13 @@ class compiler:
             self.lib_flags = lib_flags[self.executable]
         if self.executable in stdin_flags:
             self.stdin_flags = stdin_flags[self.executable]
-        if self.executable in arch_flags:
+        if gen is not None:
+            try:
+                self.arch_flags = baseline_flags(gen, self.executable)
+            except NotImplementedError as err:
+                self.unsupported = str(err)
+                self.arch_flags = []
+        elif self.executable in arch_flags:
             self.arch_flags = arch_flags[self.executable][arch]
 
     def run_compilation(self, source : str, output_filename : str, cmd : list[str]):
@@ -81,6 +106,8 @@ class compiler:
         :return: True if the compilation succeeds, otherwise False
         :rtype: bool
         """
+        if self.unsupported:
+            raise NotImplementedError(f"{self.executable}: {self.unsupported}")
         cross_flags = []
         if "native" != cross_compile:
             cross_flags = cross_cxx_flags[cross_compile][self.executable] +\
@@ -117,6 +144,8 @@ class compiler:
         :return: True if the compilation succeeds, otherwise False
         :rtype: bool
         """
+        if self.unsupported:
+            raise NotImplementedError(f"{self.executable}: {self.unsupported}")
         cross_flags = []
         if "native" != cross_compile:
             cross_flags = cross_cxx_flags[cross_compile][self.executable] +\

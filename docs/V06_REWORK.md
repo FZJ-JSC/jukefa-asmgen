@@ -601,27 +601,31 @@ builds unchanged.
       ukropt's pairs too (its 0014).
 - [x] `max_*regs`: methods in the base class and every backend - they were
       by now; `tests/test_reg_available.py` holds every generator to it.
-- [~] Compiler flags from the generator and its enabled features (asmgen
+- [x] Compiler flags from the generator and its enabled features (asmgen
       0068): `gen.compiler_flags(compiler)` - the ISA's and those of the
       extensions it may use, `gen.enabled_features()` (set_features', all
       without a call); RISC-V's `-march` extensions in their order, rvv071's
       XTheadVector's (`-mepi` without it, EPI's toolchain), AArch64's by
       backend (`MARCH_BASE`, `MARCH_EXTENSIONS`), AVX-512's per feature;
-      gcc and clang alike, armclang for AArch64. Its users move in phase 8:
-      `compilation/tools` (test_asm_correct's `compiler_presets` table) and
-      ukropt's `-march` by ISA name.
+      gcc and clang alike, armclang for AArch64. Its users moved (phase 8):
+      `compilation/tools` takes a generator's flags at its baseline
+      (test_asm_correct; asmgen 0074), ukropt's FP16 `-march` its
+      extensions (ukropt 0015); the `compiler_presets` table stays for
+      callers without a generator.
 
-### Phase 8: the callers [~]
+### Phase 8: the callers [x]
 
 ukrgen:
-- [~] The signature emitter on the operations: address arithmetic, zeroing,
+- [x] The signature emitter on the operations: address arithmetic, zeroing,
       the vector length, masks, parameters, framing, loop alignment; its
       probes and compatibility shims gone; IR op names `add`/`mul`. Done:
       framing and loop alignment (ukrgen 0165); the probes and shims -
       signatures tried until one didn't raise, dummy calls, hasattr and
       getattr for older asmgens - are fits, refusal, forms and available
-      (ukrgen 0168); IR op names (0157). Left: the wrappers it calls
-      (`mov_greg`, `add_greg_imm`, `zero_vreg`, ...) - the operations.
+      (ukrgen 0168); IR op names (0157); the wrappers it called (`mov_greg`,
+      `add_greg_imm`, `zero_vreg`, ...) are the operations through its
+      `emitters/asmops.py`, one call each (ukrgen 0171; ukropt's pairs too,
+      its 0016).
 - [x] The old mechanism into `legacy/` (ukrgen 0169): what can't be
       imported and what only it uses, each module at its old path -
       `irmod` and `variant` among it; the family pipeline imports none.
@@ -630,11 +634,16 @@ ukrgen:
       `flow/test_pack`, `flow/stages` - they can't load since asmgen moved
       `asmblocks/operations` to `asmblocks/op` (`emitters/asm.py`,
       `specializers/asm.py`, `models/addr_parameters.py` import it).
-- [ ] A test for the signature emitter's address resolution, as
+- [x] A test for the signature emitter's address resolution, as
       `test_addr_resolver` was for the old one: different numbers of
       address registers, and phased, rotating and blocked advances.
 
-ukropt:
+ukropt: (ukrgen 0172): kernels
+      with 1 to 3 address registers per component, rotating, blocked and by
+      phase, run against a reference gemm (AVX2 natively, NEON and RVV under
+      qemu). Patterns taking a register back to an earlier column of C
+      (rotating over 2 on a 3-column tile) are refused for now - "not
+      specialized yet": a gap the test keeps in sight.
 - [x] `pairs` and `fmaload` without their workarounds: immediates through
       constraints and `set`, `gen.nop()` with ukropt's own nop sizes, vector
       bytes and compiler flags from the generator, forms by query, free
@@ -745,3 +754,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   in legacy/ (ukrgen 0168, 0169).
 - 2026-10-25: the tracker's pools; are_fregs_in_vregs retired (asmgen 0072).
 - 2026-10-25: ukropt's workarounds gone (ukropt 0013-0015).
+- 2026-10-25: compilation/tools on the generator's flags (asmgen 0074); the
+  emitter on the operations, its address test (ukrgen 0171, 0172).

@@ -131,7 +131,7 @@ class asm_correctness_test(unittest.TestCase,testcase):
 
         cls.compilation_failed = False
         if platform.machine() == cross_arch:
-            cxx = compiler(cls.cxx_name,cls.name)
+            cxx = compiler(cls.cxx_name, cls.name, gen=cls.gen)
             result = cxx.compile_lib(source=cls.testlib_source,
                                      output_filename=os.path.join(
                                          cls.test_root, cls.testlib_name))
@@ -146,7 +146,7 @@ class asm_correctness_test(unittest.TestCase,testcase):
                            "with %s"), cls.name, cls.cxx_name)
                 return
             log.debug("%s not supported on host, will cross compile and emulate",cls.name)
-            cxx = compiler(cls.cxx_name,cls.name)
+            cxx = compiler(cls.cxx_name, cls.name, gen=cls.gen)
             result = cxx.compile_lib(source=cls.testlib_source,
                                      output_filename=os.path.join(
                                          cls.test_root, cls.testlib_name),
