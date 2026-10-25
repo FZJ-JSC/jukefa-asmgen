@@ -15,11 +15,36 @@ from ..rvv.opset import rvv_opset
 from .opmem import rvv071_load, rvv071_store
 from .move import rvv071_move
 
+def _th_prefixed(line : str) -> str:
+    """
+    A vector instruction as XTheadVector spells it - th.vle.v for vle.v -
+    other lines (scalar instructions, labels) as they are
+    """
+    stripped = line.lstrip()
+    token = stripped.split()[0] if stripped.split() else ""
+    if token.startswith("v") and not token.endswith(":"):
+        return line[:len(line) - len(stripped)] + "th." + stripped
+    return line
+
+
 # pylint: disable=too-many-public-methods
 class rvv071(rvv):
     """
     RISC-V RVV 0.7.1 asmgen implementation
     """
+
+    #: XTheadVector: 0.7.1's vector instructions th.-prefixed, as mainline
+    #: binutils and GCC take them; off, unprefixed (EPI's toolchain, -mepi)
+    ENCODING_FEATURES = {"XTheadVector": True}
+
+    def asmwrap(self, code : str) -> str:
+        """
+        The instructions wrapped as rvv's are, their vector mnemonics
+        th.-prefixed under XTheadVector
+        """
+        if self._encoding_features()["XTheadVector"]:
+            code = "\n".join(_th_prefixed(line) for line in code.split("\n"))
+        return super().asmwrap(code)
 
     def __init__(self):
         super().__init__()

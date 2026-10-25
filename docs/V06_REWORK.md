@@ -523,9 +523,11 @@ builds unchanged.
       width letters sign-extend to SEW - which is the kernel's one width
       (mixed precision isn't a goal); its indices are SEW-wide, so they're
       as wide as the data. RVV's old methods it kept are gone: the base
-      class's run on these. The snapshots assemble rvv071 now, through
-      binutils' XTheadVector (th.-prefixed mnemonics; the generator prints
-      T-Head's toolchain's unprefixed ones): its entries that don't assemble
+      class's run on these. XTheadVector, an encoding feature on by default
+      (asmgen 0062), prints the vector instructions th.-prefixed, as mainline
+      binutils and GCC take 0.7.1; off, they're unprefixed, as EPI's
+      toolchain (-mepi) and T-Head's take them. The snapshots assemble rvv071
+      through binutils' XTheadVector: its entries that don't assemble
       are RVV's own (opd3's unsigned forms, `vwaddsu.vv` with a scalar), none
       of 0.7.1's. ukrgen's RVV FP64 and FP32 configurations build for rvv071,
       every family, and assemble as 0.7.1.
@@ -666,3 +668,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-25: no wrapping of subclasses' methods: the base generator's
   parameter methods know features, backends' chain to them, constructors
   gate; operations' get_signatures filters their all_signatures (asmgen 0061).
+- 2026-10-25: rvv071's XTheadVector: th.-prefixed vector instructions by
+  default, unprefixed without (asmgen 0062).

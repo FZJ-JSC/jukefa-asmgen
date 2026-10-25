@@ -163,7 +163,7 @@ class test_vlen(unittest.TestCase):
         self.assertEqual(f"vsetvli {x}, zero, e64, m1, ta, ma", self.vlen(r, adt.DOUBLE))
         r.set_parameter(name="LMUL", value=2)
         self.assertEqual(f"vsetvli {x}, zero, e32, m2, ta, ma", self.vlen(r, adt.SINGLE))
-        self.assertEqual(f"vsetvli {x}, zero, e16, m1", self.vlen(make(rvv071), adt.HALF))
+        self.assertEqual(f"th.vsetvli {x}, zero, e16, m1", self.vlen(make(rvv071), adt.HALF))   # XTheadVector, the default
         self.assertEqual("mov x1,#16", self.vlen(n))
         self.assertEqual("mov x1,#4", self.vlen(n, adt.SINGLE))
         self.assertEqual("cntb x1", self.vlen(s))

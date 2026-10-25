@@ -1,10 +1,11 @@
 """
-rvv071's operations print RVV 0.7.1's forms (0.6, phase 5): loads and stores
+rvv071's operations print RVV 0.7.1's forms (0.6, phase 5) - th.-prefixed
+under XTheadVector (on by default), unprefixed without it: loads and stores
 with the element width as a letter (vle.v, vlw.v), strides and broadcasts
 vls*.v, indices vlx*.v and vsux*.v at the data's width, segments
 vlseg<nf>*.v; element 0 into a general purpose register vext.x.v; no FP
 slides; vmpopc.m; vsetvli without policies. Checked against binutils'
-XTheadVector, which spells them th.-prefixed.
+XTheadVector. The forms below are XTheadVector's off: unprefixed.
 """
 import os
 import shutil
@@ -26,6 +27,7 @@ def plain(text):
 class test_rvv071_memory(unittest.TestCase):
     def setUp(self):
         self.g = rvv071()
+        self.g.set_parameter("XTheadVector", "off")
         self.v0, self.v1 = self.g.vreg(0), self.g.vreg(1)
         self.t0, self.t1 = self.g.greg(5), self.g.greg(6)
 
@@ -70,6 +72,7 @@ class test_rvv071_memory(unittest.TestCase):
 class test_rvv071_moves_and_masks(unittest.TestCase):
     def setUp(self):
         self.g = rvv071()
+        self.g.set_parameter("XTheadVector", "off")
 
     def test_element0_into_a_greg(self):
         text = plain(self.g.move(dregs=[self.g.vreg(1), self.g.greg(10)], dts=[adt.SINT64, adt.SINT64],
@@ -88,10 +91,22 @@ class test_rvv071_moves_and_masks(unittest.TestCase):
                                                  label="z", dt=adt.FP64))
 
 
-def th(line):
-    """binutils' XTheadVector spelling: th.vle.v"""
-    s = line.lstrip()
-    return line[:len(line) - len(s)] + "th." + s if s.startswith("v") else line
+class test_xtheadvector(unittest.TestCase):
+    def test_on_by_default(self):
+        g = rvv071()
+        self.assertIn("XTheadVector", g.get_parameters())
+        self.assertEqual("on", g.get_param_value("XTheadVector"))
+        self.assertEqual("th.vle.v v0, (t5)", plain(g.load(dregs=[g.vreg(0)], areg=g.greg(5), dt=adt.FP64)))
+        self.assertIn("th.vsetvli", g.vlen_to_greg(reg=g.greg(6), dt=adt.FP64))
+
+    def test_scalars_and_labels_stay(self):
+        g = rvv071()
+        self.assertEqual("ld s4, 8(t5)", plain(g.load_greg(areg=g.greg(5), offset=8, dst=g.greg(10))))
+
+    def test_off(self):
+        g = rvv071()
+        g.set_parameter("XTheadVector", "off")
+        self.assertEqual("vle.v v0, (t5)", plain(g.load(dregs=[g.vreg(0)], areg=g.greg(5), dt=adt.FP64)))
 
 
 class test_rvv071_assembles(unittest.TestCase):
@@ -115,7 +130,7 @@ class test_rvv071_assembles(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             src = os.path.join(d, "a.s")
             with open(src, "w") as f:
-                f.write("\n".join(th(l) for l in text.splitlines()) + "\n")
+                f.write(text)
             r = subprocess.run([tool, "-march=rv64gc_xtheadvector", src, "-o", os.path.join(d, "a.o")],
                                capture_output=True, text=True)
         if r.returncode and "xtheadvector" in r.stderr:

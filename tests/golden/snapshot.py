@@ -358,28 +358,13 @@ ASSEMBLERS = {
     # the assemblers themselves: compiler drivers check -march against their
     # own (older) lists - GCC 13's has no +sme
     "rvv": ["riscv64-linux-gnu-as", "-march=rv64gcv_zba_zfh_zvfh"],
-    # binutils takes 0.7.1 as XTheadVector, its mnemonics th.-prefixed (TRANSFORMS)
+    # binutils takes 0.7.1 as XTheadVector, th.-prefixed: rvv071's default
     "rvv071": ["riscv64-linux-gnu-as", "-march=rv64gc_zba_zfh_xtheadvector"],
     "neon": ["aarch64-linux-gnu-as", "-march=armv8.6-a+fp16+fp16fml+bf16+i8mm+dotprod"],
     "sve": ["aarch64-linux-gnu-as", "-march=armv9-a+sve2+bf16+i8mm+f64mm"],
     "sme": ["aarch64-linux-gnu-as", "-march=armv9-a+sme2+sme-f64f64+sme-i16i64+bf16"],
     "fma128": ["as"], "fma256": ["as"], "avx512": ["as"],
 }
-
-
-def _th_prefixed(line: str) -> str:
-    """
-    A 0.7.1 vector instruction as binutils' XTheadVector spells it: th.vle.v
-    for vle.v (the generator prints T-Head's toolchain's unprefixed forms)
-    """
-    stripped = line.lstrip()
-    if stripped.startswith("v"):
-        return line[:len(line) - len(stripped)] + "th." + stripped
-    return line
-
-
-#: each line's text as the backend's assembler takes it
-TRANSFORMS = {"rvv071": _th_prefixed}
 
 
 def assemble(name: str, entries: dict) -> list | None:
@@ -400,7 +385,7 @@ def assemble(name: str, entries: dict) -> list | None:
         if text.startswith("!") or not text.strip():
             continue
         for line in text.splitlines():
-            lines.append(TRANSFORMS.get(name, lambda l: l)(line))
+            lines.append(line)
             owner.append(key)
     with tempfile.TemporaryDirectory() as tmp:
         src = os.path.join(tmp, "s.s")
