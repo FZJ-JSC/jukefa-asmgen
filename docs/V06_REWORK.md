@@ -573,11 +573,14 @@ builds unchanged.
       (the FMA's with a scalar operand; whether loads take a predicate).
       Callers' trials (ukrgen's try-the-next-signature, ukropt's FMA form)
       go onto them in phase 8.
-- [ ] `available(tag)` on the register tracker.
+- [x] `available(tag)` on the register tracker (asmgen 0065): the registers
+      `reserve_any_reg` could still give, shared files counted (SVE's FP and
+      vector registers, AVX2's masks and vectors). `available_reg_count`
+      was no such count - the allocatable total, reservations or not.
 - [ ] Lane ranges as operand constraints: replaces `indexable_elements`.
 - [ ] `simd_size` raises on VLA.
-- [ ] `max_*regs`: properties or methods, the same in the base class and the
-      backends.
+- [x] `max_*regs`: methods in the base class and every backend - they were
+      by now; `tests/test_reg_available.py` holds every generator to it.
 - [ ] Compiler flags from the generator and its enabled features (or an
       improved `compiler_presets`), its users moved.
 
@@ -695,3 +698,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-25: fngen.function, gen.align, gen.nop, gen.asmfile_annotations
   (asmgen 0063).
 - 2026-10-25: op.fits and op.forms (asmgen 0064).
+- 2026-10-25: the register tracker's available(tag) (asmgen 0065).

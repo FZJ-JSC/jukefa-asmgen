@@ -222,9 +222,24 @@ class reg_tracker:
 
     def available_reg_count(self, type_tag : str) -> int:
         """
-        Returns the number of available registers of the specified type
+        The number of registers of the type the tracker allocates at all,
+        reserved ones included: available() counts the free ones
         """
         return len(self.available_regs[type_tag])
+
+    def available(self, type_tag : str) -> int:
+        """
+        How many registers of the type reserve_any_reg could still give: free
+        ones - not in use, nor any register sharing them (SVE's FP and vector
+        registers, AVX2's masks and vectors) - instead of reserving until it
+        raises
+
+        :param type_tag: tag/type name of the registers
+        :return: the number of free registers
+        """
+        if type_tag not in self.registered_types:
+            raise ValueError(f"Type not tracked: {type_tag}")
+        return sum(1 for idx in self.available_regs[type_tag] if self._free(type_tag, idx))
 
     def used_reg_count(self, type_tag : str) -> int:
         """
