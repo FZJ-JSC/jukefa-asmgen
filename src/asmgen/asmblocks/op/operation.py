@@ -21,6 +21,11 @@ from .misc import make_ord_prefix
 from .modifier import operation_modifier as mod
 from .operand import operand_modifier as opd_mod
 
+#: what a call that doesn't fit raises - argument checks, the signatures,
+#: their constraints, implementations refusing what their signatures allow
+_REFUSALS = (ValueError, TypeError, KeyError, IndexError, NotImplementedError)
+
+
 class operation(ABC):
     """
     Abstraction over operations/instructions
@@ -157,14 +162,22 @@ class operation(ABC):
         :param modifiers: operation modifiers
         """
 
+        # fits(): the signature the call takes, None where it would raise -
+        # every check and the implementation run, no text kept
+        query = kwargs.pop("_query", False)
         dregs = dregs if dregs else []
         gregs = gregs if gregs else []
         dts = dts if dts else {}
 
         resolved_operands = kwargs.copy()
 
-        resolved_operands |= self.resolve_dregs(dregs, dts)
-        resolved_operands |= self.resolve_gregs(gregs)
+        try:
+            resolved_operands |= self.resolve_dregs(dregs, dts)
+            resolved_operands |= self.resolve_gregs(gregs)
+        except _REFUSALS:
+            if query:
+                return None
+            raise
 
 
         sigs = self.get_signatures()
@@ -175,6 +188,8 @@ class operation(ABC):
                                kwargs=resolved_operands,
                                dts=dts)),
             None)
+        if not matched_sig and query:
+            return None
         if not matched_sig:
             self.diagnose_failure(modifiers, operand_modifiers, kwargs, dts)
             self._auto_diagnose(modifiers, operand_modifiers, kwargs, dts)
@@ -203,7 +218,12 @@ class operation(ABC):
             )
 
 
-        matched_sig.validate_allocation(resolved_operands)
+        try:
+            matched_sig.validate_allocation(resolved_operands)
+        except _REFUSALS:
+            if query:
+                return None
+            raise
 
         resolved_operands['modifiers'] = modifiers
         resolved_operands['operand_modifiers'] = operand_modifiers
@@ -212,7 +232,56 @@ class operation(ABC):
         # opmem has a different interface
         resolved_operands['dregs'] = dregs
 
-        return self.implementation(**resolved_operands)
+        if not query:
+            return self.implementation(**resolved_operands)
+        try:
+            self.implementation(**resolved_operands)
+        except _REFUSALS:
+            return None
+        return matched_sig
+
+    def fits(self, **kwargs) -> operation_signature | None:
+        """
+        Whether a call with these arguments - the operation's own - would
+        work: the signature it would take, None where it would raise. Nothing
+        is raised and no text kept; a caller asks instead of trying.
+
+        :return: the signature, or None
+        """
+        try:
+            return self(**kwargs, _query=True)
+        except _REFUSALS:
+            return None
+
+    def forms(self, *, dts : dict | None = None, rtypes : dict | None = None,
+              modifiers : set | None = None,
+              operand_modifiers : dict | None = None) -> list[operation_signature]:
+        """
+        The signatures whose named operands have these data types and
+        register types, and that carry these modifiers (at least): which
+        forms there are for given operands, without registers or values -
+        the FMA's with a scalar operand, whether loads take a predicate
+
+        :param dts: operand name: data type
+        :param rtypes: operand name: register type
+        :param modifiers: modifiers each form has, among its own
+        :param operand_modifiers: operand name: modifiers it has, among its own
+        :return: the signatures, in the operation's order
+        """
+        def has(s):
+            for name, dt in (dts or {}).items():
+                if name not in s.operands or s.operands[name].dt != dt:
+                    return False
+            for name, rtype in (rtypes or {}).items():
+                if name not in s.operands or s.operands[name].rtype != rtype:
+                    return False
+            if modifiers and not set(modifiers) <= set(s.modifiers or ()):
+                return False
+            for name, mods in (operand_modifiers or {}).items():
+                if name not in s.operands or not set(mods) <= set(s.operands[name].modifiers or ()):
+                    return False
+            return True
+        return [s for s in self.get_signatures() if has(s)]
 
 
     @abstractmethod

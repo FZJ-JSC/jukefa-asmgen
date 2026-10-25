@@ -564,8 +564,15 @@ builds unchanged.
 
 ### Phase 7: questions instead of trials [ ]
 
-- [ ] A query on each operation: which forms fit given operands and types
-      (the FMA's scalar operand, SVE's predicates) - no call that may raise.
+- [x] A query on each operation (asmgen 0064): `op.fits(**the call's own
+      arguments)` is the signature the call would take, None where it
+      would raise - argument checks, signatures, constraints and the
+      implementation all run, nothing is raised and no text kept;
+      `op.forms(dts=, rtypes=, modifiers=, operand_modifiers=)` the
+      signatures there are for given operands, without registers or values
+      (the FMA's with a scalar operand; whether loads take a predicate).
+      Callers' trials (ukrgen's try-the-next-signature, ukropt's FMA form)
+      go onto them in phase 8.
 - [ ] `available(tag)` on the register tracker.
 - [ ] Lane ranges as operand constraints: replaces `indexable_elements`.
 - [ ] `simd_size` raises on VLA.
@@ -687,3 +694,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   default, unprefixed without (asmgen 0062).
 - 2026-10-25: fngen.function, gen.align, gen.nop, gen.asmfile_annotations
   (asmgen 0063).
+- 2026-10-25: op.fits and op.forms (asmgen 0064).
