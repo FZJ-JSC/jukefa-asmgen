@@ -562,7 +562,7 @@ builds unchanged.
       inline one: ukrgen's emitter and BLIS injector (its 0165) and ukropt's
       pairs and sweep (its 0013) frame and align through it.
 
-### Phase 7: questions instead of trials [ ]
+### Phase 7: questions instead of trials [x]
 
 - [x] A query on each operation (asmgen 0064): `op.fits(**the call's own
       arguments)` is the signature the call would take, None where it
@@ -603,15 +603,21 @@ builds unchanged.
       `compilation/tools` (test_asm_correct's `compiler_presets` table) and
       ukropt's `-march` by ISA name.
 
-### Phase 8: the callers [ ]
+### Phase 8: the callers [~]
 
 ukrgen:
-- [ ] The signature emitter on the operations: address arithmetic, zeroing,
+- [~] The signature emitter on the operations: address arithmetic, zeroing,
       the vector length, masks, parameters, framing, loop alignment; its
-      probes and compatibility shims gone; IR op names `add`/`mul`.
-- [ ] The old mechanism into `legacy/`; the family pipeline's stages
-      (`irmod`, `variant`) no longer import from it.
-- [ ] Its tests along with it: `models/test_loop`, `models/test_addr_resolver`,
+      probes and compatibility shims gone; IR op names `add`/`mul`. Done:
+      framing and loop alignment (ukrgen 0165); the probes and shims -
+      signatures tried until one didn't raise, dummy calls, hasattr and
+      getattr for older asmgens - are fits, refusal, forms and available
+      (ukrgen 0168); IR op names (0157). Left: the wrappers it calls
+      (`mov_greg`, `add_greg_imm`, `zero_vreg`, ...) - the operations.
+- [x] The old mechanism into `legacy/` (ukrgen 0169): what can't be
+      imported and what only it uses, each module at its old path -
+      `irmod` and `variant` among it; the family pipeline imports none.
+- [x] Its tests along with it (ukrgen 0169): `models/test_loop`, `models/test_addr_resolver`,
       `specializers/test_lsc_specializer`, `lsc` and `sto`'s `test_vecdir`,
       `flow/test_pack`, `flow/stages` - they can't load since asmgen moved
       `asmblocks/operations` to `asmblocks/op` (`emitters/asm.py`,
@@ -722,3 +728,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-25: indexable_elements removed (asmgen 0067).
 - 2026-10-25: gen.compiler_flags, gen.enabled_features (asmgen 0068).
 - 2026-10-25: op.refusal (asmgen 0070).
+- 2026-10-25: phase 8 under way - ukrgen's probes and shims, its old mechanism
+  in legacy/ (ukrgen 0168, 0169).
