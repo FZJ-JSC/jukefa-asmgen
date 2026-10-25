@@ -7,6 +7,7 @@
 Valid signatures for Base X86_64 opmem operations
 """
 
+from .displacement import displacement_forms
 from ...op.constraint import minmax_constraint
 from ...op import (
     operation_signature as sig,
@@ -83,10 +84,10 @@ def make_x86_64_opmem_signatures():
             sigs.append(sig(modifiers=set(s0.modifiers) | {mod.SCALEOFFSET},
                             structural_params=dict(s0.structural_params, scale_factor=scale),
                             operands=dict(s0.operands)))
-    return sigs
+    return displacement_forms(sigs)
 
 
-def make_x86_prefetch_signatures():
+def _x86_prefetch_forms():
     """
     Generate signatures for Base X86_64 prefetch operations
     """
@@ -118,3 +119,11 @@ def make_x86_prefetch_signatures():
             }
         ),
     ]
+
+
+def make_x86_prefetch_signatures():
+    """
+    x86's prefetches: plain, and with an offset in disp8's or disp32's range
+    """
+    return displacement_forms(_x86_prefetch_forms())
+

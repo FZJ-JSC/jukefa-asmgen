@@ -489,8 +489,25 @@ builds unchanged.
       64-bit offsets; and RVV's FP16 gathers with 32-bit indices raising:
       their index would need an aligned register group (reserved encoding,
       though it assembled).
-- [ ] The limits become constraints: `max/min_load_immoff`,
-      `max/min_fload_immoff`, `max/min_bcast_immoff`, `max/min_load_voff`.
+- [x] x86 displacements (asmgen 0058), instead of the agreed 255-byte
+      limit, which was wrong: an offset costs one byte (disp8, -128 to 127)
+      or four (disp32) more than none, and EVEX scales the one byte by the
+      access's size N (disp8*N: the vector; an element for broadcasts), so
+      under it the offsets one byte holds are the multiples of N from -128*N
+      to 127*N - a small offset that isn't one takes disp32. Every x86 load,
+      store and prefetch form with an offset (`ioffset`, AVX's `voffset`)
+      comes twice: the full 32 bits behind the encoding feature
+      `enable-disp32`, off by default, and disp8's range behind
+      `enable-disp8`, on - neither on, no offset forms. Encoding features
+      (`ENCODING_FEATURES`, new) gate signatures as ISA extensions do, with
+      defaults of their own, and only `set_parameter` sets them:
+      `set_features` (ISA extensions, "exactly these" - ukrgen calls it with
+      none) leaves them alone. AVX's vector offsets count the generator's
+      vector (16, 32 or 64 bytes; 128-bit AVX counted 32).
+- [x] The offset limits are gone (`max/min_load_immoff`,
+      `max/min_fload_immoff`, `max/min_bcast_immoff`, `max/min_load_voff`):
+      nothing used them; the constraints say what encodes. `max_add_voff`
+      stays while `examples/axpy.py` asks it (phase 7: a query).
 - [ ] rvv071: its operations print 0.7.1's mnemonics and `vsetvli`, their
       signatures offer only the element width `vsetvli` set; FP32 and FP64
       kernels build.
@@ -618,3 +635,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-24: gathers and scatters on byte offsets everywhere, SVE's and
   RVV's index forms, AVX's 128-bit FP64 broadcast (asmgen 0056).
 - 2026-10-24: the old vector loads and stores on load and store (asmgen 0057).
+- 2026-10-25: x86's disp8 and disp32 as encoding features; the offset limits
+  removed (asmgen 0058).

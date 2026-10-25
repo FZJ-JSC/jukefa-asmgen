@@ -412,9 +412,9 @@ vlse64.v v0, (t0), t1
 vlse16.v v0, (t0), t1
 ### method load_vector_gregstride(areg=t0, dt=SINGLE, sreg=t1, vreg=v0)
 vlse32.v v0, (t0), t1
-### method load_vector_immoff(areg=t0, dt=DOUBLE, offset=4, vreg=v0)
+### method load_vector_immoff(areg=t0, dt=DOUBLE, offset=64, vreg=v0)
 !NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
-### method load_vector_immoff(areg=t0, dt=HALF, offset=4, vreg=v0)
+### method load_vector_immoff(areg=t0, dt=HALF, offset=64, vreg=v0)
 !NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=-2048, vreg=v0)
 !NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
@@ -434,9 +434,9 @@ vle32.v v0, (t0)
 !NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=256, vreg=v0)
 !NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
-### method load_vector_immoff(areg=t0, dt=SINGLE, offset=4, vreg=v0)
-!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=4096, vreg=v0)
+!NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
+### method load_vector_immoff(areg=t0, dt=SINGLE, offset=64, vreg=v0)
 !NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
 ### method load_vector_immoff(areg=t0, dt=SINGLE, offset=8, vreg=v0)
 !NotImplementedError: rvv has no such load: RVV has no ld/st with immediate offsets
@@ -452,11 +452,11 @@ vle32.v v0, (t0)
 !NotImplementedError: rvv has no such load: RVV has no immediate lane selection ld/st
 ### method load_vector_lane(areg=t0, dt=SINGLE, lane=1, vreg=v0)
 !NotImplementedError: rvv has no such load: RVV has no immediate lane selection ld/st
-### method load_vector_voff(areg=t0, dt=DOUBLE, voffset=4, vreg=v0)
+### method load_vector_voff(areg=t0, dt=DOUBLE, voffset=1, vreg=v0)
 !NotImplementedError: rvv has no such load: RVV has no ld/st with vector offsets
-### method load_vector_voff(areg=t0, dt=HALF, voffset=4, vreg=v0)
+### method load_vector_voff(areg=t0, dt=HALF, voffset=1, vreg=v0)
 !NotImplementedError: rvv has no such load: RVV has no ld/st with vector offsets
-### method load_vector_voff(areg=t0, dt=SINGLE, voffset=4, vreg=v0)
+### method load_vector_voff(areg=t0, dt=SINGLE, voffset=1, vreg=v0)
 !NotImplementedError: rvv has no such load: RVV has no ld/st with vector offsets
 ### method loopbegin(label=someloop, reg=t0)
 .someloop:
@@ -473,30 +473,10 @@ bnez t0,.someloop
 !NotImplementedError: rvv has no mask to set
 ### method mask_all_true(dt=SINGLE, reg=v0)
 !NotImplementedError: rvv has no mask to set
-### method max_bcast_immoff(dt=DOUBLE)
-0
-### method max_bcast_immoff(dt=HALF)
-0
-### method max_bcast_immoff(dt=SINGLE)
-0
-### method max_fload_immoff(dt=DOUBLE)
-2047
-### method max_fload_immoff(dt=HALF)
-2047
-### method max_fload_immoff(dt=SINGLE)
-2047
 ### method max_fregs()
 32
 ### method max_gregs()
 32
-### method max_load_immoff(dt=DOUBLE)
-0
-### method max_load_immoff(dt=HALF)
-0
-### method max_load_immoff(dt=SINGLE)
-0
-### method max_load_voff()
-0
 ### method max_tregs(dt=DOUBLE)
 0
 ### method max_tregs(dt=HALF)
@@ -505,26 +485,6 @@ bnez t0,.someloop
 0
 ### method max_vregs()
 32
-### method min_bcast_immoff(dt=DOUBLE)
-0
-### method min_bcast_immoff(dt=HALF)
-0
-### method min_bcast_immoff(dt=SINGLE)
-0
-### method min_fload_immoff(dt=DOUBLE)
--2048
-### method min_fload_immoff(dt=HALF)
--2048
-### method min_fload_immoff(dt=SINGLE)
--2048
-### method min_load_immoff(dt=DOUBLE)
-0
-### method min_load_immoff(dt=HALF)
-0
-### method min_load_immoff(dt=SINGLE)
-0
-### method min_load_voff()
-0
 ### method mov_freg(dst=f1, dt=DOUBLE, src=f0)
 fmv.d f1,f0
 ### method mov_freg(dst=f1, dt=HALF, src=f0)
@@ -682,9 +642,9 @@ vsse64.v v0, (t0), t1
 vsse16.v v0, (t0), t1
 ### method store_vector_gregstride(areg=t0, dt=SINGLE, sreg=t1, vreg=v0)
 vsse32.v v0, (t0), t1
-### method store_vector_immoff(areg=t0, dt=DOUBLE, offset=4, vreg=v0)
+### method store_vector_immoff(areg=t0, dt=DOUBLE, offset=64, vreg=v0)
 !NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
-### method store_vector_immoff(areg=t0, dt=HALF, offset=4, vreg=v0)
+### method store_vector_immoff(areg=t0, dt=HALF, offset=64, vreg=v0)
 !NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=-2048, vreg=v0)
 !NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
@@ -704,9 +664,9 @@ vse32.v v0, (t0)
 !NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=256, vreg=v0)
 !NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
-### method store_vector_immoff(areg=t0, dt=SINGLE, offset=4, vreg=v0)
-!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=4096, vreg=v0)
+!NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
+### method store_vector_immoff(areg=t0, dt=SINGLE, offset=64, vreg=v0)
 !NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
 ### method store_vector_immoff(areg=t0, dt=SINGLE, offset=8, vreg=v0)
 !NotImplementedError: rvv has no such store: RVV has no ld/st with immediate offsets
@@ -728,11 +688,11 @@ vsuxei32.v v0, (t0), v1
 !NotImplementedError: rvv has no such store: Invalid configuration for rvv_store.
 ### method store_vector_scatter(areg=t0, dt=SINGLE, it=INT32, offvreg=v1, vreg=v0)
 vsuxei32.v v0, (t0), v1
-### method store_vector_voff(areg=t0, dt=DOUBLE, voffset=4, vreg=v0)
+### method store_vector_voff(areg=t0, dt=DOUBLE, voffset=1, vreg=v0)
 !NotImplementedError: rvv has no such store: RVV has no ld/st with vector offsets
-### method store_vector_voff(areg=t0, dt=HALF, voffset=4, vreg=v0)
+### method store_vector_voff(areg=t0, dt=HALF, voffset=1, vreg=v0)
 !NotImplementedError: rvv has no such store: RVV has no ld/st with vector offsets
-### method store_vector_voff(areg=t0, dt=SINGLE, voffset=4, vreg=v0)
+### method store_vector_voff(areg=t0, dt=SINGLE, voffset=1, vreg=v0)
 !NotImplementedError: rvv has no such store: RVV has no ld/st with vector offsets
 ### method sub_greg_greg(dst=t0, reg1=t1, reg2=t2)
 sub t0,t1,t2

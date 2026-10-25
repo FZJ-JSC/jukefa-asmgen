@@ -331,9 +331,3 @@ class aarch64(asmgen):
 
     def freg(self, reg_idx : int, dt : adt) -> freg_base:
         return aarch64_freg(reg_idx=reg_idx, dt=dt)
-
-    def min_fload_immoff(self, dt : adt):
-        return 0
-
-    def max_fload_immoff(self, dt : adt):
-        return 4095

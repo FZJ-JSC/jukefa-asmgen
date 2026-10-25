@@ -297,19 +297,3 @@ class riscv64(asmgen):
     def reserved_registers(self) -> dict[str, dict[str, int]]:
         # indices as riscv64_greg names them: ra, sp, gp, tp, s0 (fp), zero
         return {"greg": {"ra": 26, "sp": 27, "gp": 28, "tp": 29, "fp": 30, "zero": 31}}
-
-    def min_load_immoff(self, dt : adt):
-        _ = dt # explicitly unused
-        return 0
-
-    def max_load_immoff(self, dt : adt):
-        _ = dt # explicitly unused
-        return 0
-
-    def min_fload_immoff(self, dt : adt):
-        _ = dt # explicitly unused
-        return -(1<<11)
-
-    def max_fload_immoff(self, dt : adt):
-        _ = dt # explicitly unused
-        return (1<<11) -1

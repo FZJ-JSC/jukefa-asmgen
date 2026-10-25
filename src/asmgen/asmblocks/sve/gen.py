@@ -155,26 +155,6 @@ class sve(aarch64):
     def vreg(self, reg_idx : int) -> sve_vreg:
         return sve_vreg(reg_idx)
 
-    def min_load_immoff(self, dt : adt) -> int:
-        return 0
-
-    def max_load_immoff(self, dt : adt) -> int:
-        return 252
-
-    def min_bcast_immoff(self, dt : adt) -> int:
-        return self.min_load_immoff(dt)
-
-    def max_bcast_immoff(self, dt : adt) -> int:
-        return self.max_load_immoff(dt)
-
-    @property
-    def min_load_voff(self) -> int:
-        return -8
-
-    @property
-    def max_load_voff(self) -> int:
-        return 7
-
     @property
     def max_add_voff(self) -> int:
         return 16

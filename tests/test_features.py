@@ -88,7 +88,9 @@ class test_features_per_isa(unittest.TestCase):
         from asmgen.asmblocks.avx import avx512
         g = avx512()
         self.assertEqual({"FP16"}, self.rows(g.fma)["HALF->HALF"])
-        lanes = {s.operands["adreg"].dt.name: set(s.requires) for s in g.load.get_signatures()
+        # ISA extensions only: offset forms also require x86's encoding features
+        lanes = {s.operands["adreg"].dt.name: set(s.requires) - set(g.ENCODING_FEATURES)
+                 for s in g.load.get_signatures()
                  if any("ILANE" == m.name for m in s.operands["adreg"].modifiers)}
         self.assertEqual({"BW"}, lanes["SINT16"])
         self.assertEqual({"DQ"}, lanes["SINT32"])

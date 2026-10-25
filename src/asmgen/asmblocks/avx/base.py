@@ -11,6 +11,7 @@ from copy import deepcopy
 from typing import Union
 from abc import abstractmethod
 
+from ..x86.opmem.displacement import ENCODING_FEATURES as X86_ENCODING_FEATURES
 from ...asmdata import asm_data
 from ...registers import asm_index_type
 from ...registers import (
@@ -48,6 +49,9 @@ class avxbase(asmgen):
     """
     Base X86_64/AVX/FMA asmgem implementation
     """
+
+    #: x86's displacements: disp8 on, disp32 off by default (x86/opmem/displacement.py)
+    ENCODING_FEATURES = dict(X86_ENCODING_FEATURES)
 
     greg_names = [f'r{i}' for i in \
             [str(j) for j in range(8,16)]+\
@@ -513,33 +517,6 @@ class avxbase(asmgen):
 
     def zero_freg(self, *, freg : freg_base, dt : adt) -> str:
         return self.set(dreg=freg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
-
-    def min_load_immoff(self, dt : adt):
-        return 0
-
-    def max_load_immoff(self, dt : adt):
-        return 255//adt_size(dt)
-
-    def min_bcast_immoff(self, dt : adt) -> int:
-        return self.min_load_immoff(dt)
-
-    def max_bcast_immoff(self, dt : adt) -> int:
-        return self.max_load_immoff(dt)
-
-    def min_fload_immoff(self, dt : adt):
-        return 0
-
-    def max_fload_immoff(self, dt : adt):
-        return 255//adt_size(dt)
-
-    @property
-    def min_load_voff(self):
-        return 0
-
-    @property
-    def max_load_voff(self) -> int:
-        return 255//self.simd_size//8
-
 
     @property
     def max_add_voff(self) -> int:

@@ -119,7 +119,7 @@ xmm0
 ### method get_param_value(name=dummy)
 dummy
 ### method get_parameters()
-[]
+['enable-disp8', 'enable-disp32']
 ### method greg(reg_idx=0)
 r8
 ### method greg_to_voffs(dt=DOUBLE, streg=r8, vreg=xmm1)
@@ -196,9 +196,9 @@ shrq $2, %r8
 ### method labelstr(label=label)
 .label
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=-2048)
-vmovsd -2048(%r8), %xmm0
+!ValueError: value of ioffset must be >= -128
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=-2049)
-vmovsd -2049(%r8), %xmm0
+!ValueError: value of ioffset must be >= -128
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=-8)
 vmovsd -8(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=0)
@@ -206,17 +206,17 @@ vmovsd (%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=1)
 vmovsd 1(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=2047)
-vmovsd 2047(%r8), %xmm0
+!ValueError: value of ioffset must be <= 127
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=2048)
-vmovsd 2048(%r8), %xmm0
+!ValueError: value of ioffset must be <= 127
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=255)
-vmovsd 255(%r8), %xmm0
+!ValueError: value of ioffset must be <= 127
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=256)
-vmovsd 256(%r8), %xmm0
+!ValueError: value of ioffset must be <= 127
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=4)
 vmovsd 4(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=4096)
-vmovsd 4096(%r8), %xmm0
+!ValueError: value of ioffset must be <= 127
 ### method load_freg(areg=r8, dst=xmm0, dt=DOUBLE, offset=8)
 vmovsd 8(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=HALF, offset=4)
@@ -224,9 +224,9 @@ vmovsh 4(%r8), %xmm0
 ### method load_freg(areg=r8, dst=xmm0, dt=SINGLE, offset=4)
 vmovss 4(%r8), %xmm0
 ### method load_greg(areg=r8, dst=r9, offset=-2048)
-movq -2048(%r8), %r9
+!ValueError: value of ioffset must be >= -128
 ### method load_greg(areg=r8, dst=r9, offset=-2049)
-movq -2049(%r8), %r9
+!ValueError: value of ioffset must be >= -128
 ### method load_greg(areg=r8, dst=r9, offset=-8)
 movq -8(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=0)
@@ -234,25 +234,25 @@ movq (%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=1)
 movq 1(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=2047)
-movq 2047(%r8), %r9
+!ValueError: value of ioffset must be <= 127
 ### method load_greg(areg=r8, dst=r9, offset=2048)
-movq 2048(%r8), %r9
+!ValueError: value of ioffset must be <= 127
 ### method load_greg(areg=r8, dst=r9, offset=255)
-movq 255(%r8), %r9
+!ValueError: value of ioffset must be <= 127
 ### method load_greg(areg=r8, dst=r9, offset=256)
-movq 256(%r8), %r9
+!ValueError: value of ioffset must be <= 127
 ### method load_greg(areg=r8, dst=r9, offset=4)
 movq 4(%r8), %r9
 ### method load_greg(areg=r8, dst=r9, offset=4096)
-movq 4096(%r8), %r9
+!ValueError: value of ioffset must be <= 127
 ### method load_greg(areg=r8, dst=r9, offset=8)
 movq 8(%r8), %r9
 ### method load_pointer(areg=r8, name=someparam)
 movq %[someparam], %r8
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-2048)
-vmovsd -2048(%r8), %xmm0
+!ValueError: value of ioffset must be >= -128
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-2049)
-vmovsd -2049(%r8), %xmm0
+!ValueError: value of ioffset must be >= -128
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-8)
 vmovsd -8(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=0)
@@ -260,17 +260,17 @@ vmovsd (%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=1)
 vmovsd 1(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=2047)
-vmovsd 2047(%r8), %xmm0
+!ValueError: value of ioffset must be <= 127
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=2048)
-vmovsd 2048(%r8), %xmm0
+!ValueError: value of ioffset must be <= 127
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=255)
-vmovsd 255(%r8), %xmm0
+!ValueError: value of ioffset must be <= 127
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=256)
-vmovsd 256(%r8), %xmm0
+!ValueError: value of ioffset must be <= 127
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=4)
 vmovsd 4(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=4096)
-vmovsd 4096(%r8), %xmm0
+!ValueError: value of ioffset must be <= 127
 ### method load_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=8)
 vmovsd 8(%r8), %xmm0
 ### method load_scalar_immoff(areg=r8, dt=HALF, freg=xmm0, offset=4)
@@ -292,9 +292,9 @@ vmovddup (%r8), %xmm0
 ### method load_vector_bcast1(areg=r8, dt=SINGLE, vreg=xmm0)
 vbroadcastss (%r8), %xmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=-2048, vreg=xmm0)
-vmovddup -2048(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be >= -128
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=-2049, vreg=xmm0)
-vmovddup -2049(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be >= -128
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=-8, vreg=xmm0)
 vmovddup -8(%r8), %xmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=0, vreg=xmm0)
@@ -302,17 +302,17 @@ vmovddup (%r8), %xmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=1, vreg=xmm0)
 vmovddup 1(%r8), %xmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=2047, vreg=xmm0)
-vmovddup 2047(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=2048, vreg=xmm0)
-vmovddup 2048(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=255, vreg=xmm0)
-vmovddup 255(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=256, vreg=xmm0)
-vmovddup 256(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=4, vreg=xmm0)
 vmovddup 4(%r8), %xmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=4096, vreg=xmm0)
-vmovddup 4096(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_bcast1_immoff(areg=r8, dt=DOUBLE, offset=8, vreg=xmm0)
 vmovddup 8(%r8), %xmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=HALF, offset=4, vreg=xmm0)
@@ -320,9 +320,9 @@ vmovddup 8(%r8), %xmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=HALF, offset=8, vreg=xmm0)
 !NotImplementedError: fma128 has no such load: Invalid configuration for avx128_load.
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=-2048, vreg=xmm0)
-vbroadcastss -2048(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be >= -128
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=-2049, vreg=xmm0)
-vbroadcastss -2049(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be >= -128
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=-8, vreg=xmm0)
 vbroadcastss -8(%r8), %xmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=0, vreg=xmm0)
@@ -330,17 +330,17 @@ vbroadcastss (%r8), %xmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=1, vreg=xmm0)
 vbroadcastss 1(%r8), %xmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=2047, vreg=xmm0)
-vbroadcastss 2047(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=2048, vreg=xmm0)
-vbroadcastss 2048(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=255, vreg=xmm0)
-vbroadcastss 255(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=256, vreg=xmm0)
-vbroadcastss 256(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=4, vreg=xmm0)
 vbroadcastss 4(%r8), %xmm0
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=4096, vreg=xmm0)
-vbroadcastss 4096(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_bcast1_immoff(areg=r8, dt=SINGLE, offset=8, vreg=xmm0)
 vbroadcastss 8(%r8), %xmm0
 ### method load_vector_bcast1_inc(areg=r8, dt=DOUBLE, offset=-2048, vreg=xmm0)
@@ -407,14 +407,14 @@ vbroadcastss 8(%r8), %xmm0
 !NotImplementedError: fma128 has no such load: Base X86_64 has no ld/st with GP-reg strides
 ### method load_vector_gregstride(areg=r8, dt=SINGLE, sreg=r9, vreg=xmm0)
 !NotImplementedError: fma128 has no such load: Base X86_64 has no ld/st with GP-reg strides
-### method load_vector_immoff(areg=r8, dt=DOUBLE, offset=4, vreg=xmm0)
-vmovupd 4(%r8), %xmm0
-### method load_vector_immoff(areg=r8, dt=HALF, offset=4, vreg=xmm0)
-vmovdqu 4(%r8), %xmm0
+### method load_vector_immoff(areg=r8, dt=DOUBLE, offset=64, vreg=xmm0)
+vmovupd 64(%r8), %xmm0
+### method load_vector_immoff(areg=r8, dt=HALF, offset=64, vreg=xmm0)
+vmovdqu 64(%r8), %xmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=-2048, vreg=xmm0)
-vmovups -2048(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be >= -128
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=-2049, vreg=xmm0)
-vmovups -2049(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be >= -128
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=-8, vreg=xmm0)
 vmovups -8(%r8), %xmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=0, vreg=xmm0)
@@ -422,17 +422,17 @@ vmovups (%r8), %xmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=1, vreg=xmm0)
 vmovups 1(%r8), %xmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=2047, vreg=xmm0)
-vmovups 2047(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=2048, vreg=xmm0)
-vmovups 2048(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=255, vreg=xmm0)
-vmovups 255(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=256, vreg=xmm0)
-vmovups 256(%r8), %xmm0
-### method load_vector_immoff(areg=r8, dt=SINGLE, offset=4, vreg=xmm0)
-vmovups 4(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=4096, vreg=xmm0)
-vmovups 4096(%r8), %xmm0
+!NotImplementedError: fma128 has no such load: value of ioffset must be <= 127
+### method load_vector_immoff(areg=r8, dt=SINGLE, offset=64, vreg=xmm0)
+vmovups 64(%r8), %xmm0
 ### method load_vector_immoff(areg=r8, dt=SINGLE, offset=8, vreg=xmm0)
 vmovups 8(%r8), %xmm0
 ### method load_vector_immstride(areg=r8, byte_stride=4, dt=DOUBLE, vreg=xmm0)
@@ -447,12 +447,12 @@ vmovups 8(%r8), %xmm0
 !NotImplementedError: fma128 has no such load: Invalid configuration for avx128_load.
 ### method load_vector_lane(areg=r8, dt=SINGLE, lane=1, vreg=xmm0)
 !NotImplementedError: fma128 has no such load: Invalid configuration for avx128_load.
-### method load_vector_voff(areg=r8, dt=DOUBLE, voffset=4, vreg=xmm0)
-vmovupd 64(%r8), %xmm0
-### method load_vector_voff(areg=r8, dt=HALF, voffset=4, vreg=xmm0)
-vmovdqu 64(%r8), %xmm0
-### method load_vector_voff(areg=r8, dt=SINGLE, voffset=4, vreg=xmm0)
-vmovups 64(%r8), %xmm0
+### method load_vector_voff(areg=r8, dt=DOUBLE, voffset=1, vreg=xmm0)
+vmovupd 16(%r8), %xmm0
+### method load_vector_voff(areg=r8, dt=HALF, voffset=1, vreg=xmm0)
+vmovdqu 16(%r8), %xmm0
+### method load_vector_voff(areg=r8, dt=SINGLE, voffset=1, vreg=xmm0)
+vmovups 16(%r8), %xmm0
 ### method loopbegin(label=someloop, reg=r8)
 .someloop:
 sub $1, %r8
@@ -470,30 +470,10 @@ vpcmpeqd %xmm1,%xmm1,%xmm1
 vpcmpeqd %xmm1,%xmm1,%xmm1
 ### method mask_all_true(dt=SINGLE, reg=xmm1)
 vpcmpeqd %xmm1,%xmm1,%xmm1
-### method max_bcast_immoff(dt=DOUBLE)
-31
-### method max_bcast_immoff(dt=HALF)
-127
-### method max_bcast_immoff(dt=SINGLE)
-63
-### method max_fload_immoff(dt=DOUBLE)
-31
-### method max_fload_immoff(dt=HALF)
-127
-### method max_fload_immoff(dt=SINGLE)
-63
 ### method max_fregs()
 16
 ### method max_gregs()
 16
-### method max_load_immoff(dt=DOUBLE)
-31
-### method max_load_immoff(dt=HALF)
-127
-### method max_load_immoff(dt=SINGLE)
-63
-### method max_load_voff()
-1
 ### method max_tregs(dt=DOUBLE)
 0
 ### method max_tregs(dt=HALF)
@@ -502,26 +482,6 @@ vpcmpeqd %xmm1,%xmm1,%xmm1
 0
 ### method max_vregs()
 16
-### method min_bcast_immoff(dt=DOUBLE)
-0
-### method min_bcast_immoff(dt=HALF)
-0
-### method min_bcast_immoff(dt=SINGLE)
-0
-### method min_fload_immoff(dt=DOUBLE)
-0
-### method min_fload_immoff(dt=HALF)
-0
-### method min_fload_immoff(dt=SINGLE)
-0
-### method min_load_immoff(dt=DOUBLE)
-0
-### method min_load_immoff(dt=HALF)
-0
-### method min_load_immoff(dt=SINGLE)
-0
-### method min_load_voff()
-0
 ### method mov_freg(dst=xmm1, dt=DOUBLE, src=xmm0)
 vmovsd xmm0, xmm1
 ### method mov_freg(dst=xmm1, dt=HALF, src=xmm0)
@@ -586,9 +546,9 @@ movq $8,%r8
 ### method simd_size_to_greg(dt=SINGLE, reg=r8)
 movq $4,%r8
 ### method store_freg(areg=r8, dt=DOUBLE, offset=-2048, src=xmm0)
-vmovsd %xmm0, -2048(%r8)
+!ValueError: value of ioffset must be >= -128
 ### method store_freg(areg=r8, dt=DOUBLE, offset=-2049, src=xmm0)
-vmovsd %xmm0, -2049(%r8)
+!ValueError: value of ioffset must be >= -128
 ### method store_freg(areg=r8, dt=DOUBLE, offset=-8, src=xmm0)
 vmovsd %xmm0, -8(%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=0, src=xmm0)
@@ -596,17 +556,17 @@ vmovsd %xmm0, (%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=1, src=xmm0)
 vmovsd %xmm0, 1(%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=2047, src=xmm0)
-vmovsd %xmm0, 2047(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_freg(areg=r8, dt=DOUBLE, offset=2048, src=xmm0)
-vmovsd %xmm0, 2048(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_freg(areg=r8, dt=DOUBLE, offset=255, src=xmm0)
-vmovsd %xmm0, 255(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_freg(areg=r8, dt=DOUBLE, offset=256, src=xmm0)
-vmovsd %xmm0, 256(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_freg(areg=r8, dt=DOUBLE, offset=4, src=xmm0)
 vmovsd %xmm0, 4(%r8)
 ### method store_freg(areg=r8, dt=DOUBLE, offset=4096, src=xmm0)
-vmovsd %xmm0, 4096(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_freg(areg=r8, dt=DOUBLE, offset=8, src=xmm0)
 vmovsd %xmm0, 8(%r8)
 ### method store_freg(areg=r8, dt=HALF, offset=4, src=xmm0)
@@ -614,9 +574,9 @@ vmovsh %xmm0, 4(%r8)
 ### method store_freg(areg=r8, dt=SINGLE, offset=4, src=xmm0)
 vmovss %xmm0, 4(%r8)
 ### method store_greg(areg=r8, offset=-2048, src=r9)
-movq %r9, -2048(%r8)
+!ValueError: value of ioffset must be >= -128
 ### method store_greg(areg=r8, offset=-2049, src=r9)
-movq %r9, -2049(%r8)
+!ValueError: value of ioffset must be >= -128
 ### method store_greg(areg=r8, offset=-8, src=r9)
 movq %r9, -8(%r8)
 ### method store_greg(areg=r8, offset=0, src=r9)
@@ -624,23 +584,23 @@ movq %r9, (%r8)
 ### method store_greg(areg=r8, offset=1, src=r9)
 movq %r9, 1(%r8)
 ### method store_greg(areg=r8, offset=2047, src=r9)
-movq %r9, 2047(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_greg(areg=r8, offset=2048, src=r9)
-movq %r9, 2048(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_greg(areg=r8, offset=255, src=r9)
-movq %r9, 255(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_greg(areg=r8, offset=256, src=r9)
-movq %r9, 256(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_greg(areg=r8, offset=4, src=r9)
 movq %r9, 4(%r8)
 ### method store_greg(areg=r8, offset=4096, src=r9)
-movq %r9, 4096(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_greg(areg=r8, offset=8, src=r9)
 movq %r9, 8(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-2048)
-vmovsd %xmm0, -2048(%r8)
+!ValueError: value of ioffset must be >= -128
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-2049)
-vmovsd %xmm0, -2049(%r8)
+!ValueError: value of ioffset must be >= -128
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=-8)
 vmovsd %xmm0, -8(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=0)
@@ -648,17 +608,17 @@ vmovsd %xmm0, (%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=1)
 vmovsd %xmm0, 1(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=2047)
-vmovsd %xmm0, 2047(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=2048)
-vmovsd %xmm0, 2048(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=255)
-vmovsd %xmm0, 255(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=256)
-vmovsd %xmm0, 256(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=4)
 vmovsd %xmm0, 4(%r8)
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=4096)
-vmovsd %xmm0, 4096(%r8)
+!ValueError: value of ioffset must be <= 127
 ### method store_scalar_immoff(areg=r8, dt=DOUBLE, freg=xmm0, offset=8)
 vmovsd %xmm0, 8(%r8)
 ### method store_scalar_immoff(areg=r8, dt=HALF, freg=xmm0, offset=4)
@@ -679,14 +639,14 @@ vmovups %xmm0, (%r8)
 !NotImplementedError: fma128 has no such store: Base X86_64 has no ld/st with GP-reg strides
 ### method store_vector_gregstride(areg=r8, dt=SINGLE, sreg=r9, vreg=xmm0)
 !NotImplementedError: fma128 has no such store: Base X86_64 has no ld/st with GP-reg strides
-### method store_vector_immoff(areg=r8, dt=DOUBLE, offset=4, vreg=xmm0)
-vmovupd %xmm0, 4(%r8)
-### method store_vector_immoff(areg=r8, dt=HALF, offset=4, vreg=xmm0)
-vmovdqu %xmm0, 4(%r8)
+### method store_vector_immoff(areg=r8, dt=DOUBLE, offset=64, vreg=xmm0)
+vmovupd %xmm0, 64(%r8)
+### method store_vector_immoff(areg=r8, dt=HALF, offset=64, vreg=xmm0)
+vmovdqu %xmm0, 64(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=-2048, vreg=xmm0)
-vmovups %xmm0, -2048(%r8)
+!NotImplementedError: fma128 has no such store: value of ioffset must be >= -128
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=-2049, vreg=xmm0)
-vmovups %xmm0, -2049(%r8)
+!NotImplementedError: fma128 has no such store: value of ioffset must be >= -128
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=-8, vreg=xmm0)
 vmovups %xmm0, -8(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=0, vreg=xmm0)
@@ -694,17 +654,17 @@ vmovups %xmm0, (%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=1, vreg=xmm0)
 vmovups %xmm0, 1(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=2047, vreg=xmm0)
-vmovups %xmm0, 2047(%r8)
+!NotImplementedError: fma128 has no such store: value of ioffset must be <= 127
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=2048, vreg=xmm0)
-vmovups %xmm0, 2048(%r8)
+!NotImplementedError: fma128 has no such store: value of ioffset must be <= 127
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=255, vreg=xmm0)
-vmovups %xmm0, 255(%r8)
+!NotImplementedError: fma128 has no such store: value of ioffset must be <= 127
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=256, vreg=xmm0)
-vmovups %xmm0, 256(%r8)
-### method store_vector_immoff(areg=r8, dt=SINGLE, offset=4, vreg=xmm0)
-vmovups %xmm0, 4(%r8)
+!NotImplementedError: fma128 has no such store: value of ioffset must be <= 127
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=4096, vreg=xmm0)
-vmovups %xmm0, 4096(%r8)
+!NotImplementedError: fma128 has no such store: value of ioffset must be <= 127
+### method store_vector_immoff(areg=r8, dt=SINGLE, offset=64, vreg=xmm0)
+vmovups %xmm0, 64(%r8)
 ### method store_vector_immoff(areg=r8, dt=SINGLE, offset=8, vreg=xmm0)
 vmovups %xmm0, 8(%r8)
 ### method store_vector_immstride(areg=r8, byte_stride=4, dt=DOUBLE, vreg=xmm0)
@@ -725,12 +685,12 @@ vextractps $1, %xmm0, (%r8)
 !NotImplementedError: AVX2 has no scatters
 ### method store_vector_scatter(areg=r8, dt=SINGLE, it=INT32, offvreg=xmm1, vreg=xmm0)
 !NotImplementedError: AVX2 has no scatters
-### method store_vector_voff(areg=r8, dt=DOUBLE, voffset=4, vreg=xmm0)
-vmovupd %xmm0, 64(%r8)
-### method store_vector_voff(areg=r8, dt=HALF, voffset=4, vreg=xmm0)
-vmovdqu %xmm0, 64(%r8)
-### method store_vector_voff(areg=r8, dt=SINGLE, voffset=4, vreg=xmm0)
-vmovups %xmm0, 64(%r8)
+### method store_vector_voff(areg=r8, dt=DOUBLE, voffset=1, vreg=xmm0)
+vmovupd %xmm0, 16(%r8)
+### method store_vector_voff(areg=r8, dt=HALF, voffset=1, vreg=xmm0)
+vmovdqu %xmm0, 16(%r8)
+### method store_vector_voff(areg=r8, dt=SINGLE, voffset=1, vreg=xmm0)
+vmovups %xmm0, 16(%r8)
 ### method sub_greg_greg(dst=r8, reg1=r9, reg2=r10)
 movq %r9,%r8
 subq %r10,%r8
@@ -825,605 +785,605 @@ vfmadd231pd %xmm1,%xmm2,%xmm3
 ### op fma [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vfmadd231ps %xmm1,%xmm2,%xmm3
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-vmovsh -2147483648(%rcx,%rdx,1), %xmm1
+vmovsh -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-vmovsh 2147483647(%rcx,%rdx,1), %xmm1
+vmovsh 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-vmovsh -2147483648(%rcx,%rdx,2), %xmm1
+vmovsh -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-vmovsh 2147483647(%rcx,%rdx,2), %xmm1
+vmovsh 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-vmovsh -2147483648(%rcx,%rdx,4), %xmm1
+vmovsh -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-vmovsh 2147483647(%rcx,%rdx,4), %xmm1
+vmovsh 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-vmovsh -2147483648(%rcx,%rdx,8), %xmm1
+vmovsh -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-vmovsh 2147483647(%rcx,%rdx,8), %xmm1
+vmovsh 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-vmovsd -2147483648(%rcx,%rdx,1), %xmm1
+vmovsd -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-vmovsd 2147483647(%rcx,%rdx,1), %xmm1
+vmovsd 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-vmovsd -2147483648(%rcx,%rdx,2), %xmm1
+vmovsd -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-vmovsd 2147483647(%rcx,%rdx,2), %xmm1
+vmovsd 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-vmovsd -2147483648(%rcx,%rdx,4), %xmm1
+vmovsd -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-vmovsd 2147483647(%rcx,%rdx,4), %xmm1
+vmovsd 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-vmovsd -2147483648(%rcx,%rdx,8), %xmm1
+vmovsd -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-vmovsd 2147483647(%rcx,%rdx,8), %xmm1
+vmovsd 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-vmovsh -2147483648(%rcx,%rdx,1), %xmm1
+vmovsh -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-vmovsh 2147483647(%rcx,%rdx,1), %xmm1
+vmovsh 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-vmovsh -2147483648(%rcx,%rdx,2), %xmm1
+vmovsh -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-vmovsh 2147483647(%rcx,%rdx,2), %xmm1
+vmovsh 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-vmovsh -2147483648(%rcx,%rdx,4), %xmm1
+vmovsh -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-vmovsh 2147483647(%rcx,%rdx,4), %xmm1
+vmovsh 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-vmovsh -2147483648(%rcx,%rdx,8), %xmm1
+vmovsh -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-vmovsh 2147483647(%rcx,%rdx,8), %xmm1
+vmovsh 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-vmovss -2147483648(%rcx,%rdx,1), %xmm1
+vmovss -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-vmovss 2147483647(%rcx,%rdx,1), %xmm1
+vmovss 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-vmovss -2147483648(%rcx,%rdx,2), %xmm1
+vmovss -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-vmovss 2147483647(%rcx,%rdx,2), %xmm1
+vmovss 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-vmovss -2147483648(%rcx,%rdx,4), %xmm1
+vmovss -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-vmovss 2147483647(%rcx,%rdx,4), %xmm1
+vmovss 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-vmovss -2147483648(%rcx,%rdx,8), %xmm1
+vmovss -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-vmovss 2147483647(%rcx,%rdx,8), %xmm1
+vmovss 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movw -2147483648(%rdx,%rsi,1), %rcx
+movw -128(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movw 2147483647(%rdx,%rsi,1), %rcx
+movw 127(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movw -2147483648(%rdx,%rsi,2), %rcx
+movw -128(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movw 2147483647(%rdx,%rsi,2), %rcx
+movw 127(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movw -2147483648(%rdx,%rsi,4), %rcx
+movw -128(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movw 2147483647(%rdx,%rsi,4), %rcx
+movw 127(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movw -2147483648(%rdx,%rsi,8), %rcx
+movw -128(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movw 2147483647(%rdx,%rsi,8), %rcx
+movw 127(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movl -2147483648(%rdx,%rsi,1), %rcx
+movl -128(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movl 2147483647(%rdx,%rsi,1), %rcx
+movl 127(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movl -2147483648(%rdx,%rsi,2), %rcx
+movl -128(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movl 2147483647(%rdx,%rsi,2), %rcx
+movl 127(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movl -2147483648(%rdx,%rsi,4), %rcx
+movl -128(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movl 2147483647(%rdx,%rsi,4), %rcx
+movl 127(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movl -2147483648(%rdx,%rsi,8), %rcx
+movl -128(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movl 2147483647(%rdx,%rsi,8), %rcx
+movl 127(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movq -2147483648(%rdx,%rsi,1), %rcx
+movq -128(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movq 2147483647(%rdx,%rsi,1), %rcx
+movq 127(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movq -2147483648(%rdx,%rsi,2), %rcx
+movq -128(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movq 2147483647(%rdx,%rsi,2), %rcx
+movq 127(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movq -2147483648(%rdx,%rsi,4), %rcx
+movq -128(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movq 2147483647(%rdx,%rsi,4), %rcx
+movq 127(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movq -2147483648(%rdx,%rsi,8), %rcx
+movq -128(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movq 2147483647(%rdx,%rsi,8), %rcx
+movq 127(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movb -2147483648(%rdx,%rsi,1), %rcx
+movb -128(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movb 2147483647(%rdx,%rsi,1), %rcx
+movb 127(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movb -2147483648(%rdx,%rsi,2), %rcx
+movb -128(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movb 2147483647(%rdx,%rsi,2), %rcx
+movb 127(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movb -2147483648(%rdx,%rsi,4), %rcx
+movb -128(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movb 2147483647(%rdx,%rsi,4), %rcx
+movb 127(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movb -2147483648(%rdx,%rsi,8), %rcx
+movb -128(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movb 2147483647(%rdx,%rsi,8), %rcx
+movb 127(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movw -2147483648(%rdx,%rsi,1), %rcx
+movw -128(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movw 2147483647(%rdx,%rsi,1), %rcx
+movw 127(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movw -2147483648(%rdx,%rsi,2), %rcx
+movw -128(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movw 2147483647(%rdx,%rsi,2), %rcx
+movw 127(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movw -2147483648(%rdx,%rsi,4), %rcx
+movw -128(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movw 2147483647(%rdx,%rsi,4), %rcx
+movw 127(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movw -2147483648(%rdx,%rsi,8), %rcx
+movw -128(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movw 2147483647(%rdx,%rsi,8), %rcx
+movw 127(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movl -2147483648(%rdx,%rsi,1), %rcx
+movl -128(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movl 2147483647(%rdx,%rsi,1), %rcx
+movl 127(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movl -2147483648(%rdx,%rsi,2), %rcx
+movl -128(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movl 2147483647(%rdx,%rsi,2), %rcx
+movl 127(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movl -2147483648(%rdx,%rsi,4), %rcx
+movl -128(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movl 2147483647(%rdx,%rsi,4), %rcx
+movl 127(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movl -2147483648(%rdx,%rsi,8), %rcx
+movl -128(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movl 2147483647(%rdx,%rsi,8), %rcx
+movl 127(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movq -2147483648(%rdx,%rsi,1), %rcx
+movq -128(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movq 2147483647(%rdx,%rsi,1), %rcx
+movq 127(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movq -2147483648(%rdx,%rsi,2), %rcx
+movq -128(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movq 2147483647(%rdx,%rsi,2), %rcx
+movq 127(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movq -2147483648(%rdx,%rsi,4), %rcx
+movq -128(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movq 2147483647(%rdx,%rsi,4), %rcx
+movq 127(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movq -2147483648(%rdx,%rsi,8), %rcx
+movq -128(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movq 2147483647(%rdx,%rsi,8), %rcx
+movq 127(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movb -2147483648(%rdx,%rsi,1), %rcx
+movb -128(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movb 2147483647(%rdx,%rsi,1), %rcx
+movb 127(%rdx,%rsi,1), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movb -2147483648(%rdx,%rsi,2), %rcx
+movb -128(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movb 2147483647(%rdx,%rsi,2), %rcx
+movb 127(%rdx,%rsi,2), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movb -2147483648(%rdx,%rsi,4), %rcx
+movb -128(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movb 2147483647(%rdx,%rsi,4), %rcx
+movb 127(%rdx,%rsi,4), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movb -2147483648(%rdx,%rsi,8), %rcx
+movb -128(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movb 2147483647(%rdx,%rsi,8), %rcx
+movb 127(%rdx,%rsi,8), %rcx
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu -2147483648(%rcx,%rdx,1), %xmm1
+vmovdqu -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu 2147483647(%rcx,%rdx,1), %xmm1
+vmovdqu 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu -2147483648(%rcx,%rdx,2), %xmm1
+vmovdqu -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu 2147483647(%rcx,%rdx,2), %xmm1
+vmovdqu 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu -2147483648(%rcx,%rdx,4), %xmm1
+vmovdqu -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu 2147483647(%rcx,%rdx,4), %xmm1
+vmovdqu 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu -2147483648(%rcx,%rdx,8), %xmm1
+vmovdqu -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu 2147483647(%rcx,%rdx,8), %xmm1
+vmovdqu 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovupd -2147483648(%rcx,%rdx,1), %xmm1
+vmovupd -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovupd 2147483647(%rcx,%rdx,1), %xmm1
+vmovupd 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovupd -2147483648(%rcx,%rdx,2), %xmm1
+vmovupd -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovupd 2147483647(%rcx,%rdx,2), %xmm1
+vmovupd 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovupd -2147483648(%rcx,%rdx,4), %xmm1
+vmovupd -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovupd 2147483647(%rcx,%rdx,4), %xmm1
+vmovupd 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovupd -2147483648(%rcx,%rdx,8), %xmm1
+vmovupd -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovupd 2147483647(%rcx,%rdx,8), %xmm1
+vmovupd 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovddup -2147483648(%rcx,%rdx,1), %xmm1
+vmovddup -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovddup 2147483647(%rcx,%rdx,1), %xmm1
+vmovddup 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovddup -2147483648(%rcx,%rdx,2), %xmm1
+vmovddup -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovddup 2147483647(%rcx,%rdx,2), %xmm1
+vmovddup 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovddup -2147483648(%rcx,%rdx,4), %xmm1
+vmovddup -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovddup 2147483647(%rcx,%rdx,4), %xmm1
+vmovddup 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovddup -2147483648(%rcx,%rdx,8), %xmm1
+vmovddup -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovddup 2147483647(%rcx,%rdx,8), %xmm1
+vmovddup 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu -2147483648(%rcx,%rdx,1), %xmm1
+vmovdqu -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu 2147483647(%rcx,%rdx,1), %xmm1
+vmovdqu 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu -2147483648(%rcx,%rdx,2), %xmm1
+vmovdqu -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu 2147483647(%rcx,%rdx,2), %xmm1
+vmovdqu 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu -2147483648(%rcx,%rdx,4), %xmm1
+vmovdqu -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu 2147483647(%rcx,%rdx,4), %xmm1
+vmovdqu 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu -2147483648(%rcx,%rdx,8), %xmm1
+vmovdqu -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu 2147483647(%rcx,%rdx,8), %xmm1
+vmovdqu 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovups -2147483648(%rcx,%rdx,1), %xmm1
+vmovups -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovups 2147483647(%rcx,%rdx,1), %xmm1
+vmovups 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovups -2147483648(%rcx,%rdx,2), %xmm1
+vmovups -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovups 2147483647(%rcx,%rdx,2), %xmm1
+vmovups 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovups -2147483648(%rcx,%rdx,4), %xmm1
+vmovups -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovups 2147483647(%rcx,%rdx,4), %xmm1
+vmovups 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovups -2147483648(%rcx,%rdx,8), %xmm1
+vmovups -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovups 2147483647(%rcx,%rdx,8), %xmm1
+vmovups 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vbroadcastss -2147483648(%rcx,%rdx,1), %xmm1
+vbroadcastss -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vbroadcastss 2147483647(%rcx,%rdx,1), %xmm1
+vbroadcastss 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vbroadcastss -2147483648(%rcx,%rdx,2), %xmm1
+vbroadcastss -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vbroadcastss 2147483647(%rcx,%rdx,2), %xmm1
+vbroadcastss 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vbroadcastss -2147483648(%rcx,%rdx,4), %xmm1
+vbroadcastss -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vbroadcastss 2147483647(%rcx,%rdx,4), %xmm1
+vbroadcastss 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vbroadcastss -2147483648(%rcx,%rdx,8), %xmm1
+vbroadcastss -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vbroadcastss 2147483647(%rcx,%rdx,8), %xmm1
+vbroadcastss 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu -2147483648(%rcx,%rdx,1), %xmm1
+vmovdqu -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu 2147483647(%rcx,%rdx,1), %xmm1
+vmovdqu 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu -2147483648(%rcx,%rdx,2), %xmm1
+vmovdqu -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu 2147483647(%rcx,%rdx,2), %xmm1
+vmovdqu 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu -2147483648(%rcx,%rdx,4), %xmm1
+vmovdqu -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu 2147483647(%rcx,%rdx,4), %xmm1
+vmovdqu 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu -2147483648(%rcx,%rdx,8), %xmm1
+vmovdqu -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu 2147483647(%rcx,%rdx,8), %xmm1
+vmovdqu 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu -2147483648(%rcx,%rdx,1), %xmm1
+vmovdqu -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu 2147483647(%rcx,%rdx,1), %xmm1
+vmovdqu 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu -2147483648(%rcx,%rdx,2), %xmm1
+vmovdqu -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu 2147483647(%rcx,%rdx,2), %xmm1
+vmovdqu 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu -2147483648(%rcx,%rdx,4), %xmm1
+vmovdqu -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu 2147483647(%rcx,%rdx,4), %xmm1
+vmovdqu 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu -2147483648(%rcx,%rdx,8), %xmm1
+vmovdqu -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu 2147483647(%rcx,%rdx,8), %xmm1
+vmovdqu 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vbroadcastss -2147483648(%rcx,%rdx,1), %xmm1
+vbroadcastss -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vbroadcastss 2147483647(%rcx,%rdx,1), %xmm1
+vbroadcastss 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vbroadcastss -2147483648(%rcx,%rdx,2), %xmm1
+vbroadcastss -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vbroadcastss 2147483647(%rcx,%rdx,2), %xmm1
+vbroadcastss 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vbroadcastss -2147483648(%rcx,%rdx,4), %xmm1
+vbroadcastss -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vbroadcastss 2147483647(%rcx,%rdx,4), %xmm1
+vbroadcastss 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vbroadcastss -2147483648(%rcx,%rdx,8), %xmm1
+vbroadcastss -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vbroadcastss 2147483647(%rcx,%rdx,8), %xmm1
+vbroadcastss 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu -2147483648(%rcx,%rdx,1), %xmm1
+vmovdqu -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu 2147483647(%rcx,%rdx,1), %xmm1
+vmovdqu 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu -2147483648(%rcx,%rdx,2), %xmm1
+vmovdqu -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu 2147483647(%rcx,%rdx,2), %xmm1
+vmovdqu 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu -2147483648(%rcx,%rdx,4), %xmm1
+vmovdqu -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu 2147483647(%rcx,%rdx,4), %xmm1
+vmovdqu 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu -2147483648(%rcx,%rdx,8), %xmm1
+vmovdqu -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu 2147483647(%rcx,%rdx,8), %xmm1
+vmovdqu 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovddup -2147483648(%rcx,%rdx,1), %xmm1
+vmovddup -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovddup 2147483647(%rcx,%rdx,1), %xmm1
+vmovddup 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovddup -2147483648(%rcx,%rdx,2), %xmm1
+vmovddup -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovddup 2147483647(%rcx,%rdx,2), %xmm1
+vmovddup 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovddup -2147483648(%rcx,%rdx,4), %xmm1
+vmovddup -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovddup 2147483647(%rcx,%rdx,4), %xmm1
+vmovddup 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovddup -2147483648(%rcx,%rdx,8), %xmm1
+vmovddup -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovddup 2147483647(%rcx,%rdx,8), %xmm1
+vmovddup 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu -2147483648(%rcx,%rdx,1), %xmm1
+vmovdqu -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu 2147483647(%rcx,%rdx,1), %xmm1
+vmovdqu 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu -2147483648(%rcx,%rdx,2), %xmm1
+vmovdqu -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu 2147483647(%rcx,%rdx,2), %xmm1
+vmovdqu 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu -2147483648(%rcx,%rdx,4), %xmm1
+vmovdqu -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu 2147483647(%rcx,%rdx,4), %xmm1
+vmovdqu 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu -2147483648(%rcx,%rdx,8), %xmm1
+vmovdqu -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu 2147483647(%rcx,%rdx,8), %xmm1
+vmovdqu 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu -2147483648(%rcx,%rdx,1), %xmm1
+vmovdqu -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu 2147483647(%rcx,%rdx,1), %xmm1
+vmovdqu 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu -2147483648(%rcx,%rdx,2), %xmm1
+vmovdqu -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu 2147483647(%rcx,%rdx,2), %xmm1
+vmovdqu 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu -2147483648(%rcx,%rdx,4), %xmm1
+vmovdqu -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu 2147483647(%rcx,%rdx,4), %xmm1
+vmovdqu 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu -2147483648(%rcx,%rdx,8), %xmm1
+vmovdqu -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu 2147483647(%rcx,%rdx,8), %xmm1
+vmovdqu 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu -2147483648(%rcx,%rdx,1), %xmm1
+vmovdqu -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu 2147483647(%rcx,%rdx,1), %xmm1
+vmovdqu 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu -2147483648(%rcx,%rdx,2), %xmm1
+vmovdqu -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu 2147483647(%rcx,%rdx,2), %xmm1
+vmovdqu 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu -2147483648(%rcx,%rdx,4), %xmm1
+vmovdqu -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu 2147483647(%rcx,%rdx,4), %xmm1
+vmovdqu 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu -2147483648(%rcx,%rdx,8), %xmm1
+vmovdqu -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu 2147483647(%rcx,%rdx,8), %xmm1
+vmovdqu 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vbroadcastss -2147483648(%rcx,%rdx,1), %xmm1
+vbroadcastss -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vbroadcastss 2147483647(%rcx,%rdx,1), %xmm1
+vbroadcastss 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vbroadcastss -2147483648(%rcx,%rdx,2), %xmm1
+vbroadcastss -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vbroadcastss 2147483647(%rcx,%rdx,2), %xmm1
+vbroadcastss 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vbroadcastss -2147483648(%rcx,%rdx,4), %xmm1
+vbroadcastss -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vbroadcastss 2147483647(%rcx,%rdx,4), %xmm1
+vbroadcastss 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vbroadcastss -2147483648(%rcx,%rdx,8), %xmm1
+vbroadcastss -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vbroadcastss 2147483647(%rcx,%rdx,8), %xmm1
+vbroadcastss 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu -2147483648(%rcx,%rdx,1), %xmm1
+vmovdqu -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu 2147483647(%rcx,%rdx,1), %xmm1
+vmovdqu 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu -2147483648(%rcx,%rdx,2), %xmm1
+vmovdqu -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu 2147483647(%rcx,%rdx,2), %xmm1
+vmovdqu 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu -2147483648(%rcx,%rdx,4), %xmm1
+vmovdqu -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu 2147483647(%rcx,%rdx,4), %xmm1
+vmovdqu 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu -2147483648(%rcx,%rdx,8), %xmm1
+vmovdqu -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu 2147483647(%rcx,%rdx,8), %xmm1
+vmovdqu 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovddup -2147483648(%rcx,%rdx,1), %xmm1
+vmovddup -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovddup 2147483647(%rcx,%rdx,1), %xmm1
+vmovddup 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovddup -2147483648(%rcx,%rdx,2), %xmm1
+vmovddup -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovddup 2147483647(%rcx,%rdx,2), %xmm1
+vmovddup 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovddup -2147483648(%rcx,%rdx,4), %xmm1
+vmovddup -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovddup 2147483647(%rcx,%rdx,4), %xmm1
+vmovddup 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovddup -2147483648(%rcx,%rdx,8), %xmm1
+vmovddup -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovddup 2147483647(%rcx,%rdx,8), %xmm1
+vmovddup 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu -2147483648(%rcx,%rdx,1), %xmm1
+vmovdqu -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu 2147483647(%rcx,%rdx,1), %xmm1
+vmovdqu 127(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu -2147483648(%rcx,%rdx,2), %xmm1
+vmovdqu -128(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu 2147483647(%rcx,%rdx,2), %xmm1
+vmovdqu 127(%rcx,%rdx,2), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu -2147483648(%rcx,%rdx,4), %xmm1
+vmovdqu -128(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu 2147483647(%rcx,%rdx,4), %xmm1
+vmovdqu 127(%rcx,%rdx,4), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu -2147483648(%rcx,%rdx,8), %xmm1
+vmovdqu -128(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu 2147483647(%rcx,%rdx,8), %xmm1
+vmovdqu 127(%rcx,%rdx,8), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovsh -2147483648(%rcx,%rdx), %xmm1
+vmovsh -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovsh 2147483647(%rcx,%rdx), %xmm1
+vmovsh 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovsd -2147483648(%rcx,%rdx), %xmm1
+vmovsd -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovsd 2147483647(%rcx,%rdx), %xmm1
+vmovsd 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovsh -2147483648(%rcx,%rdx), %xmm1
+vmovsh -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovsh 2147483647(%rcx,%rdx), %xmm1
+vmovsh 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovss -2147483648(%rcx,%rdx), %xmm1
+vmovss -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovss 2147483647(%rcx,%rdx), %xmm1
+vmovss 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movw -2147483648(%rdx,%rsi), %rcx
+movw -128(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movw 2147483647(%rdx,%rsi), %rcx
+movw 127(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movl -2147483648(%rdx,%rsi), %rcx
+movl -128(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movl 2147483647(%rdx,%rsi), %rcx
+movl 127(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movq -2147483648(%rdx,%rsi), %rcx
+movq -128(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movq 2147483647(%rdx,%rsi), %rcx
+movq 127(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movb -2147483648(%rdx,%rsi), %rcx
+movb -128(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movb 2147483647(%rdx,%rsi), %rcx
+movb 127(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movw -2147483648(%rdx,%rsi), %rcx
+movw -128(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movw 2147483647(%rdx,%rsi), %rcx
+movw 127(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movl -2147483648(%rdx,%rsi), %rcx
+movl -128(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movl 2147483647(%rdx,%rsi), %rcx
+movl 127(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movq -2147483648(%rdx,%rsi), %rcx
+movq -128(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movq 2147483647(%rdx,%rsi), %rcx
+movq 127(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movb -2147483648(%rdx,%rsi), %rcx
+movb -128(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movb 2147483647(%rdx,%rsi), %rcx
+movb 127(%rdx,%rsi), %rcx
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu -2147483648(%rcx,%rdx), %xmm1
+vmovdqu -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu 2147483647(%rcx,%rdx), %xmm1
+vmovdqu 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovupd -2147483648(%rcx,%rdx), %xmm1
+vmovupd -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovupd 2147483647(%rcx,%rdx), %xmm1
+vmovupd 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovddup -2147483648(%rcx,%rdx), %xmm1
+vmovddup -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovddup 2147483647(%rcx,%rdx), %xmm1
+vmovddup 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu -2147483648(%rcx,%rdx), %xmm1
+vmovdqu -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu 2147483647(%rcx,%rdx), %xmm1
+vmovdqu 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovups -2147483648(%rcx,%rdx), %xmm1
+vmovups -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovups 2147483647(%rcx,%rdx), %xmm1
+vmovups 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vbroadcastss -2147483648(%rcx,%rdx), %xmm1
+vbroadcastss -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vbroadcastss 2147483647(%rcx,%rdx), %xmm1
+vbroadcastss 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu -2147483648(%rcx,%rdx), %xmm1
+vmovdqu -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu 2147483647(%rcx,%rdx), %xmm1
+vmovdqu 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu -2147483648(%rcx,%rdx), %xmm1
+vmovdqu -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu 2147483647(%rcx,%rdx), %xmm1
+vmovdqu 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vbroadcastss -2147483648(%rcx,%rdx), %xmm1
+vbroadcastss -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vbroadcastss 2147483647(%rcx,%rdx), %xmm1
+vbroadcastss 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu -2147483648(%rcx,%rdx), %xmm1
+vmovdqu -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu 2147483647(%rcx,%rdx), %xmm1
+vmovdqu 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovddup -2147483648(%rcx,%rdx), %xmm1
+vmovddup -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovddup 2147483647(%rcx,%rdx), %xmm1
+vmovddup 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu -2147483648(%rcx,%rdx), %xmm1
+vmovdqu -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu 2147483647(%rcx,%rdx), %xmm1
+vmovdqu 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu -2147483648(%rcx,%rdx), %xmm1
+vmovdqu -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu 2147483647(%rcx,%rdx), %xmm1
+vmovdqu 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu -2147483648(%rcx,%rdx), %xmm1
+vmovdqu -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu 2147483647(%rcx,%rdx), %xmm1
+vmovdqu 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vbroadcastss -2147483648(%rcx,%rdx), %xmm1
+vbroadcastss -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vbroadcastss 2147483647(%rcx,%rdx), %xmm1
+vbroadcastss 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu -2147483648(%rcx,%rdx), %xmm1
+vmovdqu -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu 2147483647(%rcx,%rdx), %xmm1
+vmovdqu 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovddup -2147483648(%rcx,%rdx), %xmm1
+vmovddup -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovddup 2147483647(%rcx,%rdx), %xmm1
+vmovddup 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu -2147483648(%rcx,%rdx), %xmm1
+vmovdqu -128(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu 2147483647(%rcx,%rdx), %xmm1
+vmovdqu 127(%rcx,%rdx), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
 vmovsh (%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
@@ -1725,173 +1685,173 @@ vmovddup (%rcx,%rdx), %xmm1
 ### op load [GOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 vmovdqu (%rcx,%rdx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovsh -2147483648(%rcx), %xmm1
+vmovsh -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovsh 2147483647(%rcx), %xmm1
+vmovsh 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovsd -2147483648(%rcx), %xmm1
+vmovsd -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovsd 2147483647(%rcx), %xmm1
+vmovsd 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovsh -2147483648(%rcx), %xmm1
+vmovsh -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovsh 2147483647(%rcx), %xmm1
+vmovsh 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovss -2147483648(%rcx), %xmm1
+vmovss -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovss 2147483647(%rcx), %xmm1
+vmovss 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movw -2147483648(%rdx), %rcx
+movw -128(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movw 2147483647(%rdx), %rcx
+movw 127(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movl -2147483648(%rdx), %rcx
+movl -128(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movl 2147483647(%rdx), %rcx
+movl 127(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movq -2147483648(%rdx), %rcx
+movq -128(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movq 2147483647(%rdx), %rcx
+movq 127(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movb -2147483648(%rdx), %rcx
+movb -128(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movb 2147483647(%rdx), %rcx
+movb 127(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movw -2147483648(%rdx), %rcx
+movw -128(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movw 2147483647(%rdx), %rcx
+movw 127(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movl -2147483648(%rdx), %rcx
+movl -128(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movl 2147483647(%rdx), %rcx
+movl 127(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movq -2147483648(%rdx), %rcx
+movq -128(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movq 2147483647(%rdx), %rcx
+movq 127(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movb -2147483648(%rdx), %rcx
+movb -128(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movb 2147483647(%rdx), %rcx
+movb 127(%rdx), %rcx
 ### op load [IOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu -2147483648(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu 2147483647(%rcx), %xmm1
+vmovdqu 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:BF16{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrw $0, -2147483648(%rcx), %xmm1, %xmm1
+vpinsrw $0, -128(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:BF16{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrw $7, 2147483647(%rcx), %xmm1, %xmm1
+vpinsrw $7, 127(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovupd -2147483648(%rcx), %xmm1
+vmovupd -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovupd 2147483647(%rcx), %xmm1
+vmovupd 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovddup -2147483648(%rcx), %xmm1
+vmovddup -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovddup 2147483647(%rcx), %xmm1
+vmovddup 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:DOUBLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vmovsd -2147483648(%rcx), %xmm1
+vmovsd -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:DOUBLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vmovhpd 2147483647(%rcx), %xmm1, %xmm1
+vmovhpd 127(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu -2147483648(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu 2147483647(%rcx), %xmm1
+vmovdqu 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:HALF{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrw $0, -2147483648(%rcx), %xmm1, %xmm1
+vpinsrw $0, -128(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:HALF{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrw $7, 2147483647(%rcx), %xmm1, %xmm1
+vpinsrw $7, 127(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovups -2147483648(%rcx), %xmm1
+vmovups -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovups 2147483647(%rcx), %xmm1
+vmovups 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vbroadcastss -2147483648(%rcx), %xmm1
+vbroadcastss -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vbroadcastss 2147483647(%rcx), %xmm1
+vbroadcastss 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINGLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vmovss -2147483648(%rcx), %xmm1
+vmovss -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINGLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vinsertps $48, 2147483647(%rcx), %xmm1, %xmm1
+vinsertps $48, 127(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu -2147483648(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu 2147483647(%rcx), %xmm1
+vmovdqu 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT16{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrw $0, -2147483648(%rcx), %xmm1, %xmm1
+vpinsrw $0, -128(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT16{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrw $7, 2147483647(%rcx), %xmm1, %xmm1
+vpinsrw $7, 127(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu -2147483648(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu 2147483647(%rcx), %xmm1
+vmovdqu 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vbroadcastss -2147483648(%rcx), %xmm1
+vbroadcastss -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vbroadcastss 2147483647(%rcx), %xmm1
+vbroadcastss 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT32{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrd $0, -2147483648(%rcx), %xmm1, %xmm1
+vpinsrd $0, -128(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT32{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrd $3, 2147483647(%rcx), %xmm1, %xmm1
+vpinsrd $3, 127(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu -2147483648(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu 2147483647(%rcx), %xmm1
+vmovdqu 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovddup -2147483648(%rcx), %xmm1
+vmovddup -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovddup 2147483647(%rcx), %xmm1
+vmovddup 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrq $0, -2147483648(%rcx), %xmm1, %xmm1
+vpinsrq $0, -128(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrq $1, 2147483647(%rcx), %xmm1, %xmm1
+vpinsrq $1, 127(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu -2147483648(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu 2147483647(%rcx), %xmm1
+vmovdqu 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT8{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrb $0, -2147483648(%rcx), %xmm1, %xmm1
+vpinsrb $0, -128(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:SINT8{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrb $15, 2147483647(%rcx), %xmm1, %xmm1
+vpinsrb $15, 127(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu -2147483648(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu 2147483647(%rcx), %xmm1
+vmovdqu 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT16{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrw $0, -2147483648(%rcx), %xmm1, %xmm1
+vpinsrw $0, -128(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT16{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrw $7, 2147483647(%rcx), %xmm1, %xmm1
+vpinsrw $7, 127(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu -2147483648(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu 2147483647(%rcx), %xmm1
+vmovdqu 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vbroadcastss -2147483648(%rcx), %xmm1
+vbroadcastss -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vbroadcastss 2147483647(%rcx), %xmm1
+vbroadcastss 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT32{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrd $0, -2147483648(%rcx), %xmm1, %xmm1
+vpinsrd $0, -128(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT32{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrd $3, 2147483647(%rcx), %xmm1, %xmm1
+vpinsrd $3, 127(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu -2147483648(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu 2147483647(%rcx), %xmm1
+vmovdqu 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovddup -2147483648(%rcx), %xmm1
+vmovddup -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovddup 2147483647(%rcx), %xmm1
+vmovddup 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrq $0, -2147483648(%rcx), %xmm1, %xmm1
+vpinsrq $0, -128(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrq $1, 2147483647(%rcx), %xmm1, %xmm1
+vpinsrq $1, 127(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu -2147483648(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu 2147483647(%rcx), %xmm1
+vmovdqu 127(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT8{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrb $0, -2147483648(%rcx), %xmm1, %xmm1
+vpinsrb $0, -128(%rcx), %xmm1, %xmm1
 ### op load [IOFFSET] adreg:REGISTER:VEC:UINT8{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrb $15, 2147483647(%rcx), %xmm1, %xmm1
+vpinsrb $15, 127(%rcx), %xmm1, %xmm1
 ### op load [MASK,VINDEX] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:DOUBLE vidxreg:REGISTER:VEC:DOUBLE {it:INT64}
 vgatherqpd %xmm2, (%rcx,%xmm3,1), %xmm1
 ### op load [MASK,VINDEX] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINGLE vidxreg:REGISTER:VEC:SINGLE {it:INT32}
@@ -1929,125 +1889,125 @@ movq %[p], %rcx
 ### op load [PARAM] adreg:REGISTER:GP:UINT8 param:NAME:-:-
 movb %[p], %rcx
 ### op load [VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu -1073741824(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu 1073741808(%rcx), %xmm1
+vmovdqu 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:BF16{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrw $0, -1073741824(%rcx), %xmm1, %xmm1
+vpinsrw $0, -128(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:BF16{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrw $7, 1073741808(%rcx), %xmm1, %xmm1
+vpinsrw $7, 112(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovupd -1073741824(%rcx), %xmm1
+vmovupd -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovupd 1073741808(%rcx), %xmm1
+vmovupd 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovddup -1073741824(%rcx), %xmm1
+vmovddup -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovddup 1073741808(%rcx), %xmm1
+vmovddup 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:DOUBLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vmovsd -1073741824(%rcx), %xmm1
+vmovsd -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:DOUBLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vmovhpd 1073741808(%rcx), %xmm1, %xmm1
+vmovhpd 112(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu -1073741824(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu 1073741808(%rcx), %xmm1
+vmovdqu 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:HALF{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrw $0, -1073741824(%rcx), %xmm1, %xmm1
+vpinsrw $0, -128(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:HALF{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrw $7, 1073741808(%rcx), %xmm1, %xmm1
+vpinsrw $7, 112(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovups -1073741824(%rcx), %xmm1
+vmovups -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovups 1073741808(%rcx), %xmm1
+vmovups 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vbroadcastss -1073741824(%rcx), %xmm1
+vbroadcastss -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vbroadcastss 1073741808(%rcx), %xmm1
+vbroadcastss 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINGLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vmovss -1073741824(%rcx), %xmm1
+vmovss -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINGLE{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vinsertps $48, 1073741808(%rcx), %xmm1, %xmm1
+vinsertps $48, 112(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu -1073741824(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu 1073741808(%rcx), %xmm1
+vmovdqu 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT16{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrw $0, -1073741824(%rcx), %xmm1, %xmm1
+vpinsrw $0, -128(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT16{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrw $7, 1073741808(%rcx), %xmm1, %xmm1
+vpinsrw $7, 112(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu -1073741824(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu 1073741808(%rcx), %xmm1
+vmovdqu 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vbroadcastss -1073741824(%rcx), %xmm1
+vbroadcastss -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vbroadcastss 1073741808(%rcx), %xmm1
+vbroadcastss 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT32{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrd $0, -1073741824(%rcx), %xmm1, %xmm1
+vpinsrd $0, -128(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT32{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrd $3, 1073741808(%rcx), %xmm1, %xmm1
+vpinsrd $3, 112(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu -1073741824(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu 1073741808(%rcx), %xmm1
+vmovdqu 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovddup -1073741824(%rcx), %xmm1
+vmovddup -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovddup 1073741808(%rcx), %xmm1
+vmovddup 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrq $0, -1073741824(%rcx), %xmm1, %xmm1
+vpinsrq $0, -128(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrq $1, 1073741808(%rcx), %xmm1, %xmm1
+vpinsrq $1, 112(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu -1073741824(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu 1073741808(%rcx), %xmm1
+vmovdqu 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT8{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrb $0, -1073741824(%rcx), %xmm1, %xmm1
+vpinsrb $0, -128(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:SINT8{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrb $15, 1073741808(%rcx), %xmm1, %xmm1
+vpinsrb $15, 112(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu -1073741824(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu 1073741808(%rcx), %xmm1
+vmovdqu 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT16{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrw $0, -1073741824(%rcx), %xmm1, %xmm1
+vpinsrw $0, -128(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT16{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrw $7, 1073741808(%rcx), %xmm1, %xmm1
+vpinsrw $7, 112(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu -1073741824(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu 1073741808(%rcx), %xmm1
+vmovdqu 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vbroadcastss -1073741824(%rcx), %xmm1
+vbroadcastss -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vbroadcastss 1073741808(%rcx), %xmm1
+vbroadcastss 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT32{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrd $0, -1073741824(%rcx), %xmm1, %xmm1
+vpinsrd $0, -128(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT32{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrd $3, 1073741808(%rcx), %xmm1, %xmm1
+vpinsrd $3, 112(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu -1073741824(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu 1073741808(%rcx), %xmm1
+vmovdqu 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovddup -1073741824(%rcx), %xmm1
+vmovddup -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovddup 1073741808(%rcx), %xmm1
+vmovddup 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrq $0, -1073741824(%rcx), %xmm1, %xmm1
+vpinsrq $0, -128(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT64{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrq $1, 1073741808(%rcx), %xmm1, %xmm1
+vpinsrq $1, 112(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu -1073741824(%rcx), %xmm1
+vmovdqu -128(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu 1073741808(%rcx), %xmm1
+vmovdqu 112(%rcx), %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT8{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpinsrb $0, -1073741824(%rcx), %xmm1, %xmm1
+vpinsrb $0, -128(%rcx), %xmm1, %xmm1
 ### op load [VOFFSET] adreg:REGISTER:VEC:UINT8{ILANE,ZEROOTHERS} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpinsrb $15, 1073741808(%rcx), %xmm1, %xmm1
+vpinsrb $15, 112(%rcx), %xmm1, %xmm1
 ### op load [] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64
 vmovsh (%rcx), %xmm1
 ### op load [] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64
@@ -2203,9 +2163,9 @@ vmulps %xmm1,%xmm2,%xmm3
 ### op prefetch [GOFFSET] agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 prefetcht0 (%rcx,%rdx)
 ### op prefetch [IOFFSET] agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-prefetcht0 -2147483648(%rcx)
+prefetcht0 -128(%rcx)
 ### op prefetch [IOFFSET] agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-prefetcht0 2147483647(%rcx)
+prefetcht0 127(%rcx)
 ### op prefetch [] agreg:REGISTER:GP:UINT64
 prefetcht0 (%rcx)
 ### op set [CONSTMASK] dreg:REGISTER:VEC:DOUBLE {mask:allfalse}
@@ -2398,485 +2358,485 @@ shrq $0,%rdx
 movq %rcx,%rdx
 shrq $63,%rdx
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-vmovsh %xmm1, -2147483648(%rcx,%rdx,1)
+vmovsh %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-vmovsh %xmm1, 2147483647(%rcx,%rdx,1)
+vmovsh %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-vmovsh %xmm1, -2147483648(%rcx,%rdx,2)
+vmovsh %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-vmovsh %xmm1, 2147483647(%rcx,%rdx,2)
+vmovsh %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-vmovsh %xmm1, -2147483648(%rcx,%rdx,4)
+vmovsh %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-vmovsh %xmm1, 2147483647(%rcx,%rdx,4)
+vmovsh %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-vmovsh %xmm1, -2147483648(%rcx,%rdx,8)
+vmovsh %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-vmovsh %xmm1, 2147483647(%rcx,%rdx,8)
+vmovsh %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-vmovsd %xmm1, -2147483648(%rcx,%rdx,1)
+vmovsd %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-vmovsd %xmm1, 2147483647(%rcx,%rdx,1)
+vmovsd %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-vmovsd %xmm1, -2147483648(%rcx,%rdx,2)
+vmovsd %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-vmovsd %xmm1, 2147483647(%rcx,%rdx,2)
+vmovsd %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-vmovsd %xmm1, -2147483648(%rcx,%rdx,4)
+vmovsd %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-vmovsd %xmm1, 2147483647(%rcx,%rdx,4)
+vmovsd %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-vmovsd %xmm1, -2147483648(%rcx,%rdx,8)
+vmovsd %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-vmovsd %xmm1, 2147483647(%rcx,%rdx,8)
+vmovsd %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-vmovsh %xmm1, -2147483648(%rcx,%rdx,1)
+vmovsh %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-vmovsh %xmm1, 2147483647(%rcx,%rdx,1)
+vmovsh %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-vmovsh %xmm1, -2147483648(%rcx,%rdx,2)
+vmovsh %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-vmovsh %xmm1, 2147483647(%rcx,%rdx,2)
+vmovsh %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-vmovsh %xmm1, -2147483648(%rcx,%rdx,4)
+vmovsh %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-vmovsh %xmm1, 2147483647(%rcx,%rdx,4)
+vmovsh %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-vmovsh %xmm1, -2147483648(%rcx,%rdx,8)
+vmovsh %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-vmovsh %xmm1, 2147483647(%rcx,%rdx,8)
+vmovsh %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-vmovss %xmm1, -2147483648(%rcx,%rdx,1)
+vmovss %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-vmovss %xmm1, 2147483647(%rcx,%rdx,1)
+vmovss %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-vmovss %xmm1, -2147483648(%rcx,%rdx,2)
+vmovss %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-vmovss %xmm1, 2147483647(%rcx,%rdx,2)
+vmovss %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-vmovss %xmm1, -2147483648(%rcx,%rdx,4)
+vmovss %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-vmovss %xmm1, 2147483647(%rcx,%rdx,4)
+vmovss %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-vmovss %xmm1, -2147483648(%rcx,%rdx,8)
+vmovss %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-vmovss %xmm1, 2147483647(%rcx,%rdx,8)
+vmovss %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movw %rcx, -2147483648(%rdx,%rsi,1)
+movw %rcx, -128(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movw %rcx, 2147483647(%rdx,%rsi,1)
+movw %rcx, 127(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movw %rcx, -2147483648(%rdx,%rsi,2)
+movw %rcx, -128(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movw %rcx, 2147483647(%rdx,%rsi,2)
+movw %rcx, 127(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movw %rcx, -2147483648(%rdx,%rsi,4)
+movw %rcx, -128(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movw %rcx, 2147483647(%rdx,%rsi,4)
+movw %rcx, 127(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movw %rcx, -2147483648(%rdx,%rsi,8)
+movw %rcx, -128(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movw %rcx, 2147483647(%rdx,%rsi,8)
+movw %rcx, 127(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movl %rcx, -2147483648(%rdx,%rsi,1)
+movl %rcx, -128(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movl %rcx, 2147483647(%rdx,%rsi,1)
+movl %rcx, 127(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movl %rcx, -2147483648(%rdx,%rsi,2)
+movl %rcx, -128(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movl %rcx, 2147483647(%rdx,%rsi,2)
+movl %rcx, 127(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movl %rcx, -2147483648(%rdx,%rsi,4)
+movl %rcx, -128(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movl %rcx, 2147483647(%rdx,%rsi,4)
+movl %rcx, 127(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movl %rcx, -2147483648(%rdx,%rsi,8)
+movl %rcx, -128(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movl %rcx, 2147483647(%rdx,%rsi,8)
+movl %rcx, 127(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movq %rcx, -2147483648(%rdx,%rsi,1)
+movq %rcx, -128(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movq %rcx, 2147483647(%rdx,%rsi,1)
+movq %rcx, 127(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movq %rcx, -2147483648(%rdx,%rsi,2)
+movq %rcx, -128(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movq %rcx, 2147483647(%rdx,%rsi,2)
+movq %rcx, 127(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movq %rcx, -2147483648(%rdx,%rsi,4)
+movq %rcx, -128(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movq %rcx, 2147483647(%rdx,%rsi,4)
+movq %rcx, 127(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movq %rcx, -2147483648(%rdx,%rsi,8)
+movq %rcx, -128(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movq %rcx, 2147483647(%rdx,%rsi,8)
+movq %rcx, 127(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movb %rcx, -2147483648(%rdx,%rsi,1)
+movb %rcx, -128(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movb %rcx, 2147483647(%rdx,%rsi,1)
+movb %rcx, 127(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movb %rcx, -2147483648(%rdx,%rsi,2)
+movb %rcx, -128(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movb %rcx, 2147483647(%rdx,%rsi,2)
+movb %rcx, 127(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movb %rcx, -2147483648(%rdx,%rsi,4)
+movb %rcx, -128(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movb %rcx, 2147483647(%rdx,%rsi,4)
+movb %rcx, 127(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movb %rcx, -2147483648(%rdx,%rsi,8)
+movb %rcx, -128(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movb %rcx, 2147483647(%rdx,%rsi,8)
+movb %rcx, 127(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movw %rcx, -2147483648(%rdx,%rsi,1)
+movw %rcx, -128(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movw %rcx, 2147483647(%rdx,%rsi,1)
+movw %rcx, 127(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movw %rcx, -2147483648(%rdx,%rsi,2)
+movw %rcx, -128(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movw %rcx, 2147483647(%rdx,%rsi,2)
+movw %rcx, 127(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movw %rcx, -2147483648(%rdx,%rsi,4)
+movw %rcx, -128(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movw %rcx, 2147483647(%rdx,%rsi,4)
+movw %rcx, 127(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movw %rcx, -2147483648(%rdx,%rsi,8)
+movw %rcx, -128(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movw %rcx, 2147483647(%rdx,%rsi,8)
+movw %rcx, 127(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movl %rcx, -2147483648(%rdx,%rsi,1)
+movl %rcx, -128(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movl %rcx, 2147483647(%rdx,%rsi,1)
+movl %rcx, 127(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movl %rcx, -2147483648(%rdx,%rsi,2)
+movl %rcx, -128(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movl %rcx, 2147483647(%rdx,%rsi,2)
+movl %rcx, 127(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movl %rcx, -2147483648(%rdx,%rsi,4)
+movl %rcx, -128(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movl %rcx, 2147483647(%rdx,%rsi,4)
+movl %rcx, 127(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movl %rcx, -2147483648(%rdx,%rsi,8)
+movl %rcx, -128(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movl %rcx, 2147483647(%rdx,%rsi,8)
+movl %rcx, 127(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movq %rcx, -2147483648(%rdx,%rsi,1)
+movq %rcx, -128(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movq %rcx, 2147483647(%rdx,%rsi,1)
+movq %rcx, 127(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movq %rcx, -2147483648(%rdx,%rsi,2)
+movq %rcx, -128(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movq %rcx, 2147483647(%rdx,%rsi,2)
+movq %rcx, 127(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movq %rcx, -2147483648(%rdx,%rsi,4)
+movq %rcx, -128(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movq %rcx, 2147483647(%rdx,%rsi,4)
+movq %rcx, 127(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movq %rcx, -2147483648(%rdx,%rsi,8)
+movq %rcx, -128(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movq %rcx, 2147483647(%rdx,%rsi,8)
+movq %rcx, 127(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
-movb %rcx, -2147483648(%rdx,%rsi,1)
+movb %rcx, -128(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
-movb %rcx, 2147483647(%rdx,%rsi,1)
+movb %rcx, 127(%rdx,%rsi,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2}
-movb %rcx, -2147483648(%rdx,%rsi,2)
+movb %rcx, -128(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:2} @far
-movb %rcx, 2147483647(%rdx,%rsi,2)
+movb %rcx, 127(%rdx,%rsi,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4}
-movb %rcx, -2147483648(%rdx,%rsi,4)
+movb %rcx, -128(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:4} @far
-movb %rcx, 2147483647(%rdx,%rsi,4)
+movb %rcx, 127(%rdx,%rsi,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8}
-movb %rcx, -2147483648(%rdx,%rsi,8)
+movb %rcx, -128(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:8} @far
-movb %rcx, 2147483647(%rdx,%rsi,8)
+movb %rcx, 127(%rdx,%rsi,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,1)
+vmovdqu %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,1)
+vmovdqu %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,2)
+vmovdqu %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,2)
+vmovdqu %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,4)
+vmovdqu %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,4)
+vmovdqu %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,8)
+vmovdqu %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,8)
+vmovdqu %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovupd %xmm1, -2147483648(%rcx,%rdx,1)
+vmovupd %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovupd %xmm1, 2147483647(%rcx,%rdx,1)
+vmovupd %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovupd %xmm1, -2147483648(%rcx,%rdx,2)
+vmovupd %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovupd %xmm1, 2147483647(%rcx,%rdx,2)
+vmovupd %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovupd %xmm1, -2147483648(%rcx,%rdx,4)
+vmovupd %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovupd %xmm1, 2147483647(%rcx,%rdx,4)
+vmovupd %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovupd %xmm1, -2147483648(%rcx,%rdx,8)
+vmovupd %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovupd %xmm1, 2147483647(%rcx,%rdx,8)
+vmovupd %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,1)
+vmovdqu %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,1)
+vmovdqu %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,2)
+vmovdqu %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,2)
+vmovdqu %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,4)
+vmovdqu %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,4)
+vmovdqu %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,8)
+vmovdqu %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,8)
+vmovdqu %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovups %xmm1, -2147483648(%rcx,%rdx,1)
+vmovups %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovups %xmm1, 2147483647(%rcx,%rdx,1)
+vmovups %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovups %xmm1, -2147483648(%rcx,%rdx,2)
+vmovups %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovups %xmm1, 2147483647(%rcx,%rdx,2)
+vmovups %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovups %xmm1, -2147483648(%rcx,%rdx,4)
+vmovups %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovups %xmm1, 2147483647(%rcx,%rdx,4)
+vmovups %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovups %xmm1, -2147483648(%rcx,%rdx,8)
+vmovups %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovups %xmm1, 2147483647(%rcx,%rdx,8)
+vmovups %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,1)
+vmovdqu %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,1)
+vmovdqu %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,2)
+vmovdqu %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,2)
+vmovdqu %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,4)
+vmovdqu %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,4)
+vmovdqu %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,8)
+vmovdqu %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,8)
+vmovdqu %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,1)
+vmovdqu %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,1)
+vmovdqu %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,2)
+vmovdqu %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,2)
+vmovdqu %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,4)
+vmovdqu %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,4)
+vmovdqu %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,8)
+vmovdqu %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,8)
+vmovdqu %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,1)
+vmovdqu %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,1)
+vmovdqu %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,2)
+vmovdqu %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,2)
+vmovdqu %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,4)
+vmovdqu %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,4)
+vmovdqu %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,8)
+vmovdqu %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,8)
+vmovdqu %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,1)
+vmovdqu %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,1)
+vmovdqu %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,2)
+vmovdqu %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,2)
+vmovdqu %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,4)
+vmovdqu %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,4)
+vmovdqu %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,8)
+vmovdqu %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,8)
+vmovdqu %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,1)
+vmovdqu %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,1)
+vmovdqu %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,2)
+vmovdqu %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,2)
+vmovdqu %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,4)
+vmovdqu %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,4)
+vmovdqu %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,8)
+vmovdqu %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,8)
+vmovdqu %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,1)
+vmovdqu %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,1)
+vmovdqu %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,2)
+vmovdqu %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,2)
+vmovdqu %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,4)
+vmovdqu %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,4)
+vmovdqu %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,8)
+vmovdqu %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,8)
+vmovdqu %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,1)
+vmovdqu %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,1)
+vmovdqu %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,2)
+vmovdqu %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,2)
+vmovdqu %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,4)
+vmovdqu %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,4)
+vmovdqu %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,8)
+vmovdqu %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,8)
+vmovdqu %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,1)
+vmovdqu %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,1)
+vmovdqu %xmm1, 127(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,2)
+vmovdqu %xmm1, -128(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,2)
+vmovdqu %xmm1, 127(%rcx,%rdx,2)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,4)
+vmovdqu %xmm1, -128(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,4)
+vmovdqu %xmm1, 127(%rcx,%rdx,4)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
-vmovdqu %xmm1, -2147483648(%rcx,%rdx,8)
+vmovdqu %xmm1, -128(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx,8)
+vmovdqu %xmm1, 127(%rcx,%rdx,8)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovsh %xmm1, -2147483648(%rcx,%rdx)
+vmovsh %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovsh %xmm1, 2147483647(%rcx,%rdx)
+vmovsh %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovsd %xmm1, -2147483648(%rcx,%rdx)
+vmovsd %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovsd %xmm1, 2147483647(%rcx,%rdx)
+vmovsd %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovsh %xmm1, -2147483648(%rcx,%rdx)
+vmovsh %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovsh %xmm1, 2147483647(%rcx,%rdx)
+vmovsh %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovss %xmm1, -2147483648(%rcx,%rdx)
+vmovss %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovss %xmm1, 2147483647(%rcx,%rdx)
+vmovss %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movw %rcx, -2147483648(%rdx,%rsi)
+movw %rcx, -128(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movw %rcx, 2147483647(%rdx,%rsi)
+movw %rcx, 127(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movl %rcx, -2147483648(%rdx,%rsi)
+movl %rcx, -128(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movl %rcx, 2147483647(%rdx,%rsi)
+movl %rcx, 127(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movq %rcx, -2147483648(%rdx,%rsi)
+movq %rcx, -128(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movq %rcx, 2147483647(%rdx,%rsi)
+movq %rcx, 127(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movb %rcx, -2147483648(%rdx,%rsi)
+movb %rcx, -128(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movb %rcx, 2147483647(%rdx,%rsi)
+movb %rcx, 127(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movw %rcx, -2147483648(%rdx,%rsi)
+movw %rcx, -128(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movw %rcx, 2147483647(%rdx,%rsi)
+movw %rcx, 127(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movl %rcx, -2147483648(%rdx,%rsi)
+movl %rcx, -128(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movl %rcx, 2147483647(%rdx,%rsi)
+movl %rcx, 127(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movq %rcx, -2147483648(%rdx,%rsi)
+movq %rcx, -128(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movq %rcx, 2147483647(%rdx,%rsi)
+movq %rcx, 127(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movb %rcx, -2147483648(%rdx,%rsi)
+movb %rcx, -128(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movb %rcx, 2147483647(%rdx,%rsi)
+movb %rcx, 127(%rdx,%rsi)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu %xmm1, -2147483648(%rcx,%rdx)
+vmovdqu %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx)
+vmovdqu %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovupd %xmm1, -2147483648(%rcx,%rdx)
+vmovupd %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovupd %xmm1, 2147483647(%rcx,%rdx)
+vmovupd %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu %xmm1, -2147483648(%rcx,%rdx)
+vmovdqu %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx)
+vmovdqu %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovups %xmm1, -2147483648(%rcx,%rdx)
+vmovups %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovups %xmm1, 2147483647(%rcx,%rdx)
+vmovups %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu %xmm1, -2147483648(%rcx,%rdx)
+vmovdqu %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx)
+vmovdqu %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu %xmm1, -2147483648(%rcx,%rdx)
+vmovdqu %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx)
+vmovdqu %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu %xmm1, -2147483648(%rcx,%rdx)
+vmovdqu %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx)
+vmovdqu %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu %xmm1, -2147483648(%rcx,%rdx)
+vmovdqu %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx)
+vmovdqu %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu %xmm1, -2147483648(%rcx,%rdx)
+vmovdqu %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx)
+vmovdqu %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu %xmm1, -2147483648(%rcx,%rdx)
+vmovdqu %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx)
+vmovdqu %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu %xmm1, -2147483648(%rcx,%rdx)
+vmovdqu %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx)
+vmovdqu %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
-vmovdqu %xmm1, -2147483648(%rcx,%rdx)
+vmovdqu %xmm1, -128(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
-vmovdqu %xmm1, 2147483647(%rcx,%rdx)
+vmovdqu %xmm1, 127(%rcx,%rdx)
 ### op store [GOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
 vmovsh %xmm1, (%rcx,%rdx,1)
 ### op store [GOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
@@ -3118,149 +3078,149 @@ vmovdqu %xmm1, (%rcx,%rdx)
 ### op store [GOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 vmovdqu %xmm1, (%rcx,%rdx)
 ### op store [IOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovsh %xmm1, -2147483648(%rcx)
+vmovsh %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovsh %xmm1, 2147483647(%rcx)
+vmovsh %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovsd %xmm1, -2147483648(%rcx)
+vmovsd %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovsd %xmm1, 2147483647(%rcx)
+vmovsd %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovsh %xmm1, -2147483648(%rcx)
+vmovsh %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:FP:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovsh %xmm1, 2147483647(%rcx)
+vmovsh %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-vmovss %xmm1, -2147483648(%rcx)
+vmovss %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:FP:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-vmovss %xmm1, 2147483647(%rcx)
+vmovss %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movw %rcx, -2147483648(%rdx)
+movw %rcx, -128(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movw %rcx, 2147483647(%rdx)
+movw %rcx, 127(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movl %rcx, -2147483648(%rdx)
+movl %rcx, -128(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movl %rcx, 2147483647(%rdx)
+movl %rcx, 127(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movq %rcx, -2147483648(%rdx)
+movq %rcx, -128(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movq %rcx, 2147483647(%rdx)
+movq %rcx, 127(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movb %rcx, -2147483648(%rdx)
+movb %rcx, -128(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movb %rcx, 2147483647(%rdx)
+movb %rcx, 127(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movw %rcx, -2147483648(%rdx)
+movw %rcx, -128(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movw %rcx, 2147483647(%rdx)
+movw %rcx, 127(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movl %rcx, -2147483648(%rdx)
+movl %rcx, -128(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movl %rcx, 2147483647(%rdx)
+movl %rcx, 127(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movq %rcx, -2147483648(%rdx)
+movq %rcx, -128(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movq %rcx, 2147483647(%rdx)
+movq %rcx, 127(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
-movb %rcx, -2147483648(%rdx)
+movb %rcx, -128(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
-movb %rcx, 2147483647(%rdx)
+movb %rcx, 127(%rdx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -2147483648(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 2147483647(%rcx)
+vmovdqu %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:BF16{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrw $0, %xmm1, -2147483648(%rcx)
+vpextrw $0, %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:BF16{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrw $7, %xmm1, 2147483647(%rcx)
+vpextrw $7, %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovupd %xmm1, -2147483648(%rcx)
+vmovupd %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovupd %xmm1, 2147483647(%rcx)
+vmovupd %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:DOUBLE{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vmovsd %xmm1,-2147483648(%rcx)
+vmovsd %xmm1,-128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:DOUBLE{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vmovhpd %xmm1,2147483647(%rcx)
+vmovhpd %xmm1,127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -2147483648(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 2147483647(%rcx)
+vmovdqu %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:HALF{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrw $0, %xmm1, -2147483648(%rcx)
+vpextrw $0, %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:HALF{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrw $7, %xmm1, 2147483647(%rcx)
+vpextrw $7, %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovups %xmm1, -2147483648(%rcx)
+vmovups %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovups %xmm1, 2147483647(%rcx)
+vmovups %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINGLE{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vextractps $0, %xmm1, -2147483648(%rcx)
+vextractps $0, %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINGLE{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vextractps $3, %xmm1, 2147483647(%rcx)
+vextractps $3, %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -2147483648(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 2147483647(%rcx)
+vmovdqu %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT16{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrw $0, %xmm1, -2147483648(%rcx)
+vpextrw $0, %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT16{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrw $7, %xmm1, 2147483647(%rcx)
+vpextrw $7, %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -2147483648(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 2147483647(%rcx)
+vmovdqu %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT32{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrd $0, %xmm1, -2147483648(%rcx)
+vpextrd $0, %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT32{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrd $3, %xmm1, 2147483647(%rcx)
+vpextrd $3, %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -2147483648(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 2147483647(%rcx)
+vmovdqu %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT64{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrq $0, %xmm1, -2147483648(%rcx)
+vpextrq $0, %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT64{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrq $1, %xmm1, 2147483647(%rcx)
+vpextrq $1, %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -2147483648(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 2147483647(%rcx)
+vmovdqu %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT8{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrb $0, %xmm1, -2147483648(%rcx)
+vpextrb $0, %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:SINT8{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrb $15, %xmm1, 2147483647(%rcx)
+vpextrb $15, %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -2147483648(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 2147483647(%rcx)
+vmovdqu %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT16{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrw $0, %xmm1, -2147483648(%rcx)
+vpextrw $0, %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT16{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrw $7, %xmm1, 2147483647(%rcx)
+vpextrw $7, %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -2147483648(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 2147483647(%rcx)
+vmovdqu %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT32{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrd $0, %xmm1, -2147483648(%rcx)
+vpextrd $0, %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT32{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrd $3, %xmm1, 2147483647(%rcx)
+vpextrd $3, %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -2147483648(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 2147483647(%rcx)
+vmovdqu %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT64{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrq $0, %xmm1, -2147483648(%rcx)
+vpextrq $0, %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT64{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrq $1, %xmm1, 2147483647(%rcx)
+vpextrq $1, %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -2147483648(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 2147483647(%rcx)
+vmovdqu %xmm1, 127(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrb $0, %xmm1, -2147483648(%rcx)
+vpextrb $0, %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrb $15, %xmm1, 2147483647(%rcx)
+vpextrb $15, %xmm1, 127(%rcx)
 ### op store [PARAM] adreg:REGISTER:FP:BF16 param:NAME:-:-
 vmovsh %xmm1, %[p]
 ### op store [PARAM] adreg:REGISTER:FP:DOUBLE param:NAME:-:-
@@ -3286,101 +3246,101 @@ movq %rcx, %[p]
 ### op store [PARAM] adreg:REGISTER:GP:UINT8 param:NAME:-:-
 movb %rcx, %[p]
 ### op store [VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -1073741824(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 1073741808(%rcx)
+vmovdqu %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:BF16{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrw $0, %xmm1, -1073741824(%rcx)
+vpextrw $0, %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:BF16{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrw $7, %xmm1, 1073741808(%rcx)
+vpextrw $7, %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovupd %xmm1, -1073741824(%rcx)
+vmovupd %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovupd %xmm1, 1073741808(%rcx)
+vmovupd %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:DOUBLE{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vmovsd %xmm1,-1073741824(%rcx)
+vmovsd %xmm1,-128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:DOUBLE{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vmovhpd %xmm1,1073741808(%rcx)
+vmovhpd %xmm1,112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -1073741824(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 1073741808(%rcx)
+vmovdqu %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:HALF{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrw $0, %xmm1, -1073741824(%rcx)
+vpextrw $0, %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:HALF{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrw $7, %xmm1, 1073741808(%rcx)
+vpextrw $7, %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovups %xmm1, -1073741824(%rcx)
+vmovups %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovups %xmm1, 1073741808(%rcx)
+vmovups %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINGLE{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vextractps $0, %xmm1, -1073741824(%rcx)
+vextractps $0, %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINGLE{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vextractps $3, %xmm1, 1073741808(%rcx)
+vextractps $3, %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -1073741824(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 1073741808(%rcx)
+vmovdqu %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT16{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrw $0, %xmm1, -1073741824(%rcx)
+vpextrw $0, %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT16{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrw $7, %xmm1, 1073741808(%rcx)
+vpextrw $7, %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -1073741824(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 1073741808(%rcx)
+vmovdqu %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT32{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrd $0, %xmm1, -1073741824(%rcx)
+vpextrd $0, %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT32{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrd $3, %xmm1, 1073741808(%rcx)
+vpextrd $3, %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -1073741824(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 1073741808(%rcx)
+vmovdqu %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT64{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrq $0, %xmm1, -1073741824(%rcx)
+vpextrq $0, %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT64{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrq $1, %xmm1, 1073741808(%rcx)
+vpextrq $1, %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -1073741824(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 1073741808(%rcx)
+vmovdqu %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT8{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrb $0, %xmm1, -1073741824(%rcx)
+vpextrb $0, %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:SINT8{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrb $15, %xmm1, 1073741808(%rcx)
+vpextrb $15, %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -1073741824(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 1073741808(%rcx)
+vmovdqu %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT16{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrw $0, %xmm1, -1073741824(%rcx)
+vpextrw $0, %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT16{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrw $7, %xmm1, 1073741808(%rcx)
+vpextrw $7, %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -1073741824(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 1073741808(%rcx)
+vmovdqu %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT32{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrd $0, %xmm1, -1073741824(%rcx)
+vpextrd $0, %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT32{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrd $3, %xmm1, 1073741808(%rcx)
+vpextrd $3, %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -1073741824(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 1073741808(%rcx)
+vmovdqu %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT64{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrq $0, %xmm1, -1073741824(%rcx)
+vpextrq $0, %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT64{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrq $1, %xmm1, 1073741808(%rcx)
+vpextrq $1, %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:-
-vmovdqu %xmm1, -1073741824(%rcx)
+vmovdqu %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- @far
-vmovdqu %xmm1, 1073741808(%rcx)
+vmovdqu %xmm1, 112(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:-
-vpextrb $0, %xmm1, -1073741824(%rcx)
+vpextrb $0, %xmm1, -128(%rcx)
 ### op store [VOFFSET] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 voffset:IMMEDIATE:-:- adreg_lane:IMMEDIATE:-:- @far
-vpextrb $15, %xmm1, 1073741808(%rcx)
+vpextrb $15, %xmm1, 112(%rcx)
 ### op store [] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64
 vmovsh %xmm1, (%rcx)
 ### op store [] adreg:REGISTER:FP:DOUBLE agreg:REGISTER:GP:UINT64

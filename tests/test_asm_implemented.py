@@ -211,12 +211,6 @@ function_tests = [
         ['max_gregs', None],
         ['max_fregs', None],
         ['max_tregs', {'dt' : lambda gen : adt.DOUBLE} ],
-        ['min_bcast_immoff', {'dt' : lambda gen : adt.DOUBLE} ],
-        ['min_fload_immoff', {'dt' : lambda gen : adt.DOUBLE} ],
-        ['max_bcast_immoff', {'dt' : lambda gen : adt.DOUBLE} ],
-        ['max_fload_immoff', {'dt' : lambda gen : adt.DOUBLE} ],
-        ['min_load_voff', None],
-        ['max_load_voff', None],
         ['create_callconv', {'name' : lambda gen : "default"}],
         ['isaclear', None],
         ['isadata', None],
@@ -227,10 +221,6 @@ function_tests = [
         ['isaendquirks', {
             'rt' : lambda gen : get_rt(gen=gen, name=gen.__class__),
             'dt' : lambda gen : adt.SINGLE} ],
-        ['min_load_immoff', {'dt' : lambda gen : adt.DOUBLE} ],
-        ['max_load_immoff', {'dt' : lambda gen : adt.DOUBLE} ],
-        ['min_load_immoff', {'dt' : lambda gen : adt.SINGLE} ],
-        ['max_load_immoff', {'dt' : lambda gen : adt.SINGLE} ],
         ['treg', { 'reg_idx' : lambda gen :  0, 'dt' : lambda gen : adt.DOUBLE} ],
         ['freg', { 'reg_idx' : lambda gen :  0, 'dt' : lambda gen : adt.DOUBLE} ],
         ['greg', { 'reg_idx' : lambda gen :  0} ],
@@ -359,11 +349,11 @@ function_tests = [
                               'lane' : lambda gen : 1,
                               'dt' :  lambda gen : adt.DOUBLE}],
         ['load_vector_voff', {'areg' : lambda gen : gen.greg(0),
-                              'voffset' : lambda gen : 4,
+                              'voffset' : lambda gen : 1,   # one vector: disp8 everywhere
                               'vreg' : lambda gen : gen.vreg(0),
                               'dt' :  lambda gen : adt.SINGLE}],
         ['load_vector_immoff', {'areg' : lambda gen : gen.greg(0),
-                                'offset' : lambda gen : 4,
+                                'offset' : lambda gen : 64,   # disp8 everywhere, disp8*N included
                                 'vreg' : lambda gen : gen.vreg(0),
                                 'dt' :  lambda gen : adt.SINGLE}],
         ['load_freg', {'areg' : lambda gen : gen.greg(0),
@@ -428,11 +418,11 @@ function_tests = [
                                'lane' : lambda gen : 1,
                                'dt' :  lambda gen : adt.DOUBLE}],
         ['store_vector_immoff', {'areg' : lambda gen : gen.greg(0),
-                                 'offset' : lambda gen : 4,
+                                 'offset' : lambda gen : 64,   # disp8 everywhere, disp8*N included
                                  'vreg' : lambda gen : gen.vreg(0),
                                  'dt' :  lambda gen : adt.SINGLE}],
         ['store_vector_voff', {'areg' : lambda gen : gen.greg(0),
-                               'voffset' : lambda gen : 4,
+                               'voffset' : lambda gen : 1,   # one vector: disp8 everywhere
                                'vreg' : lambda gen : gen.vreg(0),
                                'dt' :  lambda gen : adt.SINGLE}],
         ['store_vector_immstride', {'areg' : lambda gen : gen.greg(0),
@@ -498,6 +488,8 @@ class asm_test_implementation_tests(unittest.TestCase):
             '_scalar_memory',       # the scalar loads' and stores', tested through them
             '_param_memory',        # the parameter loads' and stores', tested through them
             '_vector_memory',       # the old vector loads' and stores', tested through them
+            '_encoding_features',   # through get_param_value and set_parameter
+            '_gate_features',       # through set_features and set_parameter
             '__annotate_func__',
             'operands',
             'set_output_inline',

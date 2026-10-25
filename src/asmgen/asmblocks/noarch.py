@@ -75,6 +75,10 @@ class asmgen(ABC):
     #: optional extensions this ISA's signatures may require: ISA parameters,
     #: "on" or "off"
     FEATURES : tuple[str, ...] = ()
+    #: encoding features - signatures may require them as they do extensions -
+    #: and whether they're on by default: ISA parameters, "on" or "off", that
+    #: set_features doesn't touch (x86's enable-disp8 and enable-disp32)
+    ENCODING_FEATURES : dict[str, bool] = {}
 
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
@@ -84,6 +88,17 @@ class asmgen(ABC):
             raw = cls.__dict__.get(name)
             if raw is not None and not getattr(raw, "feature_aware", False):
                 setattr(cls, name, wrap(raw))
+        init = cls.__dict__.get("__init__")
+        if init is not None and not getattr(init, "gates_features", False):
+            def __init__(self, *args, _init=init, **kw):
+                _init(self, *args, **kw)
+                # the operations exist now: those encoding features hide that
+                # are off by default
+                if self.ENCODING_FEATURES:
+                    self._gate_features()
+            __init__.gates_features = True
+            __init__.__doc__ = init.__doc__
+            cls.__init__ = __init__
 
     def available_features(self) -> list[str]:
         """
@@ -101,9 +116,31 @@ class asmgen(ABC):
             raise ValueError(f"{type(self).__name__} has no features {sorted(unknown)}: "
                              f"{list(self.FEATURES)}")
         self.features = set(names)
+        self._gate_features()
+
+    def _encoding_features(self) -> dict[str, bool]:
+        """
+        This generator's encoding features, on or off: their defaults until set
+        """
+        if "_encoding" not in self.__dict__:
+            self.__dict__["_encoding"] = dict(self.ENCODING_FEATURES)
+        return self.__dict__["_encoding"]
+
+    def _gate_features(self):
+        """
+        Hide from every operation the signatures requiring a feature that's
+        off: the extensions set_features didn't enable (none without a call)
+        and the encoding features that are off
+        """
+        features = getattr(self, "features", None)
+        if features is None and not self.ENCODING_FEATURES:
+            return
+        extensions = set(self.FEATURES) if features is None else set(features)
+        encodings = {name for name, on in self._encoding_features().items() if on}
+        enabled = frozenset(extensions | encodings)
         for value in vars(self).values():
             if isinstance(value, operation):
-                value.enabled_features = frozenset(self.features)
+                value.enabled_features = enabled
 
     @abstractmethod
     def get_parameters(self) -> list[str]:
@@ -560,104 +597,12 @@ class asmgen(ABC):
 
     @property
     @abstractmethod
-    def min_load_voff(self) -> int:
-        """
-        Returns the minimum immediate offset in number of SIMD/vector registers
-        for loading data into SIMD/vector registers  (can be negative)
-
-        :return: Minimum immediate vector loading offset in vectors
-        :rtype: int
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @property
-    @abstractmethod
-    def max_load_voff(self) -> int:
-        """
-        Returns the maximum immediate offset in number of SIMD/vector registers
-        for loading data into SIMD/vector registers (can be negative)
-
-        :return: Maximum immediate vector loading offset in vectors
-        :rtype: int
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @property
-    @abstractmethod
     def max_add_voff(self) -> int:
         """
         Returns the maximum immediate value in number of SIMD/vector registers
         for adding vector-length-based byte-size-offsets to a GP register
 
         :return: Maximum immediate value
-        :rtype: int
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def min_load_immoff(self, dt : asm_data_type) -> int:
-        """
-        Returns the minimum immediate offset in bytes
-        for loading data into SIMD/vector registers  (can be negative)
-
-        :return: Minimum immediate vector loading offset in bytes
-        :rtype: int
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def max_load_immoff(self, dt : asm_data_type) -> int:
-        """
-        Returns the maximum immediate offset in bytes
-        for loading data into SIMD/vector registers  (can be negative)
-
-        :return: Maximum immediate vector loading offset in bytes
-        :rtype: int
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def min_bcast_immoff(self, dt : asm_data_type) -> int:
-        """
-        Returns the minimum immediate offset in bytes
-        for broadcasting a value from memory into SIMD/vector
-        registers  (can be negative)
-
-        :return: Minimum immediate vector broadcasting offset in bytes
-        :rtype: int
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def max_bcast_immoff(self, dt : asm_data_type) -> int:
-        """
-        Returns the maximum immediate offset in bytes
-        for broadcasting a value from memory into SIMD/vector
-        registers  (can be negative)
-
-        :return: Maximum immediate vector broadcasting offset in bytes
-        :rtype: int
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def min_fload_immoff(self, dt : asm_data_type) -> int:
-        """
-        Returns the minimum immediate offset in bytes
-        for loading data into scalar registers  (can be negative)
-
-        :return: Minimum immediate scalar loading offset in bytes
-        :rtype: int
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def max_fload_immoff(self, dt : asm_data_type) -> int:
-        """
-        Returns the maximum immediate offset in bytes
-        for loading data into scalar registers  (can be negative)
-
-        :return: Maximum immediate scalar loading offset in bytes
         :rtype: int
         """
         raise NotImplementedError(NIE_MESSAGE)
@@ -1662,7 +1607,7 @@ class asmgen(ABC):
 
 def _features_in_parameters(raw):
     def get_parameters(self):
-        return list(raw(self)) + [f for f in self.FEATURES]
+        return list(raw(self)) + [f for f in self.FEATURES] + list(self.ENCODING_FEATURES)
     get_parameters.feature_aware = True
     get_parameters.__doc__ = raw.__doc__
     return get_parameters
@@ -1672,6 +1617,8 @@ def _features_in_values(raw):
     def get_param_value(self, name):
         if name in self.FEATURES:
             return "on" if name in getattr(self, "features", set()) else "off"
+        if name in self.ENCODING_FEATURES:
+            return "on" if self._encoding_features()[name] else "off"
         return raw(self, name)
     get_param_value.feature_aware = True
     get_param_value.__doc__ = raw.__doc__
@@ -1680,6 +1627,10 @@ def _features_in_values(raw):
 
 def _features_set(raw):
     def set_parameter(self, name, value):
+        if name in self.ENCODING_FEATURES:
+            self._encoding_features()[name] = str(value).lower() in ("on", "1", "yes", "true")
+            self._gate_features()
+            return None
         if name in self.FEATURES:
             on = str(value).lower() in ("on", "1", "yes", "true")
             features = set(getattr(self, "features", set()))

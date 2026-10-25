@@ -312,7 +312,7 @@ class avx128_opmem(avx_opmem):
                  rpref : Callable[[str],str]):
         super().__init__(action=action, simd_bytes=16, asmwrap=asmwrap, rpref=rpref)
 
-        self.signatures = make_avx_opmem_signatures(action=self.action, is_avx512=False)
+        self.signatures = make_avx_opmem_signatures(action=self.action, is_avx512=False, vbytes=16)
         self.signatures.extend(self.scalar_opmem.get_signatures())
 
     def build_lane_load(self, dreg: xmm_vreg, areg: x86_greg, dt: adt,
@@ -396,7 +396,7 @@ class avx256_opmem(avx128_opmem):
         super().__init__(action=action, asmwrap=asmwrap, rpref=rpref)
         self.simd_bytes = 32
 
-        self.signatures = make_avx_opmem_signatures(action=self.action, is_avx512=False)
+        self.signatures = make_avx_opmem_signatures(action=self.action, is_avx512=False, vbytes=32)
         self.signatures.extend(self.scalar_opmem.get_signatures())
 
 class avx512_opmem(avx_opmem):
@@ -421,7 +421,7 @@ class avx512_opmem(avx_opmem):
                  rpref : Callable[[str],str]):
         super().__init__(action=action, simd_bytes=64, asmwrap=asmwrap, rpref=rpref)
 
-        self.signatures = make_avx_opmem_signatures(action=self.action, is_avx512=True)
+        self.signatures = make_avx_opmem_signatures(action=self.action, is_avx512=True, vbytes=64)
         self.signatures.extend(self.scalar_opmem.get_signatures())
 
     def build_bcast(self, dreg: zmm_vreg, areg: x86_greg, dt: adt, addressing: str) -> str:

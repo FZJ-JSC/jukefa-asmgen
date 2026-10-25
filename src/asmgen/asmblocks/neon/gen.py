@@ -164,29 +164,6 @@ class neon(aarch64):
         """
         return aarch64_freg(reg_idx=idx, dt=adt.FP128)
 
-    def min_load_immoff(self, dt : adt) -> int:
-        _ = dt # explicitly unused
-        return 0
-
-    def max_load_immoff(self, dt : adt) -> int:
-        return 4095*adt_size(dt)*2
-
-    def min_bcast_immoff(self, dt : adt) -> int:
-        _ = dt # explicitly unused
-        return 0
-
-    def max_bcast_immoff(self, dt : adt) -> int:
-        _ = dt # explicitly unused
-        return 0
-
-    @property
-    def min_load_voff(self) -> int:
-        return 0
-
-    @property
-    def max_load_voff(self) -> int:
-        return 4096//8
-
     @property
     def max_add_voff(self) -> int:
         return 4096//self.simd_size

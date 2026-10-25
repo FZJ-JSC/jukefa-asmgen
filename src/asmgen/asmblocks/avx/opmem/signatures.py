@@ -7,6 +7,8 @@
 Valid signatures for AVX opmem operations
 """
 
+from ...x86.opmem.displacement import displacement_forms
+from ...op.constraint import multiple_constraint
 from ...op import (
     operation_signature as sig,
     operand_shape as osh,
@@ -41,7 +43,7 @@ _SIZE_AIT_MAP = {
 }
 
 def make_avx_opmem_signatures(action: opmem_action,
-                               is_avx512: bool = False) -> list[sig]:
+                               is_avx512: bool = False, vbytes: int = 32) -> list[sig]:
     """
     Generate valid signatures for AVX/AVX2/AVX512 opmem operations.
     """
@@ -74,7 +76,6 @@ def make_avx_opmem_signatures(action: opmem_action,
             ops['ioffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None, value_constraints=[
                 minmax_constraint(minval=-2**31, maxval=2**31 - 1)])
         if mod.VOFFSET in mods:
-            vbytes = 64 if is_avx512 else 32
             ops['voffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None, value_constraints=[
                 minmax_constraint(minval=-2**31 // vbytes, maxval=(2**31 - 1) // vbytes)])
 
@@ -161,4 +162,20 @@ def make_avx_opmem_signatures(action: opmem_action,
                             operands=dict(s0.operands, offreg=offreg),
                             structural_params=dict(s0.structural_params, scale_factor=scale),
                             clobber_list=list(s0.clobber_list), requires=s0.requires))
-    return sigs
+    def disp8(s, name):
+        """
+        disp8's range: one signed byte under VEX; under EVEX the multiples of
+        the access's size N - the vector, an element broadcast - up to
+        127*N (lanes are VEX: their xmm registers)
+        """
+        if "voffset" == name:
+            return [minmax_constraint(minval=-128 if is_avx512 else -(128 // vbytes),
+                                      maxval=127 if is_avx512 else 127 // vbytes)]
+        adreg = s.operands.get("adreg")
+        adreg_mods = adreg.modifiers if adreg is not None and adreg.modifiers else set()
+        if not is_avx512 or opd_mod.ILANE in adreg_mods or adreg is None or adreg.dt is None:
+            return [minmax_constraint(minval=-128, maxval=127)]
+        n = adt_size(adreg.dt) if opd_mod.BCAST in adreg_mods else vbytes
+        return [multiple_constraint(multiple=n), minmax_constraint(minval=-128 * n, maxval=127 * n)]
+
+    return displacement_forms(sigs, disp8)
