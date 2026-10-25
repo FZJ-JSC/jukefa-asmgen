@@ -39,7 +39,7 @@ class x86_opmem(opmem):
         sigs = make_x86_64_opmem_signatures()
         self.signatures = sigs + param_signatures(sigs)
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         return self.signatures
 
     def diagnose_unsupported_mods(self, modifiers: set[mod]):

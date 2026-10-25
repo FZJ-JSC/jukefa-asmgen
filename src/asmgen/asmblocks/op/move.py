@@ -95,7 +95,7 @@ class dummy_move(move):
     Dummy move operation; ISAs assign this by default to operations they do not support
     """
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         raise NotImplementedError(self.NIE_MESSAGE)
 
     def implementation(self, *, dregs : list[data_reg],

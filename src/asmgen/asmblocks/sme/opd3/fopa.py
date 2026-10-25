@@ -37,7 +37,7 @@ class sme_fopa(opd3):
 
         self.signatures = make_sme_opd3_signatures(supports_np=True)
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         return self.signatures
 
     def diagnose_failure(self, modifiers : set[mod],

@@ -92,6 +92,8 @@ class neon(aarch64):
         self.sub = aarch64_sub(asmwrap=self.asmwrap)
         self.shift = aarch64_shift(asmwrap=self.asmwrap)
         self.set = neon_opset(asmwrap=self.asmwrap, dt_suffixes=self.dt_suffixes, dt_greg_pfx=self.dt_greg_pfx)
+        # the operations exist: the features that are off hide their signatures
+        self._gate_features()
 
     def get_req_flags(self) -> list[str]:
         """

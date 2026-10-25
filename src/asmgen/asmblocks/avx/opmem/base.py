@@ -47,7 +47,7 @@ class avx_opmem(opmem):
 
         self.signatures = []
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         return self.signatures
 
     def diagnose_unsupported_mods(self, modifiers: set[mod]):
@@ -313,7 +313,7 @@ class avx128_opmem(avx_opmem):
         super().__init__(action=action, simd_bytes=16, asmwrap=asmwrap, rpref=rpref)
 
         self.signatures = make_avx_opmem_signatures(action=self.action, is_avx512=False, vbytes=16)
-        self.signatures.extend(self.scalar_opmem.get_signatures())
+        self.signatures.extend(self.scalar_opmem.all_signatures())
 
     def build_lane_load(self, dreg: xmm_vreg, areg: x86_greg, dt: adt,
                         lane: int, addressing: str) -> str:
@@ -397,7 +397,7 @@ class avx256_opmem(avx128_opmem):
         self.simd_bytes = 32
 
         self.signatures = make_avx_opmem_signatures(action=self.action, is_avx512=False, vbytes=32)
-        self.signatures.extend(self.scalar_opmem.get_signatures())
+        self.signatures.extend(self.scalar_opmem.all_signatures())
 
 class avx512_opmem(avx_opmem):
     """
@@ -422,7 +422,7 @@ class avx512_opmem(avx_opmem):
         super().__init__(action=action, simd_bytes=64, asmwrap=asmwrap, rpref=rpref)
 
         self.signatures = make_avx_opmem_signatures(action=self.action, is_avx512=True, vbytes=64)
-        self.signatures.extend(self.scalar_opmem.get_signatures())
+        self.signatures.extend(self.scalar_opmem.all_signatures())
 
     def build_bcast(self, dreg: zmm_vreg, areg: x86_greg, dt: adt, addressing: str) -> str:
         suf = "ss" if adt_size(dt) == 4 else "sd"

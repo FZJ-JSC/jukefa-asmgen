@@ -79,6 +79,8 @@ class avx512(avxbase):
         self.shift = x86_shift(asmwrap=self.asmwrap, rpref=self.rpref)
         self.set = avx_opset(asmwrap=self.asmwrap, rpref=self.rpref, evex=True, simd_bytes=self.simd_size,
                               index_table=self.index_table)
+        # the operations exist: the features that are off hide their signatures
+        self._gate_features()
 
     def get_req_flags(self) -> list[str]:
         return ['avx512f']

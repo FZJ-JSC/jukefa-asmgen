@@ -29,6 +29,8 @@ class rvv071(rvv):
         self.load = rvv071_load(asmwrap=self.asmwrap, lmul_getter=lambda : self.lmul)
         self.store = rvv071_store(asmwrap=self.asmwrap, lmul_getter=lambda : self.lmul)
         self.move = rvv071_move(asmwrap=self.asmwrap)
+        # the operations exist: the features that are off hide their signatures
+        self._gate_features()
 
     #: the mask population count
     vpopc = "vmpopc.m"

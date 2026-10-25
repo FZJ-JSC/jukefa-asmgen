@@ -32,8 +32,8 @@ class rvv_move(move):
         self.signatures = make_rvv_move_signatures()
         self.scalar_op = self.scalar_class(asmwrap=asmwrap) if self.scalar_class else None
 
-    def get_signatures(self) -> list[operation_signature]:
-        return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
+    def all_signatures(self) -> list[operation_signature]:
+        return [*self.signatures, *(self.scalar_op.all_signatures() if self.scalar_op else [])]
 
     def element0(self, dst, src, floating : bool) -> str:
         """

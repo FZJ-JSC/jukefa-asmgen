@@ -42,9 +42,9 @@ class rvv071_opmem_forms:
             inst += f"seg{kwargs['nstructs']}"
         return inst + WIDTH_LETTER[adt_size(dt)] + ".v"
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         # 0.7.1's indices are SEW-wide: as wide as the data
-        return [s for s in super().get_signatures()
+        return [s for s in super().all_signatures()
                 if mod.VINDEX not in s.modifiers
                 or ait_size((s.structural_params or {})["it"]) == adt_size(s.operands["adreg"].dt)]
 

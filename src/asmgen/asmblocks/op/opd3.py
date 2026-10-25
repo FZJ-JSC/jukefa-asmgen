@@ -142,7 +142,7 @@ class dummy_opd3(opd3):
     Dummy opd3 operation; ISAs assign this by default to operations they do not support
     """
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         raise NotImplementedError(self.NIE_MESSAGE)
 
     def implementation(self, *,

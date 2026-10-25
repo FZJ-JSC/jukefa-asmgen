@@ -127,7 +127,7 @@ class riscv64_opmem(opmem):
         offset = kwargs.get("ioffset", 0) if mod.IOFFSET in modifiers else 0
         return f"{offset}({areg})"
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         return self.signatures
 
     def implementation(self, *, dregs : list[data_reg], agreg : greg_base|None = None,

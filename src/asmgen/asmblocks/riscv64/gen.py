@@ -92,11 +92,6 @@ class riscv64(asmgen):
 
         return deepcopy(self.callconvs[name])
 
-    def get_param_value(self, name : str) -> int|str:
-        if "dummy" == name:
-            return "dummy"
-        raise ValueError(f"Invalid isa parameter \"{name}\"")
-
     def greg(self, reg_idx : int) -> greg_base:
         return riscv64_greg(reg_idx)
 

@@ -500,7 +500,8 @@ builds unchanged.
       `enable-disp32`, off by default, and disp8's range behind
       `enable-disp8`, on - neither on, no offset forms. Encoding features
       (`ENCODING_FEATURES`, new) gate signatures as ISA extensions do, with
-      defaults of their own, and only `set_parameter` sets them:
+      defaults of their own, and only `set_parameter` sets them (every
+      generator's constructor ends gating its operations: asmgen 0061):
       `set_features` (ISA extensions, "exactly these" - ukrgen calls it with
       none) leaves them alone. AVX's vector offsets count the generator's
       vector (16, 32 or 64 bytes; 128-bit AVX counted 32).
@@ -662,3 +663,6 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-25: load_tile and store_tile raising in the base class only (asmgen 0059).
 - 2026-10-25: rvv071 ported to 0.7.1's forms; its snapshots assembled
   through XTheadVector (asmgen 0060).
+- 2026-10-25: no wrapping of subclasses' methods: the base generator's
+  parameter methods know features, backends' chain to them, constructors
+  gate; operations' get_signatures filters their all_signatures (asmgen 0061).

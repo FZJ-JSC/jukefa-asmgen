@@ -48,8 +48,8 @@ class aarch64_simd_opd3_base(opd3):
         self.scalar_op = self.scalar_class(asmwrap=asmwrap) if self.scalar_class else None
 
 
-    def get_signatures(self) -> list[operation_signature]:
-        return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
+    def all_signatures(self) -> list[operation_signature]:
+        return [*self.signatures, *(self.scalar_op.all_signatures() if self.scalar_op else [])]
 
     def diagnose_failure(self,
                          modifiers : set[mod],

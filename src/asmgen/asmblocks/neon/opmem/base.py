@@ -40,9 +40,9 @@ class neon_opmem(opmem):
 
         self.signatures = make_neon_opmem_signatures(
                 bcast_supported=self.bcast_supported)
-        self.signatures.extend(self.scalar_opmem.get_signatures())
+        self.signatures.extend(self.scalar_opmem.all_signatures())
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         return self.signatures
 
     @property

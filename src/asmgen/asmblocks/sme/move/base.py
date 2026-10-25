@@ -40,11 +40,11 @@ class sme_move(move):
 
         self.sve_move = sve_move(asmwrap=asmwrap, dt_suffixes=dt_suffixes)
         self.signatures = make_sme_move_signatures()
-        self.signatures.extend(self.sve_move.get_signatures())
+        self.signatures.extend(self.sve_move.all_signatures())
         self.scalar_op = self.scalar_class(asmwrap=asmwrap) if self.scalar_class else None
 
-    def get_signatures(self) -> list[operation_signature]:
-        return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
+    def all_signatures(self) -> list[operation_signature]:
+        return [*self.signatures, *(self.scalar_op.all_signatures() if self.scalar_op else [])]
 
 
     def get_v_specs(self,

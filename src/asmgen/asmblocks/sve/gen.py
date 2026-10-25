@@ -88,6 +88,8 @@ class sve(aarch64):
         self.sub = aarch64_sub(asmwrap=self.asmwrap)
         self.shift = aarch64_shift(asmwrap=self.asmwrap)
         self.set = sve_opset(asmwrap=self.asmwrap, dt_suffixes=self.dt_suffixes)
+        # the operations exist: the features that are off hide their signatures
+        self._gate_features()
 
     def get_req_flags(self) -> list[str]:
         """

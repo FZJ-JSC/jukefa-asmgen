@@ -80,26 +80,6 @@ class asmgen(ABC):
     #: set_features doesn't touch (x86's enable-disp8 and enable-disp32)
     ENCODING_FEATURES : dict[str, bool] = {}
 
-    def __init_subclass__(cls, **kwargs):
-        super().__init_subclass__(**kwargs)
-        for name, wrap in (("get_parameters", _features_in_parameters),
-                           ("get_param_value", _features_in_values),
-                           ("set_parameter", _features_set)):
-            raw = cls.__dict__.get(name)
-            if raw is not None and not getattr(raw, "feature_aware", False):
-                setattr(cls, name, wrap(raw))
-        init = cls.__dict__.get("__init__")
-        if init is not None and not getattr(init, "gates_features", False):
-            def __init__(self, *args, _init=init, **kw):
-                _init(self, *args, **kw)
-                # the operations exist now: those encoding features hide that
-                # are off by default
-                if self.ENCODING_FEATURES:
-                    self._gate_features()
-            __init__.gates_features = True
-            __init__.__doc__ = init.__doc__
-            cls.__init__ = __init__
-
     def available_features(self) -> list[str]:
         """
         The optional extensions signatures of this ISA may require
@@ -142,39 +122,61 @@ class asmgen(ABC):
             if isinstance(value, operation):
                 value.enabled_features = enabled
 
-    @abstractmethod
     def get_parameters(self) -> list[str]:
         """
-        Returns a list of parameter names that this generator supports
+        The names of this generator's parameters: its features here - ISA
+        extensions and encoding features, "on" or "off" - backends with
+        parameters of their own adding them to these
 
         :return: List of parameter names
         :rtype: list[str]
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        return list(self.FEATURES) + list(self.ENCODING_FEATURES)
+
 
     def get_param_value(self, name : str) -> int|str:
         """
-        Returns the current value of the named generator parameter
+        Returns the current value of the named generator parameter: a
+        feature's here, "on" or "off"; backends with parameters of their own
+        answer for those and ask this for the rest
 
         :param name: Name of the parameter
         :type name: str
         :return: Current value of the parameter
         :rtype: int|str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        if "dummy" == name:
+            return "dummy"
+        if name in self.FEATURES:
+            return "on" if name in getattr(self, "features", set()) else "off"
+        if name in self.ENCODING_FEATURES:
+            return "on" if self._encoding_features()[name] else "off"
+        raise ValueError(f"Invalid isa parameter \"{name}\"")
 
-    @abstractmethod
+
     def set_parameter(self, name : str, value : int|str):
         """
         Sets a parameter in the generator, affecting the output, min/max values
-        and supported features
+        and supported features: a feature here, "on" or "off"; backends with
+        parameters of their own set those and pass the rest on to this
 
         :param name: Name of the parameter
         :type name: str
         :param value: New value to set the parameter to
         :type value: int|str
         """
-        raise NotImplementedError(NIE_MESSAGE)
+        on = str(value).lower() in ("on", "1", "yes", "true")
+        if name in self.ENCODING_FEATURES:
+            self._encoding_features()[name] = on
+            self._gate_features()
+            return
+        if name in self.FEATURES:
+            features = set(getattr(self, "features", set()))
+            (features.add if on else features.discard)(name)
+            self.set_features(sorted(features))
+            return
+        raise ValueError(f"Invalid name {name} or value {value}")
+
 
     def set_output_inline(self, yesno : bool):
         """
@@ -1601,42 +1603,3 @@ class asmgen(ABC):
         :rtype: str
         """
         raise NotImplementedError(f"{type(self).__name__} has no whole-tile store: store its rows or columns: store with the tile's slice operands")
-
-
-def _features_in_parameters(raw):
-    def get_parameters(self):
-        return list(raw(self)) + [f for f in self.FEATURES] + list(self.ENCODING_FEATURES)
-    get_parameters.feature_aware = True
-    get_parameters.__doc__ = raw.__doc__
-    return get_parameters
-
-
-def _features_in_values(raw):
-    def get_param_value(self, name):
-        if name in self.FEATURES:
-            return "on" if name in getattr(self, "features", set()) else "off"
-        if name in self.ENCODING_FEATURES:
-            return "on" if self._encoding_features()[name] else "off"
-        return raw(self, name)
-    get_param_value.feature_aware = True
-    get_param_value.__doc__ = raw.__doc__
-    return get_param_value
-
-
-def _features_set(raw):
-    def set_parameter(self, name, value):
-        if name in self.ENCODING_FEATURES:
-            self._encoding_features()[name] = str(value).lower() in ("on", "1", "yes", "true")
-            self._gate_features()
-            return None
-        if name in self.FEATURES:
-            on = str(value).lower() in ("on", "1", "yes", "true")
-            features = set(getattr(self, "features", set()))
-            (features.add if on else features.discard)(name)
-            self.set_features(features)
-            return None
-        return raw(self, name, value)
-    set_parameter.feature_aware = True
-    set_parameter.__doc__ = raw.__doc__
-    return set_parameter
-

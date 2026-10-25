@@ -25,9 +25,9 @@ class rvv071_move(rvv_move):
             return super().element0(dst, src, floating)
         return f"vext.x.v {dst},{src},zero"
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         def fp_slide(s):
             return any(opd_mod.FILLOTHERS in (shape.modifiers or set())
                        and shape.dt is not None and shape.dt.name in _FLOATS
                        for shape in s.operands.values())
-        return [s for s in super().get_signatures() if not fp_slide(s)]
+        return [s for s in super().all_signatures() if not fp_slide(s)]

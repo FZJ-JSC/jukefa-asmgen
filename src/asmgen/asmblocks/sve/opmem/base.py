@@ -43,9 +43,9 @@ class sve_opmem(opmem):
         self.scalar_opmem = aarch64_opmem(action=action, asmwrap=asmwrap)
 
         self.signatures = make_sve_opmem_signatures(bcast_supported=self.bcast_supported)
-        self.signatures.extend(self.scalar_opmem.get_signatures())
+        self.signatures.extend(self.scalar_opmem.all_signatures())
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         return self.signatures
 
     @property

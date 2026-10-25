@@ -38,7 +38,7 @@ class aarch64_opmem(opmem):
         sigs = make_aarch64_opmem_signatures()
         self.signatures = sigs + param_signatures(sigs)
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         return self.signatures
 
     @property

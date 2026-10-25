@@ -87,16 +87,6 @@ class aarch64(asmgen):
 
         return deepcopy(self.callconvs[name])
 
-    def get_parameters(self) -> list[str]:
-        return []
-    def get_param_value(self, name : str) -> int|str:
-        if "dummy" == name:
-            return "dummy"
-        raise ValueError(f"Invalid isa parameter \"{name}\"")
-
-    def set_parameter(self, name : str, value : Union[str,int]):
-        raise ValueError(f"Invalid name {name} or value {value}")
-
     @property
     def are_fregs_in_vregs(self) -> bool:
         return True

@@ -58,8 +58,8 @@ class avx_opd3_base(opd3):
                                                    has_fp16=self.has_fp16)
         self.scalar_op = self.scalar_class(asmwrap=asmwrap, rpref=rpref) if self.scalar_class else None
 
-    def get_signatures(self) -> list[operation_signature]:
-        return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
+    def all_signatures(self) -> list[operation_signature]:
+        return [*self.signatures, *(self.scalar_op.all_signatures() if self.scalar_op else [])]
 
     @abstractmethod
     def get_base_inst(self, modifiers : set[mod]) -> str:

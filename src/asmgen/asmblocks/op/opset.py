@@ -199,7 +199,7 @@ class scalar_opset(opset):
         """
         return scalar_signatures()
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         return self.signatures
 
     # pylint: disable-next=arguments-differ
@@ -254,8 +254,8 @@ class vector_opset(opset):
     scalar_op : scalar_opset = None
     signatures : list = []
 
-    def get_signatures(self) -> list[operation_signature]:
-        return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
+    def all_signatures(self) -> list[operation_signature]:
+        return [*self.signatures, *(self.scalar_op.all_signatures() if self.scalar_op else [])]
 
     # pylint: disable-next=arguments-differ
     def implementation(self, *, dreg=None, dt=None, modifiers=None, operand_modifiers=None, constant=None,

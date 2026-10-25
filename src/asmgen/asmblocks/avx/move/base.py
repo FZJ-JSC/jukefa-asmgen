@@ -36,8 +36,8 @@ class avx_move(move):
         self.signatures = make_avx_move_signatures(simd_bytes)
         self.scalar_op = self.scalar_class(asmwrap=asmwrap, rpref=rpref) if self.scalar_class else None
 
-    def get_signatures(self) -> list[operation_signature]:
-        return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
+    def all_signatures(self) -> list[operation_signature]:
+        return [*self.signatures, *(self.scalar_op.all_signatures() if self.scalar_op else [])]
 
     def implementation(self, *, dregs : list[data_reg],
                        dts : dict[str, adt],

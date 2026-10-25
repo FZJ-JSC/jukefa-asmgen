@@ -49,8 +49,8 @@ class rvv_opd3_base(opd3):
         self.signatures = make_rvv_opd3_signatures(supports_np=self.supports_np)
         self.scalar_op = self.scalar_class(asmwrap=asmwrap) if self.scalar_class else None
 
-    def get_signatures(self) -> list[operation_signature]:
-        return [*self.signatures, *(self.scalar_op.get_signatures() if self.scalar_op else [])]
+    def all_signatures(self) -> list[operation_signature]:
+        return [*self.signatures, *(self.scalar_op.all_signatures() if self.scalar_op else [])]
 
     @abstractmethod
     def get_base_inst(self, modifiers : set[mod]) -> str:

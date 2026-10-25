@@ -94,7 +94,7 @@ class scalar_arith(opd3):
                                                           "cdreg": reg(), "bdreg_shift": imm(constraints)}))
         return sigs
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         return self._signatures
 
     # pylint: disable-next=arguments-differ
@@ -179,7 +179,7 @@ class scalar_move(move):
                                             operands={"adreg": reg(rt.GP, BITS_GP[dt]), "bdreg": reg(rt.FP, dt)}))
         return sigs
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         return self._signatures
 
     # pylint: disable-next=arguments-differ

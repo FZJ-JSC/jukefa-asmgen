@@ -46,9 +46,9 @@ class sme_opmem(opmem):
         self.sve_opmem = self._SVE_DELEGATE[action](asmwrap=asmwrap)
 
         self.signatures = make_sme_opmem_signatures()
-        self.signatures.extend(self.sve_opmem.get_signatures())
+        self.signatures.extend(self.sve_opmem.all_signatures())
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         return self.signatures
 
     @property

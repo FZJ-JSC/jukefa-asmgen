@@ -56,6 +56,8 @@ class sme(sve):
         self.move = sme_move(asmwrap=self.asmwrap,
                                   dt_suffixes=self.dt_suffixes)
         self.set = sme_opset(asmwrap=self.asmwrap, dt_suffixes=self.dt_suffixes)
+        # the operations exist: the features that are off hide their signatures
+        self._gate_features()
 
     def max_tregs(self, dt : adt) -> int:
         return adt_size(dt)

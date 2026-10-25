@@ -52,9 +52,9 @@ class rvv_opmem(opmem):
         self.scalar_opmem = riscv64_opmem(action=action, asmwrap=asmwrap)
 
         self.signatures = make_rvv_opmem_signatures(self.get_lmul, self.has_bcast)
-        self.signatures.extend(self.scalar_opmem.get_signatures())
+        self.signatures.extend(self.scalar_opmem.all_signatures())
 
-    def get_signatures(self) -> list[operation_signature]:
+    def all_signatures(self) -> list[operation_signature]:
         return self.signatures
 
     @property

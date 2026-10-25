@@ -77,9 +77,11 @@ class rvv(riscv64):
         self.sub = riscv64_sub(asmwrap=self.asmwrap)
         self.shift = riscv64_shift(asmwrap=self.asmwrap)
         self.set = rvv_opset(asmwrap=self.asmwrap, lmul_getter=lambda : self.lmul)
+        # the operations exist: the features that are off hide their signatures
+        self._gate_features()
 
     def get_parameters(self) -> list[str]:
-        return ["LMUL"]
+        return ["LMUL"] + super().get_parameters()
 
     def get_param_value(self, name : str) -> int|str:
         if "LMUL" == name:
@@ -99,7 +101,7 @@ class rvv(riscv64):
                         ("{value} is not an integer. Fractional "
                          "LMUL is not implemented yet"))
         else:
-            raise ValueError(f"Invalid name {name} or value {value}")
+            super().set_parameter(name, value)
 
     def supportedby_cpuinfo(self, cpuinfo : str) -> bool:
         isa_idx = cpuinfo.find("rv64")
