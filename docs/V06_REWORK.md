@@ -635,10 +635,15 @@ ukrgen:
       address registers, and phased, rotating and blocked advances.
 
 ukropt:
-- [ ] `pairs` and `fmaload` without their workarounds: immediates through
+- [x] `pairs` and `fmaload` without their workarounds: immediates through
       constraints and `set`, `gen.nop()` with ukropt's own nop sizes, vector
       bytes and compiler flags from the generator, forms by query, free
-      registers from the tracker.
+      registers from the tracker. Done (ukropt 0013-0015): framing and padding on fngen and
+      align; the FMA's scalar-operand form, the vector FMA and load by fits;
+      immediates by add.fits, in the largest steps the ISA holds; the
+      vector's bytes from simd_size; free registers from available;
+      scalars' file from the tracker's pools; FP16's -march extensions from
+      compiler_flags.
 
 ### Phase 9: removal [ ]
 
@@ -739,3 +744,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-25: phase 8 under way - ukrgen's probes and shims, its old mechanism
   in legacy/ (ukrgen 0168, 0169).
 - 2026-10-25: the tracker's pools; are_fregs_in_vregs retired (asmgen 0072).
+- 2026-10-25: ukropt's workarounds gone (ukropt 0013-0015).
