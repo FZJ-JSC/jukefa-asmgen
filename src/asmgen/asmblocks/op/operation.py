@@ -253,6 +253,20 @@ class operation(ABC):
         except _REFUSALS:
             return None
 
+    def refusal(self, **kwargs) -> str | None:
+        """
+        Why a call with these arguments would raise: its message, the
+        exception's type first - None where it fits. fits' question, with
+        the answer a caller reports when nothing fits.
+
+        :return: the message, or None
+        """
+        try:
+            self(**kwargs)
+        except _REFUSALS as err:
+            return f"{type(err).__name__}: {err}"
+        return None
+
     def forms(self, *, dts : dict | None = None, rtypes : dict | None = None,
               modifiers : set | None = None,
               operand_modifiers : dict | None = None) -> list[operation_signature]:

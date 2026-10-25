@@ -48,6 +48,21 @@ class test_fits(unittest.TestCase):
             g.load(dregs=[g.vreg(0)], areg=g.greg(5), dt=adt.FP64, modifiers={M.IOFFSET}, ioffset=8)
 
 
+class test_refusal(unittest.TestCase):
+    def test_why_not(self):
+        g = rvv()
+        kw = dict(dregs=[g.vreg(0)], areg=g.greg(5), dt=adt.FP64)
+        self.assertIsNone(g.load.refusal(**kw))
+        why = g.load.refusal(**kw, modifiers={M.IOFFSET}, ioffset=8)
+        self.assertTrue(why.startswith("ValueError: "), why)      # the ISA's own diagnosis
+
+    def test_agrees_with_fits(self):
+        g = fma256()
+        for offset in (0, 127, 128, -129):
+            kw = dict(dregs=[g.greg(9)], areg=g.greg(8), dt=adt.UINT64, modifiers={M.IOFFSET}, ioffset=offset)
+            self.assertEqual(g.load.fits(**kw) is None, g.load.refusal(**kw) is not None, offset)
+
+
 class test_forms(unittest.TestCase):
     def test_scalar_operand(self):
         forms = rvv().fma.forms(dts={"adreg": adt.FP64}, rtypes={"bdreg": rt.FP})

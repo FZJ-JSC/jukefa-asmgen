@@ -568,7 +568,8 @@ builds unchanged.
       arguments)` is the signature the call would take, None where it
       would raise - argument checks, signatures, constraints and the
       implementation all run, nothing is raised and no text kept;
-      `op.forms(dts=, rtypes=, modifiers=, operand_modifiers=)` the
+      `op.refusal(**the same)` why not - the message, None where it fits
+      (asmgen 0070); `op.forms(dts=, rtypes=, modifiers=, operand_modifiers=)` the
       signatures there are for given operands, without registers or values
       (the FMA's with a scalar operand; whether loads take a predicate).
       Callers' trials (ukrgen's try-the-next-signature, ukropt's FMA form)
@@ -720,3 +721,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-25: simd_size raising on vector-length-agnostic ISAs (asmgen 0066).
 - 2026-10-25: indexable_elements removed (asmgen 0067).
 - 2026-10-25: gen.compiler_flags, gen.enabled_features (asmgen 0068).
+- 2026-10-25: op.refusal (asmgen 0070).
