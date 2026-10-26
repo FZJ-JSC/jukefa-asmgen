@@ -656,20 +656,21 @@ ukropt: (ukrgen 0172): kernels
 
 ### Phase 9: removal [~]
 
-- [~] The deprecated wrappers and the limits deleted. Done (asmgen 0075):
-      the scalar arithmetic (`add_greg_*`, `sub_greg_*`, `mul_greg_*`,
-      `shift_greg_*`, `add_greg_voff`), moves (`mov_greg`, `mov_freg`,
-      `mov_greg_to_freg`, `fill_vector`), constants and masks (`zero_*`,
-      `mov_greg_imm`, `mask_all_true`, `ptrue`, `vlen_to_greg`,
-      `simd_size_to_greg`, `greg_to_voffs`) and `max_add_voff`; the methods
-      the generator keeps write the operations. Left: the memory wrappers,
-      `fadd`/`fmul`.
+- [~] The deprecated wrappers and the limits deleted. Done: the scalar
+      arithmetic, moves, constants and masks, `max_add_voff` (asmgen 0075);
+      the memory wrappers - scalar and parameter loads and stores,
+      `load_pointer`, the 17 vector loads and stores, `load_tile` and
+      `store_tile`, their helpers - and NEON's post-increment and SME's
+      tile-row methods (asmgen 0076). Left: `fadd`/`fmul`.
 - [ ] What the generator keeps: register constructors; control flow (`cb`,
       `jump`, `jzero`, `label`, loops, `kiterkleft`, `ret`); setup
       (`isaquirks`, `isaendquirks`, `isa_setup`, `isadata`,
       `create_callconv`, `get_reg_tracker`, parameters, features, output
       mode, `asmwrap`); host checks; `c_simd_size_function`; `nop()`.
-- [ ] `examples/axpy.py` and `examples/rvv_lmul.py` work.
+- [x] `examples/axpy.py` and `examples/rvv_lmul.py` work (asmgen 0075,
+      0076): axpy asks `add.fits` and `set.forms`; rvv_lmul, broken unnoticed
+      (register counts read as properties, `VF` an operation modifier),
+      runs - and a test runs it.
 
 ### Phase 10: `opd3` and `move` renamed [ ]
 
@@ -764,3 +765,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-25: compilation/tools on the generator's flags (asmgen 0074); the
   emitter on the operations, its address test (ukrgen 0171, 0172).
 - 2026-10-26: the scalar, move, constant and mask wrappers deleted (asmgen 0075).
+- 2026-10-26: the memory wrappers deleted; rvv_lmul runs (asmgen 0076).

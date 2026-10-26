@@ -30,5 +30,18 @@ class test_examples(unittest.TestCase):
                     self.assertFalse(failing, f"{key} doesn't assemble")
 
 
+    def test_rvv_lmul_runs(self):
+        # it broke unnoticed (old register counts, the VF modifier): ran by nothing
+        import os, subprocess, sys
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        r = subprocess.run([sys.executable, os.path.join(root, "examples", "rvv_lmul.py")],
+                           capture_output=True, text=True, timeout=120,
+                           env={**os.environ, "PYTHONPATH": os.path.join(root, "src")})
+        self.assertEqual(0, r.returncode, r.stderr[-2000:])
+        for lmul in (1, 2, 4, 8):
+            self.assertIn(f"e64, m{lmul}", r.stdout)
+        self.assertEqual(4, r.stdout.count("vfmacc.vf"))
+        self.assertEqual(4, r.stdout.count("vfmacc.vv"))
+
 if __name__ == "__main__":
     unittest.main()

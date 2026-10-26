@@ -15,6 +15,7 @@ from asmgen.asmblocks.sve import sve
 from asmgen.asmblocks.avx import fma256, avx512
 from asmgen.asmblocks.op.opmem import opmem_modifier as mod
 from asmgen.registers import asm_data_type as adt
+from asmgen.asmblocks.op.opmem import opmem_modifier
 
 PARAM = {mod.PARAM}
 
@@ -47,17 +48,6 @@ class test_param_forms(unittest.TestCase):
                 self.assertEqual(fstore, g.store(dregs=[g.freg(2, adt.FP32)], dt=adt.FP32,
                                                  modifiers=PARAM, param="y").strip())
 
-    def test_wrappers_are_the_operations(self):
-        for gen, *_ in FORMS:
-            g = gen()
-            with self.subTest(gen=gen.__name__):
-                r = g.greg(5)
-                load = g.load(dregs=[r], dt=adt.UINT64, modifiers=PARAM, param="k")
-                self.assertEqual(load, g.mov_param_to_greg(param="k", dst=r))
-                self.assertEqual(load, g.load_pointer(areg=r, name="k"))
-                self.assertEqual(g.store(dregs=[r], dt=adt.UINT64, modifiers=PARAM, param="k"),
-                                 g.mov_greg_to_param(src=r, param="k"))
-
     def test_rejected(self):
         for gen, *_ in FORMS:
             g = gen()
@@ -89,8 +79,8 @@ class test_param_in_inline_asm(unittest.TestCase):
                     self.skipTest(f"{cc} not found")
                 g = gen()
                 r = g.greg(5)
-                body = (g.mov_param_to_greg(param="k", dst=r) + g.mov_greg_to_param(src=r, param="o")
-                        + g.load_pointer(areg=r, name="k"))
+                body = (g.load(dregs=[r], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param="k") + g.store(dregs=[r], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param="o")
+                        + g.load(dregs=[r], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param="k"))
                 source = ("void f(long *in, long *out) {\n"
                           f"    __asm__ volatile({body}\n"
                           '        : [o] "=m"(*out)\n'

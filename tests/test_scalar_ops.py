@@ -10,6 +10,7 @@ from asmgen.asmblocks.sme import sme
 from asmgen.registers import asm_data_type as adt
 from asmgen.asmblocks.op.opset import opset_modifier
 from asmgen.asmblocks.op.operand import operand_modifier
+from asmgen.asmblocks.op.opmem import opmem_modifier
 
 
 class test_shifted_adds(unittest.TestCase):
@@ -60,7 +61,7 @@ class test_riscv_fp_suffixes(unittest.TestCase):
             self.assertEqual(f"fmv.{suf} f2,f1", g.move(dregs=[g.freg(1, dt), g.freg(2, dt)], dts=[dt, dt]).strip())
         # loads keep w
         self.assertEqual(f"flw f3, 8({g.greg(10)})",
-                         g.load_scalar_immoff(areg=g.greg(10), offset=8, freg=g.freg(3, adt.FP32), dt=adt.FP32).strip())
+                         g.load(dregs=[g.freg(3, adt.FP32)], areg=g.greg(10), dt=adt.FP32, modifiers={opmem_modifier.IOFFSET}, ioffset=8).strip())
 
 
 if __name__ == "__main__":

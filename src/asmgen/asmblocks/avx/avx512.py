@@ -147,12 +147,3 @@ class avx512(avxbase):
         except ValueError as err:
             raise NotImplementedError(f"avx512 has no such {action}: {err}") from err
         return self.set(dreg=k2, dt=dt, modifiers={opset_modifier.CONSTMASK}, mask="alltrue") + access
-
-    def load_vector_gather(self, *, areg : greg_base, offvreg : vreg_base,
-                           vreg : vreg_base, dt : adt, it : asm_index_type) -> str:
-        return self._k2_vindex("load", areg=areg, offvreg=offvreg, vreg=vreg, dt=dt, it=it)
-
-    def store_vector_scatter(self, *, areg : greg_base, offvreg : vreg_base,
-                             vreg : vreg_base, dt : adt, it : asm_index_type) -> str:
-        return self._k2_vindex("store", areg=areg, offvreg=offvreg, vreg=vreg, dt=dt, it=it)
-

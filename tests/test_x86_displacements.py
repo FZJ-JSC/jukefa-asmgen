@@ -9,11 +9,14 @@ import unittest
 
 from asmgen.asmblocks.avx import fma128, fma256, avx512
 from asmgen.registers import asm_data_type as adt
+from asmgen.asmblocks.op.operand import operand_modifier
+from asmgen.asmblocks.op.opmem import opmem_modifier
 
 
-def loads(g, **kw):
-    """the old vector load with an offset, as kernels use it"""
-    return g.load_vector_immoff(areg=g.greg(8), vreg=g.vreg(0), dt=adt.FP64, **kw)
+def loads(g, offset=0):
+    """a vector load at an immediate offset, as kernels write it"""
+    kw = {"modifiers": {opmem_modifier.IOFFSET}, "ioffset": offset} if offset else {}
+    return g.load(dregs=[g.vreg(0)], areg=g.greg(8), dt=adt.FP64, **kw)
 
 
 class test_defaults(unittest.TestCase):
@@ -29,43 +32,43 @@ class test_defaults(unittest.TestCase):
         for offset in (-128, -1, 1, 127):
             loads(g, offset=offset)
         for offset in (-129, 128, 4096):
-            with self.assertRaises(NotImplementedError):
+            with self.assertRaises(ValueError):
                 loads(g, offset=offset)
 
     def test_vex_vectors(self):
         # 3 ymm, 7 xmm vectors stay within 127 bytes
-        fma256().load_vector_voff(areg=fma256().greg(8), vreg=fma256().vreg(0), dt=adt.FP64, voffset=3)
-        with self.assertRaises(NotImplementedError):
+        fma256().load(dregs=[fma256().vreg(0)], areg=fma256().greg(8), dt=adt.FP64, modifiers={opmem_modifier.VOFFSET}, voffset=3)
+        with self.assertRaises(ValueError):
             g = fma256()
-            g.load_vector_voff(areg=g.greg(8), vreg=g.vreg(0), dt=adt.FP64, voffset=4)
+            g.load(dregs=[g.vreg(0)], areg=g.greg(8), dt=adt.FP64, modifiers={opmem_modifier.VOFFSET}, voffset=4)
         g = fma128()
-        g.load_vector_voff(areg=g.greg(8), vreg=g.vreg(0), dt=adt.FP64, voffset=7)
-        with self.assertRaises(NotImplementedError):
-            g.load_vector_voff(areg=g.greg(8), vreg=g.vreg(0), dt=adt.FP64, voffset=8)
+        g.load(dregs=[g.vreg(0)], areg=g.greg(8), dt=adt.FP64, modifiers={opmem_modifier.VOFFSET}, voffset=7)
+        with self.assertRaises(ValueError):
+            g.load(dregs=[g.vreg(0)], areg=g.greg(8), dt=adt.FP64, modifiers={opmem_modifier.VOFFSET}, voffset=8)
 
     def test_evex_scaled(self):
         g = avx512()
         for offset in (-128 * 64, 64, 127 * 64):
             loads(g, offset=offset)
         for offset in (8, 128 * 64, -129 * 64):      # not a multiple of 64, or past 127*64
-            with self.assertRaises(NotImplementedError):
+            with self.assertRaises(ValueError):
                 loads(g, offset=offset)
-        g.load_vector_voff(areg=g.greg(8), vreg=g.vreg(0), dt=adt.FP64, voffset=127)
-        with self.assertRaises(NotImplementedError):
-            g.load_vector_voff(areg=g.greg(8), vreg=g.vreg(0), dt=adt.FP64, voffset=128)
+        g.load(dregs=[g.vreg(0)], areg=g.greg(8), dt=adt.FP64, modifiers={opmem_modifier.VOFFSET}, voffset=127)
+        with self.assertRaises(ValueError):
+            g.load(dregs=[g.vreg(0)], areg=g.greg(8), dt=adt.FP64, modifiers={opmem_modifier.VOFFSET}, voffset=128)
 
     def test_evex_broadcasts_scale_by_the_element(self):
         g = avx512()
-        g.load_vector_bcast1_immoff(areg=g.greg(8), vreg=g.vreg(0), dt=adt.FP64, offset=127 * 8)
+        g.load(dregs=[g.vreg(0)], areg=g.greg(8), dt=adt.FP64, modifiers={opmem_modifier.IOFFSET}, ioffset=127 * 8, operand_modifiers={"adreg": {operand_modifier.BCAST}})
         for offset in (4, 128 * 8):
-            with self.assertRaises(NotImplementedError):
-                g.load_vector_bcast1_immoff(areg=g.greg(8), vreg=g.vreg(0), dt=adt.FP64, offset=offset)
+            with self.assertRaises(ValueError):
+                g.load(dregs=[g.vreg(0)], areg=g.greg(8), dt=adt.FP64, modifiers={opmem_modifier.IOFFSET}, ioffset=offset, operand_modifiers={"adreg": {operand_modifier.BCAST}})
 
     def test_scalar(self):
         g = fma256()
-        g.load_greg(areg=g.greg(8), offset=127, dst=g.greg(9))
+        g.load(dregs=[g.greg(9)], areg=g.greg(8), dt=adt.UINT64, modifiers={opmem_modifier.IOFFSET}, ioffset=127)
         with self.assertRaises(ValueError):
-            g.load_greg(areg=g.greg(8), offset=128, dst=g.greg(9))
+            g.load(dregs=[g.greg(9)], areg=g.greg(8), dt=adt.UINT64, modifiers={opmem_modifier.IOFFSET}, ioffset=128)
 
 
 class test_switches(unittest.TestCase):
@@ -76,12 +79,12 @@ class test_switches(unittest.TestCase):
             self.assertIn(f"{offset}(", loads(g, offset=offset))
         g = fma256()
         g.set_parameter("enable-disp32", "on")
-        g.load_greg(areg=g.greg(8), offset=-2**31, dst=g.greg(9))
+        g.load(dregs=[g.greg(9)], areg=g.greg(8), dt=adt.UINT64, modifiers={opmem_modifier.IOFFSET}, ioffset=-2**31)
 
     def test_no_offsets(self):
         g = fma256()
         g.set_parameter("enable-disp8", "off")
-        with self.assertRaises(NotImplementedError):
+        with self.assertRaises(ValueError):
             loads(g, offset=8)
         self.assertIn("(%", loads(g, offset=0))        # offset 0: the plain form
 
@@ -89,7 +92,7 @@ class test_switches(unittest.TestCase):
         g = avx512()
         g.set_features([])
         loads(g, offset=64)
-        with self.assertRaises(NotImplementedError):
+        with self.assertRaises(ValueError):
             loads(g, offset=8)
         g.set_parameter("enable-disp32", "on")
         g.set_features(["VL"])

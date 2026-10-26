@@ -252,10 +252,6 @@ class aarch64(asmgen):
 
 
 
-    def mov_param_to_greg_shift(self, *, param : str,
-                                dst : greg_base, bit_count : int) -> str:
-        return self.asmwrap(f"ldr {dst},%[{param},LSL#{bit_count}]")
-
     def greg(self, reg_idx : int) -> greg_base:
         return aarch64_greg(reg_idx)
 

@@ -15,6 +15,20 @@ from asmgen.cppgen.declarations import vargen, vio_type
 from asmgen.asmblocks.op.opset import opset_modifier
 from asmgen.asmblocks.op.opd3 import opd3_modifier
 from asmgen.registers import asm_data_type as adt
+from asmgen.asmblocks.op.opmem import opmem_modifier
+
+
+def _vector_memory(gen, action, vreg, areg, dt):
+    """
+    A vector load or store of a whole vector at areg, under the ISA's
+    all-true predicate where it has one (SVE's) - as the old vector
+    wrappers wrote it
+    """
+    kw = {}
+    predicate = gen.isa_setup().all_true_predicate(rt=None, dt=dt)
+    if predicate is not None:
+        kw = {"modifiers": {opmem_modifier.MASK}, "amreg": predicate}
+    return getattr(gen, action)(dregs=[vreg], areg=areg, dt=dt, **kw)
 
 
 # These will always be complex
@@ -45,12 +59,12 @@ class vec_test_generator:
         areg_idx = rt.reserve_any_reg(type_tag="greg")
         areg = testcase.gen.greg(areg_idx)
         asmblock += testcase.gen.set(dreg=areg, dt=adt.UINT64, modifiers={opset_modifier.CONST}, constant="zero")
-        asmblock += testcase.gen.mov_param_to_greg(param=varname, dst=areg)
+        asmblock += testcase.gen.load(dregs=[areg], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param=varname)
 
         vreg_idx = rt.reserve_any_reg(type_tag="vreg")
         vreg = testcase.gen.vreg(vreg_idx)
         asmblock += testcase.gen.set(dreg=vreg, dt=dt.SINGLE, modifiers={opset_modifier.CONST}, constant="zero")
-        asmblock += testcase.gen.load_vector(areg=areg, vreg=vreg, dt=dt.SINGLE)
+        asmblock += _vector_memory(testcase.gen, "load", vreg, areg, dt.SINGLE)
 
         rt.unuse_reg(type_tag="greg", idx=areg_idx)
         rt.unuse_reg(type_tag="vreg", idx=vreg_idx)
@@ -81,12 +95,12 @@ class vec_test_generator:
         areg_idx = rt.reserve_any_reg(type_tag="greg")
         areg = testcase.gen.greg(areg_idx)
         asmblock += testcase.gen.set(dreg=areg, dt=adt.UINT64, modifiers={opset_modifier.CONST}, constant="zero")
-        asmblock += testcase.gen.mov_param_to_greg(param=varname, dst=areg)
+        asmblock += testcase.gen.load(dregs=[areg], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param=varname)
 
         vreg_idx = rt.reserve_any_reg(type_tag="vreg")
         vreg = testcase.gen.vreg(vreg_idx)
         asmblock += testcase.gen.set(dreg=vreg, dt=dt.DOUBLE, modifiers={opset_modifier.CONST}, constant="zero")
-        asmblock += testcase.gen.load_vector(areg=areg, vreg=vreg, dt=dt.DOUBLE)
+        asmblock += _vector_memory(testcase.gen, "load", vreg, areg, dt.DOUBLE)
 
         rt.unuse_reg(type_tag="greg", idx=areg_idx)
         rt.unuse_reg(type_tag="vreg", idx=vreg_idx)
@@ -139,20 +153,20 @@ class vec_test_generator:
 
         aareg_idx = rt.reserve_any_reg(type_tag="greg")
         aareg = testcase.gen.greg(aareg_idx)
-        asmblock += testcase.gen.mov_param_to_greg(param=avec, dst=aareg)
-        asmblock += testcase.gen.load_vector(areg=aareg, vreg=avreg, dt=dt.SINGLE)
+        asmblock += testcase.gen.load(dregs=[aareg], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param=avec)
+        asmblock += _vector_memory(testcase.gen, "load", avreg, aareg, dt.SINGLE)
         rt.unuse_reg(type_tag="greg", idx=aareg_idx)
 
         bareg_idx = rt.reserve_any_reg(type_tag="greg")
         bareg = testcase.gen.greg(bareg_idx)
-        asmblock += testcase.gen.mov_param_to_greg(param=bvec, dst=bareg)
-        asmblock += testcase.gen.load_vector(areg=bareg, vreg=bvreg, dt=dt.SINGLE)
+        asmblock += testcase.gen.load(dregs=[bareg], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param=bvec)
+        asmblock += _vector_memory(testcase.gen, "load", bvreg, bareg, dt.SINGLE)
         rt.unuse_reg(type_tag="greg", idx=bareg_idx)
 
         careg_idx = rt.reserve_any_reg(type_tag="greg")
         careg = testcase.gen.greg(careg_idx)
-        asmblock += testcase.gen.mov_param_to_greg(param=cvec, dst=careg)
-        asmblock += testcase.gen.load_vector(areg=careg, vreg=cvreg, dt=dt.SINGLE)
+        asmblock += testcase.gen.load(dregs=[careg], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param=cvec)
+        asmblock += _vector_memory(testcase.gen, "load", cvreg, careg, dt.SINGLE)
         try:
             asmblock += testcase.gen.fma(adreg=avreg, bdreg=bvreg, cdreg=cvreg,
                                          a_dt=dt.SINGLE, b_dt=dt.SINGLE, c_dt=dt.SINGLE)
@@ -161,7 +175,7 @@ class vec_test_generator:
                                          amreg=testcase.gen.mreg(0),
                                          modifiers={mod_d3.MASK},
                                          a_dt=dt.SINGLE, b_dt=dt.SINGLE, c_dt=dt.SINGLE)
-        asmblock += testcase.gen.store_vector(areg=careg, vreg=cvreg, dt=dt.SINGLE)
+        asmblock += _vector_memory(testcase.gen, "store", cvreg, careg, dt.SINGLE)
         rt.unuse_reg(type_tag="greg", idx=careg_idx)
 
         rt.unuse_reg(type_tag="vreg", idx=avreg_idx)
@@ -221,20 +235,20 @@ class vec_test_generator:
 
         aareg_idx = rt.reserve_any_reg(type_tag="greg")
         aareg = testcase.gen.greg(aareg_idx)
-        asmblock += testcase.gen.mov_param_to_greg(param=avec, dst=aareg)
-        asmblock += testcase.gen.load_vector(areg=aareg, vreg=avreg, dt=dt.DOUBLE)
+        asmblock += testcase.gen.load(dregs=[aareg], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param=avec)
+        asmblock += _vector_memory(testcase.gen, "load", avreg, aareg, dt.DOUBLE)
         rt.unuse_reg(type_tag="greg", idx=aareg_idx)
 
         bareg_idx = rt.reserve_any_reg(type_tag="greg")
         bareg = testcase.gen.greg(bareg_idx)
-        asmblock += testcase.gen.mov_param_to_greg(param=bvec, dst=bareg)
-        asmblock += testcase.gen.load_vector(areg=bareg, vreg=bvreg, dt=dt.DOUBLE)
+        asmblock += testcase.gen.load(dregs=[bareg], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param=bvec)
+        asmblock += _vector_memory(testcase.gen, "load", bvreg, bareg, dt.DOUBLE)
         rt.unuse_reg(type_tag="greg", idx=bareg_idx)
 
         careg_idx = rt.reserve_any_reg(type_tag="greg")
         careg = testcase.gen.greg(careg_idx)
-        asmblock += testcase.gen.mov_param_to_greg(param=cvec, dst=careg)
-        asmblock += testcase.gen.load_vector(areg=careg, vreg=cvreg, dt=dt.DOUBLE)
+        asmblock += testcase.gen.load(dregs=[careg], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param=cvec)
+        asmblock += _vector_memory(testcase.gen, "load", cvreg, careg, dt.DOUBLE)
         try:
             asmblock += testcase.gen.fma(adreg=avreg, bdreg=bvreg, cdreg=cvreg,
                                          a_dt=dt.DOUBLE, b_dt=dt.DOUBLE, c_dt=dt.DOUBLE)
@@ -243,7 +257,7 @@ class vec_test_generator:
                                          amreg=testcase.gen.mreg(0),
                                          modifiers={mod_d3.MASK},
                                          a_dt=dt.DOUBLE, b_dt=dt.DOUBLE, c_dt=dt.DOUBLE)
-        asmblock += testcase.gen.store_vector(areg=careg, vreg=cvreg, dt=dt.DOUBLE)
+        asmblock += _vector_memory(testcase.gen, "store", cvreg, careg, dt.DOUBLE)
         rt.unuse_reg(type_tag="greg", idx=careg_idx)
 
         rt.unuse_reg(type_tag="vreg", idx=avreg_idx)
@@ -294,13 +308,13 @@ class vec_test_generator:
 
         aareg_idx = rt.reserve_any_reg(type_tag="greg")
         aareg = testcase.gen.greg(aareg_idx)
-        asmblock += testcase.gen.mov_param_to_greg(param=avec, dst=aareg)
-        asmblock += testcase.gen.load_vector(areg=aareg, vreg=avreg, dt=dt.SINGLE)
+        asmblock += testcase.gen.load(dregs=[aareg], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param=avec)
+        asmblock += _vector_memory(testcase.gen, "load", avreg, aareg, dt.SINGLE)
 
         bareg_idx = rt.reserve_any_reg(type_tag="greg")
         bareg = testcase.gen.greg(bareg_idx)
-        asmblock += testcase.gen.mov_param_to_greg(param=bvec, dst=bareg)
-        asmblock += testcase.gen.load_vector(areg=bareg, vreg=bvreg, dt=dt.SINGLE)
+        asmblock += testcase.gen.load(dregs=[bareg], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param=bvec)
+        asmblock += _vector_memory(testcase.gen, "load", bvreg, bareg, dt.SINGLE)
         rt.unuse_reg(type_tag="greg", idx=bareg_idx)
         try:
             asmblock += testcase.gen.mul(adreg=avreg, bdreg=bvreg, cdreg=avreg,
@@ -310,7 +324,7 @@ class vec_test_generator:
                                           amreg=testcase.gen.mreg(0),
                                           modifiers={mod_d3.MASK},
                                           a_dt=dt.SINGLE, b_dt=dt.SINGLE, c_dt=dt.SINGLE)
-        asmblock += testcase.gen.store_vector(areg=aareg, vreg=avreg, dt=dt.SINGLE)
+        asmblock += _vector_memory(testcase.gen, "store", avreg, aareg, dt.SINGLE)
         rt.unuse_reg(type_tag="greg", idx=aareg_idx)
 
         rt.unuse_reg(type_tag="vreg", idx=avreg_idx)
@@ -360,13 +374,13 @@ class vec_test_generator:
 
         aareg_idx = rt.reserve_any_reg(type_tag="greg")
         aareg = testcase.gen.greg(aareg_idx)
-        asmblock += testcase.gen.mov_param_to_greg(param=avec, dst=aareg)
-        asmblock += testcase.gen.load_vector(areg=aareg, vreg=avreg, dt=dt.DOUBLE)
+        asmblock += testcase.gen.load(dregs=[aareg], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param=avec)
+        asmblock += _vector_memory(testcase.gen, "load", avreg, aareg, dt.DOUBLE)
 
         bareg_idx = rt.reserve_any_reg(type_tag="greg")
         bareg = testcase.gen.greg(bareg_idx)
-        asmblock += testcase.gen.mov_param_to_greg(param=bvec, dst=bareg)
-        asmblock += testcase.gen.load_vector(areg=bareg, vreg=bvreg, dt=dt.DOUBLE)
+        asmblock += testcase.gen.load(dregs=[bareg], dt=adt.UINT64, modifiers={opmem_modifier.PARAM}, param=bvec)
+        asmblock += _vector_memory(testcase.gen, "load", bvreg, bareg, dt.DOUBLE)
         rt.unuse_reg(type_tag="greg", idx=bareg_idx)
 
         try:
@@ -377,7 +391,7 @@ class vec_test_generator:
                                           amreg=testcase.gen.mreg(0),
                                           modifiers={mod_d3.MASK},
                                           a_dt=dt.DOUBLE, b_dt=dt.DOUBLE, c_dt=dt.DOUBLE)
-        asmblock += testcase.gen.store_vector(areg=aareg, vreg=avreg, dt=dt.DOUBLE)
+        asmblock += _vector_memory(testcase.gen, "store", avreg, aareg, dt.DOUBLE)
         rt.unuse_reg(type_tag="greg", idx=aareg_idx)
 
         rt.unuse_reg(type_tag="vreg", idx=avreg_idx)

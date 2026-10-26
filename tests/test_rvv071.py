@@ -18,6 +18,7 @@ from asmgen.asmblocks.op.opmem import opmem_modifier as M
 from asmgen.asmblocks.op.operand import operand_modifier as OM
 from asmgen.registers import asm_data_type as adt, asm_index_type as ait
 from asmgen.asmblocks.op.opset import opset_modifier
+from asmgen.asmblocks.op.opmem import opmem_modifier
 
 
 def plain(text):
@@ -62,14 +63,6 @@ class test_rvv071_memory(unittest.TestCase):
                          plain(self.g.load(dregs=[self.v0, self.v1], areg=self.t0, dt=adt.FP64,
                                            modifiers={M.STRUCT}, nstructs=2)))
 
-    def test_old_methods_on_them(self):
-        self.assertEqual("vle.v v0, (t5)",
-                         plain(self.g.load_vector(areg=self.t0, vreg=self.v0, dt=adt.FP64)))
-        self.assertEqual("vlxw.v v0, (t5), v1",
-                         plain(self.g.load_vector_gather(areg=self.t0, offvreg=self.v1, vreg=self.v0,
-                                                         dt=adt.FP32, it=ait.INT32)))
-
-
 class test_rvv071_moves_and_masks(unittest.TestCase):
     def setUp(self):
         self.g = rvv071()
@@ -102,7 +95,7 @@ class test_xtheadvector(unittest.TestCase):
 
     def test_scalars_and_labels_stay(self):
         g = rvv071()
-        self.assertEqual("ld s4, 8(t5)", plain(g.load_greg(areg=g.greg(5), offset=8, dst=g.greg(10))))
+        self.assertEqual("ld s4, 8(t5)", plain(g.load(dregs=[g.greg(10)], areg=g.greg(5), dt=adt.UINT64, modifiers={opmem_modifier.IOFFSET}, ioffset=8)))
 
     def test_off(self):
         g = rvv071()

@@ -217,9 +217,6 @@ class riscv64(asmgen):
 
         return asmblock
 
-    def mov_param_to_greg_shift(self, *, param : str, dst : greg_base, bit_count : int) -> str:
-        return self.asmwrap(f"slli {dst},%[{param}],{bit_count}")
-
     def reserved_registers(self) -> dict[str, dict[str, int]]:
         # indices as riscv64_greg names them: ra, sp, gp, tp, s0 (fp), zero
         return {"greg": {"ra": 26, "sp": 27, "gp": 28, "tp": 29, "fp": 30, "zero": 31}}

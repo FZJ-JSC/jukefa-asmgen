@@ -432,10 +432,6 @@ class avxbase(asmgen):
 
         return asmblock
 
-    def mov_param_to_greg_shift(self, *, param : str, dst : greg_base, bit_count : int):
-        pdst = self.rpref(dst)
-        return self.asmwrap(f"leaq (,%[{param}],{1<<bit_count}),{pdst}")
-
     def greg(self, reg_idx : int) -> greg_base:
         return x86_greg(reg_idx=reg_idx)
 
@@ -458,13 +454,3 @@ class avxbase(asmgen):
 
     def treg(self, reg_idx : int, dt : adt):
         raise NotImplementedError(self.avx_no_tile_message)
-
-    def load_vector_gather(self, *, areg : greg_base, offvreg : vreg_base,
-                           vreg : vreg_base, dt : adt, it : asm_index_type) -> str:
-        raise NotImplementedError("AVX2's gathers need a mask register, which load_vector_gather "
-                                  "has no parameter for: load with MASK and VINDEX")
-
-    def store_vector_scatter(self, *, areg : greg_base, offvreg : vreg_base,
-                             vreg : vreg_base, dt : adt, it : asm_index_type) -> str:
-        raise NotImplementedError("AVX2 has no scatters")
-

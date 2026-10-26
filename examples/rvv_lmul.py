@@ -62,12 +62,11 @@ Example showing how the LMUL parameter of the rvv generator works
 
 from asmgen.asmblocks.rvv import rvv
 from asmgen.registers import (
-        adt_size,
-        asm_data_type as adt,
-        reg_tracker
+    adt_size,
+    asm_data_type as adt
 )
-from asmgen.asmblocks.op import opd3_modifier as mod
 from asmgen.asmblocks.op.opd3 import opd3_modifier
+from asmgen.asmblocks.op.operand import operand_modifier
 
 
 def main():
@@ -80,12 +79,7 @@ def main():
 
     for lmul in [1,2,4,8]:
         gen.set_parameter("LMUL", lmul)
-        rt = reg_tracker(reg_type_init_list=[
-            ("greg",gen.max_gregs),
-            ("freg",gen.max_fregs),
-            ("vreg",gen.max_vregs),
-            ("treg",gen.max_tregs(dt=dt)),
-            ])
+        rt = gen.get_reg_tracker()
 
         aidx = rt.reserve_any_reg("vreg")
         a = gen.vreg(aidx)
@@ -116,24 +110,11 @@ def main():
         asmblock += gen.shift(adreg=vlen, bimm=adt_size(dt).bit_length()-1, cdreg=vlen, a_dt=adt.UINT64, c_dt=adt.UINT64, modifiers={opd3_modifier.SHL})
 
 
-        asmblock += gen.load_vector(
-                areg=aaddr,
-                vreg=a,
-                dt=dt)
-        asmblock += gen.load_vector(
-                areg=baddr,
-                vreg=b,
-                dt=dt)
-        asmblock += gen.load_vector(
-                areg=caddr,
-                vreg=c,
-                dt=dt)
+        asmblock += gen.load(dregs=[a], areg=aaddr, dt=dt)
+        asmblock += gen.load(dregs=[b], areg=baddr, dt=dt)
+        asmblock += gen.load(dregs=[c], areg=caddr, dt=dt)
 
-        asmblock += gen.load_scalar_immoff(
-                areg=bfaddr,
-                offset=0,
-                freg=bf,
-                dt=dt)
+        asmblock += gen.load(dregs=[bf], areg=bfaddr, dt=dt)
 
         asmblock += gen.fma(
                 adreg=a,
@@ -149,7 +130,7 @@ def main():
                 a_dt=dt,
                 b_dt=dt,
                 c_dt=dt,
-                modifiers={mod.VF})
+                operand_modifiers={"bdreg": {operand_modifier.VF}})   # bf a scalar: vfmacc.vf
 
 
         asmblock += gen.add(adreg=aaddr, bdreg=vlen, cdreg=aaddr, a_dt=adt.UINT64, b_dt=adt.UINT64, c_dt=adt.UINT64)
