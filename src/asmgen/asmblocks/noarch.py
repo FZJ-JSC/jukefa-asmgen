@@ -80,6 +80,10 @@ class asmgen(ABC):
     #: and whether they're on by default: ISA parameters, "on" or "off", that
     #: set_features doesn't touch (x86's enable-disp8 and enable-disp32)
     ENCODING_FEATURES : dict[str, bool] = {}
+    #: the extensions set_features enabled - None: never called, every one
+    features : set[str] | None = None
+    #: the encoding features' settings, made from ENCODING_FEATURES on first use
+    _encoding : dict[str, bool] | None = None
 
     def available_features(self) -> list[str]:
         """
@@ -103,9 +107,9 @@ class asmgen(ABC):
         """
         This generator's encoding features, on or off: their defaults until set
         """
-        if "_encoding" not in self.__dict__:
-            self.__dict__["_encoding"] = dict(self.ENCODING_FEATURES)
-        return self.__dict__["_encoding"]
+        if self._encoding is None:
+            self._encoding = dict(self.ENCODING_FEATURES)
+        return self._encoding
 
     def _gate_features(self):
         """
@@ -113,7 +117,7 @@ class asmgen(ABC):
         off: the extensions set_features didn't enable (none without a call)
         and the encoding features that are off
         """
-        features = getattr(self, "features", None)
+        features = self.features
         if features is None and not self.ENCODING_FEATURES:
             return
         extensions = set(self.FEATURES) if features is None else set(features)
@@ -149,7 +153,7 @@ class asmgen(ABC):
         if "dummy" == name:
             return "dummy"
         if name in self.FEATURES:
-            return "on" if name in getattr(self, "features", set()) else "off"
+            return "on" if name in (self.features or ()) else "off"
         if name in self.ENCODING_FEATURES:
             return "on" if self._encoding_features()[name] else "off"
         raise ValueError(f"Invalid isa parameter \"{name}\"")
@@ -172,7 +176,7 @@ class asmgen(ABC):
             self._gate_features()
             return
         if name in self.FEATURES:
-            features = set(getattr(self, "features", set()))
+            features = set(self.features or ())
             (features.add if on else features.discard)(name)
             self.set_features(sorted(features))
             return
@@ -205,8 +209,7 @@ class asmgen(ABC):
         The ISA extensions this generator may use: those set_features
         enabled, every one of FEATURES without a call
         """
-        features = getattr(self, "features", None)
-        return set(self.FEATURES) if features is None else set(features)
+        return set(self.FEATURES) if self.features is None else set(self.features)
 
     def compiler_flags(self, compiler : str = "gcc") -> list[str]:
         """
@@ -333,13 +336,11 @@ class asmgen(ABC):
         A register tracker for this ISA: every register file with its size,
         the reserved registers reserved and aliased by their names
         """
-        def count(name):
-            return getattr(self, name)()
-        types = [("greg", count("max_gregs")), ("vreg", count("max_vregs"))]
-        if count("max_fregs"):
-            types.append(("freg", count("max_fregs")))
-        if count("max_mregs"):
-            types.append(("mreg", count("max_mregs")))
+        types = [("greg", self.max_gregs()), ("vreg", self.max_vregs())]
+        if self.max_fregs():
+            types.append(("freg", self.max_fregs()))
+        if self.max_mregs():
+            types.append(("mreg", self.max_mregs()))
         rt = reg_tracker(types)
         tracked = {t for t, _ in types}
         for type_a, type_b, mapping in self.shared_registers():

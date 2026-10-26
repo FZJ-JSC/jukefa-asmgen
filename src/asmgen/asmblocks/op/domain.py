@@ -132,7 +132,7 @@ class constraint_domain:
         The constraint's parameters as its check would use them; None where it
         doesn't apply under the modifiers
         """
-        params = dict(getattr(c, "params", {}))
+        params = dict(c.params)
         if self.modifiers:
             try:
                 c.specialize_params(name=self.name, modifiers=self.modifiers,
@@ -216,7 +216,7 @@ class constraint_domain:
 
     def _filter_call(self, c : operand_constraint):
         self._need_bounded(c)
-        make = getattr(c, "makeval", lambda v: v)
+        make = c.makeval
         kept = []
         for v in self._enumerate(f"calling {type(c).__name__}"):
             try:

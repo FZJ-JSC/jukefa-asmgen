@@ -150,7 +150,7 @@ def make_avx_opmem_signatures(action: opmem_action,
     # unscaled, and scaled by 1, 2, 4 or 8 (SCALEOFFSET, scale_factor)
     for s0 in [s for s in sigs if not (s.modifiers - {mod.IOFFSET})
                and 'vidxreg' not in s.operands
-               and all(set(getattr(o, "modifiers", None) or ()) <= {opd_mod.BCAST, opd_mod.BLOCK}
+               and all(set(o.modifiers or ()) <= {opd_mod.BCAST, opd_mod.BLOCK}
                        for o in s.operands.values())]:
         offreg = osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64)
         sigs.append(sig(modifiers=set(s0.modifiers) | {mod.GOFFSET},

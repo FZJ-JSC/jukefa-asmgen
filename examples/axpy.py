@@ -290,8 +290,7 @@ def main():
     innerblock += gen.add(adreg=n, bimm=-1, cdreg=n, a_dt=adt.UINT64, c_dt=adt.UINT64)
     innerblock += gen.cb(reg1=n, reg2=None, cmp=comparison.NZ, label="loop")
 
-    if hasattr(gen, "isaendquirks"):
-        innerblock += gen.isaendquirks(dt=dt, rt=rt)
+    innerblock += gen.isaendquirks(dt=dt, rt=rt)
 
     fnsave, fnload, fnrestore = func.get_boilerplate(cc=cc)
 

@@ -122,7 +122,7 @@ class isa_setup:
         own: written inside an inline asm statement they would otherwise sit in
         the instruction stream
         """
-        asmdata = getattr(self.gen, "asmdata", None)
+        asmdata = self.gen.asmdata
         if not asmdata:
             return ""
         wrap = self.gen.asmwrap
@@ -172,12 +172,12 @@ class sve_setup(isa_setup):
         return predication.EXPLICIT
 
     def _index(self, rt) -> int:
-        aliased = getattr(rt, "aliased_regs", {}).get("mreg", {}) if rt else {}
+        aliased = rt.aliased_regs.get("mreg", {}) if rt else {}
         return aliased.get(self.ALIAS, self.predicate)
 
     def setup(self, *, rt, dt, vl : int | None = None) -> str:
         super().setup(rt=rt, dt=dt, vl=vl)
-        aliased = getattr(rt, "aliased_regs", {}).get("mreg") if rt else None
+        aliased = rt.aliased_regs.get("mreg") if rt else None
         if aliased is not None and self.ALIAS not in aliased:
             rt.reserve_specific_reg("mreg", self.predicate)
             rt.alias_reg("mreg", self.ALIAS, self.predicate)
@@ -208,7 +208,7 @@ class sme_setup(sve_setup):
         Whether the predicate-as-counter is set: an SME2 register - with SME2
         enabled, or no features chosen (every one available)
         """
-        features = getattr(self.gen, "features", None)
+        features = self.gen.features
         return features is None or "SME2" in features
 
     def steps(self) -> list[setup_step]:
@@ -256,7 +256,7 @@ class rvv_setup(isa_setup):
     def setup_dt(self, *, dt, group : int = 1) -> str:
         # LMUL stays the generator's: a register the caller sees is a group
         # of LMUL already, a wide one a group of those
-        return self.gen.vsetvli_keep_vl(dt=dt, lmul=getattr(self.gen, "lmul", 1) * group)
+        return self.gen.vsetvli_keep_vl(dt=dt, lmul=self.gen.lmul * group)
 
     @staticmethod
     def _aliased(rt, name: str) -> int:

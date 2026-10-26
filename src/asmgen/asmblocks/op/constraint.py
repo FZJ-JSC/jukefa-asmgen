@@ -52,6 +52,13 @@ class operand_constraint(ABC):
     """
     params: dict[str, ValueType] = field(default_factory=dict, init=False)
 
+
+    def makeval(self, value):
+        """
+        The operand's value for an enumerated one: itself - integer
+        constraints make registers of indices (regidx_constraint)
+        """
+        return value
     def __post_init__(self):
         pass
 

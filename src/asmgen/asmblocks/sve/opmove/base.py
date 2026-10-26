@@ -7,6 +7,7 @@
 data move operation base class for SVE
 """
 
+from ....registers import freg_base
 from typing import Callable
 
 from ....registers import adt_size, asm_data_type as adt, data_reg
@@ -86,8 +87,7 @@ class sve_move(opmove):
         suffixes = {8: "d", 4: "s", 2: "h", 1: "b"}
         if omod.FILLOTHERS in output_mods:
             return self.asmwrap(f"insr {output_reg}.{suffixes[adt_size(output_dt)]},{input_reg}")
-        if omod.ILANE in input_mods and not hasattr(output_reg, "lanes") and \
-                type(output_reg).__name__.endswith("freg"):
+        if omod.ILANE in input_mods and isinstance(output_reg, freg_base):
             # lane 0 is the register's low part
             return self.asmwrap(f"fmov {output_reg},{suffixes[adt_size(input_dt)]}{input_reg.idx}")
         if {omod.ILANEROT, omod.ILANESHIFT, omod.IBLOCKROT} & input_mods:

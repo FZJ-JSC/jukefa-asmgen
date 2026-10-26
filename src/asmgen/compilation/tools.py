@@ -25,7 +25,7 @@ def baseline_flags(gen, executable : str) -> list[str]:
     A generator's compiler flags at its baseline - no optional extensions,
     which older compilers may not know - its features as they were after
     """
-    features = getattr(gen, "features", None)
+    features = gen.features
     gen.set_features([])
     try:
         return gen.compiler_flags(executable)

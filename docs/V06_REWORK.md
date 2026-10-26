@@ -788,3 +788,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-27: the old opd3 and move names dropped, the ISAs' packages renamed
   (asmgen 0079).
 - 2026-10-27: CFI in fngen and callconv; CONST closed (asmgen 0080).
+- 2026-10-27: no probes left in src (hasattr, getattr defaults, __dict__ writes) and a
+  test keeping it so (asmgen 0081).

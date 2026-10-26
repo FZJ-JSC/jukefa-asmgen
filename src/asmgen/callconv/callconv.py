@@ -290,7 +290,7 @@ class callconv:
         :param priority: the priority given, where not already lower
         """
         for tag, regs in self.callee_save_lists.items():
-            if tag not in getattr(rt, "registered_types", ()):
+            if tag not in rt.registered_types:
                 continue
             for idx in regs:
                 if idx < rt.max_regs[tag]:
