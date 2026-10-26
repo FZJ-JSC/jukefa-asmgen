@@ -794,3 +794,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   vsetvli_keep_vl and vsetvlmax gone (asmgen 0082).
 - 2026-10-28: MULTIVEC for SME2's multi-vector accesses, STRUCT interleaving only (asmgen 0084).
 - 2026-10-28: set's mask of the first count elements (asmgen 0085).
+- 2026-10-28: SVE's structure loads and stores at [x, #imm, MUL VL] and [x, x, lsl #e] (asmgen 0086).

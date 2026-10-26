@@ -147,5 +147,36 @@ class test_sve_opmem(unittest.TestCase):
                           operand_modifiers={'adreg':{opd_mod.ILANE}},
                           adreg_lane=1)
 
+
+class test_struct_addressing(unittest.TestCase):
+    """
+    ld2d-ld4d, st2d-st4d at [x, #imm, MUL VL] - whole structures, -8..7 of
+    them - and [x, x, lsl #e]: a loop over a panel's structures
+    """
+    def setUp(self):
+        from asmgen.asmblocks.sve import sve
+        self.g = sve()
+        self.g.set_output_inline(False)
+
+    def call(self, action, n, **extra):
+        g = self.g
+        kw = dict(dregs=[g.vreg(i) for i in range(n)], areg=g.greg(0), dt=adt.DOUBLE,
+                  amreg=g.mreg(0), nstructs=n, **extra)
+        return getattr(g, action), kw
+
+    def test_voffset(self):
+        op, kw = self.call("store", 4, modifiers={mod.MASK, mod.STRUCT, mod.VOFFSET}, voffset=8)
+        self.assertEqual("st4d {z0.d, z1.d, z2.d, z3.d}, p0, [x0, #8, MUL VL]", op(**kw).strip())
+        for bad in (6, 32, -36):                 # not a multiple of 4; past -32..28
+            op, kw = self.call("store", 4, modifiers={mod.MASK, mod.STRUCT, mod.VOFFSET}, voffset=bad)
+            self.assertIsNone(op.fits(**kw), bad)
+        op, kw = self.call("load", 2, modifiers={mod.MASK, mod.STRUCT, mod.VOFFSET}, voffset=-16)
+        self.assertEqual("ld2d {z0.d, z1.d}, p0/z, [x0, #-16, MUL VL]", op(**kw).strip())
+
+    def test_goffset(self):
+        op, kw = self.call("store", 3, modifiers={mod.MASK, mod.STRUCT, mod.GOFFSET}, offreg=self.g.greg(1))
+        self.assertEqual("st3d {z0.d, z1.d, z2.d}, p0, [x0, x1, lsl #3]", op(**kw).strip())
+
+
 if __name__ == '__main__':
     unittest.main()

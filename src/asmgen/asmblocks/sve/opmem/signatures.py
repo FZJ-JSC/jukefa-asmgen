@@ -132,8 +132,11 @@ def make_sve_opmem_signatures(bcast_supported=False):
                                 modifiers=opd_mods.get('offreg', set()))
         # [x, #imm, MUL VL]
         if mod.VOFFSET in mods:
+            # structures: whole ones, -8..7 of them (ld2d [x, #-16..14, MUL VL])
+            n = nstructs if mod.STRUCT in mods else 1
             ops['voffset'] = osh(ot.IMMEDIATE, orl.PARAM, None, None,
-                                 value_constraints=[minmax_constraint(minval=-8, maxval=7)])
+                                 value_constraints=[minmax_constraint(minval=-8 * n, maxval=7 * n)]
+                                 + ([multiple_constraint(multiple=n)] if n > 1 else []))
 
         sigs.append(sig(
             modifiers=mods,
@@ -170,8 +173,11 @@ def make_sve_opmem_signatures(bcast_supported=False):
                     opd_mods={'adreg': {opd_mod.BLOCK, opd_mod.BCAST}})
 
         for nstructs in range(2,5):
-            # ld2/ld3/ld4
+            # ld2/ld3/ld4 - [x], [x, #imm, MUL VL], [x, x, lsl #e]: a loop
+            # over a panel's structures advances by whole ones
             add_sig(dt, mods={mod.MASK, mod.STRUCT}, nstructs=nstructs)
+            add_sig(dt, mods={mod.MASK, mod.STRUCT, mod.VOFFSET}, nstructs=nstructs)
+            add_sig(dt, mods={mod.MASK, mod.STRUCT, mod.GOFFSET}, nstructs=nstructs)
 
             if bcast_supported:
                 # ld2r/ld3r/ld4r (load structured scalars and broadcast
