@@ -654,19 +654,21 @@ ukropt: (ukrgen 0172): kernels
       scalars' file from the tracker's pools; FP16's -march extensions from
       compiler_flags.
 
-### Phase 9: removal [~]
+### Phase 9: removal [x]
 
-- [~] The deprecated wrappers and the limits deleted. Done: the scalar
+- [x] The deprecated wrappers and the limits deleted: the scalar
       arithmetic, moves, constants and masks, `max_add_voff` (asmgen 0075);
-      the memory wrappers - scalar and parameter loads and stores,
-      `load_pointer`, the 17 vector loads and stores, `load_tile` and
-      `store_tile`, their helpers - and NEON's post-increment and SME's
-      tile-row methods (asmgen 0076). Left: `fadd`/`fmul`.
-- [ ] What the generator keeps: register constructors; control flow (`cb`,
+      the memory wrappers, NEON's post-increment and SME's tile-row methods
+      (0076); `fadd`/`fmul` and the classes' old names (0077).
+- [x] What the generator keeps: register constructors; control flow (`cb`,
       `jump`, `jzero`, `label`, loops, `kiterkleft`, `ret`); setup
       (`isaquirks`, `isaendquirks`, `isa_setup`, `isadata`,
       `create_callconv`, `get_reg_tracker`, parameters, features, output
-      mode, `asmwrap`); host checks; `c_simd_size_function`; `nop()`.
+      mode, `asmwrap`); host checks; `c_simd_size_function`; `nop()`. Since:
+      `align`, `asmfile_annotations`, `compiler_flags`, `enabled_features`;
+      the questions `is_vla`, `simd_size`, `max_*regs`; the tracker's
+      `reserved_registers`, `shared_registers` - 52 in all, and the
+      operations.
 - [x] `examples/axpy.py` and `examples/rvv_lmul.py` work (asmgen 0075,
       0076): axpy asks `add.fits` and `set.forms`; rvv_lmul, broken unnoticed
       (register counts read as properties, `VF` an operation modifier),
@@ -766,3 +768,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   emitter on the operations, its address test (ukrgen 0171, 0172).
 - 2026-10-26: the scalar, move, constant and mask wrappers deleted (asmgen 0075).
 - 2026-10-26: the memory wrappers deleted; rvv_lmul runs (asmgen 0076).
+- 2026-10-26: fadd/fmul gone; phase 9 done (asmgen 0077).
