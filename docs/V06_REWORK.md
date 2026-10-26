@@ -674,7 +674,7 @@ ukropt: (ukrgen 0172): kernels
       (register counts read as properties, `VF` an operation modifier),
       runs - and a test runs it.
 
-### Phase 10: `opd3` and `move` renamed [ ]
+### Phase 10: `opd3` and `move` renamed [x]
 
 With `bdreg` optional - an immediate in its place - and shifts among its
 operations, `opd3` is the transforming operation: what changes elements,
@@ -682,9 +682,14 @@ where `move` only moves them. A name to say so, as ukrgen's
 `lsc_transformation`: `optransform`, say. And `move`'s base class named as
 the others (`opmem`, `opset`): `opmove`. After the other phases.
 
-- [ ] `opd3` (class, module, modifier enum) renamed `optransform`, the old
-      names deprecated for a release.
-- [ ] `move` (class, module, modifier enum) renamed `opmove`, likewise.
+- [x] `opd3` (class, module, modifier enum) renamed `optransform`, the old
+      names deprecated for a release (asmgen 0078): `asmgen.asmblocks.op.opd3`
+      forwards `opd3`, `opd3_modifier`, `dummy_opd3` with a warning, as the
+      `op` package does its old names. The ISAs' `opd3` packages keep their
+      directory names.
+- [x] `move` (class, module, modifier enum) renamed `opmove`, likewise
+      (asmgen 0078); the generator's `move` operation keeps its name, as the
+      ISAs' `move` packages do.
 
 ## Log
 
@@ -769,3 +774,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-26: the scalar, move, constant and mask wrappers deleted (asmgen 0075).
 - 2026-10-26: the memory wrappers deleted; rvv_lmul runs (asmgen 0076).
 - 2026-10-26: fadd/fmul gone; phase 9 done (asmgen 0077).
+- 2026-10-26: optransform, opmove; phase 10 done - the rework's phases all done
+  (asmgen 0078).

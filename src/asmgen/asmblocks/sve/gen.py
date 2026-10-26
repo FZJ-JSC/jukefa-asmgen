@@ -31,7 +31,7 @@ from ..aarch64.opd3 import aarch64_shift
 from ...registers import asm_data_type as _ADT
 from .opset import sve_opset
 from ..op.opset import opset_modifier as _opset_mod
-from ..op.opd3 import opd3_modifier as _opd3_mod
+from ..op.optransform import optransform_modifier as _opd3_mod
 
 class sve(aarch64):
     """

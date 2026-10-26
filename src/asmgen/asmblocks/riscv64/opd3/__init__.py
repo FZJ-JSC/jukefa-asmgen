@@ -2,7 +2,7 @@
 RISC-V scalar arithmetic on general registers: add, sub, mul, shift
 """
 from ...op.constraint import minmax_constraint
-from ...op.opd3 import opd3_modifier
+from ...op.optransform import optransform_modifier
 from ...op.scalar import scalar_arith
 from ....registers import greg_base
 
@@ -52,16 +52,16 @@ class riscv64_mul(scalar_arith):
 
 class riscv64_shift(scalar_arith):
     """
-    sll, srl, slli, srli (by 0 to 63): opd3_modifier SHL or SHR
+    sll, srl, slli, srli (by 0 to 63): optransform_modifier SHL or SHR
     """
     def op_modifiers(self):
-        return [{opd3_modifier.SHL}, {opd3_modifier.SHR}]
+        return [{optransform_modifier.SHL}, {optransform_modifier.SHR}]
 
     def imm_forms(self):
         return [[minmax_constraint(minval=0, maxval=63)]]
 
     def with_register(self, *, adreg : greg_base, bdreg : greg_base, cdreg : greg_base, modifiers : set) -> str:
-        return self.asmwrap(f"{'sll' if opd3_modifier.SHL in modifiers else 'srl'} {cdreg},{adreg},{bdreg}")
+        return self.asmwrap(f"{'sll' if optransform_modifier.SHL in modifiers else 'srl'} {cdreg},{adreg},{bdreg}")
 
     def with_immediate(self, *, adreg : greg_base, bimm : int, cdreg : greg_base, modifiers : set) -> str:
-        return self.asmwrap(f"{'slli' if opd3_modifier.SHL in modifiers else 'srli'} {cdreg},{adreg},{bimm}")
+        return self.asmwrap(f"{'slli' if optransform_modifier.SHL in modifiers else 'srli'} {cdreg},{adreg},{bimm}")

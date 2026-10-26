@@ -12,7 +12,7 @@ from typing import Callable
 from ....registers import asm_data_type as adt, data_reg
 from ...op.signature import operation_signature
 from ...op.operand import operand_modifier as omod
-from ...op.move import move, move_modifier as mod
+from ...op.opmove import opmove, opmove_modifier as mod
 from ..types import xmm_vreg, ymm_vreg
 from ....registers import adt_size
 from .signatures import make_avx_move_signatures
@@ -20,7 +20,7 @@ from ...x86.move import x86_move
 from ...op.scalar import scalar_dregs_only, scalar_operands
 
 
-class avx_move(move):
+class avx_move(opmove):
     """
     AVX data move instructions on 128-bit blocks, in AT&T operand order. The
     block forms move bits, so their 32x4 variants serve every element type.

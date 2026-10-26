@@ -15,7 +15,7 @@ from ....registers import (
 from .base import neon_opd3_base
 
 from ...op import (
-    opd3_modifier as mod,
+    optransform_modifier as mod,
     operand_modifier as opd_mod
 )
 

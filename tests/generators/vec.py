@@ -7,13 +7,13 @@
 Generator for tests of SIMD/vector ASM
 """
 
-from asmgen.asmblocks.op import opd3_modifier as mod_d3
+from asmgen.asmblocks.op import optransform_modifier as mod_d3
 from asmgen.asmblocks.noarch import asm_data_type as dt, reg_tracker
 from asmgen.cppgen.checkers import always_true, vec_fp64_close, vec_fp32_close
 from asmgen.cppgen.expressions import identity
 from asmgen.cppgen.declarations import vargen, vio_type
 from asmgen.asmblocks.op.opset import opset_modifier
-from asmgen.asmblocks.op.opd3 import opd3_modifier
+from asmgen.asmblocks.op.optransform import optransform_modifier
 from asmgen.registers import asm_data_type as adt
 from asmgen.asmblocks.op.opmem import opmem_modifier
 

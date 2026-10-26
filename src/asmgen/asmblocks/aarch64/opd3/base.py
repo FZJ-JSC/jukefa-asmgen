@@ -16,15 +16,15 @@ from ....registers import (
     data_reg
 )
 from ...op import (
-    opd3,
-    opd3_modifier as mod,
+    optransform,
+    optransform_modifier as mod,
     operand_modifier as opd_mod,
     operation_signature
 )
 from ....registers import greg_base as _greg_base
 from ...op.scalar import scalar_operands
 
-class aarch64_simd_opd3_base(opd3):
+class aarch64_simd_opd3_base(optransform):
     """
     NEON+SVE base opd3 implementation with methods shared by all
     opd3 operations

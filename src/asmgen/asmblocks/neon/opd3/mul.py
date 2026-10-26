@@ -12,7 +12,7 @@ from typing import Any
 from ....registers import (
     asm_data_type as adt
 )
-from ...op import opd3_modifier as mod,operand_modifier as opd_mod
+from ...op import optransform_modifier as mod,operand_modifier as opd_mod
 from .base import neon_opd3_base
 from ...aarch64.opd3 import aarch64_mul
 

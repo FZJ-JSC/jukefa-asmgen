@@ -5,7 +5,7 @@ reworking them (docs/V06_REWORK.md), to be picked up when a caller needs it.
 
 ## move
 
-- `move_modifier.CAST`: a value converted between register files - an
+- `opmove_modifier.CAST`: a value converted between register files - an
   integer into a floating-point value (2 into 2.0) and back: RISC-V
   `fcvt.d.l`/`fcvt.l.d`, AArch64 `scvtf`/`fcvtzs`, x86
   `vcvtsi2sd`/`vcvttsd2si`. `BITS` moves the bits unchanged.
@@ -14,7 +14,7 @@ reworking them (docs/V06_REWORK.md), to be picked up when a caller needs it.
 
 ## shift
 
-- An arithmetic right shift (an `opd3_modifier` beside `SHL` and `SHR`):
+- An arithmetic right shift (an `optransform_modifier` beside `SHL` and `SHR`):
   RISC-V `srai`/`sra`, AArch64 `asr`, x86 `sarq`.
 - Vector shifts: RVV `vsll`/`vsrl`, NEON `shl`/`ushr`, SVE `lsl`/`lsr`, AVX
   `vpsllq`/`vpsrlq`.

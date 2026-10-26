@@ -15,8 +15,8 @@ from ....registers import (
     data_reg,
 )
 from ...op import (
-    opd3,
-    opd3_modifier as mod,
+    optransform,
+    optransform_modifier as mod,
     operation_signature,
     operand_modifier as opd_mod
 )
@@ -29,7 +29,7 @@ from .signatures import make_avx_opd3_signatures
 from ....registers import greg_base as _greg_base
 from ...op.scalar import scalar_operands
 
-class avx_opd3_base(opd3):
+class avx_opd3_base(optransform):
     """
     AVX base opd3 implementation with methods shared by all
     opd3 operations
@@ -67,7 +67,7 @@ class avx_opd3_base(opd3):
         Return the base instruction name based on the specified modifiers
 
         :param modifiers: set of modifiers to check the name for
-        :type modifiers: set[class:`asmgen.asmblocks.operations.opd3_modifier`]
+        :type modifiers: set[class:`asmgen.asmblocks.operations.optransform_modifier`]
         :return: ASM instruction name
         :rtype: str
         """

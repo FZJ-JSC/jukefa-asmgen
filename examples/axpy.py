@@ -25,7 +25,7 @@ from asmgen.asmblocks.op import (
 )
 from asmgen.asmblocks.op.operand import register_type as op_rt
 from asmgen.asmblocks.op.operand import operand_modifier
-from asmgen.asmblocks.op.opd3 import opd3_modifier
+from asmgen.asmblocks.op.optransform import optransform_modifier
 from asmgen.asmblocks.op.opset import opset_modifier
 
 ISA_MODULES = {
@@ -111,10 +111,10 @@ def emit_ptr_bumping(gen: asmgen, addr_x, addr_y, vlen_reg, unroll, vbytes, dt):
             block += gen.add(adreg=addr_x, bdreg=vlen_reg, cdreg=addr_x, a_dt=adt.UINT64, b_dt=adt.UINT64, c_dt=adt.UINT64)
             block += gen.add(adreg=addr_y, bdreg=vlen_reg, cdreg=addr_y, a_dt=adt.UINT64, b_dt=adt.UINT64, c_dt=adt.UINT64)
     elif gen.add.fits(adreg=addr_x, bimm=unroll, cdreg=addr_x, a_dt=adt.UINT64, c_dt=adt.UINT64,
-                      modifiers={opd3_modifier.VOFFSET}):
+                      modifiers={optransform_modifier.VOFFSET}):
         # unroll vector lengths in one add, where the ISA has one (SVE's addvl)
-        block += gen.add(adreg=addr_x, bimm=unroll, cdreg=addr_x, a_dt=adt.UINT64, c_dt=adt.UINT64, modifiers={opd3_modifier.VOFFSET})
-        block += gen.add(adreg=addr_y, bimm=unroll, cdreg=addr_y, a_dt=adt.UINT64, c_dt=adt.UINT64, modifiers={opd3_modifier.VOFFSET})
+        block += gen.add(adreg=addr_x, bimm=unroll, cdreg=addr_x, a_dt=adt.UINT64, c_dt=adt.UINT64, modifiers={optransform_modifier.VOFFSET})
+        block += gen.add(adreg=addr_y, bimm=unroll, cdreg=addr_y, a_dt=adt.UINT64, c_dt=adt.UINT64, modifiers={optransform_modifier.VOFFSET})
     else:
         block += gen.add(adreg=addr_x, bimm=unroll * vbytes, cdreg=addr_x, a_dt=adt.UINT64, c_dt=adt.UINT64)
         block += gen.add(adreg=addr_y, bimm=unroll * vbytes, cdreg=addr_y, a_dt=adt.UINT64, c_dt=adt.UINT64)
@@ -175,7 +175,7 @@ def main():
         vlen_reg = gen.greg(rt.aliased_regs["greg"]["vlen"])
         shift_amt = adt_size(dt).bit_length() - 1
         if shift_amt > 0:
-            innerblock += gen.shift(adreg=vlen_reg, bimm=shift_amt, cdreg=vlen_reg, a_dt=adt.UINT64, c_dt=adt.UINT64, modifiers={opd3_modifier.SHL})
+            innerblock += gen.shift(adreg=vlen_reg, bimm=shift_amt, cdreg=vlen_reg, a_dt=adt.UINT64, c_dt=adt.UINT64, modifiers={optransform_modifier.SHL})
 
     # 1. Resolve Signatures
     ld_sig, offset_type = resolve_ldst_sig(gen.load.get_signatures(), dt, op_rt.VEC)

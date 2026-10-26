@@ -13,7 +13,7 @@ from ....registers import asm_data_type as adt, data_reg
 
 from ...op.signature import operation_signature
 from ...op.operand import operand_modifier
-from ...op.move import move,move_modifier
+from ...op.opmove import opmove,opmove_modifier
 from ...op.misc import make_ord_prefix as mop
 
 from ...sve.move import sve_move
@@ -25,7 +25,7 @@ from ...aarch64.types import aarch64_greg,aarch64_freg
 from .signatures import make_sme_move_signatures
 from ...op.scalar import scalar_dregs_only, scalar_operands
 
-class sme_move(move):
+class sme_move(opmove):
     """
     SME data move instructions
     """
@@ -99,7 +99,7 @@ class sme_move(move):
     # pylint: disable-next=too-many-locals
     def implementation(self, *, dregs : list[data_reg],
                        dts : dict[str, adt],
-                       modifiers : set[move_modifier],
+                       modifiers : set[opmove_modifier],
                        operand_modifiers : dict[str,set[operand_modifier]],
                        **kwargs) -> str:
 
@@ -111,9 +111,9 @@ class sme_move(move):
 
         input_count = 1
         output_count = 1
-        if move_modifier.MULTIPLE_IN in modifiers:
+        if opmove_modifier.MULTIPLE_IN in modifiers:
             input_count = kwargs['nin']
-        if move_modifier.MULTIPLE_OUT in modifiers:
+        if opmove_modifier.MULTIPLE_OUT in modifiers:
             output_count = kwargs['nout']
 
         if input_count == output_count and input_count == 1:

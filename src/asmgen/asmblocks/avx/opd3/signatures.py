@@ -12,7 +12,7 @@ from ...op import (
     operand_type as ot,
     operand_role as orl,
     register_type as rt,
-    opd3_modifier as mod
+    optransform_modifier as mod
 )
 
 from ....registers import asm_data_type as adt

@@ -13,7 +13,7 @@ from ....registers import adt_size, asm_data_type as adt, data_reg
 
 from ...op.signature import operation_signature
 from ...op.operand import operand_modifier as omod
-from ...op.move import move,move_modifier as mod
+from ...op.opmove import opmove,opmove_modifier as mod
 
 from ..types import sve_vreg
 from ...aarch64.types import aarch64_greg,aarch64_freg
@@ -23,7 +23,7 @@ from .signatures import make_sve_move_signatures
 from ...aarch64.move import aarch64_move
 from ...op.scalar import scalar_dregs_only, scalar_operands
 
-class sve_move(move):
+class sve_move(opmove):
     """
     SVE data move instructions
     """

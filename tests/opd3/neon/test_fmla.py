@@ -9,11 +9,11 @@ Tests NEON/ASIMD fma instruction code generation
 
 from asmgen.registers import asm_data_type as adt
 from asmgen.asmblocks.op import (
-    opd3_modifier as mod,
+    optransform_modifier as mod,
     operand_modifier as opd_mod
 )
 
-from asmgen.asmblocks.op.opd3 import widening_method as wm
+from asmgen.asmblocks.op.optransform import widening_method as wm
 
 from .test_neon_opd3 import test_neon_opd3_base
 

@@ -10,7 +10,7 @@ AVX mul (vmul)
 from typing import Any
 
 from ...op import (
-    opd3_modifier as mod,
+    optransform_modifier as mod,
     operand_modifier as opd_mod
 )
 from ....registers import asm_data_type as adt

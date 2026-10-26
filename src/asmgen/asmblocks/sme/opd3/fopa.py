@@ -14,15 +14,15 @@ from ....registers import (
     data_reg
 )
 from ...op import (
-    opd3,
-    opd3_modifier as mod,
+    optransform,
+    optransform_modifier as mod,
     operation_signature,
     operand_modifier as opd_mod
 )
 
 from .signatures import make_sme_opd3_signatures
 
-class sme_fopa(opd3):
+class sme_fopa(optransform):
     """
     SME ASM instructions of fused outer-product-accumulate operations
     """

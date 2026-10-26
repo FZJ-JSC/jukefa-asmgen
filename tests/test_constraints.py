@@ -77,7 +77,7 @@ if __name__ == "__main__":
 class test_sve_destructive(unittest.TestCase):
 
     def test_mul_add(self):
-        from asmgen.asmblocks.op import opd3_modifier as m3
+        from asmgen.asmblocks.op import optransform_modifier as m3
         g = sve()
         z = g.vreg
         dts = dict(a_dt=adt.FP64, b_dt=adt.FP64, c_dt=adt.FP64)

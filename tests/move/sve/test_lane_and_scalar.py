@@ -10,7 +10,7 @@ Tests SVE lane and scalar moves/broadcasts
 import unittest
 
 from asmgen.asmblocks.op import (
-    move_modifier as mod,
+    opmove_modifier as mod,
     operand_modifier as opd_mod,
 )
 from asmgen.registers import asm_data_type as adt

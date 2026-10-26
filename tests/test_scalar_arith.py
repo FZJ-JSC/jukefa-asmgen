@@ -11,9 +11,9 @@ from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.sve import sve
 from asmgen.registers import asm_data_type as adt
 from asmgen.asmblocks.op.operand import operand_modifier as opd_mod
-from asmgen.asmblocks.op.opd3 import opd3_modifier
+from asmgen.asmblocks.op.optransform import optransform_modifier
 
-DIR = {'shl': {opd3_modifier.SHL}, 'shr': {opd3_modifier.SHR}}
+DIR = {'shl': {optransform_modifier.SHL}, 'shr': {optransform_modifier.SHR}}
 
 U = adt.UINT64
 
@@ -147,7 +147,7 @@ class test_vector_lengths(unittest.TestCase):
     """
     def vl(self, g, a, n, c):
         return plain(g.add(adreg=g.greg(a), bimm=n, cdreg=g.greg(c), a_dt=U, c_dt=U,
-                           modifiers={opd3_modifier.VOFFSET}))
+                           modifiers={optransform_modifier.VOFFSET}))
 
     def test_sve(self):
         g = make(sve)

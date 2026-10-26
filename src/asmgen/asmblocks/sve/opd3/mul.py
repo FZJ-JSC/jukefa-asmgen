@@ -11,7 +11,7 @@ from typing import Any
 
 from ....registers import asm_data_type as adt
 from ...op import (
-    opd3_modifier as mod,
+    optransform_modifier as mod,
     operand_modifier as opd_mod
 )
 

@@ -7,7 +7,7 @@ is handled without losing it.
 from typing import Callable
 
 from ...op.constraint import minmax_constraint
-from ...op.opd3 import opd3_modifier
+from ...op.optransform import optransform_modifier
 from ...op.scalar import scalar_arith
 from ....registers import greg_base
 
@@ -91,11 +91,11 @@ class x86_mul(x86_scalar_arith):
 
 class x86_shift(x86_scalar_arith):
     """
-    shlq, shrq by an immediate, 0 to 63: opd3_modifier SHL or SHR. An amount
+    shlq, shrq by an immediate, 0 to 63: optransform_modifier SHL or SHR. An amount
     in a register would have to be %cl, so that form isn't offered
     """
     def op_modifiers(self):
-        return [{opd3_modifier.SHL}, {opd3_modifier.SHR}]
+        return [{optransform_modifier.SHL}, {optransform_modifier.SHR}]
 
     def has_register_form(self):
         return False
@@ -105,5 +105,5 @@ class x86_shift(x86_scalar_arith):
 
     def with_immediate(self, *, adreg : greg_base, bimm : int, cdreg : greg_base, modifiers : set) -> str:
         pa, pc = self.rpref(adreg), self.rpref(cdreg)
-        inst = "shlq" if opd3_modifier.SHL in modifiers else "shrq"
+        inst = "shlq" if optransform_modifier.SHL in modifiers else "shrq"
         return self.copy(src=pa, dst=pc) + self.asmwrap(f"{inst} ${bimm},{pc}")

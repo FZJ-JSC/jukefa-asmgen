@@ -67,7 +67,7 @@ class operand_constraint(ABC):
 
         :param name: name of the argument for which to specialize params
         :param modifiers: modifiers to apply to the operation
-                          (like opd3_modifier.* or opmem_modifier.*)
+                          (like optransform_modifier.* or opmem_modifier.*)
         :param context: arguments passed to the operation or already
                         assigned arguments when generating valid values
         :param params: constraint-relevant parameters
@@ -86,7 +86,7 @@ class operand_constraint(ABC):
 
         :param name: name of the argument (like 'adreg')
         :param modifiers: modifiers to apply to the operation
-                          (like opd3_modifier.* or opmem_modifier.*)
+                          (like optransform_modifier.* or opmem_modifier.*)
         :param val: value to check for the argument
         :param context: dictionary of already assigned argument values
 

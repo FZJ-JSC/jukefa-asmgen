@@ -9,7 +9,7 @@ Tests SME row/col extracts/inserts
 import unittest
 
 from asmgen.asmblocks.op import (
-    move_modifier as mod,
+    opmove_modifier as mod,
     operand_modifier as opd_mod,
     make_ord_prefix as mop
 )

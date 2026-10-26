@@ -26,10 +26,10 @@ from .opmem import aarch64_load, aarch64_store
 from .opmem import aarch64_prefetch
 from ...registers import asm_data_type as _ADT
 from ..op.operand import operand_modifier as _opd_mod
-from ..op.move import move_modifier as _move_mod
+from ..op.opmove import opmove_modifier as _move_mod
 from ..op.scalar import BITS_GP as _BITS_GP
 from ..op.opset import opset_modifier as _opset_mod
-from ..op.opd3 import opd3_modifier as _opd3_mod
+from ..op.optransform import optransform_modifier as _opd3_mod
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 

@@ -19,7 +19,7 @@ from ...op import (
     operand_type as ot,
     operand_role as orl,
     register_type as rgt,
-    move_modifier as mod,
+    opmove_modifier as mod,
     make_ord_prefix as mop
 )
 

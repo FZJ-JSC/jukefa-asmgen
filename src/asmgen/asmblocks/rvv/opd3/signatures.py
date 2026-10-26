@@ -13,11 +13,11 @@ from ...op import (
     operand_type as ot,
     operand_role as orl,
     register_type as rt,
-    opd3_modifier as mod,
+    optransform_modifier as mod,
     operand_modifier as opd_mod
 )
 
-from ...op.opd3 import widening_method as wm
+from ...op.optransform import widening_method as wm
 from ...op.constraint import multiple_constraint
 
 from ....registers import asm_data_type as adt

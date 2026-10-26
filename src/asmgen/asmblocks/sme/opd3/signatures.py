@@ -12,10 +12,10 @@ from ...op import (
     operand_type as ot,
     operand_role as orl,
     register_type as rt,
-    opd3_modifier as mod
+    optransform_modifier as mod
 )
 
-from ...op.opd3 import widening_method as wm
+from ...op.optransform import widening_method as wm
 from ....registers import asm_data_type as adt, adt_size
 
 _FLOATS = [adt.FP64, adt.FP32, adt.FP16, adt.BF16, adt.FP8E4M3, adt.FP8E5M2]

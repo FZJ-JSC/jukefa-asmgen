@@ -10,15 +10,15 @@ to it - as rvv_opmem does with riscv64_opmem.
     gen.add(adreg=a, bdreg=b, cdreg=c, a_dt=UINT64, b_dt=UINT64, c_dt=UINT64)   c = a + b
     gen.add(adreg=a, bimm=8, cdreg=c, a_dt=UINT64, c_dt=UINT64)                 c = a + 8
     gen.shift(adreg=a, bimm=3, cdreg=c, a_dt=UINT64, c_dt=UINT64,
-              modifiers={opd3_modifier.SHL})                                     c = a << 3
+              modifiers={optransform_modifier.SHL})                                     c = a << 3
 """
 from __future__ import annotations
 
 from typing import Callable
 
 from ...registers import asm_data_type as adt, greg_base, freg_base
-from .opd3 import opd3, opd3_modifier
-from .move import move, move_modifier
+from .optransform import optransform, optransform_modifier
+from .opmove import opmove, opmove_modifier
 from .operand import operand_shape as osh, operand_type as ot, operand_role as orl, register_type as rt
 from .operand import operand_modifier as opd_mod
 from .signature import operation_signature
@@ -26,7 +26,7 @@ from .signature import operation_signature
 GREG_DTS = (adt.UINT64, adt.SINT64)
 
 
-class scalar_arith(opd3):
+class scalar_arith(optransform):
     """
     An arithmetic operation on general registers: each ISA says which forms
     it has and writes the instructions (with_register, with_immediate,
@@ -57,7 +57,7 @@ class scalar_arith(opd3):
 
     def voffset_forms(self) -> list[list]:
         """
-        Forms whose bimm counts vector lengths (opd3_modifier.VOFFSET), one
+        Forms whose bimm counts vector lengths (optransform_modifier.VOFFSET), one
         list of constraints per form; none: no such form (a fixed vector
         length is a byte count)
         """
@@ -86,7 +86,7 @@ class scalar_arith(opd3):
                     sigs.append(operation_signature(modifiers=set(mods), structural_params={},
                                                     operands={"adreg": reg(), "cdreg": reg(), "bimm": imm(constraints)}))
             for constraints in self.voffset_forms():
-                sigs.append(operation_signature(modifiers={opd3_modifier.VOFFSET}, structural_params={},
+                sigs.append(operation_signature(modifiers={optransform_modifier.VOFFSET}, structural_params={},
                                                 operands={"adreg": reg(), "cdreg": reg(), "bimm": imm(constraints)}))
             for constraints, requires in self.shift_forms():
                 sigs.append(operation_signature(modifiers=set(), structural_params={}, requires=frozenset(requires),
@@ -102,7 +102,7 @@ class scalar_arith(opd3):
                        bimm : int | None = None, bdreg_shift : int | None = None,
                        modifiers : set | None = None, **_) -> str:
         mods = set(modifiers or ())
-        if opd3_modifier.VOFFSET in mods:
+        if optransform_modifier.VOFFSET in mods:
             return self.with_voffset(adreg=adreg, bimm=bimm, cdreg=cdreg)
         if bdreg_shift is not None:
             return self.with_shifted(adreg=adreg, bdreg=bdreg, bdreg_shift=bdreg_shift, cdreg=cdreg)
@@ -149,12 +149,12 @@ def scalar_operands(kwargs : dict) -> dict:
 BITS_GP = {adt.DOUBLE: adt.UINT64, adt.SINGLE: adt.UINT32, adt.HALF: adt.UINT16}
 
 
-class scalar_move(move):
+class scalar_move(opmove):
     """
     Moves between scalar registers, as operations (0.6, phase 3): general
     to general (dregs [src, dst], UINT64 or SINT64), floating-point to
     floating-point, and a general register's bits into a floating-point
-    register (move_modifier.BITS; UINT64 to DOUBLE, UINT32 to SINGLE,
+    register (opmove_modifier.BITS; UINT64 to DOUBLE, UINT32 to SINGLE,
     UINT16 to HALF). A vector move carries its base ISA's as a member, as
     rvv_opmem does with riscv64_opmem. Each ISA writes the instructions.
     """
@@ -175,7 +175,7 @@ class scalar_move(move):
             sigs.append(operation_signature(modifiers=set(), structural_params={},
                                             operands={"adreg": reg(rt.FP, dt), "bdreg": reg(rt.FP, dt)}))
         for dt in self.FP_DTS:
-            sigs.append(operation_signature(modifiers={move_modifier.BITS}, structural_params={},
+            sigs.append(operation_signature(modifiers={opmove_modifier.BITS}, structural_params={},
                                             operands={"adreg": reg(rt.GP, BITS_GP[dt]), "bdreg": reg(rt.FP, dt)}))
         return sigs
 
@@ -185,7 +185,7 @@ class scalar_move(move):
     # pylint: disable-next=arguments-differ
     def implementation(self, *, dregs, dts, modifiers=None, **_) -> str:
         src, dst = dregs[0], dregs[1]
-        if move_modifier.BITS in (modifiers or set()):
+        if opmove_modifier.BITS in (modifiers or set()):
             return self.bits_to_freg(src=src, dst=dst, dt=dts["bdreg"])
         if "GP" == self.rtype_of(dts["adreg"]):
             return self.greg_to_greg(src=src, dst=dst)

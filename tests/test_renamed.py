@@ -1,8 +1,10 @@
 """
 fadd and fmul are add and mul (0.6, phase 1); the old names - the
 generator's attributes, the classes' - were deprecated for a release and
-are gone (phase 9).
+are gone (phase 9). opd3 is optransform and move's base class opmove
+(phase 10): their old names deprecated for a release.
 """
+import warnings
 import importlib
 import unittest
 
@@ -30,6 +32,34 @@ class test_renamed(unittest.TestCase):
                     with self.assertRaises(AttributeError):
                         getattr(module, old)
 
+
+
+class test_phase10_names(unittest.TestCase):
+    def old(self, module, name):
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            value = getattr(importlib.import_module(module), name)
+        self.assertTrue(any(issubclass(w.category, DeprecationWarning) for w in caught), (module, name))
+        return value
+
+    def test_modules(self):
+        from asmgen.asmblocks.op.optransform import optransform, optransform_modifier
+        from asmgen.asmblocks.op.opmove import opmove, opmove_modifier
+        self.assertIs(optransform, self.old("asmgen.asmblocks.op.opd3", "opd3"))
+        self.assertIs(optransform_modifier, self.old("asmgen.asmblocks.op.opd3", "opd3_modifier"))
+        self.assertIs(opmove, self.old("asmgen.asmblocks.op.move", "move"))
+        self.assertIs(opmove_modifier, self.old("asmgen.asmblocks.op.move", "move_modifier"))
+
+    def test_package(self):
+        from asmgen.asmblocks import op
+        self.assertIs(op.optransform_modifier, self.old("asmgen.asmblocks.op", "opd3_modifier"))
+        self.assertIs(op.opmove_modifier, self.old("asmgen.asmblocks.op", "move_modifier"))
+
+    def test_new_names_quiet(self):
+        with warnings.catch_warnings():
+            warnings.simplefilter("error", DeprecationWarning)
+            from asmgen.asmblocks.op import optransform, optransform_modifier, opmove, opmove_modifier  # noqa
+            self.assertTrue(issubclass(type(neon().add), optransform))
 
 if __name__ == "__main__":
     unittest.main()

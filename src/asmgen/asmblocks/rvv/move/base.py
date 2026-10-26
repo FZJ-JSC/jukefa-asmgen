@@ -12,14 +12,14 @@ from typing import Callable
 from ....registers import asm_data_type as adt, data_reg
 from ...op.signature import operation_signature
 from ...op.operand import operand_modifier as omod
-from ...op.move import move, move_modifier as mod
+from ...op.opmove import opmove, opmove_modifier as mod
 from ...riscv64.types import riscv64_greg
 from .signatures import make_rvv_move_signatures
 from ...riscv64.move import riscv64_move
 from ...op.scalar import scalar_dregs_only, scalar_operands
 
 
-class rvv_move(move):
+class rvv_move(opmove):
     """
     RVV data move instructions: vmv, vfmv, vrgather
     """

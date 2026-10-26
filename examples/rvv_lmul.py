@@ -65,7 +65,7 @@ from asmgen.registers import (
     adt_size,
     asm_data_type as adt
 )
-from asmgen.asmblocks.op.opd3 import opd3_modifier
+from asmgen.asmblocks.op.optransform import optransform_modifier
 from asmgen.asmblocks.op.operand import operand_modifier
 
 
@@ -107,7 +107,7 @@ def main():
         vlenidx = rt.aliased_regs["greg"]["vlen"]
         vlen = gen.greg(vlenidx)
 
-        asmblock += gen.shift(adreg=vlen, bimm=adt_size(dt).bit_length()-1, cdreg=vlen, a_dt=adt.UINT64, c_dt=adt.UINT64, modifiers={opd3_modifier.SHL})
+        asmblock += gen.shift(adreg=vlen, bimm=adt_size(dt).bit_length()-1, cdreg=vlen, a_dt=adt.UINT64, c_dt=adt.UINT64, modifiers={optransform_modifier.SHL})
 
 
         asmblock += gen.load(dregs=[a], areg=aaddr, dt=dt)

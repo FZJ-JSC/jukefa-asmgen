@@ -11,10 +11,10 @@ import unittest
 from asmgen.asmblocks.rvv import rvv
 from asmgen.registers import asm_data_type as adt
 
-from asmgen.asmblocks.op import opd3_modifier as mod
+from asmgen.asmblocks.op import optransform_modifier as mod
 from asmgen.asmblocks.op import operand_modifier as opd_mod
 
-from asmgen.asmblocks.op.opd3 import widening_method as wm
+from asmgen.asmblocks.op.optransform import widening_method as wm
 
 class test_rvv_opd3(unittest.TestCase):
     """
