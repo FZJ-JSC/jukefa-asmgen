@@ -60,38 +60,38 @@ class sme_rowcolreg_constraint(regidx_constraint, minmax_constraint):
     maxval : int = 15
 
 @dataclass(kw_only=True)
-class sme_nt_struct_constraint(regidx_constraint, otherplusnmod_constraint):
+class sme_multivec_constraint(regidx_constraint, otherplusnmod_constraint):
     """
-    Constraint ensuring correct dreg register index offset for nt struct ld/st
+    A multi-vector access's next register: its list's stride after the one before (8 for 2, 4 for 4)
     """
     reg_class : Type[sve_vreg] = sve_vreg
     offset : int = field(init=False)
     modval : int = 32
-    nstructs : int
+    nvectors : int
 
     def __post_init__(self):
 
-        if self.nstructs == 2:
+        if self.nvectors == 2:
             self.offset = 8
-        if self.nstructs == 4:
+        if self.nvectors == 4:
             self.offset = 4
 
         super().__post_init__()
 
 @dataclass(kw_only=True)
-class sme_nt_struct_firstreg_constraint(regidx_constraint, oneof_constraint):
+class sme_multivec_firstreg_constraint(regidx_constraint, oneof_constraint):
     """
-    Constraint ensuring the first register in an nt struct ld/st is bounded correctly
+    A multi-vector access's first register: where its strided list can start
     """
     reg_class : Type[sve_vreg] = sve_vreg
     valset : int = field(init=False)
-    nstructs : int
+    nvectors : int
 
     def __post_init__(self):
 
-        if self.nstructs == 2:
+        if self.nvectors == 2:
             self.valset = set(range(8)).union(set(range(16,24)))
-        if self.nstructs == 4:
+        if self.nvectors == 4:
             self.valset = set(range(4)).union(set(range(16,20)))
 
         super().__post_init__()
@@ -121,7 +121,7 @@ def make_sme_opmem_signatures():
     """
     sigs = []
 
-    def add_sig(dt, *, mods, opd_mods=None, nstructs=1):
+    def add_sig(dt, *, mods, opd_mods=None, nvectors=1):
         ops = {
             'agreg': osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
             'amreg': osh(ot.REGISTER, orl.MASK, rt.MASK, dt)
@@ -132,20 +132,20 @@ def make_sme_opmem_signatures():
         struct_params={}
 
         # structured ld/st logic
-        if mod.STRUCT in mods:
+        if mod.MULTIVEC in mods:
             ops['amreg'].value_constraints.append(
                     sme_mreg_pn_constraint()
                     )
-            struct_params['nstructs'] = nstructs
+            struct_params['nvectors'] = nvectors
             ops['adreg'] = osh(ot.REGISTER, orl.DATA, rt.VEC, dt,
                                value_constraints = [
-                                   sme_nt_struct_firstreg_constraint(nstructs=nstructs)
+                                   sme_multivec_firstreg_constraint(nvectors=nvectors)
                                 ])
-            for i in range(1, nstructs):
+            for i in range(1, nvectors):
                 ops[f"{mop(i)}dreg"] = osh(
                     ot.REGISTER, orl.DATA, rt.VEC, dt,
                     value_constraints=[
-                        sme_nt_struct_constraint(other=f"{mop(i-1)}dreg",nstructs=nstructs)
+                        sme_multivec_constraint(other=f"{mop(i-1)}dreg",nvectors=nvectors)
                     ])
         else:
             ops['adreg'] = osh(ot.REGISTER, orl.DATA, rt.TILE, dt)
@@ -191,9 +191,9 @@ def make_sme_opmem_signatures():
         add_sig(dt, mods={mod.MASK, mod.GOFFSET}, opd_mods={'adreg':{opd_mod.ROW}})
         add_sig(dt, mods={mod.MASK, mod.GOFFSET}, opd_mods={'adreg':{opd_mod.COL}})
         # LD1NT...
-        for nstructs in [2,4]:
-            add_sig(dt, mods={mod.MASK, mod.NT, mod.STRUCT}, nstructs=nstructs)
-            add_sig(dt, mods={mod.MASK, mod.NT, mod.STRUCT, mod.GOFFSET}, nstructs=nstructs)
-            add_sig(dt, mods={mod.MASK, mod.NT, mod.STRUCT, mod.VOFFSET}, nstructs=nstructs)
+        for nvectors in [2,4]:
+            add_sig(dt, mods={mod.MASK, mod.NT, mod.MULTIVEC}, nvectors=nvectors)
+            add_sig(dt, mods={mod.MASK, mod.NT, mod.MULTIVEC, mod.GOFFSET}, nvectors=nvectors)
+            add_sig(dt, mods={mod.MASK, mod.NT, mod.MULTIVEC, mod.VOFFSET}, nvectors=nvectors)
 
     return sigs

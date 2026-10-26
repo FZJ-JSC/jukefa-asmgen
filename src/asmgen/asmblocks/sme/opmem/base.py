@@ -114,6 +114,7 @@ class sme_opmem(opmem):
 
         required_params = {
             mod.STRUCT : ['nstructs'],
+            mod.MULTIVEC : ['nvectors'],
             mod.IOFFSET : ['ioffset'],
             mod.VOFFSET : ['voffset'],
             mod.GOFFSET : ['offreg'],

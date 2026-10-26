@@ -127,8 +127,8 @@ class test_sme_opmem(unittest.TestCase):
         self.assertEqual(
             self.load(dregs=[self.z0, self.z8], areg=self.x0,
                       amreg=self.pn8, dt=adt.FP64,
-                      modifiers={mod.NT, mod.STRUCT, mod.MASK, mod.VOFFSET},
-                      nstructs=2, voffset=2),
+                      modifiers={mod.NT, mod.MULTIVEC, mod.MASK, mod.VOFFSET},
+                      nvectors=2, voffset=2),
             "ldnt1d {z0.d, z8.d}, pn8/z, [x0, #2, MUL VL]\n"
         )
 
@@ -137,8 +137,8 @@ class test_sme_opmem(unittest.TestCase):
         self.assertEqual(
             self.store(dregs=[self.z0, self.z8], areg=self.x0,
                        amreg = self.pn8, dt=adt.FP32,
-                       modifiers={mod.NT, mod.STRUCT, mod.MASK, mod.GOFFSET},
-                       nstructs=2, offreg=self.x1),
+                       modifiers={mod.NT, mod.MULTIVEC, mod.MASK, mod.GOFFSET},
+                       nvectors=2, offreg=self.x1),
             "stnt1w {z0.s, z8.s}, pn8, [x0, x1, lsl #2]\n"
         )
 
@@ -148,8 +148,8 @@ class test_sme_opmem(unittest.TestCase):
         self.assertEqual(
             self.load(dregs=[self.z0, self.z8], areg=self.x0,
                       amreg=pn9, dt=adt.FP64,
-                      modifiers={mod.NT, mod.STRUCT, mod.MASK, mod.VOFFSET},
-                      nstructs=2, voffset=2),
+                      modifiers={mod.NT, mod.MULTIVEC, mod.MASK, mod.VOFFSET},
+                      nvectors=2, voffset=2),
             "ldnt1d {z0.d, z8.d}, pn9/z, [x0, #2, MUL VL]\n"
         )
 
@@ -168,21 +168,21 @@ class test_sme_opmem(unittest.TestCase):
         with self.subTest(error="NT load with P predicate"):
             with self.assertRaisesRegex(ValueError, "index of amreg must be >= 8"):
                 self.load(dregs=[self.z0, self.z8], areg=self.x0, amreg=self.p0, dt=adt.FP64,
-                          modifiers={mod.NT, mod.STRUCT, mod.MASK}, nstructs=2)
+                          modifiers={mod.NT, mod.MULTIVEC, mod.MASK}, nvectors=2)
 
         # 3. NT strided load with non-strided registers (e.g. z0, z1 instead of z0, z8)
         with self.subTest(error="NT registers not strided correctly"):
             with self.assertRaisesRegex(ValueError,
                                         r"index of bdreg must be index of adreg plus 8 modulo 32"):
                 self.load(dregs=[self.z0, sve_vreg(1)], areg=self.x0, amreg=self.pn8, dt=adt.FP64,
-                          modifiers={mod.NT, mod.STRUCT, mod.MASK}, nstructs=2)
+                          modifiers={mod.NT, mod.MULTIVEC, mod.MASK}, nvectors=2)
 
         # 4. NT strided load with invalid starting register (e.g. z15)
         with self.subTest(error="NT invalid starting register"):
             with self.assertRaisesRegex(ValueError, r"index of adreg must be one of"):
                 self.load(dregs=[sve_vreg(15), sve_vreg(23)], areg=self.x0,
                           amreg=self.pn8, dt=adt.FP64,
-                          modifiers={mod.NT, mod.STRUCT, mod.MASK}, nstructs=2)
+                          modifiers={mod.NT, mod.MULTIVEC, mod.MASK}, nvectors=2)
 
         # 5. Tile slice immediate out of bounds (FP64 max is 1)
         with self.subTest(error="Tile slice immediate bounds"):
@@ -191,6 +191,30 @@ class test_sme_opmem(unittest.TestCase):
                           modifiers={mod.MASK},
                           operand_modifiers={'adreg':{opd_mod.ROW}},
                           adreg_rowreg=self.w12, adreg_immrow=2)
+
+
+
+class test_struct_and_multivec(unittest.TestCase):
+    """
+    STRUCT is interleaving (ld2d-ld4d: element e of register p at memory
+    element nstructs*e + p); SME2's multi-vector accesses - consecutive
+    vectors into a list of registers (ldnt1d {z0.d, z8.d}) - are MULTIVEC
+    """
+    def test_kinds(self):
+        from asmgen.asmblocks.sme import sme
+        g = sme()
+        for action in ("load", "store"):
+            op = getattr(g, action)
+            structs = op.forms(modifiers={mod.STRUCT})
+            multis = op.forms(modifiers={mod.MULTIVEC})
+            self.assertTrue(structs and multis, action)
+            for s in structs:
+                self.assertNotIn(mod.NT, s.modifiers)
+                self.assertIn(s.structural_params["nstructs"], (2, 3, 4))
+            for s in multis:
+                self.assertNotIn(mod.STRUCT, s.modifiers)
+                self.assertIn(s.structural_params["nvectors"], (2, 4))
+                self.assertNotIn("nstructs", s.structural_params)
 
 if __name__ == '__main__':
     unittest.main()

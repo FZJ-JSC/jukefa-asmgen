@@ -41,7 +41,8 @@ class opmem_modifier(operation_modifier):
     GSTRIDE = auto() # stride between elements given by greg
     ISTRIDE = auto() # stride between elements given by immediate
     POSTINC = auto() # increment address greg after operation
-    STRUCT = auto()  # load a structure with multiple components
+    STRUCT = auto()  # structures: element e of register p at memory element nstructs*e + p (ld2-4)
+    MULTIVEC = auto() # nvectors vectors consecutive in memory, a list of registers (SME2's ld1/ldnt1)
                      # (i.e [Re,Im], [x,y,z] or [r,g,b,a])
     #BCAST = auto()   # Broadcast one value into all lanes
     MASK  = auto()   # Masked operation
