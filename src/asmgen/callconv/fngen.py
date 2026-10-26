@@ -18,9 +18,11 @@ class fngen:
     Class for generating calling-convention-compliant functions in ASM
     """
 
-    def __init__(self, gen : asmgen, rt : reg_tracker | None = None):
+    def __init__(self, gen : asmgen, rt : reg_tracker | None = None, *,
+                 cfi : bool | None = None):
         self.gen = gen
         self.rt = rt
+        self._cfi = cfi
 
         self.required_loads : dict[str,tuple[str,int]] = dict()
 
@@ -47,7 +49,20 @@ class fngen:
         text += gen.asmwrap(f".global {name}")
         text += gen.asmwrap(f".type {name}, %function")
         text += gen.asmwrap(f"{name}:")
+        if self.cfi:
+            body = gen.asmwrap(".cfi_startproc") + body + gen.asmwrap(".cfi_endproc")
         return text + body + gen.asmwrap(f".size {name}, .-{name}") + data
+
+    @property
+    def cfi(self) -> bool:
+        """
+        Whether functions carry unwind information (CFI): .cfi_startproc and
+        .cfi_endproc around them (function), the stack adjustment and where
+        each register is saved after the saves (get_boilerplate). By default
+        where the output is a file of its own - inline assembly's CFI is the
+        compiler's. fngen(..., cfi=) says otherwise.
+        """
+        return (not self.gen.output_inline) if self._cfi is None else self._cfi
 
     def init_cc(self, cc : callconv,
                 reverse_alias_map : dict[str,str] = None,
@@ -120,13 +135,14 @@ class fngen:
         sr_count += len(set(used_fregs).intersection(cc.callee_save_lists['freg']))
         saveblock = cc.save_in_call(self.gen,
                                     regs={'greg':used_gregs,
-                                          'freg':used_fregs})
+                                          'freg':used_fregs},
+                                    cfi=self.cfi)
 
         loadblock = ''
 
         # the save area as the convention laid it out - with the registers
         # added as clobbers (add_clobber), not only those allocated
-        raw_sp_shift = getattr(cc, "spadd", sr_count*8)
+        raw_sp_shift = cc.spadd
         aligned_sp_shift = ((raw_sp_shift + cc.spalign - 1) // cc.spalign) * cc.spalign
         # where stack parameters are, from the stack pointer after the save:
         # for loads of them emitted elsewhere than at entry
@@ -142,6 +158,7 @@ class fngen:
 
         restoreblock = cc.restore_before_ret(self.gen,
                                              regs={'greg':used_gregs,
-                                                   'freg':used_fregs})
+                                                   'freg':used_fregs},
+                                             cfi=self.cfi)
 
         return saveblock,self.debug_block+loadblock,restoreblock

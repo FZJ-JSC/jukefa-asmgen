@@ -331,7 +331,7 @@ assembling; ukrgen's golden kernels and ukropt's builds unchanged.
 A new operation class for values that come from nowhere but the
 instruction stream:
 
-- [~] `CONST`: `constant="zero"`, `"ones"`, or a value (general registers:
+- [x] `CONST`: `constant="zero"`, `"ones"`, or a value (general registers:
       the materializing sequence). Replaces `zero_greg`, `zero_freg`,
       `zero_vreg`, `zero_treg`, `mov_greg_imm`.
       Step 4a: the operation class `opset` (`op/opset.py`, as `opmem`
@@ -359,7 +359,14 @@ instruction stream:
       and `movk` (checked under QEMU); x86 `movq` (the assembler encodes a
       value past 32 bits as `movabs`). `mov_greg_imm` on it, its texts
       kept. Zero done, `zero_greg`, `zero_freg`, `zero_vreg`,
-      `zero_treg` on it, their texts kept; `"ones"` and values to come.
+      `zero_treg` on it, their texts kept (until phase 9 deleted them).
+      Done as far as it goes without a scratch register: `zero` in every
+      register type, `one` (what `"ones"` became) in general registers
+      everywhere, floating-point ones on AArch64 and x86, vectors
+      everywhere, `value=` in general registers. The rest -
+      `allbits`, `one` where it takes a scratch register (RISC-V's FP 1.0
+      without Zfa, ...), values in floating-point and vector registers -
+      is docs/POSSIBLE_FEATURES.md's.
 - [x] `CONSTMASK`: `mask="alltrue"` and `"allfalse"` (a structural
       parameter), on mask registers: SVE and SME `ptrue p.<T>` (`pn` too)
       and `pfalse p.b`; AVX-512 `kxnorw` and `kxorw`. `mask_all_true` on
@@ -553,11 +560,14 @@ builds unchanged.
       the caller's, after all: ukrgen's `loop-align` and ukropt's padding
       are on it; RISC-V adds a `c.nop` (`SHORT_NOP`) for 2 mod 4.
 - [x] `gen.nop()`.
-- [ ] Later, if wanted: CFI (`.cfi_startproc`, the stack adjustment, where
-      each register is saved: `callconv` knows), `.ident` with the
-      generator's version and configuration; behind parameters, ISA
-      directives (`.arch_extension sve`, `.option arch, +v`), `.hidden`, x86
-      CET and AArch64 BTI markings.
+- [x] CFI (asmgen 0080): fngen writes `.cfi_startproc` and `.cfi_endproc`
+      around a function, callconv `.cfi_adjust_cfa_offset` after the stack
+      adjustments and `.cfi_rel_offset`/`.cfi_restore` after each save and
+      restore - where the output is a file of its own (inline assembly's CFI
+      is the compiler's; `fngen(..., cfi=)` overrides). Checked as encoded
+      (readelf's frames) on x86, AArch64, RISC-V. The other directives this
+      item listed - `.ident`, ISA directives, `.hidden`, CET and BTI
+      markings - are docs/POSSIBLE_FEATURES.md's.
 - [x] One implementation for standalone output; `asmwrap`/`cppgen` keep the
       inline one: ukrgen's emitter and BLIS injector (its 0165) and ukropt's
       pairs and sweep (its 0013) frame and align through it.
@@ -777,3 +787,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
   (asmgen 0078).
 - 2026-10-27: the old opd3 and move names dropped, the ISAs' packages renamed
   (asmgen 0079).
+- 2026-10-27: CFI in fngen and callconv; CONST closed (asmgen 0080).

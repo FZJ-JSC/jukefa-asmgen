@@ -79,7 +79,8 @@ class callconv:
 
     def save_regs(self,
                   gen : asmgen,
-                  reg_indices : dict[str,list[int]]) -> str:
+                  reg_indices : dict[str,list[int]],
+                  cfi : bool = False) -> str:
         """
         Returns the string with the necesseray assembly to save the specified
         registers
@@ -102,6 +103,8 @@ class callconv:
             aligned_sp = ((self.spadd + self.spalign - 1) // self.spalign) * self.spalign
             asmblock += gen.add(adreg=spreg, bimm=-aligned_sp, cdreg=spreg,
                     a_dt=adt.UINT64, c_dt=adt.UINT64)
+            if cfi:
+                asmblock += gen.asmwrap(f".cfi_adjust_cfa_offset {aligned_sp}")
 
         rtype_off = 0
         for type_tag,reg_list in reg_indices.items():
@@ -116,13 +119,16 @@ class callconv:
                 offset = 8*i+self.sp_rtype_offsets[type_tag]
                 kwargs = {"modifiers": {opmem_modifier.IOFFSET}, "ioffset": offset} if offset else {}
                 asmblock += gen.store(dregs=[reg], areg=spreg, dt=dt, **kwargs)
+                if cfi:
+                    asmblock += gen.asmwrap(f".cfi_rel_offset {reg}, {offset}")
                 rtype_off += 8
 
         return asmblock
 
     def restore_regs(self,
                      gen : asmgen,
-                     reg_indices : dict[str,list[int]]) -> str:
+                     reg_indices : dict[str,list[int]],
+                  cfi : bool = False) -> str:
         """
         Returns the string with the necessery assembly to restore the specified
         registers (from the stack)
@@ -151,11 +157,15 @@ class callconv:
                 offset = 8*i+self.sp_rtype_offsets[type_tag]
                 kwargs = {"modifiers": {opmem_modifier.IOFFSET}, "ioffset": offset} if offset else {}
                 asmblock += gen.load(dregs=[reg], areg=spreg, dt=dt, **kwargs)
+                if cfi:
+                    asmblock += gen.asmwrap(f".cfi_restore {reg}")
 
         if self.spadd > 0:
             aligned_sp = ((self.spadd + self.spalign - 1) // self.spalign) * self.spalign
             asmblock += gen.add(adreg=spreg, bimm=aligned_sp, cdreg=spreg,
                     a_dt=adt.UINT64, c_dt=adt.UINT64)
+            if cfi:
+                asmblock += gen.asmwrap(f".cfi_adjust_cfa_offset -{aligned_sp}")
 
         self.spadd = 0
 
@@ -182,7 +192,8 @@ class callconv:
              gen : asmgen,
              regs : dict[str,list[int]],
              save_lists : dict[str,list[int]],
-             action : Callable[[asmgen,dict[str,list[int]]], str]) -> str:
+             action : Callable[..., str],
+             cfi : bool = False) -> str:
         """
         Abstraction over generating the ASM for saving and restoring registers
 
@@ -208,11 +219,12 @@ class callconv:
             reg_indices[tag] = set(regs[tag]).intersection(
                     set(save_lists[tag]))
 
-        return action(gen=gen, reg_indices=reg_indices)
+        return action(gen=gen, reg_indices=reg_indices, cfi=cfi)
 
     def save_before_call(self,
                       gen : asmgen,
-                      regs : dict[str,list[int]]) -> str:
+                      regs : dict[str,list[int]],
+            cfi : bool = False) -> str:
         """
         Returns a string containing instructions to save registers to stack that are
         the resposibility of the caller
@@ -230,11 +242,13 @@ class callconv:
                 gen=gen,
                 regs=regs,
                 save_lists=self.caller_save_lists,
-                action=self.save_regs)
+                action=self.save_regs,
+                cfi=cfi)
 
     def restore_after_call(self,
                            gen : asmgen,
-                           regs : dict[str,list[int]]) -> str:
+                           regs : dict[str,list[int]],
+            cfi : bool = False) -> str:
         """
         Returns a string containing instructions to restore registers from stack that
         are the resposibility of the caller
@@ -251,7 +265,8 @@ class callconv:
                 gen=gen,
                 regs=regs,
                 save_lists=self.caller_save_lists,
-                action=self.restore_regs)
+                action=self.restore_regs,
+                cfi=cfi)
 
     def add_clobber(self, type_tag : str, indices) -> None:
         """
@@ -287,7 +302,8 @@ class callconv:
 
     def save_in_call(self,
                      gen : asmgen,
-                     regs : dict[str,list[int]]) -> str:
+                     regs : dict[str,list[int]],
+            cfi : bool = False) -> str:
         """
         Returns a string containing instructions to save registers to stack that are
         the resposibility of the callee
@@ -304,11 +320,13 @@ class callconv:
                 gen=gen,
                 regs=self._with_clobbers(regs),
                 save_lists=self.callee_save_lists,
-                action=self.save_regs)
+                action=self.save_regs,
+                cfi=cfi)
 
     def restore_before_ret(self,
                      gen : asmgen,
-                     regs : dict[str,list[int]]) -> str:
+                     regs : dict[str,list[int]],
+            cfi : bool = False) -> str:
         """
         Returns a string containing instructions to restore registers from stack that
         are the resposibility of the callee
@@ -325,7 +343,8 @@ class callconv:
                 gen=gen,
                 regs=self._with_clobbers(regs),
                 save_lists=self.callee_save_lists,
-                action=self.restore_regs)
+                action=self.restore_regs,
+                cfi=cfi)
 
     def get_params(self):
         """

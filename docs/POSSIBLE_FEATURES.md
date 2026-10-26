@@ -37,6 +37,9 @@ reworking them (docs/V06_REWORK.md), to be picked up when a caller needs it.
   (`vfmv.v.f` from a floating-point register, or `vmv.v.x` of its bits),
   64-bit integers in NEON registers (`movi` has no such immediate; `dup`
   from a general register). The forms offered take none.
+- `value=` in floating-point and vector registers: the bits set into a
+  scratch general register, then moved or broadcast (`fmov`, `vmv.v.x`,
+  `vpbroadcastq`), or loaded from a constant in the function's data.
 
 ## Lanes by index on RVV
 
@@ -48,3 +51,10 @@ vector-length-agnostically it needs code paths switched at run time.
 Giving up vector-length agnosticism on some platform could gain
 performance (not investigated).
 
+## Framing
+
+- `.ident` with asmgen's version and the generator's configuration.
+- Behind parameters: ISA directives (`.arch_extension sve`, `.option arch,
+  +v`) so a file assembles without the compiler flags, `.hidden` for
+  kernels not exported, x86 CET (`endbr64`, the property note) and AArch64
+  BTI (`bti c`, the GNU property note) markings.
