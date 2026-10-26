@@ -27,7 +27,11 @@ class sve_opset(vector_opset):
             return self.asmwrap(f"fdup {dreg}.{self.dt_suffixes[dt]},#1.0")
         return self.asmwrap(f"dup {dreg}.{self.dt_suffixes[dt]},#1")
 
-    def mask_reg(self, *, dreg : data_reg, dt : adt, mask : str) -> str:
+    def mask_reg(self, *, dreg : data_reg, dt : adt, mask : str, count : int | None = None) -> str:
+        if "first" == mask:
+            if dreg.is_pn:
+                raise ValueError(f"{dreg}: a predicate-as-counter takes no ptrue pattern")
+            return self.asmwrap(f"ptrue {dreg}.{self.dt_suffixes[dt]}, vl{count}")
         if "alltrue" == mask:
             return self.asmwrap(f"ptrue {dreg}.{self.dt_suffixes[dt]}")
         # pfalse is .b only; a predicate-as-counter register is its p's

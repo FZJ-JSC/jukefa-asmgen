@@ -1,8 +1,10 @@
 """
 AVX set signatures: CONST zero, one
 """
+from ....registers import adt_size
+from ...op.constraint import minmax_constraint
 from ...op.operand import register_type as rt
-from ...op.opset import INT_DTS, VREG_DTS, const_signatures, mask_signatures, stindex_signatures, vlen_signatures, zero_signatures
+from ...op.opset import INT_DTS, VREG_DTS, const_signatures, mask_signatures, stindex_signatures, vlen_signatures, zero_signatures, first_mask_signatures
 from ....registers import asm_data_type as adt
 
 
@@ -13,6 +15,10 @@ def make_avx_opset_signatures(*, evex : bool = False) -> list:
     """
     # AVX-512's masks are k registers, AVX2's vector registers
     masks = mask_signatures(VREG_DTS, rtype=rt.MASK if evex else rt.VEC)
+    if evex:
+        # kxnorw, then kshiftrw: element types of 16 lanes or fewer in a zmm
+        masks += first_mask_signatures({dt: minmax_constraint(minval=1, maxval=64 // adt_size(dt))
+                                        for dt in VREG_DTS if 64 // adt_size(dt) <= 16})
     return (zero_signatures(rt.VEC, VREG_DTS)
             + const_signatures(rt.VEC, (adt.DOUBLE, adt.SINGLE, adt.HALF, *INT_DTS), "one")
             + masks

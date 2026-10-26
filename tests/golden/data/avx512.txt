@@ -1652,6 +1652,12 @@ prefetcht0 -128(%rcx)
 prefetcht0 127(%rcx)
 ### op prefetch [] agreg:REGISTER:GP:UINT64
 prefetcht0 (%rcx)
+### op set [CONSTMASK] dreg:REGISTER:MASK:DOUBLE count:IMMEDIATE:-:- {mask:first}
+kxnorw %k1,%k1,%k1
+kshiftrw $15,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:DOUBLE count:IMMEDIATE:-:- {mask:first} @far
+kxnorw %k1,%k1,%k1
+kshiftrw $8,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:DOUBLE {mask:allfalse}
 kxorw %k1,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:DOUBLE {mask:alltrue}
@@ -1660,6 +1666,12 @@ kxnorw %k1,%k1,%k1
 kxorw %k1,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:HALF {mask:alltrue}
 kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINGLE count:IMMEDIATE:-:- {mask:first}
+kxnorw %k1,%k1,%k1
+kshiftrw $15,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINGLE count:IMMEDIATE:-:- {mask:first} @far
+kxnorw %k1,%k1,%k1
+kshiftrw $0,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINGLE {mask:allfalse}
 kxorw %k1,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINGLE {mask:alltrue}
@@ -1668,10 +1680,22 @@ kxnorw %k1,%k1,%k1
 kxorw %k1,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINT16 {mask:alltrue}
 kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT32 count:IMMEDIATE:-:- {mask:first}
+kxnorw %k1,%k1,%k1
+kshiftrw $15,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT32 count:IMMEDIATE:-:- {mask:first} @far
+kxnorw %k1,%k1,%k1
+kshiftrw $0,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINT32 {mask:allfalse}
 kxorw %k1,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINT32 {mask:alltrue}
 kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT64 count:IMMEDIATE:-:- {mask:first}
+kxnorw %k1,%k1,%k1
+kshiftrw $15,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT64 count:IMMEDIATE:-:- {mask:first} @far
+kxnorw %k1,%k1,%k1
+kshiftrw $8,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINT64 {mask:allfalse}
 kxorw %k1,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINT64 {mask:alltrue}
@@ -1684,10 +1708,22 @@ kxnorw %k1,%k1,%k1
 kxorw %k1,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT16 {mask:alltrue}
 kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT32 count:IMMEDIATE:-:- {mask:first}
+kxnorw %k1,%k1,%k1
+kshiftrw $15,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT32 count:IMMEDIATE:-:- {mask:first} @far
+kxnorw %k1,%k1,%k1
+kshiftrw $0,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT32 {mask:allfalse}
 kxorw %k1,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT32 {mask:alltrue}
 kxnorw %k1,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT64 count:IMMEDIATE:-:- {mask:first}
+kxnorw %k1,%k1,%k1
+kshiftrw $15,%k1,%k1
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT64 count:IMMEDIATE:-:- {mask:first} @far
+kxnorw %k1,%k1,%k1
+kshiftrw $8,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT64 {mask:allfalse}
 kxorw %k1,%k1,%k1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT64 {mask:alltrue}

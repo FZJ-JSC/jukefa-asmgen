@@ -793,3 +793,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-27: RVV's vsetvli written by its isa_setup, the generator's vsetvli,
   vsetvli_keep_vl and vsetvlmax gone (asmgen 0082).
 - 2026-10-28: MULTIVEC for SME2's multi-vector accesses, STRUCT interleaving only (asmgen 0084).
+- 2026-10-28: set's mask of the first count elements (asmgen 0085).

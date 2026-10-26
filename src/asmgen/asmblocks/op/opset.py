@@ -23,7 +23,7 @@ from enum import auto
 from typing import Callable
 
 from .modifier import operation_modifier
-from .constraint import minmax_constraint
+from .constraint import minmax_constraint, oneof_constraint
 from .operand import operand_shape as osh, operand_type as ot, operand_role as orl, register_type as rt
 from .operand import operand_modifier
 from .operation import operation
@@ -37,7 +37,7 @@ class opset_modifier(operation_modifier):
     What set sets
     """
     CONST = auto()      # a constant: constant="zero" or "one" (1, 1.0 in dt), or value=<int>
-    CONSTMASK = auto()  # a mask: mask="alltrue" or "allfalse"
+    CONSTMASK = auto()  # a mask: mask="alltrue", "allfalse", or "first" (count elements active)
     VLEN = auto()       # the vector length in elements of dt (bytes: UINT8, the default)
     STINDEX = auto()    # indices from a stride register: element i is i * streg
     PARAM = auto()      # the destination an inline asm register operand %[param], no dreg: inline only
@@ -75,6 +75,21 @@ def mask_signatures(dts, rtype=rt.MASK) -> list[operation_signature]:
     return [operation_signature(modifiers={opset_modifier.CONSTMASK}, structural_params={"mask": mask},
                                 operands={"dreg": osh(ot.REGISTER, orl.DATA, rtype, dt)})
             for mask in ("alltrue", "allfalse") for dt in dts]
+
+
+def first_mask_signatures(counts : dict, rtype=rt.MASK) -> list[operation_signature]:
+    """
+    CONSTMASK mask="first": the first count elements of dt active, the rest
+    not - per element type, count within the ISA's constraint for it (SVE's
+    patterns, AVX-512's lanes)
+
+    :param counts: element type: the constraint on count
+    """
+    return [operation_signature(modifiers={opset_modifier.CONSTMASK}, structural_params={"mask": "first"},
+                                operands={"dreg": osh(ot.REGISTER, orl.DATA, rtype, dt),
+                                          "count": osh(ot.IMMEDIATE, orl.PARAM, None, None,
+                                                       value_constraints=[constraint])})
+            for dt, constraint in counts.items()]
 
 
 def vlen_signatures() -> list[operation_signature]:
@@ -272,14 +287,15 @@ class vector_opset(opset):
             return self.scalar_op(dreg=dreg, dt=dt, modifiers=modifiers, operand_modifiers=operand_modifiers,
                                   **given, **scalar_operands(kwargs))
         if mask is not None:
-            return self.mask_reg(dreg=dreg, dt=dt, mask=mask)
+            return self.mask_reg(dreg=dreg, dt=dt, mask=mask, count=kwargs.get("count"))
         if "one" == constant:
             return self.one_reg(dreg=dreg, dt=dt)
         return self.zero_reg(dreg=dreg, dt=dt)
 
-    def mask_reg(self, *, dreg : data_reg, dt : adt, mask : str) -> str:
+    def mask_reg(self, *, dreg : data_reg, dt : adt, mask : str, count : int | None = None) -> str:
         """
-        A mask register all true or all false for elements of dt
+        A mask register all true, all false, or true for the first count
+        elements of dt
         """
         raise NotImplementedError(self.NIE_MESSAGE)
 

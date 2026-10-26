@@ -2746,54 +2746,80 @@ prfm PLDL1KEEP, [x10, x11]
 prfm PLDL1KEEP, [x10]
 ### op prefetch [] agreg:REGISTER:GP:UINT64
 prfm PLDL1KEEP, [x10]
+### op set [CONSTMASK] dreg:REGISTER:MASK:DOUBLE count:IMMEDIATE:-:- {mask:first}
+ptrue p1.d, vl1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:DOUBLE {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:DOUBLE {mask:alltrue}
 ptrue p1.d
+### op set [CONSTMASK] dreg:REGISTER:MASK:FP8E4M3 count:IMMEDIATE:-:- {mask:first}
+ptrue p1.b, vl1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:FP8E4M3 {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:FP8E4M3 {mask:alltrue}
 ptrue p1.b
+### op set [CONSTMASK] dreg:REGISTER:MASK:FP8E5M2 count:IMMEDIATE:-:- {mask:first}
+ptrue p1.b, vl1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:FP8E5M2 {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:FP8E5M2 {mask:alltrue}
 ptrue p1.b
+### op set [CONSTMASK] dreg:REGISTER:MASK:HALF count:IMMEDIATE:-:- {mask:first}
+ptrue p1.h, vl1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:HALF {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:HALF {mask:alltrue}
 ptrue p1.h
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINGLE count:IMMEDIATE:-:- {mask:first}
+ptrue p1.s, vl1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINGLE {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINGLE {mask:alltrue}
 ptrue p1.s
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT16 count:IMMEDIATE:-:- {mask:first}
+ptrue p1.h, vl1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINT16 {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINT16 {mask:alltrue}
 ptrue p1.h
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT32 count:IMMEDIATE:-:- {mask:first}
+ptrue p1.s, vl1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINT32 {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINT32 {mask:alltrue}
 ptrue p1.s
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT64 count:IMMEDIATE:-:- {mask:first}
+ptrue p1.d, vl1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINT64 {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINT64 {mask:alltrue}
 ptrue p1.d
+### op set [CONSTMASK] dreg:REGISTER:MASK:SINT8 count:IMMEDIATE:-:- {mask:first}
+ptrue p1.b, vl1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINT8 {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:SINT8 {mask:alltrue}
 ptrue p1.b
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT16 count:IMMEDIATE:-:- {mask:first}
+ptrue p1.h, vl1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT16 {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT16 {mask:alltrue}
 ptrue p1.h
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT32 count:IMMEDIATE:-:- {mask:first}
+ptrue p1.s, vl1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT32 {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT32 {mask:alltrue}
 ptrue p1.s
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT64 count:IMMEDIATE:-:- {mask:first}
+ptrue p1.d, vl1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT64 {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT64 {mask:alltrue}
 ptrue p1.d
+### op set [CONSTMASK] dreg:REGISTER:MASK:UINT8 count:IMMEDIATE:-:- {mask:first}
+ptrue p1.b, vl1
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT8 {mask:allfalse}
 pfalse p1.b
 ### op set [CONSTMASK] dreg:REGISTER:MASK:UINT8 {mask:alltrue}

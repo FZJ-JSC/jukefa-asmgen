@@ -47,8 +47,11 @@ class avx_opset(vector_opset):
         # bytes: |-1| = 1
         return ones + self.asmwrap(f"vpabsb {p},{p}")
 
-    def mask_reg(self, *, dreg : data_reg, dt : adt, mask : str) -> str:
+    def mask_reg(self, *, dreg : data_reg, dt : adt, mask : str, count : int | None = None) -> str:
         p = self.rpref(dreg)
+        if "first" == mask:
+            # every bit set, then shifted right: the low count bits stay
+            return self.asmwrap(f"kxnorw {p},{p},{p}") + self.asmwrap(f"kshiftrw ${16 - count},{p},{p}")
         if isinstance(dreg, avx512_mreg):
             return self.asmwrap(f"{'kxnorw' if 'alltrue' == mask else 'kxorw'} {p},{p},{p}")
         # a vector register as a mask (AVX2): every bit set, or none

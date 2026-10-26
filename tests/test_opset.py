@@ -226,3 +226,42 @@ class test_param(unittest.TestCase):
         g = make(rvv)
         with self.assertRaises(ValueError):
             g.set(dreg=g.vreg(1), modifiers=CONST, constant="zero")
+
+
+def plain(text):
+    """an instruction or several, one line each, as one: separated by ;"""
+    lines = [l.strip().strip('"').replace("\\n", "").replace("\\t", "").strip() for l in text.split("\n")]
+    return " ; ".join(l for l in lines if l)
+
+
+class test_first_masks(unittest.TestCase):
+    """
+    CONSTMASK mask="first": the first count elements active - a vector
+    along cdim under it packs fewer elements than a vector has
+    """
+    def first(self, g, reg, dt, count):
+        return dict(dreg=reg, dt=dt, modifiers={opset_modifier.CONSTMASK}, mask="first", count=count)
+
+    def test_sve_patterns(self):
+        g = make(sve)
+        self.assertEqual("ptrue p1.d, vl4", plain(g.set(**self.first(g, g.mreg(1), adt.DOUBLE, 4))))
+        self.assertEqual("ptrue p1.s, vl16", plain(g.set(**self.first(g, g.mreg(1), adt.SINGLE, 16))))
+        self.assertIsNone(g.set.fits(**self.first(g, g.mreg(1), adt.DOUBLE, 9)))    # not a pattern
+
+    def test_no_counter_predicates(self):
+        from asmgen.asmblocks.sme import sme
+        g = make(sme)
+        self.assertIsNone(g.set.fits(**self.first(g, g.mreg(8, True), adt.DOUBLE, 4)))
+
+    def test_avx512_shifted(self):
+        g = make(avx512)
+        self.assertEqual(["kxnorw %k1,%k1,%k1", "kshiftrw $12,%k1,%k1"],
+                         plain(g.set(**self.first(g, g.mreg(1), adt.SINGLE, 4))).split(" ; "))
+        self.assertIsNone(g.set.fits(**self.first(g, g.mreg(1), adt.DOUBLE, 9)))     # 8 lanes
+
+    def test_none_elsewhere(self):
+        for gen in (fma256, rvv, neon):
+            g = make(gen)
+            with self.subTest(gen=gen.__name__):
+                self.assertFalse([s for s in g.set.forms(modifiers={opset_modifier.CONSTMASK})
+                                  if "first" == s.structural_params.get("mask")])
