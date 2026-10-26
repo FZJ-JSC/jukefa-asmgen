@@ -156,14 +156,6 @@ class rvv(riscv64):
                                   "length is known at run time only (set with VLEN, "
                                   "c_simd_size_function)")
 
-    def vsetvli_keep_vl(self, *, dt : adt, lmul : int) -> str:
-        """
-        Change the element width and register grouping, keeping the vector
-        length (vsetvli zero, zero): valid where SEW/LMUL stays the same, as
-        from e32,m1 to e64,m2 for a widened register group
-        """
-        return self.asmwrap(f"vsetvli zero,zero,e{adt_size(dt) * 8},m{lmul},ta,ma")
-
     def max_mregs(self) -> int:
         # masked instructions take their mask in v0
         return 1
@@ -171,36 +163,6 @@ class rvv(riscv64):
     def shared_registers(self) -> list[tuple[str, str, dict[int, int] | None]]:
         # the mask register is vector register 0
         return [("mreg", "vreg", {0: 0})]
-
-    def vsetvli(self, *, vlreg : greg_base, avlreg : greg_base, dt : adt) -> str:
-        """
-        Set RVV vlen by requesting an AVL
-
-        :param vlreg: GP register to write the resulting VLEN to
-        :type vlreg: class:`asmgen.registers.greg_base`
-        :param avlreg: GP register containing the requested AVL
-        :type avlreg: class:`asmgen.registers.greg_base`
-        :param dt: Data type of the elements
-        :type dt: class:`asmgen.registers.asm_data_type`
-        :return: string with RVV instruction setting the VLEN
-        :rtype: str
-        """
-        dt_size = 'e'+str(adt_size(dt)*8)
-        return self.asmwrap(f"vsetvli {vlreg}, {avlreg}, {dt_size}, m{self.lmul}, ta, ma")
-
-    def vsetvlmax(self, *, reg : greg_base, dt : adt) -> str:
-        """
-        Set RVV vlen to maximum
-
-        :param vlreg: GP register to write the resulting VLEN to
-        :type vlreg: class:`asmgen.registers.greg_base`
-        :param dt: Data type of the elements
-        :type dt: class:`asmgen.registers.asm_data_type`
-        :return: string with RVV instruction setting the VLEN
-        :rtype: str
-        """
-        dt_size = 'e'+str(adt_size(dt)*8)
-        return self.asmwrap(f"vsetvli {reg}, zero, {dt_size}, m{self.lmul}, ta, ma")
 
     def max_tregs(self, dt : adt) -> int:
         return 0

@@ -7,6 +7,7 @@
 RISC-V RVV 0.7.1 asm generator and related types
 """
 
+from ..setup import rvv071_setup
 from ..noarch import compiler_family
 from ..rvv import rvv
 
@@ -50,6 +51,13 @@ class rvv071(rvv):
         extensions = ["zba"] if "ZBA" in self.enabled_features() else []
         return ["-march=" + "_".join(["rv64gc"] + extensions + ["xtheadvector"])]
 
+    def isa_setup(self):
+        """
+        What this ISA needs set up before a kernel and torn down after: 0.7.1's
+        vsetvli
+        """
+        return rvv071_setup(self)
+
     def asmwrap(self, code : str) -> str:
         """
         The instructions wrapped as rvv's are, their vector mnemonics
@@ -80,11 +88,3 @@ class rvv071(rvv):
             adt.FP8E4M3 : "b",
             adt.FP8E5M2 : "b",
             }
-
-    def vsetvli(self, *, vlreg : greg_base, avlreg : greg_base, dt : adt) -> str:
-        dt_size = 'e'+str(adt_size(dt)*8)
-        return self.asmwrap(f"vsetvli {vlreg}, {avlreg}, {dt_size}, m1")
-
-    def vsetvlmax(self, *, reg : greg_base, dt : adt) -> str:
-        dt_size = 'e'+str(adt_size(dt)*8)
-        return self.asmwrap(f"vsetvli {reg}, zero, {dt_size}, m1")

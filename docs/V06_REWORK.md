@@ -790,3 +790,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-27: CFI in fngen and callconv; CONST closed (asmgen 0080).
 - 2026-10-27: no probes left in src (hasattr, getattr defaults, __dict__ writes) and a
   test keeping it so (asmgen 0081).
+- 2026-10-27: RVV's vsetvli written by its isa_setup, the generator's vsetvli,
+  vsetvli_keep_vl and vsetvlmax gone (asmgen 0082).

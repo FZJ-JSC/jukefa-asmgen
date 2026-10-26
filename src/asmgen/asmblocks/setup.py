@@ -14,7 +14,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum, auto
 
-from ..registers import asm_data_type as adt
+from ..registers import asm_data_type as adt, adt_size
 from .op.opset import opset_modifier
 
 
@@ -253,10 +253,22 @@ class rvv_setup(isa_setup):
     def element_type_is_state(self) -> bool:
         return True
 
+    #: vsetvli's policies: tail and mask agnostic
+    POLICIES = ", ta, ma"
+
+    def _vsetvli(self, rd, rs, *, dt, group : int = 1) -> str:
+        """
+        vsetvli rd, rs: dt's element width; LMUL the generator's - a register
+        the caller sees is a group of LMUL already, a wide one group of those;
+        the vector length for rs elements (zero: the most) written to rd -
+        both zero: the vector length kept, valid where SEW/LMUL stays the same,
+        as from e32,m1 to e64,m2 for a widened group
+        """
+        return self.gen.asmwrap(f"vsetvli {rd}, {rs}, e{adt_size(dt) * 8}, "
+                                f"m{self.gen.lmul * group}{self.POLICIES}")
+
     def setup_dt(self, *, dt, group : int = 1) -> str:
-        # LMUL stays the generator's: a register the caller sees is a group
-        # of LMUL already, a wide one a group of those
-        return self.gen.vsetvli_keep_vl(dt=dt, lmul=self.gen.lmul * group)
+        return self._vsetvli("zero", "zero", dt=dt, group=group)
 
     @staticmethod
     def _aliased(rt, name: str) -> int:
@@ -274,12 +286,17 @@ class rvv_setup(isa_setup):
         if vl is not None:
             avl = self.gen.greg(self._aliased(rt, "avl"))
             return self.gen.set(dreg=avl, dt=adt.UINT64, modifiers={opset_modifier.CONST}, value=vl) + \
-                self.gen.vsetvli(vlreg=vlreg, avlreg=avl, dt=dt)
-        if "avl" in rt.aliased_regs.get("greg", {}):
-            # the old interface: the caller has set an aliased avl register
-            avl = self.gen.greg(rt.aliased_regs["greg"]["avl"])
-            return self.gen.vsetvli(vlreg=vlreg, avlreg=avl, dt=dt)
-        return self.gen.vsetvlmax(reg=vlreg, dt=dt)
+                self._vsetvli(vlreg, avl, dt=dt)
+        return self._vsetvli(vlreg, "zero", dt=dt)
+
+
+class rvv071_setup(rvv_setup):
+    """
+    RVV 0.7.1 (XTheadVector): vsetvli as 1.0's, without the tail and mask
+    policies, which 0.7.1 doesn't have; th.-prefixed where the generator's
+    asmwrap does it
+    """
+    POLICIES = ""
 
 
 class constants_setup(isa_setup):

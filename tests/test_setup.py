@@ -8,6 +8,7 @@ from asmgen.asmblocks.neon import neon
 from asmgen.asmblocks.sve import sve
 from asmgen.asmblocks.sme import sme
 from asmgen.asmblocks.rvv import rvv
+from asmgen.asmblocks.rvv071 import rvv071
 from asmgen.asmblocks.avx import avx512
 from asmgen.asmblocks.setup import setup_kind
 from asmgen.registers import reg_tracker, asm_data_type as adt
@@ -47,6 +48,18 @@ class test_setup(unittest.TestCase):
         self.assertIn("ptrue p0.d", text)
         self.assertIn("pn8", text)
         self.assertIn("smstop", setup.teardown(rt=tracker(), dt=adt.FP64))
+
+    def test_rvv071_vsetvli(self):
+        # 0.7.1's vsetvli: no tail and mask policies, th.-prefixed, the
+        # element type changed as RVV's
+        gen = rvv071()
+        gen.set_output_inline(False)
+        setup = gen.isa_setup()
+        rt = tracker()
+        full = setup.setup(rt=rt, dt=adt.FP64)
+        self.assertIn("th.vsetvli", full)
+        self.assertNotIn("ta", full.split("th.vsetvli")[1])
+        self.assertEqual("th.vsetvli zero, zero, e32, m2", setup.setup_dt(dt=adt.FP32, group=2).strip())
 
     def test_rvv_vector_length(self):
         gen = rvv()
@@ -171,7 +184,7 @@ class test_element_state(unittest.TestCase):
         g = rvv()
         g.output_inline = False
         self.assertTrue(rvv_setup(g).element_type_is_state())
-        self.assertEqual("vsetvli zero,zero,e32,m2,ta,ma",
+        self.assertEqual("vsetvli zero, zero, e32, m2, ta, ma",
                          rvv_setup(g).setup_dt(dt=adt.FP32, group=2).strip())
 
     def test_per_instruction(self):
