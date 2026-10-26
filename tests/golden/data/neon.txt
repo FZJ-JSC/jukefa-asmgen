@@ -1777,6 +1777,318 @@ fmov h1,w10
 fmov s1,w10
 ### op move [BITS] adreg:REGISTER:GP:UINT64 bdreg:REGISTER:FP:DOUBLE
 fmov d1,x10
+### op move [PERMUTE] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE {bits:64,pattern:trn_even,segment:None}
+trn1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE {bits:64,pattern:trn_odd,segment:None}
+trn2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE {bits:64,pattern:uzp_even,segment:None}
+uzp1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE {bits:64,pattern:uzp_odd,segment:None}
+uzp2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE {bits:64,pattern:zip_hi,segment:None}
+zip2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE {bits:64,pattern:zip_lo,segment:None}
+zip1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:16,pattern:trn_even,segment:None}
+trn1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:16,pattern:trn_odd,segment:None}
+trn2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:16,pattern:uzp_even,segment:None}
+uzp1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:16,pattern:uzp_odd,segment:None}
+uzp2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:16,pattern:zip_hi,segment:None}
+zip2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:16,pattern:zip_lo,segment:None}
+zip1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:32,pattern:trn_even,segment:None}
+trn1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:32,pattern:trn_odd,segment:None}
+trn2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:32,pattern:uzp_even,segment:None}
+uzp1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:32,pattern:uzp_odd,segment:None}
+uzp2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:32,pattern:zip_hi,segment:None}
+zip2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:32,pattern:zip_lo,segment:None}
+zip1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:64,pattern:trn_even,segment:None}
+trn1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:64,pattern:trn_odd,segment:None}
+trn2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:64,pattern:uzp_even,segment:None}
+uzp1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:64,pattern:uzp_odd,segment:None}
+uzp2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:64,pattern:zip_hi,segment:None}
+zip2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF cdreg:REGISTER:VEC:HALF {bits:64,pattern:zip_lo,segment:None}
+zip1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {bits:32,pattern:trn_even,segment:None}
+trn1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {bits:32,pattern:trn_odd,segment:None}
+trn2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {bits:32,pattern:uzp_even,segment:None}
+uzp1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {bits:32,pattern:uzp_odd,segment:None}
+uzp2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {bits:32,pattern:zip_hi,segment:None}
+zip2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {bits:32,pattern:zip_lo,segment:None}
+zip1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {bits:64,pattern:trn_even,segment:None}
+trn1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {bits:64,pattern:trn_odd,segment:None}
+trn2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {bits:64,pattern:uzp_even,segment:None}
+uzp1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {bits:64,pattern:uzp_odd,segment:None}
+uzp2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {bits:64,pattern:zip_hi,segment:None}
+zip2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE {bits:64,pattern:zip_lo,segment:None}
+zip1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:16,pattern:trn_even,segment:None}
+trn1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:16,pattern:trn_odd,segment:None}
+trn2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:16,pattern:uzp_even,segment:None}
+uzp1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:16,pattern:uzp_odd,segment:None}
+uzp2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:16,pattern:zip_hi,segment:None}
+zip2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:16,pattern:zip_lo,segment:None}
+zip1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:32,pattern:trn_even,segment:None}
+trn1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:32,pattern:trn_odd,segment:None}
+trn2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:32,pattern:uzp_even,segment:None}
+uzp1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:32,pattern:uzp_odd,segment:None}
+uzp2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:32,pattern:zip_hi,segment:None}
+zip2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:32,pattern:zip_lo,segment:None}
+zip1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:64,pattern:trn_even,segment:None}
+trn1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:64,pattern:trn_odd,segment:None}
+trn2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:64,pattern:uzp_even,segment:None}
+uzp1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:64,pattern:uzp_odd,segment:None}
+uzp2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:64,pattern:zip_hi,segment:None}
+zip2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT16 bdreg:REGISTER:VEC:SINT16 cdreg:REGISTER:VEC:SINT16 {bits:64,pattern:zip_lo,segment:None}
+zip1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {bits:32,pattern:trn_even,segment:None}
+trn1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {bits:32,pattern:trn_odd,segment:None}
+trn2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {bits:32,pattern:uzp_even,segment:None}
+uzp1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {bits:32,pattern:uzp_odd,segment:None}
+uzp2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {bits:32,pattern:zip_hi,segment:None}
+zip2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {bits:32,pattern:zip_lo,segment:None}
+zip1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {bits:64,pattern:trn_even,segment:None}
+trn1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {bits:64,pattern:trn_odd,segment:None}
+trn2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {bits:64,pattern:uzp_even,segment:None}
+uzp1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {bits:64,pattern:uzp_odd,segment:None}
+uzp2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {bits:64,pattern:zip_hi,segment:None}
+zip2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT32 bdreg:REGISTER:VEC:SINT32 cdreg:REGISTER:VEC:SINT32 {bits:64,pattern:zip_lo,segment:None}
+zip1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 {bits:64,pattern:trn_even,segment:None}
+trn1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 {bits:64,pattern:trn_odd,segment:None}
+trn2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 {bits:64,pattern:uzp_even,segment:None}
+uzp1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 {bits:64,pattern:uzp_odd,segment:None}
+uzp2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 {bits:64,pattern:zip_hi,segment:None}
+zip2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT64 bdreg:REGISTER:VEC:SINT64 cdreg:REGISTER:VEC:SINT64 {bits:64,pattern:zip_lo,segment:None}
+zip1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:16,pattern:trn_even,segment:None}
+trn1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:16,pattern:trn_odd,segment:None}
+trn2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:16,pattern:uzp_even,segment:None}
+uzp1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:16,pattern:uzp_odd,segment:None}
+uzp2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:16,pattern:zip_hi,segment:None}
+zip2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:16,pattern:zip_lo,segment:None}
+zip1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:32,pattern:trn_even,segment:None}
+trn1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:32,pattern:trn_odd,segment:None}
+trn2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:32,pattern:uzp_even,segment:None}
+uzp1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:32,pattern:uzp_odd,segment:None}
+uzp2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:32,pattern:zip_hi,segment:None}
+zip2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:32,pattern:zip_lo,segment:None}
+zip1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:64,pattern:trn_even,segment:None}
+trn1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:64,pattern:trn_odd,segment:None}
+trn2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:64,pattern:uzp_even,segment:None}
+uzp1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:64,pattern:uzp_odd,segment:None}
+uzp2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:64,pattern:zip_hi,segment:None}
+zip2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:64,pattern:zip_lo,segment:None}
+zip1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:8,pattern:trn_even,segment:None}
+trn1 v3.16b,v1.16b,v2.16b
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:8,pattern:trn_odd,segment:None}
+trn2 v3.16b,v1.16b,v2.16b
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:8,pattern:uzp_even,segment:None}
+uzp1 v3.16b,v1.16b,v2.16b
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:8,pattern:uzp_odd,segment:None}
+uzp2 v3.16b,v1.16b,v2.16b
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:8,pattern:zip_hi,segment:None}
+zip2 v3.16b,v1.16b,v2.16b
+### op move [PERMUTE] adreg:REGISTER:VEC:SINT8 bdreg:REGISTER:VEC:SINT8 cdreg:REGISTER:VEC:SINT8 {bits:8,pattern:zip_lo,segment:None}
+zip1 v3.16b,v1.16b,v2.16b
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:16,pattern:trn_even,segment:None}
+trn1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:16,pattern:trn_odd,segment:None}
+trn2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:16,pattern:uzp_even,segment:None}
+uzp1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:16,pattern:uzp_odd,segment:None}
+uzp2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:16,pattern:zip_hi,segment:None}
+zip2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:16,pattern:zip_lo,segment:None}
+zip1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:32,pattern:trn_even,segment:None}
+trn1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:32,pattern:trn_odd,segment:None}
+trn2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:32,pattern:uzp_even,segment:None}
+uzp1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:32,pattern:uzp_odd,segment:None}
+uzp2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:32,pattern:zip_hi,segment:None}
+zip2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:32,pattern:zip_lo,segment:None}
+zip1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:64,pattern:trn_even,segment:None}
+trn1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:64,pattern:trn_odd,segment:None}
+trn2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:64,pattern:uzp_even,segment:None}
+uzp1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:64,pattern:uzp_odd,segment:None}
+uzp2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:64,pattern:zip_hi,segment:None}
+zip2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT16 bdreg:REGISTER:VEC:UINT16 cdreg:REGISTER:VEC:UINT16 {bits:64,pattern:zip_lo,segment:None}
+zip1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {bits:32,pattern:trn_even,segment:None}
+trn1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {bits:32,pattern:trn_odd,segment:None}
+trn2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {bits:32,pattern:uzp_even,segment:None}
+uzp1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {bits:32,pattern:uzp_odd,segment:None}
+uzp2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {bits:32,pattern:zip_hi,segment:None}
+zip2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {bits:32,pattern:zip_lo,segment:None}
+zip1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {bits:64,pattern:trn_even,segment:None}
+trn1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {bits:64,pattern:trn_odd,segment:None}
+trn2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {bits:64,pattern:uzp_even,segment:None}
+uzp1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {bits:64,pattern:uzp_odd,segment:None}
+uzp2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {bits:64,pattern:zip_hi,segment:None}
+zip2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT32 bdreg:REGISTER:VEC:UINT32 cdreg:REGISTER:VEC:UINT32 {bits:64,pattern:zip_lo,segment:None}
+zip1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 {bits:64,pattern:trn_even,segment:None}
+trn1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 {bits:64,pattern:trn_odd,segment:None}
+trn2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 {bits:64,pattern:uzp_even,segment:None}
+uzp1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 {bits:64,pattern:uzp_odd,segment:None}
+uzp2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 {bits:64,pattern:zip_hi,segment:None}
+zip2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT64 bdreg:REGISTER:VEC:UINT64 cdreg:REGISTER:VEC:UINT64 {bits:64,pattern:zip_lo,segment:None}
+zip1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:16,pattern:trn_even,segment:None}
+trn1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:16,pattern:trn_odd,segment:None}
+trn2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:16,pattern:uzp_even,segment:None}
+uzp1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:16,pattern:uzp_odd,segment:None}
+uzp2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:16,pattern:zip_hi,segment:None}
+zip2 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:16,pattern:zip_lo,segment:None}
+zip1 v3.8h,v1.8h,v2.8h
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:32,pattern:trn_even,segment:None}
+trn1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:32,pattern:trn_odd,segment:None}
+trn2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:32,pattern:uzp_even,segment:None}
+uzp1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:32,pattern:uzp_odd,segment:None}
+uzp2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:32,pattern:zip_hi,segment:None}
+zip2 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:32,pattern:zip_lo,segment:None}
+zip1 v3.4s,v1.4s,v2.4s
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:64,pattern:trn_even,segment:None}
+trn1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:64,pattern:trn_odd,segment:None}
+trn2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:64,pattern:uzp_even,segment:None}
+uzp1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:64,pattern:uzp_odd,segment:None}
+uzp2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:64,pattern:zip_hi,segment:None}
+zip2 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:64,pattern:zip_lo,segment:None}
+zip1 v3.2d,v1.2d,v2.2d
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:8,pattern:trn_even,segment:None}
+trn1 v3.16b,v1.16b,v2.16b
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:8,pattern:trn_odd,segment:None}
+trn2 v3.16b,v1.16b,v2.16b
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:8,pattern:uzp_even,segment:None}
+uzp1 v3.16b,v1.16b,v2.16b
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:8,pattern:uzp_odd,segment:None}
+uzp2 v3.16b,v1.16b,v2.16b
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:8,pattern:zip_hi,segment:None}
+zip2 v3.16b,v1.16b,v2.16b
+### op move [PERMUTE] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8 {bits:8,pattern:zip_lo,segment:None}
+zip1 v3.16b,v1.16b,v2.16b
 ### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:FP:DOUBLE
 fmov d2,d1
 ### op move [] adreg:REGISTER:FP:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BCAST}

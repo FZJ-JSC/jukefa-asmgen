@@ -39,6 +39,20 @@ class avx_move(opmove):
     def all_signatures(self) -> list[operation_signature]:
         return [*self.signatures, *(self.scalar_op.all_signatures() if self.scalar_op else [])]
 
+    def permute(self, dregs, pattern : str, bits : int) -> str:
+        """
+        Two sources permuted, AT&T order (sources reversed, destination last)
+        """
+        a, b, d = (self.rpref(r) for r in dregs)
+        if bits in (32, 64):
+            half = "l" if "zip_lo" == pattern else "h"
+            return self.asmwrap(f"vunpck{half}p{'d' if 64 == bits else 's'} {b},{a},{d}")
+        imm = {(128, "zip_lo"): "0x20", (128, "zip_hi"): "0x31"} if 32 == self.simd_bytes else \
+              {(128, "uzp_even"): "0x88", (128, "uzp_odd"): "0xDD",
+               (256, "zip_lo"): "0x44", (256, "zip_hi"): "0xEE"}
+        inst = "vperm2f128" if 32 == self.simd_bytes else "vshuff64x2"
+        return self.asmwrap(f"{inst} ${imm[(bits, pattern)]},{b},{a},{d}")
+
     def implementation(self, *, dregs : list[data_reg],
                        dts : dict[str, adt],
                        modifiers : set[mod],
@@ -50,6 +64,8 @@ class avx_move(opmove):
                                   modifiers=modifiers, operand_modifiers=operand_modifiers,
                                   **scalar_operands(kwargs))
 
+        if mod.PERMUTE in modifiers:
+            return self.permute(dregs, kwargs["pattern"], kwargs["bits"])
         src, dst = dregs[0], dregs[1]
         dt = dts['bdreg']
         amods = operand_modifiers.get('adreg', set())

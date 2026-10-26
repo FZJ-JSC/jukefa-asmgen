@@ -31,6 +31,51 @@ class opmove_modifier(operation_modifier):
     MULTIPLE_IN = auto()
     MULTIPLE_OUT = auto()
     BITS = auto()      # the bits as they are, between register files (greg to freg): no conversion
+    PERMUTE = auto()   # two sources' units interleaved, unzipped or transposed (pattern, bits, segment)
+
+
+#: what a permute does with its sources' units (bits wide), within each segment:
+#:   zip_lo   A0 B0 A1 B1 ... (the low halves interleaved)   zip_hi   the high halves
+#:   uzp_even A0 A2 ... B0 B2 ... (the even units of each)  uzp_odd  the odd units
+#:   trn_even A0 B0 A2 B2 ... (pairs transposed)             trn_odd  A1 B1 A3 B3 ...
+PERMUTE_PATTERNS = ("zip_lo", "zip_hi", "uzp_even", "uzp_odd", "trn_even", "trn_odd")
+
+
+def permuted(pattern : str, a : list, b : list, *, element_bits : int, bits : int,
+             segment : int | None = None) -> list:
+    """
+    What a permute makes of a and b, two vectors' elements in order: the
+    pattern on units of bits, within each segment of segment bits - None, the
+    whole vector. A permute's meaning, for networks built of them and tests.
+    """
+    per_unit = bits // element_bits
+    seg = len(a) if segment is None else segment // element_bits
+    out = []
+    for s in range(0, len(a), seg):
+        ua = [a[s + i:s + i + per_unit] for i in range(0, seg, per_unit)]
+        ub = [b[s + i:s + i + per_unit] for i in range(0, seg, per_unit)]
+        n = len(ua)
+        units = {"zip_lo": [x for i in range(n // 2) for x in (ua[i], ub[i])],
+                 "zip_hi": [x for i in range(n // 2, n) for x in (ua[i], ub[i])],
+                 "uzp_even": ua[0::2] + ub[0::2],
+                 "uzp_odd": ua[1::2] + ub[1::2],
+                 "trn_even": [x for i in range(0, n, 2) for x in (ua[i], ub[i])],
+                 "trn_odd": [x for i in range(1, n, 2) for x in (ua[i], ub[i])]}[pattern]
+        out += [e for unit in units for e in unit]
+    return out
+
+
+def permute_signatures(forms) -> list:
+    """
+    PERMUTE: adreg and bdreg the sources, cdreg the destination - one
+    signature per (data type, pattern, bits, segment) of forms
+    """
+    from .operand import operand_shape as osh, operand_type as ot, operand_role as orl, register_type as rgt
+    return [operation_signature(modifiers={opmove_modifier.PERMUTE},
+                                structural_params={"pattern": pattern, "bits": bits, "segment": segment},
+                                operands={name: osh(otype=ot.REGISTER, orole=orl.DATA, rtype=rgt.VEC, dt=dt)
+                                          for name in ("adreg", "bdreg", "cdreg")})
+            for dt, pattern, bits, segment in forms]
 
 
 class opmove(operation):

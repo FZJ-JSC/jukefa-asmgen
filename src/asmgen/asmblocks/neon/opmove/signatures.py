@@ -8,6 +8,7 @@ Signatures for NEON move instructions: copies, broadcasts (dup) and lane
 inserts (ins)
 """
 
+from ...op.opmove import permute_signatures, PERMUTE_PATTERNS
 from ...op import (
     operation_signature as opsig,
     operand_modifier as omod,
@@ -70,4 +71,8 @@ def make_neon_move_signatures() -> list[opsig]:
     sigs += shift_signatures(
         _FLOATS + _INTS, [{omod.ILANEROT}, {omod.ILANESHIFT, omod.INVALIDOTHERS}],
         irot=lambda dt, m: (1 - 16 // adt_size(dt), 16 // adt_size(dt) - 1))
+    # two sources permuted: zip1/zip2, uzp1/uzp2, trn1/trn2, units of 8 to 64 bits
+    sigs += permute_signatures([(dt, pattern, bits, None) for dt in _FLOATS + _INTS
+                                for pattern in PERMUTE_PATTERNS for bits in (8, 16, 32, 64)
+                                if bits >= 8 * adt_size(dt)])
     return sigs

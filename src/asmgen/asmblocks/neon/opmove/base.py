@@ -49,6 +49,12 @@ class neon_move(opmove):
                                   modifiers=modifiers, operand_modifiers=operand_modifiers,
                                   **scalar_operands(kwargs))
 
+        if mod.PERMUTE in modifiers:
+            inst = {"zip_lo": "zip1", "zip_hi": "zip2", "uzp_even": "uzp1", "uzp_odd": "uzp2",
+                    "trn_even": "trn1", "trn_odd": "trn2"}[kwargs["pattern"]]
+            arr = {8: "16b", 16: "8h", 32: "4s", 64: "2d"}[kwargs["bits"]]
+            a, b, d = dregs
+            return self.asmwrap(f"{inst} v{d.idx}.{arr},v{a.idx}.{arr},v{b.idx}.{arr}")
         src, dst = dregs[0], dregs[1]
         dt = dts['bdreg']
         el = self.dt_idxsuffixes[dt]

@@ -7,6 +7,7 @@
 Signatures for AVX move instructions
 """
 
+from ...op.opmove import permute_signatures
 from ...op import (
     operation_signature as opsig,
     operand_modifier as omod,
@@ -18,6 +19,10 @@ from ...op import (
 from ...op.constraint import minmax_constraint
 from ...op.shift import shift_signatures
 from ....registers import asm_data_type as adt, adt_size
+
+
+#: the element types permutes move: they move bits, these the vectors'
+PERMUTE_DTS = (adt.FP64, adt.FP32, adt.SINT64, adt.UINT64, adt.SINT32, adt.UINT32)
 
 
 def make_avx_move_signatures(simd_bytes : int) -> list[opsig]:
@@ -74,4 +79,16 @@ def make_avx_move_signatures(simd_bytes : int) -> list[opsig]:
         sigs += shift_signatures(
             [adt.FP64, adt.FP32], [{omod.IBLOCKROT}], irot=lambda dt, m: (-3, 3),
             blocksize=lambda dt: 16 // adt_size(dt))
+    # two sources permuted: within each 128-bit lane vunpcklpd/vunpckhpd (64-bit
+    # units), vunpcklps/vunpckhps (32); across the register vperm2f128 (ymm:
+    # zip of 128-bit halves), vshuff64x2 (zmm: unzip of 128-bit blocks, zip of
+    # 256-bit halves)
+    forms = [(dt, pattern, bits, 128) for dt in PERMUTE_DTS for pattern in ("zip_lo", "zip_hi")
+             for bits in (32, 64) if bits >= 8 * adt_size(dt)]
+    if 32 == simd_bytes:
+        forms += [(dt, pattern, 128, None) for dt in PERMUTE_DTS for pattern in ("zip_lo", "zip_hi")]
+    if 64 == simd_bytes:
+        forms += [(dt, pattern, 128, None) for dt in PERMUTE_DTS for pattern in ("uzp_even", "uzp_odd")]
+        forms += [(dt, pattern, 256, None) for dt in PERMUTE_DTS for pattern in ("zip_lo", "zip_hi")]
+    sigs += permute_signatures(forms)
     return sigs
