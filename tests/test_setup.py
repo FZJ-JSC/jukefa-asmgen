@@ -49,6 +49,18 @@ class test_setup(unittest.TestCase):
         self.assertIn("pn8", text)
         self.assertIn("smstop", setup.teardown(rt=tracker(), dt=adt.FP64))
 
+    def test_rvv_callers_avl(self):
+        # a vector length the caller set in a register it aliased avl - not
+        # the most there is, not a constant: vsetvli takes it
+        gen = rvv()
+        setup = gen.isa_setup()
+        rt = tracker()
+        rt.alias_reg("greg", "avl", rt.reserve_any_reg("greg"))
+        avl = gen.greg(rt.aliased_regs["greg"]["avl"])
+        text = setup.setup(rt=rt, dt=adt.FP64)
+        self.assertIn(f", {avl}, e64", text)
+        self.assertNotIn("zero", text)
+
     def test_rvv071_vsetvli(self):
         # 0.7.1's vsetvli: no tail and mask policies, th.-prefixed, the
         # element type changed as RVV's

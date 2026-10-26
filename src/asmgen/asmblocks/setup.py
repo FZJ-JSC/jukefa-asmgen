@@ -287,6 +287,13 @@ class rvv_setup(isa_setup):
             avl = self.gen.greg(self._aliased(rt, "avl"))
             return self.gen.set(dreg=avl, dt=adt.UINT64, modifiers={opset_modifier.CONST}, value=vl) + \
                 self._vsetvli(vlreg, avl, dt=dt)
+        if "avl" in rt.aliased_regs.get("greg", {}):
+            # the caller's vector length: a register it aliased avl and set -
+            # a length preferred over the most there is (a multiple of 40
+            # elements on some hardware: 240 doubles of 256), known at run
+            # time only (BLIS's context)
+            avl = self.gen.greg(rt.aliased_regs["greg"]["avl"])
+            return self._vsetvli(vlreg, avl, dt=dt)
         return self._vsetvli(vlreg, "zero", dt=dt)
 
 
