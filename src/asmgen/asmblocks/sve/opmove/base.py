@@ -20,7 +20,7 @@ from ...aarch64.types import aarch64_greg,aarch64_freg
 
 
 from .signatures import make_sve_move_signatures
-from ...aarch64.move import aarch64_move
+from ...aarch64.opmove import aarch64_move
 from ...op.scalar import scalar_dregs_only, scalar_operands
 
 class sve_move(opmove):

@@ -13,7 +13,7 @@ from ....registers import (
     asm_data_type as adt,
 )
 
-from ...aarch64.opd3.base import aarch64_simd_opd3_base
+from ...aarch64.optransform.base import aarch64_simd_opd3_base
 
 from .signatures import make_sve_opd3_signatures
 

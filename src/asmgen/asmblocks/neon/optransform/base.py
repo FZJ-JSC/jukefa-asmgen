@@ -14,7 +14,7 @@ from ....registers import (
     asm_data_type as adt,
 )
 
-from ...aarch64.opd3.base import aarch64_simd_opd3_base
+from ...aarch64.optransform.base import aarch64_simd_opd3_base
 from ...op import operand_modifier as opd_mod
 
 from .signatures import make_neon_opd3_signatures

@@ -27,13 +27,13 @@ from ...callconv.callconv import callconv
 from .base import avxbase
 from .types import x86_greg,avx_freg,xmm_vreg,ymm_vreg,zmm_vreg,reg_prefixer
 
-from .move import avx_move
-from .opd3 import avx_fma,avx_mul,avx_add
+from .opmove import avx_move
+from .optransform import avx_fma,avx_mul,avx_add
 
 from .opmem.load import avx128_load,avx256_load,avx512_load
 from .opmem.store import avx128_store,avx256_store,avx512_store
-from ..x86.opd3 import x86_sub
-from ..x86.opd3 import x86_shift
+from ..x86.optransform import x86_sub
+from ..x86.optransform import x86_shift
 from .opset import avx_opset
 from ..op.opset import opset_modifier as _opset_mod
 

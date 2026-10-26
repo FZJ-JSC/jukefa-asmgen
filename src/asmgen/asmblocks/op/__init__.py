@@ -42,22 +42,3 @@ from .optransform import (
     dummy_optransform)
 
 from .misc import make_ord_prefix
-
-
-#: the names before 0.6's phase 10 - deprecated for a release
-_RENAMED = {"opd3": "optransform", "opd3_modifier": "optransform_modifier",
-            "dummy_opd3": "dummy_optransform", "move_modifier": "opmove_modifier",
-            "dummy_move": "dummy_opmove"}
-
-
-def __getattr__(name):
-    """
-    opd3 is optransform, move's base class opmove (0.6): their old names,
-    deprecated
-    """
-    if name in _RENAMED:
-        import warnings
-        warnings.warn(f"asmgen: asmgen.asmblocks.op.{name} is deprecated, use {_RENAMED[name]}",
-                      DeprecationWarning, stacklevel=2)
-        return globals()[_RENAMED[name]]
-    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

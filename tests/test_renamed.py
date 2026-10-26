@@ -2,7 +2,7 @@
 fadd and fmul are add and mul (0.6, phase 1); the old names - the
 generator's attributes, the classes' - were deprecated for a release and
 are gone (phase 9). opd3 is optransform and move's base class opmove
-(phase 10): their old names deprecated for a release.
+(phase 10): their old names gone, the ISAs' packages renamed too.
 """
 import warnings
 import importlib
@@ -25,7 +25,7 @@ class test_renamed(unittest.TestCase):
 
     def test_class_names_gone(self):
         for isa in ("neon", "sve", "avx", "rvv"):
-            module = importlib.import_module(f"asmgen.asmblocks.{isa}.opd3")
+            module = importlib.import_module(f"asmgen.asmblocks.{isa}.optransform")
             with self.subTest(isa=isa):
                 self.assertTrue(hasattr(module, f"{isa}_add") and hasattr(module, f"{isa}_mul"))
                 for old in (f"{isa}_fadd", f"{isa}_fmul"):
@@ -35,31 +35,29 @@ class test_renamed(unittest.TestCase):
 
 
 class test_phase10_names(unittest.TestCase):
-    def old(self, module, name):
-        with warnings.catch_warnings(record=True) as caught:
-            warnings.simplefilter("always")
-            value = getattr(importlib.import_module(module), name)
-        self.assertTrue(any(issubclass(w.category, DeprecationWarning) for w in caught), (module, name))
-        return value
+    """
+    opd3 is optransform, move's base class opmove (phase 10): the old
+    modules, packages and names are gone
+    """
+    def test_old_modules_gone(self):
+        for module in ["asmgen.asmblocks.op.opd3", "asmgen.asmblocks.op.move"] + \
+                [f"asmgen.asmblocks.{isa}.{old}" for isa in ("neon", "sve", "sme", "aarch64", "riscv64",
+                                                              "x86", "avx", "rvv") for old in ("opd3", "move")]:
+            with self.subTest(module=module), self.assertRaises(ModuleNotFoundError):
+                importlib.import_module(module)
 
-    def test_modules(self):
-        from asmgen.asmblocks.op.optransform import optransform, optransform_modifier
-        from asmgen.asmblocks.op.opmove import opmove, opmove_modifier
-        self.assertIs(optransform, self.old("asmgen.asmblocks.op.opd3", "opd3"))
-        self.assertIs(optransform_modifier, self.old("asmgen.asmblocks.op.opd3", "opd3_modifier"))
-        self.assertIs(opmove, self.old("asmgen.asmblocks.op.move", "move"))
-        self.assertIs(opmove_modifier, self.old("asmgen.asmblocks.op.move", "move_modifier"))
-
-    def test_package(self):
+    def test_old_names_gone(self):
         from asmgen.asmblocks import op
-        self.assertIs(op.optransform_modifier, self.old("asmgen.asmblocks.op", "opd3_modifier"))
-        self.assertIs(op.opmove_modifier, self.old("asmgen.asmblocks.op", "move_modifier"))
+        for name in ("opd3", "opd3_modifier", "move_modifier", "dummy_opd3", "dummy_move"):
+            with self.subTest(name=name):
+                self.assertFalse(hasattr(op, name))
 
-    def test_new_names_quiet(self):
+    def test_new_names(self):
         with warnings.catch_warnings():
             warnings.simplefilter("error", DeprecationWarning)
             from asmgen.asmblocks.op import optransform, optransform_modifier, opmove, opmove_modifier  # noqa
             self.assertTrue(issubclass(type(neon().add), optransform))
+            self.assertTrue(issubclass(type(neon().move), opmove))
 
 if __name__ == "__main__":
     unittest.main()

@@ -14,7 +14,7 @@ from ...registers import asm_data_type as adt, adt_size, greg_base, vreg_base
 from ...registers import asm_index_type as ait
 from ..rvv.opset import rvv_opset
 from .opmem import rvv071_load, rvv071_store
-from .move import rvv071_move
+from .opmove import rvv071_move
 
 def _th_prefixed(line : str) -> str:
     """

@@ -16,7 +16,7 @@ from ...op.opmove import opmove, opmove_modifier as mod
 from ..types import xmm_vreg, ymm_vreg
 from ....registers import adt_size
 from .signatures import make_avx_move_signatures
-from ...x86.move import x86_move
+from ...x86.opmove import x86_move
 from ...op.scalar import scalar_dregs_only, scalar_operands
 
 

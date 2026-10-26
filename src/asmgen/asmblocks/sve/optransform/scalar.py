@@ -1,7 +1,7 @@
 """
 SVE's add on general registers: AArch64's, and counts of vector lengths
 """
-from ...aarch64.opd3 import aarch64_add
+from ...aarch64.optransform import aarch64_add
 from ...op.constraint import minmax_constraint
 from ....registers import greg_base
 

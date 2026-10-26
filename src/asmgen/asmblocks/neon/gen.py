@@ -17,11 +17,11 @@ from ..aarch64 import aarch64
 
 from ..aarch64.types import aarch64_freg
 from .types import neon_vreg
-from .opd3 import neon_fma,neon_mul,neon_add
+from .optransform import neon_fma,neon_mul,neon_add
 from .opmem import neon_load, neon_store
-from .move import neon_move
-from ..aarch64.opd3 import aarch64_sub
-from ..aarch64.opd3 import aarch64_shift
+from .opmove import neon_move
+from ..aarch64.optransform import aarch64_sub
+from ..aarch64.optransform import aarch64_shift
 from ...registers import asm_data_type as _ADT
 from .opset import neon_opset
 from ..op.opset import opset_modifier as _opset_mod

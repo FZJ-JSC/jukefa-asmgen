@@ -4,7 +4,7 @@
 # Copyright (C) 2021 Stepan Nassyr <s.nassyr@xcpp.org>
 # ------------------------------------------------------------------------------
 """
-AVX add (vadd)
+AVX mul (vmul)
 """
 
 from typing import Any
@@ -16,16 +16,16 @@ from ...op import (
 from ....registers import asm_data_type as adt
 
 from .base import avx_opd3_base
-from ...x86.opd3 import x86_add
+from ...x86.optransform import x86_mul
 
-class avx_add(avx_opd3_base):
+class avx_mul(avx_opd3_base):
     """
-    AVX implementation of add (vadd)
+    AVX implementation of mul (vmul)
     """
-    scalar_class = x86_add
+    scalar_class = x86_mul
 
     def get_base_inst(self, modifiers : set[mod]):
-        return "vadd"
+        return "vmul"
 
     def diagnose_failure(self, modifiers: set[mod],
                          operand_modifiers : dict[str,set[opd_mod]],
@@ -33,4 +33,4 @@ class avx_add(avx_opd3_base):
                          dts : dict[str,adt]):
         super().diagnose_failure(modifiers, operand_modifiers, kwargs, dts)
         if mod.NP in modifiers:
-            raise ValueError("AVX add has no NP form")
+            raise ValueError("AVX mul has no NP form")

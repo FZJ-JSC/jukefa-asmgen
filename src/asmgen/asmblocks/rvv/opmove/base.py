@@ -15,7 +15,7 @@ from ...op.operand import operand_modifier as omod
 from ...op.opmove import opmove, opmove_modifier as mod
 from ...riscv64.types import riscv64_greg
 from .signatures import make_rvv_move_signatures
-from ...riscv64.move import riscv64_move
+from ...riscv64.opmove import riscv64_move
 from ...op.scalar import scalar_dregs_only, scalar_operands
 
 

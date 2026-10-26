@@ -15,7 +15,7 @@ from ...op.operand import operand_modifier as omod
 from ...op.opmove import opmove, opmove_modifier as mod
 from ...aarch64.types import aarch64_greg
 from .signatures import make_neon_move_signatures
-from ...aarch64.move import aarch64_move
+from ...aarch64.opmove import aarch64_move
 from ...op.scalar import scalar_dregs_only, scalar_operands
 
 

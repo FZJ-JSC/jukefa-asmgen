@@ -19,15 +19,15 @@ from ...registers import (
 )
 
 from .types import sve_vreg,sve_preg
-from .opd3 import sve_fma,sve_mul,sve_add
+from .optransform import sve_fma,sve_mul,sve_add
 from .opmem.load import sve_load
 from .opmem.store import sve_store
 
-from .move import sve_move
+from .opmove import sve_move
 
 from ..neon import neon
-from ..aarch64.opd3 import aarch64_sub
-from ..aarch64.opd3 import aarch64_shift
+from ..aarch64.optransform import aarch64_sub
+from ..aarch64.optransform import aarch64_shift
 from ...registers import asm_data_type as _ADT
 from .opset import sve_opset
 from ..op.opset import opset_modifier as _opset_mod

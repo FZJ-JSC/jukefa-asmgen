@@ -31,7 +31,7 @@ from ...callconv.callconv import callconv
 
 from .types import x86_greg,avx_freg,xmm_vreg,ymm_vreg,zmm_vreg,reg_prefixer,avx512_mreg
 
-from .opd3 import avx_fma,avx_mul,avx_add
+from .optransform import avx_fma,avx_mul,avx_add
 
 from .opmem.load import avx128_load,avx256_load,avx512_load
 from .opmem.store import avx128_store,avx256_store,avx512_store

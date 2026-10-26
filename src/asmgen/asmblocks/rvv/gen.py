@@ -19,11 +19,11 @@ from ...registers import (
 from ..riscv64 import riscv64
 from .types import rvv_vreg
 
-from .opd3 import rvv_fma,rvv_mul,rvv_add
+from .optransform import rvv_fma,rvv_mul,rvv_add
 from .opmem import rvv_load,rvv_store
-from .move import rvv_move
-from ..riscv64.opd3 import riscv64_sub
-from ..riscv64.opd3 import riscv64_shift
+from .opmove import rvv_move
+from ..riscv64.optransform import riscv64_sub
+from ..riscv64.optransform import riscv64_shift
 from .opset import rvv_opset
 from ..op.opset import opset_modifier as _opset_mod
 

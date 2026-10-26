@@ -14,7 +14,7 @@ from ....registers import (
 )
 from ...op import optransform_modifier as mod,operand_modifier as opd_mod
 from .base import neon_opd3_base
-from ...aarch64.opd3 import aarch64_mul
+from ...aarch64.optransform import aarch64_mul
 
 class neon_mul(neon_opd3_base):
     """

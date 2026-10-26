@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from ..op.operand import operand_modifier as opd_mod
 from ..op.signature import operation_signature
-from ..rvv.move import rvv_move
+from ..rvv.opmove import rvv_move
 
 _FLOATS = ("DOUBLE", "SINGLE", "HALF")
 

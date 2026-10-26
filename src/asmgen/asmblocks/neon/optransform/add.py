@@ -4,32 +4,29 @@
 # Copyright (C) 2021 Stepan Nassyr <s.nassyr@xcpp.org>
 # ------------------------------------------------------------------------------
 """
-SVE mul (fmul)
+NEON/ASIMD add (fadd)
 """
 
 from typing import Any
 
-from ....registers import asm_data_type as adt
+from ....registers import (
+    asm_data_type as adt,
+)
 from ...op import (
     optransform_modifier as mod,
     operand_modifier as opd_mod
 )
+from .base import neon_opd3_base
+from ...aarch64.optransform import aarch64_add
 
-from .base import sve_opd3_base
-from ...aarch64.opd3 import aarch64_mul
-
-class sve_mul(sve_opd3_base):
+class neon_add(neon_opd3_base):
     """
-    SVE implementation of mul (fmul)
+    NEON/ASIMD implementation of add (fadd)
     """
-    scalar_class = aarch64_mul
-    # unpredicated fadd/fmul (vectors) exist; the predicated forms are
-    # destructive: Zdn is both the destination and the first source
-    unpredicated = True
-    destructive = True
+    scalar_class = aarch64_add
     widens = False
 
-    inst_base = "mul"
+    inst_base = "add"
 
     def diagnose_failure(self, modifiers : set[mod],
                          operand_modifiers : dict[str,set[opd_mod]],
@@ -37,4 +34,6 @@ class sve_mul(sve_opd3_base):
                          dts : dict[str,adt]):
         super().diagnose_failure(modifiers, operand_modifiers, kwargs, dts)
         if mod.NP in modifiers:
-            raise ValueError("SVE mul has no NP-form")
+            raise ValueError("NEON add has no NP-form")
+        if mod.MASK in modifiers:
+            raise ValueError("NEON add has no masked form")

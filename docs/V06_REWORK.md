@@ -682,14 +682,13 @@ where `move` only moves them. A name to say so, as ukrgen's
 `lsc_transformation`: `optransform`, say. And `move`'s base class named as
 the others (`opmem`, `opset`): `opmove`. After the other phases.
 
-- [x] `opd3` (class, module, modifier enum) renamed `optransform`, the old
-      names deprecated for a release (asmgen 0078): `asmgen.asmblocks.op.opd3`
-      forwards `opd3`, `opd3_modifier`, `dummy_opd3` with a warning, as the
-      `op` package does its old names. The ISAs' `opd3` packages keep their
-      directory names.
-- [x] `move` (class, module, modifier enum) renamed `opmove`, likewise
-      (asmgen 0078); the generator's `move` operation keeps its name, as the
-      ISAs' `move` packages do.
+- [x] `opd3` (class, module, modifier enum) renamed `optransform` (asmgen
+      0078), the ISAs' `opd3` packages and `tests/opd3` too, the old names
+      gone - not deprecated for a release, as first planned: nothing outside
+      asmgen used them but ukrgen and ukropt, which move with it (0079).
+- [x] `move` (class, module, modifier enum) renamed `opmove`, likewise, the
+      ISAs' `move` packages (rvv071's `move.py`) and `tests/move` too; the
+      generator's `move` operation keeps its name.
 
 ## Log
 
@@ -776,3 +775,5 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-26: fadd/fmul gone; phase 9 done (asmgen 0077).
 - 2026-10-26: optransform, opmove; phase 10 done - the rework's phases all done
   (asmgen 0078).
+- 2026-10-27: the old opd3 and move names dropped, the ISAs' packages renamed
+  (asmgen 0079).

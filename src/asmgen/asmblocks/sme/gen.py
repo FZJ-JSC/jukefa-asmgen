@@ -16,8 +16,8 @@ from ...registers import (
 from ..sve import sve
 
 from .types import sme_treg
-from .opd3 import sme_fopa
-from .move import sme_move
+from .optransform import sme_fopa
+from .opmove import sme_move
 
 from .opmem.load import sme_load
 from .opmem.store import sme_store

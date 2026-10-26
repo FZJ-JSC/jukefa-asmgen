@@ -16,7 +16,7 @@ from ...op.operand import operand_modifier
 from ...op.opmove import opmove,opmove_modifier
 from ...op.misc import make_ord_prefix as mop
 
-from ...sve.move import sve_move
+from ...sve.opmove import sve_move
 
 from ...sve.types import sve_vreg
 from ..types import sme_treg
