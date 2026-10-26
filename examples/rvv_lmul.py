@@ -67,6 +67,7 @@ from asmgen.registers import (
         reg_tracker
 )
 from asmgen.asmblocks.op import opd3_modifier as mod
+from asmgen.asmblocks.op.opd3 import opd3_modifier
 
 
 def main():
@@ -112,9 +113,7 @@ def main():
         vlenidx = rt.aliased_regs["greg"]["vlen"]
         vlen = gen.greg(vlenidx)
 
-        asmblock += gen.shift_greg_left(
-                reg=vlen,
-                bit_count=adt_size(dt).bit_length()-1)
+        asmblock += gen.shift(adreg=vlen, bimm=adt_size(dt).bit_length()-1, cdreg=vlen, a_dt=adt.UINT64, c_dt=adt.UINT64, modifiers={opd3_modifier.SHL})
 
 
         asmblock += gen.load_vector(
@@ -153,18 +152,11 @@ def main():
                 modifiers={mod.VF})
 
 
-        asmblock += gen.add_greg_greg(dst=aaddr,
-                                      reg1=aaddr,
-                                      reg2=vlen)
-        asmblock += gen.add_greg_greg(dst=baddr,
-                                      reg1=baddr,
-                                      reg2=vlen)
-        asmblock += gen.add_greg_greg(dst=caddr,
-                                      reg1=caddr,
-                                      reg2=vlen)
+        asmblock += gen.add(adreg=aaddr, bdreg=vlen, cdreg=aaddr, a_dt=adt.UINT64, b_dt=adt.UINT64, c_dt=adt.UINT64)
+        asmblock += gen.add(adreg=baddr, bdreg=vlen, cdreg=baddr, a_dt=adt.UINT64, b_dt=adt.UINT64, c_dt=adt.UINT64)
+        asmblock += gen.add(adreg=caddr, bdreg=vlen, cdreg=caddr, a_dt=adt.UINT64, b_dt=adt.UINT64, c_dt=adt.UINT64)
 
-        asmblock += gen.add_greg_imm(reg=bfaddr,
-                                     imm=adt_size(dt))
+        asmblock += gen.add(adreg=bfaddr, bimm=adt_size(dt), cdreg=bfaddr, a_dt=adt.UINT64, c_dt=adt.UINT64)
 
         asmblock += gen.isaendquirks(dt=dt, rt=rt)
 

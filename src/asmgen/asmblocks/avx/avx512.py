@@ -128,14 +128,6 @@ class avx512(avxbase):
 
 
 
-    def zero_vreg(self, *, vreg : vreg_base, dt : adt):
-        return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
-
-    def zero_freg(self, *, freg : freg_base, dt : adt) -> str:
-        # EVEX: FP scalars live in the vector file, allocated from the top -
-        # xmm16-31 VEX's vpxor can't reach (AVX512VL)
-        return self.set(dreg=freg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
-
     def vreg(self, reg_idx : int):
         return zmm_vreg(reg_idx)
 

@@ -12,6 +12,9 @@ from asmgen.asmblocks.noarch import asm_data_type as dt, reg_tracker
 from asmgen.cppgen.checkers import always_true, vec_fp64_close, vec_fp32_close
 from asmgen.cppgen.expressions import identity
 from asmgen.cppgen.declarations import vargen, vio_type
+from asmgen.asmblocks.op.opset import opset_modifier
+from asmgen.asmblocks.op.opd3 import opd3_modifier
+from asmgen.registers import asm_data_type as adt
 
 
 # These will always be complex
@@ -41,12 +44,12 @@ class vec_test_generator:
 
         areg_idx = rt.reserve_any_reg(type_tag="greg")
         areg = testcase.gen.greg(areg_idx)
-        asmblock += testcase.gen.zero_greg(greg=areg)
+        asmblock += testcase.gen.set(dreg=areg, dt=adt.UINT64, modifiers={opset_modifier.CONST}, constant="zero")
         asmblock += testcase.gen.mov_param_to_greg(param=varname, dst=areg)
 
         vreg_idx = rt.reserve_any_reg(type_tag="vreg")
         vreg = testcase.gen.vreg(vreg_idx)
-        asmblock += testcase.gen.zero_vreg(vreg=vreg, dt=dt.SINGLE)
+        asmblock += testcase.gen.set(dreg=vreg, dt=dt.SINGLE, modifiers={opset_modifier.CONST}, constant="zero")
         asmblock += testcase.gen.load_vector(areg=areg, vreg=vreg, dt=dt.SINGLE)
 
         rt.unuse_reg(type_tag="greg", idx=areg_idx)
@@ -77,12 +80,12 @@ class vec_test_generator:
 
         areg_idx = rt.reserve_any_reg(type_tag="greg")
         areg = testcase.gen.greg(areg_idx)
-        asmblock += testcase.gen.zero_greg(greg=areg)
+        asmblock += testcase.gen.set(dreg=areg, dt=adt.UINT64, modifiers={opset_modifier.CONST}, constant="zero")
         asmblock += testcase.gen.mov_param_to_greg(param=varname, dst=areg)
 
         vreg_idx = rt.reserve_any_reg(type_tag="vreg")
         vreg = testcase.gen.vreg(vreg_idx)
-        asmblock += testcase.gen.zero_vreg(vreg=vreg, dt=dt.DOUBLE)
+        asmblock += testcase.gen.set(dreg=vreg, dt=dt.DOUBLE, modifiers={opset_modifier.CONST}, constant="zero")
         asmblock += testcase.gen.load_vector(areg=areg, vreg=vreg, dt=dt.DOUBLE)
 
         rt.unuse_reg(type_tag="greg", idx=areg_idx)
@@ -129,9 +132,9 @@ class vec_test_generator:
 
         asmblock  = testcase.gen.isaquirks(rt=rt, dt=dt.SINGLE)
 
-        asmblock += testcase.gen.zero_vreg(vreg=avreg, dt=dt.SINGLE)
-        asmblock += testcase.gen.zero_vreg(vreg=bvreg, dt=dt.SINGLE)
-        asmblock += testcase.gen.zero_vreg(vreg=cvreg, dt=dt.SINGLE)
+        asmblock += testcase.gen.set(dreg=avreg, dt=dt.SINGLE, modifiers={opset_modifier.CONST}, constant="zero")
+        asmblock += testcase.gen.set(dreg=bvreg, dt=dt.SINGLE, modifiers={opset_modifier.CONST}, constant="zero")
+        asmblock += testcase.gen.set(dreg=cvreg, dt=dt.SINGLE, modifiers={opset_modifier.CONST}, constant="zero")
 
 
         aareg_idx = rt.reserve_any_reg(type_tag="greg")
@@ -211,9 +214,9 @@ class vec_test_generator:
 
         asmblock  = testcase.gen.isaquirks(rt=rt, dt=dt.DOUBLE)
 
-        asmblock += testcase.gen.zero_vreg(vreg=avreg, dt=dt.DOUBLE)
-        asmblock += testcase.gen.zero_vreg(vreg=bvreg, dt=dt.DOUBLE)
-        asmblock += testcase.gen.zero_vreg(vreg=cvreg, dt=dt.DOUBLE)
+        asmblock += testcase.gen.set(dreg=avreg, dt=dt.DOUBLE, modifiers={opset_modifier.CONST}, constant="zero")
+        asmblock += testcase.gen.set(dreg=bvreg, dt=dt.DOUBLE, modifiers={opset_modifier.CONST}, constant="zero")
+        asmblock += testcase.gen.set(dreg=cvreg, dt=dt.DOUBLE, modifiers={opset_modifier.CONST}, constant="zero")
 
 
         aareg_idx = rt.reserve_any_reg(type_tag="greg")
@@ -286,8 +289,8 @@ class vec_test_generator:
 
         asmblock  = testcase.gen.isaquirks(rt=rt, dt=dt.SINGLE)
 
-        asmblock += testcase.gen.zero_vreg(vreg=avreg, dt=dt.SINGLE)
-        asmblock += testcase.gen.zero_vreg(vreg=bvreg, dt=dt.SINGLE)
+        asmblock += testcase.gen.set(dreg=avreg, dt=dt.SINGLE, modifiers={opset_modifier.CONST}, constant="zero")
+        asmblock += testcase.gen.set(dreg=bvreg, dt=dt.SINGLE, modifiers={opset_modifier.CONST}, constant="zero")
 
         aareg_idx = rt.reserve_any_reg(type_tag="greg")
         aareg = testcase.gen.greg(aareg_idx)
@@ -352,8 +355,8 @@ class vec_test_generator:
 
         asmblock  = testcase.gen.isaquirks(rt=rt, dt=dt.DOUBLE)
 
-        asmblock += testcase.gen.zero_vreg(vreg=avreg, dt=dt.DOUBLE)
-        asmblock += testcase.gen.zero_vreg(vreg=bvreg, dt=dt.DOUBLE)
+        asmblock += testcase.gen.set(dreg=avreg, dt=dt.DOUBLE, modifiers={opset_modifier.CONST}, constant="zero")
+        asmblock += testcase.gen.set(dreg=bvreg, dt=dt.DOUBLE, modifiers={opset_modifier.CONST}, constant="zero")
 
         aareg_idx = rt.reserve_any_reg(type_tag="greg")
         aareg = testcase.gen.greg(aareg_idx)

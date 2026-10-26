@@ -147,13 +147,6 @@ class neon(aarch64):
     def simd_size(self):
         return 16
 
-    def add_greg_voff(self, *, reg : greg_base, offset : int, dt : adt):
-        # a fixed vector length: the byte count, within add's immediates
-        return self.add(adreg=reg, bimm=self.simd_size*offset, cdreg=reg, a_dt=_ADT.UINT64, c_dt=_ADT.UINT64)
-
-    def zero_vreg(self, *, vreg : vreg_base, dt : adt):
-        return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
-
     def vreg(self, reg_idx : int) -> neon_vreg:
         return neon_vreg(reg_idx)
 
@@ -167,10 +160,6 @@ class neon(aarch64):
         :rtype: class:`asmgen.asmblocks.aarch64.types.aarch64_freg`
         """
         return aarch64_freg(reg_idx=idx, dt=adt.FP128)
-
-    @property
-    def max_add_voff(self) -> int:
-        return 4096//self.simd_size
 
     def load_vector_lane_greginc(self, *, areg : greg_base, offreg : greg_base,
                          vreg : vreg_base, lane : int, dt : adt) -> str:
@@ -244,7 +233,4 @@ class neon(aarch64):
         return 0
 
     def treg(self, reg_idx : int, dt : adt) -> treg_base:
-        raise NotImplementedError("NEON has no tiles, use SME")
-
-    def zero_treg(self, *, treg : treg_base, dt : adt) -> str:
         raise NotImplementedError("NEON has no tiles, use SME")

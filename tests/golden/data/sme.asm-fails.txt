@@ -22,8 +22,6 @@ method max_tregs(dt=DOUBLE)
 method max_tregs(dt=HALF)
 method max_tregs(dt=SINGLE)
 method max_vregs()
-method mov_greg_to_freg(dst=d1, dt=HALF, src=x0)
-method mov_greg_to_freg(dst=d1, dt=SINGLE, src=x0)
 method mov_greg_to_param(param=someparam, src=x0)
 method mov_param_to_greg(dst=x0, param=someparam)
 method mov_param_to_greg_shift(bit_count=2, dst=x0, param=someparam)
@@ -33,7 +31,6 @@ method treg(dt=DOUBLE, reg_idx=0)
 method treg(dt=HALF, reg_idx=0)
 method treg(dt=SINGLE, reg_idx=0)
 method vreg(reg_idx=0)
-method zero_freg(dt=DOUBLE, freg=s0)
 op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
 op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far
 op add [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{BLOCKLANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:8}

@@ -22,22 +22,6 @@ def make(ctor):
 
 
 class test_setop(unittest.TestCase):
-    def test_zero_methods_on_set(self):
-        for ctor in (rvv, neon, sve, sme, fma256, avx512):
-            g = make(ctor)
-            with self.subTest(isa=ctor.__name__):
-                self.assertEqual(g.set(dreg=g.greg(1), dt=adt.UINT64, modifiers=CONST, constant="zero"),
-                                 g.zero_greg(greg=g.greg(1)))
-                f = g.freg(1, adt.SINGLE)
-                self.assertEqual(g.set(dreg=f, dt=adt.SINGLE, modifiers=CONST, constant="zero"),
-                                 g.zero_freg(freg=f, dt=adt.SINGLE))
-                self.assertEqual(g.set(dreg=g.vreg(2), dt=adt.DOUBLE, modifiers=CONST, constant="zero"),
-                                 g.zero_vreg(vreg=g.vreg(2), dt=adt.DOUBLE))
-        g = make(sme)
-        t = g.treg(1, adt.DOUBLE)
-        self.assertEqual("zero {za1.d}", g.set(dreg=t, dt=adt.DOUBLE, modifiers=CONST, constant="zero").strip())
-        self.assertEqual(g.set(dreg=t, dt=adt.DOUBLE, modifiers=CONST, constant="zero"), g.zero_treg(treg=t, dt=adt.DOUBLE))
-
     def test_unknown_constant(self):
         g = make(rvv)
         with self.assertRaises(ValueError):
@@ -91,14 +75,6 @@ class test_one_and_values(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.value(n, 2**64)
 
-    def test_mov_greg_imm_on_set(self):
-        for ctor in (rvv, neon, avx512):
-            g = make(ctor)
-            with self.subTest(isa=ctor.__name__):
-                self.assertEqual(g.set(dreg=g.greg(1), dt=adt.UINT64, modifiers=CONST, value=4096),
-                                 g.mov_greg_imm(reg=g.greg(1), imm=4096))
-
-
 class test_masks(unittest.TestCase):
     """
     CONSTMASK: mask registers all true or all false
@@ -113,14 +89,14 @@ class test_masks(unittest.TestCase):
                 self.assertEqual("ptrue p1.d", self.mask(g, g.mreg(1), adt.DOUBLE, "alltrue"))
                 self.assertEqual("pfalse p1.b", self.mask(g, g.mreg(1), adt.SINGLE, "allfalse"))
                 self.assertEqual("ptrue pn8.s", self.mask(g, g.mreg(8, is_pn=True), adt.SINGLE, "alltrue"))
-                self.assertEqual(g.mask_all_true(reg=g.mreg(2), dt=adt.HALF),
+                self.assertEqual(g.set(dreg=g.mreg(2), dt=adt.HALF, modifiers={opset_modifier.CONSTMASK}, mask="alltrue"),
                                  g.set(dreg=g.mreg(2), dt=adt.HALF, modifiers={opset_modifier.CONSTMASK}, mask="alltrue"))
 
     def test_avx512(self):
         g = make(avx512)
         self.assertEqual("kxnorw %k1,%k1,%k1", self.mask(g, g.mreg(1), adt.DOUBLE, "alltrue"))
         self.assertEqual("kxorw %k1,%k1,%k1", self.mask(g, g.mreg(1), adt.DOUBLE, "allfalse"))
-        self.assertEqual(g.mask_all_true(reg=g.mreg(1), dt=adt.SINGLE),
+        self.assertEqual(g.set(dreg=g.mreg(1), dt=adt.SINGLE, modifiers={opset_modifier.CONSTMASK}, mask="alltrue"),
                          g.set(dreg=g.mreg(1), dt=adt.SINGLE, modifiers={opset_modifier.CONSTMASK}, mask="alltrue"))
 
     def test_avx2_vector_masks(self):
@@ -132,7 +108,7 @@ class test_masks(unittest.TestCase):
             with self.subTest(isa=ctor.__name__):
                 self.assertEqual(f"vpcmpeqd {p},{p},{p}", self.mask(g, v, adt.DOUBLE, "alltrue"))
                 self.assertEqual(f"vpxor {p},{p},{p}", self.mask(g, v, adt.DOUBLE, "allfalse"))
-                self.assertEqual(f"vpcmpeqd {p},{p},{p}", g.mask_all_true(reg=v, dt=adt.SINGLE).strip())
+                self.assertEqual(f"vpcmpeqd {p},{p},{p}", g.set(dreg=v, dt=adt.SINGLE, modifiers={opset_modifier.CONSTMASK}, mask="alltrue").strip())
         g = make(avx512)
         with self.assertRaises(ValueError):              # AVX-512's masks are k registers
             self.mask(g, g.vreg(3), adt.DOUBLE, "alltrue")
@@ -170,16 +146,6 @@ class test_vlen(unittest.TestCase):
         self.assertEqual("cntd x1", self.vlen(s, adt.DOUBLE))
         self.assertEqual(f"movq $8,{a.rpref(a.greg(1))}", self.vlen(a, adt.DOUBLE))
 
-    def test_methods_on_it(self):
-        for ctor in (rvv, neon, sve, sme, fma256, avx512):
-            g = make(ctor)
-            with self.subTest(isa=ctor.__name__):
-                v = g.set(dreg=g.greg(1), dt=adt.SINGLE, modifiers={opset_modifier.VLEN})
-                self.assertEqual(v, g.simd_size_to_greg(reg=g.greg(1), dt=adt.SINGLE))
-                self.assertEqual(v, g.vlen_to_greg(reg=g.greg(1), dt=adt.SINGLE))
-                c = g.c_simd_size_function
-                self.assertTrue(c.startswith("static inline size_t get_simd_size()"), c[:60])
-
     def test_c_helper_asm(self):
         c = make(sme).c_simd_size_function
         self.assertIn('"smstart', c)
@@ -210,18 +176,10 @@ class test_index(unittest.TestCase):
         n = make(neon)
         with self.assertRaises(ValueError):
             self.index(n, adt.DOUBLE)
-        with self.assertRaises(NotImplementedError):     # what ukrgen's emitter catches
-            n.greg_to_voffs(streg=n.greg(1), vreg=n.vreg(2), dt=adt.DOUBLE)
+        with self.assertRaises(ValueError):
+            n.set(dreg=n.vreg(2), dt=adt.DOUBLE, modifiers={opset_modifier.STINDEX}, streg=n.greg(1))
         with self.assertRaises(ValueError):              # no byte multiply on AVX
             self.index(make(avx512), adt.SINT8)
-
-    def test_greg_to_voffs_on_it(self):
-        for ctor in (rvv, sve, fma256, avx512):
-            g = make(ctor)
-            with self.subTest(isa=ctor.__name__):
-                self.assertEqual(g.set(dreg=g.vreg(2), dt=adt.SINGLE, modifiers={opset_modifier.STINDEX}, streg=g.greg(1)),
-                                 g.greg_to_voffs(streg=g.greg(1), vreg=g.vreg(2), dt=adt.SINGLE))
-
 
 class test_avx2_masks(unittest.TestCase):
     """
@@ -238,7 +196,7 @@ class test_avx2_masks(unittest.TestCase):
                 m = rt.reserve_any_reg("mreg")
                 self.assertNotEqual(m, rt.reserve_any_reg("vreg"))     # one pool
                 p = g.rpref(g.mreg(2))
-                self.assertEqual(f"vpcmpeqd {p},{p},{p}", g.mask_all_true(reg=g.mreg(2), dt=adt.DOUBLE).strip())
+                self.assertEqual(f"vpcmpeqd {p},{p},{p}", g.set(dreg=g.mreg(2), dt=adt.DOUBLE, modifiers={opset_modifier.CONSTMASK}, mask="alltrue").strip())
                 kinds = {o.rtype.name for s in g.set.get_signatures() for o in s.operands.values() if o.rtype}
                 self.assertNotIn("MASK", kinds)                        # no k registers on AVX2
 

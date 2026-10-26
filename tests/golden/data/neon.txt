@@ -1,101 +1,3 @@
-### method add_greg_greg(dst=x0, reg1=x1, reg2=x2)
-add x0,x1,x2
-### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=-2048)
-!NotImplementedError: AArch64 has no add of a register shifted by -2048 in one instruction here: value of bdreg_shift must be >= 0
-### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=-2049)
-!NotImplementedError: AArch64 has no add of a register shifted by -2049 in one instruction here: value of bdreg_shift must be >= 0
-### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=-8)
-!NotImplementedError: AArch64 has no add of a register shifted by -8 in one instruction here: value of bdreg_shift must be >= 0
-### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=0)
-add x0,x1,x2
-### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=1)
-add x0,x1,x2, LSL #1
-### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=2047)
-!NotImplementedError: AArch64 has no add of a register shifted by 2047 in one instruction here: value of bdreg_shift must be <= 63
-### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=2048)
-!NotImplementedError: AArch64 has no add of a register shifted by 2048 in one instruction here: value of bdreg_shift must be <= 63
-### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=255)
-!NotImplementedError: AArch64 has no add of a register shifted by 255 in one instruction here: value of bdreg_shift must be <= 63
-### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=256)
-!NotImplementedError: AArch64 has no add of a register shifted by 256 in one instruction here: value of bdreg_shift must be <= 63
-### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=4096)
-!NotImplementedError: AArch64 has no add of a register shifted by 4096 in one instruction here: value of bdreg_shift must be <= 63
-### method add_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=8)
-add x0,x1,x2, LSL #8
-### method add_greg_imm(imm=-2048, reg=x0)
-add x0,x0,#-2048
-### method add_greg_imm(imm=-2049, reg=x0)
-add x0,x0,#-2049
-### method add_greg_imm(imm=-8, reg=x0)
-add x0,x0,#-8
-### method add_greg_imm(imm=0, reg=x0)
-add x0,x0,#0
-### method add_greg_imm(imm=1, reg=x0)
-add x0,x0,#1
-### method add_greg_imm(imm=2047, reg=x0)
-add x0,x0,#2047
-### method add_greg_imm(imm=2048, reg=x0)
-add x0,x0,#2048
-### method add_greg_imm(imm=255, reg=x0)
-add x0,x0,#255
-### method add_greg_imm(imm=256, reg=x0)
-add x0,x0,#256
-### method add_greg_imm(imm=40, reg=x0)
-add x0,x0,#40
-### method add_greg_imm(imm=4096, reg=x0)
-add x0,x0,#4096
-### method add_greg_imm(imm=8, reg=x0)
-add x0,x0,#8
-### method add_greg_voff(dt=DOUBLE, offset=-2048, reg=x0)
-add x0,x0,#-32768
-### method add_greg_voff(dt=DOUBLE, offset=-2049, reg=x0)
-!ValueError: value of bimm fits none of the forms: value of bimm must be >= -4095; or value of bimm must be a multiple of 4096
-### method add_greg_voff(dt=DOUBLE, offset=-8, reg=x0)
-add x0,x0,#-128
-### method add_greg_voff(dt=DOUBLE, offset=0, reg=x0)
-add x0,x0,#0
-### method add_greg_voff(dt=DOUBLE, offset=1, reg=x0)
-add x0,x0,#16
-### method add_greg_voff(dt=DOUBLE, offset=2047, reg=x0)
-!ValueError: value of bimm fits none of the forms: value of bimm must be <= 4095; or value of bimm must be a multiple of 4096
-### method add_greg_voff(dt=DOUBLE, offset=2048, reg=x0)
-add x0,x0,#32768
-### method add_greg_voff(dt=DOUBLE, offset=255, reg=x0)
-add x0,x0,#4080
-### method add_greg_voff(dt=DOUBLE, offset=256, reg=x0)
-add x0,x0,#4096
-### method add_greg_voff(dt=DOUBLE, offset=40, reg=x0)
-add x0,x0,#640
-### method add_greg_voff(dt=DOUBLE, offset=4096, reg=x0)
-add x0,x0,#65536
-### method add_greg_voff(dt=DOUBLE, offset=8, reg=x0)
-add x0,x0,#128
-### method add_greg_voff(dt=HALF, offset=40, reg=x0)
-add x0,x0,#640
-### method add_greg_voff(dt=SINGLE, offset=-2048, reg=x0)
-add x0,x0,#-32768
-### method add_greg_voff(dt=SINGLE, offset=-2049, reg=x0)
-!ValueError: value of bimm fits none of the forms: value of bimm must be >= -4095; or value of bimm must be a multiple of 4096
-### method add_greg_voff(dt=SINGLE, offset=-8, reg=x0)
-add x0,x0,#-128
-### method add_greg_voff(dt=SINGLE, offset=0, reg=x0)
-add x0,x0,#0
-### method add_greg_voff(dt=SINGLE, offset=1, reg=x0)
-add x0,x0,#16
-### method add_greg_voff(dt=SINGLE, offset=2047, reg=x0)
-!ValueError: value of bimm fits none of the forms: value of bimm must be <= 4095; or value of bimm must be a multiple of 4096
-### method add_greg_voff(dt=SINGLE, offset=2048, reg=x0)
-add x0,x0,#32768
-### method add_greg_voff(dt=SINGLE, offset=255, reg=x0)
-add x0,x0,#4080
-### method add_greg_voff(dt=SINGLE, offset=256, reg=x0)
-add x0,x0,#4096
-### method add_greg_voff(dt=SINGLE, offset=40, reg=x0)
-add x0,x0,#640
-### method add_greg_voff(dt=SINGLE, offset=4096, reg=x0)
-add x0,x0,#65536
-### method add_greg_voff(dt=SINGLE, offset=8, reg=x0)
-add x0,x0,#128
 ### method align(bytes=64)
 .balign 64
 ### method asmfile_annotations()
@@ -111,12 +13,6 @@ b.ne .notequal
 <asmgen.callconv.callconv.callconv object>
 ### method enabled_features()
 {BF16, DOTPROD, FHM, FP16, FP8FMA, I8MM}
-### method fill_vector(dt=DOUBLE, sreg=d0, vreg=v1)
-dup v1.2d,v0.d[0]
-### method fill_vector(dt=HALF, sreg=d0, vreg=v1)
-dup v1.8h,v0.h[0]
-### method fill_vector(dt=SINGLE, sreg=d0, vreg=v1)
-dup v1.4s,v0.s[0]
 ### method freg(dt=DOUBLE, reg_idx=0)
 d0
 ### method freg(dt=HALF, reg_idx=0)
@@ -129,12 +25,6 @@ dummy
 ['FP16', 'FHM', 'BF16', 'FP8FMA', 'DOTPROD', 'I8MM']
 ### method greg(reg_idx=0)
 x0
-### method greg_to_voffs(dt=DOUBLE, streg=x0, vreg=v1)
-!NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {STINDEX}
-### method greg_to_voffs(dt=HALF, streg=x0, vreg=v1)
-!NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {STINDEX}
-### method greg_to_voffs(dt=SINGLE, streg=x0, vreg=v1)
-!NotImplementedError: neon has no index vector here: neon_opset does not support these modifiers at all: {STINDEX}
 ### method is_vla()
 False
 ### method isaclear()
@@ -455,12 +345,6 @@ sub x0,x0,1
 ### method loopend(label=someloop, reg=x0)
 cmp x0,0
 b.ne .someloop
-### method mask_all_true(dt=DOUBLE, reg=v0)
-!NotImplementedError: neon has no mask to set
-### method mask_all_true(dt=HALF, reg=v0)
-!NotImplementedError: neon has no mask to set
-### method mask_all_true(dt=SINGLE, reg=v0)
-!NotImplementedError: neon has no mask to set
 ### method max_fregs()
 32
 ### method max_gregs()
@@ -473,71 +357,18 @@ b.ne .someloop
 0
 ### method max_vregs()
 32
-### method mov_freg(dst=s1, dt=DOUBLE, src=s0)
-fmov s1,s0
-### method mov_freg(dst=s1, dt=HALF, src=s0)
-fmov s1,s0
-### method mov_freg(dst=s1, dt=SINGLE, src=s0)
-fmov s1,s0
-### method mov_greg(dst=x1, src=x0)
-mov x1,x0
-### method mov_greg_imm(imm=-2048, reg=x0)
-mov x0,#-2048
-### method mov_greg_imm(imm=-2049, reg=x0)
-mov x0,#-2049
-### method mov_greg_imm(imm=-8, reg=x0)
-mov x0,#-8
-### method mov_greg_imm(imm=0, reg=x0)
-mov x0,#0
-### method mov_greg_imm(imm=1, reg=x0)
-mov x0,#1
-### method mov_greg_imm(imm=2047, reg=x0)
-mov x0,#2047
-### method mov_greg_imm(imm=2048, reg=x0)
-mov x0,#2048
-### method mov_greg_imm(imm=255, reg=x0)
-mov x0,#255
-### method mov_greg_imm(imm=256, reg=x0)
-mov x0,#256
-### method mov_greg_imm(imm=40, reg=x0)
-mov x0,#40
-### method mov_greg_imm(imm=4096, reg=x0)
-mov x0,#4096
-### method mov_greg_imm(imm=8, reg=x0)
-mov x0,#8
-### method mov_greg_to_freg(dst=d1, dt=DOUBLE, src=x0)
-fmov d1,x0
-### method mov_greg_to_freg(dst=d1, dt=HALF, src=x0)
-fmov d1,w0
-### method mov_greg_to_freg(dst=d1, dt=SINGLE, src=x0)
-fmov d1,w0
 ### method mov_greg_to_param(param=someparam, src=x0)
 str x0, %[someparam]
 ### method mov_param_to_greg(dst=x0, param=someparam)
 ldr x0, %[someparam]
 ### method mov_param_to_greg_shift(bit_count=2, dst=x0, param=someparam)
 ldr x0,%[someparam,LSL#2]
-### method mul_greg_greg(dst=x0, reg1=x1, reg2=x2)
-mul x0,x1,x2
-### method mul_greg_imm(dst=x0, factor=40, src=x1)
-mov x0,#40
-mul x0,x1,x0
 ### method nop()
 nop
 ### method ret()
 ret
-### method shift_greg_left(bit_count=4, reg=x0)
-lsl x0,x0,#4
-### method shift_greg_right(bit_count=4, reg=x0)
-lsr x0,x0,#4
 ### method simd_size()
 16
-### method simd_size_to_greg(dt=DOUBLE, reg=x0)
-mov x0,#2
-### method simd_size_to_greg(dt=HALF, reg=x0)
-mov x0,#8
-### method simd_size_to_greg(dt=SINGLE, reg=x0)
-mov x0,#4
 ### method store_freg(areg=x0, dt=DOUBLE, offset=-2048, src=d0)
 !ValueError: value of ioffset must satisfy one of: value of ioffset must be >= 0; or value of ioffset must be >= -256
 ### method store_freg(areg=x0, dt=DOUBLE, offset=-2049, src=d0)
@@ -684,30 +515,6 @@ str q0, [x0, #16]
 str q0, [x0, #16]
 ### method store_vector_voff(areg=x0, dt=SINGLE, voffset=1, vreg=v0)
 str q0, [x0, #16]
-### method sub_greg_greg(dst=x0, reg1=x1, reg2=x2)
-sub x0,x1,x2
-### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=-2048)
-!NotImplementedError: AArch64 has no sub of a register shifted by -2048 in one instruction here: value of bdreg_shift must be >= 0
-### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=-2049)
-!NotImplementedError: AArch64 has no sub of a register shifted by -2049 in one instruction here: value of bdreg_shift must be >= 0
-### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=-8)
-!NotImplementedError: AArch64 has no sub of a register shifted by -8 in one instruction here: value of bdreg_shift must be >= 0
-### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=0)
-sub x0,x1,x2
-### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=1)
-sub x0,x1,x2, LSL #1
-### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=2047)
-!NotImplementedError: AArch64 has no sub of a register shifted by 2047 in one instruction here: value of bdreg_shift must be <= 63
-### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=2048)
-!NotImplementedError: AArch64 has no sub of a register shifted by 2048 in one instruction here: value of bdreg_shift must be <= 63
-### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=255)
-!NotImplementedError: AArch64 has no sub of a register shifted by 255 in one instruction here: value of bdreg_shift must be <= 63
-### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=256)
-!NotImplementedError: AArch64 has no sub of a register shifted by 256 in one instruction here: value of bdreg_shift must be <= 63
-### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=4096)
-!NotImplementedError: AArch64 has no sub of a register shifted by 4096 in one instruction here: value of bdreg_shift must be <= 63
-### method sub_greg_greg_shifted(dst=x0, reg1=x1, reg2=x2, shift=8)
-sub x0,x1,x2, LSL #8
 ### method supported_on_host()
 False
 ### method supportedby_cpuinfo(cpuinfo=invalid_isa)
@@ -718,30 +525,8 @@ False
 !NotImplementedError: NEON has no tiles, use SME
 ### method treg(dt=SINGLE, reg_idx=0)
 !NotImplementedError: NEON has no tiles, use SME
-### method vlen_to_greg(dt=DOUBLE, reg=x0)
-mov x0,#2
-### method vlen_to_greg(dt=HALF, reg=x0)
-mov x0,#8
-### method vlen_to_greg(dt=SINGLE, reg=x0)
-mov x0,#4
 ### method vreg(reg_idx=0)
 v0
-### method zero_freg(dt=DOUBLE, freg=s0)
-fmov s0,xzr
-### method zero_freg(dt=HALF, freg=s0)
-fmov s0,wzr
-### method zero_freg(dt=SINGLE, freg=s0)
-fmov s0,wzr
-### method zero_greg(greg=x0)
-mov x0,#0
-### method zero_treg
-!arguments NotImplementedError: NEON has no tiles, use SME
-### method zero_vreg(dt=DOUBLE, vreg=v0)
-dup v0.2d,xzr
-### method zero_vreg(dt=HALF, vreg=v0)
-dup v0.8h,wzr
-### method zero_vreg(dt=SINGLE, vreg=v0)
-dup v0.4s,wzr
 ### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 add x12,x10,x11
 ### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64{ISHIFT} cdreg:REGISTER:GP:SINT64 bdreg_shift:IMMEDIATE:-:-

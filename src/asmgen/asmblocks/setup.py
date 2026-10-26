@@ -14,6 +14,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum, auto
 
+from ..registers import asm_data_type as adt
+from .op.opset import opset_modifier
+
 
 class setup_kind(Enum):
     #: governing predicates for masked instructions (SVE, SME)
@@ -178,7 +181,8 @@ class sve_setup(isa_setup):
         if aliased is not None and self.ALIAS not in aliased:
             rt.reserve_specific_reg("mreg", self.predicate)
             rt.alias_reg("mreg", self.ALIAS, self.predicate)
-        return self.gen.ptrue(self.gen.mreg(self._index(rt)), dt)
+        return self.gen.set(dreg=self.gen.mreg(self._index(rt)), dt=dt, modifiers={opset_modifier.CONSTMASK},
+                            mask="alltrue")
 
     def all_true_predicate(self, *, rt, dt):
         return self.gen.mreg(self._index(rt))
@@ -219,7 +223,8 @@ class sme_setup(sve_setup):
     def setup(self, *, rt, dt, vl : int | None = None) -> str:
         out = self.gen.asmwrap("smstart") + super().setup(rt=rt, dt=dt, vl=vl)
         if self.counter():
-            out += self.gen.ptrue(self.gen.mreg(self.COUNTER, True), dt)
+            out += self.gen.set(dreg=self.gen.mreg(self.COUNTER, True), dt=dt, modifiers={opset_modifier.CONSTMASK},
+                                mask="alltrue")
         return out
 
     def teardown(self, *, rt, dt) -> str:
@@ -268,7 +273,7 @@ class rvv_setup(isa_setup):
         vlreg = self.vector_length_register(rt=rt)
         if vl is not None:
             avl = self.gen.greg(self._aliased(rt, "avl"))
-            return self.gen.mov_greg_imm(reg=avl, imm=vl) + \
+            return self.gen.set(dreg=avl, dt=adt.UINT64, modifiers={opset_modifier.CONST}, value=vl) + \
                 self.gen.vsetvli(vlreg=vlreg, avlreg=avl, dt=dt)
         if "avl" in rt.aliased_regs.get("greg", {}):
             # the old interface: the caller has set an aliased avl register

@@ -72,10 +72,6 @@ class sme(sve):
     def treg(self, reg_idx : int, dt : adt) -> treg_base:
         return sme_treg(reg_idx, dt)
 
-    def zero_treg(self, *, treg : treg_base, dt : adt) -> str:
-        return self.set(dreg=treg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
-
-
     def insert_tile_rows(self, *,
                        rreg : greg_base,
                        roff_start : int, roff_end : int,

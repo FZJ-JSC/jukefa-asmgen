@@ -654,9 +654,16 @@ ukropt: (ukrgen 0172): kernels
       scalars' file from the tracker's pools; FP16's -march extensions from
       compiler_flags.
 
-### Phase 9: removal [ ]
+### Phase 9: removal [~]
 
-- [ ] The deprecated wrappers and the limits deleted.
+- [~] The deprecated wrappers and the limits deleted. Done (asmgen 0075):
+      the scalar arithmetic (`add_greg_*`, `sub_greg_*`, `mul_greg_*`,
+      `shift_greg_*`, `add_greg_voff`), moves (`mov_greg`, `mov_freg`,
+      `mov_greg_to_freg`, `fill_vector`), constants and masks (`zero_*`,
+      `mov_greg_imm`, `mask_all_true`, `ptrue`, `vlen_to_greg`,
+      `simd_size_to_greg`, `greg_to_voffs`) and `max_add_voff`; the methods
+      the generator keeps write the operations. Left: the memory wrappers,
+      `fadd`/`fmul`.
 - [ ] What the generator keeps: register constructors; control flow (`cb`,
       `jump`, `jzero`, `label`, loops, `kiterkleft`, `ret`); setup
       (`isaquirks`, `isaendquirks`, `isa_setup`, `isadata`,
@@ -756,3 +763,4 @@ the others (`opmem`, `opset`): `opmove`. After the other phases.
 - 2026-10-25: ukropt's workarounds gone (ukropt 0013-0015).
 - 2026-10-25: compilation/tools on the generator's flags (asmgen 0074); the
   emitter on the operations, its address test (ukrgen 0171, 0172).
+- 2026-10-26: the scalar, move, constant and mask wrappers deleted (asmgen 0075).

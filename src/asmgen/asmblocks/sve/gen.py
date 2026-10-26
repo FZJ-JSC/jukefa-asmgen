@@ -138,32 +138,8 @@ class sve(aarch64):
                                   "c_simd_size_function)")
 
 
-    def add_greg_voff(self, *, reg : greg_base, offset : int, dt : adt) -> str:
-        """
-        A register moved by offset vector lengths in bytes: incb forward, decb
-        back, at most 16 a time
-        """
-        # whole vector lengths: incb or decb, 16 at a time
-        out, left = "", offset
-        while left:
-            n = max(-16, min(16, left))
-            out += self.add(adreg=reg, bimm=n, cdreg=reg, a_dt=_ADT.UINT64, c_dt=_ADT.UINT64,
-                            modifiers={_opd3_mod.VOFFSET})
-            left -= n
-        return out
-
-    def mask_all_true(self, *, reg, dt : adt) -> str:
-        return self.set(dreg=reg, dt=dt, modifiers={_opset_mod.CONSTMASK}, mask="alltrue")
-
-    def zero_vreg(self, *, vreg : vreg_base, dt : adt) -> str:
-        return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
-
     def vreg(self, reg_idx : int) -> sve_vreg:
         return sve_vreg(reg_idx)
-
-    @property
-    def max_add_voff(self) -> int:
-        return 16
 
     def mreg(self, idx : int, is_pn : bool = False) -> sve_preg:
         """
@@ -178,27 +154,8 @@ class sve(aarch64):
         """
         return sve_preg(idx, is_pn)
 
-    def ptrue(self, reg : sve_preg, dt : adt) -> str:
-        """
-        Stores an all-true mask for the specified data type in the specified
-        predicate register
-
-        :param reg: Predicate register
-        :type reg: class:`asmgen.asmblocks.sve.types.sve_preg`
-        :param dt: Data type to use
-        :type dt: class:`asmgen.registers.asm_data_type`
-        :return: String with the required SVE ASM
-        :rtype: str
-        """
-        suf = self.dt_suffixes[dt]
-        return self.asmwrap(f"ptrue {reg}.{suf}")
-
-
     def max_tregs(self, dt : adt) -> int:
         return 0
 
     def treg(self, reg_idx : int, dt : adt) -> treg_base:
-        raise NotImplementedError("SVE has no tiles, use SME")
-
-    def zero_treg(self, *, treg : treg_base, dt : adt) -> str:
         raise NotImplementedError("SVE has no tiles, use SME")

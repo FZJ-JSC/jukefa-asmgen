@@ -1,102 +1,3 @@
-### method add_greg_greg(dst=r8, reg1=r9, reg2=r10)
-movq %r9,%r8
-addq %r10,%r8
-### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=-2048)
-!NotImplementedError: x86 has no add of a register shifted by -2048 in one instruction here: value of bdreg_shift must be >= 0
-### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=-2049)
-!NotImplementedError: x86 has no add of a register shifted by -2049 in one instruction here: value of bdreg_shift must be >= 0
-### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=-8)
-!NotImplementedError: x86 has no add of a register shifted by -8 in one instruction here: value of bdreg_shift must be >= 0
-### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=0)
-leaq (%r9,%r10,1),%r8
-### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=1)
-leaq (%r9,%r10,2),%r8
-### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=2047)
-!NotImplementedError: x86 has no add of a register shifted by 2047 in one instruction here: value of bdreg_shift must be <= 3
-### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=2048)
-!NotImplementedError: x86 has no add of a register shifted by 2048 in one instruction here: value of bdreg_shift must be <= 3
-### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=255)
-!NotImplementedError: x86 has no add of a register shifted by 255 in one instruction here: value of bdreg_shift must be <= 3
-### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=256)
-!NotImplementedError: x86 has no add of a register shifted by 256 in one instruction here: value of bdreg_shift must be <= 3
-### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=4096)
-!NotImplementedError: x86 has no add of a register shifted by 4096 in one instruction here: value of bdreg_shift must be <= 3
-### method add_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=8)
-!NotImplementedError: x86 has no add of a register shifted by 8 in one instruction here: value of bdreg_shift must be <= 3
-### method add_greg_imm(imm=-2048, reg=r8)
-addq $-2048,%r8
-### method add_greg_imm(imm=-2049, reg=r8)
-addq $-2049,%r8
-### method add_greg_imm(imm=-8, reg=r8)
-addq $-8,%r8
-### method add_greg_imm(imm=0, reg=r8)
-addq $0,%r8
-### method add_greg_imm(imm=1, reg=r8)
-addq $1,%r8
-### method add_greg_imm(imm=2047, reg=r8)
-addq $2047,%r8
-### method add_greg_imm(imm=2048, reg=r8)
-addq $2048,%r8
-### method add_greg_imm(imm=255, reg=r8)
-addq $255,%r8
-### method add_greg_imm(imm=256, reg=r8)
-addq $256,%r8
-### method add_greg_imm(imm=40, reg=r8)
-addq $40,%r8
-### method add_greg_imm(imm=4096, reg=r8)
-addq $4096,%r8
-### method add_greg_imm(imm=8, reg=r8)
-addq $8,%r8
-### method add_greg_voff(dt=DOUBLE, offset=-2048, reg=r8)
-addq $-32768,%r8
-### method add_greg_voff(dt=DOUBLE, offset=-2049, reg=r8)
-addq $-32784,%r8
-### method add_greg_voff(dt=DOUBLE, offset=-8, reg=r8)
-addq $-128,%r8
-### method add_greg_voff(dt=DOUBLE, offset=0, reg=r8)
-addq $0,%r8
-### method add_greg_voff(dt=DOUBLE, offset=1, reg=r8)
-addq $16,%r8
-### method add_greg_voff(dt=DOUBLE, offset=2047, reg=r8)
-addq $32752,%r8
-### method add_greg_voff(dt=DOUBLE, offset=2048, reg=r8)
-addq $32768,%r8
-### method add_greg_voff(dt=DOUBLE, offset=255, reg=r8)
-addq $4080,%r8
-### method add_greg_voff(dt=DOUBLE, offset=256, reg=r8)
-addq $4096,%r8
-### method add_greg_voff(dt=DOUBLE, offset=40, reg=r8)
-addq $640,%r8
-### method add_greg_voff(dt=DOUBLE, offset=4096, reg=r8)
-addq $65536,%r8
-### method add_greg_voff(dt=DOUBLE, offset=8, reg=r8)
-addq $128,%r8
-### method add_greg_voff(dt=HALF, offset=40, reg=r8)
-addq $640,%r8
-### method add_greg_voff(dt=SINGLE, offset=-2048, reg=r8)
-addq $-32768,%r8
-### method add_greg_voff(dt=SINGLE, offset=-2049, reg=r8)
-addq $-32784,%r8
-### method add_greg_voff(dt=SINGLE, offset=-8, reg=r8)
-addq $-128,%r8
-### method add_greg_voff(dt=SINGLE, offset=0, reg=r8)
-addq $0,%r8
-### method add_greg_voff(dt=SINGLE, offset=1, reg=r8)
-addq $16,%r8
-### method add_greg_voff(dt=SINGLE, offset=2047, reg=r8)
-addq $32752,%r8
-### method add_greg_voff(dt=SINGLE, offset=2048, reg=r8)
-addq $32768,%r8
-### method add_greg_voff(dt=SINGLE, offset=255, reg=r8)
-addq $4080,%r8
-### method add_greg_voff(dt=SINGLE, offset=256, reg=r8)
-addq $4096,%r8
-### method add_greg_voff(dt=SINGLE, offset=40, reg=r8)
-addq $640,%r8
-### method add_greg_voff(dt=SINGLE, offset=4096, reg=r8)
-addq $65536,%r8
-### method add_greg_voff(dt=SINGLE, offset=8, reg=r8)
-addq $128,%r8
 ### method align(bytes=64)
 .balign 64
 ### method asmfile_annotations()
@@ -112,12 +13,6 @@ jne .notequal
 <asmgen.callconv.callconv.callconv object>
 ### method enabled_features()
 {}
-### method fill_vector(dt=DOUBLE, sreg=xmm0, vreg=xmm1)
-vmovddup %xmm0,%xmm1
-### method fill_vector(dt=HALF, sreg=xmm0, vreg=xmm1)
-vpbroadcastw %xmm0,%xmm1
-### method fill_vector(dt=SINGLE, sreg=xmm0, vreg=xmm1)
-vbroadcastss %xmm0,%xmm1
 ### method freg(dt=DOUBLE, reg_idx=0)
 xmm0
 ### method freg(dt=HALF, reg_idx=0)
@@ -130,15 +25,6 @@ dummy
 ['enable-disp8', 'enable-disp32']
 ### method greg(reg_idx=0)
 r8
-### method greg_to_voffs(dt=DOUBLE, streg=r8, vreg=xmm1)
-vpbroadcastq %r8,%xmm1
-vpmuludq .iota_64x2(%rip),%xmm1,%xmm1
-### method greg_to_voffs(dt=HALF, streg=r8, vreg=xmm1)
-vpbroadcastw %r8d,%xmm1
-vpmullw .iota_16x8(%rip),%xmm1,%xmm1
-### method greg_to_voffs(dt=SINGLE, streg=r8, vreg=xmm1)
-vpbroadcastd %r8d,%xmm1
-vpmulld .iota_32x4(%rip),%xmm1,%xmm1
 ### method is_vla()
 False
 ### method isaclear()
@@ -466,12 +352,6 @@ sub $1, %r8
 ### method loopend(label=someloop, reg=r8)
 cmp $0x0,%r8
 jne .someloop
-### method mask_all_true(dt=DOUBLE, reg=xmm1)
-vpcmpeqd %xmm1,%xmm1,%xmm1
-### method mask_all_true(dt=HALF, reg=xmm1)
-vpcmpeqd %xmm1,%xmm1,%xmm1
-### method mask_all_true(dt=SINGLE, reg=xmm1)
-vpcmpeqd %xmm1,%xmm1,%xmm1
 ### method max_fregs()
 16
 ### method max_gregs()
@@ -484,71 +364,18 @@ vpcmpeqd %xmm1,%xmm1,%xmm1
 0
 ### method max_vregs()
 16
-### method mov_freg(dst=xmm1, dt=DOUBLE, src=xmm0)
-vmovsd xmm0, xmm1
-### method mov_freg(dst=xmm1, dt=HALF, src=xmm0)
-vmovsh xmm0, xmm1
-### method mov_freg(dst=xmm1, dt=SINGLE, src=xmm0)
-vmovss xmm0, xmm1
-### method mov_greg(dst=r9, src=r8)
-movq %r8, %r9
-### method mov_greg_imm(imm=-2048, reg=r8)
-movq $-2048,%r8
-### method mov_greg_imm(imm=-2049, reg=r8)
-movq $-2049,%r8
-### method mov_greg_imm(imm=-8, reg=r8)
-movq $-8,%r8
-### method mov_greg_imm(imm=0, reg=r8)
-movq $0,%r8
-### method mov_greg_imm(imm=1, reg=r8)
-movq $1,%r8
-### method mov_greg_imm(imm=2047, reg=r8)
-movq $2047,%r8
-### method mov_greg_imm(imm=2048, reg=r8)
-movq $2048,%r8
-### method mov_greg_imm(imm=255, reg=r8)
-movq $255,%r8
-### method mov_greg_imm(imm=256, reg=r8)
-movq $256,%r8
-### method mov_greg_imm(imm=40, reg=r8)
-movq $40,%r8
-### method mov_greg_imm(imm=4096, reg=r8)
-movq $4096,%r8
-### method mov_greg_imm(imm=8, reg=r8)
-movq $8,%r8
-### method mov_greg_to_freg(dst=xmm1, dt=DOUBLE, src=r8)
-vmovq %r8,%xmm1
-### method mov_greg_to_freg(dst=xmm1, dt=HALF, src=r8)
-vmovd %r8d,%xmm1
-### method mov_greg_to_freg(dst=xmm1, dt=SINGLE, src=r8)
-vmovd %r8d,%xmm1
 ### method mov_greg_to_param(param=someparam, src=r8)
 movq %r8, %[someparam]
 ### method mov_param_to_greg(dst=r8, param=someparam)
 movq %[someparam], %r8
 ### method mov_param_to_greg_shift(bit_count=2, dst=r8, param=someparam)
 leaq (,%[someparam],4),%r8
-### method mul_greg_greg(dst=r8, reg1=r9, reg2=r10)
-movq %r9,%r8
-imulq %r10,%r8
-### method mul_greg_imm(dst=r8, factor=40, src=r9)
-imulq $40,%r9,%r8
 ### method nop()
 nop
 ### method ret()
 ret
-### method shift_greg_left(bit_count=4, reg=r8)
-shlq $4,%r8
-### method shift_greg_right(bit_count=4, reg=r8)
-shrq $4,%r8
 ### method simd_size()
 16
-### method simd_size_to_greg(dt=DOUBLE, reg=r8)
-movq $2,%r8
-### method simd_size_to_greg(dt=HALF, reg=r8)
-movq $8,%r8
-### method simd_size_to_greg(dt=SINGLE, reg=r8)
-movq $4,%r8
 ### method store_freg(areg=r8, dt=DOUBLE, offset=-2048, src=xmm0)
 !ValueError: value of ioffset must be >= -128
 ### method store_freg(areg=r8, dt=DOUBLE, offset=-2049, src=xmm0)
@@ -695,31 +522,6 @@ vmovupd %xmm0, 16(%r8)
 vmovdqu %xmm0, 16(%r8)
 ### method store_vector_voff(areg=r8, dt=SINGLE, voffset=1, vreg=xmm0)
 vmovups %xmm0, 16(%r8)
-### method sub_greg_greg(dst=r8, reg1=r9, reg2=r10)
-movq %r9,%r8
-subq %r10,%r8
-### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=-2048)
-!NotImplementedError: x86 has no sub of a register shifted by -2048 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
-### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=-2049)
-!NotImplementedError: x86 has no sub of a register shifted by -2049 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
-### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=-8)
-!NotImplementedError: x86 has no sub of a register shifted by -8 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
-### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=0)
-!NotImplementedError: x86 has no sub of a register shifted by 0 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
-### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=1)
-!NotImplementedError: x86 has no sub of a register shifted by 1 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
-### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=2047)
-!NotImplementedError: x86 has no sub of a register shifted by 2047 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
-### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=2048)
-!NotImplementedError: x86 has no sub of a register shifted by 2048 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
-### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=255)
-!NotImplementedError: x86 has no sub of a register shifted by 255 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
-### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=256)
-!NotImplementedError: x86 has no sub of a register shifted by 256 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
-### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=4096)
-!NotImplementedError: x86 has no sub of a register shifted by 4096 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
-### method sub_greg_greg_shifted(dst=r8, reg1=r9, reg2=r10, shift=8)
-!NotImplementedError: x86 has no sub of a register shifted by 8 in one instruction here: x86_sub does not support these modifiers at all: {ISHIFT}
 ### method supported_on_host()
 True
 ### method supportedby_cpuinfo(cpuinfo=invalid_isa)
@@ -730,30 +532,8 @@ False
 !NotImplementedError: Not tile support in AVX (will be supported with AMX)
 ### method treg(dt=SINGLE, reg_idx=0)
 !NotImplementedError: Not tile support in AVX (will be supported with AMX)
-### method vlen_to_greg(dt=DOUBLE, reg=r8)
-movq $2,%r8
-### method vlen_to_greg(dt=HALF, reg=r8)
-movq $8,%r8
-### method vlen_to_greg(dt=SINGLE, reg=r8)
-movq $4,%r8
 ### method vreg(reg_idx=0)
 xmm0
-### method zero_freg(dt=DOUBLE, freg=xmm0)
-vpxor %xmm0,%xmm0,%xmm0
-### method zero_freg(dt=HALF, freg=xmm0)
-vpxor %xmm0,%xmm0,%xmm0
-### method zero_freg(dt=SINGLE, freg=xmm0)
-vpxor %xmm0,%xmm0,%xmm0
-### method zero_greg(greg=r8)
-movq $0,%r8
-### method zero_treg
-!arguments NotImplementedError: Not tile support in AVX (will be supported with AMX)
-### method zero_vreg(dt=DOUBLE, vreg=xmm0)
-vpxor %xmm0,%xmm0,%xmm0
-### method zero_vreg(dt=HALF, vreg=xmm0)
-vpxor %xmm0,%xmm0,%xmm0
-### method zero_vreg(dt=SINGLE, vreg=xmm0)
-vpxor %xmm0,%xmm0,%xmm0
 ### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 movq %rcx,%rsi
 addq %rdx,%rsi

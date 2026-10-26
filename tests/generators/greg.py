@@ -12,6 +12,8 @@ from asmgen.cppgen.declarations import vargen
 from asmgen.cppgen.expressions import identity
 
 from ..testcase import testcase
+from asmgen.asmblocks.op.opset import opset_modifier
+from asmgen.registers import asm_data_type as adt
 
 class greg_test_generator:
     """
@@ -34,8 +36,8 @@ class greg_test_generator:
         reg = tcase.gen.greg(reg_idx=reg_idx)
         imm = tcase.random_immediate()
 
-        asmblock  = tcase.gen.zero_greg(greg=reg)
-        asmblock += tcase.gen.mov_greg_imm(reg=reg, imm=imm)
+        asmblock  = tcase.gen.set(dreg=reg, dt=adt.UINT64, modifiers={opset_modifier.CONST}, constant="zero")
+        asmblock += tcase.gen.set(dreg=reg, dt=adt.UINT64, modifiers={opset_modifier.CONST}, value=imm)
         asmblock += tcase.gen.mov_greg_to_param(src=reg, param=varname)
 
         rt.unuse_reg(type_tag="greg", idx=reg_idx)
@@ -56,8 +58,8 @@ class greg_test_generator:
         reg_idx = rt.reserve_any_reg(type_tag="greg")
         reg = tcase.gen.greg(reg_idx)
         imm = tcase.random_immediate()
-        asmblock  = tcase.gen.zero_greg(greg=reg)
-        asmblock += tcase.gen.add_greg_imm(reg=reg, imm=imm)
+        asmblock  = tcase.gen.set(dreg=reg, dt=adt.UINT64, modifiers={opset_modifier.CONST}, constant="zero")
+        asmblock += tcase.gen.add(adreg=reg, bimm=imm, cdreg=reg, a_dt=adt.UINT64, c_dt=adt.UINT64)
         asmblock += tcase.gen.mov_greg_to_param(src=reg, param=varname)
         rt.unuse_reg(type_tag="greg", idx=reg_idx)
         check_function = bi_u64_eq(f"check_{test_name}",identity)
@@ -77,9 +79,9 @@ class greg_test_generator:
         reg_idx = rt.reserve_any_reg(type_tag="greg")
         reg = tcase.gen.greg(reg_idx)
         imm = tcase.random_immediate()
-        asmblock  = tcase.gen.zero_greg(greg=reg)
-        asmblock += tcase.gen.add_greg_imm(reg=reg, imm=imm)
-        asmblock += tcase.gen.add_greg_imm(reg=reg, imm=imm)
+        asmblock  = tcase.gen.set(dreg=reg, dt=adt.UINT64, modifiers={opset_modifier.CONST}, constant="zero")
+        asmblock += tcase.gen.add(adreg=reg, bimm=imm, cdreg=reg, a_dt=adt.UINT64, c_dt=adt.UINT64)
+        asmblock += tcase.gen.add(adreg=reg, bimm=imm, cdreg=reg, a_dt=adt.UINT64, c_dt=adt.UINT64)
         asmblock += tcase.gen.mov_greg_to_param(src=reg, param=varname)
         rt.unuse_reg(type_tag="greg", idx=reg_idx)
         check_function = bi_u64_eq(f"check_{test_name}",identity)
@@ -107,12 +109,12 @@ class greg_test_generator:
 
         imm = tcase.random_immediate()
 
-        asmblock  = tcase.gen.zero_greg(greg=dst)
-        asmblock += tcase.gen.zero_greg(greg=reg1)
-        asmblock += tcase.gen.zero_greg(greg=reg2)
-        asmblock += tcase.gen.add_greg_imm(reg=reg1, imm=imm)
-        asmblock += tcase.gen.add_greg_imm(reg=reg2, imm=imm)
-        asmblock += tcase.gen.add_greg_greg(dst=dst, reg1=reg1, reg2=reg2)
+        asmblock  = tcase.gen.set(dreg=dst, dt=adt.UINT64, modifiers={opset_modifier.CONST}, constant="zero")
+        asmblock += tcase.gen.set(dreg=reg1, dt=adt.UINT64, modifiers={opset_modifier.CONST}, constant="zero")
+        asmblock += tcase.gen.set(dreg=reg2, dt=adt.UINT64, modifiers={opset_modifier.CONST}, constant="zero")
+        asmblock += tcase.gen.add(adreg=reg1, bimm=imm, cdreg=reg1, a_dt=adt.UINT64, c_dt=adt.UINT64)
+        asmblock += tcase.gen.add(adreg=reg2, bimm=imm, cdreg=reg2, a_dt=adt.UINT64, c_dt=adt.UINT64)
+        asmblock += tcase.gen.add(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=adt.UINT64, b_dt=adt.UINT64, c_dt=adt.UINT64)
         asmblock += tcase.gen.mov_greg_to_param(src=dst, param=varname)
 
         rt.unuse_reg(type_tag="greg", idx=dst_idx)

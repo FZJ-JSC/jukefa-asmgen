@@ -141,13 +141,6 @@ class aarch64(asmgen):
         return self.asmwrap(f"fcmp {reg1},{other}") + \
             self.asmwrap(f"{insts[cmp.name]} {self.labelstr(label)}")
 
-    def mov_greg_to_freg(self, *, src: greg_base, dst, dt: adt) -> str:
-        """
-        Move a general register's low bits into an FP register: an FP
-        constant from its bit pattern
-        """
-        return self.move(dregs=[src, dst], dts=[_BITS_GP[dt], dt], modifiers={_move_mod.BITS})
-
     def cb(self, *, reg1, reg2, cmp: comparison, label: str,
            dt: adt | None = None, greg: greg_base | None = None) -> str:
         if isinstance(reg1, freg_base):
@@ -202,7 +195,7 @@ class aarch64(asmgen):
         # Example unroll=4: kleft = k & 0b0111
         asmblock += self.asmwrap(f"and {kleftreg},{kreg},#{unroll-1}")
         # Example unroll=4: k = k >> 2
-        asmblock += self.shift_greg_right(reg=kreg,bit_count=unrollpower)
+        asmblock += self.shift(adreg=kreg, bimm=unrollpower, cdreg=kreg, a_dt=_GP, c_dt=_GP, modifiers={_opd3_mod.SHR})
 
         return asmblock
 
@@ -246,87 +239,22 @@ class aarch64(asmgen):
 
         asmblock = ""
 
-        asmblock += self.mov_greg_imm(reg=kleftreg, imm=unroll)
+        asmblock += self.set(dreg=kleftreg, dt=_GP, modifiers={_opset_mod.CONST}, value=unroll)
         # tmp = k // unroll
         asmblock += self.asmwrap(f"udiv {tmpreg},{kreg},{kleftreg}")
         # kleft = k - (tmp * unroll)
         asmblock += self.asmwrap(f"msub {kleftreg},{tmpreg},{kleftreg},{kreg}")
         # k = tmp
-        asmblock += self.mov_greg(src=tmpreg,dst=kreg)
+        asmblock += self.move(dregs=[tmpreg, kreg], dts=[_GP, _GP])
 
 
         return asmblock
 
 
-
-    def mov_greg(self, *, src : greg_base, dst : greg_base) -> str:
-        return self.move(dregs=[src, dst], dts=[_GP, _GP])
-
-    def mov_freg(self, *, src : freg_base, dst : freg_base,
-                 dt : adt) -> str:
-        return self.move(dregs=[src, dst], dts=[dt, dt])
-
-    def zero_freg(self, *, freg : freg_base, dt : adt) -> str:
-        # fmov's immediate can't encode 0.0: the zero register can
-        return self.set(dreg=freg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
     def mov_param_to_greg_shift(self, *, param : str,
                                 dst : greg_base, bit_count : int) -> str:
         return self.asmwrap(f"ldr {dst},%[{param},LSL#{bit_count}]")
-
-    def mov_greg_imm(self, *, reg : greg_base, imm : int) -> str:
-        return self.set(dreg=reg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, value=imm)
-
-    def mul_greg_imm(self, *, src : greg_base, dst : greg_base, factor):
-        assert src != dst
-        # no immediate form: the factor into dst first
-        asmblock = self.mov_greg_imm(reg=dst, imm=factor)
-        asmblock += self.mul(adreg=src, bdreg=dst, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
-        return asmblock
-
-    def mul_greg_greg(self, *, dst : greg_base,
-                      reg1 : greg_base, reg2 : greg_base) -> str:
-        return self.mul(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
-
-    def add_greg_imm(self, *, reg : greg_base, imm : int) -> str:
-        return self.add(adreg=reg, bimm=imm, cdreg=reg, a_dt=_GP, c_dt=_GP)
-
-    def add_greg_greg(self, *, dst : greg_base,
-                      reg1 : greg_base, reg2 : greg_base) -> str:
-        return self.add(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
-
-    def sub_greg_greg(self, *, dst : greg_base,
-                      reg1 : greg_base, reg2 : greg_base) -> str:
-        return self.sub(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
-
-    def add_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
-                              reg2 : greg_base, shift : int) -> str:
-        try:
-            return self.add(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP,
-                          operand_modifiers={'bdreg': {_opd_mod.ISHIFT}}, bdreg_shift=shift)
-        except ValueError as err:
-            # no form (or not with these features): what callers probing it expect
-            raise NotImplementedError(f"AArch64 has no add of a register shifted by {shift} "
-                                      f"in one instruction here: {err}") from err
-
-    def sub_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
-                              reg2 : greg_base, shift : int) -> str:
-        try:
-            return self.sub(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP,
-                          operand_modifiers={'bdreg': {_opd_mod.ISHIFT}}, bdreg_shift=shift)
-        except ValueError as err:
-            # no form (or not with these features): what callers probing it expect
-            raise NotImplementedError(f"AArch64 has no sub of a register shifted by {shift} "
-                                      f"in one instruction here: {err}") from err
-
-    def shift_greg_left(self, *, reg : greg_base, bit_count : int) -> str:
-        return self.shift(adreg=reg, bimm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP, modifiers={_opd3_mod.SHL})
-
-    def shift_greg_right(self, *, reg : greg_base, bit_count : int) -> str:
-        return self.shift(adreg=reg, bimm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP, modifiers={_opd3_mod.SHR})
-
-    def zero_greg(self, *, greg : greg_base) -> str:
-        return self.set(dreg=greg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, constant="zero")
 
     def greg(self, reg_idx : int) -> greg_base:
         return aarch64_greg(reg_idx)

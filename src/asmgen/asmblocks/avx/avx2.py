@@ -88,9 +88,6 @@ class fma128(avxbase):
     def simd_size(self):
         return 16
 
-    def zero_vreg(self, *, vreg : vreg_base, dt : adt):
-        return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
-
     def vreg(self, reg_idx):
         return xmm_vreg(reg_idx)
 
@@ -144,9 +141,6 @@ class fma256(avxbase):
     @property
     def simd_size(self):
         return 32
-
-    def zero_vreg(self, *, vreg : vreg_base, dt : adt):
-        return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
 
     def vreg(self, reg_idx : int):
         return ymm_vreg(reg_idx)

@@ -24,6 +24,9 @@ from asmgen.asmblocks.op import (
     operand_modifier as opd_mod
 )
 from asmgen.asmblocks.op.operand import register_type as op_rt
+from asmgen.asmblocks.op.operand import operand_modifier
+from asmgen.asmblocks.op.opd3 import opd3_modifier
+from asmgen.asmblocks.op.opset import opset_modifier
 
 ISA_MODULES = {
     "fma128": "avx",
@@ -105,14 +108,16 @@ def emit_ptr_bumping(gen: asmgen, addr_x, addr_y, vlen_reg, unroll, vbytes, dt):
     block = ""
     if vlen_reg:
         for _ in range(unroll):
-            block += gen.add_greg_greg(dst=addr_x, reg1=addr_x, reg2=vlen_reg)
-            block += gen.add_greg_greg(dst=addr_y, reg1=addr_y, reg2=vlen_reg)
-    elif gen.max_add_voff >= unroll:
-        block += gen.add_greg_voff(reg=addr_x, offset=unroll, dt=dt)
-        block += gen.add_greg_voff(reg=addr_y, offset=unroll, dt=dt)
+            block += gen.add(adreg=addr_x, bdreg=vlen_reg, cdreg=addr_x, a_dt=adt.UINT64, b_dt=adt.UINT64, c_dt=adt.UINT64)
+            block += gen.add(adreg=addr_y, bdreg=vlen_reg, cdreg=addr_y, a_dt=adt.UINT64, b_dt=adt.UINT64, c_dt=adt.UINT64)
+    elif gen.add.fits(adreg=addr_x, bimm=unroll, cdreg=addr_x, a_dt=adt.UINT64, c_dt=adt.UINT64,
+                      modifiers={opd3_modifier.VOFFSET}):
+        # unroll vector lengths in one add, where the ISA has one (SVE's addvl)
+        block += gen.add(adreg=addr_x, bimm=unroll, cdreg=addr_x, a_dt=adt.UINT64, c_dt=adt.UINT64, modifiers={opd3_modifier.VOFFSET})
+        block += gen.add(adreg=addr_y, bimm=unroll, cdreg=addr_y, a_dt=adt.UINT64, c_dt=adt.UINT64, modifiers={opd3_modifier.VOFFSET})
     else:
-        block += gen.add_greg_imm(reg=addr_x, imm=unroll * vbytes)
-        block += gen.add_greg_imm(reg=addr_y, imm=unroll * vbytes)
+        block += gen.add(adreg=addr_x, bimm=unroll * vbytes, cdreg=addr_x, a_dt=adt.UINT64, c_dt=adt.UINT64)
+        block += gen.add(adreg=addr_y, bimm=unroll * vbytes, cdreg=addr_y, a_dt=adt.UINT64, c_dt=adt.UINT64)
     return block
 
 # -----------------------------------------------------------------------------
@@ -170,7 +175,7 @@ def main():
         vlen_reg = gen.greg(rt.aliased_regs["greg"]["vlen"])
         shift_amt = adt_size(dt).bit_length() - 1
         if shift_amt > 0:
-            innerblock += gen.shift_greg_left(reg=vlen_reg, bit_count=shift_amt)
+            innerblock += gen.shift(adreg=vlen_reg, bimm=shift_amt, cdreg=vlen_reg, a_dt=adt.UINT64, c_dt=adt.UINT64, modifiers={opd3_modifier.SHL})
 
     # 1. Resolve Signatures
     ld_sig, offset_type = resolve_ldst_sig(gen.load.get_signatures(), dt, op_rt.VEC)
@@ -193,17 +198,17 @@ def main():
     mreg = None
     if needs_mask:
         mreg = gen.mreg(rt.reserve_any_reg("mreg"))
-        if hasattr(gen, "ptrue"):
-            innerblock += gen.ptrue(reg=mreg, dt=dt)
-        elif hasattr(gen, "init_mask_all"):
-            innerblock += gen.init_mask_all(mreg=mreg, dt=dt)
+        # every lane on, where the ISA sets masks so (SVE's ptrue)
+        if gen.set.forms(modifiers={opset_modifier.CONSTMASK}):
+            innerblock += gen.set(dreg=mreg, dt=dt, modifiers={opset_modifier.CONSTMASK},
+                                  mask="alltrue")
 
     ld_kwargs = build_kwargs(ld_sig, mreg)
     st_kwargs = build_kwargs(st_sig, mreg)
 
     if not can_vf:
         alpha_vreg = gen.vreg(rt.reserve_any_reg("vreg"))
-        innerblock += gen.fill_vector(sreg=alpha, vreg=alpha_vreg, dt=dt)
+        innerblock += gen.move(dregs=[alpha, alpha_vreg], dts=[dt, dt], operand_modifiers={"bdreg": {operand_modifier.BCAST}})
         breg = alpha_vreg
         opd_modifiers = {}
     else:
@@ -282,7 +287,7 @@ def main():
             innerblock += emit_ptr_bumping(gen, addr_x, addr_y,
                                            vlen_reg, 1, vbytes, dt)
 
-    innerblock += gen.add_greg_imm(reg=n, imm=-1)
+    innerblock += gen.add(adreg=n, bimm=-1, cdreg=n, a_dt=adt.UINT64, c_dt=adt.UINT64)
     innerblock += gen.cb(reg1=n, reg2=None, cmp=comparison.NZ, label="loop")
 
     if hasattr(gen, "isaendquirks"):

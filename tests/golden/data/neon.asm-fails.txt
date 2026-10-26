@@ -21,8 +21,6 @@ method max_tregs(dt=DOUBLE)
 method max_tregs(dt=HALF)
 method max_tregs(dt=SINGLE)
 method max_vregs()
-method mov_greg_to_freg(dst=d1, dt=HALF, src=x0)
-method mov_greg_to_freg(dst=d1, dt=SINGLE, src=x0)
 method mov_greg_to_param(param=someparam, src=x0)
 method mov_param_to_greg(dst=x0, param=someparam)
 method mov_param_to_greg_shift(bit_count=2, dst=x0, param=someparam)
@@ -30,7 +28,6 @@ method simd_size()
 method supported_on_host()
 method supportedby_cpuinfo(cpuinfo=invalid_isa)
 method vreg(reg_idx=0)
-method zero_freg(dt=DOUBLE, freg=s0)
 op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{ILANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:-
 op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{ILANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- @far
 op add [] adreg:REGISTER:VEC:HALF bdreg:REGISTER:VEC:HALF{ILANE} cdreg:REGISTER:VEC:HALF bdreg_lane:IMMEDIATE:-:-

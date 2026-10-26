@@ -6,6 +6,7 @@ import unittest
 
 from asmgen.asmblocks.sme import sme
 from asmgen.registers import asm_data_type as adt
+from asmgen.asmblocks.op.opset import opset_modifier
 
 
 class test_sme_setup(unittest.TestCase):
@@ -13,7 +14,7 @@ class test_sme_setup(unittest.TestCase):
     def test_zero_list(self):
         g = sme()
         g.output_inline = False
-        self.assertEqual("zero {za1.d}", g.zero_treg(treg=g.treg(1, adt.FP64), dt=adt.FP64).strip())
+        self.assertEqual("zero {za1.d}", g.set(dreg=g.treg(1, adt.FP64), dt=adt.FP64, modifiers={opset_modifier.CONST}, constant="zero").strip())
 
     def test_counter_with_sme2(self):
         from asmgen.asmblocks.setup import sme_setup

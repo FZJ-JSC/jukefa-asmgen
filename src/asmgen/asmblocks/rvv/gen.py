@@ -156,19 +156,6 @@ class rvv(riscv64):
                                   "length is known at run time only (set with VLEN, "
                                   "c_simd_size_function)")
 
-    def add_greg_voff(self, *, reg : greg_base, offset : int,
-                      dt : adt) -> str:
-        raise NotImplementedError(
-                "RVV doesn't have an instruction to add a vector offset to a gp register")
-
-    def zero_vreg(self, *, vreg : vreg_base, dt : adt) -> str:
-        return self.set(dreg=vreg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
-
-
-    @property
-    def max_add_voff(self) -> int:
-        return 0
-
     def vsetvli_keep_vl(self, *, dt : adt, lmul : int) -> str:
         """
         Change the element width and register grouping, keeping the vector
@@ -221,7 +208,4 @@ class rvv(riscv64):
     rvv_no_tile_message = "RVV has no tiles (wait for IME/AME support)"
 
     def treg(self, reg_idx : int, dt : adt) -> treg_base:
-        raise NotImplementedError(self.rvv_no_tile_message)
-
-    def zero_treg(self, *, treg : treg_base, dt : adt) -> str:
         raise NotImplementedError(self.rvv_no_tile_message)

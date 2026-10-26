@@ -221,7 +221,7 @@ class avxbase(asmgen):
         suf = 's'+self.dt_suffixes[dt]
         pfreg1 = self.rpref(freg1)
         pfreg2 = self.rpref(freg2)
-        asmblock  = self.zero_freg(freg=freg2, dt=dt)
+        asmblock  = self.set(dreg=freg2, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
         asmblock += self.asmwrap(f"ucomi{suf} {pfreg2},{pfreg1}")
         asmblock += self.asmwrap(f"je {self.labelstr(label)}")
         return asmblock
@@ -232,7 +232,7 @@ class avxbase(asmgen):
         suf = 'p'+self.dt_suffixes[dt]
         pvreg1 = self.rpref(vreg1)
         pvreg2 = self.rpref(vreg2)
-        asmblock  = self.zero_vreg(vreg=vreg2, dt=dt)
+        asmblock  = self.set(dreg=vreg2, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
         asmblock += self.asmwrap(f"vcmpeq{suf} {pvreg2},{pvreg1},{pvreg2}")
         asmblock += self.asmwrap(f"vptest {pvreg2},{pvreg2}")
         asmblock += self.asmwrap(f"jne {self.labelstr(label)}")
@@ -254,13 +254,6 @@ class avxbase(asmgen):
         if cmp.name in ('EQ', 'EZ'):
             return out + self.asmwrap("jp 1f") + self.asmwrap(f"je {lab}") + self.asmwrap("1:")
         raise NotImplementedError(f"x86 FP comparison {cmp.name}")
-
-    def mov_greg_to_freg(self, *, src: greg_base, dst, dt: adt) -> str:
-        """
-        Move a general register's low bits into an FP register: an FP
-        constant from its bit pattern
-        """
-        return self.move(dregs=[src, dst], dts=[_BITS_GP[dt], dt], modifiers={_move_mod.BITS})
 
     def cb(self, *, reg1, reg2, cmp: comparison, label: str,
            dt: adt | None = None, greg: greg_base | None = None) -> str:
@@ -356,7 +349,7 @@ class avxbase(asmgen):
         pkreg = self.rpref(kreg)
         pkleftreg = self.rpref(kleftreg)
 
-        asmblock += self.mov_greg(src=kreg,dst=kleftreg)
+        asmblock += self.move(dregs=[kreg, kleftreg], dts=[_GP, _GP])
         # Example unroll=4: kleft = k & 0b0111
         asmblock += self.asmwrap(f"andq ${unroll-1}, {pkleftreg}")
         # Example unroll=4: k = k >> 2
@@ -398,7 +391,7 @@ class avxbase(asmgen):
             asmblock += self.asmwrap(f"push {rdx}")
 
         if f"{pkreg}" != f"{rax}":
-            asmblock += self.mov_greg(src=kreg,dst=self.greg(8)) #RAX
+            asmblock += self.move(dregs=[kreg, self.greg(8)], dts=[_GP, _GP]) #RAX
         if f"{pkleftreg}" not in [f"{rax}",f"{rdx}"]:
             unrollreg = kleftreg
         elif f"{pkreg}" not in [f"{rax}",f"{rdx}"]:
@@ -409,7 +402,7 @@ class avxbase(asmgen):
         punrollreg = self.rpref(unrollreg)
 
         asmblock += self.asmwrap(f"xorq {rdx},{rdx}")
-        asmblock += self.mov_greg_imm(reg=unrollreg, imm=unroll)
+        asmblock += self.set(dreg=unrollreg, dt=_GP, modifiers={_opset_mod.CONST}, value=unroll)
 
         # The DIV
         asmblock += self.asmwrap(f"div {punrollreg}")
@@ -417,14 +410,14 @@ class avxbase(asmgen):
 
         if f"{pkreg}" != f"{rdx}":
             if f"{pkreg}" != f"{rax}":
-                asmblock += self.mov_greg(src=self.greg(8), dst=kreg) #RAX
+                asmblock += self.move(dregs=[self.greg(8), kreg], dts=[_GP, _GP]) #RAX
             if f"{pkleftreg}" != f"{rdx}":
-                asmblock += self.mov_greg(src=self.greg(11), dst=kleftreg) #RDX
+                asmblock += self.move(dregs=[self.greg(11), kleftreg], dts=[_GP, _GP]) #RDX
         elif f"{pkleftreg}" != f"{rax}":
             if f"{pkleftreg}" != f"{rdx}":
-                asmblock += self.mov_greg(src=self.greg(11), dst=kleftreg) #RDX
+                asmblock += self.move(dregs=[self.greg(11), kleftreg], dts=[_GP, _GP]) #RDX
             if f"{pkreg}" != f"{rax}":
-                asmblock += self.mov_greg(src=self.greg(8), dst=kreg) #RAX
+                asmblock += self.move(dregs=[self.greg(8), kreg], dts=[_GP, _GP]) #RAX
         else:
             # exchange rax and rdx
             asmblock += self.asmwrap(f"xorq {rax},{rdx}")
@@ -439,67 +432,9 @@ class avxbase(asmgen):
 
         return asmblock
 
-    def mov_greg(self, *, src : greg_base, dst : greg_base):
-        return self.move(dregs=[src, dst], dts=[_GP, _GP])
-
-    def mov_freg(self, *, src : freg_base, dst : freg_base, dt : adt):
-        return self.move(dregs=[src, dst], dts=[dt, dt])
-
-
     def mov_param_to_greg_shift(self, *, param : str, dst : greg_base, bit_count : int):
         pdst = self.rpref(dst)
         return self.asmwrap(f"leaq (,%[{param}],{1<<bit_count}),{pdst}")
-
-    def mov_greg_imm(self, *, reg : greg_base, imm : int):
-        return self.set(dreg=reg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, value=imm)
-
-    def zero_greg(self, *, greg : greg_base):
-        return self.set(dreg=greg, dt=_ADT.UINT64, modifiers={_opset_mod.CONST}, constant="zero")
-
-    def add_greg_imm(self, *, reg : greg_base, imm : int):
-        return self.add(adreg=reg, bimm=imm, cdreg=reg, a_dt=_GP, c_dt=_GP)
-
-    def mul_greg_imm(self, *, src : greg_base, dst : greg_base, factor : int) -> str:
-        return self.mul(adreg=src, bimm=factor, cdreg=dst, a_dt=_GP, c_dt=_GP)
-
-    def mul_greg_greg(self, *, dst : greg_base, reg1 : greg_base, reg2 : greg_base) -> str:
-        return self.mul(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
-
-    def add_greg_greg(self, *, dst : greg_base, reg1 : greg_base, reg2 : greg_base) -> str:
-        return self.add(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
-
-    def sub_greg_greg(self, *, dst : greg_base, reg1 : greg_base, reg2 : greg_base) -> str:
-        return self.sub(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP)
-
-    def add_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
-                              reg2 : greg_base, shift : int) -> str:
-        try:
-            return self.add(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP,
-                          operand_modifiers={'bdreg': {_opd_mod.ISHIFT}}, bdreg_shift=shift)
-        except ValueError as err:
-            # no form (or not with these features): what callers probing it expect
-            raise NotImplementedError(f"x86 has no add of a register shifted by {shift} "
-                                      f"in one instruction here: {err}") from err
-
-    def sub_greg_greg_shifted(self, *, dst : greg_base, reg1 : greg_base,
-                              reg2 : greg_base, shift : int) -> str:
-        try:
-            return self.sub(adreg=reg1, bdreg=reg2, cdreg=dst, a_dt=_GP, b_dt=_GP, c_dt=_GP,
-                          operand_modifiers={'bdreg': {_opd_mod.ISHIFT}}, bdreg_shift=shift)
-        except ValueError as err:
-            # no form (or not with these features): what callers probing it expect
-            raise NotImplementedError(f"x86 has no sub of a register shifted by {shift} "
-                                      f"in one instruction here: {err}") from err
-
-    def add_greg_voff(self, *, reg : greg_base, offset : int, dt : adt) -> str:
-        offset = offset*self.simd_size
-        return self.add_greg_imm(reg=reg, imm=offset)
-
-    def shift_greg_left(self, *, reg : greg_base, bit_count : int) -> str:
-        return self.shift(adreg=reg, bimm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP, modifiers={_opd3_mod.SHL})
-
-    def shift_greg_right(self, *, reg : greg_base, bit_count : int) -> str:
-        return self.shift(adreg=reg, bimm=bit_count, cdreg=reg, a_dt=_GP, c_dt=_GP, modifiers={_opd3_mod.SHR})
 
     def greg(self, reg_idx : int) -> greg_base:
         return x86_greg(reg_idx=reg_idx)
@@ -508,27 +443,12 @@ class avxbase(asmgen):
         _ = dt # explicitly unused
         return avx_freg(reg_idx=reg_idx)
 
-    def zero_freg(self, *, freg : freg_base, dt : adt) -> str:
-        return self.set(dreg=freg, dt=dt, modifiers={_opset_mod.CONST}, constant="zero")
-
-    @property
-    def max_add_voff(self) -> int:
-        return 2**31//self.simd_size//8
-
     def mreg(self, reg_idx : int):
         """
         AVX2's masks are vector registers - gathers', masked loads' and stores',
         variable blends' - any of them: mask i is vector register i
         """
         return self.vreg(reg_idx)
-
-    def mask_all_true(self, *, reg, dt : adt) -> str:
-        """
-        Set a gather or scatter mask to every lane active - before each, as
-        those instructions clear their mask: kxnorw on an AVX-512 mask
-        register, vpcmpeqd on an AVX2 vector mask
-        """
-        return self.set(dreg=reg, dt=dt, modifiers={_opset_mod.CONSTMASK}, mask="alltrue")
 
     def max_tregs(self, dt : adt):
         return 0
@@ -537,9 +457,6 @@ class avxbase(asmgen):
     avx_no_tile_message = "Not tile support in AVX (will be supported with AMX)"
 
     def treg(self, reg_idx : int, dt : adt):
-        raise NotImplementedError(self.avx_no_tile_message)
-
-    def zero_treg(self, *, treg : treg_base, dt : adt):
         raise NotImplementedError(self.avx_no_tile_message)
 
     def load_vector_gather(self, *, areg : greg_base, offvreg : vreg_base,

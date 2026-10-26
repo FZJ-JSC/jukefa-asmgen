@@ -17,6 +17,7 @@ from asmgen.asmblocks.rvv071 import rvv071
 from asmgen.asmblocks.op.opmem import opmem_modifier as M
 from asmgen.asmblocks.op.operand import operand_modifier as OM
 from asmgen.registers import asm_data_type as adt, asm_index_type as ait
+from asmgen.asmblocks.op.opset import opset_modifier
 
 
 def plain(text):
@@ -97,7 +98,7 @@ class test_xtheadvector(unittest.TestCase):
         self.assertIn("XTheadVector", g.get_parameters())
         self.assertEqual("on", g.get_param_value("XTheadVector"))
         self.assertEqual("th.vle.v v0, (t5)", plain(g.load(dregs=[g.vreg(0)], areg=g.greg(5), dt=adt.FP64)))
-        self.assertIn("th.vsetvli", g.vlen_to_greg(reg=g.greg(6), dt=adt.FP64))
+        self.assertIn("th.vsetvli", g.set(dreg=g.greg(6), dt=adt.FP64, modifiers={opset_modifier.VLEN}))
 
     def test_scalars_and_labels_stay(self):
         g = rvv071()
@@ -118,7 +119,7 @@ class test_rvv071_assembles(unittest.TestCase):
         g.set_output_inline(False)
         v0, v1, t0, t1 = g.vreg(0), g.vreg(1), g.greg(5), g.greg(6)
         text = "".join([
-            g.vlen_to_greg(reg=t1, dt=adt.FP64),
+            g.set(dreg=t1, dt=adt.FP64, modifiers={opset_modifier.VLEN}),
             g.load(dregs=[v0], areg=t0, dt=adt.FP64),
             g.load(dregs=[v0], areg=t0, dt=adt.FP32, modifiers={M.GSTRIDE}, streg=t1),
             g.load(dregs=[v0], areg=t0, dt=adt.FP64, modifiers={M.VINDEX}, vidxreg=v1, it=ait.INT64),

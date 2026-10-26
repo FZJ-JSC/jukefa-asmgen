@@ -372,21 +372,6 @@ class asmgen(ABC):
                 rt.clobbered_regs[tag].discard(idx)
         return rt
 
-    def vlen_to_greg(self, *, reg, dt : asm_data_type) -> str:
-        """
-        dt's elements in a vector into reg: set(VLEN) (0.6, phase 4)
-        """
-        from .op.opset import opset_modifier   # pylint: disable=import-outside-toplevel
-        return self.set(dreg=reg, dt=dt, modifiers={opset_modifier.VLEN})
-
-    def mask_all_true(self, *, reg, dt : asm_data_type) -> str:
-        """
-        Set a mask register to every lane active: before instructions that
-        clear their mask (AVX gathers and scatters list it in their
-        signatures' clobber_list)
-        """
-        raise NotImplementedError(f"{type(self).__name__} has no mask to set")
-
     def isa_setup(self):
         """
         What this ISA needs set up before a kernel and torn down after: see
@@ -548,13 +533,6 @@ class asmgen(ABC):
         from .op.opset import opset_modifier   # pylint: disable=import-outside-toplevel
         return self.set(modifiers={opset_modifier.VLEN, opset_modifier.PARAM}, param="byte_size")
 
-    def simd_size_to_greg(self, *, reg : greg_type, dt : asm_data_type) -> str:
-        """
-        dt's elements in a vector into reg: set(VLEN) (0.6, phase 4)
-        """
-        from .op.opset import opset_modifier   # pylint: disable=import-outside-toplevel
-        return self.set(dreg=reg, dt=dt, modifiers={opset_modifier.VLEN})
-
     @abstractmethod
     def kiterkleft(self, *, kreg : greg_type,
                    kleftreg : greg_type,
@@ -646,18 +624,6 @@ class asmgen(ABC):
         """
         raise NotImplementedError(NIE_MESSAGE)
 
-    @property
-    @abstractmethod
-    def max_add_voff(self) -> int:
-        """
-        Returns the maximum immediate value in number of SIMD/vector registers
-        for adding vector-length-based byte-size-offsets to a GP register
-
-        :return: Maximum immediate value
-        :rtype: int
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
     @abstractmethod
     def label(self, *, label : str) -> str:
         """
@@ -667,12 +633,6 @@ class asmgen(ABC):
         :type label: str
         :return: String containing correctly placed ASM label
         :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    def mov_greg_to_freg(self, *, src : greg_type, dst : freg_type, dt : asm_data_type) -> str:
-        """
-        Move a general register's low bits into an FP register of data type dt
         """
         raise NotImplementedError(NIE_MESSAGE)
 
@@ -829,77 +789,6 @@ class asmgen(ABC):
         """
         raise NotImplementedError(NIE_MESSAGE)
 
-    @abstractmethod
-    def zero_greg(self, *, greg : greg_type) -> str:
-        """
-        Returns the string containing instructions to set a GP register to zero
-        
-        :param greg: GP register to set to zero
-        :type greg: class:`asmgen.register.greg_base`
-        :return: String containing the required ASM instructions
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def zero_freg(self, *, freg : freg_type, dt : asm_data_type) -> str:
-        """
-        Returns the string containing instructions to set a scalar register to zero
-        
-        :param freg: scalar register to set to zero
-        :type freg: class:`asmgen.register.freg_base`
-        :param dt: Data type contained in the scalar register
-        :type dt: class:`asmgen.registers.asm_data_type`
-        :return: String containing the required ASM instructions
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def zero_vreg(self, *, vreg : vreg_type, dt : asm_data_type) -> str:
-        """
-        Returns the string containing instructions to set all elements in a 
-        vector register to zero
-        
-        :param vreg: vector register to set to zero
-        :type vreg: class:`asmgen.register.vreg_base`
-        :param dt: Data type contained in the scalar register
-        :type dt: class:`asmgen.registers.asm_data_type`
-        :return: String containing the required ASM instructions
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def zero_treg(self, *, treg : treg_type, dt : asm_data_type) -> str:
-        """
-        Returns the string containing instructions to set all elements in a 
-        tile register to zero
-        
-        :param treg: tile register to set to zero
-        :type treg: class:`asmgen.register.vreg_base`
-        :param dt: Data type contained in the scalar register
-        :type dt: class:`asmgen.registers.asm_data_type`
-        :return: String containing the required ASM instructions
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def mov_greg(self, *, src : greg_type, dst : greg_type) -> str:
-        """
-        Returns the string containing the instruction(s) to copy the content of one
-        GP register to another GP register
-
-        :param src: GP register to copy data from
-        :type src: class:`asmgen.register.greg_base`
-        :param dst: GP register to copy data to
-        :type dst: class:`asmgen.register.greg_base`
-        :return: String containing the required ASM instructions
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
     def _scalar_memory(self, action : str, *, areg : greg_type, offset : int,
                        reg : greg_type | freg_type, dt : asm_data_type) -> str:
         """
@@ -930,23 +819,6 @@ class asmgen(ABC):
         A store through store (0.6, phase 5)
         """
         return self._scalar_memory("store", areg=areg, offset=offset, reg=src, dt=asm_data_type.UINT64)
-
-    @abstractmethod
-    def mov_freg(self, *, src : freg_type, dst : freg_type, dt : asm_data_type) -> str:
-        """
-        Returns the string containing the instruction(s) to copy the content of one
-        scalar register to another scalar register
-
-        :param src: scalar register to copy data from
-        :type src: class:`asmgen.register.freg_base`
-        :param dst: scalar register to copy data to
-        :type dst: class:`asmgen.register.freg_base`
-        :param dt: Data type contained in the scalar register
-        :type dt: class:`asmgen.registers.asm_data_type`
-        :return: String containing the required ASM instructions
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
 
     def mov_greg_to_param(self, *, src : greg_type, param : str) -> str:
         """
@@ -994,197 +866,6 @@ class asmgen(ABC):
         :rtype: str
         """
         raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def mov_greg_imm(self, *, reg : greg_type, imm : int) -> str:
-        """
-        Returns the string containing the instruction(s) to copy an immediate
-        to a general purpose register
-
-        :param reg: GP register to put the value in
-        :type reg: class:`asmgen.register.greg_base`
-        :param imm: integer value to put into the GP register
-        :type imm: int
-        :return: String containing the required ASM instructions
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def mul_greg_imm(self, *, src : greg_type, dst : greg_type, factor : int) -> str:
-        """
-        Returns the string containing the instruction(s) to write the product
-        of a GP register and an immediate into a GP register
-
-        :param src: GP register containing one of the multiplicands
-        :type src: class:`asmgen.register.greg_base`
-        :param dst: GP register to write the result to
-        :type dst: class:`asmgen.register.greg_base`
-        :param factor: integer value to multiply the value in the src register with
-        :type factor: int
-        :return: String containing the required ASM instructions
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def mul_greg_greg(self, *, dst : greg_type, reg1 : greg_type, reg2 : greg_type) -> str:
-        """
-        Returns the string containing the instruction(s) to write the product of 2 GP registers
-        into a GP register
-        
-        :param dst: destination GP register
-        :type dst: greg_type
-        :param reg1: first multiplicand
-        :type reg1: greg_type
-        :param reg2: second multiplicand
-        :type reg2: greg_type
-        :return: ASM/IR of the operation
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def add_greg_imm(self, *, reg : greg_type, imm : int) -> str:
-        """
-        Returns the string containing the instruction(s) to write the sum
-        of a GP register and an immediate into a GP register
-
-        :param src: GP register containing one of the summands
-        :type src: class:`asmgen.register.greg_base`
-        :param dst: GP register to write the result to
-        :type dst: class:`asmgen.register.greg_base`
-        :param imm: integer value to add to the value in the src register
-        :type imm: int
-        :return: String containing the required ASM instructions
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def add_greg_voff(self, *, reg : greg_type, offset : int,
-                      dt : asm_data_type) -> str:
-        """
-        Returns the string containing the instruction(s) to write the sum
-        of a GP register and an immediate multiplied by the simd/vector size in bytes
-        into itself
-
-        :param dst: GP register to write the result to
-        :type dst: class:`asmgen.register.greg_base`
-        :param factor: integer value to multiply with the simd/vector size in bytes and 
-            add to the initial value in the GP register to
-        :type factor: int
-        :return: String containing the required ASM instructions
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def add_greg_greg(self, *, dst : greg_type, reg1 : greg_type, reg2 : greg_type) -> str:
-        """
-        Returns the string containing the instruction(s) to write the sum of 2 GP registers
-        into a GP register
-        
-        :param dst: destination GP register
-        :type dst: greg_type
-        :param reg1: first addend
-        :type reg1: greg_type
-        :param reg2: second addend
-        :type reg2: greg_type
-        :return: ASM/IR of the operation
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def sub_greg_greg(self, *, dst : greg_type, reg1 : greg_type, reg2 : greg_type) -> str:
-        """
-        Returns the string containing the instruction(s) to write the difference of 2 GP registers
-        into a GP register
-        
-        :param dst: destination GP register
-        :type dst: greg_type
-        :param reg1: minuend
-        :type reg1: greg_type
-        :param reg2: subtrahend
-        :type reg2: greg_type
-        :return: ASM/IR of the operation
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-
-    @abstractmethod
-    def add_greg_greg_shifted(self, *, dst : greg_type, reg1 : greg_type, reg2 : greg_type,
-                              shift : int) -> str:
-        """
-        Returns the string containing the instruction to write reg1 plus reg2
-        shifted left by shift into a GP register: one instruction - an
-        address moved by a power-of-two multiple of an amount in a register
-
-        :param dst: destination GP register
-        :param reg1: first summand
-        :param reg2: second summand, shifted
-        :param shift: bits reg2 is shifted left by
-        :return: ASM/IR of the operation
-        """
-        raise NotImplementedError("Method not implemented")
-
-    @abstractmethod
-    def sub_greg_greg_shifted(self, *, dst : greg_type, reg1 : greg_type, reg2 : greg_type,
-                              shift : int) -> str:
-        """
-        Returns the string containing the instruction to write reg1 minus reg2
-        shifted left by shift into a GP register: one instruction
-
-        :param dst: destination GP register
-        :param reg1: minuend
-        :param reg2: subtrahend, shifted
-        :param shift: bits reg2 is shifted left by
-        :return: ASM/IR of the operation
-        """
-        raise NotImplementedError("Method not implemented")
-
-    @abstractmethod
-    def shift_greg_left(self, *, reg : greg_type, bit_count : int) -> str:
-        """
-        Returns the string containing the instruction(s) to left-shift the value
-        in a GP register by the specified number of places
-
-        :param reg: GP register to modify
-        :type reg: class:`asmgen.register.greg_base`
-        :param bit_count: number of bits to shift the value to the left
-        :type bit_count: int
-        :return: String containing the required ASM instructions
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    @abstractmethod
-    def shift_greg_right(self, *, reg : greg_type, bit_count : int) -> str:
-        """
-        Returns the string containing the instruction(s) to right-shift the value
-        in a GP register by the specified number of places
-
-        :param reg: GP register to modify
-        :type reg: class:`asmgen.register.greg_base`
-        :param bit_count: number of bits to shift the value to the right
-        :type bit_count: int
-        :return: String containing the required ASM instructions
-        :rtype: str
-        """
-        raise NotImplementedError(NIE_MESSAGE)
-
-    def greg_to_voffs(self, *, streg : greg_type, vreg : vreg_type, dt : asm_data_type) -> str:
-        """
-        Element i of vreg i * streg: set(STINDEX) (0.6, phase 4); raises
-        NotImplementedError where the ISA has no form, as callers expect
-        """
-        from .op.opset import opset_modifier   # pylint: disable=import-outside-toplevel
-        try:
-            return self.set(dreg=vreg, dt=dt, modifiers={opset_modifier.STINDEX}, streg=streg)
-        except ValueError as err:
-            raise NotImplementedError(f"{type(self).__name__} has no index vector here: {err}") from err
 
     def load_pointer(self, *, areg : greg_type, name : str):
         """
@@ -1320,15 +1001,6 @@ class asmgen(ABC):
         :rtype: str
         """
         return self._vector_memory("load", areg=areg, vreg=vreg, dt=dt)
-
-    def fill_vector(self, *, sreg : freg_base, vreg : vreg_base, dt : asm_data_type) -> str:
-        """
-        Every element of vreg the value in sreg: a move broadcasting (0.6,
-        phase 3) - move(dregs=[sreg, vreg], operand_modifiers={'bdreg': {BCAST}})
-        """
-        from .op.operand import operand_modifier   # pylint: disable=import-outside-toplevel
-        return self.move(dregs=[sreg, vreg], dts=[dt, dt],
-                         operand_modifiers={'bdreg': {operand_modifier.BCAST}})
 
     def load_vector_lane(self, *, areg : greg_base,
                          vreg : vreg_base, lane : int, dt : asm_data_type) -> str:

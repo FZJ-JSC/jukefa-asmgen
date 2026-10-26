@@ -89,6 +89,7 @@ class test_setup(unittest.TestCase):
 
 
 from asmgen.asmblocks.setup import predication
+from asmgen.asmblocks.op.opset import opset_modifier
 
 
 class test_reg_trackers(unittest.TestCase):
@@ -153,7 +154,7 @@ class test_rvv_index_vector(unittest.TestCase):
 
     def test_bytes(self):
         g = rvv()
-        text = g.greg_to_voffs(streg=g.greg(5), vreg=g.vreg(3), dt=adt.FP64)
+        text = g.set(dreg=g.vreg(3), dt=adt.FP64, modifiers={opset_modifier.STINDEX}, streg=g.greg(5))
         self.assertIn("vid.v v3", text)
         self.assertIn("vmul.vx v3,v3,", text)
 

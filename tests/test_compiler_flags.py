@@ -18,6 +18,7 @@ from asmgen.asmblocks.avx import fma256, avx512
 from asmgen.asmblocks.noarch import compiler_family
 from asmgen.callconv.fngen import fngen
 from asmgen.registers import asm_data_type as adt
+from asmgen.asmblocks.op.opset import opset_modifier
 
 
 def baseline(gen):
@@ -78,7 +79,7 @@ def kernel(g):
     ISA's vectors (SVE's dup needs +sve), unpredicated everywhere - then the
     return"""
     g.set_output_inline(False)
-    body = g.zero_vreg(vreg=g.vreg(0), dt=adt.FP64)
+    body = g.set(dreg=g.vreg(0), dt=adt.FP64, modifiers={opset_modifier.CONST}, constant="zero")
     return fngen(g).function("k", body + g.ret()) + g.asmfile_annotations()
 
 

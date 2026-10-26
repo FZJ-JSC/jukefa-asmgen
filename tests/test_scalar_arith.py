@@ -78,17 +78,6 @@ class test_scalar_arith(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.ri(g, "add", 1, 2**31, 1)
 
-    def test_old_methods_on_top(self):
-        for ctor in (rvv, neon, avx512):
-            g = make(ctor)
-            a, b, c = g.greg(1), g.greg(2), g.greg(3)
-            with self.subTest(isa=ctor.__name__):
-                self.assertEqual(g.add(adreg=a, bdreg=b, cdreg=c, a_dt=U, b_dt=U, c_dt=U),
-                                 g.add_greg_greg(dst=c, reg1=a, reg2=b))
-                self.assertEqual(g.add(adreg=a, bimm=16, cdreg=a, a_dt=U, c_dt=U), g.add_greg_imm(reg=a, imm=16))
-                self.assertEqual(g.sub(adreg=a, bdreg=b, cdreg=c, a_dt=U, b_dt=U, c_dt=U),
-                                 g.sub_greg_greg(dst=c, reg1=a, reg2=b))
-
     def test_vector_and_scalar_behind_one_name(self):
         g = make(rvv)
         names = [{n for n in s.operands} for s in g.add.get_signatures()]
@@ -152,17 +141,6 @@ class test_shifts(unittest.TestCase):
             with self.subTest(shift=s), self.assertRaises(ValueError):
                 self.shifted(r, "add", 1, 2, 3, s)
 
-    def test_old_methods_on_top(self):
-        for ctor in (rvv, neon, avx512):
-            g = make(ctor)
-            r = g.greg(1)
-            with self.subTest(isa=ctor.__name__):
-                self.assertEqual(g.shift(adreg=r, bimm=3, cdreg=r, a_dt=U, c_dt=U, modifiers=DIR['shl']), g.shift_greg_left(reg=r, bit_count=3))
-                self.assertEqual(g.shift(adreg=r, bimm=3, cdreg=r, a_dt=U, c_dt=U, modifiers=DIR['shr']), g.shift_greg_right(reg=r, bit_count=3))
-        a = make(avx512)
-        with self.assertRaises(NotImplementedError):     # what ukrgen's probe catches
-            a.sub_greg_greg_shifted(dst=a.greg(1), reg1=a.greg(1), reg2=a.greg(2), shift=1)
-
 class test_vector_lengths(unittest.TestCase):
     """
     VOFFSET: bimm counts vector lengths (SVE)
@@ -180,16 +158,6 @@ class test_vector_lengths(unittest.TestCase):
         for bad in (32, -33):
             with self.subTest(n=bad), self.assertRaises(ValueError):
                 self.vl(g, 1, bad, 1)
-        self.assertEqual("incb x1, ALL, MUL #16 ; incb x1, ALL, MUL #4",
-                         plain(g.add_greg_voff(reg=g.greg(1), offset=20, dt=adt.FP64)))
-
-    def test_fixed_lengths_count_bytes(self):
-        n = make(neon)
-        with self.assertRaises(ValueError):          # no VL-scaled form: a byte count instead
-            self.vl(n, 1, 2, 1)
-        self.assertEqual("add x1,x1,#32", plain(n.add_greg_voff(reg=n.greg(1), offset=2, dt=adt.FP64)))
-        with self.assertRaises(ValueError):          # 2047 * 16 bytes: no add immediate
-            n.add_greg_voff(reg=n.greg(1), offset=2047, dt=adt.FP64)
 
 if __name__ == "__main__":
     unittest.main()

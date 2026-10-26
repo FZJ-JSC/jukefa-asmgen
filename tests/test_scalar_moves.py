@@ -12,6 +12,7 @@ from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.sme import sme
 from asmgen.asmblocks.sve import sve
 from asmgen.registers import asm_data_type as adt
+from asmgen.asmblocks.op.operand import operand_modifier
 
 U = adt.UINT64
 BITS = {move_modifier.BITS}
@@ -52,18 +53,6 @@ class test_scalar_moves(unittest.TestCase):
         with self.assertRaises(ValueError):          # without BITS: no conversion between files
             g.move(dregs=[g.greg(1), g.freg(2, adt.DOUBLE)], dts=[adt.UINT64, adt.DOUBLE])
 
-    def test_old_methods_on_top(self):
-        for ctor in (rvv, neon, sve, avx512):
-            g = make(ctor)
-            with self.subTest(isa=ctor.__name__):
-                self.assertEqual(g.move(dregs=[g.greg(1), g.greg(2)], dts=[U, U]),
-                                 g.mov_greg(src=g.greg(1), dst=g.greg(2)))
-                f1, f2 = g.freg(1, adt.SINGLE), g.freg(2, adt.SINGLE)
-                self.assertEqual(g.move(dregs=[f1, f2], dts=[adt.SINGLE, adt.SINGLE]),
-                                 g.mov_freg(src=f1, dst=f2, dt=adt.SINGLE))
-                self.assertEqual(g.move(dregs=[g.greg(1), f2], dts=[adt.UINT32, adt.SINGLE], modifiers=BITS),
-                                 g.mov_greg_to_freg(src=g.greg(1), dst=f2, dt=adt.SINGLE))
-
     def test_vector_moves_beside(self):
         for ctor in (rvv, neon, sve, sme, avx512):
             g = make(ctor)
@@ -82,17 +71,6 @@ class test_broadcast(unittest.TestCase):
     """
     fill_vector is a move broadcasting a floating-point register (BCAST)
     """
-    def test_fill_vector_is_a_move(self):
-        from asmgen.asmblocks.avx import fma128, fma256
-        from asmgen.asmblocks.op.operand import operand_modifier
-        for ctor in (rvv, neon, sve, sme, fma128, fma256, avx512):
-            g = make(ctor)
-            for dt in (adt.DOUBLE, adt.SINGLE, adt.HALF):
-                with self.subTest(isa=ctor.__name__, dt=dt.name):
-                    f, v = g.freg(1, dt), g.vreg(2)
-                    self.assertEqual(g.move(dregs=[f, v], dts=[dt, dt], operand_modifiers={"bdreg": {operand_modifier.BCAST}}),
-                                     g.fill_vector(sreg=f, vreg=v, dt=dt))
-
     def test_x86_half_is_a_word_broadcast(self):
         g = make(avx512)
-        self.assertIn("vpbroadcastw", g.fill_vector(sreg=g.freg(1, adt.HALF), vreg=g.vreg(2), dt=adt.HALF))
+        self.assertIn("vpbroadcastw", g.move(dregs=[g.freg(1, adt.HALF), g.vreg(2)], dts=[adt.HALF, adt.HALF], operand_modifiers={"bdreg": {operand_modifier.BCAST}}))
