@@ -37,6 +37,11 @@ class sve_opset(vector_opset):
         # pfalse is .b only; a predicate-as-counter register is its p's
         return self.asmwrap(f"pfalse p{dreg.idx}.b")
 
+    def maskavl_reg(self, *, dreg : data_reg, dt : adt, avlreg : greg_base) -> str:
+        if dreg.is_pn:
+            raise ValueError(f"{dreg}: a predicate-as-counter's whilelo takes a vector count (vlx2): not yet")
+        return self.asmwrap(f"whilelo {dreg}.{self.dt_suffixes[dt]}, xzr, {avlreg}")
+
     def vlen(self, *, dreg : greg_base, dt : adt = adt.UINT8) -> str:
         suf = {1: "b", 2: "h", 4: "w", 8: "d"}[adt_size(dt)]
         return self.asmwrap(f"cnt{suf} {dreg}")

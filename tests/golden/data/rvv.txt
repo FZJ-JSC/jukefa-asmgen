@@ -1503,6 +1503,8 @@ vid.v v1
 vmul.vx v1,v1,s4
 ### op set [VLEN] dreg:REGISTER:GP:UINT64
 vsetvli s4, zero, e64, m1, ta, ma
+### op set [VLEN] dreg:REGISTER:GP:UINT64 avlreg:REGISTER:GP:UINT64
+vsetvli s4, s5, e64, m1, ta, ma
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64
 sll s6,s4,s5
 ### op shift [SHL] adreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64 bimm:IMMEDIATE:-:-

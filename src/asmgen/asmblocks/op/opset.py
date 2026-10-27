@@ -38,7 +38,9 @@ class opset_modifier(operation_modifier):
     """
     CONST = auto()      # a constant: constant="zero" or "one" (1, 1.0 in dt), or value=<int>
     CONSTMASK = auto()  # a mask: mask="alltrue", "allfalse", or "first" (count elements active)
-    VLEN = auto()       # the vector length in elements of dt (bytes: UINT8, the default)
+    VLEN = auto()       # the vector length in elements of dt (bytes: UINT8, the default); with
+                        # avlreg (RVV) the length set for avlreg's elements, at most VLMAX
+    MASKAVL = auto()    # a mask of the first avlreg elements of dt, at most the vector's (SVE whilelo)
     STINDEX = auto()    # indices from a stride register: element i is i * streg
     PARAM = auto()      # the destination an inline asm register operand %[param], no dreg: inline only
 
@@ -99,6 +101,27 @@ def vlen_signatures() -> list[operation_signature]:
     """
     return [operation_signature(modifiers={opset_modifier.VLEN}, structural_params={},
                                 operands={"dreg": osh(ot.REGISTER, orl.DATA, rt.GP, adt.UINT64)})]
+
+
+def vlen_avl_signatures() -> list[operation_signature]:
+    """
+    VLEN set for avlreg's elements of dt - at most the register group's -
+    the length set into dreg (RVV's vsetvli rd, avl)
+    """
+    return [operation_signature(modifiers={opset_modifier.VLEN}, structural_params={},
+                                operands={"dreg": osh(ot.REGISTER, orl.DATA, rt.GP, adt.UINT64),
+                                          "avlreg": osh(ot.REGISTER, orl.PARAM, rt.GP, adt.UINT64)})]
+
+
+def maskavl_signatures(dts, rtype=rt.MASK) -> list[operation_signature]:
+    """
+    MASKAVL: a mask of the first avlreg elements of dt, the rest not - any
+    count, at most the vector's elements (SVE's whilelo)
+    """
+    return [operation_signature(modifiers={opset_modifier.MASKAVL}, structural_params={},
+                                operands={"dreg": osh(ot.REGISTER, orl.DATA, rtype, dt),
+                                          "avlreg": osh(ot.REGISTER, orl.PARAM, rt.GP, adt.UINT64)})
+            for dt in dts]
 
 
 def vlen_param_signatures() -> list[operation_signature]:
@@ -278,7 +301,11 @@ class vector_opset(opset):
         if opset_modifier.PARAM in set(modifiers or ()):
             dreg = _inline_param(param)
         if opset_modifier.VLEN in set(modifiers or ()):
+            if kwargs.get("avlreg") is not None:
+                return self.vlen(dreg=dreg, dt=dt, avlreg=kwargs["avlreg"])
             return self.vlen(dreg=dreg, dt=dt)
+        if opset_modifier.MASKAVL in set(modifiers or ()):
+            return self.maskavl_reg(dreg=dreg, dt=dt, avlreg=kwargs["avlreg"])
         if opset_modifier.STINDEX in set(modifiers or ()):
             return self.stindex_reg(dreg=dreg, dt=dt, streg=streg)
         # If a scalar register is passed, forward to the base ISA's set
@@ -296,6 +323,13 @@ class vector_opset(opset):
         """
         A mask register all true, all false, or true for the first count
         elements of dt
+        """
+        raise NotImplementedError(self.NIE_MESSAGE)
+
+    def maskavl_reg(self, *, dreg : data_reg, dt : adt, avlreg : greg_base) -> str:
+        """
+        A mask register true for the first avlreg elements of dt, at most
+        the vector's
         """
         raise NotImplementedError(self.NIE_MESSAGE)
 

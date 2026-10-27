@@ -265,3 +265,38 @@ class test_first_masks(unittest.TestCase):
             with self.subTest(gen=gen.__name__):
                 self.assertFalse([s for s in g.set.forms(modifiers={opset_modifier.CONSTMASK})
                                   if "first" == s.structural_params.get("mask")])
+
+
+class test_avl(unittest.TestCase):
+    """
+    The first avl elements from a register: SVE's mask of them (MASKAVL,
+    whilelo - any count, at most the vector's), RVV's vector length for them
+    (VLEN with avlreg, vsetvli rd, avl)
+    """
+    def test_sve_whilelo(self):
+        g = make(sve)
+        self.assertEqual("whilelo p1.d, xzr, x3", plain(g.set(dreg=g.mreg(1), dt=adt.DOUBLE,
+                                                             modifiers={opset_modifier.MASKAVL}, avlreg=g.greg(3))))
+        self.assertIsNone(g.set.fits(dreg=g.greg(2), dt=adt.DOUBLE, modifiers={opset_modifier.VLEN},
+                                     avlreg=g.greg(3)))     # no vector length to set
+
+    def test_no_counter_predicates(self):
+        from asmgen.asmblocks.sme import sme
+        g = make(sme)
+        self.assertIsNone(g.set.fits(dreg=g.mreg(8, True), dt=adt.DOUBLE, modifiers={opset_modifier.MASKAVL},
+                                     avlreg=g.greg(3)))
+
+    def test_rvv_vsetvli(self):
+        g = make(rvv)
+        self.assertEqual("vsetvli t2, t3, e64, m1, ta, ma",
+                         plain(g.set(dreg=g.greg(2), dt=adt.DOUBLE, modifiers={opset_modifier.VLEN}, avlreg=g.greg(3))))
+        self.assertEqual("vsetvli t2, zero, e64, m1, ta, ma",
+                         plain(g.set(dreg=g.greg(2), dt=adt.DOUBLE, modifiers={opset_modifier.VLEN})))
+
+    def test_none_elsewhere(self):
+        # RVV's masks need masked accesses first; AVX-512's a scratch register
+        for gen in (rvv, avx512, neon):
+            g = make(gen)
+            with self.subTest(gen=gen.__name__):
+                self.assertFalse(g.set.forms(modifiers={opset_modifier.MASKAVL}))
+

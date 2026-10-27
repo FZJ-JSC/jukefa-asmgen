@@ -3,7 +3,7 @@ SVE set signatures: CONST zero, one
 """
 from ...op.constraint import oneof_constraint
 from ...op.operand import register_type as rt
-from ...op.opset import INT_DTS, const_signatures, mask_signatures, stindex_signatures, vlen_param_signatures, vlen_signatures, zero_signatures, first_mask_signatures
+from ...op.opset import INT_DTS, const_signatures, mask_signatures, stindex_signatures, vlen_param_signatures, vlen_signatures, zero_signatures, first_mask_signatures, maskavl_signatures
 from ....registers import asm_data_type as adt
 
 ONE_DTS = (adt.DOUBLE, adt.SINGLE, adt.HALF, *INT_DTS)
@@ -26,4 +26,6 @@ def make_sve_opset_signatures(*, dt_suffixes : dict) -> list:
             + first_mask_signatures({dt: oneof_constraint(valset=set(SVE_VL_PATTERNS))
                                      for dt in dt_suffixes})
             + vlen_signatures() + vlen_param_signatures()
+            # whilelo p.T, xzr, x: the first avl elements, any count
+            + maskavl_signatures(list(dt_suffixes))
             + stindex_signatures(list(dt_suffixes)))
