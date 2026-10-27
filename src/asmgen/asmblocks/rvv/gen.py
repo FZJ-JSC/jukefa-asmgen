@@ -111,6 +111,9 @@ class rvv(riscv64):
                 raise NotImplementedError(
                         ("{value} is not an integer. Fractional "
                          "LMUL is not implemented yet"))
+            # the memory operations' signatures depend on it (segments)
+            self.load.refresh()
+            self.store.refresh()
         else:
             super().set_parameter(name, value)
 

@@ -87,6 +87,9 @@ def make_rvv_opmem_signatures(get_lmul: Callable[[],int], has_bcast=False):
         # selection logic could be simplified if we support it
         # explicitly
         for nstructs in range(1,9):
+            if nstructs * get_lmul() > 8:
+                # EMUL * NF <= 8: at m2 four fields, at m4 two
+                continue
             operands = {
                 'agreg' : osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
                 'adreg' : osh(ot.REGISTER, orl.DATA, rt.VEC, dt)}
@@ -169,9 +172,27 @@ def make_rvv_opmem_signatures(get_lmul: Callable[[],int], has_bcast=False):
                     }
                 ))
 
+        # STRUCT + GSTRIDE: segments streg bytes apart (vlsseg<nf>, vssseg<nf>) -
+        # a panel's rows packed in parts, each part's rows interleaved into
+        # the panel's columns cdim apart
+        for nstructs in range(2, 9):
+            if nstructs * get_lmul() > 8:
+                continue
+            operands = {
+                'agreg' : osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
+                'streg' : osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
+                'adreg' : osh(ot.REGISTER, orl.DATA, rt.VEC, dt)}
+            operands.update({
+                mop(i)+'dreg': osh(ot.REGISTER, orl.DATA, rt.VEC, dt,
+                                   value_constraints=[sc(other=mop(i-1)+'dreg', offset=get_lmul())])
+                for i in range(1, nstructs)})
+            sigs.append(sig(
+                modifiers={mod.STRUCT, mod.GSTRIDE},
+                structural_params={'nstructs': nstructs},
+                operands=operands))
+
         # TODO:
         # - STRUCT+VINDEX
-        # - STRUCT+GSTRIDE
 
         # TODO (also in the opmem implementation)
         # - everything + MASK

@@ -51,6 +51,14 @@ class rvv_opmem(opmem):
 
         self.scalar_opmem = riscv64_opmem(action=action, asmwrap=asmwrap)
 
+        self.refresh()
+
+    def refresh(self):
+        """
+        The signatures for the generator's LMUL as it is now - segments'
+        fields a register group apart, at most 8 registers (EMUL * NF) -
+        built again where LMUL changes
+        """
         self.signatures = make_rvv_opmem_signatures(self.get_lmul, self.has_bcast)
         self.signatures.extend(self.scalar_opmem.all_signatures())
 
