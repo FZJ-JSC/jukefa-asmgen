@@ -51,6 +51,27 @@ vector-length-agnostically it needs code paths switched at run time.
 Giving up vector-length agnosticism on some platform could gain
 performance (not investigated).
 
+## LMUL by size, and within a kernel, on RVV
+
+Measured on two RVV machines: LMUL 2 makes vec packm faster, LMUL 1 gemm.
+LMUL is per family, though - set to 2 for packm, a vector is a group of two
+registers, and the odd counts (cdim 1v, 3v, 5v) aren't built: their panels
+go to the reference. Two levels of finer control:
+
+- Per kernel (ukrgen, nothing here): a family's LMUL by its kernels' size
+  - a map of vector counts to LMUL, or a rule (the largest of 1, 2, 4, 8
+  dividing the count: 2v and 4v m2, 1v, 3v and 5v m1) - each kernel built
+  with its own generator's (rvv-LMUL), sweepable as other family keys.
+- Within a kernel (here): register groups of different LMUL in one kernel
+  - 3v as an m2 group and an m1 register, 5v as m4 and m1 - so the odd
+  counts get the even ones' wider accesses too. LMUL becomes a register
+  group's (an operand's) rather than the generator's: allocation by group
+  size, each group's operations under its vtype - a vsetvli between them,
+  whose cost goes from almost nothing to expensive by implementation (as
+  for the vector length set for the last of cdim = n*VL + M); RVV 1.0's
+  whole-register loads and stores (vl2re64.v, vs1r.v) move groups without
+  vtype, the arithmetic between them (kappa) still under one.
+
 ## Framing
 
 - `.ident` with asmgen's version and the generator's configuration.
