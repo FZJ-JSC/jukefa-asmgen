@@ -47,6 +47,22 @@ class avx_opset(vector_opset):
         # bytes: |-1| = 1
         return ones + self.asmwrap(f"vpabsb {p},{p}")
 
+    def maskavl_reg(self, *, dreg, dt, avlreg, tmpreg=None) -> str:
+        """
+        AVX-512: the first avlreg lanes true - all ones in a scratch general
+        register, bzhi keeping the low avlreg bits (BMI2), kmovw into the k
+        register: 16 lanes or fewer
+        """
+        if not isinstance(dreg, avx512_mreg):
+            raise ValueError(f"a mask of a count is a k register, not {dreg}")
+        if tmpreg is None:
+            raise ValueError("AVX-512's mask of a count takes a scratch general register (tmpreg)")
+        if tmpreg.idx == avlreg.idx:
+            raise ValueError(f"the scratch register {tmpreg} is the count's")
+        t = f"%{tmpreg.name(8)}"
+        return (self.asmwrap(f"movq $-1,{t}") + self.asmwrap(f"bzhiq %{avlreg.name(8)},{t},{t}")
+                + self.asmwrap(f"kmovw %{tmpreg.name(4)},{self.rpref(dreg)}"))
+
     def mask_reg(self, *, dreg : data_reg, dt : adt, mask : str, count : int | None = None) -> str:
         p = self.rpref(dreg)
         if "first" == mask:

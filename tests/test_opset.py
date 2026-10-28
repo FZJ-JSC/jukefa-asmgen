@@ -300,9 +300,59 @@ class test_avl(unittest.TestCase):
         self.assertTrue(forms)
         self.assertTrue(all("tmpreg" in s.operands for s in forms))
 
+    def test_avx512_bzhi(self):
+        # AVX-512's: all ones, bzhi to the count, kmovw - a scratch general
+        # register, 16 lanes or fewer
+        g = make(avx512)
+        k1, rdx, rax = g.mreg(1), g.greg(11), g.greg(8)
+        self.assertEqual(["movq $-1,%rax", "bzhiq %rdx,%rax,%rax", "kmovw %eax,%k1"],
+                         g.set(dreg=k1, dt=adt.FP64, modifiers={opset_modifier.MASKAVL}, avlreg=rdx,
+                               tmpreg=rax).strip().split("\n"))
+        self.assertIn("the count's", g.set.refusal(dreg=k1, dt=adt.FP64, modifiers={opset_modifier.MASKAVL},
+                                                   avlreg=rdx, tmpreg=rdx))
+        self.assertIsNone(g.set.fits(dreg=k1, dt=adt.FP64, modifiers={opset_modifier.MASKAVL}, avlreg=rdx))
+        self.assertIsNone(g.set.fits(dreg=k1, dt=adt.UINT16, modifiers={opset_modifier.MASKAVL}, avlreg=rdx,
+                                     tmpreg=rax))
+
+    def test_avx512_semantics(self):
+        # run here: every count 0 to 8, a vector loaded and stored under the
+        # mask - its first count doubles copied, the rest left
+        import os, subprocess, tempfile
+        flags = open("/proc/cpuinfo").read() if os.path.exists("/proc/cpuinfo") else ""
+        if not all(f" {f}" in flags for f in ("avx512f", "bmi2")):
+            self.skipTest("needs AVX512F and BMI2")
+        g = make(avx512)
+        asm = ("\t.text\n\t.globl f\n\t.type f, @function\nf:\n"
+               + g.set(dreg=g.mreg(1), dt=adt.FP64, modifiers={opset_modifier.MASKAVL}, avlreg=g.greg(11),
+                       tmpreg=g.greg(8))
+               + "\tvmovupd (%rdi),%zmm0{%k1}{z}\n\tvmovupd %zmm0,(%rsi){%k1}\n\tvzeroupper\n\tret\n"
+               + "\t.section .note.GNU-stack,\"\",@progbits\n")
+        c = r"""
+#include <stdio.h>
+void f(const double* src, double* out, long count);
+int main(void) {
+    int bad = 0;
+    for (long count = 0; count <= 8; ++count) {
+        double src[8], out[8];
+        for (int i = 0; i < 8; ++i) { src[i] = i + 1; out[i] = -1; }
+        f(src, out, count);
+        for (int i = 0; i < 8; ++i) if (out[i] != (i < count ? i + 1 : -1)) ++bad;
+    }
+    printf("bad %d\n", bad);
+    return 0;
+}
+"""
+        with tempfile.TemporaryDirectory() as d:
+            open(os.path.join(d, "f.s"), "w").write(asm)
+            open(os.path.join(d, "m.c"), "w").write(c)
+            r = subprocess.run(["gcc", "-O1", os.path.join(d, "m.c"), os.path.join(d, "f.s"), "-o",
+                                os.path.join(d, "run")], capture_output=True, text=True)
+            self.assertEqual(0, r.returncode, r.stderr)
+            out = subprocess.run([os.path.join(d, "run")], capture_output=True, text=True, timeout=60).stdout
+            self.assertIn("bad 0", out)
+
     def test_none_elsewhere(self):
-        # AVX-512's takes a scratch register (its own patch)
-        for gen in (avx512, neon):
+        for gen in (neon,):
             g = make(gen)
             with self.subTest(gen=gen.__name__):
                 self.assertFalse(g.set.forms(modifiers={opset_modifier.MASKAVL}))

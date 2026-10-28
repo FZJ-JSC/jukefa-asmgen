@@ -1908,6 +1908,30 @@ vpternlogd $0xff,%zmm1,%zmm1,%zmm1
 vpabsb %zmm1,%zmm1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 vpxorq %zmm1,%zmm1,%zmm1
+### op set [MASKAVL] dreg:REGISTER:MASK:DOUBLE avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:GP:UINT64
+movq $-1,%rdx
+bzhiq %rcx,%rdx,%rdx
+kmovw %edx,%k1
+### op set [MASKAVL] dreg:REGISTER:MASK:SINGLE avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:GP:UINT64
+movq $-1,%rdx
+bzhiq %rcx,%rdx,%rdx
+kmovw %edx,%k1
+### op set [MASKAVL] dreg:REGISTER:MASK:SINT32 avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:GP:UINT64
+movq $-1,%rdx
+bzhiq %rcx,%rdx,%rdx
+kmovw %edx,%k1
+### op set [MASKAVL] dreg:REGISTER:MASK:SINT64 avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:GP:UINT64
+movq $-1,%rdx
+bzhiq %rcx,%rdx,%rdx
+kmovw %edx,%k1
+### op set [MASKAVL] dreg:REGISTER:MASK:UINT32 avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:GP:UINT64
+movq $-1,%rdx
+bzhiq %rcx,%rdx,%rdx
+kmovw %edx,%k1
+### op set [MASKAVL] dreg:REGISTER:MASK:UINT64 avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:GP:UINT64
+movq $-1,%rdx
+bzhiq %rcx,%rdx,%rdx
+kmovw %edx,%k1
 ### op set [STINDEX] dreg:REGISTER:VEC:DOUBLE streg:REGISTER:GP:UINT64
 vpbroadcastq %rcx,%zmm1
 vpmuludq .iota_64x8(%rip),%zmm1,%zmm1
