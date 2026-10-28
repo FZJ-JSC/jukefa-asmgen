@@ -117,6 +117,8 @@ class asmgen(ABC):
         off: the extensions set_features didn't enable (none without a call)
         and the encoding features that are off
         """
+        # the state some signatures require depends on the features (SME's FA64)
+        self.declare_state()
         features = self.features
         if features is None and not self.ENCODING_FEATURES:
             return
@@ -126,6 +128,28 @@ class asmgen(ABC):
         for value in vars(self).values():
             if isinstance(value, operation):
                 value.enabled_features = enabled
+
+    def declare_state(self):
+        """
+        Each of this generator's signatures' processor state - what it
+        requires and writes (state_requires, state_writes) - as signature_state
+        says: the ISA's knowledge, consumers (ukrgen) taking it from the
+        signatures. Again where what decides it changes (features, LMUL)
+        """
+        for value in vars(self).values():
+            if isinstance(value, operation):
+                for sig in value.all_signatures():
+                    requires, writes = self.signature_state(value, sig)
+                    sig.state_requires = dict(requires)
+                    sig.state_writes = dict(writes)
+
+    def signature_state(self, op, sig) -> tuple[dict[str, str], dict[str, str]]:
+        """
+        A signature's processor state - (requires, writes) - this ISA's: none
+        unless a backend has state (RVV's vector length and type, SME's
+        streaming mode and ZA)
+        """
+        return {}, {}
 
     def get_parameters(self) -> list[str]:
         """

@@ -23,7 +23,7 @@ b.ne .notequal
 ### method create_callconv(name=default)
 <asmgen.callconv.callconv.callconv object>
 ### method enabled_features()
-{B16B16, BF16, F16F16, F64F64, F8F16, F8F32, FP8FMA, I16I64, I8MM, SME2, SME_B16B16, SVE2}
+{B16B16, BF16, F16F16, F64F64, F8F16, F8F32, FA64, FP8FMA, I16I64, I8MM, SME2, SME_B16B16, SVE2}
 ### method freg(dt=DOUBLE, reg_idx=0)
 d0
 ### method freg(dt=HALF, reg_idx=0)
@@ -33,7 +33,7 @@ s0
 ### method get_param_value(name=dummy)
 dummy
 ### method get_parameters()
-['SVE2', 'BF16', 'B16B16', 'FP8FMA', 'I8MM', 'SME2', 'F64F64', 'I16I64', 'F16F16', 'SME_B16B16', 'F8F16', 'F8F32']
+['SVE2', 'BF16', 'B16B16', 'FP8FMA', 'I8MM', 'SME2', 'F64F64', 'I16I64', 'F16F16', 'SME_B16B16', 'F8F16', 'F8F32', 'FA64']
 ### method greg(reg_idx=0)
 x0
 ### method is_vla()

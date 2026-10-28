@@ -7,6 +7,7 @@
 RISC-V RVV 1.0 asm generator and related types
 """
 
+from ..op.operand import register_type as rt
 from ..noarch import compiler_family
 from ...registers import (
     reg_tracker,
@@ -91,6 +92,19 @@ class rvv(riscv64):
         # the operations exist: the features that are off hide their signatures
         self._gate_features()
 
+    def signature_state(self, op, sig) -> tuple[dict[str, str], dict[str, str]]:
+        """
+        RVV: every vector instruction runs at the vector length and type
+        vsetvli last set (it requires them set); vsetvli sets them - to its
+        avl operand's count (or the most, without one) and the call's
+        element type
+        """
+        if op is self.set and any("VLEN" == m.name for m in sig.modifiers):
+            return {}, {"vlen": "avl" if "avlreg" in sig.operands else "max", "vtype": "dt"}
+        if any(rt.VEC == o.rtype for o in sig.operands.values()):
+            return {"vlen": "!=None", "vtype": "!=None"}, {}
+        return {}, {}
+
     def get_parameters(self) -> list[str]:
         return ["LMUL"] + super().get_parameters()
 
@@ -114,6 +128,7 @@ class rvv(riscv64):
             # the memory operations' signatures depend on it (segments)
             self.load.refresh()
             self.store.refresh()
+            self.declare_state()
         else:
             super().set_parameter(name, value)
 

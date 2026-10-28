@@ -212,6 +212,9 @@ class asm_test_implementation_tests(unittest.TestCase):
             'reserved_registers',
             'set_features',
             'shared_registers',
+            # the processor state signatures declare (tests/test_state.py)
+            'declare_state',
+            'signature_state',
         ]
 
         existing_methods = inspect.getmembers(asmgen,

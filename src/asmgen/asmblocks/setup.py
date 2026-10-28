@@ -61,6 +61,17 @@ class isa_setup:
     def __init__(self, gen):
         self.gen = gen
 
+    def state(self, dt) -> dict[str, str]:
+        """
+        The processor state the setup leaves (signatures' state_requires and
+        state_writes name the same states) - none by default
+        """
+        return {}
+
+    def teardown_state(self) -> dict[str, str]:
+        """the processor state the teardown leaves - none by default"""
+        return {}
+
     def steps(self) -> list[setup_step]:
         return []
 
@@ -194,6 +205,15 @@ class sme_setup(sve_setup):
     and an all-true predicate-as-counter for multi-vector instructions
     """
 
+    def state(self, dt) -> dict[str, str]:
+        """smstart's: streaming mode, ZA on"""
+        return {**super().state(dt), "sm": "1", "za": "1"}
+
+    def teardown_state(self) -> dict[str, str]:
+        """smstop's: out of streaming mode, ZA off"""
+        return {**super().teardown_state(), "sm": "0", "za": "0"}
+
+
     COUNTER = 8
 
     def clobbers(self) -> dict[str, list[int]]:
@@ -238,6 +258,11 @@ class rvv_setup(isa_setup):
     hardware has, or fewer: on some implementations a shorter one performs
     better, and RVV instructions and address increments all use the length set.
     """
+
+    def state(self, dt) -> dict[str, str]:
+        """vsetvli's: the most elements, dt's element type"""
+        return {"vlen": "max", "vtype": f"e{8 * adt_size(dt)}"}
+
 
     def steps(self) -> list[setup_step]:
         return [setup_step(setup_kind.VECTOR_LENGTH,

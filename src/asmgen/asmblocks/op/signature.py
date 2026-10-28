@@ -32,6 +32,20 @@ class operation_signature:
     requires : frozenset = field(default_factory=frozenset)
     operands: dict[str, operand_shape]
     clobber_list: list[str] = field(default_factory=list)
+    #: processor state the instruction depends on, and what it must be -
+    #: name -> condition: "vlen": "!=None" (set, any value), "sm": "==1".
+    #: An instruction reads each state it requires. The generator declares
+    #: them (declare_state), as its ISA has them
+    state_requires: dict[str, str] = field(default_factory=dict)
+    #: processor state the instruction sets - name -> value: "vlen": "avl"
+    #: (its avlreg operand's count), "max"; "vtype": "dt" (the call's element
+    #: type); "sm": "1"
+    state_writes: dict[str, str] = field(default_factory=dict)
+
+    @property
+    def state_reads(self) -> frozenset[str]:
+        """the states the instruction reads: those it requires"""
+        return frozenset(self.state_requires)
 
 
     def get_tag(self) -> str:

@@ -7,6 +7,7 @@
 SME asm generator
 """
 
+from ..op.operand import register_type as rt
 from ...registers import (
     asm_data_type as adt,
     reg_tracker,
@@ -37,7 +38,7 @@ class sme(sve):
     # SVE's, and SME's own: FEAT_SME2, FEAT_SME_F64F64, _I16I64, _F16F16,
     # _B16B16, _F8F16, _F8F32
     FEATURES = sve.FEATURES + ("SME2", "F64F64", "I16I64", "F16F16", "SME_B16B16",
-                               "F8F16", "F8F32")
+                               "F8F16", "F8F32", "FA64")
 
 
     def isa_setup(self, predicate : int = 0):
@@ -63,6 +64,23 @@ class sme(sve):
         self.set = sme_opset(asmwrap=self.asmwrap, dt_suffixes=self.dt_suffixes)
         # the operations exist: the features that are off hide their signatures
         self._gate_features()
+
+    def signature_state(self, op, sig) -> tuple[dict[str, str], dict[str, str]]:
+        """
+        SME: ZA's tiles and slices only in streaming mode with ZA on (sm, za);
+        SME2's multi-vector accesses only in streaming mode; gathers and
+        scatters only out of it - unless FEAT_SME_FA64, the full A64 set in
+        streaming mode (LX2 has it, Apple's parts don't)
+        """
+        rtypes = {o.rtype for o in sig.operands.values()}
+        mods = {m.name for m in sig.modifiers}
+        if rt.TILE in rtypes:
+            return {"sm": "==1", "za": "==1"}, {}
+        if "MULTIVEC" in mods:
+            return {"sm": "==1"}, {}
+        if "VINDEX" in mods and "FA64" not in (set(self.FEATURES) if self.features is None else set(self.features)):
+            return {"sm": "==0"}, {}
+        return {}, {}
 
     def max_tregs(self, dt : adt) -> int:
         return adt_size(dt)
