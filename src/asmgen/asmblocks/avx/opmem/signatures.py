@@ -95,6 +95,9 @@ def make_avx_opmem_signatures(action: opmem_action,
             clobber_list.append('amreg')
 
         requires = set()
+        if is_avx512 and mod.MASK in mods and mod.VINDEX not in mods and adt_size(dt) <= 2:
+            # masked moves of bytes and words: vmovdqu8, vmovdqu16 (AVX512BW)
+            requires.add("BW")
         if is_avx512 and any(opd_mod.ILANE in m for m in (opd_mods or {}).values()):
             # EVEX vpinsr/vpextr: bytes and words AVX512BW, dwords and
             # qwords AVX512DQ; the FP lanes (vmovsd, vmovhpd, vinsertps,
@@ -113,6 +116,10 @@ def make_avx_opmem_signatures(action: opmem_action,
     for dt in _ALL_DTS:
         for addr_mod in base_addr_mods:
             add_sig(dt, mods=addr_mod)
+            if is_avx512:
+                # under a k mask: the lanes it holds read (the others zeroed)
+                # or written - a last vector's first lanes
+                add_sig(dt, mods=addr_mod | {mod.MASK})
 
 
     # 2. Broadcast (Loads only)
@@ -145,10 +152,10 @@ def make_avx_opmem_signatures(action: opmem_action,
             add_sig(dt, mods=mods)
 
     # an index register (x86's base + index x scale): beside every plain or
-    # immediate-offset signature without masks, lanes or vector indices -
-    # broadcasts (BCAST, BLOCK) included -
+    # immediate-offset signature without lanes or vector indices - masked
+    # ones (AVX-512's k) and broadcasts (BCAST, BLOCK) included -
     # unscaled, and scaled by 1, 2, 4 or 8 (SCALEOFFSET, scale_factor)
-    for s0 in [s for s in sigs if not (s.modifiers - {mod.IOFFSET})
+    for s0 in [s for s in sigs if not (s.modifiers - {mod.IOFFSET, mod.MASK})
                and 'vidxreg' not in s.operands
                and all(set(o.modifiers or ()) <= {opd_mod.BCAST, opd_mod.BLOCK}
                        for o in s.operands.values())]:

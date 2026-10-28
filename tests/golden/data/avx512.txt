@@ -162,6 +162,246 @@ vfmadd231pd %zmm1,%zmm2,%zmm3
 vfmadd231ph %zmm1,%zmm2,%zmm3
 ### op fma [] adreg:REGISTER:VEC:SINGLE bdreg:REGISTER:VEC:SINGLE cdreg:REGISTER:VEC:SINGLE
 vfmadd231ps %zmm1,%zmm2,%zmm3
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 -8192(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu16 8128(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 -8192(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu16 8128(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 -8192(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu16 8128(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 -8192(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu16 8128(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovupd -8192(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovupd 8128(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovupd -8192(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovupd 8128(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovupd -8192(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovupd 8128(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovupd -8192(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovupd 8128(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 -8192(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu16 8128(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 -8192(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu16 8128(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 -8192(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu16 8128(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 -8192(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu16 8128(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovups -8192(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovups 8128(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovups -8192(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovups 8128(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovups -8192(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovups 8128(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovups -8192(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovups 8128(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 -8192(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu16 8128(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 -8192(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu16 8128(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 -8192(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu16 8128(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 -8192(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu16 8128(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu32 -8192(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu32 8128(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu32 -8192(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu32 8128(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu32 -8192(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu32 8128(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu32 -8192(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu32 8128(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu64 -8192(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu64 8128(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu64 -8192(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu64 8128(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu64 -8192(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu64 8128(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu64 -8192(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu64 8128(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu8 -8192(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu8 8128(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu8 -8192(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu8 8128(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu8 -8192(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu8 8128(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu8 -8192(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu8 8128(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 -8192(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu16 8128(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 -8192(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu16 8128(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 -8192(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu16 8128(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 -8192(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu16 8128(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu32 -8192(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu32 8128(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu32 -8192(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu32 8128(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu32 -8192(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu32 8128(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu32 -8192(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu32 8128(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu64 -8192(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu64 8128(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu64 -8192(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu64 8128(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu64 -8192(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu64 8128(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu64 -8192(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu64 8128(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu8 -8192(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu8 8128(%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu8 -8192(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu8 8128(%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu8 -8192(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu8 8128(%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu8 -8192(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu8 8128(%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu16 -8192(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu16 8128(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovupd -8192(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovupd 8128(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu16 -8192(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu16 8128(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovups -8192(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovups 8128(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu16 -8192(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu16 8128(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu32 -8192(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu32 8128(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu64 -8192(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu64 8128(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu8 -8192(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu8 8128(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu16 -8192(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu16 8128(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu32 -8192(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu32 8128(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu64 -8192(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu64 8128(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu8 -8192(%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu8 8128(%rcx,%rdx), %zmm1{%k1}{z}
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
 vmovsh -128(%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
@@ -762,6 +1002,126 @@ vbroadcastsd 1016(%rcx,%rdx), %zmm1
 vmovdqu64 -8192(%rcx,%rdx), %zmm1
 ### op load [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
 vmovdqu64 8128(%rcx,%rdx), %zmm1
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 (%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 (%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 (%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 (%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovupd (%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovupd (%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovupd (%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovupd (%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 (%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 (%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 (%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 (%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovups (%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovups (%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovups (%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovups (%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 (%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 (%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 (%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 (%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu32 (%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu32 (%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu32 (%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu32 (%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu64 (%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu64 (%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu64 (%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu64 (%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu8 (%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu8 (%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu8 (%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu8 (%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 (%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 (%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 (%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 (%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu32 (%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu32 (%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu32 (%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu32 (%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu64 (%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu64 (%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu64 (%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu64 (%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu8 (%rcx,%rdx,1), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu8 (%rcx,%rdx,2), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu8 (%rcx,%rdx,4), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu8 (%rcx,%rdx,8), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 offreg:REGISTER:GP:UINT64
+vmovdqu16 (%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE offreg:REGISTER:GP:UINT64
+vmovupd (%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF offreg:REGISTER:GP:UINT64
+vmovdqu16 (%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE offreg:REGISTER:GP:UINT64
+vmovups (%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 offreg:REGISTER:GP:UINT64
+vmovdqu16 (%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 offreg:REGISTER:GP:UINT64
+vmovdqu32 (%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 offreg:REGISTER:GP:UINT64
+vmovdqu64 (%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 offreg:REGISTER:GP:UINT64
+vmovdqu8 (%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 offreg:REGISTER:GP:UINT64
+vmovdqu16 (%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 offreg:REGISTER:GP:UINT64
+vmovdqu32 (%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 offreg:REGISTER:GP:UINT64
+vmovdqu64 (%rcx,%rdx), %zmm1{%k1}{z}
+### op load [GOFFSET,MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 offreg:REGISTER:GP:UINT64
+vmovdqu8 (%rcx,%rdx), %zmm1{%k1}{z}
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
 vmovsh (%rcx,%rdx,1), %xmm1
 ### op load [GOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
@@ -1062,6 +1422,54 @@ vmovdqu64 (%rcx,%rdx), %zmm1
 vbroadcastsd (%rcx,%rdx), %zmm1
 ### op load [GOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 vmovdqu64 (%rcx,%rdx), %zmm1
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:-
+vmovdqu16 -8192(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- @far
+vmovdqu16 8128(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:-
+vmovupd -8192(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- @far
+vmovupd 8128(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:-
+vmovdqu16 -8192(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- @far
+vmovdqu16 8128(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:-
+vmovups -8192(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- @far
+vmovups 8128(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:-
+vmovdqu16 -8192(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- @far
+vmovdqu16 8128(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:-
+vmovdqu32 -8192(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- @far
+vmovdqu32 8128(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:-
+vmovdqu64 -8192(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- @far
+vmovdqu64 8128(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:-
+vmovdqu8 -8192(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- @far
+vmovdqu8 8128(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:-
+vmovdqu16 -8192(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- @far
+vmovdqu16 8128(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:-
+vmovdqu32 -8192(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- @far
+vmovdqu32 8128(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:-
+vmovdqu64 -8192(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- @far
+vmovdqu64 8128(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:-
+vmovdqu8 -8192(%rcx), %zmm1{%k1}{z}
+### op load [IOFFSET,MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- @far
+vmovdqu8 8128(%rcx), %zmm1{%k1}{z}
 ### op load [IOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
 vmovsh -128(%rcx), %xmm1
 ### op load [IOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
@@ -1242,6 +1650,78 @@ vgatherqpd (%rcx,%zmm2,1), %zmm1{%k1}
 vgatherdps (%rcx,%zmm2,1), %zmm1{%k1}
 ### op load [MASK,VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 vidxreg:REGISTER:VEC:UINT64 {it:INT64}
 vgatherqpd (%rcx,%zmm2,1), %zmm1{%k1}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 voffset:IMMEDIATE:-:-
+vmovdqu16 -8192(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 voffset:IMMEDIATE:-:- @far
+vmovdqu16 8128(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE voffset:IMMEDIATE:-:-
+vmovupd -8192(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE voffset:IMMEDIATE:-:- @far
+vmovupd 8128(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF voffset:IMMEDIATE:-:-
+vmovdqu16 -8192(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF voffset:IMMEDIATE:-:- @far
+vmovdqu16 8128(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE voffset:IMMEDIATE:-:-
+vmovups -8192(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE voffset:IMMEDIATE:-:- @far
+vmovups 8128(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 voffset:IMMEDIATE:-:-
+vmovdqu16 -8192(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 voffset:IMMEDIATE:-:- @far
+vmovdqu16 8128(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 voffset:IMMEDIATE:-:-
+vmovdqu32 -8192(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 voffset:IMMEDIATE:-:- @far
+vmovdqu32 8128(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 voffset:IMMEDIATE:-:-
+vmovdqu64 -8192(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 voffset:IMMEDIATE:-:- @far
+vmovdqu64 8128(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 voffset:IMMEDIATE:-:-
+vmovdqu8 -8192(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 voffset:IMMEDIATE:-:- @far
+vmovdqu8 8128(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 voffset:IMMEDIATE:-:-
+vmovdqu16 -8192(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 voffset:IMMEDIATE:-:- @far
+vmovdqu16 8128(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 voffset:IMMEDIATE:-:-
+vmovdqu32 -8192(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 voffset:IMMEDIATE:-:- @far
+vmovdqu32 8128(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 voffset:IMMEDIATE:-:-
+vmovdqu64 -8192(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 voffset:IMMEDIATE:-:- @far
+vmovdqu64 8128(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 voffset:IMMEDIATE:-:-
+vmovdqu8 -8192(%rcx), %zmm1{%k1}{z}
+### op load [MASK,VOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 voffset:IMMEDIATE:-:- @far
+vmovdqu8 8128(%rcx), %zmm1{%k1}{z}
+### op load [MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16
+vmovdqu16 (%rcx), %zmm1{%k1}{z}
+### op load [MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE
+vmovupd (%rcx), %zmm1{%k1}{z}
+### op load [MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF
+vmovdqu16 (%rcx), %zmm1{%k1}{z}
+### op load [MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE
+vmovups (%rcx), %zmm1{%k1}{z}
+### op load [MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16
+vmovdqu16 (%rcx), %zmm1{%k1}{z}
+### op load [MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32
+vmovdqu32 (%rcx), %zmm1{%k1}{z}
+### op load [MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64
+vmovdqu64 (%rcx), %zmm1{%k1}{z}
+### op load [MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8
+vmovdqu8 (%rcx), %zmm1{%k1}{z}
+### op load [MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16
+vmovdqu16 (%rcx), %zmm1{%k1}{z}
+### op load [MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32
+vmovdqu32 (%rcx), %zmm1{%k1}{z}
+### op load [MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64
+vmovdqu64 (%rcx), %zmm1{%k1}{z}
+### op load [MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8
+vmovdqu8 (%rcx), %zmm1{%k1}{z}
 ### op load [PARAM] adreg:REGISTER:FP:BF16 param:NAME:-:-
 vmovsh %[p], %xmm1
 ### op load [PARAM] adreg:REGISTER:FP:DOUBLE param:NAME:-:-
@@ -1985,6 +2465,246 @@ shrq $0,%rdx
 ### op shift [SHR] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 movq %rcx,%rdx
 shrq $63,%rdx
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovupd %zmm1, -8192(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovupd %zmm1, 8128(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovupd %zmm1, -8192(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovupd %zmm1, 8128(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovupd %zmm1, -8192(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovupd %zmm1, 8128(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovupd %zmm1, -8192(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovupd %zmm1, 8128(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovups %zmm1, -8192(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovups %zmm1, 8128(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovups %zmm1, -8192(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovups %zmm1, 8128(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovups %zmm1, -8192(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovups %zmm1, 8128(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovups %zmm1, -8192(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovups %zmm1, 8128(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu32 %zmm1, -8192(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu32 %zmm1, 8128(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu32 %zmm1, -8192(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu32 %zmm1, 8128(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu32 %zmm1, -8192(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu32 %zmm1, 8128(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu32 %zmm1, -8192(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu32 %zmm1, 8128(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu64 %zmm1, -8192(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu64 %zmm1, 8128(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu64 %zmm1, -8192(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu64 %zmm1, 8128(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu64 %zmm1, -8192(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu64 %zmm1, 8128(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu64 %zmm1, -8192(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu64 %zmm1, 8128(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu8 %zmm1, -8192(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu8 %zmm1, 8128(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu8 %zmm1, -8192(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu8 %zmm1, 8128(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu8 %zmm1, -8192(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu8 %zmm1, 8128(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu8 %zmm1, -8192(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu8 %zmm1, 8128(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 %zmm1, -8192(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu32 %zmm1, -8192(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu32 %zmm1, 8128(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu32 %zmm1, -8192(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu32 %zmm1, 8128(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu32 %zmm1, -8192(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu32 %zmm1, 8128(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu32 %zmm1, -8192(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu32 %zmm1, 8128(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu64 %zmm1, -8192(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu64 %zmm1, 8128(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu64 %zmm1, -8192(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu64 %zmm1, 8128(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu64 %zmm1, -8192(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu64 %zmm1, 8128(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu64 %zmm1, -8192(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu64 %zmm1, 8128(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu8 %zmm1, -8192(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:1} @far
+vmovdqu8 %zmm1, 8128(%rcx,%rdx,1){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu8 %zmm1, -8192(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:2} @far
+vmovdqu8 %zmm1, 8128(%rcx,%rdx,2){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu8 %zmm1, -8192(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:4} @far
+vmovdqu8 %zmm1, 8128(%rcx,%rdx,4){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu8 %zmm1, -8192(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 {scale_factor:8} @far
+vmovdqu8 %zmm1, 8128(%rcx,%rdx,8){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu16 %zmm1, -8192(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovupd %zmm1, -8192(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovupd %zmm1, 8128(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu16 %zmm1, -8192(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovups %zmm1, -8192(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovups %zmm1, 8128(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu16 %zmm1, -8192(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu32 %zmm1, -8192(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu32 %zmm1, 8128(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu64 %zmm1, -8192(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu64 %zmm1, 8128(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu8 %zmm1, -8192(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu8 %zmm1, 8128(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu16 %zmm1, -8192(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu16 %zmm1, 8128(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu32 %zmm1, -8192(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu32 %zmm1, 8128(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu64 %zmm1, -8192(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu64 %zmm1, 8128(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64
+vmovdqu8 %zmm1, -8192(%rcx,%rdx){%k1}
+### op store [GOFFSET,IOFFSET,MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
+vmovdqu8 %zmm1, 8128(%rcx,%rdx){%k1}
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1}
 vmovsh %xmm1, -128(%rcx,%rdx,1)
 ### op store [GOFFSET,IOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 {scale_factor:1} @far
@@ -2465,6 +3185,126 @@ vmovdqu64 %zmm1, 8128(%rcx,%rdx)
 vmovdqu64 %zmm1, -8192(%rcx,%rdx)
 ### op store [GOFFSET,IOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:- offreg:REGISTER:GP:UINT64 @far
 vmovdqu64 %zmm1, 8128(%rcx,%rdx)
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 %zmm1, (%rcx,%rdx,1){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 %zmm1, (%rcx,%rdx,2){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 %zmm1, (%rcx,%rdx,4){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 %zmm1, (%rcx,%rdx,8){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovupd %zmm1, (%rcx,%rdx,1){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovupd %zmm1, (%rcx,%rdx,2){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovupd %zmm1, (%rcx,%rdx,4){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovupd %zmm1, (%rcx,%rdx,8){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 %zmm1, (%rcx,%rdx,1){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 %zmm1, (%rcx,%rdx,2){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 %zmm1, (%rcx,%rdx,4){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 %zmm1, (%rcx,%rdx,8){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovups %zmm1, (%rcx,%rdx,1){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovups %zmm1, (%rcx,%rdx,2){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovups %zmm1, (%rcx,%rdx,4){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovups %zmm1, (%rcx,%rdx,8){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 %zmm1, (%rcx,%rdx,1){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 %zmm1, (%rcx,%rdx,2){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 %zmm1, (%rcx,%rdx,4){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 %zmm1, (%rcx,%rdx,8){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu32 %zmm1, (%rcx,%rdx,1){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu32 %zmm1, (%rcx,%rdx,2){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu32 %zmm1, (%rcx,%rdx,4){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu32 %zmm1, (%rcx,%rdx,8){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu64 %zmm1, (%rcx,%rdx,1){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu64 %zmm1, (%rcx,%rdx,2){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu64 %zmm1, (%rcx,%rdx,4){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu64 %zmm1, (%rcx,%rdx,8){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu8 %zmm1, (%rcx,%rdx,1){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu8 %zmm1, (%rcx,%rdx,2){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu8 %zmm1, (%rcx,%rdx,4){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu8 %zmm1, (%rcx,%rdx,8){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu16 %zmm1, (%rcx,%rdx,1){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu16 %zmm1, (%rcx,%rdx,2){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu16 %zmm1, (%rcx,%rdx,4){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu16 %zmm1, (%rcx,%rdx,8){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu32 %zmm1, (%rcx,%rdx,1){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu32 %zmm1, (%rcx,%rdx,2){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu32 %zmm1, (%rcx,%rdx,4){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu32 %zmm1, (%rcx,%rdx,8){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu64 %zmm1, (%rcx,%rdx,1){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu64 %zmm1, (%rcx,%rdx,2){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu64 %zmm1, (%rcx,%rdx,4){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu64 %zmm1, (%rcx,%rdx,8){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 offreg:REGISTER:GP:UINT64 {scale_factor:1}
+vmovdqu8 %zmm1, (%rcx,%rdx,1){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 offreg:REGISTER:GP:UINT64 {scale_factor:2}
+vmovdqu8 %zmm1, (%rcx,%rdx,2){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 offreg:REGISTER:GP:UINT64 {scale_factor:4}
+vmovdqu8 %zmm1, (%rcx,%rdx,4){%k1}
+### op store [GOFFSET,MASK,SCALEOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 offreg:REGISTER:GP:UINT64 {scale_factor:8}
+vmovdqu8 %zmm1, (%rcx,%rdx,8){%k1}
+### op store [GOFFSET,MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 offreg:REGISTER:GP:UINT64
+vmovdqu16 %zmm1, (%rcx,%rdx){%k1}
+### op store [GOFFSET,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE offreg:REGISTER:GP:UINT64
+vmovupd %zmm1, (%rcx,%rdx){%k1}
+### op store [GOFFSET,MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF offreg:REGISTER:GP:UINT64
+vmovdqu16 %zmm1, (%rcx,%rdx){%k1}
+### op store [GOFFSET,MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE offreg:REGISTER:GP:UINT64
+vmovups %zmm1, (%rcx,%rdx){%k1}
+### op store [GOFFSET,MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 offreg:REGISTER:GP:UINT64
+vmovdqu16 %zmm1, (%rcx,%rdx){%k1}
+### op store [GOFFSET,MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 offreg:REGISTER:GP:UINT64
+vmovdqu32 %zmm1, (%rcx,%rdx){%k1}
+### op store [GOFFSET,MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 offreg:REGISTER:GP:UINT64
+vmovdqu64 %zmm1, (%rcx,%rdx){%k1}
+### op store [GOFFSET,MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 offreg:REGISTER:GP:UINT64
+vmovdqu8 %zmm1, (%rcx,%rdx){%k1}
+### op store [GOFFSET,MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 offreg:REGISTER:GP:UINT64
+vmovdqu16 %zmm1, (%rcx,%rdx){%k1}
+### op store [GOFFSET,MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 offreg:REGISTER:GP:UINT64
+vmovdqu32 %zmm1, (%rcx,%rdx){%k1}
+### op store [GOFFSET,MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 offreg:REGISTER:GP:UINT64
+vmovdqu64 %zmm1, (%rcx,%rdx){%k1}
+### op store [GOFFSET,MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 offreg:REGISTER:GP:UINT64
+vmovdqu8 %zmm1, (%rcx,%rdx){%k1}
 ### op store [GOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:1}
 vmovsh %xmm1, (%rcx,%rdx,1)
 ### op store [GOFFSET,SCALEOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64 {scale_factor:2}
@@ -2705,6 +3545,54 @@ vmovdqu64 %zmm1, (%rcx,%rdx)
 vmovdqu64 %zmm1, (%rcx,%rdx)
 ### op store [GOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 offreg:REGISTER:GP:UINT64
 vmovdqu64 %zmm1, (%rcx,%rdx)
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:-
+vmovdqu16 %zmm1, -8192(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 ioffset:IMMEDIATE:-:- @far
+vmovdqu16 %zmm1, 8128(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:-
+vmovupd %zmm1, -8192(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE ioffset:IMMEDIATE:-:- @far
+vmovupd %zmm1, 8128(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:-
+vmovdqu16 %zmm1, -8192(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF ioffset:IMMEDIATE:-:- @far
+vmovdqu16 %zmm1, 8128(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:-
+vmovups %zmm1, -8192(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE ioffset:IMMEDIATE:-:- @far
+vmovups %zmm1, 8128(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:-
+vmovdqu16 %zmm1, -8192(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 ioffset:IMMEDIATE:-:- @far
+vmovdqu16 %zmm1, 8128(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:-
+vmovdqu32 %zmm1, -8192(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 ioffset:IMMEDIATE:-:- @far
+vmovdqu32 %zmm1, 8128(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:-
+vmovdqu64 %zmm1, -8192(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 ioffset:IMMEDIATE:-:- @far
+vmovdqu64 %zmm1, 8128(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:-
+vmovdqu8 %zmm1, -8192(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 ioffset:IMMEDIATE:-:- @far
+vmovdqu8 %zmm1, 8128(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:-
+vmovdqu16 %zmm1, -8192(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 ioffset:IMMEDIATE:-:- @far
+vmovdqu16 %zmm1, 8128(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:-
+vmovdqu32 %zmm1, -8192(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 ioffset:IMMEDIATE:-:- @far
+vmovdqu32 %zmm1, 8128(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:-
+vmovdqu64 %zmm1, -8192(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 ioffset:IMMEDIATE:-:- @far
+vmovdqu64 %zmm1, 8128(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:-
+vmovdqu8 %zmm1, -8192(%rcx){%k1}
+### op store [IOFFSET,MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 ioffset:IMMEDIATE:-:- @far
+vmovdqu8 %zmm1, 8128(%rcx){%k1}
 ### op store [IOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64
 vmovsh %xmm1, -128(%rcx)
 ### op store [IOFFSET] adreg:REGISTER:FP:BF16 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
@@ -2861,6 +3749,78 @@ vscatterqpd %zmm1, (%rcx,%zmm2,1){%k1}
 vscatterdps %zmm1, (%rcx,%zmm2,1){%k1}
 ### op store [MASK,VINDEX] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 vidxreg:REGISTER:VEC:UINT64 {it:INT64}
 vscatterqpd %zmm1, (%rcx,%zmm2,1){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 voffset:IMMEDIATE:-:-
+vmovdqu16 %zmm1, -8192(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16 voffset:IMMEDIATE:-:- @far
+vmovdqu16 %zmm1, 8128(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE voffset:IMMEDIATE:-:-
+vmovupd %zmm1, -8192(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE voffset:IMMEDIATE:-:- @far
+vmovupd %zmm1, 8128(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF voffset:IMMEDIATE:-:-
+vmovdqu16 %zmm1, -8192(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF voffset:IMMEDIATE:-:- @far
+vmovdqu16 %zmm1, 8128(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE voffset:IMMEDIATE:-:-
+vmovups %zmm1, -8192(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE voffset:IMMEDIATE:-:- @far
+vmovups %zmm1, 8128(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 voffset:IMMEDIATE:-:-
+vmovdqu16 %zmm1, -8192(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16 voffset:IMMEDIATE:-:- @far
+vmovdqu16 %zmm1, 8128(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 voffset:IMMEDIATE:-:-
+vmovdqu32 %zmm1, -8192(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32 voffset:IMMEDIATE:-:- @far
+vmovdqu32 %zmm1, 8128(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 voffset:IMMEDIATE:-:-
+vmovdqu64 %zmm1, -8192(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64 voffset:IMMEDIATE:-:- @far
+vmovdqu64 %zmm1, 8128(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 voffset:IMMEDIATE:-:-
+vmovdqu8 %zmm1, -8192(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8 voffset:IMMEDIATE:-:- @far
+vmovdqu8 %zmm1, 8128(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 voffset:IMMEDIATE:-:-
+vmovdqu16 %zmm1, -8192(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16 voffset:IMMEDIATE:-:- @far
+vmovdqu16 %zmm1, 8128(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 voffset:IMMEDIATE:-:-
+vmovdqu32 %zmm1, -8192(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32 voffset:IMMEDIATE:-:- @far
+vmovdqu32 %zmm1, 8128(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 voffset:IMMEDIATE:-:-
+vmovdqu64 %zmm1, -8192(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64 voffset:IMMEDIATE:-:- @far
+vmovdqu64 %zmm1, 8128(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 voffset:IMMEDIATE:-:-
+vmovdqu8 %zmm1, -8192(%rcx){%k1}
+### op store [MASK,VOFFSET] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8 voffset:IMMEDIATE:-:- @far
+vmovdqu8 %zmm1, 8128(%rcx){%k1}
+### op store [MASK] adreg:REGISTER:VEC:BF16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:BF16
+vmovdqu16 %zmm1, (%rcx){%k1}
+### op store [MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:DOUBLE
+vmovupd %zmm1, (%rcx){%k1}
+### op store [MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:HALF
+vmovdqu16 %zmm1, (%rcx){%k1}
+### op store [MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINGLE
+vmovups %zmm1, (%rcx){%k1}
+### op store [MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT16
+vmovdqu16 %zmm1, (%rcx){%k1}
+### op store [MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT32
+vmovdqu32 %zmm1, (%rcx){%k1}
+### op store [MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT64
+vmovdqu64 %zmm1, (%rcx){%k1}
+### op store [MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:SINT8
+vmovdqu8 %zmm1, (%rcx){%k1}
+### op store [MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT16
+vmovdqu16 %zmm1, (%rcx){%k1}
+### op store [MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT32
+vmovdqu32 %zmm1, (%rcx){%k1}
+### op store [MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT64
+vmovdqu64 %zmm1, (%rcx){%k1}
+### op store [MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:MASK:UINT8
+vmovdqu8 %zmm1, (%rcx){%k1}
 ### op store [PARAM] adreg:REGISTER:FP:BF16 param:NAME:-:-
 vmovsh %xmm1, %[p]
 ### op store [PARAM] adreg:REGISTER:FP:DOUBLE param:NAME:-:-

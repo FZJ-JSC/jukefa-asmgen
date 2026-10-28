@@ -294,6 +294,19 @@ class avx_opmem(opmem):
 
         pdreg = self.rpref(dreg)
         inst = self.get_vector_mnemonic(a_dt)
+        if mod.MASK in modifiers:
+            # AVX-512 under a k mask (not k0, no mask): the move whose lanes
+            # are the elements' - masks are a lane's - a load zeroing the
+            # lanes it doesn't read
+            mreg = kwargs.get("amreg")
+            if not isinstance(mreg, avx512_mreg) or 0 == mreg.idx:
+                raise ValueError(f"a masked move's mask is a k register other than k0, not {mreg}")
+            if a_dt not in (adt.FP32, adt.FP64):
+                inst = f"vmovdqu{8 * adt_size(a_dt)}"
+            k = self.rpref(mreg)
+            if self.action == opmem_action.LOAD:
+                return self.asmwrap(f"{inst} {addressing}, {pdreg}{{{k}}}{{z}}")
+            return self.asmwrap(f"{inst} {pdreg}, {addressing}{{{k}}}")
         if self.action == opmem_action.LOAD:
             return self.asmwrap(f"{inst} {addressing}, {pdreg}")
         if self.action == opmem_action.STORE:
