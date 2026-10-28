@@ -125,7 +125,7 @@ def maskavl_signatures(dts, rtype=rt.MASK, tmp=None) -> list[operation_signature
         operands = {"dreg": osh(ot.REGISTER, orl.DATA, rtype, dt),
                     "avlreg": osh(ot.REGISTER, orl.PARAM, rt.GP, adt.UINT64)}
         if tmp is not None:
-            operands["tmpreg"] = osh(ot.REGISTER, orl.DATA, tmp, dt if rt.VEC == tmp else adt.UINT64)
+            operands["tmpreg"] = osh(ot.REGISTER, orl.SCRATCH, tmp, dt if rt.VEC == tmp else adt.UINT64)
         sigs.append(operation_signature(modifiers={opset_modifier.MASKAVL}, structural_params={},
                                         operands=operands))
     return sigs
@@ -334,7 +334,8 @@ class vector_opset(opset):
         """
         raise NotImplementedError(self.NIE_MESSAGE)
 
-    def maskavl_reg(self, *, dreg : data_reg, dt : adt, avlreg : greg_base) -> str:
+    def maskavl_reg(self, *, dreg : data_reg, dt : adt, avlreg : greg_base,
+                    tmpreg : data_reg | None = None) -> str:
         """
         A mask register true for the first avlreg elements of dt, at most
         the vector's

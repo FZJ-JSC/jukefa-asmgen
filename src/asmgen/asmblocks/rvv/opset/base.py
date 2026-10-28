@@ -7,6 +7,7 @@ from ...op.opset import vector_opset
 from ....registers import asm_data_type as adt, adt_size, data_reg, greg_base
 from ...riscv64.opset import riscv64_opset
 from .signatures import make_rvv_opset_signatures
+from ..types import rvv_vreg
 
 
 class rvv_opset(vector_opset):
@@ -27,7 +28,8 @@ class rvv_opset(vector_opset):
     def one_reg(self, *, dreg : data_reg, dt : adt) -> str:
         return self.asmwrap(f"vmv.v.i {dreg},1")
 
-    def maskavl_reg(self, *, dreg, dt, avlreg, tmpreg=None) -> str:
+    def maskavl_reg(self, *, dreg : rvv_vreg, dt : adt, avlreg : greg_base,
+                    tmpreg : rvv_vreg | None = None) -> str:
         """
         The first avlreg elements true, the rest false: the element indices
         (vid.v) below avlreg (vmsltu.vx) - under the current vtype, its

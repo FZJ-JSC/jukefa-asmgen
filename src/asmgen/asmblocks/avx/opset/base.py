@@ -9,7 +9,7 @@ from ..types import avx512_mreg
 from ...x86.opset import x86_opset
 from .signatures import make_avx_opset_signatures
 from ...x86.opset.base import ONE_SHIFTS
-from ...x86.types import SIZE_SUFFIXES
+from ...x86.types import SIZE_SUFFIXES, x86_greg
 
 # 1 from all bits set: a logical right shift by the element's bits less one
 INT_SHIFTS = {adt.UINT64: ("q", 63), adt.SINT64: ("q", 63), adt.UINT32: ("d", 31), adt.SINT32: ("d", 31),
@@ -47,7 +47,8 @@ class avx_opset(vector_opset):
         # bytes: |-1| = 1
         return ones + self.asmwrap(f"vpabsb {p},{p}")
 
-    def maskavl_reg(self, *, dreg, dt, avlreg, tmpreg=None) -> str:
+    def maskavl_reg(self, *, dreg : avx512_mreg, dt : adt, avlreg : x86_greg,
+                    tmpreg : x86_greg | None = None) -> str:
         """
         AVX-512: the first avlreg lanes true - all ones in a scratch general
         register, bzhi keeping the low avlreg bits (BMI2), kmovw into the k

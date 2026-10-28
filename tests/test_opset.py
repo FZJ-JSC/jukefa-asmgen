@@ -11,6 +11,7 @@ from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.sme import sme
 from asmgen.asmblocks.sve import sve
 from asmgen.registers import asm_data_type as adt
+from asmgen.asmblocks.op.operand import operand_role as orl
 
 CONST = {opset_modifier.CONST}
 
@@ -298,7 +299,9 @@ class test_avl(unittest.TestCase):
         # count (vmsltu.vx) - masked accesses take it in v0
         forms = make(rvv).set.forms(modifiers={opset_modifier.MASKAVL})
         self.assertTrue(forms)
-        self.assertTrue(all("tmpreg" in s.operands for s in forms))
+        # the scratch register in the signature, its role saying so: the
+        # caller allocates it
+        self.assertTrue(all(orl.SCRATCH == s.operands["tmpreg"].orole for s in forms))
 
     def test_avx512_bzhi(self):
         # AVX-512's: all ones, bzhi to the count, kmovw - a scratch general
@@ -313,6 +316,13 @@ class test_avl(unittest.TestCase):
         self.assertIsNone(g.set.fits(dreg=k1, dt=adt.FP64, modifiers={opset_modifier.MASKAVL}, avlreg=rdx))
         self.assertIsNone(g.set.fits(dreg=k1, dt=adt.UINT16, modifiers={opset_modifier.MASKAVL}, avlreg=rdx,
                                      tmpreg=rax))
+        self.assertTrue(all(orl.SCRATCH == s.operands["tmpreg"].orole
+                            for s in g.set.forms(modifiers={opset_modifier.MASKAVL})))
+
+    def test_scratch_is_a_register(self):
+        from asmgen.asmblocks.op.operand import operand_shape, operand_type
+        with self.assertRaises(ValueError):
+            operand_shape(operand_type.IMMEDIATE, orl.SCRATCH, None, None)
 
     def test_avx512_semantics(self):
         # run here: every count 0 to 8, a vector loaded and stored under the

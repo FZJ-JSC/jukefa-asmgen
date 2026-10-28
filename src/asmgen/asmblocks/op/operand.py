@@ -40,6 +40,10 @@ class operand_role(Enum):
     ADDRESS = auto()
     MASK = auto()
     PARAM = auto()
+    #: a register the operation overwrites for its own use - its sequence's
+    #: intermediate (RVV's element indices, AVX-512's mask bits): the caller
+    #: supplies any free register of its type, its value lost
+    SCRATCH = auto()
 
 
 class register_type(Enum):
@@ -120,6 +124,6 @@ class operand_shape:
         if not isinstance(self.orole, operand_role):
             raise TypeError(
                     f"orole must be operand_role, got {type(self.orole).__name__}")
-        if self.orole in (operand_role.DATA, operand_role.MASK) \
+        if self.orole in (operand_role.DATA, operand_role.MASK, operand_role.SCRATCH) \
                 and self.otype != operand_type.REGISTER:
             raise ValueError(f"{self.orole.name} operand must be a register")
