@@ -113,15 +113,22 @@ def vlen_avl_signatures() -> list[operation_signature]:
                                           "avlreg": osh(ot.REGISTER, orl.PARAM, rt.GP, adt.UINT64)})]
 
 
-def maskavl_signatures(dts, rtype=rt.MASK) -> list[operation_signature]:
+def maskavl_signatures(dts, rtype=rt.MASK, tmp=None) -> list[operation_signature]:
     """
     MASKAVL: a mask of the first avlreg elements of dt, the rest not - any
-    count, at most the vector's elements (SVE's whilelo)
+    count, at most the vector's elements (SVE's whilelo). tmp: the register
+    type of a scratch register the ISA's sequence takes (RVV's element
+    indices, a vector; AVX-512's bits, a general register)
     """
-    return [operation_signature(modifiers={opset_modifier.MASKAVL}, structural_params={},
-                                operands={"dreg": osh(ot.REGISTER, orl.DATA, rtype, dt),
-                                          "avlreg": osh(ot.REGISTER, orl.PARAM, rt.GP, adt.UINT64)})
-            for dt in dts]
+    sigs = []
+    for dt in dts:
+        operands = {"dreg": osh(ot.REGISTER, orl.DATA, rtype, dt),
+                    "avlreg": osh(ot.REGISTER, orl.PARAM, rt.GP, adt.UINT64)}
+        if tmp is not None:
+            operands["tmpreg"] = osh(ot.REGISTER, orl.DATA, tmp, dt if rt.VEC == tmp else adt.UINT64)
+        sigs.append(operation_signature(modifiers={opset_modifier.MASKAVL}, structural_params={},
+                                        operands=operands))
+    return sigs
 
 
 def vlen_param_signatures() -> list[operation_signature]:
@@ -305,7 +312,8 @@ class vector_opset(opset):
                 return self.vlen(dreg=dreg, dt=dt, avlreg=kwargs["avlreg"])
             return self.vlen(dreg=dreg, dt=dt)
         if opset_modifier.MASKAVL in set(modifiers or ()):
-            return self.maskavl_reg(dreg=dreg, dt=dt, avlreg=kwargs["avlreg"])
+            return self.maskavl_reg(dreg=dreg, dt=dt, avlreg=kwargs["avlreg"],
+                                    **({"tmpreg": kwargs["tmpreg"]} if "tmpreg" in kwargs else {}))
         if opset_modifier.STINDEX in set(modifiers or ()):
             return self.stindex_reg(dreg=dreg, dt=dt, streg=streg)
         # If a scalar register is passed, forward to the base ISA's set

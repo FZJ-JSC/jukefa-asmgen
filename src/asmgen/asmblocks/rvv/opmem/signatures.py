@@ -191,6 +191,19 @@ def make_rvv_opmem_signatures(get_lmul: Callable[[],int], has_bcast=False):
                 structural_params={'nstructs': nstructs},
                 operands=operands))
 
+        # MASK: the elements v0 holds (vle64.v vd, (rs1), v0.t) - a last
+        # vector's first elements; unit-stride and strided
+        for mods, extra in (({mod.MASK}, {}),
+                            ({mod.MASK, mod.GSTRIDE},
+                             {'streg': osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64)})):
+            sigs.append(sig(
+                modifiers=mods,
+                structural_params={},
+                operands={'adreg': osh(ot.REGISTER, orl.DATA, rt.VEC, dt),
+                          'agreg': osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64),
+                          'amreg': osh(ot.REGISTER, orl.MASK, rt.VEC, dt),
+                          **extra}))
+
         # TODO:
         # - STRUCT+VINDEX
 

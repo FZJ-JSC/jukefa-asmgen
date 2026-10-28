@@ -27,6 +27,18 @@ class rvv_opset(vector_opset):
     def one_reg(self, *, dreg : data_reg, dt : adt) -> str:
         return self.asmwrap(f"vmv.v.i {dreg},1")
 
+    def maskavl_reg(self, *, dreg, dt, avlreg, tmpreg=None) -> str:
+        """
+        The first avlreg elements true, the rest false: the element indices
+        (vid.v) below avlreg (vmsltu.vx) - under the current vtype, its
+        element width dt's; masked accesses take it in v0
+        """
+        if tmpreg is None:
+            raise ValueError("RVV's mask of a count takes a scratch vector (tmpreg) for the indices")
+        if str(tmpreg) == str(dreg):
+            raise ValueError(f"the indices' scratch vector {tmpreg} is the mask {dreg}")
+        return self.asmwrap(f"vid.v {tmpreg}") + self.asmwrap(f"vmsltu.vx {dreg}, {tmpreg}, {avlreg}")
+
     def vlen(self, *, dreg : greg_base, dt : adt = adt.UINT8, avlreg : greg_base | None = None) -> str:
         # vsetvli's VLMAX: a register group's elements (bytes: e8) - or, an
         # avl given, the length for its elements, at most VLMAX; it sets the

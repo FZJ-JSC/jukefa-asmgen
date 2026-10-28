@@ -290,4 +290,12 @@ class rvv_opmem(opmem):
 
 
         dreg_str = str(dregs[0])
+        if mod.MASK in modifiers:
+            # RVV masks with v0 only; a masked load's destination isn't v0
+            amreg = kwargs.get("amreg")
+            if amreg is None or "v0" != str(amreg):
+                raise ValueError(f"RVV's masked accesses take their mask in v0, not {amreg}")
+            if "v0" == dreg_str:
+                raise ValueError("a masked access's data register isn't v0, the mask")
+            addressing += ", v0.t"
         return self.asmwrap(f"{inst} {dreg_str}, {addressing}")

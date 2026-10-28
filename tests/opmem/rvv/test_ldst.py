@@ -215,5 +215,75 @@ int main(void) {
                 self.assertIn(f"vl {vlen // 64} bad 0", out, out)
 
 
+class test_masked(unittest.TestCase):
+    """
+    Masked accesses (MASK, v0.t) and a mask of a count (MASKAVL: vid.v,
+    vmsltu.vx): a last vector's first elements read and written, the rest
+    of it left - RVV masks with v0 only
+    """
+    def gen(self):
+        from asmgen.asmblocks.rvv import rvv
+        g = rvv()
+        g.set_output_inline(False)
+        return g
+
+    def test_forms(self):
+        from asmgen.asmblocks.op.opset import opset_modifier
+        g = self.gen()
+        v = g.vreg
+        self.assertEqual("vle64.v v8, (t2), v0.t", g.load(dregs=[v(8)], areg=g.greg(2), dt=adt.FP64,
+                                                           modifiers={mod.MASK}, amreg=v(0)).strip())
+        self.assertEqual("vsse64.v v8, (t2), t5, v0.t",
+                         g.store(dregs=[v(8)], areg=g.greg(2), dt=adt.FP64, modifiers={mod.MASK, mod.GSTRIDE},
+                                 amreg=v(0), streg=g.greg(5)).strip())
+        self.assertIn("in v0", g.load.refusal(dregs=[v(8)], areg=g.greg(2), dt=adt.FP64,
+                                               modifiers={mod.MASK}, amreg=v(1)))
+        self.assertIn("isn't v0", g.load.refusal(dregs=[v(0)], areg=g.greg(2), dt=adt.FP64,
+                                                  modifiers={mod.MASK}, amreg=v(0)))
+        self.assertEqual(["vid.v v31", "vmsltu.vx v0, v31, t5"],
+                         g.set(dreg=v(0), dt=adt.FP64, modifiers={opset_modifier.MASKAVL}, avlreg=g.greg(5),
+                               tmpreg=v(31)).strip().split("\n"))
+        self.assertIsNone(g.set.fits(dreg=v(0), dt=adt.FP64, modifiers={opset_modifier.MASKAVL}, avlreg=g.greg(5)))
+
+    def test_semantics(self):
+        # run: the first 3 of a vector copied under the mask, the rest of
+        # it left (-1) - qemu, VLEN 256 and 512
+        import os, shutil, subprocess, tempfile
+        from asmgen.asmblocks.op.opset import opset_modifier
+        cc, qemu = "riscv64-linux-gnu-gcc", "qemu-riscv64-static"
+        if not (shutil.which(cc) and shutil.which(qemu)):
+            self.skipTest("needs riscv64-linux-gnu-gcc and qemu-riscv64-static")
+        g = self.gen()
+        v, a0, a1, a2 = g.vreg, g.greg(18), g.greg(19), g.greg(20)
+        asm = ("\t.text\n\t.globl f\n\t.type f, @function\nf:\n\tvsetvli t0, zero, e64, m1, ta, ma\n"
+               + g.set(dreg=v(0), dt=adt.FP64, modifiers={opset_modifier.MASKAVL}, avlreg=a2, tmpreg=v(31))
+               + g.load(dregs=[v(8)], areg=a0, dt=adt.FP64, modifiers={mod.MASK}, amreg=v(0))
+               + g.store(dregs=[v(8)], areg=a1, dt=adt.FP64, modifiers={mod.MASK}, amreg=v(0))
+               + "\tmv a0, t0\n\tret\n")
+        c = r"""
+#include <stdio.h>
+long f(const double* src, double* out, long count);
+int main(void) {
+    double src[16], out[16];
+    for (int i = 0; i < 16; ++i) { src[i] = i + 1; out[i] = -1; }
+    long vl = f(src, out, 3); int bad = 0;
+    for (long i = 0; i < 16; ++i) if (out[i] != (i < 3 ? i + 1 : -1)) ++bad;
+    printf("vl %ld bad %d\n", vl, bad);
+    return 0;
+}
+"""
+        with tempfile.TemporaryDirectory() as d:
+            open(os.path.join(d, "f.s"), "w").write(asm)
+            open(os.path.join(d, "m.c"), "w").write(c)
+            r = subprocess.run([cc, "-static", "-march=rv64gcv", os.path.join(d, "m.c"), os.path.join(d, "f.s"),
+                                "-o", os.path.join(d, "run")], capture_output=True, text=True)
+            self.assertEqual(0, r.returncode, r.stderr)
+            for vlen in (256, 512):
+                out = subprocess.run([qemu, "-cpu", f"rv64,v=true,vlen={vlen},elen=64", os.path.join(d, "run")],
+                                     capture_output=True, text=True, timeout=60).stdout
+                self.assertIn(f"vl {vlen // 64} bad 0", out, out)
+
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -400,6 +400,32 @@ vmaccu.vx v2,s4,v1
 vwmaccu.vv v4,v2,v1
 ### op fma [] adreg:REGISTER:VEC:UINT8 bdreg:REGISTER:VEC:UINT8 cdreg:REGISTER:VEC:UINT8
 vmaccu.vv v3,v2,v1
+### op load [GSTRIDE,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:DOUBLE streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [GSTRIDE,MASK] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:FP8E4M3 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [GSTRIDE,MASK] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:FP8E5M2 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [GSTRIDE,MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:HALF streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [GSTRIDE,MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINGLE streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [GSTRIDE,MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT16 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [GSTRIDE,MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT32 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [GSTRIDE,MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT64 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [GSTRIDE,MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT8 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [GSTRIDE,MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT16 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [GSTRIDE,MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT32 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [GSTRIDE,MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT64 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [GSTRIDE,MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT8 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
 ### op load [GSTRIDE,STRUCT] agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE gdreg:REGISTER:VEC:DOUBLE hdreg:REGISTER:VEC:DOUBLE {nstructs:8}
 vlsseg8e64.v v1, (s4), s5
 ### op load [GSTRIDE,STRUCT] agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE gdreg:REGISTER:VEC:DOUBLE {nstructs:7}
@@ -660,6 +686,32 @@ ld s4, 2047(s5)
 lb s4, -2048(s5)
 ### op load [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
 lb s4, 2047(s5)
+### op load [MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:DOUBLE
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [MASK] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:FP8E4M3
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [MASK] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:FP8E5M2
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:HALF
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINGLE
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT16
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT32
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT8
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT16
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT32
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op load [MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT8
+!ValueError: RVV's masked accesses take their mask in v0, not v2
 ### op load [PARAM] adreg:REGISTER:FP:DOUBLE param:NAME:-:-
 fld f1, %[p]
 ### op load [PARAM] adreg:REGISTER:FP:FP8E4M3 param:NAME:-:-
@@ -1648,6 +1700,39 @@ vmv.v.i v1,0
 vmv.v.i v1,1
 ### op set [CONST] dreg:REGISTER:VEC:UINT8 {constant:zero}
 vmv.v.i v1,0
+### op set [MASKAVL] dreg:REGISTER:VEC:DOUBLE avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:VEC:DOUBLE
+vid.v v2
+vmsltu.vx v1, v2, s4
+### op set [MASKAVL] dreg:REGISTER:VEC:HALF avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:VEC:HALF
+vid.v v2
+vmsltu.vx v1, v2, s4
+### op set [MASKAVL] dreg:REGISTER:VEC:SINGLE avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:VEC:SINGLE
+vid.v v2
+vmsltu.vx v1, v2, s4
+### op set [MASKAVL] dreg:REGISTER:VEC:SINT16 avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:VEC:SINT16
+vid.v v2
+vmsltu.vx v1, v2, s4
+### op set [MASKAVL] dreg:REGISTER:VEC:SINT32 avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:VEC:SINT32
+vid.v v2
+vmsltu.vx v1, v2, s4
+### op set [MASKAVL] dreg:REGISTER:VEC:SINT64 avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:VEC:SINT64
+vid.v v2
+vmsltu.vx v1, v2, s4
+### op set [MASKAVL] dreg:REGISTER:VEC:SINT8 avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:VEC:SINT8
+vid.v v2
+vmsltu.vx v1, v2, s4
+### op set [MASKAVL] dreg:REGISTER:VEC:UINT16 avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:VEC:UINT16
+vid.v v2
+vmsltu.vx v1, v2, s4
+### op set [MASKAVL] dreg:REGISTER:VEC:UINT32 avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:VEC:UINT32
+vid.v v2
+vmsltu.vx v1, v2, s4
+### op set [MASKAVL] dreg:REGISTER:VEC:UINT64 avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:VEC:UINT64
+vid.v v2
+vmsltu.vx v1, v2, s4
+### op set [MASKAVL] dreg:REGISTER:VEC:UINT8 avlreg:REGISTER:GP:UINT64 tmpreg:REGISTER:VEC:UINT8
+vid.v v2
+vmsltu.vx v1, v2, s4
 ### op set [PARAM,VLEN] param:NAME:-:-
 vsetvli %[p], zero, e8, m1, ta, ma
 ### op set [STINDEX] dreg:REGISTER:VEC:DOUBLE streg:REGISTER:GP:UINT64
@@ -1711,6 +1796,32 @@ srl s6,s4,s5
 srli s5,s4,0
 ### op shift [SHR] adreg:REGISTER:GP:UINT64 cdreg:REGISTER:GP:UINT64 bimm:IMMEDIATE:-:- @far
 srli s5,s4,63
+### op store [GSTRIDE,MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:DOUBLE streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [GSTRIDE,MASK] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:FP8E4M3 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [GSTRIDE,MASK] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:FP8E5M2 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [GSTRIDE,MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:HALF streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [GSTRIDE,MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINGLE streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [GSTRIDE,MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT16 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [GSTRIDE,MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT32 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [GSTRIDE,MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT64 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [GSTRIDE,MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT8 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [GSTRIDE,MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT16 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [GSTRIDE,MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT32 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [GSTRIDE,MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT64 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [GSTRIDE,MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT8 streg:REGISTER:GP:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
 ### op store [GSTRIDE,STRUCT] agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE gdreg:REGISTER:VEC:DOUBLE hdreg:REGISTER:VEC:DOUBLE {nstructs:8}
 vssseg8e64.v v1, (s4), s5
 ### op store [GSTRIDE,STRUCT] agreg:REGISTER:GP:UINT64 streg:REGISTER:GP:UINT64 adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE edreg:REGISTER:VEC:DOUBLE fdreg:REGISTER:VEC:DOUBLE gdreg:REGISTER:VEC:DOUBLE {nstructs:7}
@@ -1971,6 +2082,32 @@ sd s4, 2047(s5)
 sb s4, -2048(s5)
 ### op store [IOFFSET] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 ioffset:IMMEDIATE:-:SINT64 @far
 sb s4, 2047(s5)
+### op store [MASK] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:DOUBLE
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [MASK] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:FP8E4M3
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [MASK] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:FP8E5M2
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [MASK] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:HALF
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [MASK] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINGLE
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [MASK] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT16
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [MASK] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT32
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [MASK] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [MASK] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:SINT8
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [MASK] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT16
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [MASK] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT32
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [MASK] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT64
+!ValueError: RVV's masked accesses take their mask in v0, not v2
+### op store [MASK] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 amreg:REGISTER:VEC:UINT8
+!ValueError: RVV's masked accesses take their mask in v0, not v2
 ### op store [PARAM] adreg:REGISTER:FP:DOUBLE param:NAME:-:-
 fsd f1, %[p]
 ### op store [PARAM] adreg:REGISTER:FP:FP8E4M3 param:NAME:-:-

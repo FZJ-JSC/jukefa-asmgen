@@ -293,9 +293,16 @@ class test_avl(unittest.TestCase):
         self.assertEqual("vsetvli t2, zero, e64, m1, ta, ma",
                          plain(g.set(dreg=g.greg(2), dt=adt.DOUBLE, modifiers={opset_modifier.VLEN})))
 
+    def test_rvv_takes_a_scratch_vector(self):
+        # RVV's: the element indices (vid.v) in a scratch vector, below the
+        # count (vmsltu.vx) - masked accesses take it in v0
+        forms = make(rvv).set.forms(modifiers={opset_modifier.MASKAVL})
+        self.assertTrue(forms)
+        self.assertTrue(all("tmpreg" in s.operands for s in forms))
+
     def test_none_elsewhere(self):
-        # RVV's masks need masked accesses first; AVX-512's a scratch register
-        for gen in (rvv, avx512, neon):
+        # AVX-512's takes a scratch register (its own patch)
+        for gen in (avx512, neon):
             g = make(gen)
             with self.subTest(gen=gen.__name__):
                 self.assertFalse(g.set.forms(modifiers={opset_modifier.MASKAVL}))

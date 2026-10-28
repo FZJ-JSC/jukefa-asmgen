@@ -75,7 +75,10 @@ class test_forms(unittest.TestCase):
         vector_loads = sve().load.forms(rtypes={"adreg": rt.VEC})
         self.assertTrue(vector_loads)
         self.assertTrue(all(M.MASK in s.modifiers for s in vector_loads))
-        self.assertFalse(any(M.MASK in s.modifiers for s in rvv().load.forms(rtypes={"adreg": rt.VEC})))
+        # RVV's may: masked (v0.t) and not
+        rvv_loads = rvv().load.forms(rtypes={"adreg": rt.VEC})
+        self.assertTrue(any(M.MASK in s.modifiers for s in rvv_loads))
+        self.assertTrue(any(M.MASK not in s.modifiers for s in rvv_loads))
 
     def test_modifiers(self):
         g = neon()
