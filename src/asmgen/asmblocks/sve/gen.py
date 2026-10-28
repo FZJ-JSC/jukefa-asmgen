@@ -70,7 +70,7 @@ class sve(aarch64):
 
         :param predicate: predicate register for the all-true predicate
         """
-        from ..setup import sve_setup
+        from .setup import sve_setup
         return sve_setup(self, predicate=predicate)
 
     def __init__(self):

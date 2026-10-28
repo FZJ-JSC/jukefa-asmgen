@@ -7,7 +7,7 @@
 RISC-V RVV 0.7.1 asm generator and related types
 """
 
-from ..setup import rvv071_setup
+from .setup import rvv071_setup
 from ..noarch import compiler_family
 from ..rvv import rvv
 

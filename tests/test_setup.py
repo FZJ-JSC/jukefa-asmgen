@@ -192,7 +192,7 @@ class test_element_state(unittest.TestCase):
 
     def test_rvv(self):
         from asmgen.asmblocks.rvv import rvv
-        from asmgen.asmblocks.setup import rvv_setup
+        from asmgen.asmblocks.rvv.setup import rvv_setup
         g = rvv()
         g.output_inline = False
         self.assertTrue(rvv_setup(g).element_type_is_state())
@@ -200,7 +200,7 @@ class test_element_state(unittest.TestCase):
                          rvv_setup(g).setup_dt(dt=adt.FP32, group=2).strip())
 
     def test_per_instruction(self):
-        from asmgen.asmblocks.setup import sme_setup
+        from asmgen.asmblocks.sme.setup import sme_setup
         self.assertFalse(sme_setup(sme()).element_type_is_state())
         self.assertEqual("", sme_setup(sme()).setup_dt(dt=adt.FP32, group=2))
 

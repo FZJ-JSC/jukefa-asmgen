@@ -70,7 +70,7 @@ class rvv(riscv64):
         """
         What this ISA needs set up before a kernel and torn down after
         """
-        from ..setup import rvv_setup
+        from .setup import rvv_setup
         return rvv_setup(self)
 
     def __init__(self):

@@ -47,7 +47,7 @@ class sme(sve):
 
         :param predicate: predicate register for the all-true predicate
         """
-        from ..setup import sme_setup
+        from .setup import sme_setup
         return sme_setup(self, predicate=predicate)
 
     def __init__(self):

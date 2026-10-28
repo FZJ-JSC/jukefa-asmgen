@@ -17,7 +17,7 @@ class test_sme_setup(unittest.TestCase):
         self.assertEqual("zero {za1.d}", g.set(dreg=g.treg(1, adt.FP64), dt=adt.FP64, modifiers={opset_modifier.CONST}, constant="zero").strip())
 
     def test_counter_with_sme2(self):
-        from asmgen.asmblocks.setup import sme_setup
+        from asmgen.asmblocks.sme.setup import sme_setup
         g = sme()
         g.output_inline = False
         g.set_features([])
@@ -37,7 +37,7 @@ class test_clobbers(unittest.TestCase):
     """
 
     def test_sme_setup_clobbers_vectors(self):
-        from asmgen.asmblocks.setup import sme_setup
+        from asmgen.asmblocks.sme.setup import sme_setup
         g = sme()
         self.assertEqual(list(range(g.max_fregs())), sme_setup(g).clobbers()["freg"])
 

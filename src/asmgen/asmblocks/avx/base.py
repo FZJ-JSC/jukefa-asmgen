@@ -82,7 +82,7 @@ class avxbase(asmgen):
         """
         What this ISA needs set up before a kernel and torn down after
         """
-        from ..setup import constants_setup
+        from .setup import constants_setup
         return constants_setup(self)
 
     def __init__(self):
