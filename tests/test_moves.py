@@ -209,3 +209,27 @@ class test_avx512_256bit_blocks(unittest.TestCase):
                 r = subprocess.run(["as", src, "-o", os.path.join(d, "x.o")],
                                    capture_output=True, text=True)
                 self.assertEqual(0, r.returncode, r.stderr)
+
+
+class test_sve_copy(unittest.TestCase):
+
+    def test_copy_bitwise(self):
+        # a vector's unpredicated copy is ORR's alias, .d only - whatever its
+        # elements: mov z2.s, z1.s doesn't assemble
+        g = sve()
+        for dt in (adt.FP64, adt.FP32, adt.FP16):
+            self.assertEqual("mov z2.d,z1.d", plain(g.move(dregs=[g.vreg(1), g.vreg(2)], dts=[dt] * 2,
+                                                           modifiers=set(), operand_modifiers={})))
+
+    @unittest.skipUnless(shutil.which("aarch64-linux-gnu-as"), "needs an AArch64 assembler")
+    def test_copy_assembles(self):
+        g = sve()
+        text = "\n".join(plain(g.move(dregs=[g.vreg(1), g.vreg(2)], dts=[dt] * 2, modifiers=set(),
+                                      operand_modifiers={}))
+                         for dt in (adt.FP64, adt.FP32, adt.FP16)) + "\n"
+        with tempfile.TemporaryDirectory() as d:
+            with open(os.path.join(d, "m.s"), "w") as f:
+                f.write(text)
+            r = subprocess.run(["aarch64-linux-gnu-as", "-march=armv8-a+sve", os.path.join(d, "m.s"),
+                                "-o", os.path.join(d, "m.o")], capture_output=True, text=True)
+            self.assertEqual(0, r.returncode, r.stderr)

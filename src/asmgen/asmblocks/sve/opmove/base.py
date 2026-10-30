@@ -113,5 +113,8 @@ class sve_move(opmove):
             in_str = str(input_reg.retype(input_dt))
         else:
             in_str = f"{input_reg}.{self.dt_suffixes[input_dt]}"
+            if not predicate:
+                # a vector's unpredicated copy is ORR's alias: bitwise, .d only
+                in_str, out_str = f"{input_reg}.d", f"{output_reg}.d"
 
         return self.asmwrap(f"{inst} {out_str},{predicate}{in_str}")
