@@ -43,6 +43,8 @@ class opset_modifier(operation_modifier):
     MASKAVL = auto()    # a mask of the first avlreg elements of dt, at most the vector's (SVE whilelo)
     STINDEX = auto()    # indices from a stride register: element i is i * streg
     PARAM = auto()      # the destination an inline asm register operand %[param], no dreg: inline only
+    ENGINE = auto()     # the ISA's engine on or off (engine="on", "off"), no dreg: SME's smstart and
+                        # smstop - streaming mode and ZA - the setup's switches as state
 
 
 FREG_DTS = (adt.DOUBLE, adt.SINGLE, adt.HALF)
@@ -209,8 +211,8 @@ class opset(operation):
         """
         modifiers = set(modifiers or ())
         dts = {"dreg": dt}
-        if opset_modifier.PARAM in modifiers:
-            # no dreg: an inline asm operand, by its name (param)
+        if opset_modifier.PARAM in modifiers or opset_modifier.ENGINE in modifiers:
+            # no dreg: an inline asm operand, by its name (param); the engine
             dts = {}
             dt = adt.UINT8 if dt is None else dt
         elif opset_modifier.VLEN in modifiers:

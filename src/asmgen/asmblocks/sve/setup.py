@@ -35,7 +35,7 @@ class sve_setup(isa_setup):
         aliased = rt.aliased_regs.get("mreg", {}) if rt else {}
         return aliased.get(self.ALIAS, self.predicate)
 
-    def setup(self, *, rt, dt, vl : int | None = None) -> str:
+    def setup(self, *, rt, dt, vl : int | None = None, engine : bool = True) -> str:
         super().setup(rt=rt, dt=dt, vl=vl)
         aliased = rt.aliased_regs.get("mreg") if rt else None
         if aliased is not None and self.ALIAS not in aliased:

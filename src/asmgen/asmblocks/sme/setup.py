@@ -25,6 +25,10 @@ class sme_setup(sve_setup):
         """smstop's: out of streaming mode, ZA off"""
         return {**super().teardown_state(), "sm": "0", "za": "0"}
 
+    def engine(self) -> tuple[dict[str, str], dict[str, str]]:
+        """smstart's and smstop's: streaming mode and ZA on, off"""
+        return {"sm": "1", "za": "1"}, {"sm": "0", "za": "0"}
+
 
     COUNTER = 8
 
@@ -52,12 +56,13 @@ class sme_setup(sve_setup):
                                     f"multi-vector instructions"))
         return steps
 
-    def setup(self, *, rt, dt, vl : int | None = None) -> str:
-        out = self.gen.asmwrap("smstart") + super().setup(rt=rt, dt=dt, vl=vl)
+    def setup(self, *, rt, dt, vl : int | None = None, engine : bool = True) -> str:
+        # smstart first: it zeroes the vector and predicate registers
+        out = (self.gen.asmwrap("smstart") if engine else "") + super().setup(rt=rt, dt=dt, vl=vl)
         if self.counter():
             out += self.gen.set(dreg=self.gen.mreg(self.COUNTER, True), dt=dt, modifiers={opset_modifier.CONSTMASK},
                                 mask="alltrue")
         return out
 
-    def teardown(self, *, rt, dt) -> str:
-        return super().teardown(rt=rt, dt=dt) + self.gen.asmwrap("smstop")
+    def teardown(self, *, rt, dt, engine : bool = True) -> str:
+        return super().teardown(rt=rt, dt=dt) + (self.gen.asmwrap("smstop") if engine else "")

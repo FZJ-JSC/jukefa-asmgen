@@ -4,6 +4,7 @@ sme's set
 from typing import Callable
 
 from ....registers import asm_data_type as adt, data_reg, treg_base
+from ...op.opset import opset_modifier
 from ...sve.opset import sve_opset
 from .signatures import make_sme_opset_signatures
 
@@ -15,6 +16,13 @@ class sme_opset(sve_opset):
     def __init__(self, *, asmwrap : Callable[[str], str], dt_suffixes : dict):
         super().__init__(asmwrap=asmwrap, dt_suffixes=dt_suffixes)
         self.signatures = self.signatures + make_sme_opset_signatures(dt_suffixes=dt_suffixes)
+
+    # pylint: disable-next=arguments-differ
+    def implementation(self, *, modifiers=None, engine=None, **kwargs) -> str:
+        if opset_modifier.ENGINE in (modifiers or ()):
+            # the engine: streaming mode and ZA on, off
+            return self.asmwrap("smstart" if "on" == engine else "smstop")
+        return super().implementation(modifiers=modifiers, **kwargs)
 
     def zero_reg(self, *, dreg : data_reg, dt : adt) -> str:
         if isinstance(dreg, treg_base):

@@ -65,7 +65,7 @@ class rvv_setup(isa_setup):
     def vector_length_register(self, *, rt):
         return self.gen.greg(self._aliased(rt, "vlen"))
 
-    def setup(self, *, rt, dt, vl : int | None = None) -> str:
+    def setup(self, *, rt, dt, vl : int | None = None, engine : bool = True) -> str:
         super().setup(rt=rt, dt=dt, vl=vl)
         vlreg = self.vector_length_register(rt=rt)
         if vl is not None:

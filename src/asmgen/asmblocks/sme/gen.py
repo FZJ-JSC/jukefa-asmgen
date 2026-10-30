@@ -74,6 +74,9 @@ class sme(sve):
         """
         rtypes = {o.rtype for o in sig.operands.values()}
         mods = {m.name for m in sig.modifiers}
+        if op is self.set and "ENGINE" in mods:
+            on = "on" == sig.structural_params.get("engine")
+            return {}, ({"sm": "1", "za": "1"} if on else {"sm": "0", "za": "0"})
         if rt.TILE in rtypes:
             return {"sm": "==1", "za": "==1"}, {}
         if "MULTIVEC" in mods:

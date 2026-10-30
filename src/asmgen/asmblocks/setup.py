@@ -70,6 +70,15 @@ class isa_setup:
         """the processor state the teardown leaves - none by default"""
         return {}
 
+    def engine(self) -> tuple[dict[str, str], dict[str, str]] | None:
+        """
+        The setup's and the teardown's switches of the ISA's engine as state -
+        (on, off), SME's smstart's and smstop's: streaming mode and ZA - which
+        set writes (ENGINE) for a caller placing them itself (setup and
+        teardown with engine=False); None where the ISA has none
+        """
+        return None
+
     def steps(self) -> list[setup_step]:
         return []
 
@@ -111,7 +120,7 @@ class isa_setup:
         """
         return {}
 
-    def setup(self, *, rt, dt, vl : int | None = None) -> str:
+    def setup(self, *, rt, dt, vl : int | None = None, engine : bool = True) -> str:
         """
         Instructions setting up everything every kernel needs, in order
 
@@ -122,7 +131,7 @@ class isa_setup:
             raise ValueError(f"{type(self.gen).__name__} cannot override the vector length")
         return ""
 
-    def teardown(self, *, rt, dt) -> str:
+    def teardown(self, *, rt, dt, engine : bool = True) -> str:
         return ""
 
     def data(self) -> str:
