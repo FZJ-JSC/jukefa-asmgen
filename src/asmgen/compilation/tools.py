@@ -135,8 +135,10 @@ class compiler:
         :type source: str
         :param output_filename: resulting binary file name
         :type output_filename: str
-        :param extraflags: Additional libs to link to
-        :type extraflags: list[str]
+        :param libs: libraries to link - after the source: a linker dropping
+                     libraries nothing before them needs (--as-needed, Ubuntu's
+                     default) would drop them before it
+        :type libs: list[str]
         :param cross_compile: architecture to compile for or "native"
         :type cross_compiler: str
         :param extraflags: Additional flags to pass to the compiler
@@ -155,8 +157,8 @@ class compiler:
                self.arch_flags +\
                cross_flags +\
                [self.oflag,output_filename] +\
-               libs +\
                extraflags +\
-               self.stdin_flags
+               self.stdin_flags +\
+               (["-x", "none"] + libs if libs else [])
 
         return self.run_compilation(source=source, output_filename=output_filename, cmd=cmd)

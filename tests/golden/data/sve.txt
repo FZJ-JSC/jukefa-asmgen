@@ -1793,7 +1793,7 @@ dup z1.d,z2.d[0]
 ### op move [] bdreg:REGISTER:VEC:DOUBLE{BCAST} adreg:REGISTER:VEC:DOUBLE{ILANE} adreg_lane:IMMEDIATE:-:- @far
 dup z1.d,z2.d[7]
 ### op move [] bdreg:REGISTER:VEC:FP8E4M3 adreg:REGISTER:VEC:FP8E4M3
-mov z1.b,z2.b
+mov z1.d,z2.d
 ### op move [] bdreg:REGISTER:VEC:FP8E4M3{BCAST,BLOCK} adreg:REGISTER:VEC:FP8E4M3{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:16,bdreg_blocksize:16}
 dup z1.q,z2.q[0]
 ### op move [] bdreg:REGISTER:VEC:FP8E4M3{BCAST,BLOCK} adreg:REGISTER:VEC:FP8E4M3{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:16,bdreg_blocksize:16} @far
@@ -1805,7 +1805,7 @@ dup z1.b,z2.b[0]
 ### op move [] bdreg:REGISTER:VEC:FP8E4M3{BCAST} adreg:REGISTER:VEC:FP8E4M3{ILANE} adreg_lane:IMMEDIATE:-:- @far
 dup z1.b,z2.b[63]
 ### op move [] bdreg:REGISTER:VEC:FP8E5M2 adreg:REGISTER:VEC:FP8E5M2
-mov z1.b,z2.b
+mov z1.d,z2.d
 ### op move [] bdreg:REGISTER:VEC:FP8E5M2{BCAST,BLOCK} adreg:REGISTER:VEC:FP8E5M2{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:16,bdreg_blocksize:16}
 dup z1.q,z2.q[0]
 ### op move [] bdreg:REGISTER:VEC:FP8E5M2{BCAST,BLOCK} adreg:REGISTER:VEC:FP8E5M2{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:16,bdreg_blocksize:16} @far
@@ -1817,7 +1817,7 @@ dup z1.b,z2.b[0]
 ### op move [] bdreg:REGISTER:VEC:FP8E5M2{BCAST} adreg:REGISTER:VEC:FP8E5M2{ILANE} adreg_lane:IMMEDIATE:-:- @far
 dup z1.b,z2.b[63]
 ### op move [] bdreg:REGISTER:VEC:HALF adreg:REGISTER:VEC:HALF
-mov z1.h,z2.h
+mov z1.d,z2.d
 ### op move [] bdreg:REGISTER:VEC:HALF{BCAST,BLOCK} adreg:REGISTER:VEC:HALF{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:8,bdreg_blocksize:8}
 dup z1.q,z2.q[0]
 ### op move [] bdreg:REGISTER:VEC:HALF{BCAST,BLOCK} adreg:REGISTER:VEC:HALF{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:8,bdreg_blocksize:8} @far
@@ -1829,7 +1829,7 @@ dup z1.h,z2.h[0]
 ### op move [] bdreg:REGISTER:VEC:HALF{BCAST} adreg:REGISTER:VEC:HALF{ILANE} adreg_lane:IMMEDIATE:-:- @far
 dup z1.h,z2.h[31]
 ### op move [] bdreg:REGISTER:VEC:SINGLE adreg:REGISTER:VEC:SINGLE
-mov z1.s,z2.s
+mov z1.d,z2.d
 ### op move [] bdreg:REGISTER:VEC:SINGLE{BCAST,BLOCK} adreg:REGISTER:VEC:SINGLE{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:4,bdreg_blocksize:4}
 dup z1.q,z2.q[0]
 ### op move [] bdreg:REGISTER:VEC:SINGLE{BCAST,BLOCK} adreg:REGISTER:VEC:SINGLE{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:4,bdreg_blocksize:4} @far
@@ -1841,7 +1841,7 @@ dup z1.s,z2.s[0]
 ### op move [] bdreg:REGISTER:VEC:SINGLE{BCAST} adreg:REGISTER:VEC:SINGLE{ILANE} adreg_lane:IMMEDIATE:-:- @far
 dup z1.s,z2.s[15]
 ### op move [] bdreg:REGISTER:VEC:SINT16 adreg:REGISTER:VEC:SINT16
-mov z1.h,z2.h
+mov z1.d,z2.d
 ### op move [] bdreg:REGISTER:VEC:SINT16{BCAST,BLOCK} adreg:REGISTER:VEC:SINT16{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:8,bdreg_blocksize:8}
 dup z1.q,z2.q[0]
 ### op move [] bdreg:REGISTER:VEC:SINT16{BCAST,BLOCK} adreg:REGISTER:VEC:SINT16{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:8,bdreg_blocksize:8} @far
@@ -1853,7 +1853,7 @@ dup z1.h,z2.h[0]
 ### op move [] bdreg:REGISTER:VEC:SINT16{BCAST} adreg:REGISTER:VEC:SINT16{ILANE} adreg_lane:IMMEDIATE:-:- @far
 dup z1.h,z2.h[31]
 ### op move [] bdreg:REGISTER:VEC:SINT32 adreg:REGISTER:VEC:SINT32
-mov z1.s,z2.s
+mov z1.d,z2.d
 ### op move [] bdreg:REGISTER:VEC:SINT32{BCAST,BLOCK} adreg:REGISTER:VEC:SINT32{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:4,bdreg_blocksize:4}
 dup z1.q,z2.q[0]
 ### op move [] bdreg:REGISTER:VEC:SINT32{BCAST,BLOCK} adreg:REGISTER:VEC:SINT32{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:4,bdreg_blocksize:4} @far
@@ -1877,7 +1877,7 @@ dup z1.d,z2.d[0]
 ### op move [] bdreg:REGISTER:VEC:SINT64{BCAST} adreg:REGISTER:VEC:SINT64{ILANE} adreg_lane:IMMEDIATE:-:- @far
 dup z1.d,z2.d[7]
 ### op move [] bdreg:REGISTER:VEC:SINT8 adreg:REGISTER:VEC:SINT8
-mov z1.b,z2.b
+mov z1.d,z2.d
 ### op move [] bdreg:REGISTER:VEC:SINT8{BCAST,BLOCK} adreg:REGISTER:VEC:SINT8{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:16,bdreg_blocksize:16}
 dup z1.q,z2.q[0]
 ### op move [] bdreg:REGISTER:VEC:SINT8{BCAST,BLOCK} adreg:REGISTER:VEC:SINT8{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:16,bdreg_blocksize:16} @far
@@ -1889,7 +1889,7 @@ dup z1.b,z2.b[0]
 ### op move [] bdreg:REGISTER:VEC:SINT8{BCAST} adreg:REGISTER:VEC:SINT8{ILANE} adreg_lane:IMMEDIATE:-:- @far
 dup z1.b,z2.b[63]
 ### op move [] bdreg:REGISTER:VEC:UINT16 adreg:REGISTER:VEC:UINT16
-mov z1.h,z2.h
+mov z1.d,z2.d
 ### op move [] bdreg:REGISTER:VEC:UINT16{BCAST,BLOCK} adreg:REGISTER:VEC:UINT16{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:8,bdreg_blocksize:8}
 dup z1.q,z2.q[0]
 ### op move [] bdreg:REGISTER:VEC:UINT16{BCAST,BLOCK} adreg:REGISTER:VEC:UINT16{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:8,bdreg_blocksize:8} @far
@@ -1901,7 +1901,7 @@ dup z1.h,z2.h[0]
 ### op move [] bdreg:REGISTER:VEC:UINT16{BCAST} adreg:REGISTER:VEC:UINT16{ILANE} adreg_lane:IMMEDIATE:-:- @far
 dup z1.h,z2.h[31]
 ### op move [] bdreg:REGISTER:VEC:UINT32 adreg:REGISTER:VEC:UINT32
-mov z1.s,z2.s
+mov z1.d,z2.d
 ### op move [] bdreg:REGISTER:VEC:UINT32{BCAST,BLOCK} adreg:REGISTER:VEC:UINT32{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:4,bdreg_blocksize:4}
 dup z1.q,z2.q[0]
 ### op move [] bdreg:REGISTER:VEC:UINT32{BCAST,BLOCK} adreg:REGISTER:VEC:UINT32{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:4,bdreg_blocksize:4} @far
@@ -1925,7 +1925,7 @@ dup z1.d,z2.d[0]
 ### op move [] bdreg:REGISTER:VEC:UINT64{BCAST} adreg:REGISTER:VEC:UINT64{ILANE} adreg_lane:IMMEDIATE:-:- @far
 dup z1.d,z2.d[7]
 ### op move [] bdreg:REGISTER:VEC:UINT8 adreg:REGISTER:VEC:UINT8
-mov z1.b,z2.b
+mov z1.d,z2.d
 ### op move [] bdreg:REGISTER:VEC:UINT8{BCAST,BLOCK} adreg:REGISTER:VEC:UINT8{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:16,bdreg_blocksize:16}
 dup z1.q,z2.q[0]
 ### op move [] bdreg:REGISTER:VEC:UINT8{BCAST,BLOCK} adreg:REGISTER:VEC:UINT8{IBLOCK} adreg_block:IMMEDIATE:-:- {adreg_blocksize:16,bdreg_blocksize:16} @far

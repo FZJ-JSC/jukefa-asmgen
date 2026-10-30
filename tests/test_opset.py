@@ -148,10 +148,12 @@ class test_vlen(unittest.TestCase):
         self.assertEqual(f"movq $8,{a.rpref(a.greg(1))}", self.vlen(a, adt.DOUBLE))
 
     def test_c_helper_asm(self):
+        # SME: the streaming vector length read without a switch (rdsvl x0,
+        # #1, encoded - C compiled without SME takes it)
         c = make(sme).c_simd_size_function
-        self.assertIn('"smstart', c)
-        self.assertIn('"cntb %[byte_size]', c)
-        self.assertIn('"smstop', c)
+        self.assertIn('".inst 0x04bf5820', c)
+        self.assertNotIn("smstart", c)
+        self.assertNotIn("smstop", c)
         self.assertEqual("static inline size_t get_simd_size() { return 64; }", make(avx512).c_simd_size_function)
 
 
@@ -221,7 +223,7 @@ class test_param(unittest.TestCase):
                 self.assertEqual(text, g.set(modifiers={M.VLEN, M.PARAM}, param="n").strip())
         g = make(sve)
         self.assertEqual("cntd %[n]", g.set(dt=adt.DOUBLE, modifiers={M.VLEN, M.PARAM}, param="n").strip())
-        self.assertIn('"cntb %[byte_size]', make(sme).c_simd_size_function)
+        self.assertIn('".inst 0x04bf5820', make(sme).c_simd_size_function)
 
     def test_dt_needed_but_for_vlen(self):
         g = make(rvv)
