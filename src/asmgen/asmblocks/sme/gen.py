@@ -93,7 +93,23 @@ class sme(sve):
     def treg(self, reg_idx : int, dt : adt) -> treg_base:
         return sme_treg(reg_idx, dt)
 
-    def _c_simd_size_asm(self) -> str:
-        # the streaming vector length: counted in streaming mode
-        return self.asmwrap("smstart") + super()._c_simd_size_asm() + self.asmwrap("smstop")
+    @property
+    def c_simd_size_function(self) -> str:
+        """
+        get_simd_size(): the streaming vector length in bytes, read in either
+        mode (rdsvl) - no switch: a caller in streaming mode (BLIS around its
+        loops) stays there, and no vector register is zeroed behind the
+        compiler's back. Encoded (.inst): C compiled without SME takes it
+        """
+        return ("static inline size_t get_simd_size() {\n"
+                "    size_t byte_size = 0;\n"
+                "    __asm__ volatile(\n"
+                "        \".inst 0x04bf5820\\n\\t\"    /* rdsvl x0, #1 */\n"
+                "        \"mov %[byte_size], x0\\n\\t\"\n"
+                "    : [byte_size] \"=r\" (byte_size)\n"
+                "    :\n"
+                "    : \"x0\"\n"
+                "    );\n"
+                "    return byte_size;\n"
+                "}")
 
