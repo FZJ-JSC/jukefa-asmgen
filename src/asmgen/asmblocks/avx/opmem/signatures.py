@@ -152,12 +152,14 @@ def make_avx_opmem_signatures(action: opmem_action,
             add_sig(dt, mods=mods)
 
     # an index register (x86's base + index x scale): beside every plain or
-    # immediate-offset signature without lanes or vector indices - masked
-    # ones (AVX-512's k) and broadcasts (BCAST, BLOCK) included -
-    # unscaled, and scaled by 1, 2, 4 or 8 (SCALEOFFSET, scale_factor)
+    # immediate-offset signature without vector indices - masked ones
+    # (AVX-512's k), broadcasts (BCAST, BLOCK) and lanes (ILANE: vmovsd,
+    # vmovhpd, vpextrq, vpinsrq - a lane's memory operand any of x86's)
+    # included - unscaled, and scaled by 1, 2, 4 or 8 (SCALEOFFSET, scale_factor)
     for s0 in [s for s in sigs if not (s.modifiers - {mod.IOFFSET, mod.MASK})
                and 'vidxreg' not in s.operands
-               and all(set(o.modifiers or ()) <= {opd_mod.BCAST, opd_mod.BLOCK}
+               and all(set(o.modifiers or ()) <= {opd_mod.BCAST, opd_mod.BLOCK,
+                                                  opd_mod.ILANE, opd_mod.ZEROOTHERS}
                        for o in s.operands.values())]:
         offreg = osh(ot.REGISTER, orl.ADDRESS, rt.GP, adt.UINT64)
         sigs.append(sig(modifiers=set(s0.modifiers) | {mod.GOFFSET},
