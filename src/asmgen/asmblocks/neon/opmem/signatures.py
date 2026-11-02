@@ -123,6 +123,10 @@ def make_neon_opmem_signatures(bcast_supported=False):
         add_sig(dt, mods={mod.VOFFSET}, opd_mods=dict())
         add_sig(dt, mods=set(), opd_mods={'adreg': {opd_mod.ILANE}})
         add_sig(dt, mods={mod.VOFFSET}, opd_mods={'adreg': {opd_mod.ILANE}})
+        # a lane's ld1/st1 post-increments too: by the element (#8 for a .d
+        # lane) or by a register - ld1 {v0.d}[1], [x0], x1
+        add_sig(dt, mods={mod.POSTINC}, opd_mods={'adreg': {opd_mod.ILANE}}, postinc_reg=False)
+        add_sig(dt, mods={mod.POSTINC}, opd_mods={'adreg': {opd_mod.ILANE}}, postinc_reg=True)
         add_sig(dt, mods={mod.POSTINC}, opd_mods=dict(), postinc_reg=False)
         add_sig(dt, mods={mod.POSTINC}, opd_mods=dict(), postinc_reg=True)
         if bcast_supported:
