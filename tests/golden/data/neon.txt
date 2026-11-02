@@ -1122,109 +1122,239 @@ ldrb w10, [x11], #255
 ### op load [POSTINC] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ldrb w10, [x11], x12
 ### op load [POSTINC] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-ld1 {v1.2d}, [x10], #16
+ldr q1, [x10], #-256
+### op load [POSTINC] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+ldr q1, [x10], #255
 ### op load [POSTINC] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1 {v1.2d}, [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
 ld1r {v1.2d}, [x10], #8
 ### op load [POSTINC] adreg:REGISTER:VEC:DOUBLE{BCAST} agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1r {v1.2d}, [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:DOUBLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+ld1 {v1.d}[0], [x10], #8
+### op load [POSTINC] adreg:REGISTER:VEC:DOUBLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+ld1 {v1.d}[1], [x10], #8
+### op load [POSTINC] adreg:REGISTER:VEC:DOUBLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+ld1 {v1.d}[0], [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:DOUBLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+ld1 {v1.d}[1], [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-ld1 {v1.16b}, [x10], #16
+ldr q1, [x10], #-256
+### op load [POSTINC] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+ldr q1, [x10], #255
 ### op load [POSTINC] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1 {v1.16b}, [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:FP8E4M3{BCAST} agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
 ld1r {v1.16b}, [x10], #1
 ### op load [POSTINC] adreg:REGISTER:VEC:FP8E4M3{BCAST} agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1r {v1.16b}, [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:FP8E4M3{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+ld1 {v1.b}[0], [x10], #1
+### op load [POSTINC] adreg:REGISTER:VEC:FP8E4M3{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+ld1 {v1.b}[15], [x10], #1
+### op load [POSTINC] adreg:REGISTER:VEC:FP8E4M3{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+ld1 {v1.b}[0], [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:FP8E4M3{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+ld1 {v1.b}[15], [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-ld1 {v1.16b}, [x10], #16
+ldr q1, [x10], #-256
+### op load [POSTINC] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+ldr q1, [x10], #255
 ### op load [POSTINC] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1 {v1.16b}, [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:FP8E5M2{BCAST} agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
 ld1r {v1.16b}, [x10], #1
 ### op load [POSTINC] adreg:REGISTER:VEC:FP8E5M2{BCAST} agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1r {v1.16b}, [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:FP8E5M2{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+ld1 {v1.b}[0], [x10], #1
+### op load [POSTINC] adreg:REGISTER:VEC:FP8E5M2{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+ld1 {v1.b}[15], [x10], #1
+### op load [POSTINC] adreg:REGISTER:VEC:FP8E5M2{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+ld1 {v1.b}[0], [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:FP8E5M2{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+ld1 {v1.b}[15], [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-ld1 {v1.8h}, [x10], #16
+ldr q1, [x10], #-256
+### op load [POSTINC] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+ldr q1, [x10], #255
 ### op load [POSTINC] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1 {v1.8h}, [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:HALF{BCAST} agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
 ld1r {v1.8h}, [x10], #2
 ### op load [POSTINC] adreg:REGISTER:VEC:HALF{BCAST} agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1r {v1.8h}, [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:HALF{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+ld1 {v1.h}[0], [x10], #2
+### op load [POSTINC] adreg:REGISTER:VEC:HALF{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+ld1 {v1.h}[7], [x10], #2
+### op load [POSTINC] adreg:REGISTER:VEC:HALF{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+ld1 {v1.h}[0], [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:HALF{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+ld1 {v1.h}[7], [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-ld1 {v1.4s}, [x10], #16
+ldr q1, [x10], #-256
+### op load [POSTINC] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+ldr q1, [x10], #255
 ### op load [POSTINC] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1 {v1.4s}, [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
 ld1r {v1.4s}, [x10], #4
 ### op load [POSTINC] adreg:REGISTER:VEC:SINGLE{BCAST} agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1r {v1.4s}, [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:SINGLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+ld1 {v1.s}[0], [x10], #4
+### op load [POSTINC] adreg:REGISTER:VEC:SINGLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+ld1 {v1.s}[3], [x10], #4
+### op load [POSTINC] adreg:REGISTER:VEC:SINGLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+ld1 {v1.s}[0], [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:SINGLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+ld1 {v1.s}[3], [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-ld1 {v1.8h}, [x10], #16
+ldr q1, [x10], #-256
+### op load [POSTINC] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+ldr q1, [x10], #255
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1 {v1.8h}, [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT16{BCAST} agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
 ld1r {v1.8h}, [x10], #2
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT16{BCAST} agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1r {v1.8h}, [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:SINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+ld1 {v1.h}[0], [x10], #2
+### op load [POSTINC] adreg:REGISTER:VEC:SINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+ld1 {v1.h}[7], [x10], #2
+### op load [POSTINC] adreg:REGISTER:VEC:SINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+ld1 {v1.h}[0], [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:SINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+ld1 {v1.h}[7], [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-ld1 {v1.4s}, [x10], #16
+ldr q1, [x10], #-256
+### op load [POSTINC] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+ldr q1, [x10], #255
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1 {v1.4s}, [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
 ld1r {v1.4s}, [x10], #4
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT32{BCAST} agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1r {v1.4s}, [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:SINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+ld1 {v1.s}[0], [x10], #4
+### op load [POSTINC] adreg:REGISTER:VEC:SINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+ld1 {v1.s}[3], [x10], #4
+### op load [POSTINC] adreg:REGISTER:VEC:SINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+ld1 {v1.s}[0], [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:SINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+ld1 {v1.s}[3], [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-ld1 {v1.2d}, [x10], #16
+ldr q1, [x10], #-256
+### op load [POSTINC] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+ldr q1, [x10], #255
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1 {v1.2d}, [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
 ld1r {v1.2d}, [x10], #8
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT64{BCAST} agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1r {v1.2d}, [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:SINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+ld1 {v1.d}[0], [x10], #8
+### op load [POSTINC] adreg:REGISTER:VEC:SINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+ld1 {v1.d}[1], [x10], #8
+### op load [POSTINC] adreg:REGISTER:VEC:SINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+ld1 {v1.d}[0], [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:SINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+ld1 {v1.d}[1], [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-ld1 {v1.16b}, [x10], #16
+ldr q1, [x10], #-256
+### op load [POSTINC] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+ldr q1, [x10], #255
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1 {v1.16b}, [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT8{BCAST} agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
 ld1r {v1.16b}, [x10], #1
 ### op load [POSTINC] adreg:REGISTER:VEC:SINT8{BCAST} agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1r {v1.16b}, [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:SINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+ld1 {v1.b}[0], [x10], #1
+### op load [POSTINC] adreg:REGISTER:VEC:SINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+ld1 {v1.b}[15], [x10], #1
+### op load [POSTINC] adreg:REGISTER:VEC:SINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+ld1 {v1.b}[0], [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:SINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+ld1 {v1.b}[15], [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-ld1 {v1.8h}, [x10], #16
+ldr q1, [x10], #-256
+### op load [POSTINC] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+ldr q1, [x10], #255
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1 {v1.8h}, [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT16{BCAST} agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
 ld1r {v1.8h}, [x10], #2
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT16{BCAST} agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1r {v1.8h}, [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:UINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+ld1 {v1.h}[0], [x10], #2
+### op load [POSTINC] adreg:REGISTER:VEC:UINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+ld1 {v1.h}[7], [x10], #2
+### op load [POSTINC] adreg:REGISTER:VEC:UINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+ld1 {v1.h}[0], [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:UINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+ld1 {v1.h}[7], [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-ld1 {v1.4s}, [x10], #16
+ldr q1, [x10], #-256
+### op load [POSTINC] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+ldr q1, [x10], #255
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1 {v1.4s}, [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
 ld1r {v1.4s}, [x10], #4
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT32{BCAST} agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1r {v1.4s}, [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:UINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+ld1 {v1.s}[0], [x10], #4
+### op load [POSTINC] adreg:REGISTER:VEC:UINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+ld1 {v1.s}[3], [x10], #4
+### op load [POSTINC] adreg:REGISTER:VEC:UINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+ld1 {v1.s}[0], [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:UINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+ld1 {v1.s}[3], [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-ld1 {v1.2d}, [x10], #16
+ldr q1, [x10], #-256
+### op load [POSTINC] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+ldr q1, [x10], #255
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1 {v1.2d}, [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
 ld1r {v1.2d}, [x10], #8
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT64{BCAST} agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1r {v1.2d}, [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:UINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+ld1 {v1.d}[0], [x10], #8
+### op load [POSTINC] adreg:REGISTER:VEC:UINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+ld1 {v1.d}[1], [x10], #8
+### op load [POSTINC] adreg:REGISTER:VEC:UINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+ld1 {v1.d}[0], [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:UINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+ld1 {v1.d}[1], [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-ld1 {v1.16b}, [x10], #16
+ldr q1, [x10], #-256
+### op load [POSTINC] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+ldr q1, [x10], #255
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1 {v1.16b}, [x10], x11
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT8{BCAST} agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
 ld1r {v1.16b}, [x10], #1
 ### op load [POSTINC] adreg:REGISTER:VEC:UINT8{BCAST} agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 ld1r {v1.16b}, [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+ld1 {v1.b}[0], [x10], #1
+### op load [POSTINC] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+ld1 {v1.b}[15], [x10], #1
+### op load [POSTINC] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+ld1 {v1.b}[0], [x10], x11
+### op load [POSTINC] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+ld1 {v1.b}[15], [x10], x11
 ### op load [STRUCT] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE {nstructs:4}
 ld4 {v1.2d, v2.2d, v3.2d, v4.2d}, [x10]
 ### op load [STRUCT] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE {nstructs:3}
@@ -2994,57 +3124,187 @@ strb w10, [x11], #255
 ### op store [POSTINC] adreg:REGISTER:GP:UINT8 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 strb w10, [x11], x12
 ### op store [POSTINC] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-st1 {v1.2d}, [x10], #16
+str q1, [x10], #-256
+### op store [POSTINC] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+str q1, [x10], #255
 ### op store [POSTINC] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 st1 {v1.2d}, [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:DOUBLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+st1 {v1.d}[0], [x10], #8
+### op store [POSTINC] adreg:REGISTER:VEC:DOUBLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+st1 {v1.d}[1], [x10], #8
+### op store [POSTINC] adreg:REGISTER:VEC:DOUBLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+st1 {v1.d}[0], [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:DOUBLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+st1 {v1.d}[1], [x10], x11
 ### op store [POSTINC] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-st1 {v1.16b}, [x10], #16
+str q1, [x10], #-256
+### op store [POSTINC] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+str q1, [x10], #255
 ### op store [POSTINC] adreg:REGISTER:VEC:FP8E4M3 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 st1 {v1.16b}, [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:FP8E4M3{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+st1 {v1.b}[0], [x10], #1
+### op store [POSTINC] adreg:REGISTER:VEC:FP8E4M3{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+st1 {v1.b}[15], [x10], #1
+### op store [POSTINC] adreg:REGISTER:VEC:FP8E4M3{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+st1 {v1.b}[0], [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:FP8E4M3{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+st1 {v1.b}[15], [x10], x11
 ### op store [POSTINC] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-st1 {v1.16b}, [x10], #16
+str q1, [x10], #-256
+### op store [POSTINC] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+str q1, [x10], #255
 ### op store [POSTINC] adreg:REGISTER:VEC:FP8E5M2 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 st1 {v1.16b}, [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:FP8E5M2{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+st1 {v1.b}[0], [x10], #1
+### op store [POSTINC] adreg:REGISTER:VEC:FP8E5M2{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+st1 {v1.b}[15], [x10], #1
+### op store [POSTINC] adreg:REGISTER:VEC:FP8E5M2{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+st1 {v1.b}[0], [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:FP8E5M2{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+st1 {v1.b}[15], [x10], x11
 ### op store [POSTINC] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-st1 {v1.8h}, [x10], #16
+str q1, [x10], #-256
+### op store [POSTINC] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+str q1, [x10], #255
 ### op store [POSTINC] adreg:REGISTER:VEC:HALF agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 st1 {v1.8h}, [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:HALF{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+st1 {v1.h}[0], [x10], #2
+### op store [POSTINC] adreg:REGISTER:VEC:HALF{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+st1 {v1.h}[7], [x10], #2
+### op store [POSTINC] adreg:REGISTER:VEC:HALF{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+st1 {v1.h}[0], [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:HALF{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+st1 {v1.h}[7], [x10], x11
 ### op store [POSTINC] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-st1 {v1.4s}, [x10], #16
+str q1, [x10], #-256
+### op store [POSTINC] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+str q1, [x10], #255
 ### op store [POSTINC] adreg:REGISTER:VEC:SINGLE agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 st1 {v1.4s}, [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:SINGLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+st1 {v1.s}[0], [x10], #4
+### op store [POSTINC] adreg:REGISTER:VEC:SINGLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+st1 {v1.s}[3], [x10], #4
+### op store [POSTINC] adreg:REGISTER:VEC:SINGLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+st1 {v1.s}[0], [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:SINGLE{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+st1 {v1.s}[3], [x10], x11
 ### op store [POSTINC] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-st1 {v1.8h}, [x10], #16
+str q1, [x10], #-256
+### op store [POSTINC] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+str q1, [x10], #255
 ### op store [POSTINC] adreg:REGISTER:VEC:SINT16 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 st1 {v1.8h}, [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:SINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+st1 {v1.h}[0], [x10], #2
+### op store [POSTINC] adreg:REGISTER:VEC:SINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+st1 {v1.h}[7], [x10], #2
+### op store [POSTINC] adreg:REGISTER:VEC:SINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+st1 {v1.h}[0], [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:SINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+st1 {v1.h}[7], [x10], x11
 ### op store [POSTINC] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-st1 {v1.4s}, [x10], #16
+str q1, [x10], #-256
+### op store [POSTINC] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+str q1, [x10], #255
 ### op store [POSTINC] adreg:REGISTER:VEC:SINT32 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 st1 {v1.4s}, [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:SINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+st1 {v1.s}[0], [x10], #4
+### op store [POSTINC] adreg:REGISTER:VEC:SINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+st1 {v1.s}[3], [x10], #4
+### op store [POSTINC] adreg:REGISTER:VEC:SINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+st1 {v1.s}[0], [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:SINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+st1 {v1.s}[3], [x10], x11
 ### op store [POSTINC] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-st1 {v1.2d}, [x10], #16
+str q1, [x10], #-256
+### op store [POSTINC] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+str q1, [x10], #255
 ### op store [POSTINC] adreg:REGISTER:VEC:SINT64 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 st1 {v1.2d}, [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:SINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+st1 {v1.d}[0], [x10], #8
+### op store [POSTINC] adreg:REGISTER:VEC:SINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+st1 {v1.d}[1], [x10], #8
+### op store [POSTINC] adreg:REGISTER:VEC:SINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+st1 {v1.d}[0], [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:SINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+st1 {v1.d}[1], [x10], x11
 ### op store [POSTINC] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-st1 {v1.16b}, [x10], #16
+str q1, [x10], #-256
+### op store [POSTINC] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+str q1, [x10], #255
 ### op store [POSTINC] adreg:REGISTER:VEC:SINT8 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 st1 {v1.16b}, [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:SINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+st1 {v1.b}[0], [x10], #1
+### op store [POSTINC] adreg:REGISTER:VEC:SINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+st1 {v1.b}[15], [x10], #1
+### op store [POSTINC] adreg:REGISTER:VEC:SINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+st1 {v1.b}[0], [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:SINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+st1 {v1.b}[15], [x10], x11
 ### op store [POSTINC] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-st1 {v1.8h}, [x10], #16
+str q1, [x10], #-256
+### op store [POSTINC] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+str q1, [x10], #255
 ### op store [POSTINC] adreg:REGISTER:VEC:UINT16 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 st1 {v1.8h}, [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:UINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+st1 {v1.h}[0], [x10], #2
+### op store [POSTINC] adreg:REGISTER:VEC:UINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+st1 {v1.h}[7], [x10], #2
+### op store [POSTINC] adreg:REGISTER:VEC:UINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+st1 {v1.h}[0], [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:UINT16{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+st1 {v1.h}[7], [x10], x11
 ### op store [POSTINC] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-st1 {v1.4s}, [x10], #16
+str q1, [x10], #-256
+### op store [POSTINC] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+str q1, [x10], #255
 ### op store [POSTINC] adreg:REGISTER:VEC:UINT32 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 st1 {v1.4s}, [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:UINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+st1 {v1.s}[0], [x10], #4
+### op store [POSTINC] adreg:REGISTER:VEC:UINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+st1 {v1.s}[3], [x10], #4
+### op store [POSTINC] adreg:REGISTER:VEC:UINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+st1 {v1.s}[0], [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:UINT32{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+st1 {v1.s}[3], [x10], x11
 ### op store [POSTINC] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-st1 {v1.2d}, [x10], #16
+str q1, [x10], #-256
+### op store [POSTINC] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+str q1, [x10], #255
 ### op store [POSTINC] adreg:REGISTER:VEC:UINT64 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 st1 {v1.2d}, [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:UINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+st1 {v1.d}[0], [x10], #8
+### op store [POSTINC] adreg:REGISTER:VEC:UINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+st1 {v1.d}[1], [x10], #8
+### op store [POSTINC] adreg:REGISTER:VEC:UINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+st1 {v1.d}[0], [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:UINT64{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+st1 {v1.d}[1], [x10], x11
 ### op store [POSTINC] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:-
-st1 {v1.16b}, [x10], #16
+str q1, [x10], #-256
+### op store [POSTINC] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 iinc:IMMEDIATE:-:- @far
+str q1, [x10], #255
 ### op store [POSTINC] adreg:REGISTER:VEC:UINT8 agreg:REGISTER:GP:UINT64 increg:REGISTER:GP:UINT64
 st1 {v1.16b}, [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:-
+st1 {v1.b}[0], [x10], #1
+### op store [POSTINC] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- iinc:IMMEDIATE:-:- @far
+st1 {v1.b}[15], [x10], #1
+### op store [POSTINC] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64
+st1 {v1.b}[0], [x10], x11
+### op store [POSTINC] adreg:REGISTER:VEC:UINT8{ILANE} agreg:REGISTER:GP:UINT64 adreg_lane:IMMEDIATE:-:- increg:REGISTER:GP:UINT64 @far
+st1 {v1.b}[15], [x10], x11
 ### op store [STRUCT] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE ddreg:REGISTER:VEC:DOUBLE {nstructs:4}
 st4 {v1.2d, v2.2d, v3.2d, v4.2d}, [x10]
 ### op store [STRUCT] adreg:REGISTER:VEC:DOUBLE agreg:REGISTER:GP:UINT64 bdreg:REGISTER:VEC:DOUBLE cdreg:REGISTER:VEC:DOUBLE {nstructs:3}

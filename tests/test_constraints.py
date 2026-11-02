@@ -34,10 +34,14 @@ class test_neon(unittest.TestCase):
                 self.load(modifiers={mod.VOFFSET}, voffset=bad)
 
     def test_post_increment(self):
-        # structure loads post-increment by exactly what they transfer
-        self.load(modifiers={mod.POSTINC}, iinc=16)
+        # a whole vector post-increments by the 16 bytes it moves (ld1) or by
+        # any other immediate in -256..255 (ldr q's post-index form);
+        # broadcasts, lanes and structures by exactly what they transfer
+        self.assertIn("ld1", self.load(modifiers={mod.POSTINC}, iinc=16))
+        self.assertIn("ldr q", self.load(modifiers={mod.POSTINC}, iinc=32))
+        self.assertIn("ldr q", self.load(modifiers={mod.POSTINC}, iinc=-48))
         with self.assertRaises(Exception):
-            self.load(modifiers={mod.POSTINC}, iinc=32)
+            self.load(modifiers={mod.POSTINC}, iinc=512)
         bcast = {"adreg": {omod.BCAST}}
         self.load(modifiers={mod.POSTINC}, operand_modifiers=bcast, iinc=8)
         with self.assertRaises(Exception):

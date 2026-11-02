@@ -107,9 +107,15 @@ def make_neon_opmem_signatures(bcast_supported=False):
                 # lanes, a 16-byte register per structure otherwise
                 adreg_mods = opd_mods.get('adreg', set())
                 per_struct = adt_size(dt) if {opd_mod.BCAST, opd_mod.ILANE} & adreg_mods else 16
-                ops['iinc'] = osh(ot.IMMEDIATE, orl.PARAM, None, None,
-                                  value_constraints=[oneof_constraint(
-                                      valset=[per_struct * nstructs])])
+                if mod.STRUCT not in mods and not any(opd_mods.values()):
+                    # a whole vector: ld1/st1 by the 16 bytes moved, any other
+                    # immediate ldr/str q's post-index form (-256..255)
+                    ops['iinc'] = osh(ot.IMMEDIATE, orl.PARAM, None, None,
+                                      value_constraints=[minmax_constraint(minval=-256, maxval=255)])
+                else:
+                    ops['iinc'] = osh(ot.IMMEDIATE, orl.PARAM, None, None,
+                                      value_constraints=[oneof_constraint(
+                                          valset=[per_struct * nstructs])])
 
         sigs.append(sig(
             modifiers=mods,

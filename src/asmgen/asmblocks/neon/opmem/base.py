@@ -284,6 +284,15 @@ class neon_opmem(opmem):
             inst = "ldr" if self.action == opmem_action.LOAD else "str"
             return self.asmwrap(f"{inst} q{dregs[0].idx}, {addressing}")
 
+        # a whole vector post-incremented by an immediate other than the 16
+        # bytes it moves: ldr/str q's post-index form (ld1/st1's is exactly
+        # the transfer) - ld1/st1 for the transfer and for a register
+        if mod.POSTINC in modifiers and "iinc" in kwargs and 16 != kwargs["iinc"] \
+                and mod.STRUCT not in modifiers \
+                and not any({opd_mod.BCAST, opd_mod.ILANE} & set(mods) for _, mods in operand_modifiers.items()):
+            inst = "ldr" if self.action == opmem_action.LOAD else "str"
+            return self.asmwrap(f"{inst} q{dregs[0].idx}, {addressing}")
+
         nstructs = kwargs.get("nstructs",1)
 
         has_bcast = any(opd_mod.BCAST in mods
