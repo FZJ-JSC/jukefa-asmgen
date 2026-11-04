@@ -116,12 +116,20 @@ ret
 True
 ### method supportedby_cpuinfo(cpuinfo=invalid_isa)
 False
+### method tile_types()
+[]
 ### method treg(dt=DOUBLE, reg_idx=0)
 !NotImplementedError: Not tile support in AVX (will be supported with AMX)
 ### method treg(dt=HALF, reg_idx=0)
 !NotImplementedError: Not tile support in AVX (will be supported with AMX)
 ### method treg(dt=SINGLE, reg_idx=0)
 !NotImplementedError: Not tile support in AVX (will be supported with AMX)
+### method treg_tag(dt=DOUBLE)
+treg
+### method treg_tag(dt=HALF)
+treg
+### method treg_tag(dt=SINGLE)
+treg
 ### method vreg(reg_idx=0)
 ymm0
 ### op add [] adreg:REGISTER:GP:SINT64 bdreg:REGISTER:GP:SINT64 cdreg:REGISTER:GP:SINT64

@@ -118,12 +118,20 @@ ret
 False
 ### method supportedby_cpuinfo(cpuinfo=invalid_isa)
 False
+### method tile_types()
+[]
 ### method treg(dt=DOUBLE, reg_idx=0)
 !NotImplementedError: SVE has no tiles, use SME
 ### method treg(dt=HALF, reg_idx=0)
 !NotImplementedError: SVE has no tiles, use SME
 ### method treg(dt=SINGLE, reg_idx=0)
 !NotImplementedError: SVE has no tiles, use SME
+### method treg_tag(dt=DOUBLE)
+treg
+### method treg_tag(dt=HALF)
+treg
+### method treg_tag(dt=SINGLE)
+treg
 ### method vreg(reg_idx=0)
 z0
 ### op add [MASK] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16 amreg:REGISTER:MASK:BF16

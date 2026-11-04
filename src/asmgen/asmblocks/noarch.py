@@ -355,6 +355,18 @@ class asmgen(ABC):
         """
         return []
 
+    def tile_types(self) -> list[tuple[str, int]]:
+        """
+        The tile register types (treg_tag) with their numbers of registers -
+        one per element size an ISA's tiles come in; their overlaps in
+        shared_registers. None by default
+        """
+        return []
+
+    def treg_tag(self, dt : asm_data_type) -> str:
+        """The tracker's type of the tiles holding dt (tile_types)"""
+        return "treg"
+
     def get_reg_tracker(self) -> reg_tracker:
         """
         A register tracker for this ISA: every register file with its size,
@@ -365,6 +377,7 @@ class asmgen(ABC):
             types.append(("freg", self.max_fregs()))
         if self.max_mregs():
             types.append(("mreg", self.max_mregs()))
+        types.extend(self.tile_types())
         rt = reg_tracker(types)
         tracked = {t for t, _ in types}
         for type_a, type_b, mapping in self.shared_registers():

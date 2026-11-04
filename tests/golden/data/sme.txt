@@ -125,12 +125,20 @@ ret
 False
 ### method supportedby_cpuinfo(cpuinfo=invalid_isa)
 False
+### method tile_types()
+[('treg8', 1), ('treg16', 2), ('treg32', 4), ('treg64', 8)]
 ### method treg(dt=DOUBLE, reg_idx=0)
 za0
 ### method treg(dt=HALF, reg_idx=0)
 za0
 ### method treg(dt=SINGLE, reg_idx=0)
 za0
+### method treg_tag(dt=DOUBLE)
+treg64
+### method treg_tag(dt=HALF)
+treg16
+### method treg_tag(dt=SINGLE)
+treg32
 ### method vreg(reg_idx=0)
 z0
 ### op add [MASK] adreg:REGISTER:VEC:BF16 bdreg:REGISTER:VEC:BF16 cdreg:REGISTER:VEC:BF16 amreg:REGISTER:MASK:BF16

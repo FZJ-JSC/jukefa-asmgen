@@ -100,6 +100,8 @@ function_tests = [
         ['max_gregs', None],
         ['max_fregs', None],
         ['max_tregs', {'dt' : lambda gen : adt.DOUBLE} ],
+        ['tile_types', None],
+        ['treg_tag', {'dt' : lambda gen : adt.DOUBLE} ],
         ['create_callconv', {'name' : lambda gen : "default"}],
         ['isaclear', None],
         ['isadata', None],
