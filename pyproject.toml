@@ -8,7 +8,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "asmgen"
+name = "jukefa-asmgen"
 version = "0.6.0"
 authors = [
 { name="linedot", email="linedot@linedot.org" },
@@ -23,6 +23,12 @@ classifiers = [
 dependencies = [
   "Mako"
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+  "src/asmgen"
+]
+
 [project.optional-dependencies]
 test = [
   "parameterized"
