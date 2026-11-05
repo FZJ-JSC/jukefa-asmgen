@@ -87,6 +87,24 @@ class sme(sve):
 
     def max_tregs(self, dt : adt) -> int:
         return adt_size(dt)
+
+    #: ZA's tiles come in these element sizes (bytes): as many tiles as bytes
+    TILE_SIZES = (1, 2, 4, 8)
+
+    def treg_tag(self, dt : adt) -> str:
+        return f"treg{8 * adt_size(dt)}"
+
+    def tile_types(self) -> list[tuple[str, int]]:
+        # one type per element size - as many tiles as its bytes
+        return [(f"treg{8 * size}", size) for size in self.TILE_SIZES]
+
+    def shared_registers(self) -> list[tuple[str, str, dict | None]]:
+        # ZA: a tile of element size e - one of e - is the storage of the
+        # 64-bit tiles n, n + e, n + 2e, ... (za0.s: za0.d and za4.d)
+        tiles = [(f"treg{8 * size}", "treg64",
+                  {n: tuple(range(n, 8, size)) for n in range(size)})
+                 for size in self.TILE_SIZES if size != 8]
+        return super().shared_registers() + tiles
     def max_mregs(self):
         return 16
 

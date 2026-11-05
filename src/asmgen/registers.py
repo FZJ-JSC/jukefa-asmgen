@@ -49,7 +49,8 @@ class reg_tracker:
         self.clobbered_regs : dict[str,set[int]] = {}
         self.aliased_regs   : dict[str,dict[str,int]] = {}
         # type -> [(other type, index in this type -> index in the other)]
-        self.shared         : dict[str,list[tuple[str,dict[int,int]]]] = {}
+        #: type -> (other type, index -> its indices, whether they're its storage)
+        self.shared         : dict[str,list[tuple[str,dict[int,tuple[int,...]],bool]]] = {}
         # type -> index -> priority: reserve_any_reg takes the free register
         # of the highest first (default 0)
         self.priorities     : dict[str,dict[int,int]] = {}
@@ -83,29 +84,68 @@ class reg_tracker:
             self.clobbered_regs[tag] = set()
             self.used_regs[tag] = set()
 
-    def share(self, type_a : str, type_b : str, mapping : dict[int,int] | None = None):
+    def share(self, type_a : str, type_b : str, mapping : dict | None = None):
         """
         Declare registers of two types to be the same registers: AArch64's d0
-        is the low part of v0, RVV's mask register is vector register 0.
-        Reserving or releasing one then reserves or releases the other.
+        is the low part of v0, RVV's mask register is vector register 0 - or
+        one the storage of several: SME's za0.s that of za0.d and za4.d.
+        Reserving or releasing one then reserves or releases the others.
 
-        :param mapping: index in type_a -> index in type_b; None for the same
-                        index, for every register both types have
+        :param mapping: index in type_a -> index in type_b, or the indices in
+                        type_b it covers; None for the same index, for every
+                        register both types have
         """
         for tag in (type_a, type_b):
             if tag not in self.registered_types:
                 raise ValueError(f"Type not tracked: {tag}")
         if mapping is None:
             mapping = {i: i for i in range(min(self.max_regs[type_a], self.max_regs[type_b]))}
-        self.shared.setdefault(type_a, []).append((type_b, dict(mapping)))
-        self.shared.setdefault(type_b, []).append((type_a, {v: k for k, v in mapping.items()}))
+        ahead = {k: tuple(v) if isinstance(v, (tuple, list, set, frozenset)) else (v,)
+                 for k, v in mapping.items()}
+        back : dict[int, tuple[int, ...]] = {}
+        for k, covered in ahead.items():
+            for v in covered:
+                back[v] = back.get(v, ()) + (k,)
+        # type_a's registers cover type_b's (their storage); type_b's are in
+        # type_a's - one way only where one covers several
+        self.shared.setdefault(type_a, []).append((type_b, ahead, True))
+        self.shared.setdefault(type_b, []).append((type_a, back, False))
 
     def _counterparts(self, type_tag : str, idx : int) -> list[tuple[str,int]]:
-        return [(other, m[idx]) for other, m in self.shared.get(type_tag, []) if idx in m]
+        return [(other, i) for other, m, _ in self.shared.get(type_tag, []) for i in m.get(idx, ())]
+
+    def _covered(self, type_tag : str, idx : int) -> list[tuple[str,int]]:
+        """The registers a register covers (shared as theirs: za0.s's za0.d and za4.d)"""
+        return [(other, i) for other, m, covers in self.shared.get(type_tag, []) if covers
+                for i in m.get(idx, ())]
+
+    def storage(self, type_tag : str, idx : int) -> frozenset[tuple[str,int]]:
+        """
+        What a register occupies: the registers it covers (share's direction),
+        down to those covering none - itself where it covers none. Two
+        registers conflict where their storage meets: SME's za0.s (za0.d,
+        za4.d) and za0.h (za0.d, za2.d, za4.d, za6.d) at za0.d, za0.d and za1.d
+        nowhere; AArch64's d3 and v3 at v3
+
+        :param type_tag: tag/type name of the register
+        :param idx: its index
+        :return: (type, index) of each
+        """
+        out, todo = set(), [(type_tag, idx)]
+        while todo:
+            reg = todo.pop()
+            covered = self._covered(*reg)
+            if covered:
+                todo.extend(covered)
+            else:
+                out.add(reg)
+        return frozenset(out)
 
     def _free(self, type_tag : str, idx : int) -> bool:
+        # free: not taken itself, nor what it covers (taken through another
+        # covering it too) - a register covering this one taken marks it
         return idx not in self.used_regs[type_tag] and \
-            all(i not in self.used_regs[t] for t, i in self._counterparts(type_tag, idx))
+            all(i not in self.used_regs[t] for t, i in self._covered(type_tag, idx))
 
     def _mark(self, type_tag : str, idx : int):
         for tag, i in [(type_tag, idx)] + self._counterparts(type_tag, idx):
@@ -263,9 +303,9 @@ class reg_tracker:
         if not through_shared:
             return self.clobbered_regs[type_tag]
         regs = set(self.clobbered_regs[type_tag])
-        for other, mapping in self.shared.get(type_tag, []):
-            mine = {theirs: ours for ours, theirs in mapping.items()}
-            regs |= {mine[i] for i in self.clobbered_regs[other] if i in mine}
+        for other, mapping, _ in self.shared.get(type_tag, []):
+            regs |= {ours for ours, theirs in mapping.items()
+                     if any(i in self.clobbered_regs[other] for i in theirs)}
         return regs
 
     def pool(self, type_tag : str) -> frozenset[str]:
@@ -281,7 +321,7 @@ class reg_tracker:
             raise ValueError(f"Type not tracked: {type_tag}")
         seen, todo = {type_tag}, [type_tag]
         while todo:
-            for other, _ in self.shared.get(todo.pop(), []):
+            for other, _, _ in self.shared.get(todo.pop(), []):
                 if other not in seen:
                     seen.add(other)
                     todo.append(other)
@@ -293,7 +333,10 @@ class reg_tracker:
         register of several of them (share) counted once - a pool's size
 
         :param type_tags: a tag, or several (a pool)
-        :return: the number of registers, reserved ones included
+        :return: the number of registers, reserved ones included - with
+                 registers covering several (SME's tiles of different element
+                 sizes) storage sharing at all counted once: storage() tells
+                 which conflict
         """
         tags = {type_tags} if isinstance(type_tags, str) else set(type_tags)
         for tag in tags:

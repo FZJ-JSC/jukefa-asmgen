@@ -96,3 +96,46 @@ class test_counts_are_methods(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class test_tiles(unittest.TestCase):
+    """
+    Registers covering several (SME's tiles of different element sizes): one
+    shared with many, reservations through all, conflicts where aliases meet
+    """
+    def setUp(self):
+        from asmgen.asmblocks.sme.gen import sme
+        self.gen = sme()
+        self.rt = self.gen.get_reg_tracker()
+
+    def test_types_and_tags(self):
+        from asmgen.registers import asm_data_type as adt
+        self.assertEqual({"treg8": 1, "treg16": 2, "treg32": 4, "treg64": 8},
+                         {t: self.rt.max_regs[t] for t in self.rt.registered_types if t.startswith("treg")})
+        self.assertEqual("treg64", self.gen.treg_tag(adt.FP64))
+        self.assertEqual("treg32", self.gen.treg_tag(adt.FP32))
+        self.assertEqual(self.gen.max_tregs(adt.FP32), self.rt.max_regs[self.gen.treg_tag(adt.FP32)])
+
+    def test_reserving_covers(self):
+        self.rt.reserve_specific_reg("treg32", 1)
+        self.assertEqual([0, 2, 3, 4, 6, 7], [i for i in range(8) if self.rt._free("treg64", i)])
+        self.assertFalse(self.rt._free("treg16", 1))
+        self.assertTrue(self.rt._free("treg16", 0))
+        self.rt.unuse_reg("treg32", 1)
+        self.assertTrue(all(self.rt._free("treg64", i) for i in range(8)))
+
+    def test_storage_meets(self):
+        meet = lambda a, b: bool(self.rt.storage(*a) & self.rt.storage(*b))
+        self.assertTrue(meet(("treg32", 0), ("treg16", 0)))
+        self.assertTrue(meet(("treg32", 1), ("treg64", 5)))
+        self.assertTrue(meet(("treg32", 0), ("treg8", 0)))
+        self.assertFalse(meet(("treg32", 0), ("treg32", 1)))
+        self.assertFalse(meet(("treg32", 1), ("treg16", 0)))
+        self.assertTrue(meet(("vreg", 3), ("freg", 3)))
+        self.assertFalse(meet(("treg64", 0), ("treg64", 1)))
+        self.assertFalse(meet(("treg32", 1), ("treg16", 0)))
+
+    def test_tiles_of_one_size_all_free(self):
+        for i in range(8):
+            self.assertEqual(i, self.rt.reserve_any_reg("treg64"))
+        self.assertEqual(0, self.rt.available("treg64"))

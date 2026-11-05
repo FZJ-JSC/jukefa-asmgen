@@ -23,9 +23,13 @@ method max_tregs(dt=SINGLE)
 method max_vregs()
 method supported_on_host()
 method supportedby_cpuinfo(cpuinfo=invalid_isa)
+method tile_types()
 method treg(dt=DOUBLE, reg_idx=0)
 method treg(dt=HALF, reg_idx=0)
 method treg(dt=SINGLE, reg_idx=0)
+method treg_tag(dt=DOUBLE)
+method treg_tag(dt=HALF)
+method treg_tag(dt=SINGLE)
 method vreg(reg_idx=0)
 op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2}
 op add [] adreg:REGISTER:VEC:DOUBLE bdreg:REGISTER:VEC:DOUBLE{BLOCKLANE} cdreg:REGISTER:VEC:DOUBLE bdreg_lane:IMMEDIATE:-:- {bdreg_blocksize:2} @far

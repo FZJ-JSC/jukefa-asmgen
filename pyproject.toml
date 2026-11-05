@@ -9,7 +9,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jukefa-asmgen"
-version = "0.6.0"
+version = "0.6.1"
 authors = [
 { name="linedot", email="linedot@linedot.org" },
 ]
