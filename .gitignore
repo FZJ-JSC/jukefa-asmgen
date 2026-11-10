@@ -6,3 +6,4 @@
 dist
 __pycache__
 test_run
+uv.lock

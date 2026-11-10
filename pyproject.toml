@@ -9,7 +9,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jukefa-asmgen"
-version = "0.6.1"
+version = "0.6.2"
 authors = [
 { name="linedot", email="linedot@linedot.org" },
 ]
@@ -25,6 +25,7 @@ dependencies = [
 ]
 
 [tool.hatch.build.targets.wheel]
+include = ["src/asmgen/py.typed"]
 packages = [
   "src/asmgen"
 ]
@@ -37,3 +38,16 @@ test = [
 [project.urls]
 Homepage = "https://github.com/linedot/asmgen"
 Issues = "https://github.com/linedot/asmgen/issues"
+
+[tool.mypy]
+python_version = "3.13"
+files = ["src"]
+mypy_path = "src"
+show_error_codes = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+no_implicit_optional = true
+pretty = true
+[[tool.mypy.overrides]]
+module = ["mako.*" ]
+ignore_missing_imports = true
