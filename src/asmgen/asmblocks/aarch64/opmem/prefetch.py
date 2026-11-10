@@ -7,14 +7,15 @@
 Base AArch64 prefetch instructions
 """
 
-from typing import Callable
+from collections.abc import Callable
 
+from ...op import operand_modifier as opd_mod
 from ...op import opmem_action as action
 from ...op import opmem_modifier as mod
-from ...op import operand_modifier as opd_mod
 from ..types import aarch64_greg
 from .base import aarch64_opmem
 from .signatures import make_aarch64_prefetch_signatures
+
 
 class aarch64_prefetch(aarch64_opmem):
     """

@@ -6,13 +6,13 @@ operand_modifiers=) the signatures there are for given operands.
 """
 import unittest
 
-from asmgen.asmblocks.neon import neon
-from asmgen.asmblocks.sve import sve
-from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.avx import fma256
+from asmgen.asmblocks.neon import neon
 from asmgen.asmblocks.op import register_type as rt
 from asmgen.asmblocks.op.opmem import opmem_modifier as M
 from asmgen.asmblocks.op.opset import opset_modifier as S
+from asmgen.asmblocks.rvv import rvv
+from asmgen.asmblocks.sve import sve
 from asmgen.registers import asm_data_type as adt
 
 

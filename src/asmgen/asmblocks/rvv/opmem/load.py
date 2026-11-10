@@ -7,10 +7,11 @@
 RVV 1.0 and 0.7.1 load instructions
 """
 
-from typing import Callable
+from collections.abc import Callable
 
 from ...op import opmem_action as action
 from .base import rvv_opmem
+
 
 class rvv_load(rvv_opmem):
     """

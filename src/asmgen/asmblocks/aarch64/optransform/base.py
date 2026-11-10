@@ -7,22 +7,17 @@
 AArch64 SIMD opd3 base class for both NEON and SVE
 """
 
-from typing import Callable,Any
+from collections.abc import Callable
+from typing import Any
 
-from ....registers import (
-    asm_data_type as adt,
-    adt_size,
-    adt_is_unsigned,
-    data_reg
-)
-from ...op import (
-    optransform,
-    optransform_modifier as mod,
-    operand_modifier as opd_mod,
-    operation_signature
-)
+from ....registers import adt_is_unsigned, adt_size, data_reg
+from ....registers import asm_data_type as adt
 from ....registers import greg_base as _greg_base
+from ...op import operand_modifier as opd_mod
+from ...op import operation_signature, optransform
+from ...op import optransform_modifier as mod
 from ...op.scalar import scalar_operands
+
 
 class aarch64_simd_opd3_base(optransform):
     """

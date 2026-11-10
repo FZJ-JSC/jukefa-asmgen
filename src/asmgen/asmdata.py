@@ -10,7 +10,8 @@ Classes to store various constant data to be used with ASM instructions
 import struct
 from dataclasses import dataclass
 
-from .registers import asm_data_type as adt, adt_size, adt_is_float
+from .registers import adt_is_float, adt_size
+from .registers import asm_data_type as adt
 
 
 def adt_to_type_macro(dt : adt) -> str:

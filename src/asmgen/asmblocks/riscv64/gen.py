@@ -9,28 +9,15 @@ RISC-V 64bit asm generator and related types
 
 from copy import deepcopy
 
-from ...registers import (
-    adt_size,
-
-    asm_data_type as adt,
-    greg_base, freg_base
-)
-
-from ..noarch import asmgen,comparison
-
-from .types import FCDT_SUFFIXES, FDT_SUFFIXES
-from .types import riscv64_freg, riscv64_greg
 from ...callconv.callconv import callconv
-
-
-from .opmem import riscv64_load,riscv64_store
-from .opmem import riscv64_prefetch
 from ...registers import asm_data_type as _ADT
-from ..op.operand import operand_modifier as _opd_mod
-from ..op.opmove import opmove_modifier as _move_mod
-from ..op.scalar import BITS_GP as _BITS_GP
+from ...registers import asm_data_type as adt
+from ...registers import freg_base, greg_base
+from ..noarch import asmgen, comparison
 from ..op.opset import opset_modifier as _opset_mod
 from ..op.optransform import optransform_modifier as _opd3_mod
+from .opmem import riscv64_load, riscv64_prefetch, riscv64_store
+from .types import FCDT_SUFFIXES, FDT_SUFFIXES, riscv64_freg, riscv64_greg
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 

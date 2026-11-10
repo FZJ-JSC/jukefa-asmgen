@@ -60,13 +60,11 @@ Example showing how the LMUL parameter of the rvv generator works
 # add t2,t2,t4
 # add t3,t3,8
 
-from asmgen.asmblocks.rvv import rvv
-from asmgen.registers import (
-    adt_size,
-    asm_data_type as adt
-)
-from asmgen.asmblocks.op.optransform import optransform_modifier
 from asmgen.asmblocks.op.operand import operand_modifier
+from asmgen.asmblocks.op.optransform import optransform_modifier
+from asmgen.asmblocks.rvv import rvv
+from asmgen.registers import adt_size
+from asmgen.registers import asm_data_type as adt
 
 
 def main():

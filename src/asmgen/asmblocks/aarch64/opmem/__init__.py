@@ -7,5 +7,5 @@
 Meta-module for Base AArch64 opmem operations
 """
 from .load import *
-from .store import *
 from .prefetch import *
+from .store import *

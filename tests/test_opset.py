@@ -6,12 +6,12 @@ import unittest
 
 from asmgen.asmblocks.avx import avx512, fma256
 from asmgen.asmblocks.neon import neon
+from asmgen.asmblocks.op.operand import operand_role as orl
 from asmgen.asmblocks.op.opset import opset_modifier
 from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.sme import sme
 from asmgen.asmblocks.sve import sve
 from asmgen.registers import asm_data_type as adt
-from asmgen.asmblocks.op.operand import operand_role as orl
 
 CONST = {opset_modifier.CONST}
 
@@ -329,7 +329,9 @@ class test_avl(unittest.TestCase):
     def test_avx512_semantics(self):
         # run here: every count 0 to 8, a vector loaded and stored under the
         # mask - its first count doubles copied, the rest left
-        import os, subprocess, tempfile
+        import os
+        import subprocess
+        import tempfile
         flags = open("/proc/cpuinfo").read() if os.path.exists("/proc/cpuinfo") else ""
         if not all(f" {f}" in flags for f in ("avx512f", "bmi2")):
             self.skipTest("needs AVX512F and BMI2")

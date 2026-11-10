@@ -9,6 +9,7 @@ operation modifier
 
 from enum import Enum
 
+
 class operation_modifier(Enum):
     """
     Operation modifier base class for type hinting and safety

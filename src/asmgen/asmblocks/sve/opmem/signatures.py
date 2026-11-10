@@ -8,33 +8,25 @@ Valid signatures for SVE opmem operations
 """
 
 from dataclasses import dataclass
-from typing import Type
 
-from ...op import (
-    operation_signature as sig,
-    operand_shape as osh,
-    operand_type as ot,
-    operand_role as orl,
-    register_type as rt,
-    opmem_modifier as mod,
-    operand_modifier as opd_mod
-)
-
+from ....registers import adt_size
+from ....registers import asm_data_type as adt
+from ....registers import asm_index_type as ait
+from ...op import operand_modifier as opd_mod
+from ...op import operand_role as orl
+from ...op import operand_shape as osh
+from ...op import operand_type as ot
+from ...op import operation_signature as sig
+from ...op import opmem_modifier as mod
+from ...op import register_type as rt
 from ...op.constraint import (
     minmax_constraint,
     multiple_constraint,
     otherplusnmod_constraint,
-    regidx_constraint
+    regidx_constraint,
 )
 from ...op.misc import make_ord_prefix as mop
-
 from ..types import sve_vreg
-
-from ....registers import (
-    asm_data_type as adt,
-    asm_index_type as ait,
-    adt_size
-)
 
 _FLOATS = [adt.FP64, adt.FP32, adt.FP16, adt.BF16, adt.FP8E4M3, adt.FP8E5M2]
 _INTS = [adt.SINT64, adt.SINT32, adt.SINT16, adt.SINT8,
@@ -54,7 +46,7 @@ class sve_struct_constraint(regidx_constraint,otherplusnmod_constraint):
     """
     Constraint ensuring structured loads/stores use consecutive registers
     """
-    reg_class : Type[sve_vreg] = sve_vreg
+    reg_class : type[sve_vreg] = sve_vreg
     offset : int = 1
     modval : int = 32
 

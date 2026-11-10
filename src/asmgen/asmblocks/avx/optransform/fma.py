@@ -8,8 +8,8 @@ AVX fma instruction
 """
 
 from ...op import optransform_modifier as mod
-
 from .base import avx_opd3_base
+
 
 class avx_fma(avx_opd3_base):
     """

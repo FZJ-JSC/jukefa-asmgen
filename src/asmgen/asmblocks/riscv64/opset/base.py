@@ -1,8 +1,9 @@
 """
 riscv64's set
 """
+from ....registers import asm_data_type as adt
+from ....registers import freg_base, greg_base
 from ...op.opset import scalar_opset
-from ....registers import asm_data_type as adt, greg_base, freg_base
 from ..types import FCDT_SUFFIXES
 from .signatures import make_riscv64_opset_signatures
 

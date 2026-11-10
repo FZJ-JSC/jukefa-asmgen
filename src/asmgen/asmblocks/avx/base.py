@@ -7,42 +7,25 @@
 Shared AVX(X86_64) generator base class (avxbase)
 """
 
-from copy import deepcopy
-from typing import Union
 from abc import abstractmethod
+from copy import deepcopy
 
-from ..noarch import compiler_family
-from ..x86.opmem.displacement import ENCODING_FEATURES as X86_ENCODING_FEATURES
 from ...asmdata import asm_data
-from ...registers import asm_index_type
+from ...callconv.callconv import callconv
 from ...registers import (
     adt_size,
     freg_base,
-
-    reg_tracker,
-    asm_data_type as adt,
-    adt_size,
-    asm_index_type as ait,
-    treg_base, vreg_base, freg_base, greg_base
+    greg_base,
+    vreg_base,
 )
-
-from ..noarch import asmgen,comparison
-from ...callconv.callconv import callconv
-
-from .types import x86_greg,avx_freg,xmm_vreg,ymm_vreg,zmm_vreg,reg_prefixer,avx512_mreg
-
-from .optransform import avx_fma,avx_mul,avx_add
-
-from .opmem.load import avx128_load,avx256_load,avx512_load
-from .opmem.store import avx128_store,avx256_store,avx512_store
 from ...registers import asm_data_type as _ADT
-from ..op.operand import operand_modifier as _opd_mod
-from ..op.opmove import opmove_modifier as _move_mod
-from ..op.scalar import BITS_GP as _BITS_GP
+from ...registers import asm_data_type as adt
+from ...registers import asm_index_type as ait
+from ..noarch import asmgen, comparison, compiler_family
 from ..op.opset import opset_modifier as _opset_mod
-from ..x86.types import DT_SUFFIXES
-from ..op.optransform import optransform_modifier as _opd3_mod
-from ..x86.types import SIZE_SUFFIXES
+from ..x86.opmem.displacement import ENCODING_FEATURES as X86_ENCODING_FEATURES
+from ..x86.types import DT_SUFFIXES, SIZE_SUFFIXES
+from .types import avx_freg, reg_prefixer, x86_greg, xmm_vreg, ymm_vreg
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
@@ -90,9 +73,9 @@ class avxbase(asmgen):
         self.callconvs = {
             "systemv" : callconv(
                 param_regs={ 'greg' : [13,12,11,10, 0,1], # RDI, RSI, RDX, RCX, R8, R9
-                             'freg' : list(range(0, 8))},
+                             'freg' : list(range(8))},
                 caller_save_lists={ 'greg' : [13,12,11,10, 0,1],  # func args/return vals
-                                    'freg' : list(range(0, 8))
+                                    'freg' : list(range(8))
                                    },
                 callee_save_lists={ 'greg' : list(range(4,8)) +# R12-R15
                                         [9,   # BX

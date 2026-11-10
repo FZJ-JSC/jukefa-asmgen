@@ -32,7 +32,9 @@ class test_examples(unittest.TestCase):
 
     def test_rvv_lmul_runs(self):
         # it broke unnoticed (old register counts, the VF modifier): ran by nothing
-        import os, subprocess, sys
+        import os
+        import subprocess
+        import sys
         root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         r = subprocess.run([sys.executable, os.path.join(root, "examples", "rvv_lmul.py")],
                            capture_output=True, text=True, timeout=120,

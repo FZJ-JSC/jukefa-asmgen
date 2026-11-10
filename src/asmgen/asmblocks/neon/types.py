@@ -8,6 +8,7 @@ NEON/ASIMD register types
 """
 from ...registers import vreg_base
 
+
 #pylint: disable=too-few-public-methods
 class neon_vreg(vreg_base):
     """

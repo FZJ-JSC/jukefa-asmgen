@@ -9,6 +9,7 @@ C++ templates for evaluating conditions
 
 from asmgen.cppgen.expressions import identity
 
+
 def always_true(function_name, condition=""):
     """
     condition check that always returns true

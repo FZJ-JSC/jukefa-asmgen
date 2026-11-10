@@ -7,13 +7,13 @@ with ukrgen 0.3.
 """
 import unittest
 
+from asmgen.asmblocks.avx import avx512, fma128, fma256
+from asmgen.asmblocks.neon import neon
+from asmgen.asmblocks.op.opmem import opmem_modifier as mod
 from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.rvv071 import rvv071
-from asmgen.asmblocks.neon import neon
-from asmgen.asmblocks.sve import sve
 from asmgen.asmblocks.sme import sme
-from asmgen.asmblocks.avx import fma128, fma256, avx512
-from asmgen.asmblocks.op.opmem import opmem_modifier as mod
+from asmgen.asmblocks.sve import sve
 
 # base ISA: prefetch of greg(5), plain and 64 bytes past it
 FORMS = {

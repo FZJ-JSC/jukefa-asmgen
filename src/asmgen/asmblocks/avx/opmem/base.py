@@ -6,30 +6,26 @@
 """
 AVX operations with n data operand and 1 address operand (load/store)
 """
-from typing import Callable, Any
+from collections.abc import Callable
+from typing import Any
 
-from ...op import (
-    opmem,
-    opmem_modifier as mod,
-    opmem_action,
-    operation_signature,
-    operand_modifier as opd_mod
-)
-from ....registers import (
-    asm_data_type as adt,
-    adt_size,
-    ait_size,
-    data_reg
-)
-from ..types import (
-    x86_greg,
-    avx_vreg, xmm_vreg, ymm_vreg, zmm_vreg,
-    avx_freg,
-    avx512_mreg
-)
+from ....registers import adt_size, ait_size, data_reg
+from ....registers import asm_data_type as adt
+from ...op import operand_modifier as opd_mod
+from ...op import operation_signature, opmem, opmem_action
+from ...op import opmem_modifier as mod
 from ...x86.opmem.base import x86_opmem
-
+from ..types import (
+    avx512_mreg,
+    avx_freg,
+    avx_vreg,
+    x86_greg,
+    xmm_vreg,
+    ymm_vreg,
+    zmm_vreg,
+)
 from .signatures import make_avx_opmem_signatures
+
 
 class avx_opmem(opmem):
     """

@@ -14,12 +14,13 @@ store (0.6, phase 5):
 """
 import unittest
 
+from asmgen.asmblocks.avx import fma128, fma256
+from asmgen.asmblocks.op.operand import operand_modifier as OM
+from asmgen.asmblocks.op.opmem import opmem_modifier as M
 from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.sve import sve
-from asmgen.asmblocks.avx import fma128, fma256
-from asmgen.registers import asm_data_type as adt, asm_index_type as ait
-from asmgen.asmblocks.op.opmem import opmem_modifier as M
-from asmgen.asmblocks.op.operand import operand_modifier as OM
+from asmgen.registers import asm_data_type as adt
+from asmgen.registers import asm_index_type as ait
 
 
 class test_sve_gathers(unittest.TestCase):

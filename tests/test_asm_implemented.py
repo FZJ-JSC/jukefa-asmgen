@@ -7,25 +7,22 @@
 Test the asmgen implementations for different ISAs on whether they implement
 required methods
 """
-import unittest
 import inspect
+import unittest
 
 from parameterized import parameterized, parameterized_class
 
-from asmgen.asmblocks.noarch import asmgen,comparison
-from asmgen.registers import asm_data_type as adt
-from asmgen.registers import asm_index_type as ait
-from asmgen.registers import reg_tracker
-
-from asmgen.asmblocks.avx import fma128,fma256,avx512
+from asmgen.asmblocks.avx import avx512, fma128, fma256
 from asmgen.asmblocks.neon import neon
-from asmgen.asmblocks.sve import sve
-from asmgen.asmblocks.sme import sme
+from asmgen.asmblocks.noarch import asmgen, comparison
 from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.rvv071 import rvv071
+from asmgen.asmblocks.sme import sme
+from asmgen.asmblocks.sve import sve
+from asmgen.registers import asm_data_type as adt
+from asmgen.registers import reg_tracker
 
 from .testcase import testcase
-
 
 allowed_not_implemented = {
         'rvv' : ['simd_size',   # vector-length-agnostic: known at run time only

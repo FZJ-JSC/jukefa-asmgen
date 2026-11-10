@@ -7,23 +7,21 @@
 data move operation base class for SME
 """
 
-from typing import Callable
+from collections.abc import Callable
 
-from ....registers import asm_data_type as adt, data_reg
-
-from ...op.signature import operation_signature
-from ...op.operand import operand_modifier
-from ...op.opmove import opmove,opmove_modifier
+from ....registers import asm_data_type as adt
+from ....registers import data_reg
+from ...aarch64.types import aarch64_freg, aarch64_greg
 from ...op.misc import make_ord_prefix as mop
-
+from ...op.operand import operand_modifier
+from ...op.opmove import opmove, opmove_modifier
+from ...op.scalar import scalar_dregs_only, scalar_operands
+from ...op.signature import operation_signature
 from ...sve.opmove import sve_move
-
 from ...sve.types import sve_vreg
 from ..types import sme_treg
-from ...aarch64.types import aarch64_greg,aarch64_freg
-
 from .signatures import make_sme_move_signatures
-from ...op.scalar import scalar_dregs_only, scalar_operands
+
 
 class sme_move(opmove):
     """
@@ -176,13 +174,13 @@ class sme_move(opmove):
 
         if t_to_v:
             return self.asmwrap(
-                    (f"mova {vreg_specs},"
+                    f"mova {vreg_specs},"
                      f"{predicate},"
-                     f"{tile_spec}"))
+                     f"{tile_spec}")
         if v_to_t:
             return self.asmwrap(
-                    (f"mova {tile_spec},"
+                    f"mova {tile_spec},"
                      f"{predicate},"
-                     f"{vreg_specs}"))
+                     f"{vreg_specs}")
 
         raise ValueError("tile/vector move direction could not be determined")

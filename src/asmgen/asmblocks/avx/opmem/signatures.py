@@ -7,25 +7,19 @@
 Valid signatures for AVX opmem operations
 """
 
+from ....registers import adt_size
+from ....registers import asm_data_type as adt
+from ....registers import asm_index_type as ait
+from ...op import operand_modifier as opd_mod
+from ...op import operand_role as orl
+from ...op import operand_shape as osh
+from ...op import operand_type as ot
+from ...op import operation_signature as sig
+from ...op import opmem_action
+from ...op import opmem_modifier as mod
+from ...op import register_type as rt
+from ...op.constraint import minmax_constraint, multiple_constraint
 from ...x86.opmem.displacement import displacement_forms
-from ...op.constraint import multiple_constraint
-from ...op import (
-    operation_signature as sig,
-    operand_shape as osh,
-    operand_type as ot,
-    operand_role as orl,
-    operand_modifier as opd_mod,
-    register_type as rt,
-    opmem_modifier as mod,
-    opmem_action
-)
-
-from ...op.constraint import minmax_constraint
-from ....registers import (
-    asm_data_type as adt,
-    asm_index_type as ait,
-    adt_size
-)
 
 # Complete set of types
 _ALL_DTS = [

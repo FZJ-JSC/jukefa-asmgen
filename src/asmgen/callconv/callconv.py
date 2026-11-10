@@ -7,11 +7,12 @@
 Calling convention abstraction class
 """
 
-from typing import Callable, Union
+from collections.abc import Callable
 
 from ..asmblocks.noarch import asmgen
 from ..asmblocks.op.opmem import opmem_modifier
-from ..registers import asm_data_type as adt, greg_base, data_reg
+from ..registers import asm_data_type as adt
+from ..registers import data_reg, greg_base
 
 #pylint: disable=too-many-instance-attributes,too-many-positional-arguments
 
@@ -175,7 +176,7 @@ class callconv:
     def get_locations(self,
                       gen : asmgen,
                       type_tag : str,
-                      indices : list[int]) -> list[Union[greg_base,data_reg]]:
+                      indices : list[int]) -> list[greg_base | data_reg]:
         """
         Returns the registers corresponding to the specified register indices
         """
@@ -210,10 +211,10 @@ class callconv:
         """
 
         reg_indices : dict[str,list[int]] = {
-                k : [] for k in save_lists.keys()
+                k : [] for k in save_lists
                 }
 
-        for tag in save_lists.keys():
+        for tag in save_lists:
             if tag not in regs:
                 continue
             reg_indices[tag] = set(regs[tag]).intersection(

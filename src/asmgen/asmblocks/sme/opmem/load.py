@@ -7,10 +7,11 @@
 SME load instructions
 """
 
-from typing import Callable
+from collections.abc import Callable
 
 from ...op import opmem_action as action
 from .base import sme_opmem
+
 
 class sme_load(sme_opmem):
     """

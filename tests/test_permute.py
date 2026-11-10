@@ -11,10 +11,12 @@ import subprocess
 import tempfile
 import unittest
 
+from asmgen.asmblocks.avx import avx512, fma256
 from asmgen.asmblocks.neon import neon
-from asmgen.asmblocks.avx import fma256, avx512
-from asmgen.asmblocks.op.opmove import opmove_modifier as MV, permuted, PERMUTE_PATTERNS
-from asmgen.registers import asm_data_type as adt, adt_size
+from asmgen.asmblocks.op.opmove import PERMUTE_PATTERNS, permuted
+from asmgen.asmblocks.op.opmove import opmove_modifier as MV
+from asmgen.registers import adt_size
+from asmgen.registers import asm_data_type as adt
 
 HARNESS = r"""
 #include <stdio.h>

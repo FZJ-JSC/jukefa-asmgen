@@ -7,10 +7,11 @@
 AVX/FMA/AVX2/AVX512 load instructions
 """
 
-from typing import Callable
+from collections.abc import Callable
 
 from ...op import opmem_action as action
-from .base import avx128_opmem,avx256_opmem,avx512_opmem
+from .base import avx128_opmem, avx256_opmem, avx512_opmem
+
 
 class avx128_load(avx128_opmem):
     """

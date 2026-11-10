@@ -1,8 +1,9 @@
 """
 aarch64's set
 """
+from ....registers import adt_size, freg_base, greg_base
+from ....registers import asm_data_type as adt
 from ...op.opset import scalar_opset
-from ....registers import asm_data_type as adt, adt_size, greg_base, freg_base
 from .signatures import make_aarch64_opset_signatures
 
 MASK64 = 2**64 - 1

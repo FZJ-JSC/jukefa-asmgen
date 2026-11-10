@@ -7,11 +7,12 @@
 Tests SVE fmul instruction code generation
 """
 
-from asmgen.registers import asm_data_type as adt
 from asmgen.asmblocks.op import optransform_modifier as mod
 from asmgen.asmblocks.op.optransform import widening_method as wm
+from asmgen.registers import asm_data_type as adt
 
 from .test_sve_opd3 import test_sve_opd3_base
+
 
 class test_sve_mul(test_sve_opd3_base):
     """

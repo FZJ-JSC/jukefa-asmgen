@@ -6,17 +6,11 @@
 """
 Operation signatures
 """
+from dataclasses import dataclass, field
 from typing import Any
 
-from dataclasses import dataclass,field
-
 from .modifier import operation_modifier
-from .operand import (
-    operand_shape,
-    operand_modifier,
-    is_register_type,
-    operand_type
-)
+from .operand import is_register_type, operand_modifier, operand_shape, operand_type
 
 
 @dataclass(kw_only=True)

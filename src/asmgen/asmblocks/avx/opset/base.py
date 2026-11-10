@@ -1,15 +1,16 @@
 """
 avx's set
 """
-from typing import Callable
+from collections.abc import Callable
 
+from ....registers import adt_size, data_reg, greg_base
+from ....registers import asm_data_type as adt
 from ...op.opset import vector_opset
-from ....registers import asm_data_type as adt, adt_size, data_reg, greg_base
-from ..types import avx512_mreg
 from ...x86.opset import x86_opset
-from .signatures import make_avx_opset_signatures
 from ...x86.opset.base import ONE_SHIFTS
 from ...x86.types import SIZE_SUFFIXES, x86_greg
+from ..types import avx512_mreg
+from .signatures import make_avx_opset_signatures
 
 # 1 from all bits set: a logical right shift by the element's bits less one
 INT_SHIFTS = {adt.UINT64: ("q", 63), adt.SINT64: ("q", 63), adt.UINT32: ("d", 31), adt.SINT32: ("d", 31),

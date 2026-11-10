@@ -7,19 +7,14 @@
 Classes for operand restrictions/constraints
 """
 
-from typing import Callable,Type
-
 from abc import ABC, abstractmethod
+from collections.abc import Callable
 from dataclasses import dataclass, field
 
+from ...registers import asm_data_type as adt
+from ...registers import data_reg, greg_base, mreg_base
 from .modifier import operation_modifier as mod
 
-from ...registers import (
-    data_reg,
-    greg_base,
-    mreg_base,
-    asm_data_type as adt
-)
 
 # pylint: disable-next=invalid-name
 class ArgumentDependencyError(Exception):
@@ -162,7 +157,7 @@ class regidx_constraint(intval_constraint):
     :param reg_class: register type/class, must be constructible
                       with reg_class(reg_idx : int)
     """
-    reg_class : Type[greg_base|data_reg|mreg_base]
+    reg_class : type[greg_base|data_reg|mreg_base]
     what : str = "index"
     getint : Callable[[greg_base|data_reg|mreg_base],int] = lambda reg : reg.idx
     makeval : Callable[[int], greg_base|data_reg|mreg_base] = field(init=False)
@@ -280,8 +275,8 @@ class otherplusn_constraint(intval_constraint):
         offset = params['offset']
 
         if self.getint(val) != otherint+offset:
-            raise ValueError((f"{self.what} of {name} must be "
-                              f"{self.what} of {other} plus {offset}"))
+            raise ValueError(f"{self.what} of {name} must be "
+                              f"{self.what} of {other} plus {offset}")
 
 
 @dataclass(kw_only=True)
@@ -320,9 +315,9 @@ class otherplusnmod_constraint(intval_constraint):
         modval = params['modval']
 
         if self.getint(val) != (otherint+offset) % modval:
-            raise ValueError((f"{self.what} of {name} must be "
+            raise ValueError(f"{self.what} of {name} must be "
                               f"{self.what} of {other} plus {offset} "
-                              f"modulo {modval}"))
+                              f"modulo {modval}")
 
 @dataclass(kw_only=True)
 class sameval_constraint(intval_constraint):
@@ -348,8 +343,8 @@ class sameval_constraint(intval_constraint):
             raise ArgumentDependencyError(name=name, deps=[other])
 
         if self.getint(val) != self.getint(context[other]):
-            raise ValueError((f"{self.what} of {name} must be equal to "
-                              f"{self.what} of {other}"))
+            raise ValueError(f"{self.what} of {name} must be equal to "
+                              f"{self.what} of {other}")
 
 @dataclass(kw_only=True)
 class differentval_constraint(intval_constraint):
@@ -376,8 +371,8 @@ class differentval_constraint(intval_constraint):
             raise ArgumentDependencyError(name=name, deps=[other])
 
         if self.getint(val) == self.getint(context[other]):
-            raise ValueError((f"{self.what} of {name} must be different from "
-                              f"{self.what} of {other}"))
+            raise ValueError(f"{self.what} of {name} must be different from "
+                              f"{self.what} of {other}")
 
 
 @dataclass(kw_only=True)

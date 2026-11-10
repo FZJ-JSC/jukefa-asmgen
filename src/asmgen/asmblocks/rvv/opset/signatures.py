@@ -2,7 +2,17 @@
 RVV set signatures: CONST zero, one
 """
 from ...op.operand import register_type as rt
-from ...op.opset import INT_DTS, VREG_DTS, const_signatures, stindex_signatures, vlen_param_signatures, vlen_signatures, zero_signatures, vlen_avl_signatures, maskavl_signatures
+from ...op.opset import (
+    INT_DTS,
+    VREG_DTS,
+    const_signatures,
+    maskavl_signatures,
+    stindex_signatures,
+    vlen_avl_signatures,
+    vlen_param_signatures,
+    vlen_signatures,
+    zero_signatures,
+)
 
 
 def make_rvv_opset_signatures() -> list:

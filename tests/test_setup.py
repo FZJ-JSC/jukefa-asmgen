@@ -4,14 +4,15 @@ What each ISA sets up before a kernel and tears down after
 
 import unittest
 
+from asmgen.asmblocks.avx import avx512
 from asmgen.asmblocks.neon import neon
-from asmgen.asmblocks.sve import sve
-from asmgen.asmblocks.sme import sme
 from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.rvv071 import rvv071
-from asmgen.asmblocks.avx import avx512
 from asmgen.asmblocks.setup import setup_kind
-from asmgen.registers import reg_tracker, asm_data_type as adt
+from asmgen.asmblocks.sme import sme
+from asmgen.asmblocks.sve import sve
+from asmgen.registers import asm_data_type as adt
+from asmgen.registers import reg_tracker
 
 
 def tracker():
@@ -113,8 +114,8 @@ class test_setup(unittest.TestCase):
                                  gen.isaendquirks(rt=tracker(), dt=adt.FP32))
 
 
-from asmgen.asmblocks.setup import predication
 from asmgen.asmblocks.op.opset import opset_modifier
+from asmgen.asmblocks.setup import predication
 
 
 class test_reg_trackers(unittest.TestCase):

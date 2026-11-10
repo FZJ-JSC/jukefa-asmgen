@@ -7,15 +7,14 @@
 RISC-V RVV 0.7.1 asm generator and related types
 """
 
-from .setup import rvv071_setup
+from ...registers import asm_data_type as adt
 from ..noarch import compiler_family
 from ..rvv import rvv
-
-from ...registers import asm_data_type as adt, adt_size, greg_base, vreg_base
-from ...registers import asm_index_type as ait
 from ..rvv.opset import rvv_opset
 from .opmem import rvv071_load, rvv071_store
 from .opmove import rvv071_move
+from .setup import rvv071_setup
+
 
 def _th_prefixed(line : str) -> str:
     """

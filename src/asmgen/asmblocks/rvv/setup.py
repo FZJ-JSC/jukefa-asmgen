@@ -6,7 +6,8 @@ RVV's setup: vsetvli's element width, grouping and vector length
 """
 from __future__ import annotations
 
-from ...registers import asm_data_type as adt, adt_size
+from ...registers import adt_size
+from ...registers import asm_data_type as adt
 from ..op.opset import opset_modifier
 from ..setup import isa_setup, predication, setup_kind, setup_step
 

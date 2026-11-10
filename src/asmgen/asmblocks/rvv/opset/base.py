@@ -1,13 +1,14 @@
 """
 rvv's set
 """
-from typing import Callable
+from collections.abc import Callable
 
+from ....registers import adt_size, data_reg, greg_base
+from ....registers import asm_data_type as adt
 from ...op.opset import vector_opset
-from ....registers import asm_data_type as adt, adt_size, data_reg, greg_base
 from ...riscv64.opset import riscv64_opset
-from .signatures import make_rvv_opset_signatures
 from ..types import rvv_vreg
+from .signatures import make_rvv_opset_signatures
 
 
 class rvv_opset(vector_opset):

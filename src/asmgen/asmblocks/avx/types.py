@@ -6,11 +6,11 @@
 """
 AVX register types (vector, masking registers and AT&T prefixing)
 """
-from typing import Callable
+from collections.abc import Callable
 
-from ...registers import vreg_base, greg_base, data_reg, mreg_base
+from ...registers import data_reg, greg_base, mreg_base, vreg_base
+from ..x86.types import avx_freg, x86_greg
 
-from ..x86.types import x86_greg, avx_freg
 
 class avx_vreg(vreg_base):
     """

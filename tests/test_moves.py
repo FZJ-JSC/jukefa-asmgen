@@ -9,9 +9,9 @@ import tempfile
 import unittest
 
 from asmgen.asmblocks.neon import neon
+from asmgen.asmblocks.op import operand_modifier as omod
 from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.sve import sve
-from asmgen.asmblocks.op import operand_modifier as omod
 from asmgen.registers import asm_data_type as adt
 
 B, L = omod.BCAST, omod.ILANE

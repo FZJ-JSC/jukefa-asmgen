@@ -1,8 +1,9 @@
 """
 RISC-V moves between scalar registers
 """
+from ....registers import asm_data_type as adt
+from ....registers import freg_base, greg_base
 from ...op.scalar import scalar_move
-from ....registers import asm_data_type as adt, greg_base, freg_base
 from ..types import FCDT_SUFFIXES, FDT_SUFFIXES
 
 

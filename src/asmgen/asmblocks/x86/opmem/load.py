@@ -7,10 +7,11 @@
 Base X86 load instructions
 """
 
-from typing import Callable
+from collections.abc import Callable
 
 from ...op import opmem_action as action
 from .base import x86_opmem
+
 
 class x86_load(x86_opmem):
     """

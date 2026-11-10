@@ -7,11 +7,12 @@
 Utilities for generating C-callable functions in ASM
 """
 
-from .callconv import callconv
+from ..asmblocks.noarch import asmgen
 from ..asmblocks.op.opmem import opmem_modifier
 from ..registers import asm_data_type as adt
-from ..asmblocks.noarch import asmgen
 from ..registers import reg_tracker
+from .callconv import callconv
+
 
 class fngen:
     """

@@ -7,20 +7,21 @@
 Operation moving data between data registers
 """
 
-from enum import auto
-
 from abc import abstractmethod
-
-from .operation import operation
-from .signature import operation_signature
-from .modifier import operation_modifier
-from .operand import operand_modifier
-from .misc import make_ord_prefix
+from enum import auto
 
 from ...registers import (
     asm_data_type as adt,
+)
+from ...registers import (
     data_reg,
 )
+from .misc import make_ord_prefix
+from .modifier import operation_modifier
+from .operand import operand_modifier
+from .operation import operation
+from .signature import operation_signature
+
 
 # Modifiers are mostly on operands (ROW,LANE, etc...)
 class opmove_modifier(operation_modifier):
@@ -70,7 +71,10 @@ def permute_signatures(forms) -> list:
     PERMUTE: adreg and bdreg the sources, cdreg the destination - one
     signature per (data type, pattern, bits, segment) of forms
     """
-    from .operand import operand_shape as osh, operand_type as ot, operand_role as orl, register_type as rgt
+    from .operand import operand_role as orl
+    from .operand import operand_shape as osh
+    from .operand import operand_type as ot
+    from .operand import register_type as rgt
     return [operation_signature(modifiers={opmove_modifier.PERMUTE},
                                 structural_params={"pattern": pattern, "bits": bits, "segment": segment},
                                 operands={name: osh(otype=ot.REGISTER, orole=orl.DATA, rtype=rgt.VEC, dt=dt)

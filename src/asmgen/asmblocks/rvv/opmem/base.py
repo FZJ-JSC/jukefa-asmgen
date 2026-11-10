@@ -7,31 +7,19 @@
 RVV 1.0 and 0.7.1 opmem base
 """
 
-from typing import Any,Callable
+from collections.abc import Callable
+from typing import Any
 
-from ....registers import (
-    asm_data_type as adt,
-    adt_size,
-    ait_size,
-    data_reg,
-    greg_base
-)
-
-from ...op import (
-    opmem,
-    opmem_modifier as mod,
-    opmem_action,
-    operation_signature,
-    operand_modifier as opd_mod
-)
-
+from ....registers import adt_size, ait_size, data_reg, greg_base
+from ....registers import asm_data_type as adt
+from ...op import operand_modifier as opd_mod
+from ...op import operation_signature, opmem, opmem_action
+from ...op import opmem_modifier as mod
 from ...riscv64.opmem.base import riscv64_opmem
-
+from ...riscv64.types import riscv64_freg, riscv64_greg
 from ..types import rvv_vreg
-from ...riscv64.types import riscv64_greg,riscv64_freg
-
-
 from .signatures import make_rvv_opmem_signatures
+
 
 class rvv_opmem(opmem):
     """

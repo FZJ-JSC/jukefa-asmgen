@@ -10,12 +10,11 @@ SVE add (fadd)
 from typing import Any
 
 from ....registers import asm_data_type as adt
-from ...op import (
-    optransform_modifier as mod,
-    operand_modifier as opd_mod
-)
+from ...op import operand_modifier as opd_mod
+from ...op import optransform_modifier as mod
 from .base import sve_opd3_base
 from .scalar import sve_scalar_add
+
 
 class sve_add(sve_opd3_base):
     """

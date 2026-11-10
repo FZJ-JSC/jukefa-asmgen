@@ -7,20 +7,16 @@
 SME fopa implementation
 """
 
-from typing import Callable, Any
+from collections.abc import Callable
+from typing import Any
 
-from ....registers import (
-    asm_data_type as adt,
-    data_reg
-)
-from ...op import (
-    optransform,
-    optransform_modifier as mod,
-    operation_signature,
-    operand_modifier as opd_mod
-)
-
+from ....registers import asm_data_type as adt
+from ....registers import data_reg
+from ...op import operand_modifier as opd_mod
+from ...op import operation_signature, optransform
+from ...op import optransform_modifier as mod
 from .signatures import make_sme_opd3_signatures
+
 
 class sme_fopa(optransform):
     """
@@ -46,8 +42,8 @@ class sme_fopa(optransform):
                          dts : dict[str,adt]):
 
         if mod.PART in modifiers:
-            raise ValueError(("SME has no partial instructions "
-                              "(widening instructions 'dot' neighbours)"))
+            raise ValueError("SME has no partial instructions "
+                              "(widening instructions 'dot' neighbours)")
 
         unsupported_opd_mods = {
             opd_mod.VF    : (ValueError, "SME has no VF opd3"),
@@ -102,7 +98,7 @@ class sme_fopa(optransform):
         narrow_suf = self.dt_suffixes[a_dt]
         wide_suf = self.dt_suffixes[c_dt]
         return self.asmwrap(
-            (f"{inst} {cdreg}.{wide_suf},"
+            f"{inst} {cdreg}.{wide_suf},"
              f"{kwargs['amreg']}/m,{kwargs['bmreg']}/m,"
              f"{adreg}.{narrow_suf},"
-             f"{bdreg}.{narrow_suf}"))
+             f"{bdreg}.{narrow_suf}")

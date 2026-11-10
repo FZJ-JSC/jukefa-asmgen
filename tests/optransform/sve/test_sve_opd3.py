@@ -10,6 +10,7 @@ import unittest
 
 from asmgen.asmblocks.sve import sve
 
+
 # It's fine for the testing
 # pylint: disable-next=too-many-instance-attributes
 class test_sve_opd3_base(unittest.TestCase):

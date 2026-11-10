@@ -9,8 +9,9 @@ RISCV64 +D/F prefetch (Zicbop) testsuite
 import unittest
 
 from asmgen.asmblocks.op import opmem_modifier as mod
-from asmgen.asmblocks.riscv64.types import riscv64_greg
 from asmgen.asmblocks.riscv64.opmem import riscv64_prefetch
+from asmgen.asmblocks.riscv64.types import riscv64_greg
+
 
 def asmwrap(s: str) -> str:
     """

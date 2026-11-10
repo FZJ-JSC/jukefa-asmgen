@@ -1,10 +1,10 @@
 """
 AArch64 scalar arithmetic on general registers: add, sub, mul, shift
 """
+from ....registers import greg_base
 from ...op.constraint import anyof_constraint, minmax_constraint, multiple_constraint
 from ...op.optransform import optransform_modifier
 from ...op.scalar import scalar_arith
-from ....registers import greg_base
 
 SHIFTED_MAX = 4095 * 4096
 

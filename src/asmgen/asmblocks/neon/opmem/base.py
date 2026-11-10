@@ -7,21 +7,18 @@
 NEON/ASIMD operations with n data operand and 1 address operand (load/store)
 """
 
-from typing import Callable,Any
+from collections.abc import Callable
+from typing import Any
 
+from ....registers import adt_size
+from ....registers import asm_data_type as adt
 from ...aarch64.opmem.base import aarch64_opmem
-from ...aarch64.types import aarch64_greg,aarch64_freg
-from ...op import (
-    opmem,
-    opmem_modifier as mod,
-    opmem_action,
-    operation_signature,
-    operand_modifier as opd_mod,
-    make_ord_prefix
-)
-from ....registers import asm_data_type as adt, adt_size
-
+from ...aarch64.types import aarch64_freg, aarch64_greg
+from ...op import make_ord_prefix, operation_signature, opmem, opmem_action
+from ...op import operand_modifier as opd_mod
+from ...op import opmem_modifier as mod
 from .signatures import make_neon_opmem_signatures
+
 
 class neon_opmem(opmem):
     """
@@ -150,9 +147,9 @@ class neon_opmem(opmem):
                     dregname = f"{make_ord_prefix(i)}dreg"
                     if kwargs[f"{dregname}_lane"] != adreg_lane:
                         raise ValueError(
-                                ("NEON STRUCT+ILANE ld/st requires the same lane "
+                                "NEON STRUCT+ILANE ld/st requires the same lane "
                                  " to be used for all dregs"
-                                ))
+                                )
 
     def diagnose_failure(self, modifiers : set[mod],
                          operand_modifiers : dict[str,set[opd_mod]],
@@ -173,8 +170,8 @@ class neon_opmem(opmem):
         if {mod.VOFFSET, mod.IOFFSET} & modifiers:
             if mod.STRUCT in modifiers or has_bcast or has_ilane:
                 raise ValueError(
-                        ("VOFFSET/IOFFSET cannot be combined with STRUCT, "
-                         "ILANE, or BCAST"))
+                        "VOFFSET/IOFFSET cannot be combined with STRUCT, "
+                         "ILANE, or BCAST")
 
         self.diagnose_bcast(opd_mods=operand_modifiers)
 

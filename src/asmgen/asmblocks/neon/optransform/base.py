@@ -7,17 +7,15 @@
 NEON/ASIMD opd3 base case
 """
 
-from typing import Callable
+from collections.abc import Callable
 
 from ....registers import (
-    adt_size,
     asm_data_type as adt,
 )
-
 from ...aarch64.optransform.base import aarch64_simd_opd3_base
 from ...op import operand_modifier as opd_mod
-
 from .signatures import make_neon_opd3_signatures
+
 
 class neon_opd3_base(aarch64_simd_opd3_base):
     """

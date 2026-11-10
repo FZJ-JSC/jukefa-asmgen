@@ -7,27 +7,23 @@
 RISC-V RVV 1.0 asm generator and related types
 """
 
-from ..op.operand import register_type as rt
-from ..noarch import compiler_family
+from ...registers import asm_data_type as adt
+from ...registers import asm_index_type as ait
 from ...registers import (
-    reg_tracker,
-    asm_data_type as adt,
-    adt_size,
-    asm_index_type as ait,
+    freg_base,
+    greg_base,
     treg_base,
-    vreg_base, freg_base, greg_base
+    vreg_base,
 )
+from ..noarch import compiler_family
+from ..op.operand import register_type as rt
 from ..riscv64 import riscv64
-from .types import rvv_vreg
-
-from .optransform import rvv_fma,rvv_mul,rvv_add
-from .opmem import rvv_load,rvv_store
+from ..riscv64.optransform import riscv64_shift, riscv64_sub
+from .opmem import rvv_load, rvv_store
 from .opmove import rvv_move
-from ..riscv64.optransform import riscv64_sub
-from ..riscv64.optransform import riscv64_shift
 from .opset import rvv_opset
-from ..op.opset import opset_modifier as _opset_mod
-
+from .optransform import rvv_add, rvv_fma, rvv_mul
+from .types import rvv_vreg
 
 # pylint: disable=too-many-public-methods
 
@@ -123,8 +119,8 @@ class rvv(riscv64):
                 self.lmul = value
             else:
                 raise NotImplementedError(
-                        ("{value} is not an integer. Fractional "
-                         "LMUL is not implemented yet"))
+                        "{value} is not an integer. Fractional "
+                         "LMUL is not implemented yet")
             # the memory operations' signatures depend on it (segments)
             self.load.refresh()
             self.store.refresh()

@@ -6,7 +6,8 @@
 """
 C++ expressions
 """
-from enum import Enum,unique
+from enum import Enum, unique
+
 
 def identity(c_var):
     """

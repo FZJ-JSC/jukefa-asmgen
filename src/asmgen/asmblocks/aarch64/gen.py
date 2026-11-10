@@ -8,28 +8,16 @@ ARM64/AArch64 asm generator and related types
 """
 
 from copy import deepcopy
-from typing import Union
 
-from ..noarch import compiler_family
-from ..noarch import asmgen,comparison
-from ...registers import (
-    adt_size,
-
-    asm_data_type as adt,
-    greg_base, freg_base
-)
-
-from .types import aarch64_greg,aarch64_freg
 from ...callconv.callconv import callconv
-
-from .opmem import aarch64_load, aarch64_store
-from .opmem import aarch64_prefetch
 from ...registers import asm_data_type as _ADT
-from ..op.operand import operand_modifier as _opd_mod
-from ..op.opmove import opmove_modifier as _move_mod
-from ..op.scalar import BITS_GP as _BITS_GP
+from ...registers import asm_data_type as adt
+from ...registers import freg_base, greg_base
+from ..noarch import asmgen, comparison, compiler_family
 from ..op.opset import opset_modifier as _opset_mod
 from ..op.optransform import optransform_modifier as _opd3_mod
+from .opmem import aarch64_load, aarch64_prefetch, aarch64_store
+from .types import aarch64_freg, aarch64_greg
 
 _GP = _ADT.UINT64  # general registers' arithmetic: 64-bit
 
@@ -73,14 +61,14 @@ class aarch64(asmgen):
         super().__init__()
         self.callconvs = {
             "aapcs64" : callconv(
-                param_regs={ 'greg' : list(range(0, 8)),
-                             'freg' : list(range(0, 8))},
-                caller_save_lists={ 'greg' : list(range(0, 8)) + # func args/return vals
+                param_regs={ 'greg' : list(range(8)),
+                             'freg' : list(range(8))},
+                caller_save_lists={ 'greg' : list(range(8)) + # func args/return vals
                                              [8] + # XR, indirect result reg
                                              list(range(9,16)) + # locals
                                              [18] # platform reg
                                         ,
-                                    'freg' : list(range(0, 8)) +
+                                    'freg' : list(range(8)) +
                                              list(range(16,32))
                                    },
                 callee_save_lists={ 'greg' : list(range(19,29)) + # Callee-saved

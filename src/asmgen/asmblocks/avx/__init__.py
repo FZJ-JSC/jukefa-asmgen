@@ -6,4 +6,4 @@
 """
 AVX/AVX2/FMA/AVX512 asm generator, register types and vector ops
 """
-from .gen import fma128, fma256, avx512
+from .gen import avx512, fma128, fma256

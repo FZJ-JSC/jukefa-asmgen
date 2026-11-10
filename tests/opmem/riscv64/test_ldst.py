@@ -8,10 +8,11 @@ RISCV64 +D/F opmem (ld/st) testsuite
 """
 import unittest
 
-from asmgen.asmblocks.op import opmem_action, opmem_modifier as mod
-from asmgen.registers import asm_data_type as adt
-from asmgen.asmblocks.riscv64.types import riscv64_greg, riscv64_freg
+from asmgen.asmblocks.op import opmem_action
+from asmgen.asmblocks.op import opmem_modifier as mod
 from asmgen.asmblocks.riscv64.opmem.base import riscv64_opmem
+from asmgen.asmblocks.riscv64.types import riscv64_freg, riscv64_greg
+from asmgen.registers import asm_data_type as adt
 
 
 def asmwrap(s: str) -> str:

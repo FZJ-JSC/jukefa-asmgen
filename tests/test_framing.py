@@ -11,9 +11,9 @@ import subprocess
 import tempfile
 import unittest
 
-from asmgen.asmblocks.rvv import rvv
-from asmgen.asmblocks.neon import neon
 from asmgen.asmblocks.avx import fma256
+from asmgen.asmblocks.neon import neon
+from asmgen.asmblocks.rvv import rvv
 from asmgen.callconv.fngen import fngen
 
 # generator, assembler and its flags

@@ -6,15 +6,16 @@
 """
 Generator for tests of GP register-related ASM blocks
 """
-from asmgen.registers import reg_tracker
+from asmgen.asmblocks.op.opmem import opmem_modifier
+from asmgen.asmblocks.op.opset import opset_modifier
 from asmgen.cppgen.checkers import bi_u64_eq
 from asmgen.cppgen.declarations import vargen
 from asmgen.cppgen.expressions import identity
+from asmgen.registers import asm_data_type as adt
+from asmgen.registers import reg_tracker
 
 from ..testcase import testcase
-from asmgen.asmblocks.op.opset import opset_modifier
-from asmgen.registers import asm_data_type as adt
-from asmgen.asmblocks.op.opmem import opmem_modifier
+
 
 class greg_test_generator:
     """

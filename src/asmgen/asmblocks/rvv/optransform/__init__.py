@@ -6,6 +6,6 @@
 """
 Meta-module for RVV opd3 operations
 """
+from .add import *
 from .fma import *
 from .mul import *
-from .add import *

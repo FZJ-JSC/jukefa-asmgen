@@ -9,14 +9,12 @@ AVX add (vadd)
 
 from typing import Any
 
-from ...op import (
-    optransform_modifier as mod,
-    operand_modifier as opd_mod
-)
 from ....registers import asm_data_type as adt
-
-from .base import avx_opd3_base
+from ...op import operand_modifier as opd_mod
+from ...op import optransform_modifier as mod
 from ...x86.optransform import x86_add
+from .base import avx_opd3_base
+
 
 class avx_add(avx_opd3_base):
     """

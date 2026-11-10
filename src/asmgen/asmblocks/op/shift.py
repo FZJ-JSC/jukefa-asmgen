@@ -2,14 +2,22 @@
 Signatures of moves shifting or rotating a register's lanes or blocks
 """
 
+from .constraint import minmax_constraint, otherplusn_constraint
 from .operand import (
     operand_modifier as omod,
-    operand_shape as osh,
-    operand_type as ot,
+)
+from .operand import (
     operand_role as orl,
+)
+from .operand import (
+    operand_shape as osh,
+)
+from .operand import (
+    operand_type as ot,
+)
+from .operand import (
     register_type as rgt,
 )
-from .constraint import minmax_constraint, otherplusn_constraint
 from .signature import operation_signature as opsig
 
 

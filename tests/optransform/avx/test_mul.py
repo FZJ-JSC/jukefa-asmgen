@@ -10,6 +10,7 @@ from asmgen.registers import asm_data_type as adt
 
 from .test_avx_opd3 import test_avx_opd3
 
+
 class test_avx_mul(test_avx_opd3):
     """
     Tests AVX opd3 operations

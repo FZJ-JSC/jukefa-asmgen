@@ -35,6 +35,7 @@ class test_golden_assembles(unittest.TestCase):
     @parameterized.expand([(name,) for name in backends()])
     def test_still_assembles(self, name):
         import os
+
         from tests.golden.snapshot import assemble, fails_path, snapshot
         if not os.path.exists(fails_path(name)):
             self.skipTest(f"{name}: no assembly baseline recorded")

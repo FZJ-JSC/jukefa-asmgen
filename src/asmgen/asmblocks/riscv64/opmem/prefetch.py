@@ -7,14 +7,15 @@
 RISCV64 +D/F prefetch instructions (Zicbop)
 """
 
-from typing import Callable
+from collections.abc import Callable
 
+from ...op import operand_modifier as opd_mod
 from ...op import opmem_action as action
 from ...op import opmem_modifier as mod
-from ...op import operand_modifier as opd_mod
 from ..types import riscv64_greg
 from .base import riscv64_opmem
 from .signatures import make_riscv64_prefetch_signatures
+
 
 class riscv64_prefetch(riscv64_opmem):
     """

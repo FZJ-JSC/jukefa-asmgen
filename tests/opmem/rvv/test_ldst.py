@@ -8,12 +8,14 @@ RVV opmem (ld/st) testsuite
 """
 import unittest
 
-from asmgen.asmblocks.op import opmem_modifier as mod
 from asmgen.asmblocks.op import operand_modifier as opd_mod
-from asmgen.registers import asm_data_type as adt, asm_index_type as ait
-from asmgen.asmblocks.riscv64.types import riscv64_greg, riscv64_freg
-from asmgen.asmblocks.rvv.types import rvv_vreg
+from asmgen.asmblocks.op import opmem_modifier as mod
+from asmgen.asmblocks.riscv64.types import riscv64_freg, riscv64_greg
 from asmgen.asmblocks.rvv import rvv  # Updated import
+from asmgen.asmblocks.rvv.types import rvv_vreg
+from asmgen.registers import asm_data_type as adt
+from asmgen.registers import asm_index_type as ait
+
 
 class test_rvv_opmem(unittest.TestCase):
     """
@@ -178,7 +180,10 @@ class test_strided_segments(unittest.TestCase):
     def test_semantics(self):
         # run: v8-v10 hold three rows, stored as segments 5 doubles apart:
         # element 5i + p is row p's element i (qemu, VLEN 128 and 256)
-        import os, shutil, subprocess, tempfile
+        import os
+        import shutil
+        import subprocess
+        import tempfile
         cc, qemu = "riscv64-linux-gnu-gcc", "qemu-riscv64-static"
         if not (shutil.which(cc) and shutil.which(qemu)):
             self.skipTest("needs riscv64-linux-gnu-gcc and qemu-riscv64-static")
@@ -248,7 +253,11 @@ class test_masked(unittest.TestCase):
     def test_semantics(self):
         # run: the first 3 of a vector copied under the mask, the rest of
         # it left (-1) - qemu, VLEN 256 and 512
-        import os, shutil, subprocess, tempfile
+        import os
+        import shutil
+        import subprocess
+        import tempfile
+
         from asmgen.asmblocks.op.opset import opset_modifier
         cc, qemu = "riscv64-linux-gnu-gcc", "qemu-riscv64-static"
         if not (shutil.which(cc) and shutil.which(qemu)):

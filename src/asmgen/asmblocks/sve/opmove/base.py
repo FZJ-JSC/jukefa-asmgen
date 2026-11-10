@@ -7,22 +7,20 @@
 data move operation base class for SVE
 """
 
-from ....registers import freg_base
-from typing import Callable
+from collections.abc import Callable
 
-from ....registers import adt_size, asm_data_type as adt, data_reg
-
-from ...op.signature import operation_signature
-from ...op.operand import operand_modifier as omod
-from ...op.opmove import opmove,opmove_modifier as mod
-
-from ..types import sve_vreg
-from ...aarch64.types import aarch64_greg,aarch64_freg
-
-
-from .signatures import make_sve_move_signatures
+from ....registers import adt_size, data_reg, freg_base
+from ....registers import asm_data_type as adt
 from ...aarch64.opmove import aarch64_move
+from ...aarch64.types import aarch64_freg, aarch64_greg
+from ...op.operand import operand_modifier as omod
+from ...op.opmove import opmove
+from ...op.opmove import opmove_modifier as mod
 from ...op.scalar import scalar_dregs_only, scalar_operands
+from ...op.signature import operation_signature
+from ..types import sve_vreg
+from .signatures import make_sve_move_signatures
+
 
 class sve_move(opmove):
     """

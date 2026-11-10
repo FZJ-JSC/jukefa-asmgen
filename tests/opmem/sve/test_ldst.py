@@ -8,14 +8,14 @@ Tests SVE loads/stores
 """
 import unittest
 
-from asmgen.asmblocks.op import (
-    opmem_modifier as mod,
-    operand_modifier as opd_mod
-)
-from asmgen.registers import asm_data_type as adt, asm_index_type as ait
-from asmgen.asmblocks.aarch64.types import aarch64_greg, aarch64_freg
-from asmgen.asmblocks.sve.types import sve_vreg, sve_preg
+from asmgen.asmblocks.aarch64.types import aarch64_freg, aarch64_greg
+from asmgen.asmblocks.op import operand_modifier as opd_mod
+from asmgen.asmblocks.op import opmem_modifier as mod
 from asmgen.asmblocks.sve.opmem import sve_load, sve_store
+from asmgen.asmblocks.sve.types import sve_preg, sve_vreg
+from asmgen.registers import asm_data_type as adt
+from asmgen.registers import asm_index_type as ait
+
 
 def asmwrap(s: str) -> str:
     """

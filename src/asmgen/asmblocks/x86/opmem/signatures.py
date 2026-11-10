@@ -7,18 +7,16 @@
 Valid signatures for Base X86_64 opmem operations
 """
 
-from .displacement import displacement_forms
+from ....registers import adt_is_float
+from ....registers import asm_data_type as adt
+from ...op import operand_role as orl
+from ...op import operand_shape as osh
+from ...op import operand_type as ot
+from ...op import operation_signature as sig
+from ...op import opmem_modifier as mod
+from ...op import register_type as rt
 from ...op.constraint import minmax_constraint
-from ...op import (
-    operation_signature as sig,
-    operand_shape as osh,
-    operand_type as ot,
-    operand_role as orl,
-    register_type as rt,
-    opmem_modifier as mod
-)
-
-from ....registers import asm_data_type as adt, adt_is_float
+from .displacement import displacement_forms
 
 _FLOATS = [adt.FP64, adt.FP32, adt.FP16, adt.BF16]
 _INTS = [adt.SINT64, adt.SINT32, adt.SINT16, adt.SINT8,

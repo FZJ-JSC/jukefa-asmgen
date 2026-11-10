@@ -9,20 +9,21 @@ Test the Calling convention abstraction
 
 import unittest
 
-
 from parameterized import parameterized_class
-from asmgen.asmblocks.noarch import asmgen
-from asmgen.asmblocks.avx import fma128,fma256,avx512
+
+from asmgen.asmblocks.aarch64 import aarch64
+from asmgen.asmblocks.avx import avx512, fma128, fma256
+from asmgen.asmblocks.avx.base import avxbase
 from asmgen.asmblocks.neon import neon
-from asmgen.asmblocks.rvv import rvv
-from asmgen.asmblocks.rvv071 import rvv071
-from asmgen.asmblocks.sve import sve
-from asmgen.asmblocks.sme import sme
+from asmgen.asmblocks.noarch import asmgen
 
 # base ISA classes
 from asmgen.asmblocks.riscv64 import riscv64
-from asmgen.asmblocks.aarch64 import aarch64
-from asmgen.asmblocks.avx.base import avxbase
+from asmgen.asmblocks.rvv import rvv
+from asmgen.asmblocks.rvv071 import rvv071
+from asmgen.asmblocks.sme import sme
+from asmgen.asmblocks.sve import sve
+
 
 class callconv_testsuite_type_hinter:
     """
@@ -224,7 +225,6 @@ class test_stack_parameters(unittest.TestCase):
 
     def test_offset_past_saves(self):
         from asmgen.callconv.fngen import fngen
-        from asmgen.registers import asm_data_type as adt
         g = sme()
         g.output_inline = False
         rt = g.get_reg_tracker()

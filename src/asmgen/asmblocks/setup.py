@@ -15,7 +15,6 @@ from dataclasses import dataclass
 from enum import Enum, auto
 
 
-
 class setup_kind(Enum):
     #: governing predicates for masked instructions (SVE, SME)
     PREDICATE = auto()
@@ -149,7 +148,7 @@ class isa_setup:
             result += wrap(f".balign {self.gen.simd_size}")
             result += wrap(f"{self.gen.labelstr(name)}:")
             for d in datalist:
-                result += wrap(f"  {str(d)}")
+                result += wrap(f"  {d!s}")
         result += wrap(".popsection")
         return result
 
@@ -158,11 +157,11 @@ class isa_setup:
         The predicate register masked instructions use for full vectors, set
         up by setup(); None where instructions aren't masked
         """
-        return None
+        return
 
     def vector_length_register(self, *, rt):
         """
         The register holding the vector length in elements, set by setup();
         None where it isn't kept in one
         """
-        return None
+        return

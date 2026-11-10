@@ -4,12 +4,12 @@ instructions take two operands (the destination is a source): another
 destination is a copy first, and a destination that is the second source
 is handled without losing it.
 """
-from typing import Callable
+from collections.abc import Callable
 
+from ....registers import greg_base
 from ...op.constraint import minmax_constraint
 from ...op.optransform import optransform_modifier
 from ...op.scalar import scalar_arith
-from ....registers import greg_base
 
 IMM32 = [[minmax_constraint(minval=-2**31, maxval=2**31 - 1)]]
 

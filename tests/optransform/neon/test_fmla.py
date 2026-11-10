@@ -7,15 +7,13 @@
 Tests NEON/ASIMD fma instruction code generation
 """
 
-from asmgen.registers import asm_data_type as adt
-from asmgen.asmblocks.op import (
-    optransform_modifier as mod,
-    operand_modifier as opd_mod
-)
-
+from asmgen.asmblocks.op import operand_modifier as opd_mod
+from asmgen.asmblocks.op import optransform_modifier as mod
 from asmgen.asmblocks.op.optransform import widening_method as wm
+from asmgen.registers import asm_data_type as adt
 
 from .test_neon_opd3 import test_neon_opd3_base
+
 
 class test_neon_fmla(test_neon_opd3_base):
     """

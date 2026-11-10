@@ -6,9 +6,9 @@ and what each ISA's setup and teardown leave
 """
 import unittest
 
+from asmgen.asmblocks.op.operand import register_type as rt
 from asmgen.asmblocks.op.opmem import opmem_modifier as M
 from asmgen.asmblocks.op.opset import opset_modifier as S
-from asmgen.asmblocks.op.operand import register_type as rt
 from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.sme import sme
 from asmgen.asmblocks.sve import sve

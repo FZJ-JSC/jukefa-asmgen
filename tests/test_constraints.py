@@ -5,8 +5,9 @@ Immediate constraints on memory operation signatures, against the encodings
 import unittest
 
 from asmgen.asmblocks.neon import neon
+from asmgen.asmblocks.op import operand_modifier as omod
+from asmgen.asmblocks.op import opmem_modifier as mod
 from asmgen.asmblocks.sve import sve
-from asmgen.asmblocks.op import opmem_modifier as mod, operand_modifier as omod
 from asmgen.registers import asm_data_type as adt
 
 
@@ -22,9 +23,8 @@ class test_neon(unittest.TestCase):
             with self.subTest(ok=ok):
                 self.assertIn("ldr", self.load(modifiers={mod.IOFFSET}, ioffset=ok))
         for bad in (-272, 273, 65536):
-            with self.subTest(bad=bad):
-                with self.assertRaises(Exception):
-                    self.load(modifiers={mod.IOFFSET}, ioffset=bad)
+            with self.subTest(bad=bad), self.assertRaises(Exception):
+                self.load(modifiers={mod.IOFFSET}, ioffset=bad)
 
     def test_vector_offset(self):
         for ok in (-16, 4095):

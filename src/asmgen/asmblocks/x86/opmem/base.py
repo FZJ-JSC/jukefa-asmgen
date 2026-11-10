@@ -7,21 +7,18 @@
 Base X86 loads/stores
 """
 
-from typing import Callable, Any
+from collections.abc import Callable
+from typing import Any
 
-from ...op import (
-    opmem,
-    opmem_modifier as mod,
-    opmem_action,
-    operation_signature,
-    operand_modifier as opd_mod
-)
-
-from ....registers import asm_data_type as adt, adt_size
-from ..types import x86_greg, avx_freg
-
-from .signatures import make_x86_64_opmem_signatures
+from ....registers import adt_size
+from ....registers import asm_data_type as adt
+from ...op import operand_modifier as opd_mod
+from ...op import operation_signature, opmem, opmem_action
+from ...op import opmem_modifier as mod
 from ...op.opmem import param_signatures
+from ..types import avx_freg, x86_greg
+from .signatures import make_x86_64_opmem_signatures
+
 
 class x86_opmem(opmem):
     """

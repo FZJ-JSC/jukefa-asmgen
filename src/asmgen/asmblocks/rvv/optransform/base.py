@@ -7,27 +7,26 @@
 RVV 1.0 and 0.7.1 opd3 base
 """
 from abc import abstractmethod
-from typing import Callable,Any
+from collections.abc import Callable
+from typing import Any
 
 from ....registers import (
-    asm_data_type as adt,
+    adt_is_float,
+    adt_is_int,
+    adt_is_signed,
+    adt_is_unsigned,
     adt_size,
-    adt_is_float,adt_is_int,
-    adt_is_signed,adt_is_unsigned,
-    data_reg
+    data_reg,
 )
-from ...op import (
-    optransform,
-    optransform_modifier as mod,
-    operation_signature,
-    operand_modifier as opd_mod
-)
-from ....util import NIE_MESSAGE
-
-
-from .signatures import make_rvv_opd3_signatures
+from ....registers import asm_data_type as adt
 from ....registers import greg_base as _greg_base
+from ....util import NIE_MESSAGE
+from ...op import operand_modifier as opd_mod
+from ...op import operation_signature, optransform
+from ...op import optransform_modifier as mod
 from ...op.scalar import scalar_operands
+from .signatures import make_rvv_opd3_signatures
+
 
 class rvv_opd3_base(optransform):
     """

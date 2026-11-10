@@ -9,36 +9,24 @@ Operation/Instruction abstractions and utilities
 
 
 from .constraint import operand_constraint
+from .misc import make_ord_prefix
 from .modifier import operation_modifier
-from .signature import operation_signature
-
+from .operand import (
+    operand_modifier,
+    operand_role,
+    operand_shape,
+    operand_type,
+    register_type,
+)
 from .operation import (
     operation,
 )
-
-from .operand import (
-    operand_modifier,
-    operand_shape,
-    operand_type,
-    operand_role,
-    register_type
-)
-
-from .opmove import (
-    opmove,
-    opmove_modifier
-)
-
-from .opmem import (
-    opmem_modifier,
-    opmem_action,
-    opmem
-)
-
+from .opmem import opmem, opmem_action, opmem_modifier
+from .opmove import opmove, opmove_modifier
 from .optransform import (
-    widening_method,
-    optransform_modifier,
+    dummy_optransform,
     optransform,
-    dummy_optransform)
-
-from .misc import make_ord_prefix
+    optransform_modifier,
+    widening_method,
+)
+from .signature import operation_signature

@@ -7,11 +7,11 @@
 RVV 1.0 and 0.7.1 fused-multiply-accumulate
 """
 
-from typing import Callable
+from collections.abc import Callable
 
 from ...op.optransform import optransform_modifier as mod
-
 from .base import rvv_opd3_base
+
 
 class rvv_fma(rvv_opd3_base):
     """

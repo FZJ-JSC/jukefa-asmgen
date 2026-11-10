@@ -7,27 +7,27 @@
 SVE opmem operations
 """
 import math
-from typing import Callable,Any
-
-from ...aarch64.opmem.base import aarch64_opmem
-from ...aarch64.types import aarch64_greg, aarch64_freg
-from ..types import sve_preg
-from ...op import (
-    opmem,
-    opmem_modifier as mod,
-    opmem_action,
-    operation_signature,
-    operand_modifier as opd_mod
-)
+from collections.abc import Callable
+from typing import Any
 
 from ....registers import (
-    asm_data_type as adt,
-    asm_index_type as ait,
     adt_size,
     ait_size,
 )
-
+from ....registers import (
+    asm_data_type as adt,
+)
+from ....registers import (
+    asm_index_type as ait,
+)
+from ...aarch64.opmem.base import aarch64_opmem
+from ...aarch64.types import aarch64_freg, aarch64_greg
+from ...op import operand_modifier as opd_mod
+from ...op import operation_signature, opmem, opmem_action
+from ...op import opmem_modifier as mod
+from ..types import sve_preg
 from .signatures import make_sve_opmem_signatures
+
 
 class sve_opmem(opmem):
     """

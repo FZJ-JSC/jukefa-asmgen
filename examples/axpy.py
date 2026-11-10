@@ -7,26 +7,19 @@
 Example generating an AXPY function with dynamic unrolling and arithmetic selection.
 """
 
-import importlib
 import argparse
+import importlib
 
-from asmgen.registers import (
-    adt_size,
-    asm_data_type as adt,
-    reg_tracker
-)
-from asmgen.asmblocks.noarch import asmgen
-from asmgen.callconv.fngen import fngen
-from asmgen.asmblocks.noarch import comparison
-
-from asmgen.asmblocks.op import (
-    opmem_modifier as mem_mod,
-    operand_modifier as opd_mod
-)
-from asmgen.asmblocks.op.operand import register_type as op_rt
+from asmgen.asmblocks.noarch import asmgen, comparison
+from asmgen.asmblocks.op import operand_modifier as opd_mod
+from asmgen.asmblocks.op import opmem_modifier as mem_mod
 from asmgen.asmblocks.op.operand import operand_modifier
-from asmgen.asmblocks.op.optransform import optransform_modifier
+from asmgen.asmblocks.op.operand import register_type as op_rt
 from asmgen.asmblocks.op.opset import opset_modifier
+from asmgen.asmblocks.op.optransform import optransform_modifier
+from asmgen.callconv.fngen import fngen
+from asmgen.registers import adt_size
+from asmgen.registers import asm_data_type as adt
 
 ISA_MODULES = {
     "fma128": "avx",

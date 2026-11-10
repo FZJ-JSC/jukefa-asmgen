@@ -14,13 +14,17 @@ to it - as rvv_opmem does with riscv64_opmem.
 """
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
-from ...registers import asm_data_type as adt, greg_base, freg_base
-from .optransform import optransform, optransform_modifier
-from .opmove import opmove, opmove_modifier
-from .operand import operand_shape as osh, operand_type as ot, operand_role as orl, register_type as rt
+from ...registers import asm_data_type as adt
+from ...registers import freg_base, greg_base
 from .operand import operand_modifier as opd_mod
+from .operand import operand_role as orl
+from .operand import operand_shape as osh
+from .operand import operand_type as ot
+from .operand import register_type as rt
+from .opmove import opmove, opmove_modifier
+from .optransform import optransform, optransform_modifier
 from .signature import operation_signature
 
 GREG_DTS = (adt.UINT64, adt.SINT64)

@@ -7,35 +7,27 @@
 Valid signatures for SME opmem operations
 """
 
-from dataclasses import dataclass,field
-from typing import Type
+from dataclasses import dataclass, field
 
-from ...op import (
-    operation_signature as sig,
-    operand_shape as osh,
-    operand_type as ot,
-    operand_role as orl,
-    register_type as rt,
-    opmem_modifier as mod,
-    operand_modifier as opd_mod
-)
-
+from ....registers import adt_size
+from ....registers import asm_data_type as adt
+from ....registers import asm_index_type as ait
+from ...aarch64.types import aarch64_greg
+from ...op import operand_modifier as opd_mod
+from ...op import operand_role as orl
+from ...op import operand_shape as osh
+from ...op import operand_type as ot
+from ...op import operation_signature as sig
+from ...op import opmem_modifier as mod
+from ...op import register_type as rt
 from ...op.constraint import (
-    otherplusnmod_constraint,
     minmax_constraint,
     oneof_constraint,
-    regidx_constraint
+    otherplusnmod_constraint,
+    regidx_constraint,
 )
 from ...op.misc import make_ord_prefix as mop
-
-from ...sve.types import sve_vreg,sve_preg
-from ...aarch64.types import aarch64_greg
-
-from ....registers import (
-    asm_data_type as adt,
-    asm_index_type as ait,
-    adt_size
-)
+from ...sve.types import sve_preg, sve_vreg
 
 _FLOATS = [adt.FP64, adt.FP32, adt.FP16, adt.BF16, adt.FP8E4M3, adt.FP8E5M2]
 _INTS = [adt.SINT64, adt.SINT32, adt.SINT16, adt.SINT8,
@@ -55,7 +47,7 @@ class sme_rowcolreg_constraint(regidx_constraint, minmax_constraint):
     """
     Constraint ensuring row/col registers have an index between 12-15
     """
-    reg_class : Type[aarch64_greg] = aarch64_greg
+    reg_class : type[aarch64_greg] = aarch64_greg
     minval : int = 12
     maxval : int = 15
 
@@ -64,7 +56,7 @@ class sme_multivec_constraint(regidx_constraint, otherplusnmod_constraint):
     """
     A multi-vector access's next register: its list's stride after the one before (8 for 2, 4 for 4)
     """
-    reg_class : Type[sve_vreg] = sve_vreg
+    reg_class : type[sve_vreg] = sve_vreg
     offset : int = field(init=False)
     modval : int = 32
     nvectors : int
@@ -83,7 +75,7 @@ class sme_multivec_firstreg_constraint(regidx_constraint, oneof_constraint):
     """
     A multi-vector access's first register: where its strided list can start
     """
-    reg_class : Type[sve_vreg] = sve_vreg
+    reg_class : type[sve_vreg] = sve_vreg
     valset : int = field(init=False)
     nvectors : int
 
@@ -101,7 +93,7 @@ class sme_mreg_pn_constraint(regidx_constraint, minmax_constraint):
     """
     Constraint ensuring the predicate is a pn register
     """
-    reg_class : Type[sve_preg] =  sve_preg
+    reg_class : type[sve_preg] =  sve_preg
     minval : int = 8
     maxval : int = 15
 
@@ -110,7 +102,7 @@ class sme_mreg_notpn_constraint(regidx_constraint, minmax_constraint):
     """
     Constraint ensuring the predicate is a pn register
     """
-    reg_class : Type[sve_preg] =  sve_preg
+    reg_class : type[sve_preg] =  sve_preg
     minval : int = 0
     maxval : int = 7
 

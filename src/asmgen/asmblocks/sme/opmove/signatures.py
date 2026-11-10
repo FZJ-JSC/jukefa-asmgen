@@ -7,36 +7,29 @@
 Signatures for SME move instructions
 """
 
-from ...op.constraint import minmax_constraint
-from typing import Type
-
 from dataclasses import dataclass
 
-from ...op import (
-    operation_signature as opsig,
-    operand_modifier as omod,
-    operand_shape as osh,
-    operand_type as ot,
-    operand_role as orl,
-    register_type as rgt,
-    opmove_modifier as mod,
-    make_ord_prefix as mop
-)
-
+from ....registers import adt_size
+from ....registers import asm_data_type as adt
+from ...aarch64.types import aarch64_greg
+from ...op import make_ord_prefix as mop
+from ...op import operand_modifier as omod
+from ...op import operand_role as orl
+from ...op import operand_shape as osh
+from ...op import operand_type as ot
+from ...op import operation_signature as opsig
+from ...op import opmove_modifier as mod
+from ...op import register_type as rgt
 from ...op.constraint import (
+    minmax_constraint,
+    oneof_constraint,
     otherplusn_constraint,
     otherplusnmod_constraint,
-    oneof_constraint,
     regidx_constraint,
-    sameval_constraint
+    sameval_constraint,
 )
-
-from ....registers import asm_data_type as adt,adt_size
-
-from ...aarch64.types import aarch64_greg
-from ...sve.types import sve_vreg
-
 from ...sme.opmem.signatures import sme_rowcolreg_constraint
+from ...sve.types import sve_vreg
 
 _FLOATS = [adt.FP64, adt.FP32, adt.FP16, adt.BF16, adt.FP8E4M3, adt.FP8E5M2]
 _INTS = [adt.SINT64, adt.SINT32, adt.SINT16, adt.SINT8,
@@ -49,7 +42,7 @@ class samegregidx_constraint(regidx_constraint,
     """
     Ensure the same register is used for all rows/cols
     """
-    reg_class : Type[aarch64_greg] = aarch64_greg
+    reg_class : type[aarch64_greg] = aarch64_greg
 
 @dataclass(kw_only=True)
 class consecutive_vregs_constraint(regidx_constraint,
@@ -60,7 +53,7 @@ class consecutive_vregs_constraint(regidx_constraint,
     """
     offset : int = 1
     modval : int = 32
-    reg_class : Type[sve_vreg] = sve_vreg
+    reg_class : type[sve_vreg] = sve_vreg
 
 
 #TODO: modularize/break up/generalize/deduplicate

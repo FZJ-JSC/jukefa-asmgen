@@ -6,8 +6,7 @@
 """
 RISC-V 64-bit register types
 """
-from ...registers import greg_base, freg_base
-from ...registers import asm_data_type
+from ...registers import asm_data_type, freg_base, greg_base
 
 #pylint: disable=too-few-public-methods
 

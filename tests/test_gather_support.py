@@ -4,11 +4,11 @@ Gather and scatter support: masks set all-true, index vectors, the vector length
 
 import unittest
 
-from asmgen.asmblocks.sve import sve
 from asmgen.asmblocks.avx import avx512
 from asmgen.asmblocks.avx.avx2 import fma256
-from asmgen.registers import asm_data_type as adt
 from asmgen.asmblocks.op.opset import opset_modifier
+from asmgen.asmblocks.sve import sve
+from asmgen.registers import asm_data_type as adt
 
 
 def plain(t):
@@ -36,7 +36,6 @@ class test_gather_support(unittest.TestCase):
         sig = next(s for s in a.load.get_signatures()
                    if "VINDEX" in {m.name for m in s.modifiers}
                    and s.operands["adreg"].dt == adt.FP64)
-        from asmgen.asmblocks.op import opmem_modifier as mm
         text = plain(a.load(dregs=[a.vreg(4)], areg=a.greg(8), dt=adt.FP64,
                             modifiers=set(sig.modifiers), vidxreg=a.vreg(5), amreg=a.mreg(1),
                             **sig.structural_params))

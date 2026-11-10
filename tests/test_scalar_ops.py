@@ -6,11 +6,11 @@ copying FP registers
 
 import unittest
 
-from asmgen.asmblocks.sme import sme
-from asmgen.registers import asm_data_type as adt
-from asmgen.asmblocks.op.opset import opset_modifier
 from asmgen.asmblocks.op.operand import operand_modifier
 from asmgen.asmblocks.op.opmem import opmem_modifier
+from asmgen.asmblocks.op.opset import opset_modifier
+from asmgen.asmblocks.sme import sme
+from asmgen.registers import asm_data_type as adt
 
 
 class test_shifted_adds(unittest.TestCase):
@@ -78,6 +78,7 @@ class test_avx512_fp_zero(unittest.TestCase):
         import shutil
         import subprocess
         import tempfile
+
         from asmgen.asmblocks.avx.avx512 import avx512
         g = avx512()
         g.output_inline = False
@@ -102,6 +103,7 @@ class test_scaled_offset(unittest.TestCase):
         import shutil
         import subprocess
         import tempfile
+
         from asmgen.asmblocks.avx.avx512 import avx512
         from asmgen.asmblocks.op import opmem_modifier as mod
         g = avx512()

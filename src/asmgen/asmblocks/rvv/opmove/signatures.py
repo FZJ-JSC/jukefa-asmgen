@@ -8,17 +8,27 @@ Signatures for RVV move instructions: copies, broadcasts and moves into
 element 0
 """
 
+from ....registers import asm_data_type as adt
+from ...op import (
+    operand_modifier as omod,
+)
+from ...op import (
+    operand_role as orl,
+)
+from ...op import (
+    operand_shape as osh,
+)
+from ...op import (
+    operand_type as ot,
+)
 from ...op import (
     operation_signature as opsig,
-    operand_modifier as omod,
-    operand_shape as osh,
-    operand_type as ot,
-    operand_role as orl,
+)
+from ...op import (
     register_type as rgt,
 )
 from ...op.constraint import minmax_constraint
-from ...op.shift import shift_signatures, fill_signatures, extract_signatures
-from ....registers import asm_data_type as adt
+from ...op.shift import extract_signatures, fill_signatures, shift_signatures
 
 _FLOATS = [adt.FP64, adt.FP32, adt.FP16]
 _INTS = [adt.SINT64, adt.SINT32, adt.SINT16, adt.SINT8,

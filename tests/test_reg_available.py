@@ -6,12 +6,12 @@ Every generator's max_*regs are methods returning counts.
 """
 import unittest
 
-from asmgen.asmblocks.avx import fma128, fma256, avx512
+from asmgen.asmblocks.avx import avx512, fma128, fma256
 from asmgen.asmblocks.neon import neon
-from asmgen.asmblocks.sve import sve
-from asmgen.asmblocks.sme import sme
 from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.rvv071 import rvv071
+from asmgen.asmblocks.sme import sme
+from asmgen.asmblocks.sve import sve
 from asmgen.registers import asm_data_type as adt
 
 GENERATORS = (fma128, fma256, avx512, neon, sve, sme, rvv, rvv071)

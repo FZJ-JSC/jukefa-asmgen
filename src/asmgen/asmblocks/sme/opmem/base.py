@@ -7,22 +7,17 @@
 opmem base class for SME
 """
 import math
-from typing import Callable, Any
+from collections.abc import Callable
+from typing import Any
 
-from ...op import (
-    opmem,
-    opmem_modifier as mod,
-    opmem_action,
-    operation_signature,
-    operand_modifier as opd_mod
-)
-
-from ....registers import asm_data_type as adt, adt_size
-
+from ....registers import adt_size
+from ....registers import asm_data_type as adt
 from ...aarch64.types import aarch64_greg
+from ...op import operand_modifier as opd_mod
+from ...op import operation_signature, opmem, opmem_action
+from ...op import opmem_modifier as mod
+from ...sve.opmem import sve_load, sve_store
 from ..types import sme_treg
-from ...sve.opmem import sve_load,sve_store
-
 from .signatures import make_sme_opmem_signatures
 
 
@@ -99,13 +94,13 @@ class sme_opmem(opmem):
             raise ValueError("ROW and COL modifiers are mutually exclusive")
 
         if mod.NT in modifiers and (has_row or has_col):
-            raise ValueError(("Non-temporal strided operations cannot be combined "
-                              "with tile slice modifiers (ROW/COL)"))
+            raise ValueError("Non-temporal strided operations cannot be combined "
+                              "with tile slice modifiers (ROW/COL)")
 
         if has_row or has_col:
             if mod.VOFFSET in modifiers or mod.IOFFSET in modifiers:
-                raise ValueError(("SME tile slice operations only support scalar+scalar "
-                                 "(GOFFSET) memory addressing"))
+                raise ValueError("SME tile slice operations only support scalar+scalar "
+                                 "(GOFFSET) memory addressing")
 
         addr_mods = {mod.IOFFSET, mod.VOFFSET, mod.GOFFSET}.intersection(modifiers)
         if len(addr_mods) > 1:

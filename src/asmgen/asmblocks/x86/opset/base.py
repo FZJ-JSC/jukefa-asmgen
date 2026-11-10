@@ -1,10 +1,11 @@
 """
 x86's set
 """
-from typing import Callable
+from collections.abc import Callable
 
+from ....registers import asm_data_type as adt
+from ....registers import freg_base, greg_base
 from ...op.opset import scalar_opset
-from ....registers import asm_data_type as adt, greg_base, freg_base
 from .signatures import make_x86_opset_signatures
 
 # 1.0 from all bits set: shifted left, then right logically by 2

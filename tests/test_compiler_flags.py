@@ -9,16 +9,16 @@ import subprocess
 import tempfile
 import unittest
 
+from asmgen.asmblocks.avx import avx512, fma256
+from asmgen.asmblocks.neon import neon
+from asmgen.asmblocks.noarch import compiler_family
+from asmgen.asmblocks.op.opset import opset_modifier
 from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.rvv071 import rvv071
-from asmgen.asmblocks.neon import neon
-from asmgen.asmblocks.sve import sve
 from asmgen.asmblocks.sme import sme
-from asmgen.asmblocks.avx import fma256, avx512
-from asmgen.asmblocks.noarch import compiler_family
+from asmgen.asmblocks.sve import sve
 from asmgen.callconv.fngen import fngen
 from asmgen.registers import asm_data_type as adt
-from asmgen.asmblocks.op.opset import opset_modifier
 
 
 def baseline(gen):

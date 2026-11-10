@@ -6,10 +6,11 @@
 """
 RISC-V +D/F store instructions
 """
-from typing import Callable
+from collections.abc import Callable
 
 from ...op import opmem_action as action
 from .base import riscv64_opmem
+
 
 class riscv64_store(riscv64_opmem):
     """

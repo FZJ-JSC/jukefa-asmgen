@@ -18,7 +18,6 @@ from __future__ import annotations
 import inspect
 import os
 import re
-from itertools import count
 
 from asmgen.registers import asm_data_type as adt
 
@@ -34,12 +33,12 @@ def backends() -> dict:
     """
     The generators snapshotted, by name: constructors
     """
-    from asmgen.asmblocks.avx import fma128, fma256, avx512
+    from asmgen.asmblocks.avx import avx512, fma128, fma256
     from asmgen.asmblocks.neon import neon
-    from asmgen.asmblocks.sve import sve
-    from asmgen.asmblocks.sme import sme
     from asmgen.asmblocks.rvv import rvv
     from asmgen.asmblocks.rvv071 import rvv071
+    from asmgen.asmblocks.sme import sme
+    from asmgen.asmblocks.sve import sve
     return {"fma128": fma128, "fma256": fma256, "avx512": avx512, "neon": neon,
             "sve": sve, "sme": sme, "rvv": rvv, "rvv071": rvv071}
 
@@ -332,8 +331,7 @@ def path(name: str) -> str:
 def write(name: str, entries: dict):
     os.makedirs(DATA, exist_ok=True)
     with open(path(name), "w") as f:
-        for key in sorted(entries):
-            f.write(f"### {key}\n{entries[key]}\n")
+        f.writelines(f"### {key}\n{entries[key]}\n" for key in sorted(entries))
 
 
 def read(name: str) -> dict:

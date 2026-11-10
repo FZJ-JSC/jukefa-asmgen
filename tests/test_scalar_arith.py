@@ -7,11 +7,11 @@ import unittest
 
 from asmgen.asmblocks.avx import avx512
 from asmgen.asmblocks.neon import neon
+from asmgen.asmblocks.op.operand import operand_modifier as opd_mod
+from asmgen.asmblocks.op.optransform import optransform_modifier
 from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.sve import sve
 from asmgen.registers import asm_data_type as adt
-from asmgen.asmblocks.op.operand import operand_modifier as opd_mod
-from asmgen.asmblocks.op.optransform import optransform_modifier
 
 DIR = {'shl': {optransform_modifier.SHL}, 'shr': {optransform_modifier.SHR}}
 

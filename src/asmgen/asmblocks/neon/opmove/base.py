@@ -7,16 +7,18 @@
 data move operation for NEON
 """
 
-from typing import Callable
+from collections.abc import Callable
 
-from ....registers import asm_data_type as adt, data_reg, adt_size
-from ...op.signature import operation_signature
-from ...op.operand import operand_modifier as omod
-from ...op.opmove import opmove, opmove_modifier as mod
-from ...aarch64.types import aarch64_greg
-from .signatures import make_neon_move_signatures
+from ....registers import adt_size, data_reg
+from ....registers import asm_data_type as adt
 from ...aarch64.opmove import aarch64_move
+from ...aarch64.types import aarch64_greg
+from ...op.operand import operand_modifier as omod
+from ...op.opmove import opmove
+from ...op.opmove import opmove_modifier as mod
 from ...op.scalar import scalar_dregs_only, scalar_operands
+from ...op.signature import operation_signature
+from .signatures import make_neon_move_signatures
 
 
 class neon_move(opmove):

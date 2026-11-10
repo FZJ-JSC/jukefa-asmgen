@@ -9,6 +9,7 @@ SVE fma instruction
 
 from .base import sve_opd3_base
 
+
 class sve_fma(sve_opd3_base):
     """
     SVE implementation of fma

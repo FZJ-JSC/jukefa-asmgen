@@ -7,10 +7,11 @@
 Base AArch64 load instructions
 """
 
-from typing import Callable
+from collections.abc import Callable
 
 from ...op import opmem_action as action
 from .base import aarch64_opmem
+
 
 class aarch64_load(aarch64_opmem):
     """

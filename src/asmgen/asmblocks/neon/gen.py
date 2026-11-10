@@ -6,25 +6,17 @@
 """
 NEON/ASIMD asm generator and related types
 """
-from ...registers import (
-    reg_tracker,
-    asm_data_type as adt,
-    adt_size,
-    asm_index_type as ait,
-    treg_base,vreg_base,freg_base,greg_base
-)
+from ...registers import asm_data_type as adt
+from ...registers import freg_base, greg_base, treg_base, vreg_base
 from ..aarch64 import aarch64
-
+from ..aarch64.optransform import aarch64_shift, aarch64_sub
 from ..aarch64.types import aarch64_freg
-from .types import neon_vreg
-from .optransform import neon_fma,neon_mul,neon_add
 from .opmem import neon_load, neon_store
 from .opmove import neon_move
-from ..aarch64.optransform import aarch64_sub
-from ..aarch64.optransform import aarch64_shift
-from ...registers import asm_data_type as _ADT
 from .opset import neon_opset
-from ..op.opset import opset_modifier as _opset_mod
+from .optransform import neon_add, neon_fma, neon_mul
+from .types import neon_vreg
+
 
 class neon(aarch64):
     """

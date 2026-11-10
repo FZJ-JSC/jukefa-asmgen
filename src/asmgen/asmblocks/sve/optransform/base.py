@@ -7,15 +7,14 @@
 SVE opd3 base case
 """
 
-from typing import Callable
+from collections.abc import Callable
 
 from ....registers import (
     asm_data_type as adt,
 )
-
 from ...aarch64.optransform.base import aarch64_simd_opd3_base
-
 from .signatures import make_sve_opd3_signatures
+
 
 class sve_opd3_base(aarch64_simd_opd3_base):
     """

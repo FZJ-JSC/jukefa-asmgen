@@ -6,7 +6,8 @@
 """
 SVE register types
 """
-from ...registers import vreg_base,mreg_base
+from ...registers import mreg_base, vreg_base
+
 
 #pylint: disable=too-few-public-methods
 class sve_vreg(vreg_base):

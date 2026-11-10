@@ -6,16 +6,13 @@
 """
 Valid signatures for NEON opd3 operations
 """
-from ...op import (
-    operation_signature as sig,
-    operand_shape as osh,
-    operand_type as ot,
-    operand_role as orl,
-    register_type as rt,
-    optransform_modifier as mod
-)
-
 from ....registers import asm_data_type as adt
+from ...op import operand_role as orl
+from ...op import operand_shape as osh
+from ...op import operand_type as ot
+from ...op import operation_signature as sig
+from ...op import optransform_modifier as mod
+from ...op import register_type as rt
 
 
 def make_avx_opd3_signatures(supports_np : bool, has_fp16 : bool) -> list[sig]:

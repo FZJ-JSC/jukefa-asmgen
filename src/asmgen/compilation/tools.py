@@ -7,18 +7,19 @@
 Compilation tools
 """
 
-from subprocess import Popen, PIPE
 import logging
+from subprocess import PIPE, Popen
 
 from .compiler_presets import (
-    default_flags,
-    output_flag,
-    stdin_flags,
-    lib_flags,
     arch_flags,
     cross_cxx_flags,
-    cross_lib_flags
+    cross_lib_flags,
+    default_flags,
+    lib_flags,
+    output_flag,
+    stdin_flags,
 )
+
 
 def baseline_flags(gen, executable : str) -> list[str]:
     """

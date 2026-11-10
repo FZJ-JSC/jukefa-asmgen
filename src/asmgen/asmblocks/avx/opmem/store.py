@@ -7,13 +7,15 @@
 AVX/FMA/AVX2/AVX512 store instructions
 """
 
-from typing import Callable,Any
+from collections.abc import Callable
+from typing import Any
 
 from ....registers import asm_data_type as adt
-from ...op import opmem_action as action
 from ...op import operand_modifier as opd_mod
+from ...op import opmem_action as action
 from ...op.opmem import opmem_modifier as mod
-from .base import avx_opmem,avx128_opmem,avx256_opmem,avx512_opmem
+from .base import avx128_opmem, avx256_opmem, avx512_opmem, avx_opmem
+
 
 class no_bcast(avx_opmem):
     """

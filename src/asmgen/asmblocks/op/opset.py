@@ -19,17 +19,21 @@ floating-point registers as a member, as rvv_opmem carries riscv64_opmem.
 from __future__ import annotations
 
 from abc import abstractmethod
+from collections.abc import Callable
 from enum import auto
-from typing import Callable
 
+from ...registers import asm_data_type as adt
+from ...registers import data_reg, freg_base, greg_base
+from .constraint import minmax_constraint
 from .modifier import operation_modifier
-from .constraint import minmax_constraint, oneof_constraint
-from .operand import operand_shape as osh, operand_type as ot, operand_role as orl, register_type as rt
 from .operand import operand_modifier
+from .operand import operand_role as orl
+from .operand import operand_shape as osh
+from .operand import operand_type as ot
+from .operand import register_type as rt
 from .operation import operation
 from .scalar import GREG_DTS, scalar_operands
 from .signature import operation_signature
-from ...registers import asm_data_type as adt, data_reg, greg_base, freg_base
 
 
 class opset_modifier(operation_modifier):

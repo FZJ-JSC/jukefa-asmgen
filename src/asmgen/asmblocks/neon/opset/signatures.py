@@ -1,9 +1,14 @@
 """
 NEON set signatures: CONST zero, one
 """
-from ...op.operand import register_type as rt
-from ...op.opset import const_signatures, vlen_param_signatures, vlen_signatures, zero_signatures
 from ....registers import asm_data_type as adt
+from ...op.operand import register_type as rt
+from ...op.opset import (
+    const_signatures,
+    vlen_param_signatures,
+    vlen_signatures,
+    zero_signatures,
+)
 
 ONE_DTS = (adt.DOUBLE, adt.SINGLE, adt.HALF, adt.UINT32, adt.SINT32, adt.UINT16, adt.SINT16, adt.UINT8, adt.SINT8)
 

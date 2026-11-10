@@ -7,23 +7,17 @@
 RISCV64 +D/F opmem operations
 """
 
-from typing import Callable,Any
+from collections.abc import Callable
+from typing import Any
 
-from ....registers import (
-    asm_data_type as adt,
-    adt_size,
-    data_reg,
-    greg_base
-)
-
-from ...op import opmem,opmem_modifier as mod, opmem_action
-from ...op import operation_signature
+from ....registers import adt_size, data_reg, greg_base
+from ....registers import asm_data_type as adt
 from ...op import operand_modifier as opd_mod
-from ..types import riscv64_greg,riscv64_freg
-
-
-from .signatures import make_riscv64_opmem_signatures
+from ...op import operation_signature, opmem, opmem_action
+from ...op import opmem_modifier as mod
 from ...op.opmem import param_signatures
+from ..types import riscv64_freg, riscv64_greg
+from .signatures import make_riscv64_opmem_signatures
 
 
 class riscv64_opmem(opmem):

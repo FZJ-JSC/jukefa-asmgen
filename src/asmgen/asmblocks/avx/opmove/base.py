@@ -7,17 +7,18 @@
 data move operation for AVX
 """
 
-from typing import Callable
+from collections.abc import Callable
 
-from ....registers import asm_data_type as adt, data_reg
-from ...op.signature import operation_signature
+from ....registers import adt_size, data_reg
+from ....registers import asm_data_type as adt
 from ...op.operand import operand_modifier as omod
-from ...op.opmove import opmove, opmove_modifier as mod
-from ..types import xmm_vreg, ymm_vreg
-from ....registers import adt_size
-from .signatures import make_avx_move_signatures
-from ...x86.opmove import x86_move
+from ...op.opmove import opmove
+from ...op.opmove import opmove_modifier as mod
 from ...op.scalar import scalar_dregs_only, scalar_operands
+from ...op.signature import operation_signature
+from ...x86.opmove import x86_move
+from ..types import xmm_vreg, ymm_vreg
+from .signatures import make_avx_move_signatures
 
 
 class avx_move(opmove):

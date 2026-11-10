@@ -1,10 +1,10 @@
 """
 RISC-V scalar arithmetic on general registers: add, sub, mul, shift
 """
+from ....registers import greg_base
 from ...op.constraint import minmax_constraint
 from ...op.optransform import optransform_modifier
 from ...op.scalar import scalar_arith
-from ....registers import greg_base
 
 
 class riscv64_add(scalar_arith):

@@ -6,6 +6,6 @@
 """
 Meta-module for SVE opd3 operations
 """
+from .add import *
 from .fma import *
 from .mul import *
-from .add import *

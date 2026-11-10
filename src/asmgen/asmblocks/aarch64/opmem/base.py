@@ -7,22 +7,26 @@
 Aarch64 opmem operations
 """
 
-from typing import Callable
+from collections.abc import Callable
 
+from ....registers import adt_size
+from ....registers import asm_data_type as adt
 from ...op import (
-    opmem,
-    opmem_modifier as mod,
-    opmem_action,
-    operation_signature,
     operand_modifier as opd_mod,
 )
+from ...op import (
+    operation_signature,
+    opmem,
+    opmem_action,
+)
+from ...op import (
+    opmem_modifier as mod,
+)
 from ...op.constraint import ValueType
-from ....registers import asm_data_type as adt, adt_size
-
-from ..types import aarch64_greg, aarch64_freg
-
-from .signatures import make_aarch64_opmem_signatures
 from ...op.opmem import param_signatures
+from ..types import aarch64_freg, aarch64_greg
+from .signatures import make_aarch64_opmem_signatures
+
 
 class aarch64_opmem(opmem):
     """

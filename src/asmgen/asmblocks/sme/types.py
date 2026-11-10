@@ -7,7 +7,8 @@
 SME register types
 """
 
-from ...registers import treg_base, asm_data_type as adt, adt_size
+from ...registers import adt_size, treg_base
+from ...registers import asm_data_type as adt
 
 
 # pylint: disable-next=too-few-public-methods

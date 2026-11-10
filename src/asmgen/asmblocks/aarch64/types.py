@@ -6,7 +6,9 @@
 """
 ARM64/AArch64 register types
 """
-from ...registers import greg_base, freg_base, asm_data_type as adt, adt_size
+from ...registers import adt_size, freg_base, greg_base
+from ...registers import asm_data_type as adt
+
 
 #pylint: disable=too-few-public-methods
 class aarch64_greg(greg_base):

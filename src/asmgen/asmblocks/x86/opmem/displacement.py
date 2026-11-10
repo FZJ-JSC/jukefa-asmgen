@@ -12,7 +12,7 @@ default). With neither on there are no offset forms.
 from __future__ import annotations
 
 import dataclasses
-from typing import Callable
+from collections.abc import Callable
 
 from ...op.constraint import minmax_constraint
 from ...op.signature import operation_signature

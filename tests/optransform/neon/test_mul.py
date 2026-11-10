@@ -7,10 +7,11 @@
 Tests NEON/ASIMD fmul instruction code generation
 """
 
-from asmgen.registers import asm_data_type as adt
 from asmgen.asmblocks.op import optransform_modifier as mod
+from asmgen.registers import asm_data_type as adt
 
 from .test_neon_opd3 import test_neon_opd3_base
+
 
 class test_neon_mul(test_neon_opd3_base):
     """
@@ -51,10 +52,9 @@ class test_neon_mul(test_neon_opd3_base):
                               a_dt=adt.FP16, b_dt=adt.FP16, c_dt=adt.FP32)
 
         # Non-widening integer MUL
-        with self.subTest(error="unsupported NP"):
-            with self.assertRaisesRegex(
-                    ValueError,
-                    "Only widening unsigned integer MUL supported in NEON"):
-                self.gen.mul(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
-                              a_dt=adt.UINT32, b_dt=adt.UINT32, c_dt=adt.UINT32,
-                              modifiers=set())
+        with self.subTest(error="unsupported NP"), self.assertRaisesRegex(
+                ValueError,
+                "Only widening unsigned integer MUL supported in NEON"):
+            self.gen.mul(adreg=self.v1, bdreg=self.v2, cdreg=self.v0,
+                          a_dt=adt.UINT32, b_dt=adt.UINT32, c_dt=adt.UINT32,
+                          modifiers=set())

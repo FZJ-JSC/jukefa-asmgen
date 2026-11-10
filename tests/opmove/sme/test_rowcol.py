@@ -8,16 +8,15 @@ Tests SME row/col extracts/inserts
 """
 import unittest
 
-from asmgen.asmblocks.op import (
-    opmove_modifier as mod,
-    operand_modifier as opd_mod,
-    make_ord_prefix as mop
-)
-from asmgen.registers import asm_data_type as adt
 from asmgen.asmblocks.aarch64.types import aarch64_greg
-from asmgen.asmblocks.sve.types import sve_vreg,sve_preg
-from asmgen.asmblocks.sme.types import sme_treg
+from asmgen.asmblocks.op import make_ord_prefix as mop
+from asmgen.asmblocks.op import operand_modifier as opd_mod
+from asmgen.asmblocks.op import opmove_modifier as mod
 from asmgen.asmblocks.sme import sme
+from asmgen.asmblocks.sme.types import sme_treg
+from asmgen.asmblocks.sve.types import sve_preg, sve_vreg
+from asmgen.registers import asm_data_type as adt
+
 
 # fine for testing
 # pylint: disable-next=too-many-instance-attributes

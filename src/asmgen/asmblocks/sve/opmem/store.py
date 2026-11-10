@@ -7,10 +7,11 @@
 SVE store instructions
 """
 
-from typing import Callable
+from collections.abc import Callable
 
 from ...op import opmem_action as action
 from .base import sve_opmem
+
 
 class sve_store(sve_opmem):
     """

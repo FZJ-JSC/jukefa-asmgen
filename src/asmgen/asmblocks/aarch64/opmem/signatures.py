@@ -7,18 +7,15 @@
 Valid signatures for AArch64  opmem operations
 """
 
-from ....registers import adt_size
+from ....registers import adt_is_float, adt_size
+from ....registers import asm_data_type as adt
+from ...op import operand_role as orl
+from ...op import operand_shape as osh
+from ...op import operand_type as ot
+from ...op import operation_signature as sig
+from ...op import opmem_modifier as mod
+from ...op import register_type as rt
 from ...op.constraint import either_constraint, minmax_constraint, multiple_constraint
-from ...op import (
-    operation_signature as sig,
-    operand_shape as osh,
-    operand_type as ot,
-    operand_role as orl,
-    register_type as rt,
-    opmem_modifier as mod
-)
-
-from ....registers import asm_data_type as adt, adt_is_float
 
 _FLOATS = [adt.FP64, adt.FP32, adt.FP16, adt.FP8E4M3, adt.FP8E5M2]
 _INTS = [adt.SINT64, adt.SINT32, adt.SINT16, adt.SINT8,

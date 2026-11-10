@@ -7,8 +7,8 @@ them (engine=False)
 import unittest
 
 from asmgen.asmblocks.neon import neon
-from asmgen.asmblocks.sme import sme
 from asmgen.asmblocks.op.opset import opset_modifier as setmod
+from asmgen.asmblocks.sme import sme
 from asmgen.registers import asm_data_type as adt
 
 

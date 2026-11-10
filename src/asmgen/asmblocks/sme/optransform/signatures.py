@@ -6,17 +6,15 @@
 """
 Valid signatures for SME opd3 operations
 """
-from ...op import (
-    operation_signature as sig,
-    operand_shape as osh,
-    operand_type as ot,
-    operand_role as orl,
-    register_type as rt,
-    optransform_modifier as mod
-)
-
+from ....registers import adt_size
+from ....registers import asm_data_type as adt
+from ...op import operand_role as orl
+from ...op import operand_shape as osh
+from ...op import operand_type as ot
+from ...op import operation_signature as sig
+from ...op import optransform_modifier as mod
+from ...op import register_type as rt
 from ...op.optransform import widening_method as wm
-from ....registers import asm_data_type as adt, adt_size
 
 _FLOATS = [adt.FP64, adt.FP32, adt.FP16, adt.BF16, adt.FP8E4M3, adt.FP8E5M2]
 _SIGNED_INTS = [adt.SINT64, adt.SINT32, adt.SINT16, adt.SINT8]

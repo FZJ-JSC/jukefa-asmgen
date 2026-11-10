@@ -9,6 +9,7 @@ Type hinting helper for asmgen test cases
 
 from asmgen.asmblocks.noarch import asmgen
 
+
 # This exists just for type hinting
 class testcase:
     """

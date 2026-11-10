@@ -8,9 +8,10 @@ Test Base X86_64 prefetches
 """
 import unittest
 
+from asmgen.asmblocks.avx.types import reg_prefixer, x86_greg
 from asmgen.asmblocks.op import opmem_modifier as mod
-from asmgen.asmblocks.avx.types import x86_greg, reg_prefixer
 from asmgen.asmblocks.x86.opmem import x86_prefetch
+
 
 class test_x86_prefetch(unittest.TestCase):
     """

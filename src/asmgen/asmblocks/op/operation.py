@@ -7,19 +7,20 @@
 Abstract base classes for arithmetic operations/instructions
 """
 
-from abc import ABC,abstractmethod
+from abc import ABC, abstractmethod
 
+from ...registers import (
+    asm_data_type as adt,
+)
 from ...registers import (
     data_reg,
     greg_base,
     mreg_base,
-    asm_data_type as adt,
 )
-
-from .signature import operation_signature
 from .misc import make_ord_prefix
 from .modifier import operation_modifier as mod
 from .operand import operand_modifier as opd_mod
+from .signature import operation_signature
 
 #: what a call that doesn't fit raises - argument checks, the signatures,
 #: their constraints, implementations refusing what their signatures allow
@@ -87,8 +88,8 @@ class operation(ABC):
         if unsupported_mods:
             unsup_mod_string = "|".join(m.name for m in unsupported_mods)
             raise ValueError(
-                    (f"{type(self).__name__} does not support "
-                     f"these modifiers at all: {{{unsup_mod_string}}}"))
+                    f"{type(self).__name__} does not support "
+                     f"these modifiers at all: {{{unsup_mod_string}}}")
 
         all_supported_operand_mods = set().union(
                 *(op.modifiers for sig in sigs for _,op in sig.operands.items()))
@@ -98,8 +99,8 @@ class operation(ABC):
         if unsupported_mods:
             unsup_mod_string = "|".join(m.name for m in unsupported_mods)
             raise ValueError(
-                    (f"{type(self).__name__} does not support "
-                     f"these modifiers at all: {{{unsup_mod_string}}}"))
+                    f"{type(self).__name__} does not support "
+                     f"these modifiers at all: {{{unsup_mod_string}}}")
 
 
     def resolve_dregs(self,

@@ -2,10 +2,20 @@
 AVX set signatures: CONST zero, one
 """
 from ....registers import adt_size
+from ....registers import asm_data_type as adt
 from ...op.constraint import minmax_constraint
 from ...op.operand import register_type as rt
-from ...op.opset import maskavl_signatures, INT_DTS, VREG_DTS, const_signatures, mask_signatures, stindex_signatures, vlen_signatures, zero_signatures, first_mask_signatures
-from ....registers import asm_data_type as adt
+from ...op.opset import (
+    INT_DTS,
+    VREG_DTS,
+    const_signatures,
+    first_mask_signatures,
+    mask_signatures,
+    maskavl_signatures,
+    stindex_signatures,
+    vlen_signatures,
+    zero_signatures,
+)
 
 
 def make_avx_opset_signatures(*, evex : bool = False) -> list:

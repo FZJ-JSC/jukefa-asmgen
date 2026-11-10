@@ -7,23 +7,21 @@
 SME asm generator
 """
 
-from ..op.operand import register_type as rt
+from ...registers import (
+    adt_size,
+    treg_base,
+)
 from ...registers import (
     asm_data_type as adt,
-    reg_tracker,
-    adt_size,
-    treg_base, vreg_base, greg_base,
 )
+from ..op.operand import register_type as rt
 from ..sve import sve
-
-from .types import sme_treg
-from .optransform import sme_fopa
-from .opmove import sme_move
-
 from .opmem.load import sme_load
 from .opmem.store import sme_store
+from .opmove import sme_move
 from .opset import sme_opset
-from ..op.opset import opset_modifier as _opset_mod
+from .optransform import sme_fopa
+from .types import sme_treg
 
 
 class sme(sve):

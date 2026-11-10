@@ -11,6 +11,7 @@ import unittest
 from asmgen.asmblocks.neon import neon
 from asmgen.registers import asm_data_type as adt
 
+
 class test_neon_opd3_base(unittest.TestCase):
     """Base setup for NEON opd3 tests"""
     def setUp(self):

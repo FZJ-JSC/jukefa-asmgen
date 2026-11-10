@@ -6,11 +6,11 @@
 """
 Contains facilities to work with different ASM register types independently from the ISA
 """
-from abc import ABC,abstractmethod
-from enum import Enum,auto
-from typing import Union
+from abc import ABC, abstractmethod
+from enum import Enum, auto
 
 from .util import NIE_MESSAGE
+
 
 class reg_tracker:
     """
@@ -232,8 +232,8 @@ class reg_tracker:
         if not self._free(type_tag, idx):
             raise IndexError(f"{type_tag} register nr. {idx} already in use")
         if idx >= self.max_regs[type_tag]:
-            raise IndexError((f"{type_tag} register nr. {idx} not accessible"
-                              f"(max_regs = {self.max_regs[type_tag]})"))
+            raise IndexError(f"{type_tag} register nr. {idx} not accessible"
+                              f"(max_regs = {self.max_regs[type_tag]})")
 
         self._mark(type_tag, idx)
 
@@ -499,7 +499,7 @@ class adt_triple:
         self.b = b_dt
         self.c = c_dt
 
-    def __getitem__(self, key : Union[int,str]):
+    def __getitem__(self, key : int | str):
         if key in [0,'a']:
             return self.a
         if key in [1,'b']:

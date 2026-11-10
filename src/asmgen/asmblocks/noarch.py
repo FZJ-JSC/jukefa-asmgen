@@ -12,22 +12,23 @@ Base ASM generator class and ISA-independent utilities
 # pylint: disable=too-many-lines
 
 
-from .op.operation import operation
-from enum import Enum,auto
 import re
 from abc import ABC, abstractmethod
-from typing import TypeAlias,Union,TYPE_CHECKING
+from enum import Enum, auto
+from typing import TYPE_CHECKING, TypeAlias
 
-from ..registers import (
-    reg_tracker,
-    asm_data_type,
-    asm_index_type,
-    data_reg,
-    greg_base, freg_base, vreg_base, treg_base
-)
 from ..asmdata import asm_data
-
+from ..registers import (
+    asm_data_type,
+    data_reg,
+    freg_base,
+    greg_base,
+    reg_tracker,
+    treg_base,
+    vreg_base,
+)
 from ..util import NIE_MESSAGE
+from .op.operation import operation
 
 if TYPE_CHECKING:
     from ..callconv.callconv import callconv
@@ -314,7 +315,7 @@ class asmgen(ABC):
     @staticmethod
     def operands(inputs : list[tuple[str,str,str]],
                  outputs : list[tuple[str,str,str]],
-                 clobber : list[Union[greg_base|data_reg]]) -> str:
+                 clobber : list[greg_base|data_reg]) -> str:
         """
         Returns the closing block of an inline asm block, containing the inputs,
         outputs and clobber list
@@ -550,7 +551,7 @@ class asmgen(ABC):
         c_simd_size_function's asm: set(VLEN) into the inline asm operand
         byte_size (PARAM)
         """
-        from .op.opset import opset_modifier   # pylint: disable=import-outside-toplevel
+        from .op.opset import opset_modifier  # pylint: disable=import-outside-toplevel
         return self.set(modifiers={opset_modifier.VLEN, opset_modifier.PARAM}, param="byte_size")
 
     @abstractmethod

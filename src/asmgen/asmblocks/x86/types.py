@@ -6,8 +6,9 @@
 """
 X86_64 register types (scalar: GPRs and xmm scalar FP)
 """
-from ...registers import greg_base, freg_base
 from ...registers import asm_data_type as adt
+from ...registers import freg_base, greg_base
+
 
 #pylint: disable=too-few-public-methods
 class x86_greg(greg_base):

@@ -7,29 +7,23 @@
 Valid signatures for RVV opmem operations
 """
 
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable
 
-from ...op import (
-    operation_signature as sig,
-    operand_shape as osh,
-    operand_type as ot,
-    operand_role as orl,
-    register_type as rt,
-    opmem_modifier as mod,
-    operand_modifier as opd_mod
-)
-
+from ....registers import adt_size
+from ....registers import asm_data_type as adt
+from ....registers import asm_index_type as ait
+from ...op import operand_modifier as opd_mod
+from ...op import operand_role as orl
+from ...op import operand_shape as osh
+from ...op import operand_type as ot
+from ...op import operation_signature as sig
+from ...op import opmem_modifier as mod
+from ...op import register_type as rt
 from ...op.constraint import otherplusn_constraint
 from ...op.misc import make_ord_prefix as mop
-
 from ..types import rvv_vreg
 
-from ....registers import (
-    asm_data_type as adt,
-    asm_index_type as ait,
-    adt_size
-)
 
 @dataclass(kw_only=True)
 class struct_constraint(otherplusn_constraint):

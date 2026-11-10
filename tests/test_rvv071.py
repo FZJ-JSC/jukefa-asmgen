@@ -13,12 +13,13 @@ import subprocess
 import tempfile
 import unittest
 
-from asmgen.asmblocks.rvv071 import rvv071
-from asmgen.asmblocks.op.opmem import opmem_modifier as M
 from asmgen.asmblocks.op.operand import operand_modifier as OM
-from asmgen.registers import asm_data_type as adt, asm_index_type as ait
-from asmgen.asmblocks.op.opset import opset_modifier
 from asmgen.asmblocks.op.opmem import opmem_modifier
+from asmgen.asmblocks.op.opmem import opmem_modifier as M
+from asmgen.asmblocks.op.opset import opset_modifier
+from asmgen.asmblocks.rvv071 import rvv071
+from asmgen.registers import asm_data_type as adt
+from asmgen.registers import asm_index_type as ait
 
 
 def plain(text):

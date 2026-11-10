@@ -6,8 +6,13 @@ priorities
 import unittest
 
 from asmgen.asmblocks.op.constraint import (
-    ArgumentDependencyError, minmax_constraint, oneof_constraint, multiple_constraint,
-    either_constraint, otherplusn_constraint, differentval_constraint,
+    ArgumentDependencyError,
+    differentval_constraint,
+    either_constraint,
+    minmax_constraint,
+    multiple_constraint,
+    oneof_constraint,
+    otherplusn_constraint,
 )
 from asmgen.asmblocks.op.domain import constraint_domain, unbounded_domain_error
 from asmgen.registers import reg_tracker
@@ -99,13 +104,13 @@ class test_every_immediate_constrained(unittest.TestCase):
     """
 
     def test_all(self):
-        from asmgen.asmblocks.op.operand import operand_type as ot
-        from asmgen.asmblocks.neon import neon
-        from asmgen.asmblocks.sve import sve
-        from asmgen.asmblocks.rvv import rvv
-        from asmgen.asmblocks.sme import sme
         from asmgen.asmblocks.avx.avx2 import fma256
         from asmgen.asmblocks.avx.avx512 import avx512
+        from asmgen.asmblocks.neon import neon
+        from asmgen.asmblocks.op.operand import operand_type as ot
+        from asmgen.asmblocks.rvv import rvv
+        from asmgen.asmblocks.sme import sme
+        from asmgen.asmblocks.sve import sve
         for G in (neon, sve, sme, rvv, fma256, avx512):
             g = G()
             for opn in ("load", "store", "move"):

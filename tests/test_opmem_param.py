@@ -9,13 +9,13 @@ import subprocess
 import tempfile
 import unittest
 
-from asmgen.asmblocks.rvv import rvv
+from asmgen.asmblocks.avx import avx512, fma256
 from asmgen.asmblocks.neon import neon
-from asmgen.asmblocks.sve import sve
-from asmgen.asmblocks.avx import fma256, avx512
-from asmgen.asmblocks.op.opmem import opmem_modifier as mod
-from asmgen.registers import asm_data_type as adt
 from asmgen.asmblocks.op.opmem import opmem_modifier
+from asmgen.asmblocks.op.opmem import opmem_modifier as mod
+from asmgen.asmblocks.rvv import rvv
+from asmgen.asmblocks.sve import sve
+from asmgen.registers import asm_data_type as adt
 
 PARAM = {mod.PARAM}
 

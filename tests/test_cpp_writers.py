@@ -11,6 +11,7 @@ import unittest
 
 from asmgen.cppgen.writers import write_asmblock_func
 
+
 class cpp_writers_test(unittest.TestCase):
     """
     Test case for C++ source code writers

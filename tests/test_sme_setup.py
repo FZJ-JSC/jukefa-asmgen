@@ -4,9 +4,9 @@ SME: tiles zeroed as lists; the SME2 predicate-as-counter set only with SME2
 
 import unittest
 
+from asmgen.asmblocks.op.opset import opset_modifier
 from asmgen.asmblocks.sme import sme
 from asmgen.registers import asm_data_type as adt
-from asmgen.asmblocks.op.opset import opset_modifier
 
 
 class test_sme_setup(unittest.TestCase):

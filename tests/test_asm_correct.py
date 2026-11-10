@@ -14,33 +14,29 @@ import platform
 import random
 import shutil
 import unittest
-
-from subprocess import Popen, PIPE
-from typing import Union
+from subprocess import PIPE, Popen
 
 from parameterized import parameterized, parameterized_class
 
-from asmgen.registers import reg_tracker
-from asmgen.asmblocks.noarch import asmgen
-from asmgen.asmblocks.avx import fma128,fma256,avx512
+from asmgen.asmblocks.avx import avx512, fma128, fma256
 from asmgen.asmblocks.neon import neon
-from asmgen.asmblocks.sve import sve
+from asmgen.asmblocks.noarch import asmgen
 from asmgen.asmblocks.rvv import rvv
-from asmgen.cppgen.writers import write_test_asmblock_func
-from asmgen.cppgen.writers import write_test_func_declaration
-from asmgen.cppgen.declarations import vargen,vio_type
+from asmgen.asmblocks.sve import sve
+from asmgen.compilation.compiler_presets import cross_archs, cross_cxx_flags
 from asmgen.compilation.tools import compiler
-from asmgen.compilation.compiler_presets import cross_archs,cross_cxx_flags
+from asmgen.cppgen.declarations import vargen, vio_type
+from asmgen.cppgen.writers import write_test_asmblock_func, write_test_func_declaration
 from asmgen.emulation import get_emulator
+from asmgen.registers import reg_tracker
 
-from .testcase import testcase
 from .asm_test_generator import asm_test_generator
-
+from .testcase import testcase
 
 #NOTE: rvv071 will only work with special 0.7.1 EPI llvm, which will not work with RVV 1.0
 #      So let's remove testing it
 gens = [fma128(), fma256(), avx512(), neon(), sve(), rvv()]
-gen_dicts : list[dict[str,Union[str,asmgen]]] = [{
+gen_dicts : list[dict[str,str | asmgen]] = [{
     "name": gen.__class__.__name__,
     "gen": gen
     } for gen in gens]

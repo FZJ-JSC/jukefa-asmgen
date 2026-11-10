@@ -1,9 +1,10 @@
 """
 sme's set
 """
-from typing import Callable
+from collections.abc import Callable
 
-from ....registers import asm_data_type as adt, data_reg, treg_base
+from ....registers import asm_data_type as adt
+from ....registers import data_reg, treg_base
 from ...op.opset import opset_modifier
 from ...sve.opset import sve_opset
 from .signatures import make_sme_opset_signatures

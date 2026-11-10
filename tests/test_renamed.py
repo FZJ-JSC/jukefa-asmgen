@@ -4,14 +4,14 @@ generator's attributes, the classes' - were deprecated for a release and
 are gone (phase 9). opd3 is optransform and move's base class opmove
 (phase 10): their old names gone, the ISAs' packages renamed too.
 """
-import warnings
 import importlib
 import unittest
+import warnings
 
-from asmgen.asmblocks.neon import neon
-from asmgen.asmblocks.sve import sve
-from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.avx import fma256
+from asmgen.asmblocks.neon import neon
+from asmgen.asmblocks.rvv import rvv
+from asmgen.asmblocks.sve import sve
 
 
 class test_renamed(unittest.TestCase):

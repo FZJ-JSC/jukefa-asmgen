@@ -7,31 +7,23 @@
 SVE asm generator
 """
 
-from ..aarch64 import aarch64
-
+from ...registers import asm_data_type as adt
 from ...registers import (
-    reg_tracker,
-    asm_data_type as adt,
-    adt_size,
-    asm_index_type as ait,
-    ait_size,
-    treg_base, vreg_base, freg_base, greg_base
+    freg_base,
+    greg_base,
+    treg_base,
+    vreg_base,
 )
-
-from .types import sve_vreg,sve_preg
-from .optransform import sve_fma,sve_mul,sve_add
+from ..aarch64 import aarch64
+from ..aarch64.optransform import aarch64_shift, aarch64_sub
+from ..neon import neon
 from .opmem.load import sve_load
 from .opmem.store import sve_store
-
 from .opmove import sve_move
-
-from ..neon import neon
-from ..aarch64.optransform import aarch64_sub
-from ..aarch64.optransform import aarch64_shift
-from ...registers import asm_data_type as _ADT
 from .opset import sve_opset
-from ..op.opset import opset_modifier as _opset_mod
-from ..op.optransform import optransform_modifier as _opd3_mod
+from .optransform import sve_add, sve_fma, sve_mul
+from .types import sve_preg, sve_vreg
+
 
 class sve(aarch64):
     """

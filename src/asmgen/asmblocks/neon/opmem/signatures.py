@@ -8,34 +8,26 @@ Valid signatures for NEON opmem operations
 """
 
 from dataclasses import dataclass
-from typing import Type
 
-from ...op import (
-    operation_signature as sig,
-    operand_shape as osh,
-    operand_type as ot,
-    operand_role as orl,
-    operand_modifier as opd_mod,
-    register_type as rt,
-    opmem_modifier as mod
-)
-
+from ....registers import adt_size
+from ....registers import asm_data_type as adt
+from ...op import operand_modifier as opd_mod
+from ...op import operand_role as orl
+from ...op import operand_shape as osh
+from ...op import operand_type as ot
+from ...op import operation_signature as sig
+from ...op import opmem_modifier as mod
+from ...op import register_type as rt
 from ...op.constraint import (
-    otherplusnmod_constraint,
+    either_constraint,
     minmax_constraint,
     multiple_constraint,
     oneof_constraint,
-    either_constraint,
-    regidx_constraint
+    otherplusnmod_constraint,
+    regidx_constraint,
 )
 from ...op.misc import make_ord_prefix as mop
-
 from ..types import neon_vreg
-
-from ....registers import (
-    asm_data_type as adt,
-    adt_size
-)
 
 _FLOATS = [adt.FP64, adt.FP32, adt.FP16, adt.FP8E4M3, adt.FP8E5M2]
 _INTS = [adt.SINT64, adt.SINT32, adt.SINT16, adt.SINT8,
@@ -46,7 +38,7 @@ class neon_struct_constraint(regidx_constraint,otherplusnmod_constraint):
     """
     Constraint ensuring structured loads/stores use consecutive registers
     """
-    reg_class : Type[neon_vreg] = neon_vreg
+    reg_class : type[neon_vreg] = neon_vreg
     offset : int = 1
     modval : int = 32
 

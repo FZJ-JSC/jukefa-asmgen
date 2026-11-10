@@ -7,16 +7,18 @@
 data move operation for RVV
 """
 
-from typing import Callable
+from collections.abc import Callable
 
-from ....registers import asm_data_type as adt, data_reg
-from ...op.signature import operation_signature
+from ....registers import asm_data_type as adt
+from ....registers import data_reg
 from ...op.operand import operand_modifier as omod
-from ...op.opmove import opmove, opmove_modifier as mod
+from ...op.opmove import opmove
+from ...op.opmove import opmove_modifier as mod
+from ...op.scalar import scalar_dregs_only, scalar_operands
+from ...op.signature import operation_signature
+from ...riscv64.opmove import riscv64_move
 from ...riscv64.types import riscv64_greg
 from .signatures import make_rvv_move_signatures
-from ...riscv64.opmove import riscv64_move
-from ...op.scalar import scalar_dregs_only, scalar_operands
 
 
 class rvv_move(opmove):

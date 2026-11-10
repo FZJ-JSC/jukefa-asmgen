@@ -6,10 +6,11 @@
 """
 NEON load instructions
 """
-from typing import Callable
+from collections.abc import Callable
 
 from ...op import opmem_action as action
 from .base import neon_opmem
+
 
 class neon_load(neon_opmem):
     """

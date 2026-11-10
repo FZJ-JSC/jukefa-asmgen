@@ -7,5 +7,5 @@
 Meta-module for Base X86 opmem operations
 """
 from .load import *
-from .store import *
 from .prefetch import *
+from .store import *

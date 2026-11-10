@@ -7,22 +7,14 @@
 Operands
 """
 
-from dataclasses import dataclass,field
+from dataclasses import dataclass, field
 from enum import Enum, auto
-
 from typing import Any
 
-
-from ...registers import (
-    asm_data_type as adt,
-    greg_base,
-    freg_base,
-    vreg_base,
-    treg_base,
-    mreg_base
-)
-
+from ...registers import asm_data_type as adt
+from ...registers import freg_base, greg_base, mreg_base, treg_base, vreg_base
 from .constraint import operand_constraint
+
 
 class operand_type(Enum):
     """

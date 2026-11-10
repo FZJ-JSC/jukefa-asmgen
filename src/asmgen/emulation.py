@@ -6,15 +6,16 @@
 """
 Utilities for running emulations of different ISAs on other ISAs
 """
-from itertools import permutations
-from subprocess import Popen, PIPE
 import logging
 import os
 import platform
-import shutil
 import re
+import shutil
+from itertools import permutations
+from subprocess import PIPE, Popen
 
 from .compilation.compiler_presets import cross_archs
+
 
 class emulator:
     """

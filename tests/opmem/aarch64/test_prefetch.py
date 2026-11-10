@@ -12,6 +12,7 @@ from asmgen.asmblocks.aarch64.opmem import aarch64_prefetch
 from asmgen.asmblocks.aarch64.types import aarch64_greg
 from asmgen.asmblocks.op import opmem_modifier as mod
 
+
 def asmwrap(s: str) -> str:
     """
     Dummy asmwrap to reduce complexity

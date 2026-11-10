@@ -7,14 +7,15 @@
 Base X86 prefetch instructions
 """
 
-from typing import Callable
+from collections.abc import Callable
 
+from ...op import operand_modifier as opd_mod
 from ...op import opmem_action as action
 from ...op import opmem_modifier as mod
-from ...op import operand_modifier as opd_mod
 from ..types import x86_greg
 from .base import x86_opmem
 from .signatures import make_x86_prefetch_signatures
+
 
 class x86_prefetch(x86_opmem):
     """

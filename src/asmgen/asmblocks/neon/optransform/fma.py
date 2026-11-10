@@ -12,12 +12,10 @@ from typing import Any
 from ....registers import (
     asm_data_type as adt,
 )
+from ...op import operand_modifier as opd_mod
+from ...op import optransform_modifier as mod
 from .base import neon_opd3_base
 
-from ...op import (
-    optransform_modifier as mod,
-    operand_modifier as opd_mod
-)
 
 class neon_fma(neon_opd3_base):
     """

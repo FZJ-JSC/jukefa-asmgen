@@ -8,20 +8,27 @@ Test AVX loads/stores
 """
 import unittest
 
-from asmgen.asmblocks.op import (
-    opmem_modifier as mod,
-    operand_modifier as opd_mod
+from asmgen.asmblocks.avx.opmem import (
+    avx128_load,
+    avx128_store,
+    avx256_load,
+    avx512_load,
+    avx512_store,
 )
-from asmgen.registers import asm_data_type as adt, asm_index_type as ait
 from asmgen.asmblocks.avx.types import (
-    x86_greg,
-    xmm_vreg, ymm_vreg, zmm_vreg,
-    avx_freg,
     avx512_mreg,
+    avx_freg,
     reg_prefixer,
+    x86_greg,
+    xmm_vreg,
+    ymm_vreg,
+    zmm_vreg,
 )
-from asmgen.asmblocks.avx.opmem import avx128_load, avx256_load, avx512_load
-from asmgen.asmblocks.avx.opmem import avx128_store, avx512_store
+from asmgen.asmblocks.op import operand_modifier as opd_mod
+from asmgen.asmblocks.op import opmem_modifier as mod
+from asmgen.registers import asm_data_type as adt
+from asmgen.registers import asm_index_type as ait
+
 
 def asmwrap(s: str) -> str:
     """

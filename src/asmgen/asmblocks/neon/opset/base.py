@@ -1,11 +1,12 @@
 """
 neon's set
 """
-from typing import Callable
+from collections.abc import Callable
 
-from ...op.opset import vector_opset
-from ....registers import asm_data_type as adt, adt_size, data_reg, greg_base
+from ....registers import adt_size, data_reg, greg_base
+from ....registers import asm_data_type as adt
 from ...aarch64.opset import aarch64_opset
+from ...op.opset import vector_opset
 from .signatures import make_neon_opset_signatures
 
 

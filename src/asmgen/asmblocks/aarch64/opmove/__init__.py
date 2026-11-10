@@ -1,8 +1,9 @@
 """
 AArch64 moves between scalar registers
 """
+from ....registers import adt_size, freg_base, greg_base
+from ....registers import asm_data_type as adt
 from ...op.scalar import scalar_move
-from ....registers import asm_data_type as adt, adt_size, greg_base, freg_base
 
 
 class aarch64_move(scalar_move):

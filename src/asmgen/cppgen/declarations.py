@@ -7,7 +7,6 @@
 Facilities for generating variables/parameters in C++ code
 """
 from enum import Enum, unique
-from typing import Union
 
 headers_for_types = {
     "std::uint64_t" : "cstdint",
@@ -89,8 +88,8 @@ class vargen:
         self.cppvar_vts[name] = vt
         return name
 
-    def new_vector(self, *, cpp_type : str, size : Union[str,int]=1,
-                   fillwith : Union[int,float]=0.0,
+    def new_vector(self, *, cpp_type : str, size : str | int=1,
+                   fillwith : float=0.0,
                    name : str ="#auto#",
                    cppinit : str = "",
                    vt : vio_type =vio_type.OUTPUT) -> str:

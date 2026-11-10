@@ -8,22 +8,20 @@ Operation on n data operands and 1 address operand and related structures
 """
 
 import dataclasses
-from enum import Enum,auto
-
 from abc import abstractmethod
+from enum import Enum, auto
 
-from .operation import operation
-from .signature import operation_signature
+from ...registers import asm_data_type as adt
+from ...registers import data_reg, greg_base
+from .misc import make_ord_prefix
 from .modifier import operation_modifier
 from .operand import operand_modifier
-from .operand import operand_shape as osh, operand_type as ot, operand_role as orl
-from .misc import make_ord_prefix
+from .operand import operand_role as orl
+from .operand import operand_shape as osh
+from .operand import operand_type as ot
+from .operation import operation
+from .signature import operation_signature
 
-from ...registers import (
-    asm_data_type as adt,
-    data_reg,
-    greg_base
-)
 
 class opmem_modifier(operation_modifier):
     """

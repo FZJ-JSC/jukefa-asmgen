@@ -7,14 +7,15 @@
 Operation on 3 data operands and related structures
 """
 from abc import abstractmethod
-from enum import Enum,auto
+from enum import Enum, auto
 
-from .operation import operation
+from ...registers import asm_data_type as adt
+from ...registers import data_reg
 from .modifier import operation_modifier
 from .operand import operand_modifier
+from .operation import operation
 from .signature import operation_signature
 
-from ...registers import asm_data_type as adt, data_reg
 
 class widening_method(Enum):
     """

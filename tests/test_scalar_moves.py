@@ -7,12 +7,12 @@ import unittest
 
 from asmgen.asmblocks.avx import avx512
 from asmgen.asmblocks.neon import neon
+from asmgen.asmblocks.op.operand import operand_modifier
 from asmgen.asmblocks.op.opmove import opmove_modifier
 from asmgen.asmblocks.rvv import rvv
 from asmgen.asmblocks.sme import sme
 from asmgen.asmblocks.sve import sve
 from asmgen.registers import asm_data_type as adt
-from asmgen.asmblocks.op.operand import operand_modifier
 
 U = adt.UINT64
 BITS = {opmove_modifier.BITS}

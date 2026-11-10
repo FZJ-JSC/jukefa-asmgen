@@ -1,10 +1,11 @@
 """
 x86-64 moves between scalar registers
 """
-from typing import Callable
+from collections.abc import Callable
 
+from ....registers import adt_size, freg_base, greg_base
+from ....registers import asm_data_type as adt
 from ...op.scalar import scalar_move
-from ....registers import asm_data_type as adt, adt_size, greg_base, freg_base
 from ..types import DT_SUFFIXES
 
 

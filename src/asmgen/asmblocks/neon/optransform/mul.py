@@ -9,12 +9,12 @@ NEON/ASIMD mul (fmul)
 
 from typing import Any
 
-from ....registers import (
-    asm_data_type as adt
-)
-from ...op import optransform_modifier as mod,operand_modifier as opd_mod
-from .base import neon_opd3_base
+from ....registers import asm_data_type as adt
 from ...aarch64.optransform import aarch64_mul
+from ...op import operand_modifier as opd_mod
+from ...op import optransform_modifier as mod
+from .base import neon_opd3_base
+
 
 class neon_mul(neon_opd3_base):
     """

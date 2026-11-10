@@ -7,27 +7,27 @@
 AVX opd3 base case
 """
 from abc import abstractmethod
-from typing import Callable,Any
+from collections.abc import Callable
+from typing import Any
 
 from ....registers import (
     asm_data_type as adt,
+)
+from ....registers import (
     asm_index_type as ait,
+)
+from ....registers import (
     data_reg,
 )
-from ...op import (
-    optransform,
-    optransform_modifier as mod,
-    operation_signature,
-    operand_modifier as opd_mod
-)
-
-from ..types import reg_prefixer
-
-from ....util import NIE_MESSAGE
-
-from .signatures import make_avx_opd3_signatures
 from ....registers import greg_base as _greg_base
+from ....util import NIE_MESSAGE
+from ...op import operand_modifier as opd_mod
+from ...op import operation_signature, optransform
+from ...op import optransform_modifier as mod
 from ...op.scalar import scalar_operands
+from ..types import reg_prefixer
+from .signatures import make_avx_opd3_signatures
+
 
 class avx_opd3_base(optransform):
     """

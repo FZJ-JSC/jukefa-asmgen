@@ -1,10 +1,20 @@
 """
 SVE set signatures: CONST zero, one
 """
+from ....registers import asm_data_type as adt
 from ...op.constraint import oneof_constraint
 from ...op.operand import register_type as rt
-from ...op.opset import INT_DTS, const_signatures, mask_signatures, stindex_signatures, vlen_param_signatures, vlen_signatures, zero_signatures, first_mask_signatures, maskavl_signatures
-from ....registers import asm_data_type as adt
+from ...op.opset import (
+    INT_DTS,
+    const_signatures,
+    first_mask_signatures,
+    mask_signatures,
+    maskavl_signatures,
+    stindex_signatures,
+    vlen_param_signatures,
+    vlen_signatures,
+    zero_signatures,
+)
 
 ONE_DTS = (adt.DOUBLE, adt.SINGLE, adt.HALF, *INT_DTS)
 

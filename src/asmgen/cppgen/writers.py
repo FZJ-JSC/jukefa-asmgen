@@ -10,6 +10,7 @@ from mako.template import Template
 
 import asmgen.cppgen.templates as cpptpl
 
+
 def write_test_asmblock_func(name : str, asmblock : str, tparams : dict[str,str]) -> str:
     """
     Writes a function that tests an ASM block

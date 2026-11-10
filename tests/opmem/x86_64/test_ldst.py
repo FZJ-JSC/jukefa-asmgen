@@ -8,13 +8,12 @@ Test Base X86_64 loads/stores
 """
 import unittest
 
-from asmgen.asmblocks.op import (
-    opmem_modifier as mod,
-    operand_modifier as opd_mod
-)
-from asmgen.registers import asm_data_type as adt
-from asmgen.asmblocks.avx.types import x86_greg, avx_freg, reg_prefixer
+from asmgen.asmblocks.avx.types import avx_freg, reg_prefixer, x86_greg
+from asmgen.asmblocks.op import operand_modifier as opd_mod
+from asmgen.asmblocks.op import opmem_modifier as mod
 from asmgen.asmblocks.x86.opmem import x86_load, x86_store
+from asmgen.registers import asm_data_type as adt
+
 
 class test_x86_opmem(unittest.TestCase):
     """

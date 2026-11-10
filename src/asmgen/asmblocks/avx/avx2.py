@@ -7,35 +7,17 @@
 X86_64 AVX/AVX2+FMA generator specifics (xmm/ymm, no masking)
 """
 
-from copy import deepcopy
-from typing import Union
-from abc import abstractmethod
 
 from ..x86.opmem import x86_prefetch
-from ...asmdata import asm_data
-from ...registers import (
-    reg_tracker,
-    asm_data_type as adt,
-    adt_size,
-    asm_index_type as ait,
-    treg_base, vreg_base, freg_base, greg_base
-)
-
-from ..noarch import asmgen,comparison
-from ...callconv.callconv import callconv
-
+from ..x86.optransform import x86_shift, x86_sub
 from .base import avxbase
-from .types import x86_greg,avx_freg,xmm_vreg,ymm_vreg,zmm_vreg,reg_prefixer
-
+from .opmem.load import avx128_load, avx256_load
+from .opmem.store import avx128_store, avx256_store
 from .opmove import avx_move
-from .optransform import avx_fma,avx_mul,avx_add
-
-from .opmem.load import avx128_load,avx256_load,avx512_load
-from .opmem.store import avx128_store,avx256_store,avx512_store
-from ..x86.optransform import x86_sub
-from ..x86.optransform import x86_shift
 from .opset import avx_opset
-from ..op.opset import opset_modifier as _opset_mod
+from .optransform import avx_add, avx_fma, avx_mul
+from .types import xmm_vreg, ymm_vreg
+
 
 class fma128(avxbase):
     """

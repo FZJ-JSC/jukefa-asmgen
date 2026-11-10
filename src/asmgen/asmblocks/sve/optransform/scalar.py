@@ -1,9 +1,9 @@
 """
 SVE's add on general registers: AArch64's, and counts of vector lengths
 """
+from ....registers import greg_base
 from ...aarch64.optransform import aarch64_add
 from ...op.constraint import minmax_constraint
-from ....registers import greg_base
 
 
 class sve_scalar_add(aarch64_add):

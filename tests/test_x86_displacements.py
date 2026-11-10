@@ -7,10 +7,10 @@ extensions) leaves both alone.
 """
 import unittest
 
-from asmgen.asmblocks.avx import fma128, fma256, avx512
-from asmgen.registers import asm_data_type as adt
+from asmgen.asmblocks.avx import avx512, fma128, fma256
 from asmgen.asmblocks.op.operand import operand_modifier
 from asmgen.asmblocks.op.opmem import opmem_modifier
+from asmgen.registers import asm_data_type as adt
 
 
 def loads(g, offset=0):

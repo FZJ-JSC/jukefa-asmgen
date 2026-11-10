@@ -6,10 +6,17 @@ The values an operand may take under its constraints
 """
 
 from .constraint import (
-    ArgumentDependencyError, ConstraintDoesNotApplyError,
-    operand_constraint, minmax_constraint, oneof_constraint, multiple_constraint,
-    either_constraint, otherplusn_constraint, otherplusnmod_constraint,
-    sameval_constraint, differentval_constraint,
+    ArgumentDependencyError,
+    ConstraintDoesNotApplyError,
+    differentval_constraint,
+    either_constraint,
+    minmax_constraint,
+    multiple_constraint,
+    oneof_constraint,
+    operand_constraint,
+    otherplusn_constraint,
+    otherplusnmod_constraint,
+    sameval_constraint,
 )
 
 
