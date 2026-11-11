@@ -13,6 +13,7 @@ import os
 import platform
 import random
 import shutil
+import tempfile
 import unittest
 from subprocess import PIPE, Popen
 
@@ -52,8 +53,11 @@ class asm_correctness_test(unittest.TestCase,testcase):
     Runs code correctness tests on ASM generators. To add a test, add it to one of the
     generators in tests/generators or create a new one and make asm_test_generator in
     asm_test_generator.py inherit from it
+
+    Every parameterized class gets its own scratch directory and its artifacts are
+    named after generator *and* compiler: two classes never write the same file, so
+    the suite is safe under xdist.
     """
-    test_root = "test_run/asm_correct/"
 
     @classmethod
     def clang_format_if_exists(cls, source : str) -> str:
@@ -77,13 +81,20 @@ class asm_correctness_test(unittest.TestCase,testcase):
         if None is compiler_exe:
             raise unittest.SkipTest(f"Compiler {cls.cxx_name} not found, skipping")
 
-        cls.testlib_name = f"libtest_asm_correct_{cls.name}.so"
-        cls.testlib_source  = f"// uarch_bench; Generator: {cls.name}\n"
+        # One scratch directory per parameterized class: concurrent xdist workers
+        # (different generators, or the same generator with another compiler)
+        # must not share artifacts
+        cls.test_root = tempfile.mkdtemp(prefix=f"asm_correct_{cls.name}_{cls.cxx_name}_")
+        tag = f"{cls.name}_{cls.cxx_name}"
+
+        cls.testlib_name = f"libtest_asm_correct_{tag}.so"
+        cls.testlib_source  = f"// uarch_bench; Generator: {cls.name}, compiler: {cls.cxx_name}\n"
         cls.testlib_source += "// generated C++/inline ASM code for ASM correctness tests\n"
-        cls.header_source  = f"// uarch_bench; Generator: {cls.name}\n"
+        cls.header_source  = f"// uarch_bench; Generator: {cls.name}, compiler: {cls.cxx_name}\n"
         cls.header_source += "// generated C++ header for ASM correctness tests\n"
 
         log = logging.getLogger("ASMCORTEST")
+        log.info("artifacts for %s with %s in %s", cls.name, cls.cxx_name, cls.test_root)
 
         cls.testlib_source += "#include <cstddef>\n"
         cls.testlib_source += "#include <cstdlib>\n"
@@ -110,12 +121,9 @@ class asm_correctness_test(unittest.TestCase,testcase):
         cls.testlib_source = cls.clang_format_if_exists(cls.testlib_source)
         cls.header_source = cls.clang_format_if_exists(cls.header_source)
 
-        if not os.path.exists(cls.test_root):
-            os.makedirs(cls.test_root)
-
         # save sources for later inspection
-        source_path = os.path.join(cls.test_root, f"testlib_source_{cls.name}.cpp")
-        header_path = os.path.join(cls.test_root, f"testlib_header_{cls.name}.hpp")
+        source_path = os.path.join(cls.test_root, f"testlib_source_{tag}.cpp")
+        header_path = os.path.join(cls.test_root, f"testlib_header_{tag}.hpp")
 
         with open(source_path, mode="w", encoding="utf-8") as source_file:
             source_file.write(cls.testlib_source)
@@ -263,42 +271,39 @@ class asm_correctness_test(unittest.TestCase,testcase):
         log = logging.getLogger("ASMCORTEST")
         source = self.header_source+"\n"+self.wrap_test_call(test_name)
         cxx = compiler(self.cxx_name,self.name)
-        exe : str = ""
-        exe_name = f"test_{test_name}_{self.name}"
+        exe_name = f"test_{test_name}_{self.name}_{self.cxx_name}"
+        exe = os.path.join(self.test_root,exe_name)
 
         log.debug("testing %s with %s",test_name,self.name)
 
         cross_arch = cross_archs[self.name]
-        cmd = []
 
         if platform.machine() == cross_arch:
-            cxx.compile_exe(source=source,
-                            output_filename=os.path.join(self.test_root,exe_name),
-                            libs=[os.path.join(self.test_root,self.testlib_name)])
-
-            exe = shutil.which(exe_name,path=self.test_root)
-            if None is exe:
-                self.fail(f"Compilation failed with generator {self.name} for {test_name}")
-            cmd = [exe]
+            compiled = cxx.compile_exe(source=source,
+                                       output_filename=exe,
+                                       libs=[os.path.join(self.test_root,self.testlib_name)])
         else:
             if not self.cxx_name in cross_cxx_flags[cross_arch]:
                 self.skipTest(f"Skipping: Can't cross-compile for {self.name} with {self.cxx_name}")
-            cxx.compile_exe(source=source,
-                            output_filename=os.path.join(self.test_root,exe_name),
-                            libs=[os.path.join(self.test_root,self.testlib_name)],
-                            cross_compile=cross_arch)
+            compiled = cxx.compile_exe(source=source,
+                                       output_filename=exe,
+                                       libs=[os.path.join(self.test_root,self.testlib_name)],
+                                       cross_compile=cross_arch)
 
-            exe = shutil.which(exe_name,path=self.test_root)
-            if None is exe:
-                self.fail(f"Compilation failed with generator {self.name} for {test_name}")
+        # the compiler's own exit status, not the presence of some file of that name:
+        # a leftover artifact must never stand in for a failed compilation
+        if not compiled:
+            self.fail(f"Compilation failed with generator {self.name} for {test_name}"
+                      f" (artifacts in {self.test_root})")
+
         if not self.gen.supported_on_host():
             emulator = get_emulator(platform.machine(), self.name)
             emulator.run(exe)
         else:
-            log.debug("Running test %s with: %s", test_name, ' '.join(cmd))
+            log.debug("Running test %s with: %s", test_name, exe)
             output = ""
             errout = ""
-            with Popen(cmd,stdin=PIPE,stdout=PIPE,stderr=PIPE) as process:
+            with Popen([exe],stdin=PIPE,stdout=PIPE,stderr=PIPE) as process:
                 process_out = process.communicate()
                 output = process_out[0].decode()
                 errout = process_out[1].decode()
