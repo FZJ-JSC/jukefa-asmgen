@@ -29,6 +29,7 @@ from ..registers import (
 )
 from ..util import NIE_MESSAGE
 from .op.operation import operation
+from .op.operand import register_type as rgt
 
 if TYPE_CHECKING:
     from ..callconv.callconv import callconv
@@ -366,18 +367,19 @@ class asmgen(ABC):
 
     def treg_tag(self, dt : asm_data_type) -> str:
         """The tracker's type of the tiles holding dt (tile_types)"""
-        return "treg"
+        return rgt.TILE.tag
 
     def get_reg_tracker(self) -> reg_tracker:
         """
         A register tracker for this ISA: every register file with its size,
         the reserved registers reserved and aliased by their names
         """
-        types = [("greg", self.max_gregs()), ("vreg", self.max_vregs())]
+        types = [(rgt.GP.tag, self.max_gregs()),
+                 (rgt.VEC.tag, self.max_vregs())]
         if self.max_fregs():
-            types.append(("freg", self.max_fregs()))
+            types.append((rgt.FP.tag, self.max_fregs()))
         if self.max_mregs():
-            types.append(("mreg", self.max_mregs()))
+            types.append((rgt.MASK.tag, self.max_mregs()))
         types.extend(self.tile_types())
         rt = reg_tracker(types)
         tracked = {t for t, _ in types}

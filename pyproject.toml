@@ -9,7 +9,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jukefa-asmgen"
-version = "0.6.2"
+version = "0.6.3"
 authors = [
 { name="linedot", email="linedot@linedot.org" },
 ]
@@ -30,14 +30,16 @@ packages = [
   "src/asmgen"
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 test = [
-  "parameterized"
+  "pytest>=8",
+  "parameterized",
+  "pytest-xdist"
 ]
 
 [project.urls]
-Homepage = "https://github.com/linedot/asmgen"
-Issues = "https://github.com/linedot/asmgen/issues"
+Homepage = "https://github.com/FZJ-JSC/jukefa-asmgen"
+Issues = "https://github.com/FZJ-JSC/jukefa-asmgen/issues"
 
 [tool.mypy]
 python_version = "3.13"

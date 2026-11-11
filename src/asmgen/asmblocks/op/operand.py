@@ -41,12 +41,32 @@ class operand_role(Enum):
 class register_type(Enum):
     """
     Valid register types
+
+    A type's `tag` is the register tracker's name for its file - the string a
+    generator's tracker is built with (vreg, freg, greg, mreg) and the prefix a
+    tile's element-sized one has (treg: treg8, treg64 - the generator's
+    `treg_tag(dt)` names those, its tile sizes its own)
     """
     GP = auto()
     FP = auto()
     VEC = auto()
     TILE = auto()
     MASK = auto()
+
+    @property
+    def tag(self) -> str:
+        """
+        The tracker's tag of this register type's file
+        :return: vreg, freg, greg, mreg, or treg for tiles
+        """
+        return _TAGS[self]
+
+
+#: a register type's tag: asmgen's own names, not derivable from the members'
+#: (TILE's is treg, MASK's mreg)
+_TAGS = {register_type.GP: "greg", register_type.FP: "freg",
+         register_type.VEC: "vreg", register_type.TILE: "treg",
+         register_type.MASK: "mreg"}
 
 class operand_modifier(Enum):
     """
