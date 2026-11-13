@@ -18,6 +18,31 @@ GENERATORS = (fma128, fma256, avx512, neon, sve, sme, rvv, rvv071)
 
 
 class test_available(unittest.TestCase):
+
+    def test_every_type_the_tracker_allocates_has_a_register(self):
+        # a tag the tracker can give an index for is a register the generator
+        # can make of it: RVV's single mask (v0) was the one that was missing
+        from asmgen.registers import adt_size
+        for ctor in GENERATORS:
+            gen = ctor()
+            for tag, count in gen.get_reg_tracker().max_regs.items():
+                for idx in range(count):
+                    dt = adt.FP64
+                    if tag.startswith("treg"):
+                        # SME's tile types are one per element size
+                        size = int(tag[4:]) // 8
+                        dt = next(d for d in adt if adt_size(d) == size)
+                        reg = gen.treg(idx, dt)
+                    else:
+                        make = getattr(gen, tag)
+                        try:
+                            reg = make(idx)
+                        except TypeError:
+                            # x86's scalar names a view of the vector
+                            # register: the data type says which
+                            reg = make(idx, dt)
+                    self.assertEqual(idx, reg.idx, f"{ctor.__name__}: {tag} {idx}")
+
     def test_counts_down(self):
         rt = neon().get_reg_tracker()
         free, allocatable = rt.available("greg"), rt.available_reg_count("greg")

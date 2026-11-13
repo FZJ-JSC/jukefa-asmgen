@@ -174,6 +174,20 @@ class rvv(riscv64):
         # masked instructions take their mask in v0
         return 1
 
+    def mreg(self, reg_idx : int) -> rvv_vreg:
+        """
+        The mask register at an index - RVV has one, vector register 0, which
+        is what a mask is here (as AVX2's is an ymm)
+
+        :param reg_idx: Register index
+        :type reg_idx: int
+        :return: Mask register, a vector register
+        :rtype: class:`asmgen.asmblocks.rvv.types.rvv_vreg`
+        """
+        if 0 != reg_idx:
+            raise ValueError(f"RVV has one mask register (v0), asked for {reg_idx}")
+        return rvv_vreg(reg_idx)
+
     def shared_registers(self) -> list[tuple[str, str, dict[int, int] | None]]:
         # the mask register is vector register 0
         return [("mreg", "vreg", {0: 0})]
